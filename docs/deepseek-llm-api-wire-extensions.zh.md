@@ -10,7 +10,7 @@
 
 | 位置 | 命名方式 | 示例 |
 |---|---|---|
-| HTTP 字段名 | 小写 kebab-case；HTTP 匹配仍不区分大小写 | `user-agent`, `x-deepseek-harness-session-id` |
+| HTTP 字段名 | 小写 kebab-case；HTTP 匹配仍不区分大小写 | `user-agent`, `x-deepseek-harness-compact` |
 | DeepSeek 请求正文扩展字段 | 使用保留 `dsh_` 前缀的 snake case | `dsh_plugin_packages`, `dsh_session_log` |
 | DSH 持有的嵌套 JSON 成员 | Camel case | `afterSeq`, `throughSeq`, `sessionId` |
 | 带标签的值 | 使用 kebab-case 字符串；持久事件采用 `domain/action` | `session-log-deepseek/delivery-accepted` |
@@ -24,11 +24,9 @@
 | 标头 | 出现条件 | 值 |
 |---|---|---|
 | `user-agent` | 每个提供方 HTTP 请求，包括 Files API 操作 | 采用 `product/version (+url)` 形式的应用身份；默认产品为 `deepseek-harness` |
-| `x-deepseek-harness-user-id` | 每个已授权的模型请求 | 已解析 Harness home 的稳定匿名 UUID |
-| `x-deepseek-harness-session-id` | 携带会话 id 的模型请求 | 确切的请求 `sessionId` 字符串 |
 | `x-deepseek-harness-compact` | 用途为 `compaction` 的模型请求 | 字面字符串 `1` |
 
-凭据失败发生在解析匿名用户 id 之前，因此未授权请求既不会发送这些标头，也不会创建身份文件。没有会话的直接请求会省略 `x-deepseek-harness-session-id`。会话标题请求没有额外的用途标头；请求携带 `sessionId` 时，仍然适用普通的会话 id 规则。
+官方模型请求不发送 `x-deepseek-harness-user-id` 或 `x-deepseek-harness-session-id`，模型调用也不会创建 `$DSH_HOME/.anonymous-user-id`。会话标题请求没有额外的用途标头。
 
 ## 正文扩展事务
 
@@ -40,7 +38,7 @@
 
 ## `dsh_plugin_packages`
 
-[`@deepseek-ai/dsh-plugin-package-inventory-deepseek`](../packages/llm/plugin-package-inventory-deepseek/README.zh.md) 贡献完整存活的 Loader-backed 插件包清单。该字段默认启用。
+[`@deepseek-ai/dsh-plugin-package-inventory-deepseek`](../packages/llm/plugin-package-inventory-deepseek/README.zh.md) 在 `enabled` 为 true 时贡献完整存活的 Loader-backed 插件包清单。随附 profile 禁用该插件，因此省略该字段。
 
 ```json
 {
@@ -73,7 +71,7 @@
 
 ## `dsh_session_log`
 
-[`@deepseek-ai/dsh-session-log-deepseek`](../packages/session/session-log-deepseek/README.zh.md) 贡献权威会话日志的一段连续后缀。该字段默认启用。它适用于携带存活会话且至少存在一个事件的请求；直接请求、陈旧会话 id 或空日志会省略该字段，第一条待发事件本身超过 `maxBytes` 或无法序列化的请求也会省略该字段；组合可用 `enabled: false` 禁用它。下方示例使用逻辑 Session 格式 2 仅为说明协议字段，并不标识[当前写入格式](session-format-status.zh.md)。
+[`@deepseek-ai/dsh-session-log-deepseek`](../packages/session/session-log-deepseek/README.zh.md) 在 `enabled` 为 true 时贡献权威会话日志的一段连续后缀。随附 profile 禁用该插件。启用后，它适用于携带存活会话且至少存在一个事件的请求；直接请求、陈旧会话 id 或空日志会省略该字段，第一条待发事件本身超过 `maxBytes` 或无法序列化的请求也会省略该字段。下方示例使用逻辑 Session 格式 2 仅为说明协议字段，并不标识[当前写入格式](session-format-status.zh.md)。
 
 ```json
 {

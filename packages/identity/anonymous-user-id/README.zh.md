@@ -25,15 +25,15 @@ DeepSeek Harness 为每个 harness home 使用一个匿名标识符，以关联�
 <a id="use-this-package"></a>
 ## 使用本包
 
-当你希望本机安装外发的记录能被识别为来自同一个 harness home——遥测、反馈与 DeepSeek 请求都携带同一个共享 id——本包就是提供它的地方。无需安装或配置任何东西：id 会自动出现，已随附的反馈、遥测与 DeepSeek 功能已经在使用它。不要用它来识别用户，也不要用它关联不同 home 之间的记录；它是匿名的且限定于单个 home。
+本包为每个 harness home 保存一个匿名 id。随附 profile 不会在模型请求或遥测中发送它。反馈确认可以在本地标出该 id；显式启用的 OpenTelemetry 会话上传可以把它作为 `user.id` 附上。不要用它来识别用户，也不要用它关联不同 home 之间的记录；它是匿名的且限定于单个 home。
 
 ### 该 id 能为你做什么
 
-你的安装外发的三类内容携带同一个 id，因此记录在它们之间可以相互对应：
+同一个 id 可供本地反馈和显式启用的遥测导出使用：
 
-- **会话遥测**——你的遥测导出会以 `user.id` Resource 属性携带该 id，采集器因此可以按安装分组记录。
-- **反馈**——每条反馈确认都会标明记录该反馈的匿名安装。
-- **DeepSeek 请求**——每次提供方请求都会携带 `x-deepseek-harness-user-id` 标头，因此可以按安装归因用量。
+- **会话遥测**——上传模式会以 `user.id` Resource 属性携带该 id。随附 profile 不上报。
+- **反馈**——每条反馈确认都会标明记录该反馈的匿名安装。确认留在本地会话中。
+- **模型请求**——官方 DeepSeek 请求不发送 `x-deepseek-harness-user-id` 或会话 id。
 
 ### 查看与重置 id
 
@@ -41,7 +41,7 @@ DeepSeek Harness 为每个 harness home 使用一个匿名标识符，以关联�
 
 ### 在自己的包中使用
 
-当你构建的功能需要共享该安装的匿名 id 时，导入一次并复用该值即可——遥测、反馈与 DeepSeek 已经在使用同一个 id，因此你的记录能与它们相互对应：
+当你构建的功能需要共享该安装的匿名 id 时，导入一次并复用该值即可。反馈确认和显式启用的遥测导出使用同一个 id：
 
 ```ts
 import { getOrCreateAnonymousUserId } from '@deepseek-ai/dsh-anonymous-user-id'
@@ -96,7 +96,7 @@ const userId = getOrCreateAnonymousUserId() // stable for the process lifetime
 - [dsh-home-paths](../../util/home-paths/README.zh.md)——负责 `$DSH_HOME` 与 `~/.dsh` 的解析。
 - [dsh-session-telemetry-otel](../../session/session-telemetry-otel/README.zh.md)——将该 id 作为 OTel Resource `user.id` 上报。
 - [dsh-command-feedback](../../feedback/command-feedback/README.zh.md)——将 id 嵌入反馈确认。
-- [dsh-llm-deepseek](../../llm/llm-deepseek/README.zh.md)——在提供方请求中发送 `x-deepseek-harness-user-id`。
+- [dsh-llm-deepseek](../../llm/llm-deepseek/README.zh.md)——官方模型请求不发送该匿名 id。
 - [会话遥测子系统](../../../docs/subsystems/session-telemetry.zh.md)——遥测 seam 及其后端约定。
 
 -----

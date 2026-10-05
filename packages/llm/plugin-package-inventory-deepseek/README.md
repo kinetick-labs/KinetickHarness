@@ -26,9 +26,9 @@ Complete active Loader-backed plugin package inventory for official DeepSeek LLM
 
 | Key | Default | Meaning |
 |---|---:|---|
-| `enabled` | `true` | Register the `dsh_plugin_packages` contribution. Set it to `false` to omit package metadata. |
+| `enabled` | `false` | Register the `dsh_plugin_packages` contribution. Set it to `true` to attach package metadata. |
 
-Shipped profiles use the default, so every official DeepSeek request carries the package inventory when preparation succeeds.
+Shipped profiles mount the plugin disabled with `enabled: false`, so official DeepSeek requests omit `dsh_plugin_packages`. Set `enabled: true` and load the row to attach the inventory.
 
 <a id="collection"></a>
 ## Collection

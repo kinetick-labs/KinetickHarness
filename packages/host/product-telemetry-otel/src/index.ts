@@ -16,7 +16,7 @@ export type ProductTelemetryScalar = OTelEventScalar
 
 /** Collector routing, application identity, and bounded in-memory batch settings. */
 export interface Config {
-  /** Full HTTP(S) logs URL. */
+  /** Full HTTP(S) logs URL. Required; there is no default collector. */
   endpoint: string
   /** Collector routing header. */
   channel: string
@@ -44,7 +44,7 @@ const positiveInteger = () => z.number().step(1).min(1).max(2_147_483_647)
 
 /** Loader validation and defaults for application compositions. */
 export const Config: z<Partial<Config>, Config> = z.object({
-  endpoint: z.string().default('https://dsh-otel-collector.deepseeksvc.com/v1/logs'),
+  endpoint: z.string().min(1).required(),
   channel: z.string().min(1).default('dsh_otel_report'),
   serviceName: z.string().required(),
   serviceVersion: z.string().required(),
