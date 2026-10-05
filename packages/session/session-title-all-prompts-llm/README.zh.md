@@ -75,7 +75,7 @@ kind: "package-reference"
 - [共享 LLM 标题策略](../session-title-llm/README.zh.md)——此提供方使用的生成辅助模块。
 - [首消息标题提供方](../session-title-first-prompt-llm/README.zh.md)——只根据首条提示词为会话生成一次标题的节奏。
 - [会话标题服务](../session-title/README.zh.md)——回退行为、重命名、刷新与提供方注册。
-- [会话包映射](../README.zh.md)——相邻的持久化、投影、标题与遥测包。
+- [会话包映射](../README.zh.md)——相邻的持久化、投影与标题包。
 
 -----
 

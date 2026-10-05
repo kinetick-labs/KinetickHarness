@@ -107,7 +107,7 @@ Read these pages when the service contract is not enough. They move from the sub
 - [Shared LLM title policy](../session-title-llm/README.md) — the model-backed generation helper both shipped providers use.
 - [First-message title provider](../session-title-first-prompt-llm/README.md) — titles from the first eligible human message.
 - [All-messages title provider](../session-title-all-prompts-llm/README.md) — titles from every eligible human message.
-- [Session package map](../README.md) — adjacent persistence, projection, title, and telemetry packages.
+- [Session package map](../README.md) — adjacent persistence, projection, and title packages.
 
 -----
 
