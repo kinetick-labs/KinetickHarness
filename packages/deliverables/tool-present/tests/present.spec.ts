@@ -4,16 +4,16 @@ import { tmpdir } from 'node:os'
 import { join, relative } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import { createScope, type Scope } from '@deepseek-ai/dsh-scope'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { SESSION_FORMAT_VERSION, Session, SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { turnBoundaryProjectionDefinition } from '@deepseek-ai/dsh-agent-loop'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineTool } from '@deepseek-ai/dsh-tools'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
+import LocalFileSystem from '@kinetick-labs/kh-fs-local'
+import { createScope, type Scope } from '@kinetick-labs/kh-scope'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { SESSION_FORMAT_VERSION, Session, SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { turnBoundaryProjectionDefinition } from '@kinetick-labs/kh-agent-loop'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { defineTool } from '@kinetick-labs/kh-tools'
 import type { PresentedFile } from '../src/types.ts'
 import * as Present from '../src/index.ts'
 
@@ -52,7 +52,7 @@ async function agent(ctx: Context, cwd: string | undefined): Promise<Agent> {
 
 
 async function setup() {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-present-minimal-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-present-minimal-'))
   cleanups.push(() => rm(root, { recursive: true, force: true }))
   const ctx = new Context()
   cleanups.push(() => ctx.fiber.dispose())
@@ -169,7 +169,7 @@ it('requires an agent, an open turn, and a workspace', async () => {
 
 it('declares readable files outside the Session directory using absolute and relative paths', async () => {
   const { root, execute, owner } = await setup()
-  const outside = await mkdtemp(join(tmpdir(), 'dsh-present-external-'))
+  const outside = await mkdtemp(join(tmpdir(), 'kh-present-external-'))
   cleanups.push(() => rm(outside, { recursive: true, force: true }))
   const file = join(outside, 'report.txt')
   await writeFile(file, 'external report')

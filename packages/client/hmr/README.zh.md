@@ -3,13 +3,13 @@ description: "Web 客户端插件的动态图同步与开发时 bundle 重载。
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-client-hmr
+# @kinetick-labs/kh-client-hmr
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-client-hmr` 让已打开的 Web 页面与 Host 插件图保持同步，并重载重建后的浏览器 bundle。普通插件的启停无需刷新页面或重启 Host 即可生效。代码重建会替换受影响插件并重置其组件状态。模型不会收到新的输入或输出。
+`kh-client-hmr` 让已打开的 Web 页面与 Host 插件图保持同步，并重载重建后的浏览器 bundle。普通插件的启停无需刷新页面或重启 Host 即可生效。代码重建会替换受影响插件并重置其组件状态。模型不会收到新的输入或输出。
 
 ## 目录
 

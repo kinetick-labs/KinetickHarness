@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { RemoteResult } from '@deepseek-ai/dsh-api-remotes/client'
-import type { GoalActivationChanged, GoalId, GoalProjection, GoalView } from '@deepseek-ai/dsh-goal/client'
-import { RemoteError } from '@deepseek-ai/dsh-client-test-runtime'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { RemoteResult } from '@kinetick-labs/kh-api-remotes/client'
+import type { GoalActivationChanged, GoalId, GoalProjection, GoalView } from '@kinetick-labs/kh-goal/client'
+import { RemoteError } from '@kinetick-labs/kh-client-test-runtime'
 import { createGoalActivationSource } from '../src/client/activation-source.ts'
 
 const GOAL_ID = 'g-1' as GoalId

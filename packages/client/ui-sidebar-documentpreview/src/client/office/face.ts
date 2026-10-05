@@ -1,8 +1,8 @@
 /** Office conversion reads and settlements bound to the renderer's declared store. */
-import type { BoundActions } from '@deepseek-ai/dsh-client-store'
-import type { TabId } from '@deepseek-ai/dsh-client-ui-dockkit'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { RemoteFailure } from '@deepseek-ai/dsh-api-remotes/client'
+import type { BoundActions } from '@kinetick-labs/kh-client-store'
+import type { TabId } from '@kinetick-labs/kh-client-ui-dockkit'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type { RemoteFailure } from '@kinetick-labs/kh-api-remotes/client'
 import type { SessionFile } from '../rpc.ts'
 import type { ReadOfficeDocument } from './cache.ts'
 import type { OfficeStore } from './store.ts'

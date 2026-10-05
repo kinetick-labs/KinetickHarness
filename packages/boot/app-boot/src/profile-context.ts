@@ -29,7 +29,7 @@ export interface ProfileContext {
 
 declare module '@deepseek-ai/cordis' {
   interface Context {
-    /** Present only in a profile launched by dsh. */
+    /** Present only in a profile launched by kh. */
     profileContext: ProfileContext
   }
 }

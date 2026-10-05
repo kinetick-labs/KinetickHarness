@@ -1,20 +1,20 @@
 /**
  * Service Definition for the user-questions capability seam (`ctx.userQuestions`): a UI-backed service for
  * pausing an agent tool call until the human answers a question. The model-
- * facing tool lives in `@deepseek-ai/dsh-tool-ask-user`; UI packages compose
+ * facing tool lives in `@kinetick-labs/kh-tool-ask-user`; UI packages compose
  * answerers on the Agent-scoped Cordis waterfall.
  *
- * @module @deepseek-ai/dsh-user-questions
+ * @module @kinetick-labs/kh-user-questions
  */
 
 import { Context } from '@deepseek-ai/cordis'
-import type {} from '@deepseek-ai/dsh-agent'
-import { createUserMessage, HarnessError, type MessageId, type ToolCallId, type UserMessage } from '@deepseek-ai/dsh-llm'
-import type { Session } from '@deepseek-ai/dsh-session'
-import { scopeTarget } from '@deepseek-ai/dsh-scope'
-import { Remote, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type {} from '@deepseek-ai/dsh-session-projection'
+import type {} from '@kinetick-labs/kh-agent'
+import { createUserMessage, HarnessError, type MessageId, type ToolCallId, type UserMessage } from '@kinetick-labs/kh-llm'
+import type { Session } from '@kinetick-labs/kh-session'
+import { scopeTarget } from '@kinetick-labs/kh-scope'
+import { Remote, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type {} from '@kinetick-labs/kh-session-projection'
 import z from '@deepseek-ai/schemastery'
 import { userQuestionProjectionDefinition } from './projection.ts'
 import { TimedQuestionWait } from './timed-wait.ts'

@@ -10,9 +10,9 @@ import { tmpdir } from 'node:os'
 import { basename, join } from 'node:path'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import type { SandboxPolicy } from '@deepseek-ai/dsh-sandbox'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import { LocalSandboxProvider } from '@deepseek-ai/dsh-sandbox-local'
+import type { SandboxPolicy } from '@kinetick-labs/kh-sandbox'
+import { SessionId } from '@kinetick-labs/kh-session'
+import { LocalSandboxProvider } from '@kinetick-labs/kh-sandbox-local'
 
 /** Cross-file state shared with the vi.mock factory (hoisting contract). */
 const mockState = vi.hoisted(() => ({
@@ -24,7 +24,7 @@ const mockState = vi.hoisted(() => ({
   disposeFailure: undefined as Error | undefined,
 }))
 
-vi.mock('@deepseek-ai/dsh-sandbox-windows-acl', () => {
+vi.mock('@kinetick-labs/kh-sandbox-windows-acl', () => {
   class MockAclWriteGrant {
     readonly writeSid: string
     readonly added: Array<{ path: string; standing: boolean }> = []
@@ -75,7 +75,7 @@ async function setup() {
 }
 
 function workspaceRoot(): string {
-  return realpathSync(mkdtempSync(join(tmpdir(), 'dsh-acl-grants-ws-')))
+  return realpathSync(mkdtempSync(join(tmpdir(), 'kh-acl-grants-ws-')))
 }
 
 function flag(argv: readonly string[], name: string): string | undefined {
@@ -127,7 +127,7 @@ describe('windows-acl write grants (LocalSandboxProvider)', () => {
       const tempDir = flag(confined.argv, '--temp')
       const tempSid = flag(confined.argv, '--temp-write-sid')
       expect(tempDir).toBeDefined()
-      expect(basename(tempDir ?? '')).toMatch(/^dsh-[A-Za-z0-9_-]{6}$/u)
+      expect(basename(tempDir ?? '')).toMatch(/^kh-[A-Za-z0-9_-]{6}$/u)
       expect(tempSid).toBe(`TEMP:${tempDir}`)
       expect(tempSid).not.toBe(WORKSPACE_SID)
       expect(confined.argv).toEqual([

@@ -19,12 +19,12 @@
  * image, so entry mounting, the activation audit, and its diagnostics are the
  * same code the Node deployment runs. The Worker supplies module loading,
  * profile locations, and the command line.
- * @module @deepseek-ai/dsh-experimental-webworker-runtime/src/worker-host
+ * @module @kinetick-labs/kh-experimental-webworker-runtime/src/worker-host
  */
 import { setActiveModuleLoader, WorkerModuleLoader, type StaticModuleFactory } from './module-system/module-loader.ts'
-import type { ProfileContext } from '@deepseek-ai/dsh-app-boot'
-import type { TypertGateway } from '@deepseek-ai/dsh-api-gateway'
-import type { HostConnectionHandle } from '@deepseek-ai/dsh-client-connection'
+import type { ProfileContext } from '@kinetick-labs/kh-app-boot'
+import type { TypertGateway } from '@kinetick-labs/kh-api-gateway'
+import type { HostConnectionHandle } from '@kinetick-labs/kh-client-connection'
 import type { AlsCausality } from './polyfill/async-context/als-runtime.ts'
 import { dirname, join } from './module-system/posix-path.ts'
 import { installProcessGlobal } from './node/globals/process.ts'
@@ -104,7 +104,7 @@ export interface WorkerHostOptions {
   readonly cmdlineArgs?: readonly string[]
   /** Port named on the default command line; defaults to {@link DEFAULT_PORT}. */
   readonly port?: number
-  /** Environment for the process shim; `DSH_HOME` defaults to `<root>/home`. */
+  /** Environment for the process shim; `KH_HOME` defaults to `<root>/home`. */
   readonly env?: Readonly<Record<string, string>>
   /**
    * Image manifest path; defaults to `<root>/config/vfs-manifest.json`. Its
@@ -186,7 +186,7 @@ export function createWorkerHost(options: WorkerHostOptions): WorkerHost {
   const start = async (): Promise<void> => {
     try {
       const home = join(root, IMAGE_HOME_DIRECTORY)
-      installProcessGlobal({ cwd: root, env: { DSH_HOME: home, HOME: home, ...options.env } })
+      installProcessGlobal({ cwd: root, env: { KH_HOME: home, HOME: home, ...options.env } })
 
       const [bytes, overlays] = await Promise.all([
         readImage(options.image),
@@ -221,7 +221,7 @@ export function createWorkerHost(options: WorkerHostOptions): WorkerHost {
       modules = loader
 
       const require = loader.requireFrom(dirname(configPath))
-      const appBoot = require('@deepseek-ai/dsh-app-boot') as {
+      const appBoot = require('@kinetick-labs/kh-app-boot') as {
         boot(
           binName: string,
           configPath: string,
@@ -229,7 +229,7 @@ export function createWorkerHost(options: WorkerHostOptions): WorkerHost {
           prepare: (ctx: HostContext) => void,
         ): Promise<HostContext>
       }
-      const cmdline = require('@deepseek-ai/dsh-cmdline') as {
+      const cmdline = require('@kinetick-labs/kh-cmdline') as {
         provideCmdline(ctx: unknown, host: {
           args: readonly string[]
           exit: (code: number) => void
@@ -241,7 +241,7 @@ export function createWorkerHost(options: WorkerHostOptions): WorkerHost {
 
       const { patches, profile } = bootPatches(loader, mounted, configPath, root)
       const profileConfig = join(profile.dir, 'cordis.yml')
-      const ctx = await appBoot.boot('dsh-webworker', profileConfig, patches, (hostCtx) => {
+      const ctx = await appBoot.boot('kh-webworker', profileConfig, patches, (hostCtx) => {
         hostCtx.provide('profileContext', profile)
         // Before any entry mounts: the Loader would otherwise fall back to the
         // runtime's own dynamic import for every row.
@@ -424,15 +424,15 @@ function bootPatches(
     home: join(root, IMAGE_HOME_DIRECTORY), startedBundles: [],
     overlays: patches,
   }
-  vfs.seed(join(dir, 'package.json'), '{"private":true,"dsh":{"profile":{"bundles":[]}}}\n')
+  vfs.seed(join(dir, 'package.json'), '{"private":true,"kh":{"profile":{"bundles":[]}}}\n')
   vfs.seed(join(dir, 'cordis.yml'), '[]\n')
   if (!vfs.existsSync(profile.patchPath)) {
     vfs.seed(profile.patchPath, yaml.dump([{ insert: rows }], { schema: include.entryListSchema }))
   }
-  const appBoot = loader.load(loader.resolve('@deepseek-ai/dsh-app-boot', root)) as {
+  const appBoot = loader.load(loader.resolve('@kinetick-labs/kh-app-boot', root)) as {
     readProfilePatches(binName: string, profile: ProfileContext): unknown[]
   }
-  return { patches: appBoot.readProfilePatches('dsh-webworker', profile), profile }
+  return { patches: appBoot.readProfilePatches('kh-webworker', profile), profile }
 }
 
 /**

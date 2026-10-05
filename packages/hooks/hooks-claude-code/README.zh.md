@@ -3,13 +3,13 @@ description: "在 agent 运行期间使用你现有的 Claude Code hooks.json �
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-hooks-claude-code
+# @kinetick-labs/kh-hooks-claude-code
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-hooks-claude-code` 在 agent（智能体）运行期间执行你现有 Claude Code `hooks.json` 或 settings 文件中的 command 钩子，无需重写。受支持的钩子会在会话、提示词、工具、停止或 subagent 到达对应时刻时运行。它们可以带模型可见的原因阻塞提示词或工具调用、添加对话上下文，或强制模型再执行一个轮次。需要在 harness 中复用 Claude Code command 钩子时选择本包；没有 Claude Code 对应物的行为应使用原生插件。
+`kh-hooks-claude-code` 在 agent（智能体）运行期间执行你现有 Claude Code `hooks.json` 或 settings 文件中的 command 钩子，无需重写。受支持的钩子会在会话、提示词、工具、停止或 subagent 到达对应时刻时运行。它们可以带模型可见的原因阻塞提示词或工具调用、添加对话上下文，或强制模型再执行一个轮次。需要在 harness 中复用 Claude Code command 钩子时选择本包；没有 Claude Code 对应物的行为应使用原生插件。
 
 ## 目录
 
@@ -34,7 +34,7 @@ kind: "package-reference"
 ### 最小配置
 
 ```yaml
-- name: '@deepseek-ai/dsh-hooks-claude-code'
+- name: '@kinetick-labs/kh-hooks-claude-code'
   config:
     configPath: ./.claude/hooks.json
     pluginRoot: ./.claude/plugins/my-plugin
@@ -96,7 +96,7 @@ matcher subject 是工具名称（`PreToolUse`／`PostToolUse`）、会话源（
 
 ### 脱离运行与释放
 
-三个 emit 点（`SessionStart`、`SubagentStart`、`SubagentStop`）以脱离方式运行——没有扩展点等待它们。每条运行链都会被跟踪，对桥接执行 dispose（资源释放）时会中止仍在运行的 hook 进程，并在 dispose 完成前排空 continuation（`createDetachedRuns`，位于 `dsh-hook-protocol`）。
+三个 emit 点（`SessionStart`、`SubagentStart`、`SubagentStop`）以脱离方式运行——没有扩展点等待它们。每条运行链都会被跟踪，对桥接执行 dispose（资源释放）时会中止仍在运行的 hook 进程，并在 dispose 完成前排空 continuation（`createDetachedRuns`，位于 `kh-hook-protocol`）。
 
 ### 设计理念
 

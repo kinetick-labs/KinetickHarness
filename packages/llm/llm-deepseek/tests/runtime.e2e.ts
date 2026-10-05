@@ -1,4 +1,4 @@
-import * as Protocol from '@deepseek-ai/dsh-llm-deepseek'
+import * as Protocol from '@kinetick-labs/kh-llm-deepseek'
 import { readFileSync } from 'node:fs'
 import { mkdtemp, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -6,10 +6,10 @@ import { join } from 'node:path'
 import { randomBytes } from 'node:crypto'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import LlmRuntime, { createToolResultMessage, createUserMessage, ToolCallId, ReasoningEffortId, createMessage, createSystemMessage } from '@deepseek-ai/dsh-llm'
-import type { Message, ToolSchema } from '@deepseek-ai/dsh-llm'
-import AttachmentStore, { AttachmentId, ImageVariantId } from '@deepseek-ai/dsh-attachment'
-import LocalAttachments from '@deepseek-ai/dsh-attachment-local'
+import LlmRuntime, { createToolResultMessage, createUserMessage, ToolCallId, ReasoningEffortId, createMessage, createSystemMessage } from '@kinetick-labs/kh-llm'
+import type { Message, ToolSchema } from '@kinetick-labs/kh-llm'
+import AttachmentStore, { AttachmentId, ImageVariantId } from '@kinetick-labs/kh-attachment'
+import LocalAttachments from '@kinetick-labs/kh-attachment-local'
 import type {
   ImageAttachmentLimits,
   ImageAttachmentRef,
@@ -17,10 +17,10 @@ import type {
   RequestImageAttachment,
   SaveImageAttachment,
   StoredImageAttachment,
-} from '@deepseek-ai/dsh-attachment'
-import { LocalCredentialProvider } from '@deepseek-ai/dsh-credentials-local'
-import * as LlmDeepSeek from '@deepseek-ai/dsh-llm-deepseek-api-key'
-import type { Options as Config } from '@deepseek-ai/dsh-llm-deepseek'
+} from '@kinetick-labs/kh-attachment'
+import { LocalCredentialProvider } from '@kinetick-labs/kh-credentials-local'
+import * as LlmDeepSeek from '@kinetick-labs/kh-llm-deepseek-api-key'
+import type { Options as Config } from '@kinetick-labs/kh-llm-deepseek'
 import type { WireRequest } from '../src/wire-types.ts'
 import { assemble, type AssembledResult } from './assemble.ts'
 
@@ -95,8 +95,8 @@ class E2eAttachmentStore extends AttachmentStore {
 }
 
 beforeEach(async () => {
-  identityHome = await mkdtemp(join(tmpdir(), 'dsh-e2e-user-id-'))
-  vi.stubEnv('DSH_HOME', identityHome)
+  identityHome = await mkdtemp(join(tmpdir(), 'kh-e2e-user-id-'))
+  vi.stubEnv('KH_HOME', identityHome)
 })
 
 async function harness(model: string, config: Partial<Config> = {}) {
@@ -221,7 +221,7 @@ describe.skipIf(!process.env.DEEPSEEK_API_KEY)('llm-deepseek e2e (real API)', ()
   it('serves a real request with the key held only by a credentials-local document', async () => {
     const key = process.env.DEEPSEEK_API_KEY
     if (key === undefined) throw new Error('e2e ran without DEEPSEEK_API_KEY')
-    const dir = await mkdtemp(join(tmpdir(), 'dsh-e2e-credentials-'))
+    const dir = await mkdtemp(join(tmpdir(), 'kh-e2e-credentials-'))
     try {
       // JSON.stringify quotes the value: YAML is a JSON superset, so a real
       // key survives whatever characters it happens to carry.

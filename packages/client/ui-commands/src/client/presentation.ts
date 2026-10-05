@@ -1,13 +1,13 @@
 /** Composer menu grouping, localized labels, descriptions, and icons. */
 import type { ComponentType } from 'react'
-import type { InputTriggerCandidate } from '@deepseek-ai/dsh-client-ui-input-trigger/client'
+import type { InputTriggerCandidate } from '@kinetick-labs/kh-client-ui-input-trigger/client'
 import {
   IconCompactOutlineRegular, IconDownloadOutlineRegular, IconGoalOutlineRegular, IconPaperPlaneOutlineRegular, IconPlanOutlineRegular,
   PermissionIconFullAccessRegular,
-} from '@deepseek-ai/dsh-client-ui-primitives'
-import type { IconProps } from '@deepseek-ai/dsh-client-ui-primitives'
-import type { TranslateNS } from '@deepseek-ai/dsh-client-locale/client'
-import type { CommandDescriptor } from '@deepseek-ai/dsh-commands/types'
+} from '@kinetick-labs/kh-client-ui-primitives'
+import type { IconProps } from '@kinetick-labs/kh-client-ui-primitives'
+import type { TranslateNS } from '@kinetick-labs/kh-client-locale/client'
+import type { CommandDescriptor } from '@kinetick-labs/kh-commands/types'
 import type { CommandKey } from './locales.ts'
 import { builtinCommandName } from './resolution.ts'
 import type { BuiltinCommandName } from './resolution.ts'

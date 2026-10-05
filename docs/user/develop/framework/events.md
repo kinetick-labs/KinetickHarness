@@ -122,7 +122,7 @@ This plugin logs tool calls and results:
 
 ```ts
 import type { Context } from '@deepseek-ai/cordis'
-import '@deepseek-ai/dsh-tools'
+import '@kinetick-labs/kh-tools'
 
 export const name = 'tool-logger'
 

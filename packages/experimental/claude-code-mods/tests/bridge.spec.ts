@@ -7,23 +7,23 @@ import { join, resolve } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context, type Fiber } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import CommandRuntime from '@deepseek-ai/dsh-commands'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import { createAssistantMessage, createUserMessage, ToolCallId as ToolCallIdOf } from '@deepseek-ai/dsh-llm'
-import type { LlmResolvedModelInfo } from '@deepseek-ai/dsh-llm'
-import TokenMeter from '@deepseek-ai/dsh-token-meter'
-import type { ImageAttachmentRef } from '@deepseek-ai/dsh-attachment/types'
-import { scopeOf } from '@deepseek-ai/dsh-scope'
-import { SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import Storage from '@deepseek-ai/dsh-storage'
-import * as StorageDomain from '@deepseek-ai/dsh-storage-domain'
-import * as StorageJson from '@deepseek-ai/dsh-storage-json'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
-import { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import UserQuestionService from '@deepseek-ai/dsh-user-questions'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import CommandRuntime from '@kinetick-labs/kh-commands'
+import LocalFileSystem from '@kinetick-labs/kh-fs-local'
+import { createAssistantMessage, createUserMessage, ToolCallId as ToolCallIdOf } from '@kinetick-labs/kh-llm'
+import type { LlmResolvedModelInfo } from '@kinetick-labs/kh-llm'
+import TokenMeter from '@kinetick-labs/kh-token-meter'
+import type { ImageAttachmentRef } from '@kinetick-labs/kh-attachment/types'
+import { scopeOf } from '@kinetick-labs/kh-scope'
+import { SessionId, type SessionEvent } from '@kinetick-labs/kh-session'
+import Storage from '@kinetick-labs/kh-storage'
+import * as StorageDomain from '@kinetick-labs/kh-storage-domain'
+import * as StorageJson from '@kinetick-labs/kh-storage-json'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
+import { defineContentToolFixture } from '@kinetick-labs/kh-tools'
+import UserQuestionService from '@kinetick-labs/kh-user-questions'
 import ClaudeCodeMods, { defineMod, MODS_API_VERSION, type Config, type ModPlugin, type ModRegister } from '../src/index.ts'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 
@@ -43,7 +43,7 @@ afterEach(async () => {
   for (const dir of dirs.splice(0)) rmSync(dir, { recursive: true, force: true })
 })
 
-function scratch(prefix = 'dsh-cc-mods-'): string {
+function scratch(prefix = 'kh-cc-mods-'): string {
   const dir = mkdtempSync(join(tmpdir(), prefix))
   dirs.push(dir)
   return dir
@@ -106,7 +106,7 @@ async function harness(
   await mountAgentLoopTestDependencies(ctx, { tools: options.tools ?? {} })
   await ctx.plugin(AgentLoop, { agents: [] })
   await ctx.plugin(CommandRuntime)
-  const workspace = scratch('dsh-cc-mods-ws-')
+  const workspace = scratch('kh-cc-mods-ws-')
   await options.services?.(ctx, workspace)
   const mods = await ctx.plugin(ClaudeCodeMods, { ...options.config })
   await mods.await()

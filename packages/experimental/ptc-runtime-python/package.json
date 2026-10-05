@@ -1,10 +1,10 @@
 {
-  "name": "@deepseek-ai/dsh-experimental-ptc-runtime-python",
-  "description": "CPython subprocess implementation of the DeepSeek Harness PTC execution seam",
+  "name": "@kinetick-labs/kh-experimental-ptc-runtime-python",
+  "description": "CPython subprocess implementation of the KinetickHarness PTC execution seam",
   "version": "0.2.1-alpha.1",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/experimental/ptc-runtime-python"
   },
   "type": "module",
@@ -24,16 +24,16 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-ptc-runtime": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
+    "@kinetick-labs/kh-ptc-runtime": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-util-values": "workspace:*"
+    "@kinetick-labs/kh-util-values": "workspace:*"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-ptc-runtime": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
+    "@kinetick-labs/kh-ptc-runtime": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-util-values": "workspace:*"
+    "@kinetick-labs/kh-util-values": "workspace:*"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "workspace:~"

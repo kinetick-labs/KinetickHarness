@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-fs-sandbox",
-  "description": "Sandbox-enforcing implementation of the DeepSeek Harness filesystem seam: fences write/edit by the per-call sandbox mode (read-only denies mutation, workspace-write contains it to the workspace + temp roots) while reads pass through",
+  "name": "@kinetick-labs/kh-fs-sandbox",
+  "description": "Sandbox-enforcing implementation of the KinetickHarness filesystem seam: fences write/edit by the per-call sandbox mode (read-only denies mutation, workspace-write contains it to the workspace + temp roots) while reads pass through",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/fs/fs-sandbox"
   },
   "type": "module",
@@ -27,18 +27,18 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-fs-local": "workspace:*",
-    "@deepseek-ai/dsh-sandbox": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-policy": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-fs-local": "workspace:*",
+    "@kinetick-labs/kh-sandbox": "workspace:*",
+    "@kinetick-labs/kh-sandbox-policy": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-fs-local": "workspace:*",
-    "@deepseek-ai/dsh-sandbox": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-policy": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-fs-local": "workspace:*",
+    "@kinetick-labs/kh-sandbox": "workspace:*",
+    "@kinetick-labs/kh-sandbox-policy": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-session-projection": "workspace:*"
+    "@kinetick-labs/kh-session-projection": "workspace:*"
   }
 }

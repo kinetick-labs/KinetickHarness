@@ -1,22 +1,22 @@
-"""Locate and execute the bundled dsh CLI shipped with the Python SDK runtime.
+"""Locate and execute the bundled kh CLI shipped with the Python SDK runtime.
 
 Two runtime carriers coexist under ``runtime/``, both injected by the repo's
 ``scripts/build-exe-for-python-sdk.ts`` build (neither is checked into git):
 
 - **exe (production)**: single-file Node executables named
-  ``deepseek-harness-sdk-runtime-<platform>-<arch>`` for Linux/macOS and an
+  ``kinetick-harness-sdk-runtime-<platform>-<arch>`` for Linux/macOS and an
   ``.exe`` counterpart for Windows. Each has a sibling ripgrep executable;
   macOS also uses a sibling ``-spawn-helper``. The target machine needs no
   Node installation.
 - **node (dev-only)**: the full deploy closure under ``runtime/node/``
   (``package.json`` + ``node_modules/``), executed as ``node
-  runtime/node/node_modules/@deepseek-ai/dsh/lib/bin.js`` on a
+  runtime/node/node_modules/@kinetick-labs/kh/lib/bin.js`` on a
   system Node >= 22.19. It is the current checkout's source build, never
   selected automatically, and excluded from wheel/sdist distributions.
 
-Both carriers execute the same dsh command grammar. The Python SDK selects the
-``sdk`` profile and requires an explicit Harness home; the installed ``dsh``
-console command requires ``DSH_HOME`` for the same reason.
+Both carriers execute the same kh command grammar. The Python SDK selects the
+``sdk`` profile and requires an explicit Harness home; the installed ``kh``
+console command requires ``KH_HOME`` for the same reason.
 """
 
 from __future__ import annotations
@@ -30,16 +30,16 @@ import sys
 from pathlib import Path
 from ._resources import validate_resources
 
-PACKAGE_METADATA_FILENAME = "deepseek-harness-runtime.json"
+PACKAGE_METADATA_FILENAME = "kinetick-harness-runtime.json"
 
-RUNTIME_MODE_ENV_VAR = "DSH_RUNTIME_MODE"
+RUNTIME_MODE_ENV_VAR = "KH_RUNTIME_MODE"
 
 _PLATFORM_TAGS = {"linux": "linux", "darwin": "macos", "win32": "win"}
 _ARCH_TAGS = {"x86_64": "x64", "amd64": "x64", "arm64": "arm64", "aarch64": "arm64"}
 
 _EXE_ACQUISITION_HINT = (
     "Two ways to get the executable: run `scripts/build-exe-for-python-sdk.ts` (via tsx) in a "
-    "deepseek-harness checkout, or install the matching `deepseek-harness-runtime-bin` platform "
+    "kinetick-harness checkout, or install the matching `kinetick-harness-runtime-bin` platform "
     "wheel retained by the `build-exe-for-python-sdk` CI workflow. For local development "
     "against a repo source build, explicitly select the dev-only node carrier with "
     f"{RUNTIME_MODE_ENV_VAR}=node (or resolve_bundled_launch_args('node'))."
@@ -51,7 +51,7 @@ def bundled_package_dir() -> Path:
     root = Path(__file__).resolve().parent
     metadata = root / PACKAGE_METADATA_FILENAME
     if not metadata.is_file():
-        raise FileNotFoundError(f"deepseek-harness-runtime-bin is missing {metadata}")
+        raise FileNotFoundError(f"kinetick-harness-runtime-bin is missing {metadata}")
     return root
 
 
@@ -69,10 +69,10 @@ def bundled_runtime_path() -> Path:
     """
     tag = _current_platform_tag()
     extension = ".exe" if tag.startswith("win-") else ""
-    path = bundled_package_dir() / "runtime" / f"deepseek-harness-sdk-runtime-{tag}{extension}"
+    path = bundled_package_dir() / "runtime" / f"kinetick-harness-sdk-runtime-{tag}{extension}"
     if not path.is_file():
         raise FileNotFoundError(
-            f"deepseek-harness-runtime-bin is missing the runtime executable at {path}. "
+            f"kinetick-harness-runtime-bin is missing the runtime executable at {path}. "
             + _EXE_ACQUISITION_HINT
         )
     ripgrep = (
@@ -82,21 +82,21 @@ def bundled_runtime_path() -> Path:
     )
     if not ripgrep.is_file():
         raise FileNotFoundError(
-            f"deepseek-harness-runtime-bin is missing the ripgrep sidecar at {ripgrep}. "
+            f"kinetick-harness-runtime-bin is missing the ripgrep sidecar at {ripgrep}. "
             + _EXE_ACQUISITION_HINT
         )
     if tag.startswith("macos-"):
         helper = Path(f"{path}-spawn-helper")
         if not helper.is_file():
             raise FileNotFoundError(
-                f"deepseek-harness-runtime-bin is missing the node-pty spawn helper at {helper}. "
+                f"kinetick-harness-runtime-bin is missing the node-pty spawn helper at {helper}. "
                 + _EXE_ACQUISITION_HINT
             )
     office = path.with_name(f"{path.name.removesuffix('.exe')}-office")
     adapter = office / "node_modules/@deepseek-ai/libreoffice-kit/package.json"
     if not adapter.is_file():
         raise FileNotFoundError(
-            f"deepseek-harness-runtime-bin is missing the Office sidecar at {office}. "
+            f"kinetick-harness-runtime-bin is missing the Office sidecar at {office}. "
             + _EXE_ACQUISITION_HINT
         )
     native = tag.replace("win-", "win32-").replace("macos-", "darwin-")
@@ -104,7 +104,7 @@ def bundled_runtime_path() -> Path:
     engine = native if f"@deepseek-ai/libreoffice-kit-{native}" in declared else "wasm"
     if not (office / "node_modules" / f"@deepseek-ai/libreoffice-kit-{engine}/prebuilds.json").is_file():
         raise FileNotFoundError(
-            f"deepseek-harness-runtime-bin is missing the Office sidecar engine {engine} at {office}. "
+            f"kinetick-harness-runtime-bin is missing the Office sidecar engine {engine} at {office}. "
             + _EXE_ACQUISITION_HINT
         )
     validate_resources(path.with_name(tag), tag)
@@ -115,7 +115,7 @@ def resolve_bundled_launch_args(mode: str | None = None) -> tuple[str, ...]:
     """The argv tuple that launches the bundled runtime.
 
     Mode selection: the explicit ``mode`` argument wins, then the
-    ``DSH_RUNTIME_MODE`` environment variable (``exe`` | ``node``), then
+    ``KH_RUNTIME_MODE`` environment variable (``exe`` | ``node``), then
     automatic resolution. Automatic resolution finds the production exe ONLY —
     the dev-only node carrier must be selected explicitly so a production
     deployment can never silently ride on a source build. Returns
@@ -129,7 +129,7 @@ def resolve_bundled_launch_args(mode: str | None = None) -> tuple[str, ...]:
     if selected == "node":
         return _node_launch_args()
     raise ValueError(
-        f"unsupported DeepSeek Harness runtime mode {selected!r}: expected 'exe' or 'node' "
+        f"unsupported KinetickHarness runtime mode {selected!r}: expected 'exe' or 'node' "
         f"(explicit argument or ${RUNTIME_MODE_ENV_VAR})"
     )
 
@@ -143,7 +143,7 @@ def _current_platform_tag() -> str:
         or (plat == "win" and arch != "x64")
     ):
         raise FileNotFoundError(
-            "no bundled DeepSeek Harness SDK runtime exists for this platform "
+            "no bundled KinetickHarness SDK runtime exists for this platform "
             f"(sys.platform={sys.platform!r}, machine={platform.machine()!r}); supported: "
             "Linux x64/arm64, macOS x64/arm64, and Windows x64. " + _EXE_ACQUISITION_HINT
         )
@@ -156,14 +156,14 @@ def _node_launch_args() -> tuple[str, str]:
         node_root
         / "node_modules"
         / "@deepseek-ai"
-        / "dsh"
+        / "kh"
         / "lib"
         / "bin.js"
     )
     if not bin_js.is_file():
         raise FileNotFoundError(
             f"the dev-only node runtime closure is missing at {node_root} "
-            f"(no {bin_js}); run `scripts/build-exe-for-python-sdk.ts` in a deepseek-harness "
+            f"(no {bin_js}); run `scripts/build-exe-for-python-sdk.ts` in a kinetick-harness "
             "checkout, which builds and copies the deploy closure here. The node carrier "
             "is for repo-local development only — production uses the single-file exe."
         )
@@ -177,11 +177,11 @@ def _node_launch_args() -> tuple[str, str]:
 
 
 def main() -> None:
-    """Launch the CLI with explicit DSH_HOME; wait on Windows, replace the process on POSIX."""
-    if not os.environ.get("DSH_HOME", "").strip():
+    """Launch the CLI with explicit KH_HOME; wait on Windows, replace the process on POSIX."""
+    if not os.environ.get("KH_HOME", "").strip():
         print(
-            "dsh: the Python runtime command requires an explicit DSH_HOME; "
-            "it never uses ~/.dsh implicitly",
+            "kh: the Python runtime command requires an explicit KH_HOME; "
+            "it never uses ~/.kh implicitly",
             file=sys.stderr,
         )
         raise SystemExit(2)

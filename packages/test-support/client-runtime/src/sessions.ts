@@ -1,27 +1,27 @@
 /** Test-owned Session Controller faces over declarative fixtures. */
 import type { Context } from '@deepseek-ai/cordis'
-import type { AttachmentIdType } from '@deepseek-ai/dsh-attachment'
+import type { AttachmentIdType } from '@kinetick-labs/kh-attachment'
 import {
   createScope, MutableSessionEventSource, scopeOf, SESSION_SEARCH_RESULT_LIMIT,
-} from '@deepseek-ai/dsh-api-session-controller/client'
+} from '@kinetick-labs/kh-api-session-controller/client'
 import type {
   AgentContext, ISessions, ProjectionsFace, SessionBinding, SessionFace, SessionListState,
   SessionEventLikeEntry, SessionLiveEventEntry, SessionSearchResultItem,
   SessionReference, SessionReferenceSource, SessionRetainInfo, SessionRetainOptions,
   SessionSnapshot, SessionSummary, SessionTarget, SubmissionHandle,
-} from '@deepseek-ai/dsh-api-session-controller/client'
-import { scopeIdentityOf } from '@deepseek-ai/dsh-api-session-controller/src/client/scope.ts'
-import type { SessionRequestId } from '@deepseek-ai/dsh-api-session-controller/types'
-import type { SubagentAddress } from '@deepseek-ai/dsh-subagent/client'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { ObservableSnapshot, SnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
+} from '@kinetick-labs/kh-api-session-controller/client'
+import { scopeIdentityOf } from '@kinetick-labs/kh-api-session-controller/src/client/scope.ts'
+import type { SessionRequestId } from '@kinetick-labs/kh-api-session-controller/types'
+import type { SubagentAddress } from '@kinetick-labs/kh-subagent/client'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { ObservableSnapshot, SnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { sessionSnapshot } from './fixtures.ts'
 import type {
   SessionFixture, SessionFixtureSnapshot, Stabilizer,
 } from './fixtures.ts'
 
-declare module '@deepseek-ai/dsh-api-session-controller/client' {
+declare module '@kinetick-labs/kh-api-session-controller/client' {
   interface SessionReferenceSourceMap {
     testFixture: unknown
     testView: unknown

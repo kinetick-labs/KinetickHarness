@@ -1,4 +1,4 @@
-"""Drive the repo-source dsh SDK profile through the SDK and a keyless mock SSE server.
+"""Drive the repo-source kh SDK profile through the SDK and a keyless mock SSE server.
 
 Requires ``pnpm install`` but no build. This manual test is not collected by
 pytest; run ``python tests/manual_sdk_agent_smoke.py``.
@@ -48,7 +48,7 @@ class MockCompletionHandler(BaseHTTPRequestHandler):
 
 
 def run_smoke(repo_root: Path, keep_sessions: bool) -> None:
-    dsh_home = Path(tempfile.mkdtemp(prefix="dsh-sdk-smoke-home-"))
+    dsh_home = Path(tempfile.mkdtemp(prefix="kh-sdk-smoke-home-"))
     session_root = dsh_home / "sessions"
     runtime_entry = repo_root / "apps/cli/src/bin.ts"
     server = ThreadingHTTPServer(("127.0.0.1", 0), MockCompletionHandler)
@@ -74,8 +74,8 @@ def run_smoke(repo_root: Path, keep_sessions: bool) -> None:
                 "sdk",
             ),
             env={
-                "DSH_HOME": str(dsh_home),
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_HOME": str(dsh_home),
+                "KH_PERMISSION_MODE": "danger-full-access",
                 "DEEPSEEK_BASE_URL": base_url,
                 "DEEPSEEK_API_KEY": "sdk-smoke-key",
             },
@@ -109,7 +109,7 @@ def run_smoke(repo_root: Path, keep_sessions: bool) -> None:
         print(f"kept_dsh_home={dsh_home}")
     else:
         shutil.rmtree(dsh_home)
-        print("removed temporary dsh home")
+        print("removed temporary kh home")
 
 
 def main() -> None:
@@ -118,7 +118,7 @@ def main() -> None:
         "--repo-root",
         type=Path,
         default=Path(__file__).resolve().parents[3],
-        help="Path to the deepseek-harness checkout.",
+        help="Path to the kinetick-harness checkout.",
     )
     parser.add_argument("--keep-sessions", action="store_true")
     args = parser.parse_args()

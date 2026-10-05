@@ -3,22 +3,22 @@
  * `schedule_delete` tools over the Host `ctx.schedule` service. Mounting the
  * plugin registers them in the mounting scope, so a preset decides which
  * agents receive them; every call acts on the calling Agent's Session.
- * @module @deepseek-ai/dsh-tool-schedule
+ * @module @kinetick-labs/kh-tool-schedule
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import { delegationDepthOf } from '@deepseek-ai/dsh-subagent'
-import { defineTool } from '@deepseek-ai/dsh-tools'
-import type { GenericCallView } from '@deepseek-ai/dsh-tools'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { ContentBlock } from '@kinetick-labs/kh-llm'
+import { delegationDepthOf } from '@kinetick-labs/kh-subagent'
+import { defineTool } from '@kinetick-labs/kh-tools'
+import type { GenericCallView } from '@kinetick-labs/kh-tools'
 import {
   MAX_TITLE_LENGTH, MIN_EVERY_INTERVAL_SECONDS, REQUIRED_TITLE_MESSAGE, ScheduleId, ScheduleInputError, scheduleView,
-} from '@deepseek-ai/dsh-schedule'
+} from '@kinetick-labs/kh-schedule'
 import type {
   AtInput, CronInput, DailyInput, WeeklyInput, InternalScheduleError, ScheduleCreateValue, ScheduleDeleteValue,
   ScheduleListValue, ScheduleTimingChange, ScheduleToolError, ScheduleUpdateValue,
-} from '@deepseek-ai/dsh-schedule'
+} from '@kinetick-labs/kh-schedule'
 
 /** Plugin name registered with the Loader. */
 export const name = 'tool-schedule'

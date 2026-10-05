@@ -3,13 +3,13 @@ description: "面向用户与维护者的全消息 LLM（大语言模型）会�
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-session-title-all-prompts-llm
+# @kinetick-labs/kh-session-title-all-prompts-llm
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-session-title-all-prompts-llm` 作为可选的 `ctx.sessionTitle` 提供方，通过 `ctx.llm` 总结所有符合条件的用户消息。它注册 `all-prompts` 节奏，并在每条新用户提示词后启动新修订，使用预置历史与子会话提示词。较新的修订会中止并取代旧工作，即使提供方忽略取消，也无法提交陈旧输出。它使用 `dsh-session-title-llm` 的完整必填共享 LLM 配置，因此路由、提示词、预算与取消行为不会漂移。本文优先介绍自动行为与配置；实现只是基于共享策略进行的轻量注册。
+`kh-session-title-all-prompts-llm` 作为可选的 `ctx.sessionTitle` 提供方，通过 `ctx.llm` 总结所有符合条件的用户消息。它注册 `all-prompts` 节奏，并在每条新用户提示词后启动新修订，使用预置历史与子会话提示词。较新的修订会中止并取代旧工作，即使提供方忽略取消，也无法提交陈旧输出。它使用 `dsh-session-title-llm` 的完整必填共享 LLM 配置，因此路由、提示词、预算与取消行为不会漂移。本文优先介绍自动行为与配置；实现只是基于共享策略进行的轻量注册。
 
 ## 目录
 

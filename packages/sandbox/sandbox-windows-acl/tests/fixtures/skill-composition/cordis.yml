@@ -1,4 +1,4 @@
 - id: sandbox
-  name: '@deepseek-ai/dsh-sandbox-local'
+  name: '@kinetick-labs/kh-sandbox-local'
 - id: skills
-  name: '@deepseek-ai/dsh-skill'
+  name: '@kinetick-labs/kh-skill'

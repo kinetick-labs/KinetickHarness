@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-client-shortcuts",
+  "name": "@kinetick-labs/kh-client-shortcuts",
   "description": "Application keyboard command registry and physical-key routing",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/client/shortcuts"
   },
   "type": "module",
@@ -29,10 +29,10 @@
       "default": "./lib/protocol.js"
     }
   },
-  "dsh": {
+  "kh": {
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-client-locale"
+        "@kinetick-labs/kh-client-locale"
       ],
       "platform": "web"
     }
@@ -47,12 +47,12 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-client-locale": "workspace:*",
-    "@deepseek-ai/dsh-client-store": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-primitives": "workspace:*",
-    "@deepseek-ai/dsh-brand": "workspace:*",
-    "@deepseek-ai/dsh-client-test-runtime": "workspace:*",
-    "@deepseek-ai/dsh-host-webserver": "workspace:*"
+    "@kinetick-labs/kh-client-locale": "workspace:*",
+    "@kinetick-labs/kh-client-store": "workspace:*",
+    "@kinetick-labs/kh-client-ui-primitives": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
+    "@kinetick-labs/kh-client-test-runtime": "workspace:*",
+    "@kinetick-labs/kh-host-webserver": "workspace:*"
   },
   "files": [
     "lib/index.js",
@@ -61,8 +61,8 @@
     "lib/types/**/*.d.ts"
   ],
   "dependencies": {
-    "@deepseek-ai/dsh-util-crypto": "workspace:*",
-    "@deepseek-ai/dsh-util-values": "workspace:*",
+    "@kinetick-labs/kh-util-crypto": "workspace:*",
+    "@kinetick-labs/kh-util-values": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~"
   }
 }

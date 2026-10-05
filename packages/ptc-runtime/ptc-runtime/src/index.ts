@@ -1,12 +1,12 @@
 /**
  * Service Definition for the PTC execution capability seam that runs one model-written program against host async bindings.
  * Runtimes know nothing about tools or sessions; consumers own those concerns.
- * @module @deepseek-ai/dsh-ptc-runtime
+ * @module @kinetick-labs/kh-ptc-runtime
  */
 
 import { Context, Service } from '@deepseek-ai/cordis'
 import type { PtcRunRequest, PtcRunResult, PtcRunSpec } from './types.ts'
-import type { SandboxMode } from '@deepseek-ai/dsh-sandbox'
+import type { SandboxMode } from '@kinetick-labs/kh-sandbox'
 
 export type {
   PtcBindingErrorClass,
@@ -108,7 +108,7 @@ export abstract class PtcRuntime extends Service {
    * generates language-specific presentation (typed SDK stubs, usage
    * instructions) switches on it and fails loud on a language it cannot
    * present. Well-known values: `'typescript'` and `'python'`, those
-   * `dsh-tools` presents; the TypeScript backend is released, the Python
+   * `kh-tools` presents; the TypeScript backend is released, the Python
    * backend is experimental and private (not published).
    */
   abstract readonly language: string

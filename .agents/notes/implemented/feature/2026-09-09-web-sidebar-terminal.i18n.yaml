@@ -3,20 +3,20 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-09-09-web-sidebar-terminal.md
 /agent-note-web-sidebar-terminals:
-  en: dfb245f871011059
-  zh: d64c0bd9cbe5f652
+  en: 810d1c14ac40df4b
+  zh: c963e3cca5bdb0e2
 /agent-note-web-sidebar-terminals/problem:
   en: 71813b1cb1f750ba
   zh: 64d2b999933ccd98
 /agent-note-web-sidebar-terminals/decision:
-  en: 8d28949572d990ef
-  zh: f6e26790415134d2
+  en: fd1af98ac09d6535
+  zh: 0bac8af0111dd9e1
 /agent-note-web-sidebar-terminals/alternatives-considered:
-  en: b0ffb94cd5033e9c
-  zh: 9294bb76503c858a
+  en: 31a2e6c7d03d4068
+  zh: 1007a80837824463
 /agent-note-web-sidebar-terminals/consequences:
-  en: d710787595b5dc89
-  zh: 4df9518c32698f85
+  en: a48880ccb6babead
+  zh: 12e700c8641dc879
 /agent-note-web-sidebar-terminals/related:
-  en: 94540c743da01fc4
-  zh: 53e3d9d2268153d1
+  en: 1e5857ad25cd0fb6
+  zh: 180a63bc58c2f7cc

@@ -5,57 +5,57 @@
 /:
   en: 4b8ba0a939fdf9d4
   zh: 8b8ddab7cef0f022
-/deepseek-ai-dsh-web-search-exa:
-  en: 1e59112a8781b6f5
-  zh: 858672d6f86534b5
-/deepseek-ai-dsh-web-search-exa/summary:
-  en: 0cd54ea674cbf9ff
-  zh: 62214ad882ff0e44
-/deepseek-ai-dsh-web-search-exa/table-of-contents:
+/kinetick-labs-kh-web-search-exa:
+  en: f1d3966aa183ccba
+  zh: 831e4b40fd473f58
+/kinetick-labs-kh-web-search-exa/summary:
+  en: e0adb8d294a49121
+  zh: ffbcae3a3aa3925c
+/kinetick-labs-kh-web-search-exa/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-web-search-exa/use-this-package:
+/kinetick-labs-kh-web-search-exa/use-this-package:
   en: 44ecd69ae3a9e8d3
   zh: b5f26aa1580f90fc
-/deepseek-ai-dsh-web-search-exa/use-this-package/when-to-choose-it:
+/kinetick-labs-kh-web-search-exa/use-this-package/when-to-choose-it:
   en: d33f61122c271792
   zh: e097094e69b3f425
-/deepseek-ai-dsh-web-search-exa/use-this-package/minimal-configuration:
-  en: a90f952a3cb9a155
-  zh: 27c8402fb6f85be2
-/deepseek-ai-dsh-web-search-exa/use-this-package/what-a-search-returns:
+/kinetick-labs-kh-web-search-exa/use-this-package/minimal-configuration:
+  en: bb0c54147cf6be49
+  zh: f430ed50257481e6
+/kinetick-labs-kh-web-search-exa/use-this-package/what-a-search-returns:
   en: 72c9eb8a1563bfd6
   zh: 26f7069376a74090
-/deepseek-ai-dsh-web-search-exa/use-this-package/failures-and-recovery:
+/kinetick-labs-kh-web-search-exa/use-this-package/failures-and-recovery:
   en: 5740595fa2cebf20
   zh: 7316e46e09d8ad9f
-/deepseek-ai-dsh-web-search-exa/understand-the-implementation:
+/kinetick-labs-kh-web-search-exa/understand-the-implementation:
   en: 9842c69ad3636bb3
   zh: 3cdc3f816cbdd0cb
-/deepseek-ai-dsh-web-search-exa/understand-the-implementation/design-philosophy:
+/kinetick-labs-kh-web-search-exa/understand-the-implementation/design-philosophy:
   en: 341f17a367eca5b0
   zh: ca3a4e4b4956892d
-/deepseek-ai-dsh-web-search-exa/understand-the-implementation/source-map:
+/kinetick-labs-kh-web-search-exa/understand-the-implementation/source-map:
   en: ca70cbf87a47c506
   zh: bb440072bbd6a478
-/deepseek-ai-dsh-web-search-exa/understand-the-implementation/request-and-mapping-flow:
+/kinetick-labs-kh-web-search-exa/understand-the-implementation/request-and-mapping-flow:
   en: 1fe92c2ad0408273
   zh: cc8c573e0accc8dc
-/deepseek-ai-dsh-web-search-exa/further-exploration:
-  en: 3184010b324cfe4c
-  zh: e92c26f5ae57f21b
-/deepseek-ai-dsh-web-search-exa/model-experience:
-  en: b1b5d9c71a0b07b4
-  zh: 2802bef7723b6bf4
-/deepseek-ai-dsh-web-search-exa/model-experience/kv-cache-effect:
+/kinetick-labs-kh-web-search-exa/further-exploration:
+  en: aed4150f8c213b57
+  zh: 6c940893f1a8e33f
+/kinetick-labs-kh-web-search-exa/model-experience:
+  en: 54611b4b2a435ae9
+  zh: b9b5e73b24890a69
+/kinetick-labs-kh-web-search-exa/model-experience/kv-cache-effect:
   en: 40294c1c31b74824
   zh: d75d48f485447a74
-/deepseek-ai-dsh-web-search-exa/known-limitations-and-deferred-work:
-  en: 24860838d1b7462e
-  zh: 4eb921101d89c877
-/deepseek-ai-dsh-web-search-exa/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-web-search-exa/known-limitations-and-deferred-work:
+  en: 54428bf1547e4bd1
+  zh: 3e3dabb6a36de6e5
+/kinetick-labs-kh-web-search-exa/known-limitations-and-deferred-work/dev-note:
   en: 7f775cc79dbce94b
   zh: 12b8f68f9e7c48ca
-/deepseek-ai-dsh-web-search-exa/known-limitations-and-deferred-work/dev-note/future-wider-exa-control-surface:
+/kinetick-labs-kh-web-search-exa/known-limitations-and-deferred-work/dev-note/future-wider-exa-control-surface:
   en: 7a6c72d34be40225
   zh: b525946646a9f856

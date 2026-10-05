@@ -10,10 +10,10 @@
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {
   CredentialInfo, LlmConfigurableProvider, LlmProviderInfo, SettingsNamespaceView,
-} from '@deepseek-ai/dsh-api-remotes/client'
-import type { SnapshotStore } from '@deepseek-ai/dsh-client-store'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { SettingsDescribeFace } from '@deepseek-ai/dsh-client-ui-settings/client'
+} from '@kinetick-labs/kh-api-remotes/client'
+import type { SnapshotStore } from '@kinetick-labs/kh-client-store'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { SettingsDescribeFace } from '@kinetick-labs/kh-client-ui-settings/client'
 import type { SettingsSchemaOperations } from './schema-operations.ts'
 
 /**

@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-client-hmr",
+  "name": "@kinetick-labs/kh-client-hmr",
   "description": "Web client graph synchronization and rebuilt-bundle reload transport",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/client/hmr"
   },
   "type": "module",
@@ -25,10 +25,10 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "dsh": {
+  "kh": {
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-client-modules"
+        "@kinetick-labs/kh-client-modules"
       ],
       "platform": "web",
       "immediately": true
@@ -43,8 +43,8 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-client-modules": "workspace:*",
-    "@deepseek-ai/dsh-host-webserver": "workspace:*",
+    "@kinetick-labs/kh-client-modules": "workspace:*",
+    "@kinetick-labs/kh-host-webserver": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "files": [

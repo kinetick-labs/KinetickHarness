@@ -4,25 +4,25 @@ import { tmpdir } from 'node:os'
 import path from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import { ToolCallId, ReasoningEffortId } from '@deepseek-ai/dsh-llm'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { TOOL_ABORTED_BEFORE_DISPATCH } from '@deepseek-ai/dsh-tools'
-import { assembleContextFor, type Agent } from '@deepseek-ai/dsh-agent'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
-import type { SubagentStartRequest } from '@deepseek-ai/dsh-subagent'
-import LocalJobRegistry from '@deepseek-ai/dsh-jobs-local'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import * as ToolJobs from '@deepseek-ai/dsh-tool-jobs'
+import { ToolCallId, ReasoningEffortId } from '@kinetick-labs/kh-llm'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { TOOL_ABORTED_BEFORE_DISPATCH } from '@kinetick-labs/kh-tools'
+import { assembleContextFor, type Agent } from '@kinetick-labs/kh-agent'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
+import type { SubagentStartRequest } from '@kinetick-labs/kh-subagent'
+import LocalJobRegistry from '@kinetick-labs/kh-jobs-local'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import * as ToolJobs from '@kinetick-labs/kh-tool-jobs'
 import { MockAdapter, textResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import { loadStoredSession } from '../../subagent/tests/persistence-helpers.ts'
 import * as mock from './scripted-provider.ts'
 import * as tool from '../src/index.ts'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
 import {
   callSubagent,
   disposeSetupProvider,
@@ -41,7 +41,7 @@ async function projectedContext(): Promise<Context> {
 }
 
 /**
- * Drives the REAL plugin body: mounts `dsh-tool-subagent` on a real
+ * Drives the REAL plugin body: mounts `kh-tool-subagent` on a real
  * `ToolRuntime` + `SubagentRuntime`, with a package-local scripted child
  * boundary, and invokes the registered `subagent` tool through
  * `ctx.tools.execute`. Everything downstream of the child boundary is the
@@ -49,7 +49,7 @@ async function projectedContext(): Promise<Context> {
  */
 
 
-describe('dsh-tool-subagent', () => {
+describe('kh-tool-subagent', () => {
   it('rejects continuable background policy when the provider cannot prepare continuable children', async () => {
     let failure: unknown
     try {
@@ -799,7 +799,7 @@ describe('dsh-tool-subagent', () => {
   })
 })
 
-describe('dsh-tool-subagent background mode', () => {
+describe('kh-tool-subagent background mode', () => {
   /** A live parent with a dedicated scope fiber for structural task cleanup. */
   async function ownerAgent(ctx: Context, sessionId: string, inject: (...args: unknown[]) => void = () => {}): Promise<Agent> {
     const scopeFiber = ctx.plugin(() => {})
@@ -928,7 +928,7 @@ describe('dsh-tool-subagent background mode', () => {
     const ctx = await setup({ provider: 'mock' })
     const result = await callSubagent(ctx, { description: 'd', prompt: 'p', run_in_background: true })
     expect(result.isError).toBe(true)
-    expect(text(result)).toContain('background jobs unavailable: load @deepseek-ai/dsh-jobs')
+    expect(text(result)).toContain('background jobs unavailable: load @kinetick-labs/kh-jobs')
   })
 
   it('skips background startup when the tool signal is already aborted', async () => {
@@ -1175,7 +1175,7 @@ describe('dsh-tool-subagent background mode', () => {
 
 })
 
-describe('dsh-tool-subagent continuable background mode', () => {
+describe('kh-tool-subagent continuable background mode', () => {
   const fixtures: { ctx: Context; root: string }[] = []
   afterEach(async () => {
     for (const { ctx, root } of fixtures.splice(0)) {
@@ -1187,7 +1187,7 @@ describe('dsh-tool-subagent continuable background mode', () => {
   /** Boot the real continuable stack without any model-facing follow-up adapter. */
   async function continuableSetup() {
     const ctx = new Context()
-    const root = mkdtempSync(path.join(tmpdir(), 'dsh-tool-subagent-continuable-'))
+    const root = mkdtempSync(path.join(tmpdir(), 'kh-tool-subagent-continuable-'))
     fixtures.push({ ctx, root })
     await mountAgentLoopTestDependencies(ctx)
     await ctx.plugin(JsonlSessionPersistence, { root })

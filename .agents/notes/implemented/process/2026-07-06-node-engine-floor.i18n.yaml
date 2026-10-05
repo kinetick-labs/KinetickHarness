@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-07-06-node-engine-floor.md
 /agent-note-raise-the-node-lts-engine-floor-to-22-19:
-  en: 01f43f2b4c6bd4fa
-  zh: 7f34e5b3c1c55419
+  en: 16dc8cd83b3f922d
+  zh: f43cff5084e8a9cb
 /agent-note-raise-the-node-lts-engine-floor-to-22-19/problem:
   en: d7bf1b1699ce0dc8
   zh: f10dfd0e4787bb44

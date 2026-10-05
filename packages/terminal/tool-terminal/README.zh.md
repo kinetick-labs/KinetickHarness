@@ -3,13 +3,13 @@ description: "面向需要跨调用终端状态的 agent（智能体）的 6 个
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tool-terminal
+# @kinetick-labs/kh-tool-terminal
 
 [English](README.md) | 中文
 
 ## 概述
 
-当 agent 需要跨调用保留终端状态或提供交互式输入时，使用 `dsh-tool-terminal`。它可以打开、发送、读取、传递信号、关闭和列出终端会话，同时防止一个 agent 操作其他 agent 的会话。发送可以等待有界的前台输出，也可以返回供后续收集或中断的后台任务 job id。`maxResultBytes` 限制每个结果的大小，而结果会保留在会话历史中直到压缩（compaction）。指引会让模型对有界工作优先使用单次工具。
+当 agent 需要跨调用保留终端状态或提供交互式输入时，使用 `kh-tool-terminal`。它可以打开、发送、读取、传递信号、关闭和列出终端会话，同时防止一个 agent 操作其他 agent 的会话。发送可以等待有界的前台输出，也可以返回供后续收集或中断的后台任务 job id。`maxResultBytes` 限制每个结果的大小，而结果会保留在会话历史中直到压缩（compaction）。指引会让模型对有界工作优先使用单次工具。
 
 ## 目录
 
@@ -41,12 +41,12 @@ kind: "package-reference"
 ### 组合方式
 
 ```yaml
-- name: '@deepseek-ai/dsh-terminal'
-- name: '@deepseek-ai/dsh-terminal-bash'
-- name: '@deepseek-ai/dsh-tool-terminal'
+- name: '@kinetick-labs/kh-terminal'
+- name: '@kinetick-labs/kh-terminal-bash'
+- name: '@kinetick-labs/kh-tool-terminal'
 ```
 
-工具需要 `ctx.terminals`——必须挂载一个后端——以及用于指引章节的系统提示词服务。后台发送还额外要求任务服务及其面向模型的控制器（`@deepseek-ai/dsh-tool-jobs`）。
+工具需要 `ctx.terminals`——必须挂载一个后端——以及用于指引章节的系统提示词服务。后台发送还额外要求任务服务及其面向模型的控制器（`@kinetick-labs/kh-tool-jobs`）。
 
 ### 配置
 
@@ -139,7 +139,7 @@ Use a terminal session only when work needs persistent terminal state or interac
 
 #### 模型看到什么
 
-6 个生成的 schema 列在 [`dsh-tool-terminal` 目录章节](../../../docs/tool-catalog.zh.md#deepseek-aidsh-tool-terminal)中。此插件活跃时，请求中会包含它们的固定 schema token；按 agent 范围过滤工具时可能隐藏这些 schema。
+6 个生成的 schema 列在 [`kh-tool-terminal` 目录章节](../../../docs/tool-catalog.zh.md#deepseek-aidsh-tool-terminal)中。此插件活跃时，请求中会包含它们的固定 schema token；按 agent 范围过滤工具时可能隐藏这些 schema。
 
 #### Token 影响
 
@@ -171,7 +171,7 @@ spawn 返回 id 与有界启动输出。发送与读取返回有界终端文本�
 这些限制说明缺失的面向模型接口面。它们是当前包约束，不是任务积压。
 
 - **没有 TUI 或按键序列接口面**——具名按键序列、全屏 TUI 交互、BEL、调整大小与自动启动均未出现在任何 schema 中。
-- **后台模式要求任务接口面**——`run_in_background` 同时需要 `@deepseek-ai/dsh-jobs` 及其面向模型的控制器（`@deepseek-ai/dsh-tool-jobs`）；缺少时会拒绝该参数。
+- **后台模式要求任务接口面**——`run_in_background` 同时需要 `@kinetick-labs/kh-jobs` 及其面向模型的控制器（`@kinetick-labs/kh-tool-jobs`）；缺少时会拒绝该参数。
 
 <a id="dev-note"></a>
 ### 开发备注

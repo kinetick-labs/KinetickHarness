@@ -9,15 +9,15 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import * as ToolTodo from '@deepseek-ai/dsh-tool-todo'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import * as ToolTodo from '@kinetick-labs/kh-tool-todo'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
 
 let root: string | undefined
 let context: Context | undefined
@@ -54,14 +54,14 @@ function resultText(result: { content: { type: string; text?: string }[] }): str
  * @returns the booted context.
  */
 async function boot(configLines: readonly string[]): Promise<Context> {
-  root = await mkdtemp(join(tmpdir(), 'dsh-todo-loader-'))
+  root = await mkdtemp(join(tmpdir(), 'kh-todo-loader-'))
   const configPath = join(root, 'cordis.yml')
   await writeFile(configPath, [
-    "- name: '@deepseek-ai/dsh-agent'",
-    "- name: '@deepseek-ai/dsh-system-prompt'",
-    "- name: '@deepseek-ai/dsh-tools'",
-    "- name: '@deepseek-ai/dsh-session-projection'",
-    "- name: '@deepseek-ai/dsh-tool-todo'",
+    "- name: '@kinetick-labs/kh-agent'",
+    "- name: '@kinetick-labs/kh-system-prompt'",
+    "- name: '@kinetick-labs/kh-tools'",
+    "- name: '@kinetick-labs/kh-session-projection'",
+    "- name: '@kinetick-labs/kh-tool-todo'",
     ...configLines.length > 0 ? ['  config:', ...configLines] : [],
     '',
   ].join('\n'))
@@ -72,11 +72,11 @@ async function boot(configLines: readonly string[]): Promise<Context> {
   await ctx.plugin(Loader)
   ctx.loader.builtins.include = Include
   const modules = new Map<string, unknown>([
-    ['@deepseek-ai/dsh-agent', AgentRegistry],
-    ['@deepseek-ai/dsh-system-prompt', SystemPrompt],
-    ['@deepseek-ai/dsh-tools', ToolRuntime],
-    ['@deepseek-ai/dsh-session-projection', SessionProjectionRegistry],
-    ['@deepseek-ai/dsh-tool-todo', ToolTodo],
+    ['@kinetick-labs/kh-agent', AgentRegistry],
+    ['@kinetick-labs/kh-system-prompt', SystemPrompt],
+    ['@kinetick-labs/kh-tools', ToolRuntime],
+    ['@kinetick-labs/kh-session-projection', SessionProjectionRegistry],
+    ['@kinetick-labs/kh-tool-todo', ToolTodo],
   ])
   ctx.loader.internal = {
     version: 'v2',

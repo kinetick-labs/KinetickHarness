@@ -1,20 +1,20 @@
 import { describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import { createUserMessage, ToolCallId } from '@deepseek-ai/dsh-llm'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { Session, SessionId, SessionLogOffset } from '@deepseek-ai/dsh-session'
-import type { TodoItem } from '@deepseek-ai/dsh-tool-todo'
-import { type Agent } from '@deepseek-ai/dsh-agent'
+import { createUserMessage, ToolCallId } from '@kinetick-labs/kh-llm'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { Session, SessionId, SessionLogOffset } from '@kinetick-labs/kh-session'
+import type { TodoItem } from '@kinetick-labs/kh-tool-todo'
+import { type Agent } from '@kinetick-labs/kh-agent'
 
 import * as tool from '../src/index.ts'
 
 const testToolSignal = new AbortController().signal
 
 /**
- * Drives the REAL plugin body: mounts `dsh-tool-todo` on a real `ToolRuntime`
+ * Drives the REAL plugin body: mounts `kh-tool-todo` on a real `ToolRuntime`
  * and invokes the registered `todo_write` tool through `ctx.tools.execute`,
  * with a fake parent Agent carrying a real `Session` — so the append the tool
  * makes is observable on a genuine session log (only the agent wrapper is a
@@ -52,7 +52,7 @@ function text(result: { content: { type: string; text?: string }[] }): string {
   return result.content.filter(b => b.type === 'text').map(b => b.text).join('')
 }
 
-describe('dsh-tool-todo', () => {
+describe('kh-tool-todo', () => {
   it('registers a `todo_write` tool whose schema is an array of {content,status}', async () => {
     const ctx = await setup(true)
     const schema = ctx.tools.schemas().find(s => s.name === 'todo_write')

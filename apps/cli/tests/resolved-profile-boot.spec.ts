@@ -4,17 +4,17 @@ import { createRequire } from 'node:module'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import { createLaunchEnvironmentSnapshot } from '@deepseek-ai/dsh-launch-environment'
+import { createLaunchEnvironmentSnapshot } from '@kinetick-labs/kh-launch-environment'
 import {
   boot, composeEntries, createRuntimeResolution,
   PluginPackages, type Profile,
-} from '@deepseek-ai/dsh-app-boot'
-import { installProxyFromEnvironment } from '@deepseek-ai/dsh-http-proxy'
+} from '@kinetick-labs/kh-app-boot'
+import { installProxyFromEnvironment } from '@kinetick-labs/kh-http-proxy'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { runProfile } from '../src/profile-boot.ts'
 
-vi.mock('@deepseek-ai/dsh-app-boot', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@deepseek-ai/dsh-app-boot')>()
+vi.mock('@kinetick-labs/kh-app-boot', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@kinetick-labs/kh-app-boot')>()
   return {
     ...actual,
     boot: vi.fn(),
@@ -22,7 +22,7 @@ vi.mock('@deepseek-ai/dsh-app-boot', async (importOriginal) => {
     installFailLoud: vi.fn(),
   }
 })
-vi.mock('@deepseek-ai/dsh-http-proxy', () => ({ installProxyFromEnvironment: vi.fn() }))
+vi.mock('@kinetick-labs/kh-http-proxy', () => ({ installProxyFromEnvironment: vi.fn() }))
 
 const homes: string[] = []
 afterEach(() => {
@@ -36,12 +36,12 @@ describe('runProfile with an application-owned profile', () => {
   it.each(
     ['composition', 'boot', 'watch', 'cleanup', 'tree-cleanup', 'both-cleanups'] as const,
   )('releases startup resources after a %s failure', async (stage) => {
-    const home = mkdtempSync(join(tmpdir(), 'dsh-profile-startup-failure-'))
+    const home = mkdtempSync(join(tmpdir(), 'kh-profile-startup-failure-'))
     homes.push(home)
     mkdirSync(join(home, 'runtime'))
     writeFileSync(join(home, 'runtime/package.json'), '{"name":"test-runtime","version":"1.0.0"}')
     writeFileSync(join(home, 'package.json'), '{"name":"test-bundle","version":"1.0.0"}')
-    vi.stubEnv('DSH_HOME', home)
+    vi.stubEnv('KH_HOME', home)
     vi.spyOn(process, 'on').mockReturnValue(process)
     const ctx = new Context()
     ctx.provide('loader', { create: vi.fn() })
@@ -87,7 +87,7 @@ describe('runProfile with an application-owned profile', () => {
   })
 
   it('uses shared layers, runtime resolution, and shutdown', async () => {
-    const home = mkdtempSync(join(tmpdir(), 'dsh-resolved-profile-'))
+    const home = mkdtempSync(join(tmpdir(), 'kh-resolved-profile-'))
     homes.push(home)
     mkdirSync(join(home, 'runtime'))
     writeFileSync(join(home, 'runtime/package.json'), '{"name":"test-runtime","version":"1.0.0","exports":"./index.cjs"}')
@@ -98,7 +98,7 @@ describe('runProfile with an application-owned profile', () => {
     const localManifest = '{"name":"test-local","version":"1.0.0","exports":"./index.cjs"}'
     writeFileSync(join(localPackageDir, 'package.json'), localManifest)
     writeFileSync(join(localPackageDir, 'index.cjs'), 'module.exports = "profile"\n')
-    vi.stubEnv('DSH_HOME', home)
+    vi.stubEnv('KH_HOME', home)
     vi.spyOn(process, 'on').mockReturnValue(process)
     const oldExitCode = process.exitCode
     const ctx = new Context()

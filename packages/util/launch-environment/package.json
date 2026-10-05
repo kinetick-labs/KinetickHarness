@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-launch-environment",
-  "description": "Immutable DeepSeek Harness launch environment that records which layer supplied each value",
+  "name": "@kinetick-labs/kh-launch-environment",
+  "description": "Immutable KinetickHarness launch environment that records which layer supplied each value",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/util/launch-environment"
   },
   "type": "module",

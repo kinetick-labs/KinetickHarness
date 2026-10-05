@@ -5,9 +5,9 @@ import { fileURLToPath } from 'node:url'
 import { connect } from 'node:net'
 import type { Duplex } from 'node:stream'
 import serveStatic from 'serve-static'
-import type { IndexInjection } from '@deepseek-ai/dsh-host-webserver'
-import type {} from '@deepseek-ai/dsh-client-connection'
-import type {} from '@deepseek-ai/dsh-cmdline'
+import type { IndexInjection } from '@kinetick-labs/kh-host-webserver'
+import type {} from '@kinetick-labs/kh-client-connection'
+import type {} from '@kinetick-labs/kh-cmdline'
 import open, { apps } from 'open'
 import { resolveInspectorOptions, startInspector, type InspectorOptions } from './bridge/controller.ts'
 import { createInspectorService } from '../shared/service.ts'
@@ -59,7 +59,7 @@ export async function apply(ctx: Context, config: HostPluginConfig): Promise<voi
       }))
       disposers.push(ctx.provide('inspector', createInspectorService(handle.source)))
       disposers.push(ctx.on('webserver/index-inject', (table: IndexInjection[]) => {
-        table.push({ kind: 'global', name: '__DSH_INSPECTOR__', value: handle.endpoint.client })
+        table.push({ kind: 'global', name: '__KH_INSPECTOR__', value: handle.endpoint.client })
       }))
       disposers.push(ctx.connection.fetch.register({
         path: INSPECTOR_BOOTSTRAP_PATH, methods: ['GET'], requestBody: 'buffered',
@@ -68,7 +68,7 @@ export async function apply(ctx: Context, config: HostPluginConfig): Promise<voi
         })),
       }))
       const assets = serveStatic(fileURLToPath(new URL('./lib/devtools/',
-        import.meta.resolve('@deepseek-ai/dsh-experimental-inspector/package.json'))), {
+        import.meta.resolve('@kinetick-labs/kh-experimental-inspector/package.json'))), {
         index: false, redirect: false, fallthrough: true,
         setHeaders: (res) => { res.setHeader('X-Content-Type-Options', 'nosniff') },
       })
@@ -147,7 +147,7 @@ export async function apply(ctx: Context, config: HostPluginConfig): Promise<voi
         },
       }))
       // This readiness URL is emitted while the plugin tree is still loading, before a logger sink is guaranteed.
-      console.log(`dsh inspector: ${handle.endpoint.devtoolsFrontendUrl}`)
+      console.log(`kh inspector: ${handle.endpoint.devtoolsFrontendUrl}`)
       if (ctx.get('cmdlineArgs')?.get().includes('--inspect')) {
         await open(handle.endpoint.devtoolsFrontendUrl, { app: { name: apps.chrome }, wait: false }).catch((error: unknown) => {
           ctx.logger.error('experimental-inspector: Chrome could not open DevTools', error)

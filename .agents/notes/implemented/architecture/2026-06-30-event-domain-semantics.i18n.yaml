@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-06-30-event-domain-semantics.md
 /agent-note-event-domain-semantics-session-is-the-fact-log-agent-is-the-live-event-channel:
-  en: e7cdaa7a6029c259
-  zh: ed13f8158ee0eaeb
+  en: e2d1612590324609
+  zh: 85146ade324a578e
 /agent-note-event-domain-semantics-session-is-the-fact-log-agent-is-the-live-event-channel/problem:
-  en: 2994389e60dd7a27
-  zh: 65a40580c8a7f0d2
+  en: 1b90a87a6268fb3c
+  zh: 1df528818de5d4a8
 /agent-note-event-domain-semantics-session-is-the-fact-log-agent-is-the-live-event-channel/decision:
   en: ccc0fed9b7388112
   zh: 3cc527b11affd941

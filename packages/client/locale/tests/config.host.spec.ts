@@ -5,7 +5,7 @@ import { liveConfig, omitsGeneratedPage } from '../../../settings/settings/tests
 import { plainConfig } from '../../../settings/settings/src/schema.ts'
 import {
   Config, apply,
-} from '@deepseek-ai/dsh-client-locale'
+} from '@kinetick-labs/kh-client-locale'
 
 
 describe('locale host', () => {

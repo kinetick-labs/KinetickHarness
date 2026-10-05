@@ -1,8 +1,8 @@
 // @vitest-environment jsdom
 
 import type { ProcessGroupData } from '../src/client/contract/process-groups.ts'
-import type { InboxState } from '@deepseek-ai/dsh-agent/types'
-import type { GlobalStandardProps } from '@deepseek-ai/dsh-client-ui-slots'
+import type { InboxState } from '@kinetick-labs/kh-agent/types'
+import type { GlobalStandardProps } from '@kinetick-labs/kh-client-ui-slots'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { useEffect } from 'react'
@@ -12,24 +12,24 @@ import type {
   LegacyConversationSlice, ModelRetryNode, StartedToolCall, SteeringMessageNode,
   ToolCallBlock, ToolResultNode, TurnErrorNode, TurnMaxTokensNode, UseChatNodeTurnData,
   TranscriptViewMode, UserMessageNode,
-} from '@deepseek-ai/dsh-client-ui-chat/client'
+} from '@kinetick-labs/kh-client-ui-chat/client'
 import type {
   SessionListState, SessionSnapshot,
-} from '@deepseek-ai/dsh-api-session-controller/client'
+} from '@kinetick-labs/kh-api-session-controller/client'
 import type {
   ConversationGroupedView,
   ConversationSnapshot, ConversationViewSnapshotStore, GroupKey, GroupSnapshot, NodeKey, TurnLocation,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import type { WorkspaceSnapshot } from '@deepseek-ai/dsh-api-workspace-controller/client'
-import { SessionSeq, type SessionId } from '@deepseek-ai/dsh-session/types'
-import type { SessionStatusSnapshot } from '@deepseek-ai/dsh-client-ui-session/client'
-import type { KeyedSnapshotSelectorHook, SnapshotSelectorHook } from '@deepseek-ai/dsh-client-ui-slots'
-import { bindSnapshotSelector, makeTranslate } from '@deepseek-ai/dsh-client-test-runtime'
-import { createSnapshotStore, type ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
-import { EMPTY_CONVERSATION_SNAPSHOT } from '@deepseek-ai/dsh-client-ui-conversation/client'
-import { en as commonEn } from '@deepseek-ai/dsh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@deepseek-ai/dsh-client-locale/src/locales/zh.ts'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type { WorkspaceSnapshot } from '@kinetick-labs/kh-api-workspace-controller/client'
+import { SessionSeq, type SessionId } from '@kinetick-labs/kh-session/types'
+import type { SessionStatusSnapshot } from '@kinetick-labs/kh-client-ui-session/client'
+import type { KeyedSnapshotSelectorHook, SnapshotSelectorHook } from '@kinetick-labs/kh-client-ui-slots'
+import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
+import { createSnapshotStore, type ObservableSnapshot } from '@kinetick-labs/kh-client-store'
+import { EMPTY_CONVERSATION_SNAPSHOT } from '@kinetick-labs/kh-client-ui-conversation/client'
+import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
+import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import { createChatStore } from '../src/client/stores.ts'
 import { derivePresentationPolicy } from '../src/client/presentation-policy.ts'
 import { ChatView } from '../src/client/chat/ChatView.tsx'

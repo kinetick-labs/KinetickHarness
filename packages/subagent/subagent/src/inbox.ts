@@ -1,11 +1,11 @@
 /**
  * Activation-local admission around one continuable subagent's Agent inbox.
  *
- * @module @deepseek-ai/dsh-subagent/inbox
+ * @module @kinetick-labs/kh-subagent/inbox
  */
 
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { UserMessage } from '@deepseek-ai/dsh-session'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { UserMessage } from '@kinetick-labs/kh-session'
 import type { SubagentPromptRequest } from './control-types.ts'
 import { SubagentError } from './error.ts'
 

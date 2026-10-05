@@ -8,8 +8,8 @@
  * select one by name.
  *
  * This package owns the Service Definition role of the capability seam. Service Providers
- * (`@deepseek-ai/dsh-subagent-spawn-in-process`, `-fork`, `-acp`) and the model-facing
- * consumer (`@deepseek-ai/dsh-tool-subagent`) are separate packages.
+ * (`@kinetick-labs/kh-subagent-spawn-in-process`, `-fork`, `-acp`) and the model-facing
+ * consumer (`@kinetick-labs/kh-tool-subagent`) are separate packages.
  *
  * Public operations express caller intent: `start` returns one published owned
  * one-shot run, `startContinuable` establishes a durable continuable child, and
@@ -26,21 +26,21 @@
  * serialization and hostile-input validation belong at real process, worker,
  * persistence, and model boundaries.
  *
- * @module @deepseek-ai/dsh-subagent
+ * @module @kinetick-labs/kh-subagent
  */
 import type { Volatile } from '@deepseek-ai/cordis'
 
 import { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import type {} from '@deepseek-ai/dsh-attachment'
-import { scopeTarget } from '@deepseek-ai/dsh-scope'
-import type { Scoped } from '@deepseek-ai/dsh-scope'
-import { assertObjectJsonSchema } from '@deepseek-ai/dsh-tools'
-import type { ContentBlock, MessageId, MessageSource } from '@deepseek-ai/dsh-llm'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { SessionId } from '@deepseek-ai/dsh-session'
-import { canonicalClientTimeZone } from '@deepseek-ai/dsh-util-time'
-import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
+import type {} from '@kinetick-labs/kh-attachment'
+import { scopeTarget } from '@kinetick-labs/kh-scope'
+import type { Scoped } from '@kinetick-labs/kh-scope'
+import { assertObjectJsonSchema } from '@kinetick-labs/kh-tools'
+import type { ContentBlock, MessageId, MessageSource } from '@kinetick-labs/kh-llm'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { SessionId } from '@kinetick-labs/kh-session'
+import { canonicalClientTimeZone } from '@kinetick-labs/kh-util-time'
+import { Remote, RemoteError, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
 import {
   rejectPrompt, validateControlRequest,
 } from './control.ts'

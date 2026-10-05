@@ -6,20 +6,20 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import BrowserUse from '@deepseek-ai/dsh-browser-use'
-import SystemPrompt, { renderPrompt } from '@deepseek-ai/dsh-system-prompt'
-import Tools from '@deepseek-ai/dsh-tools'
-import McpResources from '@deepseek-ai/dsh-mcp-resources'
-import { PtcRuntime } from '@deepseek-ai/dsh-ptc-runtime'
-import Llm, { LlmAdapter, ToolCallId, createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@deepseek-ai/dsh-llm'
-import Sessions, { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import Agents from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import Projections from '@deepseek-ai/dsh-session-projection'
-import { bindScopeParent } from '@deepseek-ai/dsh-scope'
+import BrowserUse from '@kinetick-labs/kh-browser-use'
+import SystemPrompt, { renderPrompt } from '@kinetick-labs/kh-system-prompt'
+import Tools from '@kinetick-labs/kh-tools'
+import McpResources from '@kinetick-labs/kh-mcp-resources'
+import { PtcRuntime } from '@kinetick-labs/kh-ptc-runtime'
+import Llm, { LlmAdapter, ToolCallId, createUserMessage } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@kinetick-labs/kh-llm'
+import Sessions, { SessionId } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import Agents from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import Projections from '@kinetick-labs/kh-session-projection'
+import { bindScopeParent } from '@kinetick-labs/kh-scope'
 import { BrowserMcpConfig, mountSessionMcp, validateBrowserMcpConfig } from '../src/mcp.ts'
 
 const fixture = fileURLToPath(new URL('./mcp-fixture.mjs', import.meta.url))
@@ -62,7 +62,7 @@ class PresentationRuntime extends PtcRuntime {
 }
 
 async function load(exclusive = false, mode?: string, toolCallTimeoutMs?: number, toolOrder?: string[]) {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-browser-mcp-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-browser-mcp-'))
   roots.push(root)
   const model = new FixtureModel()
   const modules = new Map<string, unknown>([

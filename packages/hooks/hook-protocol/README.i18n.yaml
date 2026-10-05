@@ -5,57 +5,57 @@
 /:
   en: 7cfe3761eedff848
   zh: 80b0bed5743d0924
-/deepseek-ai-dsh-hook-protocol:
-  en: bcf8ec6c43311fb7
-  zh: 4ef45c5aaced087d
-/deepseek-ai-dsh-hook-protocol/summary:
-  en: e8ab847d0db16043
-  zh: 5c1e72f4b4a54fe1
-/deepseek-ai-dsh-hook-protocol/table-of-contents:
+/kinetick-labs-kh-hook-protocol:
+  en: 48abe376770d8a6e
+  zh: 05a3e8ba8d89371b
+/kinetick-labs-kh-hook-protocol/summary:
+  en: c246eb802c5fc02b
+  zh: 34aadca05df43518
+/kinetick-labs-kh-hook-protocol/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-hook-protocol/use-this-package:
-  en: 4b29a18ac60be5bb
-  zh: 4a02b48f9e914101
-/deepseek-ai-dsh-hook-protocol/use-this-package/when-to-choose-it:
-  en: 435c1a335f8dfccf
-  zh: efe58c06dc40d4d9
-/deepseek-ai-dsh-hook-protocol/use-this-package/what-a-hook-can-do:
+/kinetick-labs-kh-hook-protocol/use-this-package:
+  en: b6b71c23e600e21b
+  zh: f6ec32b7dbc09d6b
+/kinetick-labs-kh-hook-protocol/use-this-package/when-to-choose-it:
+  en: 65eae00a603b18ac
+  zh: 752f55830fb1e9dd
+/kinetick-labs-kh-hook-protocol/use-this-package/what-a-hook-can-do:
   en: 043f54b3a5b518a7
   zh: a4115083a9b1cef1
-/deepseek-ai-dsh-hook-protocol/use-this-package/what-you-see-when-hooks-run:
+/kinetick-labs-kh-hook-protocol/use-this-package/what-you-see-when-hooks-run:
   en: ba2d6ed1db063f53
   zh: ab1b8d72dccd2ff1
-/deepseek-ai-dsh-hook-protocol/understand-the-implementation:
+/kinetick-labs-kh-hook-protocol/understand-the-implementation:
   en: 08b3960150e9c5e2
   zh: 6bb2f236d697de01
-/deepseek-ai-dsh-hook-protocol/understand-the-implementation/processing-pipeline:
-  en: b25d80f19b551f1a
-  zh: 9c6602f008d89bce
-/deepseek-ai-dsh-hook-protocol/understand-the-implementation/hook-session-events:
-  en: f01ab4ab98f052b3
-  zh: 1da25fa50378bd19
-/deepseek-ai-dsh-hook-protocol/understand-the-implementation/design-philosophy:
-  en: 7f9239eaea5a945c
-  zh: 9ba6a2ea955d4934
-/deepseek-ai-dsh-hook-protocol/understand-the-implementation/source-map:
+/kinetick-labs-kh-hook-protocol/understand-the-implementation/processing-pipeline:
+  en: 36ddc07d4e83d32a
+  zh: 2bacf9488c337631
+/kinetick-labs-kh-hook-protocol/understand-the-implementation/hook-session-events:
+  en: 9f79b1936d11d33b
+  zh: dec1d2b44938f774
+/kinetick-labs-kh-hook-protocol/understand-the-implementation/design-philosophy:
+  en: 7b8ea6dc06eeb49e
+  zh: e9dd227eb5cb41f6
+/kinetick-labs-kh-hook-protocol/understand-the-implementation/source-map:
   en: aa4983adf89ea45c
   zh: cc83b0ede5ff156c
-/deepseek-ai-dsh-hook-protocol/further-exploration:
-  en: 65a937c4c5f221d5
-  zh: 3b9d6485493dfb8d
-/deepseek-ai-dsh-hook-protocol/model-experience:
-  en: 53d2f59435a4a88f
-  zh: 79c8fc2849b20718
-/deepseek-ai-dsh-hook-protocol/model-experience/kv-cache-effect:
+/kinetick-labs-kh-hook-protocol/further-exploration:
+  en: fb9f4d16636c827e
+  zh: c2dd1755335d4717
+/kinetick-labs-kh-hook-protocol/model-experience:
+  en: b78c266d450bf39a
+  zh: e2d1c3f2c46b5d94
+/kinetick-labs-kh-hook-protocol/model-experience/kv-cache-effect:
   en: e290ccc9b3c92c08
   zh: cb3c8823f41e7afe
-/deepseek-ai-dsh-hook-protocol/known-limitations-and-deferred-work:
-  en: 1ca6146a077a7d2d
-  zh: 369741569178fc79
-/deepseek-ai-dsh-hook-protocol/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-hook-protocol/known-limitations-and-deferred-work:
+  en: 2156165df0976f5a
+  zh: 746786ee07961a17
+/kinetick-labs-kh-hook-protocol/known-limitations-and-deferred-work/dev-note:
   en: ac1d08360a93382b
   zh: 6c58749bae9a6e65
-/deepseek-ai-dsh-hook-protocol/known-limitations-and-deferred-work/dev-note/future-run-level-halt:
+/kinetick-labs-kh-hook-protocol/known-limitations-and-deferred-work/dev-note/future-run-level-halt:
   en: bfb3db50de22c1d0
   zh: 2a979359b0edbbe7

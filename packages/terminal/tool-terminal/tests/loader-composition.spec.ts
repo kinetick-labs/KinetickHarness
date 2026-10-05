@@ -6,21 +6,21 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import TerminalSessionService from '@deepseek-ai/dsh-terminal'
-import SandboxProvider from '@deepseek-ai/dsh-sandbox'
-import type { ConfinedArgv, SandboxPolicy } from '@deepseek-ai/dsh-sandbox'
-import SandboxPolicyService from '@deepseek-ai/dsh-sandbox-policy'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
-import * as TerminalLocal from '@deepseek-ai/dsh-terminal-bash'
-import * as ToolPty from '@deepseek-ai/dsh-tool-terminal'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import TerminalSessionService from '@kinetick-labs/kh-terminal'
+import SandboxProvider from '@kinetick-labs/kh-sandbox'
+import type { ConfinedArgv, SandboxPolicy } from '@kinetick-labs/kh-sandbox'
+import SandboxPolicyService from '@kinetick-labs/kh-sandbox-policy'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
+import * as TerminalLocal from '@kinetick-labs/kh-terminal-bash'
+import * as ToolPty from '@kinetick-labs/kh-tool-terminal'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
 
 let root: string | undefined
 let context: Context | undefined
@@ -63,21 +63,21 @@ const suite = process.platform === 'linux' || process.platform === 'darwin' ? de
 
 suite('terminal real Loader composition through cordis.yml', () => {
   it('boots cordis.yml and preserves shell state across real tool calls', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-pty-loader-'))
+    root = await mkdtemp(join(tmpdir(), 'kh-pty-loader-'))
     const configPath = join(root, 'cordis.yml')
     await writeFile(configPath, [
-      "- name: '@deepseek-ai/dsh-agent'",
-      "- name: '@deepseek-ai/dsh-system-prompt'",
-      "- name: '@deepseek-ai/dsh-tools'",
-      "- name: '@deepseek-ai/dsh-terminal'",
-      "- name: '@deepseek-ai/dsh-test-sandbox'",
-      "- name: '@deepseek-ai/dsh-session-projection'",
-      "- name: '@deepseek-ai/dsh-sandbox-policy'",
+      "- name: '@kinetick-labs/kh-agent'",
+      "- name: '@kinetick-labs/kh-system-prompt'",
+      "- name: '@kinetick-labs/kh-tools'",
+      "- name: '@kinetick-labs/kh-terminal'",
+      "- name: '@kinetick-labs/kh-test-sandbox'",
+      "- name: '@kinetick-labs/kh-session-projection'",
+      "- name: '@kinetick-labs/kh-sandbox-policy'",
       '  config:',
       '    mode: danger-full-access',
       `    workspaceRoot: ${JSON.stringify(root)}`,
-      "- name: '@deepseek-ai/dsh-subprocess-local'",
-      "- name: '@deepseek-ai/dsh-terminal-bash'",
+      "- name: '@kinetick-labs/kh-subprocess-local'",
+      "- name: '@kinetick-labs/kh-terminal-bash'",
       '  config:',
       '    pollIntervalMs: 10',
       '    exactProbeAfterMs: 20',
@@ -85,7 +85,7 @@ suite('terminal real Loader composition through cordis.yml', () => {
       '    handoffGraceMs: 250',
       '    timeoutMs: 2000',
       '    disposeGraceMs: 500',
-      "- name: '@deepseek-ai/dsh-tool-terminal'",
+      "- name: '@kinetick-labs/kh-tool-terminal'",
       '',
     ].join('\n'))
 
@@ -94,16 +94,16 @@ suite('terminal real Loader composition through cordis.yml', () => {
     await context.plugin(Loader)
     context.loader.builtins.include = Include
     const modules = new Map<string, unknown>([
-      ['@deepseek-ai/dsh-agent', AgentRegistry],
-      ['@deepseek-ai/dsh-system-prompt', SystemPrompt],
-      ['@deepseek-ai/dsh-tools', ToolRuntime],
-      ['@deepseek-ai/dsh-terminal', TerminalSessionService],
-      ['@deepseek-ai/dsh-test-sandbox', PassthroughSandbox],
-      ['@deepseek-ai/dsh-session-projection', SessionProjectionRegistry],
-      ['@deepseek-ai/dsh-sandbox-policy', SandboxPolicyService],
-      ['@deepseek-ai/dsh-subprocess-local', LocalSubprocessRuntime],
-      ['@deepseek-ai/dsh-terminal-bash', TerminalLocal],
-      ['@deepseek-ai/dsh-tool-terminal', ToolPty],
+      ['@kinetick-labs/kh-agent', AgentRegistry],
+      ['@kinetick-labs/kh-system-prompt', SystemPrompt],
+      ['@kinetick-labs/kh-tools', ToolRuntime],
+      ['@kinetick-labs/kh-terminal', TerminalSessionService],
+      ['@kinetick-labs/kh-test-sandbox', PassthroughSandbox],
+      ['@kinetick-labs/kh-session-projection', SessionProjectionRegistry],
+      ['@kinetick-labs/kh-sandbox-policy', SandboxPolicyService],
+      ['@kinetick-labs/kh-subprocess-local', LocalSubprocessRuntime],
+      ['@kinetick-labs/kh-terminal-bash', TerminalLocal],
+      ['@kinetick-labs/kh-tool-terminal', ToolPty],
     ])
     context.loader.internal = {
       version: 'v2',

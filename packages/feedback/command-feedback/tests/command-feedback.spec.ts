@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent, AgentStatus } from '@deepseek-ai/dsh-agent'
-import CommandRuntime from '@deepseek-ai/dsh-commands'
-import SessionStore, { foldSurface, Session, SessionId } from '@deepseek-ai/dsh-session'
-import * as commandFeedback from '@deepseek-ai/dsh-command-feedback'
-import type { FeedbackRecord } from '@deepseek-ai/dsh-command-feedback/types'
-import { remoteMethods } from '@deepseek-ai/dsh-typert-protocol'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent, AgentStatus } from '@kinetick-labs/kh-agent'
+import CommandRuntime from '@kinetick-labs/kh-commands'
+import SessionStore, { foldSurface, Session, SessionId } from '@kinetick-labs/kh-session'
+import * as commandFeedback from '@kinetick-labs/kh-command-feedback'
+import type { FeedbackRecord } from '@kinetick-labs/kh-command-feedback/types'
+import { remoteMethods } from '@kinetick-labs/kh-typert-protocol'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
 
 interface Harness {
   readonly ctx: Context
@@ -74,7 +74,7 @@ function feedbackTexts(session: Session): (string | undefined)[] {
   return feedbackRecords(session).map(record => record.text)
 }
 
-describe('@deepseek-ai/dsh-command-feedback registration', () => {
+describe('@kinetick-labs/kh-command-feedback registration', () => {
   it('registers one global command with Loader-safe exports and disposes it', async () => {
     const test = await harness()
     expect(commandFeedback.name).toBe('command-feedback')
@@ -84,7 +84,7 @@ describe('@deepseek-ai/dsh-command-feedback registration', () => {
     expect(loader.unwrapExports(commandFeedback)).toBe(commandFeedback)
 
     expect(test.ctx.commands.list(test.agent)).toContainEqual({
-      definitionId: '@deepseek-ai/dsh-command-feedback',
+      definitionId: '@kinetick-labs/kh-command-feedback',
       name: 'feedback',
       description: 'Record feedback about this session',
       input: { hint: '<text>' },

@@ -1,19 +1,19 @@
 // @vitest-environment jsdom
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { useDisclosure } from '@deepseek-ai/dsh-client-ui-chat/src/client/chat/use-disclosure.ts'
+import { useDisclosure } from '@kinetick-labs/kh-client-ui-chat/src/client/chat/use-disclosure.ts'
 import { cleanup, render } from '@testing-library/react'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import { bindSnapshotSelector, makeTranslate } from '@deepseek-ai/dsh-client-test-runtime'
-import type { SessionListState } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { StartedToolCall, ToolResultNode } from '@deepseek-ai/dsh-client-ui-chat/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { zh as commonZh } from '@deepseek-ai/dsh-client-locale/src/locales/zh.ts'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
+import type { SessionListState } from '@kinetick-labs/kh-api-session-controller/client'
+import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
 import { GenericToolCard, type GenericToolCardProps } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { ToolRow } from '../src/client/tool/components/ToolRow.tsx'
 import { BashRow } from '../src/client/tool/toolviews/bash-sample.tsx'
-import { zh } from '@deepseek-ai/dsh-client-ui-conversation/src/client/locales.ts'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 type BashRowProps = Parameters<typeof BashRow>[0]
 

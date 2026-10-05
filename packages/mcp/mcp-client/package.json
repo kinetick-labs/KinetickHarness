@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-mcp-client",
+  "name": "@kinetick-labs/kh-mcp-client",
   "description": "MCP client bridge: connects to MCP servers and registers their tools on ctx.tools",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/mcp/mcp-client"
   },
   "type": "module",
@@ -27,44 +27,44 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-attachment": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-scope": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-attachment": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-scope": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-mcp-resources": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*"
+    "@kinetick-labs/kh-mcp-resources": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "workspace:~",
     "@modelcontextprotocol/client": "2.0.0",
-    "@deepseek-ai/dsh-util-values": "workspace:*"
+    "@kinetick-labs/kh-util-values": "workspace:*"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-attachment": "workspace:*",
-    "@deepseek-ai/dsh-attachment-local": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-scope": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-attachment": "workspace:*",
+    "@kinetick-labs/kh-attachment-local": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-scope": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@modelcontextprotocol/server-everything": "^2026.7.4",
     "@modelcontextprotocol/server-filesystem": "^2026.7.4",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-http-proxy": "workspace:*",
+    "@kinetick-labs/kh-http-proxy": "workspace:*",
     "@modelcontextprotocol/server": "2.0.0",
     "@modelcontextprotocol/node": "2.0.0",
     "zod": "^4.4.3",
-    "@deepseek-ai/dsh-mcp-resources": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*"
+    "@kinetick-labs/kh-mcp-resources": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/dsh-mcp-resources": {
+    "@kinetick-labs/kh-mcp-resources": {
       "optional": true
     },
-    "@deepseek-ai/dsh-system-prompt": {
+    "@kinetick-labs/kh-system-prompt": {
       "optional": true
     }
   }

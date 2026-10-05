@@ -5,54 +5,54 @@
 /:
   en: c9eac4288ae5293a
   zh: fb718ad3c2da3e49
-/deepseek-ai-dsh-lsp-stdio:
-  en: 79147f5b588a6d6a
-  zh: 12d7ab50d6fe0850
-/deepseek-ai-dsh-lsp-stdio/summary:
-  en: 9bb3631289433c95
-  zh: 4b30c9a4aa5186b8
-/deepseek-ai-dsh-lsp-stdio/table-of-contents:
+/kinetick-labs-kh-lsp-stdio:
+  en: 204b3f0f80f9e2db
+  zh: 094d9b00096bc309
+/kinetick-labs-kh-lsp-stdio/summary:
+  en: fb3318a8da586288
+  zh: 383d5e6c3d338b03
+/kinetick-labs-kh-lsp-stdio/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-lsp-stdio/use-this-package:
-  en: c632954ac645e57e
-  zh: 646525beedbdb97c
-/deepseek-ai-dsh-lsp-stdio/use-this-package/minimal-configuration:
-  en: 3cf011ee27d835e8
-  zh: f1a8fbf0f26b8f98
-/deepseek-ai-dsh-lsp-stdio/use-this-package/what-a-query-does:
+/kinetick-labs-kh-lsp-stdio/use-this-package:
+  en: 97666c27762965e0
+  zh: 08fa61d74d028267
+/kinetick-labs-kh-lsp-stdio/use-this-package/minimal-configuration:
+  en: 444b1adb2e576b66
+  zh: 0d12ec3e71cf936b
+/kinetick-labs-kh-lsp-stdio/use-this-package/what-a-query-does:
   en: 41363baf8fdba020
   zh: d1a6193b1aa813ba
-/deepseek-ai-dsh-lsp-stdio/use-this-package/observable-success-and-failures:
+/kinetick-labs-kh-lsp-stdio/use-this-package/observable-success-and-failures:
   en: 57f3a82c014af107
   zh: 770fc617c1ab0eab
-/deepseek-ai-dsh-lsp-stdio/use-this-package/security-boundary:
+/kinetick-labs-kh-lsp-stdio/use-this-package/security-boundary:
   en: f1f7fef771bcaa6d
   zh: f11dcf771a6fecfc
-/deepseek-ai-dsh-lsp-stdio/understand-the-implementation:
+/kinetick-labs-kh-lsp-stdio/understand-the-implementation:
   en: 8a5efa64f5b12f88
   zh: 451548c05c045c22
-/deepseek-ai-dsh-lsp-stdio/understand-the-implementation/design-philosophy:
+/kinetick-labs-kh-lsp-stdio/understand-the-implementation/design-philosophy:
   en: 7e5e63f993a287f2
   zh: a5a01b22551e5d46
-/deepseek-ai-dsh-lsp-stdio/understand-the-implementation/source-map:
+/kinetick-labs-kh-lsp-stdio/understand-the-implementation/source-map:
   en: 601baa446f830c66
   zh: 8aaebaaae7081c82
-/deepseek-ai-dsh-lsp-stdio/understand-the-implementation/protocol-behavior:
+/kinetick-labs-kh-lsp-stdio/understand-the-implementation/protocol-behavior:
   en: 0f9bac88ad9448b8
   zh: f5d3a2e61a596003
-/deepseek-ai-dsh-lsp-stdio/further-exploration:
-  en: 2b280b85054f6b9f
-  zh: 6e609d42db7da87c
-/deepseek-ai-dsh-lsp-stdio/model-experience:
-  en: b366d0dfbfeb2d91
-  zh: 72a7a8d957b13eb4
-/deepseek-ai-dsh-lsp-stdio/model-experience/kv-cache-effect:
-  en: 64354484a5367fbc
-  zh: aec3e5c7933389b6
-/deepseek-ai-dsh-lsp-stdio/known-limitations-and-deferred-work:
+/kinetick-labs-kh-lsp-stdio/further-exploration:
+  en: e1713fb1501fc0ec
+  zh: 2408ae4d0b0f95b1
+/kinetick-labs-kh-lsp-stdio/model-experience:
+  en: 0cdfcfb8970c9220
+  zh: ca4fb3491170f51d
+/kinetick-labs-kh-lsp-stdio/model-experience/kv-cache-effect:
+  en: f92d4ee0f4aa226e
+  zh: 4f580f36b88f6e1f
+/kinetick-labs-kh-lsp-stdio/known-limitations-and-deferred-work:
   en: dc4fc5797b3b2d38
   zh: f04e4159ce280218
-/deepseek-ai-dsh-lsp-stdio/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-lsp-stdio/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

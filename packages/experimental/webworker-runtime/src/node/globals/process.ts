@@ -4,19 +4,19 @@
  * constructed, and `cordis.yml` keeps its `!!js process.*` expressions, so the
  * configuration bytes stay identical to the Node deployment. Third-party Node
  * packages use the presence of `process.title` to avoid browser-only globals.
- * @module @deepseek-ai/dsh-experimental-webworker-runtime/src/node/globals/process
+ * @module @kinetick-labs/kh-experimental-webworker-runtime/src/node/globals/process
  */
 import { requireActiveModuleLoader } from '../../module-system/module-loader.ts'
 import { processAlive, signalProcess } from '../process-table.ts'
 
 /** Virtual executable identity; the worker has no Node binary behind it. */
-const EXEC_PATH = '/dsh/bin/node'
+const EXEC_PATH = '/kh/bin/node'
 
 /** Construction inputs for {@link installProcessGlobal}. */
 export interface ProcessShimOptions {
   /** Virtual root reported by `cwd()`. */
   readonly cwd: string
-  /** Environment the tree reads; `DSH_HOME` belongs here. */
+  /** Environment the tree reads; `KH_HOME` belongs here. */
   readonly env: Readonly<Record<string, string>>
   /** Argument vector reported to the tree; defaults to the executable alone, since no entry script exists. */
   readonly argv?: readonly string[]
@@ -95,7 +95,7 @@ export function installProcessGlobal(options: ProcessShimOptions): ProcessShim {
     argv: [...(options.argv ?? [EXEC_PATH])],
     execArgv: [],
     execPath: EXEC_PATH,
-    title: 'dsh-webworker',
+    title: 'kh-webworker',
     platform: 'linux',
     arch: 'x64',
     pid: 1,

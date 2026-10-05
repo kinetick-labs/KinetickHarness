@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
-import type { RequestView } from '@deepseek-ai/dsh-client-ui-conversation/client'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+import type { RequestView } from '@kinetick-labs/kh-client-ui-conversation/client'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import type {
   TrajectoryContribution, TrajectoryConversationViewNode, TrajectoryRequestHeaderState,
 } from '../src/client/trajectory-contract.ts'

@@ -3,13 +3,13 @@ description: "The model-facing persistent bash tool for users and maintainers ch
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tool-bash-persistent
+# @kinetick-labs/kh-tool-bash-persistent
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-This package gives an agent a `bash` tool whose cwd, exported variables, functions, and background jobs persist across calls. Each agent receives an isolated shell, and its commands run sequentially. Choose it for workflows that depend on cross-call state; use `dsh-tool-bash` when every command should start clean. Configure the PTY backend and per-command timeout; `exit`, timeout, or cancellation resets the shell, while interactive commands that wait for stdin may run until timeout.
+This package gives an agent a `bash` tool whose cwd, exported variables, functions, and background jobs persist across calls. Each agent receives an isolated shell, and its commands run sequentially. Choose it for workflows that depend on cross-call state; use `kh-tool-bash` when every command should start clean. Configure the PTY backend and per-command timeout; `exit`, timeout, or cancellation resets the shell, while interactive commands that wait for stdin may run until timeout.
 
 ## Table of Contents
 
@@ -29,16 +29,16 @@ Load this plugin in any composition where the agent should keep shell state betw
 
 ### When to choose it
 
-Choose the persistent tool when work depends on cross-call state: a one-shot `dsh-tool-bash` call cannot remember a `cd` or an exported variable. Choose the one-shot tool when every command should start from a known, clean environment, or when the command is short and self-contained. Commands that need interactive stdin are unsupported here — a foreground child that reads input blocks until the command timeout — so interactive work belongs to the terminal tools.
+Choose the persistent tool when work depends on cross-call state: a one-shot `kh-tool-bash` call cannot remember a `cd` or an exported variable. Choose the one-shot tool when every command should start from a known, clean environment, or when the command is short and self-contained. Commands that need interactive stdin are unsupported here — a foreground child that reads input blocks until the command timeout — so interactive work belongs to the terminal tools.
 
 ### Minimal configuration
 
-The default `shell` backend starts an interactive bash through `dsh-terminal-bash`; deployments may register another PTY backend and select it by name.
+The default `shell` backend starts an interactive bash through `kh-terminal-bash`; deployments may register another PTY backend and select it by name.
 
 ```yaml
-- name: '@deepseek-ai/dsh-terminal'
-- name: '@deepseek-ai/dsh-terminal-bash'
-- name: '@deepseek-ai/dsh-tool-bash-persistent'
+- name: '@kinetick-labs/kh-terminal'
+- name: '@kinetick-labs/kh-terminal-bash'
+- name: '@kinetick-labs/kh-tool-bash-persistent'
 ```
 
 | Field | Default | Meaning |

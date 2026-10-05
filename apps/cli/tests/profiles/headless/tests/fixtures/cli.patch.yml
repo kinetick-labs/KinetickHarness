@@ -18,14 +18,14 @@
 
 - id: shell-env
   config:
-    dshHome: './.dsh-home'
+    khHome: './.kh-home'
 
 - id: agent-instructions
   disabled: true
 
 - id: skill-filesystem
   config:
-    dshHome: './.dsh-home'
+    khHome: './.kh-home'
     agentsHome: './.agents-home'
 
 - id: session-persistence-jsonl

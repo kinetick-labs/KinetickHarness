@@ -1,6 +1,6 @@
 /**
  * Showcase integration: the real `web_fetch` tool + the real spill stack
- * (`dsh-spill-local` backend + `dsh-spill-policy`), exercised through
+ * (`kh-spill-local` backend + `kh-spill-policy`), exercised through
  * `ctx.tools.execute()`. Proves the Agent Note's default local-backend path — a large
  * formatted fetch result is automatically retained and spilled with NO
  * tool-specific spill code, and the model-facing text changes ONLY by the
@@ -14,19 +14,19 @@ import { mkdtempSync, readFileSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import { estimateContent } from '@deepseek-ai/dsh-token-meter/estimate'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import type { ToolExecution } from '@deepseek-ai/dsh-tools'
+import { estimateContent } from '@kinetick-labs/kh-token-meter/estimate'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { SessionId } from '@kinetick-labs/kh-session'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import type { ToolExecution } from '@kinetick-labs/kh-tools'
 
 const testToolSignal = new AbortController().signal
-import WebRuntime from '@deepseek-ai/dsh-web'
-import * as WebFetchLocal from '@deepseek-ai/dsh-web-fetch-http'
-import LocalSpillStore from '@deepseek-ai/dsh-spill-local'
-import * as SpillPolicy from '@deepseek-ai/dsh-spill-policy'
-import * as ToolWeb from '@deepseek-ai/dsh-tool-web'
+import WebRuntime from '@kinetick-labs/kh-web'
+import * as WebFetchLocal from '@kinetick-labs/kh-web-fetch-http'
+import LocalSpillStore from '@kinetick-labs/kh-spill-local'
+import * as SpillPolicy from '@kinetick-labs/kh-spill-policy'
+import * as ToolWeb from '@kinetick-labs/kh-tool-web'
 import { publicHttpNetwork } from '../../web-fetch-http/src/network.ts'
 
 type Handler = (req: IncomingMessage, res: ServerResponse) => void
@@ -46,7 +46,7 @@ beforeEach(async () => {
   server = createServer((req, res) => { handler(req, res) })
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve))
   base = `http://127.0.0.1:${(server.address() as AddressInfo).port}`
-  spillRoot = mkdtempSync(join(tmpdir(), 'dsh-spill-web-'))
+  spillRoot = mkdtempSync(join(tmpdir(), 'kh-spill-web-'))
 
   ctx = new Context()
   await ctx.plugin(SystemPrompt)

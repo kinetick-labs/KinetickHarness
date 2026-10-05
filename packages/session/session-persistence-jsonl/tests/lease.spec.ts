@@ -17,14 +17,14 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { SESSION_FORMAT_VERSION, SessionId, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { SessionHeader } from '@deepseek-ai/dsh-session'
+import { SESSION_FORMAT_VERSION, SessionId, SessionSeq } from '@kinetick-labs/kh-session'
+import type { SessionHeader } from '@kinetick-labs/kh-session'
 import {
   SessionAlreadyExistsError,
   SessionAlreadyOwnedError,
   SessionPersistenceNotFoundError,
-} from '@deepseek-ai/dsh-session-persistence'
-import type { SessionPersistence } from '@deepseek-ai/dsh-session-persistence'
+} from '@kinetick-labs/kh-session-persistence'
+import type { SessionPersistence } from '@kinetick-labs/kh-session-persistence'
 import JsonlSessionPersistence from '../src/index.ts'
 import { LEASE_FILENAME, SessionWriteLease } from '../src/lease.ts'
 import type { JsonlSessionHandle } from '../src/storage.ts'
@@ -120,7 +120,7 @@ function meta(id: string, cwd = '/work'): SessionHeader {
 }
 
 async function freshRoot(): Promise<string> {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-jsonl-lease-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-jsonl-lease-'))
   dirs.push(root)
   return root
 }

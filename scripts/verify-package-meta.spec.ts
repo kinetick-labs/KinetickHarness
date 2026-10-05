@@ -9,7 +9,7 @@ import { packageMetaProblems } from './verify-package-meta.ts'
 let root: string
 let dir: string
 beforeEach(() => {
-  root = mkdtempSync(join(tmpdir(), 'dsh-meta-gate-'))
+  root = mkdtempSync(join(tmpdir(), 'kh-meta-gate-'))
   dir = join(root, 'packages', 'test', 'plugin')
   mkdirSync(dir, { recursive: true })
 })
@@ -156,11 +156,11 @@ it.each([
   ['unpublished icon', { files: ['locale'] }, 'Nested', 'files must include icon.svg'],
   ['missing icon target', { exports: { './locale/*.json': './locale/*.json', './icon': './missing.svg' } }, 'Nested', 'exports["./icon"] must resolve to a file'],
   ['invalid display text', {}, false, 'meta.title must be a non-empty string'],
-  ['ordinary plugin with an exported icon', { dsh: undefined }, 'Nested', undefined],
+  ['ordinary plugin with an exported icon', { kh: undefined }, 'Nested', undefined],
 ] as const)('validates a named nested package independently: %s', (_label, fields, title, expected) => {
   manifest({ exports: { '.': './entry.js' }, files: ['examples'] })
   json('examples/nested/package.json', {
-    name: '@test/nested', type: 'module', dsh: { bundle: { patch: './cordis.patch.yml' } },
+    name: '@test/nested', type: 'module', kh: { bundle: { patch: './cordis.patch.yml' } },
     exports: { './locale/*.json': './locale/*.json', './icon': './icon.svg' },
     files: ['locale', 'icon.svg'], ...fields,
   })

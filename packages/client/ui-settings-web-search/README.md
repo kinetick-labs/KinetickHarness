@@ -1,9 +1,9 @@
 ---
-description: "The DeepSeek web-search provider's settings page on the dsh web client's Plugins page: its API key, endpoint, and per-request search budget."
+description: "The DeepSeek web-search provider's settings page on the kh web client's Plugins page: its API key, endpoint, and per-request search budget."
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-client-ui-settings-web-search
+# @kinetick-labs/kh-client-ui-settings-web-search
 
 English | [中文](README.zh.md)
 

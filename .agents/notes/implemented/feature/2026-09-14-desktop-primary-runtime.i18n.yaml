@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-09-14-desktop-primary-runtime.md
 /agent-note-desktop-primary-runtime:
-  en: aac537d0aef9e6c3
-  zh: 30166e8f8627087f
+  en: 9e1f1b7a6f81f8a3
+  zh: b6c14cbcfb67544d
 /agent-note-desktop-primary-runtime/problem:
   en: 36bf235f0821ef6a
   zh: a86bf07af03d54a3
 /agent-note-desktop-primary-runtime/decision:
-  en: 594ed7501283de88
-  zh: d2abc271a96a82d7
+  en: 640411960f4fb904
+  zh: 24686fd723fdde82
 /agent-note-desktop-primary-runtime/alternatives-considered:
   en: 566fd91c30cb0a0a
   zh: 70758ae2617f6ebb

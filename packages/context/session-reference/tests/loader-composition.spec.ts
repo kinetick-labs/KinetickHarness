@@ -8,18 +8,18 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import { agentEvents, type Agent } from '@deepseek-ai/dsh-agent'
-import { createUserMessage, ToolCallId } from '@deepseek-ai/dsh-llm'
-import * as systemPromptPlugin from '@deepseek-ai/dsh-system-prompt'
-import * as toolsPlugin from '@deepseek-ai/dsh-tools'
-import * as fsPlugin from '@deepseek-ai/dsh-fs-local'
-import * as toolFsPlugin from '@deepseek-ai/dsh-tool-fs'
-import * as sessionPlugin from '@deepseek-ai/dsh-session'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import * as queryPlugin from '@deepseek-ai/dsh-session-query-sqlite'
-import * as referencePlugin from '@deepseek-ai/dsh-session-reference'
-import * as spillPlugin from '@deepseek-ai/dsh-spill-local'
-import { sessionDir } from '@deepseek-ai/dsh-spill-local'
+import { agentEvents, type Agent } from '@kinetick-labs/kh-agent'
+import { createUserMessage, ToolCallId } from '@kinetick-labs/kh-llm'
+import * as systemPromptPlugin from '@kinetick-labs/kh-system-prompt'
+import * as toolsPlugin from '@kinetick-labs/kh-tools'
+import * as fsPlugin from '@kinetick-labs/kh-fs-local'
+import * as toolFsPlugin from '@kinetick-labs/kh-tool-fs'
+import * as sessionPlugin from '@kinetick-labs/kh-session'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import * as queryPlugin from '@kinetick-labs/kh-session-query-sqlite'
+import * as referencePlugin from '@kinetick-labs/kh-session-reference'
+import * as spillPlugin from '@kinetick-labs/kh-spill-local'
+import { sessionDir } from '@kinetick-labs/kh-spill-local'
 import * as sourcePlugin from './fixtures/source-session.ts'
 
 let context: Context | undefined
@@ -44,14 +44,14 @@ describe('session-reference real Loader composition', () => {
     await ctx.plugin(Loader)
     ctx.loader.builtins.include = Include
     const modules = new Map<string, unknown>([
-      ['@deepseek-ai/dsh-session', sessionPlugin],
-      ['@deepseek-ai/dsh-system-prompt', systemPromptPlugin],
-      ['@deepseek-ai/dsh-tools', toolsPlugin],
-      ['@deepseek-ai/dsh-fs-local', fsPlugin],
-      ['@deepseek-ai/dsh-tool-fs', toolFsPlugin],
-      ['@deepseek-ai/dsh-session-query-sqlite', queryPlugin],
-      ['@deepseek-ai/dsh-session-reference', referencePlugin],
-      ['@deepseek-ai/dsh-spill-local', spillPlugin],
+      ['@kinetick-labs/kh-session', sessionPlugin],
+      ['@kinetick-labs/kh-system-prompt', systemPromptPlugin],
+      ['@kinetick-labs/kh-tools', toolsPlugin],
+      ['@kinetick-labs/kh-fs-local', fsPlugin],
+      ['@kinetick-labs/kh-tool-fs', toolFsPlugin],
+      ['@kinetick-labs/kh-session-query-sqlite', queryPlugin],
+      ['@kinetick-labs/kh-session-reference', referencePlugin],
+      ['@kinetick-labs/kh-spill-local', spillPlugin],
       ['./source-session.ts', sourcePlugin],
     ])
     ctx.loader.internal = {

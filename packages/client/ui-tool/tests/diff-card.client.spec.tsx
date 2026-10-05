@@ -1,20 +1,20 @@
 // @vitest-environment jsdom
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { useDisclosure } from '@deepseek-ai/dsh-client-ui-chat/src/client/chat/use-disclosure.ts'
+import { useDisclosure } from '@kinetick-labs/kh-client-ui-chat/src/client/chat/use-disclosure.ts'
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import { bindSnapshotSelector } from '@deepseek-ai/dsh-client-test-runtime'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { StartedToolCall, ToolResultNode } from '@deepseek-ai/dsh-client-ui-chat/client'
-import type { SessionListState } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { makeTranslate } from '@deepseek-ai/dsh-client-test-runtime'
-import { zh as commonZh } from '@deepseek-ai/dsh-client-locale/src/locales/zh.ts'
+import { bindSnapshotSelector } from '@kinetick-labs/kh-client-test-runtime'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
+import type { SessionListState } from '@kinetick-labs/kh-api-session-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
+import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
 import { CHAT_DIFF_MAX_LINES, diffCardModel } from '../src/client/tool/models/diff-card-model.ts'
 import { GenericToolCard, type GenericToolCardProps } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { FileMutationRow, fileMutationToolview } from '../src/client/tool/toolviews/file-mutation-row.tsx'
-import { zh } from '@deepseek-ai/dsh-client-ui-conversation/src/client/locales.ts'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
 

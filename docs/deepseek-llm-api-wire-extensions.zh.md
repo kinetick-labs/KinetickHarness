@@ -2,7 +2,7 @@
 
 [English](deepseek-llm-api-wire-extensions.md) | 中文
 
-本参考定义 [`@deepseek-ai/dsh-llm-deepseek`](../packages/llm/llm-deepseek/README.zh.md) 在 `deepseek-official` Messages 请求上发送的每一个 DeepSeek Harness 专用 HTTP 标头。它不重新定义上游 DeepSeek API 拥有的字段。提供方无关的 LLM 接口和 `llm-pi-ai` 不实现这些附加内容。
+本参考定义 [`@kinetick-labs/kh-llm-deepseek`](../packages/llm/llm-deepseek/README.zh.md) 在 `deepseek-official` Messages 请求上发送的每一个 KinetickHarness 专用 HTTP 标头。它不重新定义上游 DeepSeek API 拥有的字段。提供方无关的 LLM 接口和 `llm-pi-ai` 不实现这些附加内容。
 
 适配器把附加内容发到解析后的 `baseURL`，包括已配置的网关。它们位于 `messages`、系统提示词和工具 schema 之外，因此不增加模型输入 token，也不改变模型可见前缀。随附 profile 不附加会话日志、插件清单、匿名用户 id 或会话 id。
 
@@ -18,10 +18,10 @@
 
 | 标头 | 出现时机 | 值 |
 |---|---|---|
-| `user-agent` | 每一次提供方 HTTP 请求，包括 Files API 操作 | `product/version (+url)` 形式的应用标识；默认产品是 `deepseek-harness` |
+| `user-agent` | 每一次提供方 HTTP 请求，包括 Files API 操作 | `product/version (+url)` 形式的应用标识；默认产品是 `kinetick-harness` |
 | `x-deepseek-harness-compact` | 用途为 `compaction` 的模型请求 | 字面字符串 `1` |
 
-官方模型请求不发送 `x-deepseek-harness-user-id` 或 `x-deepseek-harness-session-id`，模型调用也不会创建 `$DSH_HOME/.anonymous-user-id`。会话标题请求没有额外的用途标头。`x-deepseek-harness-compact` 标明这是一次压缩请求，不是使用情况上报。
+官方模型请求不发送 `x-deepseek-harness-user-id` 或 `x-deepseek-harness-session-id`，模型调用也不会创建 `$KH_HOME/.anonymous-user-id`。会话标题请求没有额外的用途标头。`x-deepseek-harness-compact` 标明这是一次压缩请求，不是使用情况上报。
 
 ## 正文扩展事务
 

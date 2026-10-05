@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-experimental-webworker-packer",
+  "name": "@kinetick-labs/kh-experimental-webworker-packer",
   "description": "Build-time packer for the browser runtime's base VFS image and ordered data-overlay archives",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,14 +7,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/experimental/webworker-packer"
   },
   "type": "module",
   "main": "lib/index.js",
   "types": "lib/types/index.d.ts",
   "bin": {
-    "dsh-pack-vfs-image": "./bin.js"
+    "kh-pack-vfs-image": "./bin.js"
   },
   "exports": {
     ".": {
@@ -34,11 +34,11 @@
   "license": "MIT",
   "dependencies": {
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
-    "@deepseek-ai/dsh-experimental-webworker-runtime": "workspace:*",
-    "@deepseek-ai/dsh-home-paths": "workspace:*",
-    "@deepseek-ai/dsh-session-format": "workspace:*",
-    "@deepseek-ai/dsh-session-format-catalog": "workspace:*",
-    "@deepseek-ai/dsh-session-format-v3-to-v4": "workspace:*",
+    "@kinetick-labs/kh-experimental-webworker-runtime": "workspace:*",
+    "@kinetick-labs/kh-home-paths": "workspace:*",
+    "@kinetick-labs/kh-session-format": "workspace:*",
+    "@kinetick-labs/kh-session-format-catalog": "workspace:*",
+    "@kinetick-labs/kh-session-format-v3-to-v4": "workspace:*",
     "js-yaml": "^4.2.0",
     "picomatch": "^4.0.4"
   },

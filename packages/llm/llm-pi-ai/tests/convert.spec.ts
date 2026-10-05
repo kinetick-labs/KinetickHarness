@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from 'vitest'
-import { AttachmentId, ImageVariantId } from '@deepseek-ai/dsh-attachment'
-import type { AttachmentStore, ImageAttachmentRef, ImageRequestTarget, RequestImageAttachment } from '@deepseek-ai/dsh-attachment'
-import { createToolResultMessage, createUserMessage, ToolCallId, CONTEXT_WINDOW_EXCEEDED_CODE, EMPTY_RESPONSE_CODE, createMessage } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, StreamChunk } from '@deepseek-ai/dsh-llm'
+import { AttachmentId, ImageVariantId } from '@kinetick-labs/kh-attachment'
+import type { AttachmentStore, ImageAttachmentRef, ImageRequestTarget, RequestImageAttachment } from '@kinetick-labs/kh-attachment'
+import { createToolResultMessage, createUserMessage, ToolCallId, CONTEXT_WINDOW_EXCEEDED_CODE, EMPTY_RESPONSE_CODE, createMessage } from '@kinetick-labs/kh-llm'
+import type { ContentBlock, StreamChunk } from '@kinetick-labs/kh-llm'
 import type { AssistantMessage, AssistantMessageEvent, Usage } from '@earendil-works/pi-ai'
 import { transformMessages } from '@earendil-works/pi-ai/api/transform-messages'
 import { getBuiltinModels } from '@earendil-works/pi-ai/providers/all'
@@ -239,7 +239,7 @@ describe('toPiContext', () => {
     })
     expect(context.messages[0]).toMatchObject({
       role: 'assistant',
-      api: 'dsh-foreign',
+      api: 'kh-foreign',
       provider: 'deepseek',
       model: 'old-model',
     })
@@ -529,7 +529,7 @@ describe('toPiContext', () => {
     }, undefined, onDegrade)
     expect(context.messages[0]).toMatchObject({
       role: 'assistant',
-      api: 'dsh-foreign',
+      api: 'kh-foreign',
       provider: 'deepseek',
       model: 'old',
       content: [{ type: 'text', text: 'done' }],
@@ -563,7 +563,7 @@ describe('toPiContext', () => {
         },
       })],
     }, undefined, onDegrade)
-    expect(context.messages[0]).toMatchObject({ role: 'assistant', api: 'dsh-foreign' })
+    expect(context.messages[0]).toMatchObject({ role: 'assistant', api: 'kh-foreign' })
     expect(onDegrade).toHaveBeenCalledWith(expect.stringContaining('expected a response object'))
   })
 
@@ -584,7 +584,7 @@ describe('toPiContext', () => {
     }, undefined, onDegrade)
     expect(context.messages[0]).toMatchObject({
       role: 'assistant',
-      api: 'dsh-foreign',
+      api: 'kh-foreign',
       content: [{ type: 'thinking', thinking: 'done' }],
     })
     expect(onDegrade).toHaveBeenCalledWith(expect.stringContaining('block 0 does not match assistant content'))
@@ -607,7 +607,7 @@ describe('toPiContext', () => {
     }, undefined, onDegrade)
     expect(context.messages[0]).toMatchObject({
       role: 'assistant',
-      api: 'dsh-foreign',
+      api: 'kh-foreign',
       provider: 'deepseek',
       model: 'deepseek-v4-flash',
       content: [{ type: 'text', text: 'done' }],
@@ -643,7 +643,7 @@ describe('toPiContext', () => {
     }, undefined, onDegrade)
     expect(context.messages[0]).toMatchObject({
       role: 'assistant',
-      api: 'dsh-foreign',
+      api: 'kh-foreign',
       content: [{ type: 'text', text: 'done' }],
     })
     expect(onDegrade).toHaveBeenCalledWith(expect.stringContaining(message))

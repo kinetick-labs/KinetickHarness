@@ -1,7 +1,7 @@
 /** Model-visible continuation prompt for one same-session goal round. */
 
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import type { GoalView } from '@deepseek-ai/dsh-goal'
+import type { ContentBlock } from '@kinetick-labs/kh-llm'
+import type { GoalView } from '@kinetick-labs/kh-goal'
 
 /**
  * Render the complete goal-round instruction retained in session history.

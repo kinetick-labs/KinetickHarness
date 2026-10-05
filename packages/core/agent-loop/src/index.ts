@@ -2,7 +2,7 @@
  * Concrete agent-loop plugin: creates scoped ReactLoopAgents, publishes them
  * through the agent/session registries, and owns their ordered teardown.
  *
- * @module @deepseek-ai/dsh-agent-loop
+ * @module @kinetick-labs/kh-agent-loop
  */
 import type { Volatile } from '@deepseek-ai/cosmokit'
 
@@ -10,7 +10,7 @@ import { Context, FiberState, Service } from '@deepseek-ai/cordis'
 import { randomUUID } from 'node:crypto'
 import z from '@deepseek-ai/schemastery'
 import { z as zod } from 'zod'
-import { brandString } from '@deepseek-ai/dsh-brand'
+import { brandString } from '@kinetick-labs/kh-brand'
 import type {
   Agent,
   AgentFactory,
@@ -21,16 +21,16 @@ import type {
   ResumeAgentOptions,
   SessionStartSource,
   TurnBoundaryProjection,
-} from '@deepseek-ai/dsh-agent'
-import { errorChain, ReasoningEffortId } from '@deepseek-ai/dsh-llm'
-import { interruptedTurnClosers, SessionLogOffset, SessionPreparation, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { Session, SessionHeader, SessionId } from '@deepseek-ai/dsh-session'
-import type {} from '@deepseek-ai/dsh-system-prompt'
-import type {} from '@deepseek-ai/dsh-tools'
-import type {} from '@deepseek-ai/dsh-session-projection'
-import type { ProjectionDefinition } from '@deepseek-ai/dsh-session-projection'
-import { SessionPersistenceNotFoundError } from '@deepseek-ai/dsh-session-persistence'
-import type { SessionHandle, SessionPersistence } from '@deepseek-ai/dsh-session-persistence'
+} from '@kinetick-labs/kh-agent'
+import { errorChain, ReasoningEffortId } from '@kinetick-labs/kh-llm'
+import { interruptedTurnClosers, SessionLogOffset, SessionPreparation, SessionSeq } from '@kinetick-labs/kh-session'
+import type { Session, SessionHeader, SessionId } from '@kinetick-labs/kh-session'
+import type {} from '@kinetick-labs/kh-system-prompt'
+import type {} from '@kinetick-labs/kh-tools'
+import type {} from '@kinetick-labs/kh-session-projection'
+import type { ProjectionDefinition } from '@kinetick-labs/kh-session-projection'
+import { SessionPersistenceNotFoundError } from '@kinetick-labs/kh-session-persistence'
+import type { SessionHandle, SessionPersistence } from '@kinetick-labs/kh-session-persistence'
 import { ReactLoopAgent } from './agent.ts'
 import { inboxProjectionDefinition } from './inbox.ts'
 import { DEFAULT_MAX_PARALLEL_TOOL_CALLS } from './constants.ts'
@@ -807,7 +807,7 @@ export class AgentLoop extends Service implements AgentFactory {
   async resume(ownerCtx: Context, options: ResumeAgentOptions): Promise<AgentHandle> {
     const persistence = this.runtime.ctx.get('sessionPersistence')
     if (persistence === undefined) {
-      throw new Error('cannot resume: session persistence is not configured (load a dsh-session-persistence backend)')
+      throw new Error('cannot resume: session persistence is not configured (load a kh-session-persistence backend)')
     }
     return this.resumeWith(ownerCtx, persistence, options)
   }

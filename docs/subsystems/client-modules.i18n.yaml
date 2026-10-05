@@ -3,17 +3,17 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/subsystems/client-modules.md
 /client-modules:
-  en: e256a29cc5bc2726
-  zh: e181d6b1a6e5c647
+  en: 6831620002a37cd5
+  zh: 372e7fa627b68e79
 /client-modules/the-wire:
-  en: 5734d296e8ea39d1
-  zh: 27bedf34fc90d892
+  en: fe6ab09e6d6aa7ed
+  zh: 6fcab10293dd10c6
 /client-modules/the-scan:
-  en: 91ce66fab388a8a2
-  zh: 77428943582ae3f6
+  en: 75d1eb89902608ca
+  zh: a02be2e2c447cd99
 /client-modules/the-bundle-route-and-index-injection:
   en: d653be500d3a0d67
   zh: fffb1901ce8ba7d9
 /client-modules/the-service:
-  en: 000882ed7f09ad3f
-  zh: c17c05f087d9574d
+  en: 54fc947cff3f186f
+  zh: 2998bdc76cde0ae7

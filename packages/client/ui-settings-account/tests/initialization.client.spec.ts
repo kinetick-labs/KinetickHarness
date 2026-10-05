@@ -1,13 +1,13 @@
 // @vitest-environment jsdom
 /** Account state updates continue after default-model initialization refuses. */
 import { expect, it, vi, afterEach } from 'vitest'
-import type { AccountView, SignInAttemptId } from '@deepseek-ai/dsh-deepseek-account/types'
+import type { AccountView, SignInAttemptId } from '@kinetick-labs/kh-deepseek-account/types'
 import { apply, type AccountSectionInjected } from '../src/client/index.ts'
 
 afterEach(() => vi.unstubAllGlobals())
 
 it.each(['accepted', 'refused', 'disconnected', 'pending'] as const)('initializes account models and keeps reading account state: %s', async (outcome) => {
-  vi.stubGlobal('dshDesktop', {})
+  vi.stubGlobal('khDesktop', {})
   const log = vi.spyOn(console, 'info').mockImplementation(() => {})
   const observed: { status: string | undefined; failed: boolean | undefined }[] = []
   const abort = new AbortController()

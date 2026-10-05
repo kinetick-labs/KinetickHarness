@@ -13,14 +13,14 @@ import { applyEntryPatches, type PatchOptions } from '@deepseek-ai/cordis-plugin
 import type { EntryOptions } from '@deepseek-ai/cordis-plugin-loader'
 import { loadOverlayPatches } from '../packages/boot/app-boot/src/index.ts'
 import { bundlePatchPaths, composeEntries } from '../packages/boot/app-boot/src/profile.ts'
-import type { DshBundleManifest } from '../packages/util/package-manifest/src/types.ts'
+import type { KhBundleManifest } from '../packages/util/package-manifest/src/types.ts'
 import { isAgentPresetEntry, isCordisGroupEntry, loadCordisYaml } from './cordis-yaml.ts'
 import {
   collectRuntimeLocalSourceSpecifiers,
   collectRuntimeSourceSpecifiers,
 } from './verify-client-packages.ts'
 
-const EXPERIMENTAL_PREFIX = '@deepseek-ai/dsh-experimental-'
+const EXPERIMENTAL_PREFIX = '@kinetick-labs/kh-experimental-'
 // The independently published entry package owns platform-engine dependencies.
 const EXTERNAL_KIT_PACKAGES = new Set(['@deepseek-ai/libreoffice-kit'])
 const PROFILE_SOURCE = 'packages/boot/app-boot/src/profile.ts'
@@ -35,7 +35,7 @@ interface Manifest {
   optionalDependencies?: Record<string, string>
   peerDependencies?: Record<string, string>
   devDependencies?: Record<string, string>
-  dsh?: { bundle?: DshBundleManifest; configTrees?: Array<{ path: string }> }
+  kh?: { bundle?: KhBundleManifest; configTrees?: Array<{ path: string }> }
 }
 
 interface Package {
@@ -78,8 +78,8 @@ export function verifyDefaultProductIsolation(root: string): ProductIsolationRes
     if (!existsSync(resolve(root, path))) failures.push(`missing default product root ${path}`)
   }
   const cli = directories.get(resolve(root, 'apps/cli'))
-  if (cli?.manifest.name !== '@deepseek-ai/dsh') {
-    failures.push('apps/cli/package.json must identify @deepseek-ai/dsh')
+  if (cli?.manifest.name !== '@kinetick-labs/kh') {
+    failures.push('apps/cli/package.json must identify @kinetick-labs/kh')
   }
   // The bundles the launcher ships switched off: each a runtime dependency of the installation that is a bundle
   // with an icon and locale display metadata for the plugin manager's Official group, none a default.
@@ -91,8 +91,8 @@ export function verifyDefaultProductIsolation(root: string): ProductIsolationRes
       failures.push(`${PROFILE_SOURCE}: optional bundle ${name} must be a runtime dependency of apps/cli`)
     }
     const manifest = packages.get(name)?.manifest
-    if (manifest?.dsh?.bundle?.patch === undefined) {
-      failures.push(`${PROFILE_SOURCE}: optional bundle ${name} must declare dsh.bundle.patch`)
+    if (manifest?.kh?.bundle?.patch === undefined) {
+      failures.push(`${PROFILE_SOURCE}: optional bundle ${name} must declare kh.bundle.patch`)
     }
     if (typeof manifest?.icon !== 'string' && manifest?.exports?.['./icon'] == null) {
       failures.push(`${PROFILE_SOURCE}: optional bundle ${name} must declare icon or export ./icon`)
@@ -243,14 +243,14 @@ export function verifyDefaultProductIsolation(root: string): ProductIsolationRes
   if (selection !== undefined) {
     for (const name of selection.packages) {
       reference(name, PROFILE_SOURCE)
-      if (packages.get(name)?.manifest.dsh?.bundle?.patch === undefined) {
-        failures.push(`${PROFILE_SOURCE}: default bundle ${name} must declare dsh.bundle.patch`)
+      if (packages.get(name)?.manifest.kh?.bundle?.patch === undefined) {
+        failures.push(`${PROFILE_SOURCE}: default bundle ${name} must declare kh.bundle.patch`)
       }
       if (optionalBundles.has(name)) failures.push(`${PROFILE_SOURCE}: optional bundle ${name} must not be a default bundle`)
     }
     const webLayers = selection.webBundles.flatMap((name) => {
       const pkg = packages.get(name)
-      const bundle = pkg?.manifest.dsh?.bundle
+      const bundle = pkg?.manifest.kh?.bundle
       if (pkg === undefined || bundle === undefined) return []
       return [bundlePatchPaths(pkg.directory, bundle).flatMap(file => loadOverlayPatches('verify-default-product-isolation', file))]
     })
@@ -297,8 +297,8 @@ export function verifyDefaultProductIsolation(root: string): ProductIsolationRes
         dependency(name, range, pkg, `${manifest.name} ${section}`)
       }
     }
-    for (const file of manifest.dsh?.bundle === undefined ? [] : bundlePatchPaths(pkg.directory, manifest.dsh.bundle)) scanConfig(file)
-    for (const tree of manifest.dsh?.configTrees ?? []) {
+    for (const file of manifest.kh?.bundle === undefined ? [] : bundlePatchPaths(pkg.directory, manifest.kh.bundle)) scanConfig(file)
+    for (const tree of manifest.kh?.configTrees ?? []) {
       const treePath = resolve(pkg.directory, tree.path)
       const files = existsSync(treePath) && statSync(treePath).isDirectory()
         ? globSync('**/*.{yml,yaml}', { cwd: treePath, exclude: ['**/*.i18n.yaml', '**/preset.yml'] }) : []

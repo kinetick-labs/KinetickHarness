@@ -4,18 +4,18 @@
  * authenticates with the account token when the account service allows the search endpoint;
  * every other search reuses `DEEPSEEK_API_KEY`. The provider does not reuse `DEEPSEEK_BASE_URL`;
  * auxiliary search has its own endpoint configuration.
- * @module @deepseek-ai/dsh-web-search-deepseek
+ * @module @kinetick-labs/kh-web-search-deepseek
  */
 import type { Volatile } from '@deepseek-ai/cordis'
 
 import type { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import type {} from '@deepseek-ai/dsh-agent'
-import { credentialRef } from '@deepseek-ai/dsh-credentials'
-import type {} from '@deepseek-ai/dsh-deepseek-account'
-import { launchEnvironmentOf } from '@deepseek-ai/dsh-launch-environment'
-import type {} from '@deepseek-ai/dsh-session'
-import type {} from '@deepseek-ai/dsh-web'
+import type {} from '@kinetick-labs/kh-agent'
+import { credentialRef } from '@kinetick-labs/kh-credentials'
+import type {} from '@kinetick-labs/kh-deepseek-account'
+import { launchEnvironmentOf } from '@kinetick-labs/kh-launch-environment'
+import type {} from '@kinetick-labs/kh-session'
+import type {} from '@kinetick-labs/kh-web'
 import {
   DeepSeekSearchProvider,
   DEEPSEEK_DEFAULT_API_VERSION,
@@ -82,7 +82,7 @@ export const Config = z.object({
  */
 const SEARCH_BASE_URL_ENV = 'DEEPSEEK_SEARCH_BASE_URL'
 
-/** Provider route id `dsh-llm-deepseek-account` registers; `request/context` events record it per Session. */
+/** Provider route id `kh-llm-deepseek-account` registers; `request/context` events record it per Session. */
 const ACCOUNT_PROVIDER = 'deepseek-account'
 
 /** Settings namespace carrying this provider's endpoint, model, and key reference. */

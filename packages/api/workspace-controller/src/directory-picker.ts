@@ -5,15 +5,15 @@
 
 import { Context } from '@deepseek-ai/cordis'
 import { z } from 'zod'
-import { DirectoryPickerError } from '@deepseek-ai/dsh-host-directory-picker'
+import { DirectoryPickerError } from '@kinetick-labs/kh-host-directory-picker'
 import type {
   DirectoryPickerCapabilities, DirectoryPickerErrorCode,
-} from '@deepseek-ai/dsh-host-directory-picker'
+} from '@kinetick-labs/kh-host-directory-picker'
 // The seam owns the listing declaration; the generator requires the reference
 // site to name that package rather than this package's re-export of it.
-import type { DirectoryListing } from '@deepseek-ai/dsh-host-directory-picker/types'
-import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
-import type { RemoteErrorCode } from '@deepseek-ai/dsh-typert-protocol'
+import type { DirectoryListing } from '@kinetick-labs/kh-host-directory-picker/types'
+import { Remote, RemoteError, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
+import type { RemoteErrorCode } from '@kinetick-labs/kh-typert-protocol'
 
 const createDirectoryRequestSchema = z.object({
   path: z.string(),

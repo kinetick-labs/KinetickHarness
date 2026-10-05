@@ -3,29 +3,29 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/persistence-changes/releases/README.md
 /:
-  en: 813000c665a9a00b
-  zh: 7585184354024644
-/persistence-changes-across-dsh-prereleases:
-  en: 779cdacb7f259aae
-  zh: 0e180dd42e04a81b
-/persistence-changes-across-dsh-prereleases/summary:
-  en: 2fb5f2079645f85f
-  zh: 4be7bb6cec10b388
-/persistence-changes-across-dsh-prereleases/table-of-contents:
+  en: 8ac7013ccb08a4d6
+  zh: 9449a6c3894e26ff
+/persistence-changes-across-kh-prereleases:
+  en: c793aa384abe725e
+  zh: 532d918d06a83f11
+/persistence-changes-across-kh-prereleases/summary:
+  en: 85a5bb5ea69e0470
+  zh: f6c9cb7b9d660f54
+/persistence-changes-across-kh-prereleases/table-of-contents:
   en: 66af6c63111e0d4f
   zh: d2cda8c92eda8473
-/persistence-changes-across-dsh-prereleases/archived-releases:
-  en: 995581f72b7d7bf7
-  zh: 7f73f08036618bed
-/persistence-changes-across-dsh-prereleases/files-and-scope:
+/persistence-changes-across-kh-prereleases/archived-releases:
+  en: 57d47ad9bb8a801e
+  zh: 720ca9b630b50c67
+/persistence-changes-across-kh-prereleases/files-and-scope:
   en: c7b3012355eec9c6
   zh: c31da79dc5cf326c
-/persistence-changes-across-dsh-prereleases/extraction-and-limitations:
+/persistence-changes-across-kh-prereleases/extraction-and-limitations:
   en: 2212c587e280c935
   zh: e1e12ec7d87f9bd2
-/persistence-changes-across-dsh-prereleases/verification:
-  en: 5ae84a4b450733df
-  zh: 7bd0f834534aae4c
-/persistence-changes-across-dsh-prereleases/dev-note:
+/persistence-changes-across-kh-prereleases/verification:
+  en: 9c76d9cefba416d0
+  zh: 888ed16ff85d1479
+/persistence-changes-across-kh-prereleases/dev-note:
   en: 5de1d6304e00c58f
   zh: e58fc8dda0bea8d5

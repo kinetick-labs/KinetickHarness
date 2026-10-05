@@ -4,22 +4,22 @@ import { join } from 'node:path'
 import { tmpdir } from 'node:os'
 import { describe, expect, it, onTestFinished, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AttachmentStore, { AttachmentId } from '@deepseek-ai/dsh-attachment'
-import type { ImageAttachmentRef, SaveImageAttachment, StoredImageAttachment } from '@deepseek-ai/dsh-attachment'
-import FileSystem from '@deepseek-ai/dsh-fs-local'
-import { LlmAdapter, LlmRuntime, ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions, StreamChunk, ImageBlock, LlmImageRequestPricing, LlmResolvedModelInfo } from '@deepseek-ai/dsh-llm'
-import { deepSeekImageTokens } from '@deepseek-ai/dsh-llm-deepseek'
-import { estimateContent } from '@deepseek-ai/dsh-token-meter/estimate'
-import { createMcpToolDefinition } from '@deepseek-ai/dsh-mcp-client'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import LocalSpillStore from '@deepseek-ai/dsh-spill-local'
-import { PtcRuntime } from '@deepseek-ai/dsh-ptc-runtime'
-import type { PtcRunRequest, PtcRunSpec, PtcRunResult } from '@deepseek-ai/dsh-ptc-runtime'
-import type { JsonValue } from '@deepseek-ai/dsh-util-values'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AttachmentStore, { AttachmentId } from '@kinetick-labs/kh-attachment'
+import type { ImageAttachmentRef, SaveImageAttachment, StoredImageAttachment } from '@kinetick-labs/kh-attachment'
+import FileSystem from '@kinetick-labs/kh-fs-local'
+import { LlmAdapter, LlmRuntime, ToolCallId } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions, StreamChunk, ImageBlock, LlmImageRequestPricing, LlmResolvedModelInfo } from '@kinetick-labs/kh-llm'
+import { deepSeekImageTokens } from '@kinetick-labs/kh-llm-deepseek'
+import { estimateContent } from '@kinetick-labs/kh-token-meter/estimate'
+import { createMcpToolDefinition } from '@kinetick-labs/kh-mcp-client'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { defineContentToolFixture } from '@kinetick-labs/kh-tools'
+import LocalSpillStore from '@kinetick-labs/kh-spill-local'
+import { PtcRuntime } from '@kinetick-labs/kh-ptc-runtime'
+import type { PtcRunRequest, PtcRunSpec, PtcRunResult } from '@kinetick-labs/kh-ptc-runtime'
+import type { JsonValue } from '@kinetick-labs/kh-util-values'
 import * as SpillPolicy from '../src/index.ts'
 
 const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAPoAAAD6AG1e1JrAAAADElEQVQImWNgZGIGAAAOAAeCcsnOAAAAAElFTkSuQmCC', 'base64')
@@ -62,7 +62,7 @@ class VisionAdapter extends LlmAdapter {
 }
 
 async function setup(content: JsonValue[], maxInlineTokens: number) {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-multimodal-spill-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-multimodal-spill-'))
   const ctx = new Context()
   onTestFinished(async () => {
     try { await ctx.fiber.dispose() } finally { await rm(root, { recursive: true, force: true }) }

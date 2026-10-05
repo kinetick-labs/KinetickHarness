@@ -1,12 +1,12 @@
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
 import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import * as LlmDeepSeek from '@deepseek-ai/dsh-llm-deepseek-api-key'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SessionTitleService from '@deepseek-ai/dsh-session-title'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import * as FirstMessageTitleProvider from '@deepseek-ai/dsh-session-title-first-prompt-llm'
+import LlmRuntime from '@kinetick-labs/kh-llm'
+import * as LlmDeepSeek from '@kinetick-labs/kh-llm-deepseek-api-key'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import SessionTitleService from '@kinetick-labs/kh-session-title'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import * as FirstMessageTitleProvider from '@kinetick-labs/kh-session-title-first-prompt-llm'
 
 const contexts: Context[] = []
 

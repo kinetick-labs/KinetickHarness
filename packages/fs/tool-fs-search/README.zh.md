@@ -3,13 +3,13 @@ description: "面向模型的 glob 与 grep 发现工具：供组合或排查 ag
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tool-fs-search
+# @kinetick-labs/kh-tool-fs-search
 
 [English](README.md) | 中文
 
 ## 概述
 
-使用 `dsh-tool-fs-search` 为模型提供本地工作区中的 `glob` 文件发现与 `grep` 内容搜索。搜索无需在宿主上安装 `rg`，也无需文件系统提供方；结果相对于工作目录，并包含隐藏与忽略文件但排除 VCS 元数据。可配置上限约束内联输出；挂载可选 spill 存储后，达到上限的结果仍可完整恢复。若需读取、写入或编辑文件，请选择同级 `dsh-tool-fs` 包。
+使用 `kh-tool-fs-search` 为模型提供本地工作区中的 `glob` 文件发现与 `grep` 内容搜索。搜索无需在宿主上安装 `rg`，也无需文件系统提供方；结果相对于工作目录，并包含隐藏与忽略文件但排除 VCS 元数据。可配置上限约束内联输出；挂载可选 spill 存储后，达到上限的结果仍可完整恢复。若需读取、写入或编辑文件，请选择同级 `kh-tool-fs` 包。
 
 ## 目录
 
@@ -32,11 +32,11 @@ kind: "package-reference"
 一个子进程后端，然后是工具；spill 后端为可选，使达到上限的结果可完整恢复。
 
 ```yaml
-- name: '@deepseek-ai/dsh-subprocess-local'
-- name: '@deepseek-ai/dsh-tool-fs-search'
+- name: '@kinetick-labs/kh-subprocess-local'
+- name: '@kinetick-labs/kh-tool-fs-search'
   config:
     sampleOverCapGlobResults: false
-- name: '@deepseek-ai/dsh-spill-local'
+- name: '@kinetick-labs/kh-spill-local'
 ```
 
 `sampleOverCapGlobResults` 是必填项且没有回退值：部署必须显式选择超过上限时的排序约定。格式化 spill 成功时，两种模式都会在 spill 产物中保留完整排序列表。

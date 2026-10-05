@@ -3,20 +3,20 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-09-11-persistence-type-history.md
 /agent-note-in-tree-persistence-type-history:
-  en: 27496d50584a4feb
-  zh: 1b241d60286a92f3
+  en: 96e7e409e8f8902e
+  zh: 200c39e7142c2fdb
 /agent-note-in-tree-persistence-type-history/problem:
   en: c8e926bfc65d7195
   zh: e0e007960b68fe80
 /agent-note-in-tree-persistence-type-history/decision:
-  en: 0d6257a57763ad48
-  zh: 6ce3cb7228bba27a
+  en: b41bf905c05c0e7f
+  zh: 14a14515be954e76
 /agent-note-in-tree-persistence-type-history/decision/finalized-checkpoints:
-  en: 7dd42139850de3bf
-  zh: 0783bff2f0084f71
+  en: 0277ea55af477d5c
+  zh: fa3c44056eb81eb2
 /agent-note-in-tree-persistence-type-history/alternatives-considered:
   en: 5cdac1b3f15f89f6
   zh: 36cda3b92d31c916
 /agent-note-in-tree-persistence-type-history/consequences:
-  en: 672c8cb59d291dc2
-  zh: cbec90fbca92320a
+  en: 15916dc9913e2587
+  zh: dc2bbf98053dcd6d

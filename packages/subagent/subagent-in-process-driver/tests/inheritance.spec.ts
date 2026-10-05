@@ -9,16 +9,16 @@ import { mkdtemp, readFile, realpath, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import SandboxedFileSystem from '@deepseek-ai/dsh-fs-sandbox'
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import SandboxPolicyService, { setSandboxMode } from '@deepseek-ai/dsh-sandbox-policy'
-import { Session, SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import * as ToolFs from '@deepseek-ai/dsh-tool-fs'
-import ApprovalService from '@deepseek-ai/dsh-user-approval'
-import { snapshotSubagentDescriptor } from '@deepseek-ai/dsh-subagent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import SandboxedFileSystem from '@kinetick-labs/kh-fs-sandbox'
+import type { ContentBlock } from '@kinetick-labs/kh-llm'
+import SandboxPolicyService, { setSandboxMode } from '@kinetick-labs/kh-sandbox-policy'
+import { Session, SessionId, type SessionEvent } from '@kinetick-labs/kh-session'
+import * as ToolFs from '@kinetick-labs/kh-tool-fs'
+import ApprovalService from '@kinetick-labs/kh-user-approval'
+import { snapshotSubagentDescriptor } from '@kinetick-labs/kh-subagent'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import { startInProcessRun } from '../src/index.ts'
 
@@ -29,7 +29,7 @@ const contexts: Context[] = []
 let workspace: string
 
 beforeEach(async () => {
-  workspace = await realpath(await mkdtemp(join(tmpdir(), 'dsh-inherit-')))
+  workspace = await realpath(await mkdtemp(join(tmpdir(), 'kh-inherit-')))
 })
 
 afterEach(async () => {
@@ -80,7 +80,7 @@ function toolResultTexts(agent: Agent): string[] {
 
 describe('in-process policy inheritance', () => {
   it.each(['auto', 'danger-full-access'] as const)(
-    'records the parent %s identity before publishing a DSH in-process child',
+    'records the parent %s identity before publishing a KH in-process child',
     async (preset) => {
       const { ctx, parent } = await setupWalled([textResponse('child done')])
       parent.session.append('permission/preset', { preset })
@@ -183,7 +183,7 @@ describe('in-process policy inheritance', () => {
         .filter((block): block is Extract<ContentBlock, { type: 'text' }> => block.type === 'text')
         .map(block => block.text)
         .join('\n')
-      expect(contextText).toContain('Current DSH file policy: read-only')
+      expect(contextText).toContain('Current KH file policy: read-only')
       expect(contextText).toContain('Approval prompts are disabled')
       // The statement rides runtime context; the system node (surface node 0) stays uniform.
       expect(contextText).toContain('You are a delegated subagent')

@@ -5,8 +5,8 @@
  */
 import {
   createSnapshotStore, type SnapshotStore,
-} from '@deepseek-ai/dsh-client-store'
-import type { ConfigForm } from '@deepseek-ai/dsh-client-ui-settings/client'
+} from '@kinetick-labs/kh-client-store'
+import type { ConfigForm } from '@kinetick-labs/kh-client-ui-settings/client'
 import type {
   BusyEnterBehavior, ComposerSubmitGesture, InputSubmitMode,
 } from '../contract/composer-submission.ts'

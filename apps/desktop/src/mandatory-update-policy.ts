@@ -1,12 +1,12 @@
 /** Mandatory-update policy, independent of local business traffic and updater artifacts. */
 
 import { valid } from 'semver'
-import { platformClientHeaders, type AccountClientMetadata } from '@deepseek-ai/dsh-deepseek-account'
+import { platformClientHeaders, type AccountClientMetadata } from '@kinetick-labs/kh-deepseek-account'
 
 /** Installed release identity; no field is supplied by a renderer. */
 export interface DesktopPolicyIdentity {
   readonly platform: 'win32' | 'darwin'
-  readonly bundledDshVersion: string
+  readonly bundledKhVersion: string
   readonly arch: 'x64' | 'arm64'
 }
 
@@ -150,7 +150,7 @@ export class DesktopMandatoryUpdatePolicy {
     private readonly client: () => AccountClientMetadata,
     private readonly random: () => number = Math.random,
   ) {
-    if (valid(this.client().version) === null || valid(identity.bundledDshVersion) === null
+    if (valid(this.client().version) === null || valid(identity.bundledKhVersion) === null
       || (identity.platform === 'win32' && identity.arch !== 'x64')) throw new Error('desktop policy: invalid installed client identity')
   }
 
@@ -159,7 +159,7 @@ export class DesktopMandatoryUpdatePolicy {
     return {
       ...platformClientHeaders(this.identity.platform, this.client()),
       'x-client-arch': this.identity.arch, 'x-client-update-channel': 'nightly',
-      'x-client-bundled-dsh-version': this.identity.bundledDshVersion,
+      'x-client-bundled-kh-version': this.identity.bundledKhVersion,
     }
   }
 

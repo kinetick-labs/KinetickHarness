@@ -8,12 +8,12 @@ import { join } from 'node:path'
 import type { Browser, Page } from 'playwright'
 import { chromium } from 'playwright'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import type { StreamChunk } from '@deepseek-ai/dsh-llm'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { AssistantStreamFrame } from '@deepseek-ai/dsh-agent'
-import type { ReplayEntry, ReplayOverrideDoc } from '@deepseek-ai/dsh-llm-replay'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
-import { SESSION_FORMAT_VERSION } from '@deepseek-ai/dsh-session'
+import type { StreamChunk } from '@kinetick-labs/kh-llm'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import type { AssistantStreamFrame } from '@kinetick-labs/kh-agent'
+import type { ReplayEntry, ReplayOverrideDoc } from '@kinetick-labs/kh-llm-replay'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
+import { SESSION_FORMAT_VERSION } from '@kinetick-labs/kh-session'
 import { createChatScrollFixture, type ChatScrollFixture } from './chat-scroll-fixture.ts'
 import {
   launchWebScaffold,
@@ -171,7 +171,7 @@ async function launchScrollWorld(options: ScrollWorldOptions): Promise<ScrollWor
   let page: Page | undefined
   try {
     if (options.replay !== undefined) {
-      replayDir = await mkdtemp(join(tmpdir(), 'dsh-chat-scroll-replay-'))
+      replayDir = await mkdtemp(join(tmpdir(), 'kh-chat-scroll-replay-'))
       const replayOverride = join(replayDir, 'replay.override.json')
       await writeFile(replayOverride, JSON.stringify(options.replay))
       scaffold = await launchWebScaffold({
@@ -575,7 +575,7 @@ describe('web e2e: long Chat scroll contract', () => {
           for (const contentWidth of [901, 900, 899, 901]) {
             await frame.evaluate((element, { clearance, contentWidth }) => {
               element.style.width = `${contentWidth + 2 * (clearance + 16)}px`
-              element.style.setProperty('--dsh-composer-side-clearance', `${clearance}px`)
+              element.style.setProperty('--kh-composer-side-clearance', `${clearance}px`)
             }, { clearance, contentWidth })
             await expect.poll(() => rail.isVisible()).toBe(contentWidth > 900)
           }

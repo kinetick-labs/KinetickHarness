@@ -8,21 +8,21 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { afterEach, expect, it } from 'vitest'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { LlmAdapter, ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@deepseek-ai/dsh-llm'
-import { canonicalPath, writableRoots } from '@deepseek-ai/dsh-sandbox'
-import { SESSION_FORMAT_VERSION, SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import { auditStartupEntries, composeEntries, loadOverlayPatches } from '@deepseek-ai/dsh-app-boot'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { LlmAdapter, ToolCallId } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@kinetick-labs/kh-llm'
+import { canonicalPath, writableRoots } from '@kinetick-labs/kh-sandbox'
+import { SESSION_FORMAT_VERSION, SessionId, type SessionEvent } from '@kinetick-labs/kh-session'
+import { auditStartupEntries, composeEntries, loadOverlayPatches } from '@kinetick-labs/kh-app-boot'
 // These imports carry the tools/sandboxPolicy/approval Context merges.
-import { RUN_CODE_NAME } from '@deepseek-ai/dsh-tools'
-import type {} from '@deepseek-ai/dsh-sandbox-policy'
-import type {} from '@deepseek-ai/dsh-user-approval'
-import type {} from '@deepseek-ai/dsh-permission-presets'
-import type {} from '@deepseek-ai/dsh-agent-preset-registry'
-import type {} from '@deepseek-ai/dsh-commands'
-import type {} from '@deepseek-ai/dsh-system-prompt'
-import type {} from '@deepseek-ai/dsh-terminal'
+import { RUN_CODE_NAME } from '@kinetick-labs/kh-tools'
+import type {} from '@kinetick-labs/kh-sandbox-policy'
+import type {} from '@kinetick-labs/kh-user-approval'
+import type {} from '@kinetick-labs/kh-permission-presets'
+import type {} from '@kinetick-labs/kh-agent-preset-registry'
+import type {} from '@kinetick-labs/kh-commands'
+import type {} from '@kinetick-labs/kh-system-prompt'
+import type {} from '@kinetick-labs/kh-terminal'
 import { launchWebScaffold, readPersistedEvents, type WebScaffold } from './scaffold.ts'
 import { AUTO_REVIEW_FIXTURE } from './auto-review-fixture.ts'
 import { REPO_ROOT } from './support.ts'
@@ -506,7 +506,7 @@ const EXPECTED_TOOLS = [
 ]
 
 /**
- * `glob` and `grep` come from `dsh-tool-fs-search`, which spawns the PACKAGED
+ * `glob` and `grep` come from `kh-tool-fs-search`, which spawns the PACKAGED
  * ripgrep binary (`@vscode/ripgrep`) through the subprocess seam, so the pair
  * is always present on every host — asserted as fixed members, not a host
  * dependency.
@@ -645,7 +645,7 @@ it('assembles the shipped Web transport, catalog, guidance, and defaults', async
   })
   try {
     expect(scaffold.ctx.commands.list(commandHandle.agent)).toContainEqual({
-      definitionId: '@deepseek-ai/dsh-command-feedback',
+      definitionId: '@kinetick-labs/kh-command-feedback',
       name: 'feedback',
       description: 'Record feedback about this session',
       input: { hint: '<text>' },
@@ -828,7 +828,7 @@ it('routes one browser-authored Auto request through the same model and asks the
 }, 120_000)
 
 it('reviews one-shot, continuable, and cold-resumed in-process child calls independently', async () => {
-  childOverlayDirectory = await mkdtemp(join(tmpdir(), 'dsh-auto-child-overlay-'))
+  childOverlayDirectory = await mkdtemp(join(tmpdir(), 'kh-auto-child-overlay-'))
   const overlayPath = join(childOverlayDirectory, 'cordis.patch.yml')
   await writeFile(overlayPath, [
     await readFile(AUTO_REVIEW_FIXTURE.extraOverlayPath, 'utf8'),

@@ -1,27 +1,27 @@
 // @vitest-environment jsdom
 import { render, cleanup } from '@testing-library/react'
 import { $getRoot, $isTextNode, PASTE_COMMAND } from 'lexical'
-import { projectUserText } from '@deepseek-ai/dsh-client-ui-primitives'
+import { projectUserText } from '@kinetick-labs/kh-client-ui-primitives'
 import { registerComposerKeymap } from '../src/client/input/editor/keymap.ts'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import { describe, expect, it, onTestFinished, vi } from 'vitest'
-import type { CommandContribution, CommandUiContract } from '@deepseek-ai/dsh-client-ui-commands/client'
-import type { ISession, SessionReference } from '@deepseek-ai/dsh-api-session-controller/client'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
+import type { CommandContribution, CommandUiContract } from '@kinetick-labs/kh-client-ui-commands/client'
+import type { ISession, SessionReference } from '@kinetick-labs/kh-api-session-controller/client'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import type { ObservableSnapshot } from '@kinetick-labs/kh-client-store'
 import {
   SlotTestRuntime, stubConfigForm, usePinnedBrowserLanguages,
-} from '@deepseek-ai/dsh-client-test-runtime'
-import type { SessionBehaviorOverrides } from '@deepseek-ai/dsh-client-test-runtime'
+} from '@kinetick-labs/kh-client-test-runtime'
+import type { SessionBehaviorOverrides } from '@kinetick-labs/kh-client-test-runtime'
 import {
   apply, inject, type ComposerBarInjected, type ConversationInjected,
   type ConversationSessionHeaderInjected, type ConversationSessionInjected, type ViewTab,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { WorkspaceId } from '@deepseek-ai/dsh-workspace/types'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type { WorkspaceId } from '@kinetick-labs/kh-workspace/types'
 import { createConversationStore } from '../src/client/stores.ts'
 import type { SessionInputShell } from '../src/client/input/facade.ts'
-import { RemoteError } from '@deepseek-ai/dsh-client-test-runtime'
+import { RemoteError } from '@kinetick-labs/kh-client-test-runtime'
 
 usePinnedBrowserLanguages('zh-CN')
 
@@ -308,7 +308,7 @@ describe('Conversation inject API', () => {
     let removeCustom: (() => void) | undefined
     try {
       await b.runtime.flush()
-      localStorage.setItem(`dsh.conversation.${ROOT}`, JSON.stringify({
+      localStorage.setItem(`kh.conversation.${ROOT}`, JSON.stringify({
         draft: '', view: 'custom', viewRequest: null,
       }))
 
@@ -413,7 +413,7 @@ describe('Conversation inject API', () => {
     await browser.runtime.dispose()
 
     const paths = new Map([['project', '/Users/me/my project'], ['notes.md', '/Users/me/notes.md'], ['shot.png', '/Users/me/shot.png']])
-    vi.stubGlobal('__DSH_HOST_PATHS__', { pathFor: (file: File) => paths.get(file.name) ?? '' })
+    vi.stubGlobal('__KH_HOST_PATHS__', { pathFor: (file: File) => paths.get(file.name) ?? '' })
     try {
       const desktop = await bench()
       const composer = desktop.composerApi(ROOT)
@@ -438,7 +438,7 @@ describe('Conversation inject API', () => {
   })
 
   it('preserves selected text and file order and restores pasted directory chips from the draft', async () => {
-    vi.stubGlobal('__DSH_HOST_PATHS__', { pathFor: (file: File) => `/proj/${file.name}` })
+    vi.stubGlobal('__KH_HOST_PATHS__', { pathFor: (file: File) => `/proj/${file.name}` })
     onTestFinished(() => { vi.unstubAllGlobals(); cleanup() })
     const b = await bench()
     onTestFinished(() => b.runtime.dispose())
@@ -473,7 +473,7 @@ describe('Conversation inject API', () => {
   })
 
   it('rejects the whole file batch before changing the draft when a later path is unrepresentable', async () => {
-    vi.stubGlobal('__DSH_HOST_PATHS__', { pathFor: (file: File) => `/proj/${file.name}` })
+    vi.stubGlobal('__KH_HOST_PATHS__', { pathFor: (file: File) => `/proj/${file.name}` })
     onTestFinished(() => { vi.unstubAllGlobals() })
     const b = await bench()
     onTestFinished(() => b.runtime.dispose())

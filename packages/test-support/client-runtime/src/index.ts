@@ -5,10 +5,10 @@
  * declaration, registration, scope, store, inject, rendering, updates, and
  * disposal without hand-building the machinery per suite.
  *
- * Not part of the product plugin graph (no `dsh.client`); feature packages
+ * Not part of the product plugin graph (no `kh.client`); feature packages
  * depend on it in devDependencies only. It copies no SlotCore/renderer/store
  * machinery — everything mounts the production implementations.
- * @module @deepseek-ai/dsh-client-test-runtime
+ * @module @kinetick-labs/kh-client-test-runtime
  */
 /* oxlint-disable typescript/no-redundant-type-constituents --
  * `keyof SlotMap & string` is the declare-merge key pattern (see ui-slots):
@@ -22,28 +22,28 @@ import { act, render, within } from '@testing-library/react'
 import type { RenderResult } from '@testing-library/react'
 import type { queries } from '@testing-library/dom'
 import type { BoundFunctions } from '@testing-library/dom'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import { bindSnapshotSelector as bindRendererSnapshotSelector } from '@deepseek-ai/dsh-client-ui-renderer/src/client/bind.ts'
-import { createSlotRenderer as createRenderer } from '@deepseek-ai/dsh-client-ui-renderer/src/client/scoped-slots.tsx'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import { bindSnapshotSelector as bindRendererSnapshotSelector } from '@kinetick-labs/kh-client-ui-renderer/src/client/bind.ts'
+import { createSlotRenderer as createRenderer } from '@kinetick-labs/kh-client-ui-renderer/src/client/scoped-slots.tsx'
 import {
   apply as applyUiSession, inject as uiSessionInject,
-} from '@deepseek-ai/dsh-client-ui-session/client'
-import type { SessionReference } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { PanelInfo } from '@deepseek-ai/dsh-client-ui-layout/client'
+} from '@kinetick-labs/kh-client-ui-session/client'
+import type { SessionReference } from '@kinetick-labs/kh-api-session-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { PanelInfo } from '@kinetick-labs/kh-client-ui-layout/client'
 import type {
   ChildrenDecl, ComposedProps, HostObservable, OwnerOf, RenderOpts, SlotComponent, SlotMap, SlotRenderer,
   ScopedStandardSourceBinding, SessionProviderComponent, SlotEntryDef, SlotFactoryMap, SlotRendererHost, SlotSpec,
   SnapshotSelectorHook, StoredFactory, StoreInstanceLike,
-} from '@deepseek-ai/dsh-client-ui-slots'
+} from '@kinetick-labs/kh-client-ui-slots'
 import { registerDomSnapshotSerializer } from './snapshot.ts'
 import { TestRemote } from './remote.ts'
 import { TestSessions } from './sessions.ts'
 import { TestWorkspaces } from './workspaces.ts'
 import type { Stabilizer } from './fixtures.ts'
 
-export type { UseSession } from '@deepseek-ai/dsh-client-ui-session/client'
+export type { UseSession } from '@kinetick-labs/kh-client-ui-session/client'
 export { domSnapshotSerializer, registerDomSnapshotSerializer } from './snapshot.ts'
 export { FixtureSession, TestSessions } from './sessions.ts'
 export { stubConfigForm } from './config-form.ts'

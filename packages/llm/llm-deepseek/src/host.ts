@@ -1,10 +1,10 @@
 /** Shared Host wiring for the DeepSeek protocol adapter. */
 import type { Context } from '@deepseek-ai/cordis'
-import type {} from '@deepseek-ai/dsh-settings'
+import type {} from '@kinetick-labs/kh-settings'
 import type {} from '@deepseek-ai/cordis-plugin-loader'
-import type {} from '@deepseek-ai/dsh-fs'
-import { resolveImageAttachmentAccess } from '@deepseek-ai/dsh-llm'
-import { deepEqualJson } from '@deepseek-ai/dsh-util-values'
+import type {} from '@kinetick-labs/kh-fs'
+import { resolveImageAttachmentAccess } from '@kinetick-labs/kh-llm'
+import { deepEqualJson } from '@kinetick-labs/kh-util-values'
 import { DeepSeekAdapter } from './adapter.ts'
 import type { DeepSeekAdapterOptions, DeepSeekConnectionOptions } from './types.ts'
 

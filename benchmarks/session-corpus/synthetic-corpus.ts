@@ -2,11 +2,11 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
-import { AssistantStreamAccumulator } from '@deepseek-ai/dsh-llm/assistant-stream'
-import { MessageId, ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, StreamChunk } from '@deepseek-ai/dsh-llm'
-import { SESSION_FORMAT_VERSION, SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent, SessionEventMap, SessionEventType, SessionHeader } from '@deepseek-ai/dsh-session'
+import { AssistantStreamAccumulator } from '@kinetick-labs/kh-llm/assistant-stream'
+import { MessageId, ToolCallId } from '@kinetick-labs/kh-llm'
+import type { ContentBlock, StreamChunk } from '@kinetick-labs/kh-llm'
+import { SESSION_FORMAT_VERSION, SessionId } from '@kinetick-labs/kh-session'
+import type { SessionEvent, SessionEventMap, SessionEventType, SessionHeader } from '@kinetick-labs/kh-session'
 import {
   eventLines,
   generationLogPath,

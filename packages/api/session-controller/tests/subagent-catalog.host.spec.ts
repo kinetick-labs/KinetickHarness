@@ -1,11 +1,11 @@
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import SessionStore, { SESSION_FORMAT_VERSION, SessionLogOffset, SessionSeq, SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent, SessionHeader } from '@deepseek-ai/dsh-session'
-import { SessionQueryError } from '@deepseek-ai/dsh-session-query'
-import type { SessionObservation } from '@deepseek-ai/dsh-session-query'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import SessionStore, { SESSION_FORMAT_VERSION, SessionLogOffset, SessionSeq, SessionId } from '@kinetick-labs/kh-session'
+import type { SessionEvent, SessionHeader } from '@kinetick-labs/kh-session'
+import { SessionQueryError } from '@kinetick-labs/kh-session-query'
+import type { SessionObservation } from '@kinetick-labs/kh-session-query'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
 import { describe, expect, it, vi } from 'vitest'
 import {
   createSessionTestController,

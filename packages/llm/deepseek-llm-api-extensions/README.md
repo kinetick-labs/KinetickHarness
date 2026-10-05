@@ -3,13 +3,13 @@ description: "Official DeepSeek request-extension registry for provider plugins 
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-deepseek-llm-api-extensions
+# @kinetick-labs/kh-deepseek-llm-api-extensions
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-Provider-specific registry for additive top-level fields on official DeepSeek LLM API requests. `DeepSeekLlmApiExtensionRegistry` registers `ctx.deepseekLlmApiExtensions`; contributor plugins claim one declaration-merged field, and `dsh-llm-deepseek` prepares the current contributions after serializing its base request. Use it when a plugin must add a validated provider-specific field without changing the base adapter.
+Provider-specific registry for additive top-level fields on official DeepSeek LLM API requests. `DeepSeekLlmApiExtensionRegistry` registers `ctx.deepseekLlmApiExtensions`; contributor plugins claim one declaration-merged field, and `kh-llm-deepseek` prepares the current contributions after serializing its base request. Use it when a plugin must add a validated provider-specific field without changing the base adapter.
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ The registry owns addition and lifecycle, not field semantics. Shipped profiles 
 <a id="model-experience"></a>
 ## Model Experience
 
-Indirectly, through `@deepseek-ai/dsh-llm-deepseek`, which sends registered fields outside the model's `messages`, system prompt, and tool schemas.
+Indirectly, through `@kinetick-labs/kh-llm-deepseek`, which sends registered fields outside the model's `messages`, system prompt, and tool schemas.
 
 #### KV Cache effect
 

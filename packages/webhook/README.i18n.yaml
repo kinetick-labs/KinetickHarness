@@ -3,23 +3,23 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write packages/webhook/README.md
 /:
-  en: 4b01653e4ccb53d2
-  zh: 85df5bd61bac9fe6
-/webhook-verified-external-events-to-dsh-sessions:
-  en: 56361bc7c10f73ad
-  zh: 2a40c90775045766
-/webhook-verified-external-events-to-dsh-sessions/summary:
+  en: eff4771dfb7f76ae
+  zh: 287bb849cbd4b192
+/webhook-verified-external-events-to-kh-sessions:
+  en: 1424b44ba477f335
+  zh: 9a8229097350f0ef
+/webhook-verified-external-events-to-kh-sessions/summary:
   en: 297975121095f74a
   zh: 9530dbf3c90d1ae0
-/webhook-verified-external-events-to-dsh-sessions/table-of-contents:
+/webhook-verified-external-events-to-kh-sessions/table-of-contents:
   en: 1eb35b015a6c423f
   zh: a8a3dceee2c9e943
-/webhook-verified-external-events-to-dsh-sessions/packages:
-  en: 7bebbc165a382b0d
-  zh: ee601ab6a4c467ee
-/webhook-verified-external-events-to-dsh-sessions/related-documentation:
-  en: 24b7903a3f1f7dce
-  zh: fab213faf1d22760
-/webhook-verified-external-events-to-dsh-sessions/dev-note:
+/webhook-verified-external-events-to-kh-sessions/packages:
+  en: 99f007a3c7da07ed
+  zh: dfdd92eef99ae5c2
+/webhook-verified-external-events-to-kh-sessions/related-documentation:
+  en: ca385b615ad99247
+  zh: a2eaf08225c8df24
+/webhook-verified-external-events-to-kh-sessions/dev-note:
   en: b75c8458928b72b9
   zh: 003ba4e17b4b5269

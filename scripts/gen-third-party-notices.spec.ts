@@ -64,7 +64,7 @@ describe('tierExternalDeps', () => {
     }
     for (const dependency of [
       { name: 'unrelated-library', license: 'MPL-2.0' },
-      { name: '@deepseek-ai/dsh-libreoffice-kit', license: 'MPL-2.0' },
+      { name: '@kinetick-labs/kh-libreoffice-kit', license: 'MPL-2.0' },
       { name: '@deepseek-ai/libreoffice-kit-unreviewed', license: 'MPL-2.0' },
       { name: '@deepseek-ai/libreoffice-kit', license: 'GPL-3.0-only' },
       { name: '@deepseek-ai/libreoffice-kit', license: 'UNKNOWN' },
@@ -109,12 +109,12 @@ describe('tierExternalDeps', () => {
     const { manifests, names } = workspace({
       // Root tooling and test infrastructure never ship, whichever section declares them.
       'package.json': { dependencies: { 'root-runtime-looking': '^1' }, devDependencies: { 'lint-tool': '^1' } },
-      'packages/test-support/loader-smoke/package.json': { name: '@deepseek-ai/dsh-loader-smoke', dependencies: { 'smoke-helper': '^1' } },
-      'packages/test-support/client-runtime/package.json': { name: '@deepseek-ai/dsh-client-test-runtime', dependencies: { 'test-lib': '^1' } },
+      'packages/test-support/loader-smoke/package.json': { name: '@kinetick-labs/kh-loader-smoke', dependencies: { 'smoke-helper': '^1' } },
+      'packages/test-support/client-runtime/package.json': { name: '@kinetick-labs/kh-client-test-runtime', dependencies: { 'test-lib': '^1' } },
       'website/package.json': { devDependencies: { 'site-tool': '^1' } },
       // A plugin package's runtime dependency ships even when no app mounts it by default.
-      'packages/mcp/mcp-client/package.json': { name: '@deepseek-ai/dsh-mcp-client', dependencies: { 'protocol-sdk': '^1' }, devDependencies: { 'protocol-fixture-server': '^1' } },
-      'apps/cli/package.json': { name: '@deepseek-ai/dsh-cli', dependencies: { 'cli-lib': '^1', '@deepseek-ai/dsh-mcp-client': 'workspace:^' } },
+      'packages/mcp/mcp-client/package.json': { name: '@kinetick-labs/kh-mcp-client', dependencies: { 'protocol-sdk': '^1' }, devDependencies: { 'protocol-fixture-server': '^1' } },
+      'apps/cli/package.json': { name: '@kinetick-labs/kh-cli', dependencies: { 'cli-lib': '^1', '@kinetick-labs/kh-mcp-client': 'workspace:^' } },
     })
 
     expect(tierExternalDeps(manifests, names)).toEqual(new Map([
@@ -133,18 +133,18 @@ describe('tierExternalDeps', () => {
   it('keeps a package runtime when any shipping area declares it, and excludes workspace links', () => {
     const { manifests, names } = workspace({
       'package.json': { devDependencies: { shared: '^1' } },
-      'packages/interaction/tui/package.json': { name: '@deepseek-ai/dsh-tui', dependencies: { shared: '^1', '@deepseek-ai/dsh-cli': 'workspace:^' } },
-      'apps/cli/package.json': { name: '@deepseek-ai/dsh-cli' },
+      'packages/interaction/tui/package.json': { name: '@kinetick-labs/kh-tui', dependencies: { shared: '^1', '@kinetick-labs/kh-cli': 'workspace:^' } },
+      'apps/cli/package.json': { name: '@kinetick-labs/kh-cli' },
     })
 
     expect(tierExternalDeps(manifests, names).get('shared')).toBe(true)
-    expect(tierExternalDeps(manifests, names).has('@deepseek-ai/dsh-cli')).toBe(false)
+    expect(tierExternalDeps(manifests, names).has('@kinetick-labs/kh-cli')).toBe(false)
   })
 })
 
 describe('virtualManifest', () => {
   it('resolves a manifest from an ordinary prefix-matching store directory', () => {
-    const root = mkdtempSync(join(tmpdir(), 'dsh-notices-prefix-'))
+    const root = mkdtempSync(join(tmpdir(), 'kh-notices-prefix-'))
     try {
       const name = '@scope/pkg'
       const version = '1.0.0'
@@ -160,7 +160,7 @@ describe('virtualManifest', () => {
   })
 
   it('falls back to a content scan when pnpm 11 truncates the store directory name', () => {
-    const root = mkdtempSync(join(tmpdir(), 'dsh-notices-truncated-'))
+    const root = mkdtempSync(join(tmpdir(), 'kh-notices-truncated-'))
     try {
       const name = '@scope/pkg'
       const version = '2.0.0'
@@ -178,7 +178,7 @@ describe('virtualManifest', () => {
   })
 
   it('selects the requested version when the store retains historical copies', () => {
-    const root = mkdtempSync(join(tmpdir(), 'dsh-notices-version-'))
+    const root = mkdtempSync(join(tmpdir(), 'kh-notices-version-'))
     try {
       const name = '@scope/pkg'
       const store = join(root, 'store')
@@ -196,7 +196,7 @@ describe('virtualManifest', () => {
   })
 
   it('returns undefined when neither the prefix nor the content scan finds the package', () => {
-    const root = mkdtempSync(join(tmpdir(), 'dsh-notices-miss-'))
+    const root = mkdtempSync(join(tmpdir(), 'kh-notices-miss-'))
     try {
       const store = join(root, 'store')
       const other = join(store, 'other-pkg@1.0.0', 'node_modules', 'other-pkg')
@@ -316,8 +316,8 @@ describe('collectPythonDependencies', () => {
 
   it('excludes normalized local project names without exempting a third-party prefix', () => {
     const pyprojects = [
-      '[project]\nname = "deepseek-harness-runtime-bin"\ndependencies = ["pydantic"]\n',
-      '[project]\nname = "deepseek-harness-sdk"\ndependencies = ["DeepSeek.Harness_Runtime-Bin", "deepseek-unrelated"]\n',
+      '[project]\nname = "kinetick-harness-runtime-bin"\ndependencies = ["pydantic"]\n',
+      '[project]\nname = "kinetick-harness-sdk"\ndependencies = ["DeepSeek.Harness_Runtime-Bin", "deepseek-unrelated"]\n',
     ]
     expect(() => collectPythonDependencies(pyprojects)).toThrow(
       'python dependency deepseek-unrelated is missing from PYTHON_METADATA',

@@ -6,6 +6,6 @@ head:
       content: 0; url=./guide/quickstart
 ---
 
-# DeepSeek Harness
+# KinetickHarness
 
 English | [中文](index.zh.md)

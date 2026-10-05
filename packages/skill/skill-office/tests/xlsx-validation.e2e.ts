@@ -4,18 +4,18 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { execa } from 'execa'
 import { describe, expect, it } from 'vitest'
-import { runLoaderSmoke } from '@deepseek-ai/dsh-loader-smoke'
-import { readImageFile } from '@deepseek-ai/dsh-attachment-local'
-import { parseSessionLog } from '@deepseek-ai/dsh-llm-replay'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
+import { runLoaderSmoke } from '@kinetick-labs/kh-loader-smoke'
+import { readImageFile } from '@kinetick-labs/kh-attachment-local'
+import { parseSessionLog } from '@kinetick-labs/kh-llm-replay'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
 
 const repo = fileURLToPath(new URL('../../../../', import.meta.url))
-// DSH_PRIMARY_RUNTIME names the same runtime.json + dependencies/ payload used by shipped deployments.
-const runtime = process.env.DSH_PRIMARY_RUNTIME
+// KH_PRIMARY_RUNTIME names the same runtime.json + dependencies/ payload used by shipped deployments.
+const runtime = process.env.KH_PRIMARY_RUNTIME
 const python = runtime && join(runtime, 'dependencies/python', process.platform === 'win32' ? 'python.exe' : 'bin/python3')
 const model = process.env.MODEL_NAME ?? 'deepseek-flash'
 // Development gateways can expose Chat Completions without the official Messages API.
-const completions = process.env.DSH_OFFICE_TEST_API === 'openai-completions'
+const completions = process.env.KH_OFFICE_TEST_API === 'openai-completions'
 
 const seed = `
 import sys
@@ -70,7 +70,7 @@ describe.skipIf(!process.env.DEEPSEEK_API_KEY || !runtime)('Excel validation sco
     let fixtureCalls: { args: string[]; status: number | null }[] = []
     await runLoaderSmoke({
       label: `Excel ${kind} validation`,
-      tempDirPrefix: 'dsh-xlsx-validation-',
+      tempDirPrefix: 'kh-xlsx-validation-',
       binScript: join(repo, 'apps/cli/src/bin.ts'),
       sourceImport: 'tsx/esm',
       tsconfigPath: join(repo, 'tsconfig.base.json'),
@@ -80,9 +80,9 @@ describe.skipIf(!process.env.DEEPSEEK_API_KEY || !runtime)('Excel validation sco
       ],
       processTimeoutMs: 110_000,
       env: {
-        DSH_PRIMARY_RUNTIME: runtime,
-        DSH_PERMISSION_MODE: 'danger-full-access',
-        DSH_TOOLS_MODE: 'native',
+        KH_PRIMARY_RUNTIME: runtime,
+        KH_PERMISSION_MODE: 'danger-full-access',
+        KH_TOOLS_MODE: 'native',
       },
       async prepare(cwd) {
         await execa(python!, ['-c', seed, kind], { cwd })
@@ -114,8 +114,8 @@ process.exitCode = result.status ?? 1;
         }
         await writeFile(join(cwd, 'office.patch.json'), JSON.stringify([
           { insert: [
-            { id: 'office-validation', name: '@deepseek-ai/dsh-skill-office', ...kind === 'blank' ? { config: { cli: fixtureCli } } : {} },
-            { id: 'office-dependencies', name: '@deepseek-ai/dsh-tool-workspace-dependencies', config: { source: runtime } },
+            { id: 'office-validation', name: '@kinetick-labs/kh-skill-office', ...kind === 'blank' ? { config: { cli: fixtureCli } } : {} },
+            { id: 'office-dependencies', name: '@kinetick-labs/kh-tool-workspace-dependencies', config: { source: runtime } },
           ] },
           ...completions ? [
             { id: 'llm-deepseek', disabled: true },
@@ -128,7 +128,7 @@ process.exitCode = result.status ?? 1;
             models: [{ id: model, contextWindow: 128000, maxTokens: 8192, inputModalities: ['text', 'image'] }],
           } }],
           { id: 'agent-default-model', config: { provider: completions ? 'office-test' : 'deepseek-official', model } },
-          { id: 'attachment-local', config: { dshHome: join(cwd, '.image-store') } },
+          { id: 'attachment-local', config: { khHome: join(cwd, '.image-store') } },
           { id: 'session-persistence-jsonl', config: { root: join(cwd, '.sessions'), compression: 'none' } },
         ]))
       },

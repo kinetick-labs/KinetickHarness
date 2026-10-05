@@ -3,13 +3,13 @@ description: "面向 Host 与浏览器 Client Cordis 运行时的实验性 Chrom
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-experimental-inspector
+# @kinetick-labs/kh-experimental-inspector
 
 [English](README.md) | 中文
 
 ## 概述
 
-在 Chrome DevTools 中检查一个运行中的 dsh Host 及其浏览器 Client：Host 与 Client Console context、Host Sources 与调试、Host fetch 采集和共享 Cordis 树，全部 CDP 状态都在 Worker 中。
+在 Chrome DevTools 中检查一个运行中的 kh Host 及其浏览器 Client：Host 与 Client Console context、Host Sources 与调试、Host fetch 采集和共享 Cordis 树，全部 CDP 状态都在 Worker 中。
 
 可选的[开发者工具组合包](../inspector-profile/README.zh.md) 同时启用 NodeJS 诊断和会话数据诊断，并开启 Host fetch 采集。Web startup 不需要也不接受 `--inspect`。
 
@@ -105,7 +105,7 @@ Worker 监听后，Host 会记录一个 `devtools://` URL。同一个 Worker 提
 
 ```ts
 import type { Context } from '@deepseek-ai/cordis'
-import type { InspectorJsonValue } from '@deepseek-ai/dsh-experimental-inspector'
+import type { InspectorJsonValue } from '@kinetick-labs/kh-experimental-inspector'
 
 declare const ctx: Context
 declare const topic: string

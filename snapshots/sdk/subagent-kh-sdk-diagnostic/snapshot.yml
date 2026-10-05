@@ -1,0 +1,8 @@
+version: 1
+scenario: subagent-kh-sdk-diagnostic
+profile: sdk
+composition: sdk-kh-sdk-diagnostic
+recording: live
+header:
+  class: sdk-kh-sdk-diagnostic
+  pin: true

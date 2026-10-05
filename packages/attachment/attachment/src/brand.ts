@@ -1,6 +1,6 @@
-/** Attachment identifier brand. @module @deepseek-ai/dsh-attachment/brand */
+/** Attachment identifier brand. @module @kinetick-labs/kh-attachment/brand */
 
-import type { Branded } from '@deepseek-ai/dsh-brand'
+import type { Branded } from '@kinetick-labs/kh-brand'
 
 /** Opaque content-addressed identifier for one immutable attachment object. */
 export type AttachmentId = Branded<'AttachmentId'>

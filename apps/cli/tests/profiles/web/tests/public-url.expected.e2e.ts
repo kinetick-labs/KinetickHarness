@@ -13,11 +13,11 @@ import { startPrefixProxy } from '../../../../../../apps/web/tests/prefix-proxy.
 import { PROCESS_SHUTDOWN_TIMEOUT_MS } from '../../../../src/process-shutdown.ts'
 
 const repoRoot = fileURLToPath(new URL('../../../../../../', import.meta.url))
-const dshBin = join(repoRoot, 'apps/cli/lib/bin.js')
-const builtArtifactsExist = existsSync(dshBin)
+const khBin = join(repoRoot, 'apps/cli/lib/bin.js')
+const builtArtifactsExist = existsSync(khBin)
 
 /** Browser-facing mount the reference proxy serves and strips. */
-const MOUNT = '/tools/dsh/'
+const MOUNT = '/tools/kh/'
 
 /** One live Web child, as `execa` types it. */
 type WebChild = ReturnType<typeof spawnWeb>
@@ -28,7 +28,7 @@ type StoppedWeb = Awaited<WebChild>
 /** Start one keyless Web process with an outer lifetime deadline. */
 function spawnWeb(root: string, patch: string, interrupt: string, flags: string[]) {
   return execa(process.execPath, [
-    dshBin,
+    khBin,
     '--profile', 'web',
     '--patch', patch,
     '--no-open',
@@ -39,8 +39,8 @@ function spawnWeb(root: string, patch: string, interrupt: string, flags: string[
     env: {
       ...process.env,
       DEEPSEEK_API_KEY: 'keyless-web-public-url-no-call',
-      DSH_AGENTS_HOME: join(root, '.agents'),
-      DSH_HOME: join(root, 'home'),
+      KH_AGENTS_HOME: join(root, '.agents'),
+      KH_HOME: join(root, 'home'),
       NODE_NO_WARNINGS: '1',
       WEB_INTERRUPT_FILE: interrupt,
     },
@@ -61,7 +61,7 @@ interface RunningWeb {
 }
 
 /**
- * Boot the built CLI and wait for its `dsh web:` line and bound listener port.
+ * Boot the built CLI and wait for its `kh web:` line and bound listener port.
  * The marker plugin also polls for the interrupt file and emits `SIGTERM` on
  * the child's own process, because Windows has no deliverable SIGTERM.
  */
@@ -97,7 +97,7 @@ async function bootWeb(root: string, flags: string[]): Promise<RunningWeb> {
   }
   lines.on('line', (line) => {
     if (line.startsWith('public-url-listen-port: ')) port = Number(line.slice('public-url-listen-port: '.length))
-    if (line.startsWith('dsh web: http')) startup = new URL(line.slice('dsh web: '.length))
+    if (line.startsWith('kh web: http')) startup = new URL(line.slice('kh web: '.length))
     announced()
   })
   void child.then((result) => {
@@ -121,7 +121,7 @@ async function bootWeb(root: string, flags: string[]): Promise<RunningWeb> {
 
 /** Boot one Web process in a private root, run `scenario`, then always stop it and remove the root. */
 async function withWeb(flags: string[], scenario: (web: RunningWeb) => Promise<void>): Promise<void> {
-  const root = mkdtempSync(join(tmpdir(), 'dsh-web-public-url-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-web-public-url-'))
   let web: RunningWeb | undefined
   try {
     web = await bootWeb(root, flags)
@@ -189,7 +189,7 @@ async function exchange(
   return { cookie: setCookie.split(';', 1)[0]!, setCookie }
 }
 
-describe.skipIf(!builtArtifactsExist)('dsh Web profile advertised public root', () => {
+describe.skipIf(!builtArtifactsExist)('kh Web profile advertised public root', () => {
   it('serves authenticated requests at the advertised mount and at loopback', async () => {
     await withWeb(['--public-url', `http://gateway.example${MOUNT.slice(0, -1)}`, '--trusted-host', 'gateway.example'], async (web) => {
       expect(web.startup.origin).toBe('http://gateway.example')

@@ -7,7 +7,7 @@ import {
   DESKTOP_PACKAGES_DIR,
   DESKTOP_PACKAGE_SET_FILE,
   desktopCorePackageOverrides,
-  desktopDshPackageSpec,
+  desktopKhPackageSpec,
   parseDesktopCorePackageSet,
   verifyDesktopCoreLockfile,
   verifyDesktopCorePackageSet,
@@ -28,28 +28,28 @@ function record(name: string, file: string, body: Buffer, version = '1.2.3'): De
 
 function packageSetProject(): {
   root: string
-  dsh: DesktopCorePackageRecord
+  kh: DesktopCorePackageRecord
   base: DesktopCorePackageRecord
   host: DesktopCorePackageRecord
 } {
-  const root = mkdtempSync(join(tmpdir(), 'dsh-desktop-package-set-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-desktop-package-set-'))
   roots.push(root)
   const packageDir = join(root, DESKTOP_PACKAGES_DIR)
   mkdirSync(packageDir)
-  const dshBody = Buffer.from('dsh')
+  const khBody = Buffer.from('kh')
   const baseBody = Buffer.from('base')
   const hostBody = Buffer.from('host')
-  const dsh = record('@deepseek-ai/dsh', 'dsh.tgz', dshBody)
-  const base = record('@deepseek-ai/dsh-base', 'dsh-base.tgz', baseBody)
-  const host = record('@deepseek-ai/dsh-desktop-host', 'dsh-desktop-host.tgz', hostBody)
-  writeFileSync(join(packageDir, dsh.file), dshBody)
+  const kh = record('@kinetick-labs/kh', 'kh.tgz', khBody)
+  const base = record('@kinetick-labs/kh-base', 'kh-base.tgz', baseBody)
+  const host = record('@kinetick-labs/kh-desktop-host', 'kh-desktop-host.tgz', hostBody)
+  writeFileSync(join(packageDir, kh.file), khBody)
   writeFileSync(join(packageDir, base.file), baseBody)
   writeFileSync(join(packageDir, host.file), hostBody)
   writeFileSync(join(root, DESKTOP_PACKAGE_SET_FILE), `${JSON.stringify({
     schemaVersion: 1,
-    packages: [dsh, base, host],
+    packages: [kh, base, host],
   })}\n`)
-  return { root, dsh, base, host }
+  return { root, kh, base, host }
 }
 
 afterEach(() => {
@@ -57,45 +57,45 @@ afterEach(() => {
 })
 
 describe('desktop core package set', () => {
-  it('pins the direct dsh dependency and every internal package to local tarballs', () => {
+  it('pins the direct kh dependency and every internal package to local tarballs', () => {
     const { root } = packageSetProject()
     const packageSet = verifyDesktopCorePackageSet(root, '1.2.3')
-    expect(desktopDshPackageSpec(packageSet)).toBe('file:./desktop-packages/dsh.tgz')
+    expect(desktopKhPackageSpec(packageSet)).toBe('file:./desktop-packages/kh.tgz')
     expect(desktopCorePackageOverrides(packageSet)).toEqual({
-      '@deepseek-ai/dsh': 'file:./desktop-packages/dsh.tgz',
-      '@deepseek-ai/dsh-base': 'file:./desktop-packages/dsh-base.tgz',
-      '@deepseek-ai/dsh-desktop-host': 'file:./desktop-packages/dsh-desktop-host.tgz',
+      '@kinetick-labs/kh': 'file:./desktop-packages/kh.tgz',
+      '@kinetick-labs/kh-base': 'file:./desktop-packages/kh-base.tgz',
+      '@kinetick-labs/kh-desktop-host': 'file:./desktop-packages/kh-desktop-host.tgz',
     })
   })
 
   it('rejects version drift, descriptor disorder, corruption, and extra files', () => {
-    const { root, dsh, base, host } = packageSetProject()
+    const { root, kh, base, host } = packageSetProject()
     expect(() => verifyDesktopCorePackageSet(root, '2.0.0')).toThrow(/does not match Desktop/u)
     expect(() => parseDesktopCorePackageSet({
       schemaVersion: 1,
-      packages: [dsh, base, { ...host, version: '2.0.0' }],
-    }, '1.2.3')).toThrow(/dsh-desktop-host@2\.0\.0 does not match Desktop 1\.2\.3/u)
-    expect(() => parseDesktopCorePackageSet({ schemaVersion: 1, packages: [base, dsh, host] }))
+      packages: [kh, base, { ...host, version: '2.0.0' }],
+    }, '1.2.3')).toThrow(/kh-desktop-host@2\.0\.0 does not match Desktop 1\.2\.3/u)
+    expect(() => parseDesktopCorePackageSet({ schemaVersion: 1, packages: [base, kh, host] }))
       .toThrow(/sorted by name/u)
-    writeFileSync(join(root, DESKTOP_PACKAGES_DIR, dsh.file), 'changed')
+    writeFileSync(join(root, DESKTOP_PACKAGES_DIR, kh.file), 'changed')
     expect(() => verifyDesktopCorePackageSet(root, '1.2.3')).toThrow(/integrity check failed/u)
     writeFileSync(join(root, DESKTOP_PACKAGES_DIR, 'extra.tgz'), '')
     expect(() => verifyDesktopCorePackageSet(root, '1.2.3')).toThrow(/does not match its descriptor/u)
   })
 
   it('rejects registry resolutions for names supplied by the local package set', () => {
-    const dsh = record('@deepseek-ai/dsh', 'dsh.tgz', Buffer.from('dsh'))
-    const host = record('@deepseek-ai/dsh-desktop-host', 'host.tgz', Buffer.from('host'))
-    const packageSet = parseDesktopCorePackageSet({ schemaVersion: 1, packages: [dsh, host] })
+    const kh = record('@kinetick-labs/kh', 'kh.tgz', Buffer.from('kh'))
+    const host = record('@kinetick-labs/kh-desktop-host', 'host.tgz', Buffer.from('host'))
+    const packageSet = parseDesktopCorePackageSet({ schemaVersion: 1, packages: [kh, host] })
     expect(() => {
       verifyDesktopCoreLockfile(
-        "packages:\n  '@deepseek-ai/dsh@file:desktop-packages/dsh.tgz':\n    resolution: {}\n",
+        "packages:\n  '@kinetick-labs/kh@file:desktop-packages/kh.tgz':\n    resolution: {}\n",
         packageSet,
       )
     }).not.toThrow()
     expect(() => {
       verifyDesktopCoreLockfile(
-        "packages:\n  '@deepseek-ai/dsh@1.2.3':\n    resolution: {integrity: sha512-registry}\n",
+        "packages:\n  '@kinetick-labs/kh@1.2.3':\n    resolution: {integrity: sha512-registry}\n",
         packageSet,
       )
     }).toThrow(/outside the local package set/u)

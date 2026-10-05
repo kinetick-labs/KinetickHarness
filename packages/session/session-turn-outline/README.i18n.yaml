@@ -5,51 +5,51 @@
 /:
   en: fe16836afda4a161
   zh: f8357b355323eff7
-/deepseek-ai-dsh-session-turn-outline:
+/kinetick-labs-kh-session-turn-outline:
   en: 24d95ecd31ccb9c7
   zh: 7454a859221dee40
-/deepseek-ai-dsh-session-turn-outline/summary:
+/kinetick-labs-kh-session-turn-outline/summary:
   en: 6e52b4d6489aa252
   zh: d4c91b36c0878575
-/deepseek-ai-dsh-session-turn-outline/table-of-contents:
+/kinetick-labs-kh-session-turn-outline/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-session-turn-outline/use-this-package:
+/kinetick-labs-kh-session-turn-outline/use-this-package:
   en: 9d92d2e62ad0d988
   zh: 28f8135f75df3e49
-/deepseek-ai-dsh-session-turn-outline/use-this-package/composition:
+/kinetick-labs-kh-session-turn-outline/use-this-package/composition:
   en: 1ff253c3946b4ebe
   zh: 103f66630a01e5f8
-/deepseek-ai-dsh-session-turn-outline/use-this-package/what-an-entry-means:
+/kinetick-labs-kh-session-turn-outline/use-this-package/what-an-entry-means:
   en: faf6f2af56847bd3
   zh: fdf0e21dccde33d5
-/deepseek-ai-dsh-session-turn-outline/use-this-package/failures-and-recovery:
+/kinetick-labs-kh-session-turn-outline/use-this-package/failures-and-recovery:
   en: cdfa6afebdb1926a
   zh: d762a515be9de75f
-/deepseek-ai-dsh-session-turn-outline/understand-the-implementation:
+/kinetick-labs-kh-session-turn-outline/understand-the-implementation:
   en: 80781d65311976eb
   zh: 81979840fc59851f
-/deepseek-ai-dsh-session-turn-outline/understand-the-implementation/design-concept:
+/kinetick-labs-kh-session-turn-outline/understand-the-implementation/design-concept:
   en: a20da800a1fbe258
   zh: 7123399bb8d80806
-/deepseek-ai-dsh-session-turn-outline/understand-the-implementation/source-map:
+/kinetick-labs-kh-session-turn-outline/understand-the-implementation/source-map:
   en: 819a644c4681b4f8
   zh: 0f02af23ab8f59ea
-/deepseek-ai-dsh-session-turn-outline/understand-the-implementation/fold-rules:
+/kinetick-labs-kh-session-turn-outline/understand-the-implementation/fold-rules:
   en: ac64b54bd3d619a1
   zh: 4f33bdf2693179a6
-/deepseek-ai-dsh-session-turn-outline/further-exploration:
+/kinetick-labs-kh-session-turn-outline/further-exploration:
   en: f84da4139fc6a34d
   zh: caf0625888f1bb52
-/deepseek-ai-dsh-session-turn-outline/model-experience:
+/kinetick-labs-kh-session-turn-outline/model-experience:
   en: 3cef0269156479b3
   zh: 6a34895207d2c583
-/deepseek-ai-dsh-session-turn-outline/model-experience/kv-cache-effect:
+/kinetick-labs-kh-session-turn-outline/model-experience/kv-cache-effect:
   en: 47f982e326fe77fd
   zh: c2241315dc0c89c9
-/deepseek-ai-dsh-session-turn-outline/known-limitations-and-deferred-work:
+/kinetick-labs-kh-session-turn-outline/known-limitations-and-deferred-work:
   en: a304c63504adf171
   zh: 8a76e726962c6fa4
-/deepseek-ai-dsh-session-turn-outline/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-session-turn-outline/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

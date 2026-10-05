@@ -6,8 +6,8 @@ import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it } from 'vitest'
 import type { AddressInfo } from 'node:net'
 import type { IncomingMessage, ServerResponse } from 'node:http'
-import type { AttachmentStore } from '@deepseek-ai/dsh-attachment'
-import type { IndexInjection, WebServer, WebRoute, WebUpgradeRoute } from '@deepseek-ai/dsh-host-webserver'
+import type { AttachmentStore } from '@kinetick-labs/kh-attachment'
+import type { IndexInjection, WebServer, WebRoute, WebUpgradeRoute } from '@kinetick-labs/kh-host-webserver'
 import {
   API_PATH,
   RpcId,
@@ -200,7 +200,7 @@ describe('connection node half', () => {
       const rows: IndexInjection[] = []
       ctx.emit('webserver/index-inject', rows)
       expect(rows).toEqual([{
-        kind: 'global', name: '__DSH_CONNECTION_RECOVERY__', value: {
+        kind: 'global', name: '__KH_CONNECTION_RECOVERY__', value: {
           backoffBaseMs: 500, backoffFactor: 2, backoffMaxMs: 10_000,
           generationReadyWarnMs: 3_000, generationReadyTimeoutMs: 25_000,
         },

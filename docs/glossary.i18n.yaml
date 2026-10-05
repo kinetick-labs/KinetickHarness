@@ -3,11 +3,11 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write docs/glossary.md
 /glossary:
-  en: 9b364904616b2266
-  zh: 934b9d189a4f34a2
+  en: 4558d1124b2cb01f
+  zh: 6f1bfbb56cda9a66
 /glossary/capability-seam:
-  en: 18eea8301b73be7e
-  zh: 50f1adf512543a7e
+  en: 9da01f4cb5713e31
+  zh: b7c89cef842f5fe2
 /glossary/agent-scope:
   en: 893655aaaa6a9db4
   zh: 48b699fd15fa7ba6
@@ -15,8 +15,8 @@
   en: c64d9e91d54c6315
   zh: a2918c9d276af8a1
 /glossary/human-command:
-  en: 38a55fc61b359ace
-  zh: 567cae201b3a1bdf
+  en: 419c4bfac511eb09
+  zh: ea0fbb7622cbc812
 /glossary/loop-hierarchy:
   en: 343a7cb31b8191c2
   zh: 6831415a7fe1726a

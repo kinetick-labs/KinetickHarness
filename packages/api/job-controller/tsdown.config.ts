@@ -1,7 +1,7 @@
 import { clientBundle } from '../../client/tsdown.client.ts'
 
 export default clientBundle(
-  '@deepseek-ai/dsh-api-job-controller',
+  '@kinetick-labs/kh-api-job-controller',
   ['lib/types/index.js'],
   { hostPhase: true },
 )

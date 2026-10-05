@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-experimental-inspector-profile",
+  "name": "@kinetick-labs/kh-experimental-inspector-profile",
   "description": "Optional Web bundle for raw Session logs and Chat node inspection",
   "version": "0.2.1-alpha.1",
   "icon": "./icon.svg",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/experimental/inspector-profile"
   },
   "type": "module",
@@ -32,14 +32,14 @@
     "lib/types/**/*.d.ts"
   ],
   "license": "MIT",
-  "dsh": {
+  "kh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-experimental-inspector": "workspace:*",
-    "@deepseek-ai/dsh-experimental-session-inspector": "workspace:*"
+    "@kinetick-labs/kh-experimental-inspector": "workspace:*",
+    "@kinetick-labs/kh-experimental-session-inspector": "workspace:*"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~"

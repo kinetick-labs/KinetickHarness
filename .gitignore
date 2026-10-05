@@ -38,7 +38,7 @@ python/**/.pytest_cache/
 packages/**/__pycache__/
 apps/web/dist/
 .artifacts/
-.dsh-build/
+.kh-build/
 .playwright-mcp/
 .orig
 .worktrees/

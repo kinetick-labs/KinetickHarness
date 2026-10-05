@@ -1,5 +1,5 @@
 /**
- * Enforce dsh profiles as the only supported Node application launcher.
+ * Enforce kh profiles as the only supported Node application launcher.
  * Vendor CLIs, build tools, and test tools are explicit classifications
  * rather than implicit holes.
  */
@@ -19,19 +19,19 @@ interface RootManifest {
 }
 
 interface LauncherPolicy {
-  readonly kind: 'dsh-direct' | 'dsh-wrapper'
+  readonly kind: 'kh-direct' | 'kh-wrapper'
   readonly wrapper?: string
 }
 
 /** Public product launcher plus the build-only WebWorker packer. */
 const MANIFEST_BIN_ALLOWLIST = new Map<string, ManifestBin>([
-  ['apps/cli/package.json', { dsh: 'lib/bin.js' }],
-  ['packages/experimental/webworker-packer/package.json', { 'dsh-pack-vfs-image': './bin.js' }],
+  ['apps/cli/package.json', { kh: 'lib/bin.js' }],
+  ['packages/experimental/webworker-packer/package.json', { 'kh-pack-vfs-image': './bin.js' }],
 ])
 
 /** Every JavaScript executable in an application or packaging workspace has one explicit role. */
 const EXECUTABLE_SOURCE_ALLOWLIST = new Map<string, string>([
-  ['apps/cli/src/bin.ts', 'supported dsh application launcher'],
+  ['apps/cli/src/bin.ts', 'supported kh application launcher'],
   ['apps/desktop/scripts/logged-notarytool.mjs', 'build-only notarization logging wrapper'],
   ['packages/context/time-context/tests/fixtures/driver.ts', 'test-only subprocess driver'],
   ['packages/experimental/webworker-packer/bin.js', 'build-only wrapper'],
@@ -41,22 +41,22 @@ const EXECUTABLE_SOURCE_ALLOWLIST = new Map<string, string>([
   ['packages/subagent/subagent-acp/tests/fixtures/loader/driver.ts', 'test-only subprocess driver'],
   ['packages/subagent/subagent-claude-code/tests/fixtures/loader/driver.ts', 'test-only subprocess driver'],
   ['packages/subagent/subagent-codex/tests/fixtures/loader/driver.ts', 'test-only subprocess driver'],
-  ['packages/subagent/subagent-dsh-sdk/tests/fixtures/loader/driver.ts', 'test-only subprocess driver'],
+  ['packages/subagent/subagent-kh-sdk/tests/fixtures/loader/driver.ts', 'test-only subprocess driver'],
   ['packages/test-support/loader-smoke/tests/fixtures/headless-driver.ts', 'test-only subprocess driver'],
   ['packages/test-support/llm-mock-server/src/bin.ts', 'test-only model server'],
   ['python/sdk-runtime/runtime-bootstrap.mjs', 'private packaging-only runtime dispatcher'],
 ])
 
 /**
- * Root scripts that start an application must visibly select dsh: every `demo:*`
+ * Root scripts that start an application must visibly select kh: every `demo:*`
  * script needs a row here, and the Web start and development scripts are pinned
  * by name.
  */
 const ROOT_LAUNCHER_POLICIES = new Map<string, LauncherPolicy>([
-  ['demo:ptc', { kind: 'dsh-wrapper', wrapper: 'scripts/demo-ptc.mjs' }],
-  ['demo:inspector', { kind: 'dsh-direct' }],
-  ['start:web', { kind: 'dsh-direct' }],
-  ['dev:web', { kind: 'dsh-wrapper', wrapper: 'scripts/dev-web.ts' }],
+  ['demo:ptc', { kind: 'kh-wrapper', wrapper: 'scripts/demo-ptc.mjs' }],
+  ['demo:inspector', { kind: 'kh-direct' }],
+  ['start:web', { kind: 'kh-direct' }],
+  ['dev:web', { kind: 'kh-wrapper', wrapper: 'scripts/dev-web.ts' }],
 ])
 
 const SOURCE_PATTERNS = [
@@ -105,7 +105,7 @@ function manifestBinViolations(root: string): string[] {
     if (manifest.bin === undefined) continue
     const expected = MANIFEST_BIN_ALLOWLIST.get(path)
     if (expected === undefined) {
-      failures.push(`${path}: package bin bypasses the dsh launcher; applications use apps/cli profiles`)
+      failures.push(`${path}: package bin bypasses the kh launcher; applications use apps/cli profiles`)
       continue
     }
     if (normalizedBin(manifest.bin) !== normalizedBin(expected)) {
@@ -128,7 +128,7 @@ function executableSourceViolations(root: string): string[] {
   return failures
 }
 
-function referencesDshCli(source: string): boolean {
+function referencesKhCli(source: string): boolean {
   return source.includes('apps/cli/src/bin.ts')
 }
 
@@ -145,13 +145,13 @@ function rootLauncherViolations(root: string): string[] {
     const policy = ROOT_LAUNCHER_POLICIES.get(name)
     if (policy === undefined) {
       if (name.startsWith('demo:')) {
-        failures.push(`package.json scripts.${name}: demo launcher has no explicit dsh or in-process classification`)
+        failures.push(`package.json scripts.${name}: demo launcher has no explicit kh or in-process classification`)
       }
       continue
     }
     const command = typeof commandValue === 'string' ? commandValue : ''
-    if (policy.kind === 'dsh-direct') {
-      if (!referencesDshCli(command)) failures.push(`package.json scripts.${name}: application launcher script must launch apps/cli/src/bin.ts`)
+    if (policy.kind === 'kh-direct') {
+      if (!referencesKhCli(command)) failures.push(`package.json scripts.${name}: application launcher script must launch apps/cli/src/bin.ts`)
       if (referencesPackageEntry(command)) failures.push(`package.json scripts.${name}: application launcher script must not launch a package entry directly`)
       continue
     }
@@ -166,7 +166,7 @@ function rootLauncherViolations(root: string): string[] {
       continue
     }
     const source = readFileSync(wrapperPath, 'utf8')
-    if (!referencesDshCli(source)) failures.push(`${wrapper}: application launcher wrapper must launch apps/cli/src/bin.ts`)
+    if (!referencesKhCli(source)) failures.push(`${wrapper}: application launcher wrapper must launch apps/cli/src/bin.ts`)
     if (referencesPackageEntry(source)) failures.push(`${wrapper}: application launcher wrapper must not launch a package entry directly`)
   }
   return failures
@@ -197,6 +197,6 @@ if (process.argv[1] !== undefined && import.meta.url === pathToFileURL(resolve(p
     for (const failure of failures) console.error(`  ${failure}`)
     process.exitCode = 1
   } else {
-    console.log('verify-application-entrypoints: dsh is the only supported Node application launcher.')
+    console.log('verify-application-entrypoints: kh is the only supported Node application launcher.')
   }
 }

@@ -1,9 +1,9 @@
 /** API-key authentication and discovery for the official DeepSeek route. */
 import type { Context } from '@deepseek-ai/cordis'
-import { assertUsableApiKey, LlmError } from '@deepseek-ai/dsh-llm'
+import { assertUsableApiKey, LlmError } from '@kinetick-labs/kh-llm'
 import type {} from '@deepseek-ai/cordis-plugin-loader'
-import { launchEnvironmentOf } from '@deepseek-ai/dsh-launch-environment'
-import { registerDeepSeekProvider, catalogModelInfo } from '@deepseek-ai/dsh-llm-deepseek'
+import { launchEnvironmentOf } from '@kinetick-labs/kh-launch-environment'
+import { registerDeepSeekProvider, catalogModelInfo } from '@kinetick-labs/kh-llm-deepseek'
 import { Config, plainOptions, resolveAdapterOptions } from './config.ts'
 import type { ResolvedDeepSeekOptions } from './config.ts'
 

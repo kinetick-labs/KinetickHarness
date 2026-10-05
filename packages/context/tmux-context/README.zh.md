@@ -3,13 +3,13 @@ description: "可选的按轮次 tmux 位置上下文，供启用或调优 agent
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tmux-context
+# @kinetick-labs/kh-tmux-context
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-tmux-context` 让模型识别其 agent 进程所在的 tmux 会话、window、pane 和 pane 树布局。它仅在位置发生变化时，于每轮的第一个步骤追加一条持久、带来源的读数。若终端只继承了 tmux 环境变量，却并未在所指名的 pane 中运行，则不添加任何内容；查询失败同样不添加内容，也不会使该轮失败。本包需主动启用，且不包含在随附的 Web 或无头 profile 中。
+`kh-tmux-context` 让模型识别其 agent 进程所在的 tmux 会话、window、pane 和 pane 树布局。它仅在位置发生变化时，于每轮的第一个步骤追加一条持久、带来源的读数。若终端只继承了 tmux 环境变量，却并未在所指名的 pane 中运行，则不添加任何内容；查询失败同样不添加内容，也不会使该轮失败。本包需主动启用，且不包含在随附的 Web 或无头 profile 中。
 
 ## 目录
 
@@ -36,7 +36,7 @@ kind: "package-reference"
 最小挂载无需任何配置。`refreshIntervalMs` 为正值时，会额外抑制距最近一次注入不足该毫秒数的注入；省略或设为 `0` 时，只要 tmux 状态自上次注入以来发生变化就注入。
 
 ```yaml
-- name: '@deepseek-ai/dsh-tmux-context'
+- name: '@kinetick-labs/kh-tmux-context'
   config:
     refreshIntervalMs: 60000
 ```

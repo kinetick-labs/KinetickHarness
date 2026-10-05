@@ -1,7 +1,7 @@
 /** Workspace archive and directory UI capability. */
 
 import { Service, type Context } from '@deepseek-ai/cordis'
-import type { ClientRemote, DirectoryListing, RemoteFailure } from '@deepseek-ai/dsh-api-remotes/client'
+import type { ClientRemote, DirectoryListing, RemoteFailure } from '@kinetick-labs/kh-api-remotes/client'
 import type {
   ISessions,
   SessionCreateError,
@@ -9,15 +9,15 @@ import type {
   SessionReference,
   SessionTarget,
   SessionListState,
-} from '@deepseek-ai/dsh-api-session-controller/client'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { SubagentAddress } from '@deepseek-ai/dsh-subagent/client'
+} from '@kinetick-labs/kh-api-session-controller/client'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { SubagentAddress } from '@kinetick-labs/kh-subagent/client'
 import type {
   IWorkspaces, WorkspaceId, WorkspaceSnapshot, WorkspaceView,
-} from '@deepseek-ai/dsh-api-workspace-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
-import type { DraftInitializationOptions } from '@deepseek-ai/dsh-client-ui-conversation/client'
+} from '@kinetick-labs/kh-api-workspace-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type {} from '@kinetick-labs/kh-client-ui-layout/client'
+import type { DraftInitializationOptions } from '@kinetick-labs/kh-client-ui-conversation/client'
 import type { RowToast } from './contract/slots.ts'
 import { pinOrderAccounts, pinOrderSource } from './pin-order.ts'
 import type { WorkspaceViewStoreActions } from './stores.ts'
@@ -134,7 +134,7 @@ class UiWorkspaceService extends Service implements UiWorkspace {
   private readonly connecting = new Map<WorkspaceId, Promise<SessionId>>()
   private readonly lifetime = new AbortController()
   private readonly selection = createSnapshotStore<MainSelection>(
-    {}, { persist: { name: 'dsh.sessions.current' } },
+    {}, { persist: { name: 'kh.sessions.current' } },
   )
   private mainReference: SessionReference | undefined
 

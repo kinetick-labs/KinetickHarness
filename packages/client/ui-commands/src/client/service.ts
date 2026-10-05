@@ -16,18 +16,18 @@ import { Service } from '@deepseek-ai/cordis'
 import type { Context } from '@deepseek-ai/cordis'
 // Type-only: pulls the ctx.remote merge and the forwarded-event key face
 // (`commands/change` rides the allowlist) into this program.
-import type {} from '@deepseek-ai/dsh-api-remotes/client'
-import type { CommandResult } from '@deepseek-ai/dsh-commands/types'
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type { CommandResult } from '@kinetick-labs/kh-commands/types'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
-import type { ISessions, SessionBinding } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { WeakMapWithValues } from '@deepseek-ai/dsh-util-values'
-import type { TranslateNS } from '@deepseek-ai/dsh-client-locale/client'
-import { rankByName } from '@deepseek-ai/dsh-client-ui-primitives'
+import type { ISessions, SessionBinding } from '@kinetick-labs/kh-api-session-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { WeakMapWithValues } from '@kinetick-labs/kh-util-values'
+import type { TranslateNS } from '@kinetick-labs/kh-client-locale/client'
+import { rankByName } from '@kinetick-labs/kh-client-ui-primitives'
 import type {
   CandidateRequest, ClientSessionContext, CommandClaim, PickOutcome, InputTriggerCandidate, InputTriggerPick,
   SubmitAttachment, SubmitEnvelope, SubmitOutcome,
-} from '@deepseek-ai/dsh-client-ui-input-trigger/client'
+} from '@kinetick-labs/kh-client-ui-input-trigger/client'
 import type { CommandContribution, CommandDecoration, CommandUiContract } from './contract.ts'
 import type { CommandDescriptor } from './directory.ts'
 import { CommandDirectory } from './directory.ts'
@@ -36,7 +36,7 @@ import { builtinRowFace, sectionRows } from './presentation.ts'
 import { claimToken } from './resolution.ts'
 import type { TokenSegment } from './popup.ts'
 
-declare module '@deepseek-ai/dsh-api-session-controller/client' {
+declare module '@kinetick-labs/kh-api-session-controller/client' {
   interface SessionReferenceSourceMap {
     /** A command-catalog fetch waiting for initial history and its RPC result. */
     commandCatalog: unknown

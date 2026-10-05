@@ -1,8 +1,8 @@
 /** Host registry and HTTP adapter for generic Connection RPC channels. */
 
 import { Context, Service } from '@deepseek-ai/cordis'
-import type { WebRoute } from '@deepseek-ai/dsh-host-webserver'
-import type { PeerScope } from '@deepseek-ai/dsh-typert-protocol'
+import type { WebRoute } from '@kinetick-labs/kh-host-webserver'
+import type { PeerScope } from '@kinetick-labs/kh-typert-protocol'
 import {
   RpcId,
   type ClientRequest,

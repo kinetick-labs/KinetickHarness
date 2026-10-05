@@ -1,17 +1,17 @@
-- name: '@deepseek-ai/dsh-session'
-- name: '@deepseek-ai/dsh-system-prompt'
-- name: '@deepseek-ai/dsh-tools'
-- name: '@deepseek-ai/dsh-fs-local'
-- name: '@deepseek-ai/dsh-tool-fs'
-- name: '@deepseek-ai/dsh-session-query-sqlite'
+- name: '@kinetick-labs/kh-session'
+- name: '@kinetick-labs/kh-system-prompt'
+- name: '@kinetick-labs/kh-tools'
+- name: '@kinetick-labs/kh-fs-local'
+- name: '@kinetick-labs/kh-tool-fs'
+- name: '@kinetick-labs/kh-session-query-sqlite'
   config:
     path: ':memory:'
     openAt: never
-- name: '@deepseek-ai/dsh-session-reference'
+- name: '@kinetick-labs/kh-session-reference'
   config:
     maxReferenceBytes: 360
 - name: './source-session.ts'
-- name: '@deepseek-ai/dsh-spill-local'
+- name: '@kinetick-labs/kh-spill-local'
   config:
     root: '{{spillRoot}}'
     cleanupPeriodDays: 0

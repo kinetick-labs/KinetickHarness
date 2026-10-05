@@ -1,22 +1,22 @@
 // @vitest-environment jsdom
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 /**
  * Browser-half lifecycle over the real SlotRegistry: the dictionary,
  * header-slot, and document-preview path registrations with fiber teardown
  * proving removal (HMR safety) and the injected controller faces.
  */
 
-import type { PropsRuntime, SlotComponent } from '@deepseek-ai/dsh-client-ui-slots'
-import type { ShortcutCommand } from '@deepseek-ai/dsh-client-shortcuts/client'
-import type { SessionListState } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
+import type { PropsRuntime, SlotComponent } from '@kinetick-labs/kh-client-ui-slots'
+import type { ShortcutCommand } from '@kinetick-labs/kh-client-shortcuts/client'
+import type { SessionListState } from '@kinetick-labs/kh-api-session-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { Context } from '@deepseek-ai/cordis'
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import { LayoutController, type MainPanelId } from '@deepseek-ai/dsh-client-ui-layout/client'
-import { createLayoutStore } from '@deepseek-ai/dsh-client-ui-layout/src/client/stores.ts'
-import type {} from '@deepseek-ai/dsh-client-ui-conversation/client'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import { LayoutController, type MainPanelId } from '@kinetick-labs/kh-client-ui-layout/client'
+import { createLayoutStore } from '@kinetick-labs/kh-client-ui-layout/src/client/stores.ts'
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import { apply, inject, type OpenInAppActionInjected, type OpenPathInjected } from '../src/client/index.ts'
 import { apply as nodeApply } from '../src/index.ts'
 import { OpenInAppAction } from '../src/client/OpenInAppAction.tsx'

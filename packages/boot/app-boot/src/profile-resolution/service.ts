@@ -4,7 +4,7 @@ import { existsSync, readFileSync } from 'node:fs'
 import { createRequire } from 'node:module'
 import { join } from 'node:path'
 import { Service, type Context } from '@deepseek-ai/cordis'
-import type { PluginLocalizedMeta } from '@deepseek-ai/dsh-package-manifest'
+import type { PluginLocalizedMeta } from '@kinetick-labs/kh-package-manifest'
 import {
   barePackageName,
   installRuntimeInterception,

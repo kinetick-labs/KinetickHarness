@@ -1,0 +1,15 @@
+# Keyless parent-model overlay for the KH SDK diagnostic snapshot.
+
+- id: llm-deepseek
+  name: '@kinetick-labs/kh-llm-deepseek-api-key'
+  disabled: true
+
+- insert:
+    - id: llm-replay
+      name: '@kinetick-labs/kh-llm-replay'
+      config:
+        providers:
+          - id: deepseek-official
+            name: DeepSeek
+            models:
+              - id: deepseek-v4-flash

@@ -4,7 +4,7 @@ vi.mock('../src/web-document.ts', () => ({ authenticateWebHost: async () => 'tes
 import { afterEach, expect, it, vi } from 'vitest'
 import type { BrowserWindowConstructorOptions } from 'electron'
 import type { DesktopLocale } from '../src/locale.ts'
-import type { AccountView } from '@deepseek-ai/dsh-deepseek-account/types'
+import type { AccountView } from '@kinetick-labs/kh-deepseek-account/types'
 import type { WelcomeOperations } from '../src/welcome-api.ts'
 import { DESKTOP_IPC } from '../src/ipc.ts'
 
@@ -69,7 +69,7 @@ vi.mock('electron', () => ({
   BrowserWindow: class {
     constructor(options: BrowserWindowConstructorOptions) { state.windowOptions = options }
     private ready: (() => void) | undefined
-    webContents = { mainFrame: { url: 'dsh-app://app/' }, setWindowOpenHandler: vi.fn(),
+    webContents = { mainFrame: { url: 'kh-app://app/' }, setWindowOpenHandler: vi.fn(),
       on: vi.fn(), once: vi.fn(), send: vi.fn(), openDevTools: state.openDevTools }
     static getAllWindows() { return [] }
     once(name: string, callback: () => void) { if (name === 'ready-to-show') this.ready = callback; return this }
@@ -179,23 +179,23 @@ it.each([false, true])('starts welcome onboarding without carrying update focus 
   state.accountState.mockResolvedValue({ status: 'signed-out', attempt: null, links: { usageUrl: '', topUpUrl: '' } })
   if (updated) vi.stubGlobal('process', { ...process, platform: 'win32', argv: ['desktop', '--updated'] })
   vi.useFakeTimers()
-  vi.stubEnv('DSH_CLIENT_VERSION', '1.2.3')
-  vi.stubEnv('DSH_DESKTOP_DEV_PROJECT_DIR', '/development-profile')
-  vi.stubEnv('DSH_DESKTOP_NODE_BINARY', '/runtime/node')
-  vi.stubEnv('DSH_DESKTOP_PNPM_ENTRY', '/runtime/pnpm')
-  vi.stubEnv('DSH_DESKTOP_DSH_DIR', '/runtime/dsh')
-  vi.stubEnv('DSH_DESKTOP_PRIMARY_RUNTIME_DIR', '/runtime/primary-runtime')
-  vi.stubEnv('DSH_DESKTOP_HOST_INSPECT_PORT', undefined)
-  vi.stubEnv('DSH_DESKTOP_OPEN_DEVTOOLS', '0')
-  vi.stubEnv('DSH_DESKTOP_MANDATORY_UPDATE_CONFIG', undefined)
-  vi.stubEnv('DSH_DESKTOP_UPDATE_JOURNAL_DIR', undefined)
+  vi.stubEnv('KH_CLIENT_VERSION', '1.2.3')
+  vi.stubEnv('KH_DESKTOP_DEV_PROJECT_DIR', '/development-profile')
+  vi.stubEnv('KH_DESKTOP_NODE_BINARY', '/runtime/node')
+  vi.stubEnv('KH_DESKTOP_PNPM_ENTRY', '/runtime/pnpm')
+  vi.stubEnv('KH_DESKTOP_KH_DIR', '/runtime/kh')
+  vi.stubEnv('KH_DESKTOP_PRIMARY_RUNTIME_DIR', '/runtime/primary-runtime')
+  vi.stubEnv('KH_DESKTOP_HOST_INSPECT_PORT', undefined)
+  vi.stubEnv('KH_DESKTOP_OPEN_DEVTOOLS', '0')
+  vi.stubEnv('KH_DESKTOP_MANDATORY_UPDATE_CONFIG', undefined)
+  vi.stubEnv('KH_DESKTOP_UPDATE_JOURNAL_DIR', undefined)
   const reading = Promise.withResolvers<undefined>()
   const loading = Promise.withResolvers<undefined>()
   state.beforeRead.mockReturnValueOnce(reading.promise)
   state.beforeWelcome.mockReturnValueOnce(loading.promise)
   const activate = () => {
     state.appListeners.get('second-instance')!()
-    state.appListeners.get('open-url')!({ preventDefault: vi.fn() }, 'dsh://open')
+    state.appListeners.get('open-url')!({ preventDefault: vi.fn() }, 'kh://open')
   }
   await import('../src/main.ts')
   await vi.waitFor(() => { expect(state.beforeRead).toHaveBeenCalledOnce() })
@@ -212,7 +212,7 @@ it.each([false, true])('starts welcome onboarding without carrying update focus 
   }
   await vi.waitFor(() => { expect(state.operations).toBeDefined() })
   expect(state.startHost).toHaveBeenCalledOnce()
-  expect(state.loadWorkspace).toHaveBeenCalledExactlyOnceWith('dsh-app://app/')
+  expect(state.loadWorkspace).toHaveBeenCalledExactlyOnceWith('kh-app://app/')
   expect(state.showWorkspace).not.toHaveBeenCalled()
   state.loadWorkspace.mockClear()
   expect(state.welcomeLocale).toMatchObject({ id: 'zh-CN' })
@@ -286,14 +286,14 @@ it.each([false, true])('starts welcome onboarding without carrying update focus 
   expect(await state.operations!.takeNotice()).toBeUndefined()
   state.showWorkspace.mockClear()
   state.focusWorkspace.mockClear()
-  vi.stubEnv('DSH_DESKTOP_OPEN_DEVTOOLS', '1')
+  vi.stubEnv('KH_DESKTOP_OPEN_DEVTOOLS', '1')
   state.accountListener!({ ...account, status: 'credential-stored', attempt: { id: attemptId, phase: 'succeeded' } })
   await vi.waitFor(() => { expect(state.showInactiveWorkspace).toHaveBeenCalledOnce() })
   expect(state.showWorkspace).not.toHaveBeenCalled()
   expect(state.focusWorkspace).not.toHaveBeenCalled()
   expect(state.moveTopWorkspace).not.toHaveBeenCalled()
   expect(state.openDevTools).not.toHaveBeenCalled()
-  state.appListeners.get('open-url')!({ preventDefault: vi.fn() }, 'dsh://open')
+  state.appListeners.get('open-url')!({ preventDefault: vi.fn() }, 'kh://open')
   expect(state.showWorkspace).toHaveBeenCalledOnce()
   expect(state.focusWorkspace).toHaveBeenCalledOnce()
 

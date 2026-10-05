@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-fs-local",
-  "description": "Local-filesystem implementation of the DeepSeek Harness filesystem seam (ctx.fs)",
+  "name": "@kinetick-labs/kh-fs-local",
+  "description": "Local-filesystem implementation of the KinetickHarness filesystem seam (ctx.fs)",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/fs/fs-local"
   },
   "type": "module",
@@ -27,7 +27,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "dependencies": {
@@ -36,8 +36,8 @@
     "@deepseek-ai/schemastery": "workspace:~"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   }
 }

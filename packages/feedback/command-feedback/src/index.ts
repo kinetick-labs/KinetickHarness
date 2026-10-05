@@ -5,14 +5,14 @@
  * authoritative log-only event and does not start model work. The append is
  * eager but unflushed, so acknowledgement reports that the entry is logged,
  * not that it reached disk.
- * @module @deepseek-ai/dsh-command-feedback
+ * @module @kinetick-labs/kh-command-feedback
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import { CommandDefinitionId } from '@deepseek-ai/dsh-commands/brand'
-import type { CommandInvocation, CommandResult } from '@deepseek-ai/dsh-commands'
-import type { Session } from '@deepseek-ai/dsh-session'
-import { TypertRemoteService, Remote } from '@deepseek-ai/dsh-typert-protocol'
+import { CommandDefinitionId } from '@kinetick-labs/kh-commands/brand'
+import type { CommandInvocation, CommandResult } from '@kinetick-labs/kh-commands'
+import type { Session } from '@kinetick-labs/kh-session'
+import { TypertRemoteService, Remote } from '@kinetick-labs/kh-typert-protocol'
 import type {
   FeedbackCategory,
   FeedbackRecord,
@@ -116,7 +116,7 @@ export class SessionFeedbackService extends TypertRemoteService {
 export function apply(ctx: Context): void {
   ctx.plugin(SessionFeedbackService)
   ctx.commands.register({
-    definitionId: CommandDefinitionId('@deepseek-ai/dsh-command-feedback'),
+    definitionId: CommandDefinitionId('@kinetick-labs/kh-command-feedback'),
     name: 'feedback',
     description: 'Record feedback about this session',
     input: { hint: '<text>' },

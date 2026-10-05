@@ -4,9 +4,9 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import type { Context } from '@deepseek-ai/cordis'
-import { ToolCallId, createAssistantMessage, createToolResultMessage } from '@deepseek-ai/dsh-llm'
-import type { Session } from '@deepseek-ai/dsh-session'
-import type {} from '@deepseek-ai/dsh-tools'
+import { ToolCallId, createAssistantMessage, createToolResultMessage } from '@kinetick-labs/kh-llm'
+import type { Session } from '@kinetick-labs/kh-session'
+import type {} from '@kinetick-labs/kh-tools'
 import type { WorkspaceChangesSummary } from '../src/types.ts'
 
 let callNumber = 0

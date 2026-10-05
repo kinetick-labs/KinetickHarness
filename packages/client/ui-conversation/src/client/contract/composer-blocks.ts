@@ -1,5 +1,5 @@
-import type { SnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
+import type { SnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
 
 /** Why one session's composer is inert. */
 export interface ComposerBlock {

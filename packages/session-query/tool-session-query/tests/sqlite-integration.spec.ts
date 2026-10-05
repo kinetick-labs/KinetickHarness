@@ -3,21 +3,21 @@ import { Context } from '@deepseek-ai/cordis'
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { createUserMessage, ToolCallId  } from '@deepseek-ai/dsh-llm'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { createUserMessage, ToolCallId  } from '@kinetick-labs/kh-llm'
 import SessionStore, {
   SESSION_FORMAT_VERSION,
   SessionId,
   SessionSeq,
   type Session,
-} from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { turnBoundaryProjectionDefinition } from '@deepseek-ai/dsh-agent-loop'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import SqliteSessionQueryEngine from '@deepseek-ai/dsh-session-query-sqlite'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import * as ToolSessionQuery from '@deepseek-ai/dsh-tool-session-query'
+} from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { turnBoundaryProjectionDefinition } from '@kinetick-labs/kh-agent-loop'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import SqliteSessionQueryEngine from '@kinetick-labs/kh-session-query-sqlite'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import * as ToolSessionQuery from '@kinetick-labs/kh-tool-session-query'
 
 const temporaryDirectories: string[] = []
 const contexts: Context[] = []
@@ -39,7 +39,7 @@ function registerTurnBoundary(ctx: Context): void {
 
 describe('tool-session-query with the real SQLite provider', () => {
   it('searches live prior-step history and a persisted same-workspace log', { timeout: 20_000 }, async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-tool-session-query-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-tool-session-query-'))
     temporaryDirectories.push(root)
     const ctx = new Context()
     contexts.push(ctx)
@@ -112,7 +112,7 @@ describe('tool-session-query with the real SQLite provider', () => {
   })
 
   it('passes finite fractional epoch-millisecond bounds through SQLite comparisons', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-tool-session-query-fractional-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-tool-session-query-fractional-'))
     temporaryDirectories.push(root)
     const ctx = new Context()
     contexts.push(ctx)

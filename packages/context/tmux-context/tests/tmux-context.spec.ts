@@ -1,14 +1,14 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import AgentRegistry, { agentEvents, type Agent } from '@deepseek-ai/dsh-agent'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import { ShellExecutor } from '@deepseek-ai/dsh-shell'
-import type { ShellExecRequest, ShellExecSpec, ShellExecution, ShellRunResult } from '@deepseek-ai/dsh-shell'
-import * as tmuxContext from '@deepseek-ai/dsh-tmux-context'
-import type { Config } from '@deepseek-ai/dsh-tmux-context'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import AgentRegistry, { agentEvents, type Agent } from '@kinetick-labs/kh-agent'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import { ShellExecutor } from '@kinetick-labs/kh-shell'
+import type { ShellExecRequest, ShellExecSpec, ShellExecution, ShellRunResult } from '@kinetick-labs/kh-shell'
+import * as tmuxContext from '@kinetick-labs/kh-tmux-context'
+import type { Config } from '@kinetick-labs/kh-tmux-context'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
 
 /** Empty offset readers for fakes that never produce output. */
 const silentReader = { readFrom: (fromByte: number) => ({ text: '', nextOffset: fromByte, lossy: false }) }

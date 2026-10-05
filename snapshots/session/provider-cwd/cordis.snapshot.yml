@@ -2,19 +2,19 @@
 # script comes from the scenario's committed session JSONL.
 
 - id: llm-deepseek
-  name: '@deepseek-ai/dsh-llm-deepseek-api-key'
+  name: '@kinetick-labs/kh-llm-deepseek-api-key'
   disabled: true
 - id: session-title-llm
   disabled: true
 
 - id: session-persistence-jsonl
-  name: '@deepseek-ai/dsh-session-persistence-jsonl'
+  name: '@kinetick-labs/kh-session-persistence-jsonl'
   config:
-    root: !!js dshHomePath('sessions')
+    root: !!js khHomePath('sessions')
     compression: none
 
 - id: sandbox
-  name: '@deepseek-ai/dsh-sandbox-local'
+  name: '@kinetick-labs/kh-sandbox-local'
   config:
     runnerCommand:
       - bash
@@ -26,7 +26,7 @@
 
 - insert:
     - id: llm-replay
-      name: '@deepseek-ai/dsh-llm-replay'
+      name: '@kinetick-labs/kh-llm-replay'
       config:
         providers:
           - id: deepseek-official
@@ -48,4 +48,4 @@
     - id: provider-cwd-fs
       name: '../../../packages/bundle/headless/tests/fixtures/provider-cwd.ts'
       config:
-        root: !!js process.env.DSH_SNAPSHOT_PROVIDER_CWD
+        root: !!js process.env.KH_SNAPSHOT_PROVIDER_CWD

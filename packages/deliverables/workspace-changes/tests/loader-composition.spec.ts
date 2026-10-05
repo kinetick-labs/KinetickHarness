@@ -11,9 +11,9 @@ import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
-import * as WorkspaceChangesPlugin from '@deepseek-ai/dsh-workspace-changes'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
+import * as WorkspaceChangesPlugin from '@kinetick-labs/kh-workspace-changes'
 import { changes, endTurn, git, startTurn, toolCall } from './support.ts'
 
 let root: string | undefined
@@ -28,12 +28,12 @@ afterEach(async () => {
 
 describe('real Loader composition', () => {
   it('loads the shipped rows and records a turn’s changes', async () => {
-    root = await mkdtemp(join(tmpdir(), 'dsh-workspace-changes-loader-'))
+    root = await mkdtemp(join(tmpdir(), 'kh-workspace-changes-loader-'))
     const cwd = join(root, 'ws')
     await writeFile(join(root, 'cordis.yml'), [
-      "- name: '@deepseek-ai/dsh-session'",
-      "- name: '@deepseek-ai/dsh-subprocess-local'",
-      "- name: '@deepseek-ai/dsh-workspace-changes'",
+      "- name: '@kinetick-labs/kh-session'",
+      "- name: '@kinetick-labs/kh-subprocess-local'",
+      "- name: '@kinetick-labs/kh-workspace-changes'",
       '',
     ].join('\n'))
     context = new Context()
@@ -41,9 +41,9 @@ describe('real Loader composition', () => {
     await context.plugin(Loader)
     context.loader.builtins.include = Include
     const modules = new Map<string, unknown>([
-      ['@deepseek-ai/dsh-session', SessionStore],
-      ['@deepseek-ai/dsh-subprocess-local', LocalSubprocessRuntime],
-      ['@deepseek-ai/dsh-workspace-changes', WorkspaceChangesPlugin],
+      ['@kinetick-labs/kh-session', SessionStore],
+      ['@kinetick-labs/kh-subprocess-local', LocalSubprocessRuntime],
+      ['@kinetick-labs/kh-workspace-changes', WorkspaceChangesPlugin],
     ])
     context.loader.internal = {
       version: 'v2',

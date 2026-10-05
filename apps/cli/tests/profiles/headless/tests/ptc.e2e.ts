@@ -3,32 +3,32 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import LlmRuntime, { createUserMessage, ToolCallId, HarnessError  } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { RUN_CODE_NAME, defineTool } from '@deepseek-ai/dsh-tools'
-import type { ToolExecutionResult } from '@deepseek-ai/dsh-tools'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
+import LlmRuntime, { createUserMessage, ToolCallId, HarnessError  } from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { RUN_CODE_NAME, defineTool } from '@kinetick-labs/kh-tools'
+import type { ToolExecutionResult } from '@kinetick-labs/kh-tools'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
 
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { LocalBashExecutor } from '@deepseek-ai/dsh-bash-local'
-import * as BashEnvPlugin from '@deepseek-ai/dsh-shell-env'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
-import * as ToolBash from '@deepseek-ai/dsh-tool-bash'
-import * as LlmDeepSeek from '@deepseek-ai/dsh-llm-deepseek-api-key'
-import NodeRuntime from '@deepseek-ai/dsh-ptc-runtime-node'
-import Sandbox from '@deepseek-ai/dsh-sandbox-local'
-import SandboxPolicy from '@deepseek-ai/dsh-sandbox-policy'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import * as ToolFs from '@deepseek-ai/dsh-tool-fs'
-import * as AgentInstructions from '@deepseek-ai/dsh-agent-instructions'
-import LocalJobRegistry from '@deepseek-ai/dsh-jobs-local'
-import * as ToolJobs from '@deepseek-ai/dsh-tool-jobs'
-import CordisHostRunner from '@deepseek-ai/dsh-cordis-host-runner'
-import * as ToolCordis from '@deepseek-ai/dsh-tool-cordis'
-import * as CordisInspectProviders from '@deepseek-ai/dsh-tool-cordis/host'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { LocalBashExecutor } from '@kinetick-labs/kh-bash-local'
+import * as BashEnvPlugin from '@kinetick-labs/kh-shell-env'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
+import * as ToolBash from '@kinetick-labs/kh-tool-bash'
+import * as LlmDeepSeek from '@kinetick-labs/kh-llm-deepseek-api-key'
+import NodeRuntime from '@kinetick-labs/kh-ptc-runtime-node'
+import Sandbox from '@kinetick-labs/kh-sandbox-local'
+import SandboxPolicy from '@kinetick-labs/kh-sandbox-policy'
+import LocalFileSystem from '@kinetick-labs/kh-fs-local'
+import * as ToolFs from '@kinetick-labs/kh-tool-fs'
+import * as AgentInstructions from '@kinetick-labs/kh-agent-instructions'
+import LocalJobRegistry from '@kinetick-labs/kh-jobs-local'
+import * as ToolJobs from '@kinetick-labs/kh-tool-jobs'
+import CordisHostRunner from '@kinetick-labs/kh-cordis-host-runner'
+import * as ToolCordis from '@kinetick-labs/kh-tool-cordis'
+import * as CordisInspectProviders from '@kinetick-labs/kh-tool-cordis/host'
 
 /**
  * With-key PTC mode proof: a real model receives only `run_code`, composes two
@@ -204,7 +204,7 @@ describe('PTC mode typed values: keyless real-process contracts', () => {
   })
 
   it('returns a background job id, settles the outer run, and polls that id to completion', async () => {
-    workdir = await mkdtemp(join(tmpdir(), 'dsh-ptc-background-'))
+    workdir = await mkdtemp(join(tmpdir(), 'kh-ptc-background-'))
     ctx = await backgroundPtcModeHarness(workdir)
 
     const jobId = completion(await runCode(ctx, `
@@ -227,7 +227,7 @@ describe('PTC mode typed values: keyless real-process contracts', () => {
   }, 15_000)
 
   it('pre-abort spawns nothing; post-publication abort leaves job_kill as the cancellation owner', { timeout: 15_000, retry: 0 }, async () => {
-    workdir = await mkdtemp(join(tmpdir(), 'dsh-ptc-task-cancel-'))
+    workdir = await mkdtemp(join(tmpdir(), 'kh-ptc-task-cancel-'))
     ctx = await backgroundPtcModeHarness(workdir)
 
     const pre = new AbortController()
@@ -276,7 +276,7 @@ describe('PTC mode typed values: keyless real-process contracts', () => {
   })
 
   it('keeps foreground bash coupled to the outer signal', async () => {
-    workdir = await mkdtemp(join(tmpdir(), 'dsh-ptc-foreground-cancel-'))
+    workdir = await mkdtemp(join(tmpdir(), 'kh-ptc-foreground-cancel-'))
     ctx = await backgroundPtcModeHarness(workdir)
     const controller = new AbortController()
     const startedAt = Date.now()
@@ -326,7 +326,7 @@ function waitForIdle(harness: Context, agent: Agent): Promise<void> {
 
 describe.skipIf(!process.env.DEEPSEEK_API_KEY)('PTC mode: real model writes a program over real tools', () => {
   it('collapses the wire tool list to [run_code], bridges sub-calls, and returns curated output', async () => {
-    workdir = await mkdtemp(join(tmpdir(), 'dsh-ptc-e2e-'))
+    workdir = await mkdtemp(join(tmpdir(), 'kh-ptc-e2e-'))
     ctx = await ptcModeHarness(workdir)
     const agent = await ctx.agentLoop.create(SessionId('e2e-ptc'), { provider: 'deepseek-official', model: 'deepseek-v4-flash' })
 
@@ -371,7 +371,7 @@ describe.skipIf(!process.env.DEEPSEEK_API_KEY)('PTC mode: real model writes a pr
   }, 180_000)
 
   it('projects nested workspace instructions discovered by an fs sub-call', async () => {
-    workdir = await mkdtemp(join(tmpdir(), 'dsh-ptc-workspace-e2e-'))
+    workdir = await mkdtemp(join(tmpdir(), 'kh-ptc-workspace-e2e-'))
     await mkdir(join(workdir, '.git'), { recursive: true })
     await mkdir(join(workdir, 'pkg/deep'), { recursive: true })
     await writeFile(join(workdir, 'pkg/AGENTS.md'), `If asked for the PTC mode workspace handshake, reply with exactly ${WORKSPACE_PROBE} and nothing else.\n`)

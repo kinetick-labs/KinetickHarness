@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-09-03-jobs-seam-consolidation.md
 /agent-note-one-output-ring-one-projection-one-event-stream-for-background-jobs:
-  en: f4cb113e6501a363
-  zh: 55693cca6db201b0
+  en: 328c2dd101cd64a8
+  zh: be522d50955d5c18
 /agent-note-one-output-ring-one-projection-one-event-stream-for-background-jobs/problem:
   en: 2e213085523c8ebe
   zh: 28229d752ccc7ec4

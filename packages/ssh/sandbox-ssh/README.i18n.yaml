@@ -5,33 +5,33 @@
 /:
   en: 222090dbd09cc030
   zh: 24e479b8ff87e6d4
-/deepseek-ai-dsh-sandbox-ssh:
-  en: ae397f91d266146f
-  zh: 1b6bf9730ed10edb
-/deepseek-ai-dsh-sandbox-ssh/summary:
-  en: 8af877de577db380
-  zh: e65585c91fd874b1
-/deepseek-ai-dsh-sandbox-ssh/table-of-contents:
+/kinetick-labs-kh-sandbox-ssh:
+  en: f219be24f6bd175e
+  zh: c543f80c2bc89afe
+/kinetick-labs-kh-sandbox-ssh/summary:
+  en: a40820807901be8f
+  zh: 1b53a80443a9a1b0
+/kinetick-labs-kh-sandbox-ssh/table-of-contents:
   en: d152484eb41ac6b4
   zh: 725b47765ee8f30b
-/deepseek-ai-dsh-sandbox-ssh/use-this-package:
-  en: 1a44e3c4d22d8bfe
-  zh: b53825c3da5e002c
-/deepseek-ai-dsh-sandbox-ssh/understand-the-implementation:
+/kinetick-labs-kh-sandbox-ssh/use-this-package:
+  en: 0c9e37f71b6051ca
+  zh: d63280b07622bc1d
+/kinetick-labs-kh-sandbox-ssh/understand-the-implementation:
   en: b4c1c32707dc9f7e
   zh: 33a0b69e312aa80d
-/deepseek-ai-dsh-sandbox-ssh/further-exploration:
-  en: 56145c4fead194d7
-  zh: 4e65796fc22b3031
-/deepseek-ai-dsh-sandbox-ssh/model-experience:
+/kinetick-labs-kh-sandbox-ssh/further-exploration:
+  en: 17771fbf46d71f7a
+  zh: d27d1cf5b983e2cf
+/kinetick-labs-kh-sandbox-ssh/model-experience:
   en: 586c0afcf6a3097d
   zh: 4723c59f600a3b04
-/deepseek-ai-dsh-sandbox-ssh/model-experience/kv-cache-effect:
+/kinetick-labs-kh-sandbox-ssh/model-experience/kv-cache-effect:
   en: 21f304c66e5ba98b
   zh: 18185d5b164f8216
-/deepseek-ai-dsh-sandbox-ssh/known-limitations-and-deferred-work:
+/kinetick-labs-kh-sandbox-ssh/known-limitations-and-deferred-work:
   en: 916d7c0e971765bb
   zh: 56d347094c07bc5d
-/deepseek-ai-dsh-sandbox-ssh/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-sandbox-ssh/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 8ec3e73528ddb1a6

@@ -1,15 +1,15 @@
 /**
  * Public package manifest and plugin display types, with no runtime exports.
- * @module @deepseek-ai/dsh-package-manifest
+ * @module @kinetick-labs/kh-package-manifest
  */
 
 export type {
-  DshBundleManifest,
-  DshClientManifest,
-  DshEnginesManifest,
-  DshManifest,
-  DshPackageManifest,
-  DshProfileManifest,
+  KhBundleManifest,
+  KhClientManifest,
+  KhEnginesManifest,
+  KhManifest,
+  KhPackageManifest,
+  KhProfileManifest,
   LocalizedText,
   PluginLocalizedMeta,
 } from './types.ts'

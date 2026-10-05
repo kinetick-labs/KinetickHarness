@@ -1,17 +1,17 @@
-import { createUserMessage, type GenerateOptions } from '@deepseek-ai/dsh-llm'
+import { createUserMessage, type GenerateOptions } from '@kinetick-labs/kh-llm'
 import { describe, expect, it } from 'vitest'
 import { Context, symbols, type EffectMeta } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import SubagentRuntime, { type SubagentStartRequest } from '@deepseek-ai/dsh-subagent'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
+import { SessionId } from '@kinetick-labs/kh-session'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import SubagentRuntime, { type SubagentStartRequest } from '@kinetick-labs/kh-subagent'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
 import { MockAdapter, maxTokensResponse, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import * as spawn from '../src/index.ts'
-import { STRUCTURED_OUTPUT_TOOL } from '@deepseek-ai/dsh-subagent-in-process-driver'
-import { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
+import { STRUCTURED_OUTPUT_TOOL } from '@kinetick-labs/kh-subagent-in-process-driver'
+import { defineContentToolFixture } from '@kinetick-labs/kh-tools'
 
 type Script = ConstructorParameters<typeof MockAdapter>[0]
 
@@ -60,7 +60,7 @@ function systemPromptOf(request: GenerateOptions): string {
   return head.content.flatMap(block => block.type === 'text' ? [block.text] : []).join('')
 }
 
-describe('dsh-subagent-spawn-in-process', () => {
+describe('kh-subagent-spawn-in-process', () => {
   it('runs a fresh child to completion and returns its final assistant output', async () => {
     // One model call for the child: a plain text answer.
     const { ctx, parent } = await setup([textResponse('child answer')])

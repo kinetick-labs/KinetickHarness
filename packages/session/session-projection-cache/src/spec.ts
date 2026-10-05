@@ -7,15 +7,15 @@
  * backend stores the domain `per-record`: one document per session under
  * `<root>/session_projcache/sessions/`, so a checkpoint write rewrites one
  * session's document instead of the whole unit).
- * @module @deepseek-ai/dsh-session-projection-cache/src/spec
+ * @module @kinetick-labs/kh-session-projection-cache/src/spec
  */
 
 import { z } from 'zod'
-import { isJsonValue } from '@deepseek-ai/dsh-util-values'
-import type { JsonValue } from '@deepseek-ai/dsh-util-values'
-import { SessionLogOffset, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { SessionId, SessionSeqCursor } from '@deepseek-ai/dsh-session'
-import { defineDomain, domainTable } from '@deepseek-ai/dsh-storage-domain'
+import { isJsonValue } from '@kinetick-labs/kh-util-values'
+import type { JsonValue } from '@kinetick-labs/kh-util-values'
+import { SessionLogOffset, SessionSeq } from '@kinetick-labs/kh-session'
+import type { SessionId, SessionSeqCursor } from '@kinetick-labs/kh-session'
+import { defineDomain, domainTable } from '@kinetick-labs/kh-storage-domain'
 
 /**
  * One persisted checkpoint row (the RFC's `(sessionId, key, ver, seq, val)`

@@ -5,57 +5,57 @@
 /:
   en: 3fe330c4d51197ec
   zh: 5874f3bcd419dbbc
-/deepseek-ai-dsh-typert-generator:
-  en: 572884e8456e3876
-  zh: 766da5ce0943f314
-/deepseek-ai-dsh-typert-generator/summary:
-  en: c481285bb066ad9f
-  zh: b5d9e32c7747f04a
-/deepseek-ai-dsh-typert-generator/table-of-contents:
+/kinetick-labs-kh-typert-generator:
+  en: 7fcdacce09c33c40
+  zh: a83252f975570c22
+/kinetick-labs-kh-typert-generator/summary:
+  en: ea387d7db511c1e9
+  zh: 69c7f54d530c3dd7
+/kinetick-labs-kh-typert-generator/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-typert-generator/use-this-package:
+/kinetick-labs-kh-typert-generator/use-this-package:
   en: 949dec3bb987644a
   zh: 0ed333a6067465dc
-/deepseek-ai-dsh-typert-generator/use-this-package/publishing-typert-artifacts-from-a-package:
-  en: b8720f6ac186a8e8
-  zh: 3e04a4c1bebc2cf4
-/deepseek-ai-dsh-typert-generator/use-this-package/analyzing-a-workspace-statically:
+/kinetick-labs-kh-typert-generator/use-this-package/publishing-typert-artifacts-from-a-package:
+  en: d963e08484035def
+  zh: 37764126798a88dc
+/kinetick-labs-kh-typert-generator/use-this-package/analyzing-a-workspace-statically:
   en: 4ea0e4977cefa39d
   zh: 41bdb6047bc79524
-/deepseek-ai-dsh-typert-generator/use-this-package/running-generation-inside-a-tsdown-build:
+/kinetick-labs-kh-typert-generator/use-this-package/running-generation-inside-a-tsdown-build:
   en: cc3f7d23739380f6
   zh: 864d15088f581271
-/deepseek-ai-dsh-typert-generator/understand-the-implementation:
+/kinetick-labs-kh-typert-generator/understand-the-implementation:
   en: b90762df7a978580
   zh: 123ab225a2b5df2a
-/deepseek-ai-dsh-typert-generator/understand-the-implementation/design-concept:
+/kinetick-labs-kh-typert-generator/understand-the-implementation/design-concept:
   en: 0a515742229bf442
   zh: dfd2c5eddd943af9
-/deepseek-ai-dsh-typert-generator/understand-the-implementation/source-map:
+/kinetick-labs-kh-typert-generator/understand-the-implementation/source-map:
   en: 783dec50106bcabb
   zh: 2627f55ce69a1a2c
-/deepseek-ai-dsh-typert-generator/understand-the-implementation/analysis-and-faces:
-  en: a844aafcafbc27b6
-  zh: 8efe7d472361bbc2
-/deepseek-ai-dsh-typert-generator/understand-the-implementation/emission-and-publication-contract:
-  en: 2f6f72eecffc33c2
-  zh: ded33dbc1d9a4ea5
-/deepseek-ai-dsh-typert-generator/understand-the-implementation/catalog-projection:
+/kinetick-labs-kh-typert-generator/understand-the-implementation/analysis-and-faces:
+  en: ad61971ff7ef1d5f
+  zh: 054646006cdffdf8
+/kinetick-labs-kh-typert-generator/understand-the-implementation/emission-and-publication-contract:
+  en: 388c1d5e438b15e9
+  zh: 50e6db8988f9c114
+/kinetick-labs-kh-typert-generator/understand-the-implementation/catalog-projection:
   en: e85b521a1e01ab2c
   zh: 4416dca569de0f61
-/deepseek-ai-dsh-typert-generator/further-exploration:
-  en: 6df514142eaad512
-  zh: e1ca60bd9fa30096
-/deepseek-ai-dsh-typert-generator/model-experience:
+/kinetick-labs-kh-typert-generator/further-exploration:
+  en: 601dfd23d2e91270
+  zh: 7f2fefe197cd39c5
+/kinetick-labs-kh-typert-generator/model-experience:
   en: e6641e8b5e5f42ca
   zh: 2fdc0d3fde7e9216
-/deepseek-ai-dsh-typert-generator/model-experience/kv-cache-effect:
+/kinetick-labs-kh-typert-generator/model-experience/kv-cache-effect:
   en: 09310605f7d136d4
   zh: 3535ec7eba83b90f
-/deepseek-ai-dsh-typert-generator/known-limitations-and-deferred-work:
+/kinetick-labs-kh-typert-generator/known-limitations-and-deferred-work:
   en: f3b1002133fe8736
   zh: e8d5fecd10db5e3a
-/deepseek-ai-dsh-typert-generator/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-typert-generator/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

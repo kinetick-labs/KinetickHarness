@@ -1,0 +1,16 @@
+# Bilingual-pair consistency record for guide.md (docs/i18n/README.md): per heading
+# section, a hash of its English and Chinese blocks outside code blocks and generated regions.
+# After editing either side, bring the other along and re-record with:
+#   pnpm run verify-translation-pairing --write docs/upgrade-guide/v0.2.1-alpha.1/kinetick-rebrand/guide.md
+/:
+  en: 0ada97980302a574
+  zh: 1e2d3df968106222
+/kinetickharness-names-replace-dsh:
+  en: 21262b81fb53576d
+  zh: 14a84a09172f3775
+/kinetickharness-names-replace-dsh/change:
+  en: e7c8d8c0fd84ed3c
+  zh: 717e77583e4a6bcf
+/kinetickharness-names-replace-dsh/migration:
+  en: f11aa25f68ef75b2
+  zh: 9df6e6424af7745c

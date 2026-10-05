@@ -3,14 +3,14 @@
 
 import { describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import AttachmentStore, { AttachmentError } from '@deepseek-ai/dsh-attachment'
-import type { MessageId } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
+import AttachmentStore, { AttachmentError } from '@kinetick-labs/kh-attachment'
+import type { MessageId } from '@kinetick-labs/kh-llm'
+import { SessionId } from '@kinetick-labs/kh-session'
 import SubagentRuntime, {
   SubagentError,
   type SubagentPromptRequestId,
-} from '@deepseek-ai/dsh-subagent'
-import { deliverSubagentPrompt, type HostPromptDeliverer } from '@deepseek-ai/dsh-subagent/internal'
+} from '@kinetick-labs/kh-subagent'
+import { deliverSubagentPrompt, type HostPromptDeliverer } from '@kinetick-labs/kh-subagent/internal'
 
 const PARENT = SessionId('parent')
 const CHILD = SessionId('child')

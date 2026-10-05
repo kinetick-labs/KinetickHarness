@@ -3,56 +3,56 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write packages/client/ui-user-questions/README.md
 /:
-  en: 50286bfa65e45456
-  zh: 2347492bb65bd1b4
-/deepseek-ai-dsh-client-ui-user-questions:
-  en: f109e91b29d71f55
-  zh: 73200984bad7f908
-/deepseek-ai-dsh-client-ui-user-questions/summary:
+  en: bc5c0c296b189361
+  zh: 61ea510cb9133e80
+/kinetick-labs-kh-client-ui-user-questions:
+  en: 70fb5a5182b23268
+  zh: b32d958398cc638d
+/kinetick-labs-kh-client-ui-user-questions/summary:
   en: 1aa6291852d48a08
   zh: 414eed268fb2cf1f
-/deepseek-ai-dsh-client-ui-user-questions/table-of-contents:
+/kinetick-labs-kh-client-ui-user-questions/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-client-ui-user-questions/use-this-package:
+/kinetick-labs-kh-client-ui-user-questions/use-this-package:
   en: 8d3815c19858ac85
   zh: 94fc905fa202d334
-/deepseek-ai-dsh-client-ui-user-questions/use-this-package/answering:
+/kinetick-labs-kh-client-ui-user-questions/use-this-package/answering:
   en: cc19c065d0aeac1e
   zh: 91c8cbe08b438e7f
-/deepseek-ai-dsh-client-ui-user-questions/use-this-package/reading-a-settled-question-back:
+/kinetick-labs-kh-client-ui-user-questions/use-this-package/reading-a-settled-question-back:
   en: 10975f68ff9c6fcc
   zh: 92246aadc363f0eb
-/deepseek-ai-dsh-client-ui-user-questions/use-this-package/the-plan-review-card:
-  en: 6b12f1362c614a39
-  zh: 27d9cf54d4cbd5d2
-/deepseek-ai-dsh-client-ui-user-questions/use-this-package/failure-and-recovery:
+/kinetick-labs-kh-client-ui-user-questions/use-this-package/the-plan-review-card:
+  en: 6b66d468b7b14d8b
+  zh: dd3c8f4d505705de
+/kinetick-labs-kh-client-ui-user-questions/use-this-package/failure-and-recovery:
   en: 3509678f4d183834
   zh: 625542b79e434eb5
-/deepseek-ai-dsh-client-ui-user-questions/understand-the-implementation:
+/kinetick-labs-kh-client-ui-user-questions/understand-the-implementation:
   en: 77e1b2585acdf67b
   zh: d433ec185c6b8f57
-/deepseek-ai-dsh-client-ui-user-questions/understand-the-implementation/reopening-a-panel:
-  en: 4350f2fbc41f6c86
-  zh: a11ef5e97d0c936e
-/deepseek-ai-dsh-client-ui-user-questions/understand-the-implementation/intent-surface-election:
+/kinetick-labs-kh-client-ui-user-questions/understand-the-implementation/reopening-a-panel:
+  en: 7657da8e838b764a
+  zh: 278f0d846aa2387d
+/kinetick-labs-kh-client-ui-user-questions/understand-the-implementation/intent-surface-election:
   en: 126a889edbc42edd
   zh: 7e08968cd61d42a2
-/deepseek-ai-dsh-client-ui-user-questions/understand-the-implementation/copy-and-locale:
-  en: 00b3f92cdad70faf
-  zh: ab672ddc2faef857
-/deepseek-ai-dsh-client-ui-user-questions/further-exploration:
-  en: dc98d242987579a3
-  zh: a193b9f33a197089
-/deepseek-ai-dsh-client-ui-user-questions/model-experience:
-  en: 198421eb8ed8923f
-  zh: 84f719be6e6dfe62
-/deepseek-ai-dsh-client-ui-user-questions/model-experience/kv-cache-effect:
-  en: 1032ba29b7d7f9d7
-  zh: 01f1dbf4c2164fd2
-/deepseek-ai-dsh-client-ui-user-questions/known-limitations-and-deferred-work:
+/kinetick-labs-kh-client-ui-user-questions/understand-the-implementation/copy-and-locale:
+  en: b22a2d0dc55956d9
+  zh: d8bf3e275765df6c
+/kinetick-labs-kh-client-ui-user-questions/further-exploration:
+  en: 1f21f75195fe99fc
+  zh: 56191b7f3baba0ec
+/kinetick-labs-kh-client-ui-user-questions/model-experience:
+  en: 38e385d3715fc80c
+  zh: 98d39907d323d8a9
+/kinetick-labs-kh-client-ui-user-questions/model-experience/kv-cache-effect:
+  en: e0b8a385c9271e6d
+  zh: e32c3bd701930fe6
+/kinetick-labs-kh-client-ui-user-questions/known-limitations-and-deferred-work:
   en: d61767a407077aaf
   zh: 891e7bffa61f3017
-/deepseek-ai-dsh-client-ui-user-questions/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-client-ui-user-questions/known-limitations-and-deferred-work/dev-note:
   en: 4ff0c667c1b130df
   zh: 3f42eaff797dc46d

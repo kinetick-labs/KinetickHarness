@@ -3,13 +3,13 @@ description: "The skill provider registry for users and maintainers choosing, co
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-skill
+# @kinetick-labs/kh-skill
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-Use this package to give agents and users one catalog of reusable, task-specific instructions collected from local directories, embedded plugin data, or remote services. It resolves duplicate names predictably, validates entries, tolerates unavailable sources without discarding usable results, and loads the selected skill's full instructions on demand. Mount it when a composition needs skills from multiple or non-filesystem sources; pair it with `dsh-skill-filesystem` for local discovery and `dsh-tool-skill` for model access, because it includes no skill content itself.
+Use this package to give agents and users one catalog of reusable, task-specific instructions collected from local directories, embedded plugin data, or remote services. It resolves duplicate names predictably, validates entries, tolerates unavailable sources without discarding usable results, and loads the selected skill's full instructions on demand. Mount it when a composition needs skills from multiple or non-filesystem sources; pair it with `kh-skill-filesystem` for local discovery and `kh-tool-skill` for model access, because it includes no skill content itself.
 
 ## Table of Contents
 
@@ -29,14 +29,14 @@ Mount the plugin to give a composition one skill registry. Skill sources (provid
 
 ### When to choose it
 
-Use `dsh-skill` when agents should load skills from more than one source through one interface, or when the source of skills is not the local filesystem. Avoid it when a composition needs no skill loading at all — the plugin adds a service and a per-lookup discovery cost. The shipped local provider (`dsh-skill-filesystem`) and the model-facing consumer (`dsh-tool-skill`) are separate packages; mount them alongside when the deployment wants local skills and model access.
+Use `kh-skill` when agents should load skills from more than one source through one interface, or when the source of skills is not the local filesystem. Avoid it when a composition needs no skill loading at all — the plugin adds a service and a per-lookup discovery cost. The shipped local provider (`kh-skill-filesystem`) and the model-facing consumer (`kh-tool-skill`) are separate packages; mount them alongside when the deployment wants local skills and model access.
 
 ### Mount and configure
 
 Load the plugin like any Cordis plugin. The only configuration limits how many completed provider catalogs are kept in memory; everything else is provider behavior.
 
 ```yaml
-- name: '@deepseek-ai/dsh-skill'
+- name: '@kinetick-labs/kh-skill'
 ```
 
 | Field | Default | Meaning |
@@ -121,7 +121,7 @@ Read these pages when the package-level contract is not enough. They move from t
 <a id="model-experience"></a>
 ## Model Experience
 
-Indirectly, through `dsh-tool-skill`, which renders provider summaries into durable initial or replacement catalog messages and loaded instruction bodies into retained tool results.
+Indirectly, through `kh-tool-skill`, which renders provider summaries into durable initial or replacement catalog messages and loaded instruction bodies into retained tool results.
 
 #### KV Cache effect
 

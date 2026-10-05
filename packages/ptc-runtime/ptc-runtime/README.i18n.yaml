@@ -5,66 +5,66 @@
 /:
   en: 8904d5f5d5251a83
   zh: 69b48f289b0416f0
-/deepseek-ai-dsh-ptc-runtime:
-  en: cced8c691b58657a
-  zh: 3da9cdf76a1a07ff
-/deepseek-ai-dsh-ptc-runtime/summary:
-  en: d5a1f0be39931018
-  zh: 3584bd577f654a38
-/deepseek-ai-dsh-ptc-runtime/table-of-contents:
+/kinetick-labs-kh-ptc-runtime:
+  en: b4ddd8c9d1c7df81
+  zh: 55366e8a2f2331c9
+/kinetick-labs-kh-ptc-runtime/summary:
+  en: f2d8d9d9f4cbd5c9
+  zh: c9de7ed37e7eb36d
+/kinetick-labs-kh-ptc-runtime/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-ptc-runtime/use-this-package:
-  en: 7e5ebf7420c13af4
-  zh: 9ad1e056e794ca4a
-/deepseek-ai-dsh-ptc-runtime/use-this-package/run-a-program:
+/kinetick-labs-kh-ptc-runtime/use-this-package:
+  en: 2796540ef84e2b49
+  zh: 55a9c816570392d0
+/kinetick-labs-kh-ptc-runtime/use-this-package/run-a-program:
   en: 6f97019cebc2f417
   zh: c56f18a690dbe814
-/deepseek-ai-dsh-ptc-runtime/use-this-package/choose-a-backend:
-  en: f2dd49b11ef5e888
-  zh: f2be82b0cae2d8e4
-/deepseek-ai-dsh-ptc-runtime/use-this-package/name-your-bindings-portably:
+/kinetick-labs-kh-ptc-runtime/use-this-package/choose-a-backend:
+  en: 217095ee846d94c5
+  zh: c076bd49eca9605c
+/kinetick-labs-kh-ptc-runtime/use-this-package/name-your-bindings-portably:
   en: 4e46c1672701b8df
   zh: 0353c5855c9ff6be
-/deepseek-ai-dsh-ptc-runtime/use-this-package/what-can-go-wrong:
+/kinetick-labs-kh-ptc-runtime/use-this-package/what-can-go-wrong:
   en: 44f9fdf2c8e2cacc
   zh: 99dd555a49075f88
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation:
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation:
   en: 686d570f5e669fa4
   zh: 2075cf27c30f251a
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation/design-concept:
-  en: 9f0055e22a1595a5
-  zh: 0aa3ceb9dd145128
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation/service-api:
-  en: 1d7a792c9a78a517
-  zh: b49bddf18c259edc
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation/vocabulary:
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation/design-concept:
+  en: 54359c4fed591523
+  zh: 05a044fe97019789
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation/service-api:
+  en: f75b7ae920e6783c
+  zh: 832ce5f9677c064d
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation/vocabulary:
   en: 855cb8366e3bd293
   zh: da6d7a0ce51f97fc
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation/portable-identifiers:
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation/portable-identifiers:
   en: 01c82c6e73180979
   zh: e29b066f9f82c8b4
-/deepseek-ai-dsh-ptc-runtime/understand-the-implementation/source-map:
+/kinetick-labs-kh-ptc-runtime/understand-the-implementation/source-map:
   en: 85b65ceb9be0c49f
   zh: 52df7f06d4e49d6e
-/deepseek-ai-dsh-ptc-runtime/further-exploration:
-  en: a77e68bc4f5e66d9
-  zh: 101a57bcad581668
-/deepseek-ai-dsh-ptc-runtime/model-experience:
-  en: 5506904c50c1ee20
-  zh: f0ffa9f4f08b20cf
-/deepseek-ai-dsh-ptc-runtime/model-experience/kv-cache-effect:
+/kinetick-labs-kh-ptc-runtime/further-exploration:
+  en: 06a74c52895ac206
+  zh: 5d9c2b53a2eb4ec9
+/kinetick-labs-kh-ptc-runtime/model-experience:
+  en: f5dc9bc7876aee0e
+  zh: 502e2c8298da70bd
+/kinetick-labs-kh-ptc-runtime/model-experience/kv-cache-effect:
   en: 40294c1c31b74824
   zh: 081cebc2e2650f03
-/deepseek-ai-dsh-ptc-runtime/known-limitations-and-deferred-work:
+/kinetick-labs-kh-ptc-runtime/known-limitations-and-deferred-work:
   en: 7f30f78c5d427667
   zh: 99d21160016deea2
-/deepseek-ai-dsh-ptc-runtime/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-ptc-runtime/known-limitations-and-deferred-work/dev-note:
   en: d56846da29ad869c
   zh: 0397151a7e29b8ba
-/deepseek-ai-dsh-ptc-runtime/known-limitations-and-deferred-work/dev-note/future-persistent-kernel-backend:
+/kinetick-labs-kh-ptc-runtime/known-limitations-and-deferred-work/dev-note/future-persistent-kernel-backend:
   en: cfefaae6ed9705d5
   zh: 3cca5b1bd92445b0
-/deepseek-ai-dsh-ptc-runtime/known-limitations-and-deferred-work/dev-note/future-container-backend:
+/kinetick-labs-kh-ptc-runtime/known-limitations-and-deferred-work/dev-note/future-container-backend:
   en: 2b94202842f0556c
   zh: 5aa0311fa621a018

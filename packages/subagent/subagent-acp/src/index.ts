@@ -4,7 +4,7 @@
  * the ONE thing it reads off `request.parent` is the session's workspace cwd (see
  * {@link resolveCwd}). This plugin uses named exports only; a default would hide its
  * loader metadata (see `docs/postmortem/0001-acp-default-export-drops-inject.md`).
- * @module @deepseek-ai/dsh-subagent-acp
+ * @module @kinetick-labs/kh-subagent-acp
  */
 
 import { accessSync, constants, statSync } from 'node:fs'
@@ -16,8 +16,8 @@ import type {
   SubagentCapabilities,
   SubagentProvider,
   SubagentStartRequest,
-} from '@deepseek-ai/dsh-subagent'
-import { MAX_TIMER_DELAY_MS } from '@deepseek-ai/dsh-timeout'
+} from '@kinetick-labs/kh-subagent'
+import { MAX_TIMER_DELAY_MS } from '@kinetick-labs/kh-timeout'
 import { acpConfigurationFailure, type AcpRunSpec, DEFAULT_DISPOSE_EOF_GRACE_MS, DEFAULT_DISPOSE_GRACE_MS, type PermissionPolicy, startAcpRun } from './run.ts'
 
 export const name = 'subagent-acp'

@@ -8,16 +8,16 @@ import { afterEach, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import ComputerUseRegistry from '@deepseek-ai/dsh-computer-use'
-import LocalAttachmentStore from '@deepseek-ai/dsh-attachment-local'
-import LlmRuntime, { LlmAdapter, ToolCallId, createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import ComputerUseRegistry from '@kinetick-labs/kh-computer-use'
+import LocalAttachmentStore from '@kinetick-labs/kh-attachment-local'
+import LlmRuntime, { LlmAdapter, ToolCallId, createUserMessage } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions, LlmResolvedModelInfo, StreamChunk } from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
 import * as NativeProvider from '../src/index.ts'
 import { resetFixture, screenshotBase64 } from './fixtures/cua-driver.ts'
 
@@ -57,23 +57,23 @@ afterEach(async () => {
 
 it('loads from cordis.yml and logs the native screenshot before the next model request', async () => {
   resetFixture()
-  root = await mkdtemp(join(tmpdir(), 'dsh-native-composition-'))
+  root = await mkdtemp(join(tmpdir(), 'kh-native-composition-'))
   const configPath = join(root, 'cordis.yml')
   const modules = new Map<string, unknown>([
-    ['@deepseek-ai/dsh-llm', LlmRuntime],
-    ['@deepseek-ai/dsh-session', SessionStore],
-    ['@deepseek-ai/dsh-session-projection', SessionProjectionRegistry],
-    ['@deepseek-ai/dsh-system-prompt', SystemPrompt],
-    ['@deepseek-ai/dsh-tools', ToolRuntime],
-    ['@deepseek-ai/dsh-agent', AgentRegistry],
-    ['@deepseek-ai/dsh-agent-loop', AgentLoop],
-    ['@deepseek-ai/dsh-attachment-local', LocalAttachmentStore],
-    ['@deepseek-ai/dsh-computer-use', ComputerUseRegistry],
-    ['@deepseek-ai/dsh-experimental-computer-use-cua-driver-native', NativeProvider],
+    ['@kinetick-labs/kh-llm', LlmRuntime],
+    ['@kinetick-labs/kh-session', SessionStore],
+    ['@kinetick-labs/kh-session-projection', SessionProjectionRegistry],
+    ['@kinetick-labs/kh-system-prompt', SystemPrompt],
+    ['@kinetick-labs/kh-tools', ToolRuntime],
+    ['@kinetick-labs/kh-agent', AgentRegistry],
+    ['@kinetick-labs/kh-agent-loop', AgentLoop],
+    ['@kinetick-labs/kh-attachment-local', LocalAttachmentStore],
+    ['@kinetick-labs/kh-computer-use', ComputerUseRegistry],
+    ['@kinetick-labs/kh-experimental-computer-use-cua-driver-native', NativeProvider],
   ])
   await writeFile(configPath, [...modules.keys()].flatMap(name => [
     `- name: '${name}'`,
-    ...name === '@deepseek-ai/dsh-attachment-local' ? ['  config:', `    dshHome: ${JSON.stringify(root)}`] : [],
+    ...name === '@kinetick-labs/kh-attachment-local' ? ['  config:', `    khHome: ${JSON.stringify(root)}`] : [],
   ]).join('\n') + '\n')
 
   const context = ctx = new Context()

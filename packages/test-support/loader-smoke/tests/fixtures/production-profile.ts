@@ -16,7 +16,7 @@ import {
   PluginPackages,
   type ProfileContext,
   type ProfileLayer,
-} from '@deepseek-ai/dsh-app-boot'
+} from '@kinetick-labs/kh-app-boot'
 
 const installAnchor = fileURLToPath(new URL('../../../../../apps/cli/package.json', import.meta.url))
 
@@ -103,7 +103,7 @@ export async function bootProductionProfile(options: ProductionProfileOptions): 
       // The launcher's own profile facts, so profile-backed services activate as in production.
       const profileContext: ProfileContext = {
         name: options.profile, dir: profile.dir, patchPath: profile.patchPath, installAnchor,
-        cwd: process.cwd(), home: process.env['DSH_HOME'] ?? join(homedir(), '.dsh'),
+        cwd: process.cwd(), home: process.env['KH_HOME'] ?? join(homedir(), '.kh'),
         startedBundles: profile.layers.map(layer => layer.packageName),
         overlays: overlays.flat(),
       }

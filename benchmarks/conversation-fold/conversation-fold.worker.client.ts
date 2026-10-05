@@ -2,12 +2,12 @@
 
 import { performance } from 'node:perf_hooks'
 import { Context } from '@deepseek-ai/cordis'
-import { AssistantStreamAccumulator } from '@deepseek-ai/dsh-llm/assistant-stream'
-import { LlmAttemptId, ToolCallId } from '@deepseek-ai/dsh-llm/brand'
-import type { StreamChunk } from '@deepseek-ai/dsh-llm'
-import type { SessionEvent } from '@deepseek-ai/dsh-session/types'
-import type { ChatNode, ChatSnapshot } from '@deepseek-ai/dsh-client-ui-chat/client'
-import type { SessionEventLikeEntry } from '@deepseek-ai/dsh-api-session-controller/client'
+import { AssistantStreamAccumulator } from '@kinetick-labs/kh-llm/assistant-stream'
+import { LlmAttemptId, ToolCallId } from '@kinetick-labs/kh-llm/brand'
+import type { StreamChunk } from '@kinetick-labs/kh-llm'
+import type { SessionEvent } from '@kinetick-labs/kh-session/types'
+import type { ChatNode, ChatSnapshot } from '@kinetick-labs/kh-client-ui-chat/client'
+import type { SessionEventLikeEntry } from '@kinetick-labs/kh-api-session-controller/client'
 // These Client-only fold modules have no plain-Node package export and are compiled into this worker.
 import { ConversationNodeAssembler } from '../../packages/client/ui-conversation/src/client/conversation/assembler.ts'
 import { ConversationEventRegistry } from '../../packages/client/ui-conversation/src/client/conversation/event-registry.ts'
@@ -258,12 +258,12 @@ function preparingTool(tool: 'write' | 'bash', characters: number, definitions: 
 }
 
 assertBuiltBenchmarkRuntime(import.meta.url, {
-  '@deepseek-ai/dsh-brand': import.meta.resolve('@deepseek-ai/dsh-brand'),
-  '@deepseek-ai/dsh-client-store': import.meta.resolve('@deepseek-ai/dsh-client-store'),
-  '@deepseek-ai/dsh-llm/assistant-stream': import.meta.resolve('@deepseek-ai/dsh-llm/assistant-stream'),
-  '@deepseek-ai/dsh-session/surface': import.meta.resolve('@deepseek-ai/dsh-session/surface'),
-  '@deepseek-ai/dsh-token-meter/client': import.meta.resolve('@deepseek-ai/dsh-token-meter/client'),
-  '@deepseek-ai/dsh-util-values': import.meta.resolve('@deepseek-ai/dsh-util-values'),
+  '@kinetick-labs/kh-brand': import.meta.resolve('@kinetick-labs/kh-brand'),
+  '@kinetick-labs/kh-client-store': import.meta.resolve('@kinetick-labs/kh-client-store'),
+  '@kinetick-labs/kh-llm/assistant-stream': import.meta.resolve('@kinetick-labs/kh-llm/assistant-stream'),
+  '@kinetick-labs/kh-session/surface': import.meta.resolve('@kinetick-labs/kh-session/surface'),
+  '@kinetick-labs/kh-token-meter/client': import.meta.resolve('@kinetick-labs/kh-token-meter/client'),
+  '@kinetick-labs/kh-util-values': import.meta.resolve('@kinetick-labs/kh-util-values'),
 })
 const scope = new Context()
 try {

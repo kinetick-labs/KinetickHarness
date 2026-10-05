@@ -5,54 +5,54 @@
 /:
   en: 0743cf05fedb8321
   zh: 7ad0cfa1b6b8a46b
-/deepseek-ai-dsh-ptc-runtime-node:
-  en: 7e1a8657a212c70b
-  zh: afb7a8c6a3afd718
-/deepseek-ai-dsh-ptc-runtime-node/summary:
+/kinetick-labs-kh-ptc-runtime-node:
+  en: 64042b6de3ce7938
+  zh: 66ed7a253bf1c5c7
+/kinetick-labs-kh-ptc-runtime-node/summary:
   en: 4d6be30d9289a58e
   zh: b1b2b4d773d32029
-/deepseek-ai-dsh-ptc-runtime-node/table-of-contents:
+/kinetick-labs-kh-ptc-runtime-node/table-of-contents:
   en: d152484eb41ac6b4
   zh: 725b47765ee8f30b
-/deepseek-ai-dsh-ptc-runtime-node/use-this-package:
-  en: 246231cf2a529550
-  zh: 2b4ed96194acc639
-/deepseek-ai-dsh-ptc-runtime-node/use-this-package/configuration:
-  en: e5bca585d02f08ca
-  zh: a2e9a32fe4052d90
-/deepseek-ai-dsh-ptc-runtime-node/use-this-package/execution-and-results:
+/kinetick-labs-kh-ptc-runtime-node/use-this-package:
+  en: 48d5fa3cd04f82ad
+  zh: 632916f06260301f
+/kinetick-labs-kh-ptc-runtime-node/use-this-package/configuration:
+  en: 5a9d6b14ec871712
+  zh: 1126071e2976a2da
+/kinetick-labs-kh-ptc-runtime-node/use-this-package/execution-and-results:
   en: 6d65b39223ca9f7a
   zh: 96f96341ecab1317
-/deepseek-ai-dsh-ptc-runtime-node/use-this-package/deadlines-and-cancellation:
-  en: 803c1a6e876c68e6
-  zh: 646232ebc4770680
-/deepseek-ai-dsh-ptc-runtime-node/use-this-package/failures:
+/kinetick-labs-kh-ptc-runtime-node/use-this-package/deadlines-and-cancellation:
+  en: 34f8a842e15fd545
+  zh: 5ca73e770ddac38a
+/kinetick-labs-kh-ptc-runtime-node/use-this-package/failures:
   en: 7682e50f9dcfa25c
   zh: ddcb3502e12be06f
-/deepseek-ai-dsh-ptc-runtime-node/understand-the-implementation:
+/kinetick-labs-kh-ptc-runtime-node/understand-the-implementation:
   en: 9020b491a39e4bf5
   zh: bcd1b2b1a3bde7f3
-/deepseek-ai-dsh-ptc-runtime-node/understand-the-implementation/launch-and-control:
+/kinetick-labs-kh-ptc-runtime-node/understand-the-implementation/launch-and-control:
   en: 45527dad94dd9362
   zh: c1e1179391e89a3f
-/deepseek-ai-dsh-ptc-runtime-node/understand-the-implementation/source-and-built-bootstraps:
+/kinetick-labs-kh-ptc-runtime-node/understand-the-implementation/source-and-built-bootstraps:
   en: c01071304a9d563a
   zh: 2938a64b13a257d8
-/deepseek-ai-dsh-ptc-runtime-node/understand-the-implementation/source-map:
+/kinetick-labs-kh-ptc-runtime-node/understand-the-implementation/source-map:
   en: e4cab2eb3f09e74b
   zh: 5c10e8c4c0d9e56b
-/deepseek-ai-dsh-ptc-runtime-node/further-exploration:
-  en: ac2e2ae13d3f1394
-  zh: 5d08b9c658fcf83a
-/deepseek-ai-dsh-ptc-runtime-node/model-experience:
-  en: 860e85b43c71bd0e
-  zh: 69b0fb05f9c5e43c
-/deepseek-ai-dsh-ptc-runtime-node/model-experience/kv-cache-effect:
+/kinetick-labs-kh-ptc-runtime-node/further-exploration:
+  en: 8cba2f985ab6a00a
+  zh: d0f08399fb32e623
+/kinetick-labs-kh-ptc-runtime-node/model-experience:
+  en: 935a967fc735c6ed
+  zh: b3657a4c201e23a2
+/kinetick-labs-kh-ptc-runtime-node/model-experience/kv-cache-effect:
   en: 40294c1c31b74824
   zh: d91e7b78c0619c7e
-/deepseek-ai-dsh-ptc-runtime-node/known-limitations-and-deferred-work:
+/kinetick-labs-kh-ptc-runtime-node/known-limitations-and-deferred-work:
   en: 88eac5d4119c11f6
   zh: ba0861bf07c5e9df
-/deepseek-ai-dsh-ptc-runtime-node/known-limitations-and-deferred-work/dev-note:
-  en: 6373aba4e08f7205
-  zh: 2a8c33d1f2839df4
+/kinetick-labs-kh-ptc-runtime-node/known-limitations-and-deferred-work/dev-note:
+  en: b21a45a038b5d856
+  zh: 7492a5fd47d6e44a

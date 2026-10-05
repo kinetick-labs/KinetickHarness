@@ -3,11 +3,11 @@ import type {
   ChatLocationNodeIndex, ChatNodeProcessSource, ChatNodeSource, ChatNodeStore,
   ChatTurnProcessPresentation, CompactionSummaryNode, FinalAssistantChatData, LegacyConversationSlice,
   PartialAssistant, RunningToolCall, ToolCallBlock, TurnNavigationItem,
-} from '@deepseek-ai/dsh-client-ui-chat/client'
+} from '@kinetick-labs/kh-client-ui-chat/client'
 import type {
   ConversationLocationDataSource, ConversationLocationDataStore, ConversationTurnDataMap, TurnLocation,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import { SessionSeq } from '@deepseek-ai/dsh-session/types'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
+import { SessionSeq } from '@kinetick-labs/kh-session/types'
 import type { TurnTokenUsage } from '../src/client/contract/chat-nodes.ts'
 import {
   sameTurnNavigationItem, turnNavigationItem,

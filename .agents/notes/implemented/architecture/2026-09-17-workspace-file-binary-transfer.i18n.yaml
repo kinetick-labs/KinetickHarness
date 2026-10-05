@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-09-17-workspace-file-binary-transfer.md
 /agent-note-binary-workspace-file-transfer:
-  en: ea1888ee2f867b71
-  zh: fd32b8b9f29347cb
+  en: 03c100b90fdf6de2
+  zh: 931b0bdfa002da36
 /agent-note-binary-workspace-file-transfer/problem:
   en: 7da36071204124c9
   zh: c90cdeaef381b252
 /agent-note-binary-workspace-file-transfer/decision:
-  en: e1e0224605793212
-  zh: 4e55f4b57a4b8739
+  en: d5569b7bcbf1ed47
+  zh: 9e97eaaf1f1202b3
 /agent-note-binary-workspace-file-transfer/alternatives-considered:
   en: c548577bd53db153
   zh: 2880f3751b7fcad3

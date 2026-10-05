@@ -4,17 +4,17 @@
  * catalog subscription. Saved drafts enter the model before the first lookup
  * returns; Session-scope disposal releases the shell and its resources.
  */
-import type { ModelSelectionProjection } from '@deepseek-ai/dsh-api-session-controller/types'
-import type { PlanProjection } from '@deepseek-ai/dsh-plan-mode/types'
-import type { GoalProjection } from '@deepseek-ai/dsh-goal/types'
+import type { ModelSelectionProjection } from '@kinetick-labs/kh-api-session-controller/types'
+import type { PlanProjection } from '@kinetick-labs/kh-plan-mode/types'
+import type { GoalProjection } from '@kinetick-labs/kh-goal/types'
 import type { Context } from '@deepseek-ai/cordis'
 import type {
   ISessions, SessionBinding, SessionFace,
-} from '@deepseek-ai/dsh-api-session-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { TranslateNS } from '@deepseek-ai/dsh-client-locale/client'
-import type { InboxState } from '@deepseek-ai/dsh-agent/types'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
+} from '@kinetick-labs/kh-api-session-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type { TranslateNS } from '@kinetick-labs/kh-client-locale/client'
+import type { InboxState } from '@kinetick-labs/kh-agent/types'
+import type { ObservableSnapshot } from '@kinetick-labs/kh-client-store'
 import type {
   DraftAttachmentId, DraftAttachmentSerializationResult, DraftInitializationOptions, DraftInitializationResult, InputTriggerController,
   SessionInputResolver, SessionInput, SubmitOutcome,

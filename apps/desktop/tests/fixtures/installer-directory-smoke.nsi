@@ -8,12 +8,12 @@ LoadLanguageFile "${NSISDIR}\Contrib\Language files\English.nlf"
 LangString decompressionFailed ${LANG_ENGLISH} "Payload extraction failed"
 
 !macro installApplicationFiles
-  !insertmacro dshExtractPayload "${PAYLOAD_FILE}"
+  !insertmacro khExtractPayload "${PAYLOAD_FILE}"
 !macroend
 !ifdef SOURCE_DLL
   LoadLanguageFile "${NSISDIR}\Contrib\Language files\SimpChinese.nlf"
   !include "..\..\installer\strings.nsh"
-  !define DSH_INSTALLER_LOG_DIR "${REPORT_DIR}"
+  !define KH_INSTALLER_LOG_DIR "${REPORT_DIR}"
   !include "..\..\scripts\installer.nsh"
 !else
   !include "..\..\scripts\installer-directories.nsh"
@@ -25,19 +25,19 @@ Section
     File "/oname=$PLUGINSDIR\window-frame.dll" "${SOURCE_DLL}"
   !endif
   StrCpy $INSTDIR "${TARGET_DIR}"
-  !insertmacro dshStageApplication
+  !insertmacro khStageApplication
   !ifdef CANCELLED
     SetErrorLevel 2
-    Call dshCleanupDirectories
+    Call khCleanupDirectories
     Quit
   !endif
   !ifdef MISSING_STAGE
     ; A missing source makes the second rename fail after the old directory moved.
-    RMDir /r "\\?\$dshNewDirectory"
+    RMDir /r "\\?\$khNewDirectory"
   !endif
-  Call dshPromoteDirectories
+  Call khPromoteDirectories
   IfErrors failed
-  !insertmacro dshFinishDirectories
+  !insertmacro khFinishDirectories
   SetErrorLevel 0
   Quit
   failed:
