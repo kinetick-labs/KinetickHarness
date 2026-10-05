@@ -13,3 +13,9 @@
       name: '@kinetick-labs/kh-experimental-claude-code-mods/examples/replay-theater/index.ts'
     - id: claude-code-mod-token-weather
       name: '@kinetick-labs/kh-experimental-claude-code-mods/examples/token-weather/index.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

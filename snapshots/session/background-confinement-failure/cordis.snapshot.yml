@@ -50,3 +50,9 @@
 - insert:
     - id: async-confinement-fixture
       name: '../../../packages/shell/bash-sandbox/tests/fixtures/async-confinement-failure.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

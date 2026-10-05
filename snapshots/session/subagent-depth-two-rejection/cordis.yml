@@ -7,3 +7,9 @@
     toolName: subagent
     backgroundMode: continuable
     maxDepth: 2
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

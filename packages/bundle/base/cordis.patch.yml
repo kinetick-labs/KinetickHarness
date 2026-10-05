@@ -71,13 +71,10 @@
     - id: agent
       name: '@kinetick-labs/kh-agent'
 
-    # The transport-independent default for Agents created by entry points.
-    # Settings may supply a saved selection; consumers read it at creation time.
+    # Fresh agents have no model until Settings or a patch saves provider and model.
+    # currentSelection() stays undefined, and headless refuses to start a task.
     - id: agent-default-model
       name: '@kinetick-labs/kh-agent-default-model'
-      config:
-        provider: deepseek-official
-        model: deepseek-flash
 
     - id: jobs
       name: '@kinetick-labs/kh-jobs-local'
@@ -423,22 +420,24 @@
     # The shared base enables the stable model-facing web_search and web_fetch
     # tools. The Web app disables this host row and composes both tools per agent
     # preset; products with a stricter network policy override tool-web. DeepSeek
-    # search resolves the same DEEPSEEK_API_KEY
-    # credential the Models page manages for chat, at each search; its Messages
-    # endpoint is configured independently from the model route, so it takes its own
-    # base-URL override. Anonymous fetch accepts only public HTTP(S) destinations,
-    # resolves and validates every destination, and pins every actual connection.
-    # Search is a full auxiliary model request with server-side retrieval, so this
-    # shipped DeepSeek route gets 60s while the provider-neutral tool default
+    # search stays unloaded until a later patch sets disabled: false and, when
+    # search should be pinned, searchProvider: deepseek-official. It resolves the
+    # same DEEPSEEK_API_KEY credential the Models page manages for chat, at each
+    # search; its Messages endpoint is configured independently from the model
+    # route, so it takes its own base-URL override. Anonymous fetch accepts only
+    # public HTTP(S) destinations, resolves and validates every destination, and
+    # pins every actual connection. Search is a full auxiliary model request with
+    # server-side retrieval, so a deployment that enables this DeepSeek route
+    # should set searchTimeoutMs to 60000 while the provider-neutral tool default
     # remains 30s.
     - id: web
       name: '@kinetick-labs/kh-web'
       config:
-        searchProvider: deepseek-official
         fetchProvider: http
 
     - id: web-search-deepseek
       name: '@kinetick-labs/kh-web-search-deepseek'
+      disabled: true
       config:
         apiKeyEnv: DEEPSEEK_API_KEY
 

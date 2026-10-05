@@ -266,7 +266,15 @@ export class SessionCommandController {
     const childId = brandString<SessionId>(`session-${randomUUID()}`)
     const composition = await this.agents.composeAgent(this.agents.presetForObservation(source))
     try {
-      const { provider, model } = this.ctx.agentDefaultModel.currentSelection()
+      const selected = this.ctx.agentDefaultModel.currentSelection()
+      if (selected === undefined) {
+        throw new RemoteError(
+          'session/model-unavailable',
+          'Select an available model before forking a session.',
+          {},
+        )
+      }
+      const { provider, model } = selected
       await this.ctx.agents.create({
         sessionId: childId,
         seed,
@@ -336,8 +344,15 @@ export class SessionCommandController {
     const hasImage = request.content.some(part => part.type === 'image')
     const admit = async (): Promise<SessionPromptValue> => {
       try {
+        const current = this.agents.selectionFor(agent).current
+        if (current === undefined) {
+          throw new RemoteError(
+            'session/model-unavailable',
+            'Select an available model before sending a message.',
+            {},
+          )
+        }
         if (hasImage) {
-          const current = this.agents.selectionFor(agent).current
           const model = await this.ctx.llm.resolveModelInfo(current.provider, current.model)
           if (model.inputModalities !== undefined && !model.inputModalities.includes('image')) {
             throw new RemoteError(

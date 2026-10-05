@@ -3,3 +3,9 @@
       name: '@kinetick-labs/kh-ptc-runtime-node'
     - id: structured-denial-fixture
       name: './deny.mjs'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

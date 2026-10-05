@@ -78,3 +78,9 @@
       name: '@kinetick-labs/kh-hooks-codex'
       config:
         configPath: ./codex-hooks.json
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

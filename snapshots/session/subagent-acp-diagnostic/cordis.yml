@@ -23,3 +23,9 @@
         toolName: subagent_acp
         backgroundMode: one-shot
         maxDepth: provider-managed
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

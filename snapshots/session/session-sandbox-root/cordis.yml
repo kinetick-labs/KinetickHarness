@@ -7,3 +7,9 @@
   config:
     mode: !!js "process.env.KH_PERMISSION_MODE ?? (process.env.KH_SNAPSHOT === undefined ? 'workspace-write' : 'danger-full-access')"
     workspaceRoot: /tmp
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

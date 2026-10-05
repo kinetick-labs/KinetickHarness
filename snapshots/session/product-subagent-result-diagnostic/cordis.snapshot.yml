@@ -23,3 +23,9 @@
 - id: llm-deepseek
   name: '@kinetick-labs/kh-llm-deepseek-api-key'
   disabled: true
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

@@ -23,7 +23,7 @@ With `kh-web-search-deepseek`, the harness searches the web through DeepSeek's n
 <a id="use-this-package"></a>
 ## Use this package
 
-Mount the provider in a composition that already loads the web service; it registers as the `deepseek-official` search provider, so `ctx.web.search()` resolves it automatically when it is the only usable search backend — or pin it with `searchProvider: deepseek-official`.
+Mount the provider in a composition that already loads the web service; it registers as the `deepseek-official` search provider, so `ctx.web.search()` resolves it automatically when it is the only usable search backend — or pin it with `searchProvider: deepseek-official`. The base profile ships this row with `disabled: true`. A later patch sets `disabled: false` before search can select it.
 
 ### When to choose it
 

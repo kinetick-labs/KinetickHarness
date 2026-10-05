@@ -4,6 +4,17 @@ import { expect, it, onTestFinished, vi } from 'vitest'
 import DefaultModel from '../src/index.ts'
 import { liveConfig } from '../../../settings/settings/tests/live-config.ts'
 
+it('returns undefined when provider or model is omitted or blank', async () => {
+  const omitted = new Context()
+  onTestFinished(() => omitted.fiber.dispose())
+  await omitted.plugin(DefaultModel, {})
+  expect(omitted.agentDefaultModel.currentSelection()).toBeUndefined()
+  const blank = new Context()
+  onTestFinished(() => blank.fiber.dispose())
+  await blank.plugin(DefaultModel, { provider: '  ', model: 'm' })
+  expect(blank.agentDefaultModel.currentSelection()).toBeUndefined()
+})
+
 it('reads complete selections from volatile config and clears omitted reasoning effort', async () => {
   const ctx = new Context()
   onTestFinished(() => ctx.fiber.dispose())
@@ -29,7 +40,7 @@ it('persists complete selections through its owning profile entry', async () => 
   onTestFinished(() => standalone.fiber.dispose())
   await standalone.plugin(DefaultModel, { provider: 'test', model: 'original' })
   await standalone.agentDefaultModel.saveSelection({ provider: 'test', model: 'ignored' })
-  expect(standalone.agentDefaultModel.currentSelection().model).toBe('original')
+  expect(standalone.agentDefaultModel.currentSelection()?.model).toBe('original')
 })
 
 it('serializes overlapping saves and continues after a rejected write', async () => {

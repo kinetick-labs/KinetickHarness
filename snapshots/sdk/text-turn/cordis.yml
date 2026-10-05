@@ -37,3 +37,9 @@
     - id: snapshot-feedback-producer
       name: './feedback-producer.mjs'
       disabled: !!js "process.env.KH_SNAPSHOT_FEEDBACK !== '1'"
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

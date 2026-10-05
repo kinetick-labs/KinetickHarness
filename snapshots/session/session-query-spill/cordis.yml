@@ -31,3 +31,9 @@
 - insert:
     - id: query-spill-verification-path
       name: ./resolve-spill-command.mjs
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

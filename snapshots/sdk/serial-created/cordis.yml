@@ -30,3 +30,9 @@
 - insert:
     - id: serial-created-fixture
       name: '../../../packages/core/agent-loop/tests/fixtures/serial-created.mjs'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

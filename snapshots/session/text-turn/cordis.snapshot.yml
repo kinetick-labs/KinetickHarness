@@ -39,3 +39,9 @@
             models:
               - id: deepseek-v4-flash
               - id: deepseek-v4-pro
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

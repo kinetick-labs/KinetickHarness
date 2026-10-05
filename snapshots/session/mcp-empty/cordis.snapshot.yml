@@ -14,3 +14,9 @@
                 defaultMaxTokens: 256000
                 reasoningEfforts: [off, low, high, max]
                 defaultReasoningEffort: max
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

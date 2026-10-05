@@ -644,6 +644,7 @@ export async function launchWebScaffold(options: LaunchOptions = {}): Promise<We
       ? []
       : [{
         id: 'web-search-deepseek',
+        disabled: false,
         config: {
           apiKeyEnv: options.deepSeekSearch.apiKeyEnv,
           baseURL: options.deepSeekSearch.baseURL,

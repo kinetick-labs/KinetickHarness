@@ -12,3 +12,9 @@
     thresholdRatio: 0.8
     headroomTokens: 1800
     retainTokens: 20
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

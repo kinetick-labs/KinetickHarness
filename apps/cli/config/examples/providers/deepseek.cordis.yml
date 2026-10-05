@@ -1,0 +1,16 @@
+# Optional DeepSeek chat default and DeepSeek web search. Store
+# DEEPSEEK_API_KEY in the environment or in the credentials file.
+# The web row's config is replaced as a whole, so fetchProvider stays here.
+
+- id: agent-default-model
+  config:
+    provider: deepseek-official
+    model: deepseek-flash
+
+- id: web-search-deepseek
+  disabled: false
+
+- id: web
+  config:
+    searchProvider: deepseek-official
+    fetchProvider: http

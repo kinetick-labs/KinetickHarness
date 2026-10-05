@@ -22,12 +22,18 @@ declare module '@deepseek-ai/cordis' {
 
 /** Default model selection supplied by plugin configuration. */
 export interface Config {
-  /** Registered provider route. */
-  provider: Volatile<string>
-  /** Provider-owned model id. */
-  model: Volatile<string>
+  /** Registered provider route. Omission or a blank value means no default. */
+  provider: Volatile<string | undefined>
+  /** Provider-owned model id. Omission or a blank value means no default. */
+  model: Volatile<string | undefined>
   /** Adapter-owned reasoning effort; omission follows the provider default. */
   reasoningEffort: Volatile<string | undefined>
+}
+
+/** Drop blank configuration so an unset default stays unset. */
+function present(value: string | undefined): string | undefined {
+  if (value === undefined || value.trim() === '') return undefined
+  return value
 }
 
 /** Project stored settings onto the Agent-facing selection type. */
@@ -49,8 +55,8 @@ export class AgentDefaultModelConfig extends Service {
   private saves: Promise<void> = Promise.resolve()
 
   static Config = z.object({
-    provider: z.string().required().volatile(),
-    model: z.string().required().volatile(),
+    provider: z.string().volatile(),
+    model: z.string().volatile(),
     reasoningEffort: z.string().volatile(),
   })
 
@@ -62,12 +68,16 @@ export class AgentDefaultModelConfig extends Service {
 
   /**
    * Read the current default model selection.
-   * @returns a detached provider, model, and optional reasoning selection.
+   * @returns a detached provider, model, and optional reasoning selection, or
+   * undefined when provider or model is omitted or blank.
    */
-  currentSelection(): ModelSelection {
+  currentSelection(): ModelSelection | undefined {
+    const provider = present(this.config.provider.get())
+    const model = present(this.config.model.get())
+    if (provider === undefined || model === undefined) return undefined
     const reasoningEffort = this.config.reasoningEffort.get()
     return selection({
-      provider: this.config.provider.get(), model: this.config.model.get(),
+      provider, model,
       ...reasoningEffort === undefined ? {} : { reasoningEffort },
     })
   }
