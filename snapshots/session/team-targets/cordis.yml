@@ -13,3 +13,9 @@
       name: '@kinetick-labs/kh-experimental-agent-team'
     - id: tool-agent-team
       name: '@kinetick-labs/kh-experimental-tool-agent-team'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

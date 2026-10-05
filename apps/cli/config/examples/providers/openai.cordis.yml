@@ -1,0 +1,14 @@
+# OpenAI chat for headless or Web. Store OPENAI_API_KEY in the environment
+# or in the credentials file. Replace the model id if the installed catalog
+# does not list gpt-4o.
+
+- id: llm-pi-ai
+  config:
+    providers:
+      openai:
+        apiKeyEnv: OPENAI_API_KEY
+
+- id: agent-default-model
+  config:
+    provider: openai
+    model: gpt-4o

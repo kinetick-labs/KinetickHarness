@@ -27,3 +27,9 @@
             models:
               - id: deepseek-v4-flash
                 contextWindow: 128000
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

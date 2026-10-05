@@ -14,3 +14,9 @@
         disposeGraceMs: 500
     - id: tool-terminal
       name: '@kinetick-labs/kh-tool-terminal'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

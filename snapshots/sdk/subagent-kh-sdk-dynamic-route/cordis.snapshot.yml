@@ -20,3 +20,9 @@
       inject: [sdkAppStartup, loader]
       config:
         maxTokensAsSuccess: true
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

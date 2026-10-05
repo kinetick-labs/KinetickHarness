@@ -7,3 +7,12 @@
 - insert:
     - id: dynamic-tool-updates
       name: '../../../packages/test-support/session-snapshot/tests/fixtures/dynamic-tool-updates.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash
+
+- id: web-search-deepseek
+  disabled: false

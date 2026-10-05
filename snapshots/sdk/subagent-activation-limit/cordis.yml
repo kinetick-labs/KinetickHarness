@@ -6,3 +6,9 @@
 - insert:
     - id: subagent-activation-limit
       name: '../../../packages/test-support/session-snapshot/tests/fixtures/subagent-activation-limit.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

@@ -45,3 +45,9 @@
     maxDepth: 1
     toolFilter:
       deny: [write, edit, glob, grep, web_search, web_fetch]
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

@@ -7,3 +7,9 @@
 - insert:
     - id: partial-landlock-sandbox
       name: '../../../packages/test-support/session-snapshot/tests/fixtures/partial-landlock-sandbox.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

@@ -1,0 +1,13 @@
+# OpenRouter chat. Store OPENROUTER_API_KEY in the environment or in the
+# credentials file. Replace the model id with one the installed catalog lists.
+
+- id: llm-pi-ai
+  config:
+    providers:
+      openrouter:
+        apiKeyEnv: OPENROUTER_API_KEY
+
+- id: agent-default-model
+  config:
+    provider: openrouter
+    model: openai/gpt-4o-mini

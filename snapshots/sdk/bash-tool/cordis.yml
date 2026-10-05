@@ -25,3 +25,9 @@
     backgroundMode: one-shot
     enableRunInBackground: false
     maxDepth: 1
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

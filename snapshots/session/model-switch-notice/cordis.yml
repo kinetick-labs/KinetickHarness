@@ -3,3 +3,9 @@
 - insert:
     - id: model-switch-driver
       name: './model-switch-driver.mjs'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

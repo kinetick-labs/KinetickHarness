@@ -161,6 +161,18 @@ export class ModelDirectory {
       return
     }
     const selection = projected.next ?? catalog.value.default
+    if (selection === undefined) {
+      this.store.set({
+        current: null,
+        routable: false,
+        groups: catalog.value.groups,
+        failures: catalog.value.failures,
+        status: this.store.getSnapshot().status === 'selecting' ? 'selecting' : 'ready',
+        pending: this.store.getSnapshot().pending,
+        error: null,
+      })
+      return
+    }
     const routable = catalog.value.groups.some(group => group.id === selection.provider
       && group.models.some(model => model.id === selection.model))
     this.store.set({

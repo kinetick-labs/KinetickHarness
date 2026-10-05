@@ -31,6 +31,8 @@ Run one task, get the final answer, and exit. The task is the command-line argum
 kh --profile headless "run the tests"
 ```
 
+A fresh profile has no default model. Pass a provider patch, for example `kh --profile headless --patch apps/cli/config/examples/providers/openai.cordis.yml "run the tests"`. Without one, the process exits 1 and stderr contains `no default model is configured`.
+
 The agent works through the task, streams each non-empty provider reasoning delta to stderr under a `kh: reasoning:` heading, then prints the final answer on stdout and exits. Consecutive reasoning deltas stay in one section, and the runner closes that section before later output when the provider supplied no trailing newline. A successful run without reasoning keeps stderr empty; a failure exits 1 and prints `kh: <code>: <message>` to stderr. The task comes from the positional argument, or from stdin when the argument is omitted or is a lone `-`; a blank positional argument or an empty pipe is rejected before anything runs. A positional task is used as-is and stdin is not read, so put the whole prompt in the pipe when you want piped input; a piped task is sent verbatim, its trailing newline included.
 
 ```sh

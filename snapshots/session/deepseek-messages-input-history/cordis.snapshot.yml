@@ -41,3 +41,9 @@
               - id: deepseek-v4-pro
     - id: messages-input-history-snapshot
       name: '../../../packages/llm/llm-deepseek/tests/fixtures/input-history.ts'
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

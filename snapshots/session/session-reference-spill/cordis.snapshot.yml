@@ -55,3 +55,9 @@
       config:
         root: !!js process.env.KH_SNAPSHOT_SPILL_ROOT
         locatorRoot: !!js process.env.KH_SNAPSHOT_SPILL_LOCATOR_ROOT
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash

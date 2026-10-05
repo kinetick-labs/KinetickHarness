@@ -44,10 +44,10 @@ export interface AcpConfig {
 ```ts config-catalog
 /** Default model selection supplied by plugin configuration. */
 export interface Config {
-  /** Registered provider route. */
-  provider: Volatile<string>
-  /** Provider-owned model id. */
-  model: Volatile<string>
+  /** Registered provider route. Omission or a blank value means no default. */
+  provider: Volatile<string | undefined>
+  /** Provider-owned model id. Omission or a blank value means no default. */
+  model: Volatile<string | undefined>
   /** Adapter-owned reasoning effort; omission follows the provider default. */
   reasoningEffort: Volatile<string | undefined>
 }

@@ -87,10 +87,10 @@ export const SERVICE_API: readonly ServiceApiEntry[] = [
     description: 'Owns the default model selection independently of any Host or transport. Each operation reads the owning Config references.',
     methods: [
       {
-        signature: 'currentSelection(): ModelSelection',
+        signature: 'currentSelection(): ModelSelection | undefined',
         description: 'Read the current default model selection.',
         parameters: [],
-        returns: 'a detached provider, model, and optional reasoning selection.',
+        returns: 'a detached provider, model, and optional reasoning selection, or undefined when provider or model is omitted or blank.',
       },
       {
         signature: 'async saveSelection(next: ModelSelection): Promise<void>',
@@ -5773,7 +5773,7 @@ export const TYPE_API: readonly TypeApiEntry[] = [
   },
   {
     name: 'ModelCatalog',
-    declaration: 'export interface ModelCatalog {\n    readonly default: ModelSelection;\n    readonly routableProviders: readonly string[];\n    readonly groups: readonly ModelProviderGroup[];\n    readonly failures: readonly ModelCatalogFailure[];\n}',
+    declaration: 'export interface ModelCatalog {\n    readonly default?: ModelSelection;\n    readonly routableProviders: readonly string[];\n    readonly groups: readonly ModelProviderGroup[];\n    readonly failures: readonly ModelCatalogFailure[];\n}',
   },
   {
     name: 'ModelCatalogFailure',

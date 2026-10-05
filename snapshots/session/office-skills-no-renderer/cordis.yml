@@ -18,3 +18,12 @@
 
 - id: tool-pwsh
   disabled: true
+
+- id: agent-default-model
+  name: '@kinetick-labs/kh-agent-default-model'
+  config:
+    provider: deepseek-official
+    model: deepseek-flash
+
+- id: web-search-deepseek
+  disabled: false

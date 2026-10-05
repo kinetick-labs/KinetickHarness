@@ -1,0 +1,19 @@
+# Local OpenAI-compatible server (Ollama, vLLM, LM Studio, or another
+# Chat Completions endpoint). Change baseURL and the model id to match
+# the server. Add apiKeyEnv when the server requires a key; omitting it
+# leaves authentication to the server.
+
+- id: llm-pi-ai
+  config:
+    providers:
+      local:
+        displayName: Local
+        api: openai-completions
+        baseURL: http://127.0.0.1:11434/v1
+        models:
+          - id: local-model
+
+- id: agent-default-model
+  config:
+    provider: local
+    model: local-model

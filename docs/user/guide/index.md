@@ -4,9 +4,9 @@ Start the Web UI through the [root README](../../../README.md#run); the command 
 
 ## Configure a model
 
-Open **Settings → Models** and save a provider you choose. A DeepSeek API key is optional. The model route becomes usable on the next request without restarting the server.
+Open **Settings → Models** and save a provider. OpenAI, OpenRouter, a local OpenAI-compatible server, and a DeepSeek API key are separate routes; none is selected until you save one. The model route becomes usable on the next request without restarting the server.
 
-The [model configuration guide](./providers.md) covers DeepSeek, other built-in providers, and a custom OpenAI-compatible endpoint.
+The [model configuration guide](./providers.md) covers those providers, Claude Code and Codex delegation, and why GitHub Copilot is not a chat route.
 
 ## Choose a workspace
 
