@@ -204,7 +204,7 @@ declare module '@kinetick-labs/kh-typert-protocol' {
   interface RemoteErrorDetailsMap {
     'session/provider-credentials-unavailable': Record<string, never>
     'session/provider-models-unavailable': { readonly provider: string }
-    'session/model-unavailable': { readonly provider: string; readonly model: string }
+    'session/model-unavailable': { readonly provider?: string; readonly model?: string }
     'session/conflict': {
       readonly sessionId: SessionId
       readonly requestedCwd: string
