@@ -252,7 +252,6 @@ describe('SubagentRuntime.listChildren', () => {
     })
   })
 
-
 })
 
 /** Add discovery facts without requiring a child descriptor. */

@@ -16,8 +16,6 @@ describe('parsePublicUrl', () => {
     expect(parsePublicUrl('HTTPS://app.example/UI').href).toBe('https://app.example/UI/')
   })
 
-
-
   it.each([
     // One row per rejection branch; the whitespace check precedes the scheme check.
     ['relative or non-HTTP(S)', '/web/ui', 'publicUrl must be an absolute http or https URL of the form'],

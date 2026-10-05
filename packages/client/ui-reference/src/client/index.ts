@@ -14,8 +14,8 @@
  * @module @kinetick-labs/kh-client-ui-reference/client
  */
 // Type-only: pulls the generated Remote API and ctx.remote merge through the Client assembly boundary.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
+import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
@@ -28,7 +28,7 @@ import { formatFileMention } from '@kinetick-labs/kh-file-reference/grammar'
 import type { FileReferenceCandidate } from '@kinetick-labs/kh-file-reference/types'
 import type { SessionReferenceMentionCandidate } from '@kinetick-labs/kh-session-reference/types'
 import { abbreviateHomePath, fileAddressFor } from '@kinetick-labs/kh-util-workspace-path'
-import { en, NS, zh, type ReferenceKey } from './locales.ts'
+import { en,NS,type ReferenceKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-api-session-controller/client' {
   interface SessionReferenceSourceMap {
@@ -48,7 +48,7 @@ export const inject = [
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-reference: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-reference: dictionaries')
   const t = ctx.locale.bind(NS)
   const sessions = ctx.get('sessions') as ISessions
   const source: InputTriggerSource = {

@@ -5,8 +5,6 @@ kind: persistence-release
 
 # Persistence release: kh-v0.0.1-rc.1
 
-English | [中文](kh-v0.0.1-rc.1.zh.md)
-
 ## Summary
 
 This is the earliest available KH alpha/rc tag and establishes the historical baseline: 42 persistence roots and writer format 0.

@@ -1,7 +1,5 @@
 # `kh` CLI behavior reference
 
-English | [中文](README.zh.md)
-
 This reference defines the profile, plugin-management, and config-dump command modes. Argv is parsed once through [`src/args.ts`](../src/args.ts), and [`src/bin.ts`](../src/bin.ts) dynamically imports only the selected runner.
 
 ## Profile boot
@@ -127,7 +125,6 @@ New sessions in base-backed profiles default to the `workspace-write` permission
 ## Shared deployment behavior
 
 The base bundle mounts the native DeepSeek adapter, settings and credential providers, stable `web_search` and `web_fetch`, the public-only HTTP fetch provider, and local JSONL session persistence. Official model requests do not attach the session log or package inventory. Provider credentials resolve from the inherited environment, `$KH_HOME/.credentials.yaml`, the invoking directory's `.env`, then `$KH_HOME/.env`; the managed document is never materialized into `process.env`, while both `.env` files are ordinary launch environment layers. Search uses `DEEPSEEK_API_KEY` and accepts `DEEPSEEK_SEARCH_BASE_URL`. Enabled fetch calls run in every sandbox and approval mode without per-call confirmation; the provider rejects non-public destinations before connecting. The Web app disables the base tool row and exposes the same tools through its `cordis`, `ptc`, and `standard` agent presets.
-
 
 Install external plugin bundles through `kh plugin --profile <name> add <package-or-git-spec>`. The installed package owns its dependencies and contributes its declared `cordis.patch.yml` layer. The CLI also ships `@kinetick-labs/kh-mcp-client` as a dependency for patch layers, but no MCP server is enabled by default because each server command is trusted executable code outside the agent sandbox.
 

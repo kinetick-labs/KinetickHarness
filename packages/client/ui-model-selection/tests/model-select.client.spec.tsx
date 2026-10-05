@@ -8,8 +8,8 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { ComponentProps } from 'react'
 import type { ModelDirectoryState } from '../src/client/directory.ts'
 import { ModelSelect } from '../src/client/ModelSelect.tsx'
-import { en, zh } from '../src/client/locales.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en , en as zh } from '../src/client/locales.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 
 // The seat's key domain is model ∪ common; the stub mirrors the real lookup
 // chain: package dictionary, then common vocabulary, then the key.
@@ -594,7 +594,7 @@ describe('ModelSelect catalog size', () => {
     render(<ModelSelect locked={false} available
       directory={createSnapshotStore(state({ groups: modelGroups(count), current: null }))}
       load={vi.fn()} select={vi.fn()} t={t} />)
-    const trigger = screen.getByRole('button', { name: '请选择模型' })
+    const trigger = screen.getByRole('button', { name: 'Select model' })
     fireEvent.click(trigger)
     const rows = screen.queryAllByRole('menuitemradio')
     expect(rows).toHaveLength(count)
@@ -617,7 +617,7 @@ describe('ModelSelect catalog size', () => {
 
     act(() => { directory.set(state({ groups: modelGroups(4), current })) })
     expect(screen.queryByRole('searchbox')).toBeNull()
-    expect(screen.queryByRole('button', { name: '清除搜索' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Clear search' })).toBeNull()
     const rows = screen.getAllByRole('menuitemradio')
     expect(rows).toHaveLength(4)
     expect(document.activeElement).toBe(rows[checked ? 2 : 0])
@@ -659,7 +659,7 @@ describe('ModelSelect catalog size', () => {
     expect(fireEvent.keyDown(rows[2]!, { key: 'Tab' })).toBe(false)
     expect(select).toHaveBeenCalledWith({ provider: 'deepseek-official', model: 'model-3' })
     await waitFor(() => { expect(document.activeElement).toBe(trigger) })
-    expect(screen.queryByRole('group', { name: '模型与推理等级' })).toBeNull()
+    expect(screen.queryByRole('group', { name: 'Model and reasoning effort' })).toBeNull()
     expect(trigger.hasAttribute('data-selection-focus')).toBe(true)
   })
 
@@ -675,7 +675,7 @@ describe('ModelSelect catalog size', () => {
     expect(row.hasAttribute('data-highlighted')).toBe(true)
     expect(fireEvent.keyDown(row, { key: 'Tab' })).toBe(false)
     expect(select).toHaveBeenCalledWith({ provider: 'deepseek-official', model: 'model-3' })
-    await waitFor(() => { expect(screen.queryByRole('group', { name: '模型与推理等级' })).toBeNull() })
+    await waitFor(() => { expect(screen.queryByRole('group', { name: 'Model and reasoning effort' })).toBeNull() })
   })
 
   it.each(['Escape', 'Tab'])('leaves a small model pane with %s and returns to its root cell', (key) => {
@@ -699,13 +699,13 @@ describe('ModelSelect search', () => {
     render(<ModelSelect locked={false} available
       directory={createSnapshotStore(state({ groups: modelGroups(5), current: null }))}
       load={vi.fn()} select={vi.fn()} t={t} />)
-    const trigger = screen.getByRole('button', { name: '请选择模型' })
+    const trigger = screen.getByRole('button', { name: 'Select model' })
     fireEvent.click(trigger)
     const search = screen.getByRole('searchbox')
     expect(document.activeElement).toBe(search)
     fireEvent.change(search, { target: { value: 'zzzz' } })
     fireEvent.keyDown(search, { key: 'Escape' })
-    expect(screen.queryByRole('group', { name: '模型与推理等级' })).toBeNull()
+    expect(screen.queryByRole('group', { name: 'Model and reasoning effort' })).toBeNull()
     fireEvent.click(trigger)
     expect(screen.getByRole('searchbox').getAttribute('value')).toBe('')
     expect(document.activeElement).toBe(screen.getByRole('searchbox'))
@@ -788,7 +788,7 @@ describe('ModelSelect search', () => {
     fireEvent.keyDown(search, { key: 'Enter' })
     expect(select).not.toHaveBeenCalled()
     expect(fireEvent.keyDown(search, { key: 'Tab' })).toBe(true)
-    fireEvent.click(screen.getByRole('button', { name: '清除搜索' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Clear search' }))
     const restored = screen.getAllByRole('menuitemradio')
     expect(search.getAttribute('aria-activedescendant')).toBe(restored[0]!.id)
     fireEvent.mouseMove(restored[4]!)
@@ -796,7 +796,7 @@ describe('ModelSelect search', () => {
     expect(document.activeElement).toBe(search)
     fireEvent.keyDown(search, { key })
     expect(select).toHaveBeenCalledWith({ provider: 'other', model: 'gamma' })
-    await waitFor(() => { expect(screen.queryByRole('group', { name: '模型与推理等级' })).toBeNull() })
+    await waitFor(() => { expect(screen.queryByRole('group', { name: 'Model and reasoning effort' })).toBeNull() })
     const trigger = screen.getByRole('button', { name: /选择模型/ })
     await waitFor(() => { expect(document.activeElement).toBe(trigger) })
     expect(trigger.hasAttribute('data-selection-focus')).toBe(true)
@@ -825,15 +825,15 @@ describe('ModelSelect search', () => {
     expect(trigger.textContent).toContain('DeepSeek-V4-Flash')
     fireEvent.change(search, { target: { value: 'zzzz' } })
     const status = screen.getByRole('status')
-    expect(status.textContent).toBe('没有匹配的模型。')
+    expect(status.textContent).toBe('No matching models.')
     expect(status.closest('[role="menu"]')).toBeNull()
     expect(screen.queryByRole('menu')).toBeNull()
     expect(fireEvent.keyDown(search, { key: 'ArrowDown' })).toBe(false)
     expect(document.activeElement).toBe(search)
-    fireEvent.click(screen.getByRole('button', { name: '清除搜索' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Clear search' }))
     expect(search.getAttribute('value')).toBe('')
     expect(document.activeElement).toBe(search)
-    expect(screen.queryByRole('button', { name: '清除搜索' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Clear search' })).toBeNull()
     expect(screen.getAllByRole('menuitemradio')).toHaveLength(5)
     fireEvent.change(search, { target: { value: 'gmfl' } })
     fireEvent.keyDown(search, { key: 'Escape' })
@@ -855,7 +855,7 @@ describe('ModelSelect search', () => {
 it('shows the unselected model control with the inherited effort', async () => {
   const directory = createSnapshotStore<ModelDirectoryState>(state({ current: null, routable: false, retainedEffort: 'High' }))
   render(<ModelSelect locked={false} available directory={directory} load={vi.fn()} select={vi.fn()} t={t} />)
-  const trigger = screen.getByRole('button', { name: '请选择模型' })
+  const trigger = screen.getByRole('button', { name: 'Select model' })
   expect(trigger.hasAttribute('disabled')).toBe(false)
   await expect(`${trigger.textContent}\n`).toMatchFileSnapshot('./expected/unselected-model.txt')
   expect(trigger.textContent).toContain('High')
@@ -866,12 +866,11 @@ it('shows the unselected model control with the inherited effort', async () => {
   const row = screen.getByRole('menuitemradio', { name: 'DeepSeek-V4-Flash' })
   expect(document.activeElement).toBe(row)
   fireEvent.keyDown(row, { key: 'Escape' })
-  expect(screen.queryByRole('group', { name: '模型与推理等级' })).toBeNull()
+  expect(screen.queryByRole('group', { name: 'Model and reasoning effort' })).toBeNull()
   fireEvent.click(trigger)
   expect(screen.queryByRole('searchbox')).toBeNull()
   expect(document.activeElement).toBe(screen.getByRole('menuitemradio', { name: 'DeepSeek-V4-Flash' }))
 })
-
 
 it('places account and official models before third-party models', async () => {
   const groups = ['custom', 'deepseek-official', 'deepseek-account', 'another'].map(id => ({
@@ -879,7 +878,7 @@ it('places account and official models before third-party models', async () => {
   }))
   const directory = createSnapshotStore<ModelDirectoryState>(state({ current: null, groups }))
   render(<ModelSelect locked={false} available directory={directory} load={vi.fn()} select={vi.fn()} t={t} />)
-  fireEvent.click(screen.getByRole('button', { name: '请选择模型' }))
+  fireEvent.click(screen.getByRole('button', { name: 'Select model' }))
   const names = screen.getAllByRole('menuitemradio').map(row => row.textContent)
   expect(names).toEqual([
     'deepseek-account-1', 'deepseek-account-2', 'deepseek-official-1', 'deepseek-official-2',

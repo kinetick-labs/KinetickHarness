@@ -18,7 +18,6 @@ import {
   type ProxyPolicy,
 } from './policy.ts'
 
-
 /** The active policy, or `undefined` until one is installed. Process-wide, like the dispatcher it tracks. */
 let active: ProxyPolicy | undefined
 
@@ -221,9 +220,6 @@ async function installGlobalProxy(policy: ProxyPolicy): Promise<() => Promise<vo
     await agent.close()
   }
 }
-
-
-
 
 /**
  * The proxy environment a spawned child needs.

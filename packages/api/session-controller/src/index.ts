@@ -528,7 +528,6 @@ export class SessionController extends TypertRemoteService {
     return this.controlState.control(signal)
   }
 
-
 }
 
 export { buildModelCatalog }

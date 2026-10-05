@@ -4,15 +4,15 @@
  * and the human kill all go through the `jobs` client service; this plugin
  * holds no transport state of its own.
  */
+import type {} from '@kinetick-labs/kh-api-job-controller/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { JobId } from '@kinetick-labs/kh-jobs/brand'
 import { JobListAction } from './JobListAction.tsx'
 import type { JobListInjected } from './JobListAction.tsx'
-import type {} from '@kinetick-labs/kh-api-job-controller/client'
 import type {} from '@kinetick-labs/kh-client-locale/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-session/client'
-import { en, NS, zh, type JobKey } from './locales.ts'
+import { en,NS,type JobKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -31,7 +31,7 @@ export const inject = ['jobs', 'slots', 'locale']
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-jobs: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-jobs: dictionaries')
   ctx.slots.inject(
     'conversation.session.header.actions',
     () => ctx.slots.register({

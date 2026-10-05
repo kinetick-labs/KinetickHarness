@@ -14,7 +14,7 @@ import { sessionFileAddress } from '@kinetick-labs/kh-util-workspace-path'
 import {
   FILES_ID, FILES_KIND, filesDefinition,
 } from '../src/client/definition.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 const t = makeTranslate(zh)
 

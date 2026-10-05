@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-client-ui-sidebar-files
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Browse a Session's workspace tree and open files in Sidebar previews. The root and expanded directories refresh automatically from direct-entry watches; manual reload remains available. The tab is reached from the guide and claims no resource address.

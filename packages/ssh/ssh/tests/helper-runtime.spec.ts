@@ -8,7 +8,6 @@ import { z } from 'zod'
 import { createHelperHarness as helper } from './fixtures/helper.ts'
 import { targetSchema, writeResultSchema, editResultSchema, infoSchema, entriesSchema } from '../src/schemas.ts'
 
-
 const policy = (workspaceRoot: string) => ({ mode: 'workspace-write', workspaceRoot })
 
 describe.skipIf(process.platform === 'win32')('SSH helper runtime', () => {

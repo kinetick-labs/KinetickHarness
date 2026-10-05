@@ -298,7 +298,6 @@ it('uses the Desktop stream origin and exposes the native platform bridge', asyn
   expect(mock.remote.account.startSignIn).toHaveBeenCalledWith(expect.objectContaining({ locale: 'en' }), 'http://localhost:9876', 'desktop')
 }, 60_000)
 
-
 it('re-reads the account when the shared host returns from top-up, and not from usage or an absent page', async ({ start, mock }) => {
   vi.stubGlobal('khDesktop', {})
   const c = await start()
@@ -597,7 +596,6 @@ it('reads the account task impact and reports a refused query', async ({ start, 
   mock.remote.account.hasRunningAccountTasks.mockResolvedValueOnce({ ok: false, error: new RemoteError('gateway/internal', 'offline', {}) })
   await expect(actions.hasRunningAccountTasks()).rejects.toThrow('account task query failed')
 }, 60_000)
-
 
 it('forwards live account notices and removes their subscriptions', async ({ start }) => {
   vi.stubGlobal('khDesktop', {})

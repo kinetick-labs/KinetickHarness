@@ -14,7 +14,7 @@
   },
   "darwin:zh-CN": {
     "menu": [
-      { "label": "关于 KinetickHarness", "role": "about" },
+      { "label": "About KinetickHarness", "role": "about" },
       { "type": "separator" }
     ],
     "options": {
@@ -27,7 +27,7 @@
   },
   "win32:zh-CN": {
     "menu": [
-      { "label": "关于 KinetickHarness" },
+      { "label": "About KinetickHarness" },
       { "type": "separator" }
     ],
     "options": {

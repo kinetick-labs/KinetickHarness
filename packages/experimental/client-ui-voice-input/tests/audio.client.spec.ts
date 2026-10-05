@@ -42,7 +42,6 @@ it('releases a microphone granted after cancellation', async () => {
   expect(dispose).toHaveBeenCalledOnce()
 })
 
-
 it('flushes final recording bytes, bounds timer overshoot and closes audio resources', async () => {
   const b = captureFixture()
   expect(b.recording.amplitude()).toBe(0)

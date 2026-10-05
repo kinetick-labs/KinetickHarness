@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import type {} from '../src/client/index.ts'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { GlobalStandardProps } from '@kinetick-labs/kh-client-ui-slots'
 import { Context } from '@deepseek-ai/cordis'
@@ -26,19 +27,16 @@ import {
   WorkflowRunPanel, type WorkflowRunInjected, type WorkflowRunPanelProps,
 } from '../src/client/WorkflowRunPanel.tsx'
 import { apply, inject } from '../src/client/index.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 import {
   workflowRunDefinition, type WorkflowRunChatData,
 } from '../src/client/workflow-definition.ts'
 import { apply as applyNode } from '../src/index.ts'
-import type {} from '../src/client/index.ts'
-
 // Every session-scope fixture carries the resource hook the resources plugin merges into GlobalStandardProps.
 const useResource = (() => ({ status: 'none' as const, value: undefined, failure: undefined, reload: () => {} })) as GlobalStandardProps['useResource']
 const usePanelInfo: GlobalStandardProps['usePanelInfo'] = selector => selector({ activePanelId: null })
 
 afterEach(cleanup)
-
 
 const PARENT_ID = 'parent' as SessionId
 const CHILD_ID = 'child-1' as SessionId
@@ -536,13 +534,13 @@ describe('WorkflowRunPanel', () => {
     const running: WorkflowRunChatData = { name: 'empty', status: 'running', phases: [] }
     const view = render(<WorkflowRunPanel {...panelProps(running)} />)
     expect(screen.getByRole('button', { name: /^empty/ }).getAttribute('aria-expanded')).toBe('true')
-    expect(screen.getByText('没有启动成员')).toBeTruthy()
+    expect(screen.getByText('No members started')).toBeTruthy()
     view.rerender(<WorkflowRunPanel {...panelProps({ ...running, status: 'completed' })} />)
     const header = screen.getByRole('button', { name: /^empty/ })
     expect(header.getAttribute('aria-expanded')).toBe('false')
-    expect(screen.queryByText('没有启动成员')).toBeNull()
+    expect(screen.queryByText('No members started')).toBeNull()
     fireEvent.click(header)
-    expect(screen.getByText('没有启动成员')).toBeTruthy()
+    expect(screen.getByText('No members started')).toBeTruthy()
   })
 
   it.each(['failed', 'cancelled', 'interrupted'] as const)(
@@ -618,20 +616,20 @@ describe('WorkflowRunPanel', () => {
     expect(cleanPhase.getAttribute('aria-expanded')).toBe('false')
     const activePhase = screen.getByRole('button', { name: /未分阶段/ })
     expect(activePhase.getAttribute('aria-expanded')).toBe('true')
-    expect(screen.queryByText('空成员名')).toBeNull()
+    expect(screen.queryByText('Empty member name')).toBeNull()
     expect(screen.getByText('second')).toBeTruthy()
     fireEvent.click(cleanPhase)
-    expect(screen.getByText('空成员名')).toBeTruthy()
+    expect(screen.getByText('Empty member name')).toBeTruthy()
     expect(screen.getByText('second')).toBeTruthy()
     fireEvent.click(activePhase)
     expect(screen.queryByText('second')).toBeNull()
-    expect(screen.getByText('空成员名')).toBeTruthy()
+    expect(screen.getByText('Empty member name')).toBeTruthy()
     fireEvent.click(runHeader)
     fireEvent.click(runHeader)
     expect(screen.getByRole('button', { name: /空阶段名/ }).getAttribute('aria-expanded')).toBe('true')
     expect(screen.getByRole('button', { name: /未分阶段/ }).getAttribute('aria-expanded')).toBe('false')
     fireEvent.click(screen.getByRole('button', { name: /空阶段名/ }))
-    expect(screen.queryByText('空成员名')).toBeNull()
+    expect(screen.queryByText('Empty member name')).toBeNull()
   })
 
   it('renders mixed and interrupted aggregate status while attention stays visible', () => {

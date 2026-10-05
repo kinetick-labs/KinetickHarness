@@ -12,8 +12,8 @@ import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-te
 import type { PlanProjection } from '@kinetick-labs/kh-plan-mode/client'
 import { PlanChip, type PlanChipProps } from '../src/client/PlanModeControl.tsx'
 import css from '../src/client/PlanModeControl.module.css'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 
@@ -33,7 +33,7 @@ function setup(
   return { store, exitPlanMode, view }
 }
 
-const chip = () => screen.getByRole('button', { name: '计划模式已开启，按下关闭' })
+const chip = () => screen.getByRole('button', { name: 'Plan mode on, press to turn off' })
 
 describe('PlanChip', () => {
   it('renders nothing for an absent capability or a default-mode target', () => {
@@ -81,7 +81,7 @@ describe('PlanChip', () => {
     resolve(null)
     store.set({ value: { active: true, pending: true } })
     await waitFor(() => {
-      expect(screen.queryByRole('button', { name: '计划模式已开启，按下关闭' })).toBeNull()
+      expect(screen.queryByRole('button', { name: 'Plan mode on, press to turn off' })).toBeNull()
     })
   })
 
@@ -97,7 +97,7 @@ describe('PlanChip', () => {
       .mockRejectedValueOnce('socket closed')
     setup({ active: true, pending: false }, exitPlanMode)
     fireEvent.click(chip())
-    expect((await screen.findByText('退出计划模式失败')).getAttribute('title')).toBe('host said no')
+    expect((await screen.findByText('Failed to exit plan mode')).getAttribute('title')).toBe('host said no')
     expect(chip()).toBeTruthy()
 
     fireEvent.click(chip())

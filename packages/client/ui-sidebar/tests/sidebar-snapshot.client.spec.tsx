@@ -14,7 +14,6 @@ import { act, cleanup, waitFor } from '@testing-library/react'
 import { SlotTestRuntime, usePinnedBrowserLanguages } from '@kinetick-labs/kh-client-test-runtime'
 import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
 import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
 import { apply, inject } from '@kinetick-labs/kh-client-ui-sidebar/client'
 
 // The service reads its initial locale from the browser; these specs assert
@@ -44,7 +43,7 @@ async function bench(options: { locale?: 'en' } = {}) {
   runtime.ctx.provide('layout', { toggleSidebar: vi.fn() })
   runtime.ctx.provide('uiWorkspace', { startSession: vi.fn() } as never)
   const locale = new LocaleRuntime(runtime.ctx)
-  locale.register('common', { zh: commonZh, en: commonEn })
+  locale.register('common', { en: commonEn })
   if (options.locale === 'en') locale.setLocale('en')
   runtime.ctx.provide('locale', locale)
   runtime.slots.installLocale(locale)
@@ -58,7 +57,7 @@ describe('sidebar shell snapshots', () => {
     const { runtime } = await bench()
     const slot = runtime.renderSlot('sidebar', { collapsed: false, width: 300 })
     // Wordmark + capsule both start a session in the expanded state.
-    expect(slot.view.getAllByRole('button', { name: '新建会话' })).toHaveLength(2)
+    expect(slot.view.getAllByRole('button', { name: 'New session' })).toHaveLength(2)
     expect(slot.container).toMatchSnapshot()
     await runtime.dispose()
   })

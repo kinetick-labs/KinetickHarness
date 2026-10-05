@@ -1045,7 +1045,6 @@ describe('tool execution', () => {
     expect(result.content[0]).toEqual({ type: 'text', text: '(empty_tool returned no model-visible content)' })
   })
 
-
   it('handles isError with non-text content (fallback error message)', async () => {
     const client = createMockClient(
       [{ name: 'err_notext', inputSchema: { type: 'object' } }],
@@ -1061,7 +1060,6 @@ describe('tool execution', () => {
       text: 'Error: [image unavailable: image/png; this result was not admitted to durable model context; raw image data remains available to programmatic callers]',
     })
   })
-
 
   it('uses tool description when provided', async () => {
     const client = createMockClient([

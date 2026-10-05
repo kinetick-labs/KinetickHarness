@@ -74,7 +74,7 @@ it.each(['https://registry.npmjs.org/', MIRROR])('selects the fastest responding
       await registryToggle.waitFor()
       expect(await page.getByRole('radio').count()).toBe(0)
       await registryToggle.click()
-      const options = page.getByRole('group', { name: '从哪个 npm 源下载插件', exact: true })
+      const options = page.getByRole('group', { name: 'The npm registry the plugin is downloaded from', exact: true })
       const mirror = options.getByRole('radio', { name: '中国大陆镜像源 registry.npmmirror.com', exact: true })
       await expect.poll(async () => (await readFile(requestLog, 'utf8')).trim().split('\n').filter(Boolean)).toHaveLength(2)
       const pingUrls = (await readFile(requestLog, 'utf8')).trim().split('\n').sort()
@@ -91,7 +91,7 @@ it.each(['https://registry.npmjs.org/', MIRROR])('selects the fastest responding
       }
       expect(await options.getByRole('radio').count()).toBe(3)
       await dialog.getByRole('button', { name: '安装源 中国大陆镜像源', exact: true }).waitFor()
-      await dialog.getByRole('textbox', { name: '包名或地址' }).fill('mirrored-package')
+      await dialog.getByRole('textbox', { name: 'Package name or address' }).fill('mirrored-package')
       const picker = (await captureStableAria(page, '[data-install-registry]', scaffold.workspaceCwd))
         .split(process.execPath).join('{{node}}')
         .split(scaffold.harnessHome).join('{{harnessHome}}')
@@ -101,10 +101,10 @@ it.each(['https://registry.npmjs.org/', MIRROR])('selects the fastest responding
       await page.keyboard.press('Escape')
       await options.waitFor({ state: 'detached' })
       await dialog.getByRole('button', { name: '安装源 中国大陆镜像源', exact: true }).waitFor()
-      await dialog.getByRole('button', { name: '安装', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Install', exact: true }).click()
       // The check asked the mirror first, which answered; the run that lost the mirror sent the install on to
       // the registry after it, which finished it. Each run shows behind the details with the registry it asked.
-      await dialog.getByRole('button', { name: '立即启用', exact: true }).waitFor({ timeout: 20_000 })
+      await dialog.getByRole('button', { name: 'Enable now', exact: true }).waitFor({ timeout: 20_000 })
       await dialog.getByText('版本 2.0.0', { exact: true }).waitFor()
       const lookups = (await readFile(join(profile, '.registry-lookups'), 'utf8')).trim().split('\n')
         .map(line => JSON.parse(line) as string[])
@@ -113,7 +113,7 @@ it.each(['https://registry.npmjs.org/', MIRROR])('selects the fastest responding
       expect(lookups.map(call => call.filter(argument => argument.startsWith('--registry=')))).toEqual([
         ['--registry=' + MIRROR], ['--registry=' + MIRROR], [],
       ])
-      await dialog.getByRole('button', { name: '查看安装详情', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Show install details', exact: true }).click()
       await dialog.getByText('Installed from the registry pnpm names', { exact: true }).waitFor()
       await dialog.getByText('第 1 次 · 中国大陆镜像源', { exact: true }).waitFor()
       await dialog.getByText('第 2 次 · npm 官方源', { exact: true }).waitFor()
@@ -123,8 +123,8 @@ it.each(['https://registry.npmjs.org/', MIRROR])('selects the fastest responding
         .split(scaffold.harnessHome).join('{{harnessHome}}')
       await compareOrRefreshGolden(fileURLToPath(new URL('./expected/plugin-install-registry/installed.expected.md', import.meta.url)), installed, webSnapshotMode())
       // The dialog opened again starts from the registry picked for the last install.
-      await dialog.getByRole('button', { name: '立即启用', exact: true }).click()
-      await panel.getByRole('button', { name: '添加插件', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Enable now', exact: true }).click()
+      await panel.getByRole('button', { name: 'Add plugin', exact: true }).click()
       await page.getByRole('dialog').getByRole('button', { name: '安装源 中国大陆镜像源', exact: true }).waitFor()
       expect(tripwire.pageErrors).toEqual([])
     } finally { await browser.close() }

@@ -340,7 +340,6 @@ it('offers the Web allowlist while recording without a native acknowledgement', 
   expect(screen.getByText(en['macos-web-help'])).toBeTruthy()
 })
 
-
 it('finishes a Command combination on modifier release when macOS omits the letter keyup', async () => {
   const f = await mount()
   const recorder = screen.getByRole('button', { name: en.record }); recorder.focus()

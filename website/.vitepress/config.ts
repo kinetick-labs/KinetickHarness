@@ -61,8 +61,8 @@ interface GuideModules {
 const guideModules = {
   root: {
     guide: localeCollections.root[0],
-    develop: { label: '开发', collection: localeCollections.root[1] },
-    reference: { label: '参考', collection: localeCollections.root[2] },
+    develop: { label: 'Development', collection: localeCollections.root[1] },
+    reference: { label: 'Reference', collection: localeCollections.root[2] },
   },
   en: {
     guide: localeCollections.en[0],
@@ -177,7 +177,7 @@ const base = process.env.DOCS_BASE ?? '/'
 /** Site identity shared by the VitePress configuration and the llms.txt index. */
 const siteIdentity = {
   title: 'KinetickHarness',
-  description: '用于构建 Agent Harness 的插件化 SDK',
+  description: 'A local-first, plugin-based agent harness.',
 }
 
 /**
@@ -284,28 +284,28 @@ export default withMermaid({
   outDir: '.dist',
   locales: {
     root: {
-      label: '简体中文',
-      lang: 'zh-CN',
+      label: 'English',
+      lang: 'en-US',
       themeConfig: {
-        siteTitle: siteTitle('技术预览'),
+        siteTitle: siteTitle('Preview'),
         nav: [
-          { text: '入门', link: landingLink('root', guideModules.root.guide), activeMatch: '^/guide/' },
+          { text: 'Guide', link: landingLink('root', guideModules.root.guide), activeMatch: '^/guide/' },
           ...moduleNav('root'),
         ],
         sidebar: {
           '/guide/': guideSidebar('root'),
-          '/develop/': sidebar('root', 'zh-develop'),
-          '/reference/': sidebar('root', 'zh-reference'),
+          '/develop/': sidebar('root', 'en-develop'),
+          '/reference/': sidebar('root', 'en-reference'),
         },
-        outline: { label: '本页目录' },
-        docFooter: { prev: '上一篇', next: '下一篇' },
-        darkModeSwitchLabel: '外观',
-        lightModeSwitchTitle: '切换到浅色主题',
-        darkModeSwitchTitle: '切换到深色主题',
-        sidebarMenuLabel: '菜单',
-        returnToTopLabel: '返回顶部',
-        langMenuLabel: '切换语言',
-        skipToContentLabel: '跳至内容',
+        outline: { label: 'On this page' },
+        docFooter: { prev: 'Previous', next: 'Next' },
+        darkModeSwitchLabel: 'Appearance',
+        lightModeSwitchTitle: 'Switch to light theme',
+        darkModeSwitchTitle: 'Switch to dark theme',
+        sidebarMenuLabel: 'Menu',
+        returnToTopLabel: 'Return to top',
+        langMenuLabel: 'Change language',
+        skipToContentLabel: 'Skip to content',
       },
     },
     en: {

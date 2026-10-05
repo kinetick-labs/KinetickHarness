@@ -5,20 +5,20 @@
  * popupSelect shell self-registers into conversation.input.overlay with
  * per-session resolution.
  */
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { ISessions } from '@kinetick-labs/kh-api-session-controller/client'
 // Type-only: pulls the 'conversation.input.overlay' SlotMap declaration (the
 // key's owner) into this program so the overlay registration below typechecks
 // against the real declaration — no runtime edge to ui-conversation.
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import { CommandUiRuntime } from './service.ts'
 import type { PopupSelectInjected } from './PopupSelectView.tsx'
 import { PopupSelectView } from './PopupSelectView.tsx'
-import { en, zh, type CommandKey } from './locales.ts'
+import { en,type CommandKey } from './locales.ts'
 
 export { CommandUiRuntime } from './service.ts'
 export { CommandDirectory } from './directory.ts'
@@ -56,7 +56,7 @@ export const inject = ['inputTriggers', 'sessions', 'remote', 'remote.commands',
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-commands: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-commands: dictionaries')
   ctx.plugin(CommandUiRuntime)
   ctx.inject(['slots', 'commandUi', 'sessions'], (scope: ClientContext) => {
     const command = scope.commandUi

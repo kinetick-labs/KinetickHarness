@@ -93,7 +93,7 @@ describe('TerminalBlock states', () => {
     const view = render(<TerminalBlock command="sleep 5" running />)
     expect(view.getByText('sleep 5')).toBeTruthy()
     expect(outputLines(view.container)).toEqual([])
-    expect(view.queryByText('无输出')).toBeNull()
+    expect(view.queryByText('No output')).toBeNull()
     expect(view.queryByRole('button')).toBeNull()
     expect(view.container.firstElementChild?.getAttribute('data-running')).toBe('')
     // Banner-only: no body, so no banner divider either.
@@ -105,7 +105,7 @@ describe('TerminalBlock states', () => {
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
     const view = render(<TerminalBlock command="npm run build --verbose" running copyText="npm run build --verbose" />)
     // No output yet, but the command is already copyable.
-    const button = view.getByRole('button', { name: '复制' })
+    const button = view.getByRole('button', { name: 'Copy' })
     await act(async () => { fireEvent.click(button) })
     expect(writeText).toHaveBeenCalledWith('npm run build --verbose')
   })
@@ -119,8 +119,8 @@ describe('TerminalBlock states', () => {
   it('running with supplied output streams the live text without a default copy control', () => {
     const view = render(<TerminalBlock command="sleep 5" running output="partial" />)
     expect(view.getByText('partial')).toBeTruthy()
-    expect(view.queryByText('无输出')).toBeNull()
-    expect(view.queryByRole('button', { name: '复制' })).toBeNull()
+    expect(view.queryByText('No output')).toBeNull()
+    expect(view.queryByRole('button', { name: 'Copy' })).toBeNull()
     expect(view.container.firstElementChild?.getAttribute('data-running')).toBe('')
     // Live output renders a body, so the banner divider returns.
     expect(view.container.firstElementChild?.getAttribute('data-body')).toBe('')
@@ -129,7 +129,7 @@ describe('TerminalBlock states', () => {
   it('running with an empty live stream draws neither output nor placeholder', () => {
     const view = render(<TerminalBlock command="tail -f log" running output="" />)
     expect(outputLines(view.container)).toEqual([])
-    expect(view.queryByText('无输出')).toBeNull()
+    expect(view.queryByText('No output')).toBeNull()
     expect(view.queryByRole('button')).toBeNull()
   })
 
@@ -140,18 +140,18 @@ describe('TerminalBlock states', () => {
 
   it('settled with whitespace-only output shows the dimmed placeholder', () => {
     const view = render(<TerminalBlock command="true" output={'  \n '} exitCode={0} />)
-    expect(view.getByText('无输出')).toBeTruthy()
-    expect(view.queryByRole('button', { name: '复制' })).toBeNull()
+    expect(view.getByText('No output')).toBeTruthy()
+    expect(view.queryByRole('button', { name: 'Copy' })).toBeNull()
   })
 
   it('settled with absent output shows the placeholder', () => {
     render(<TerminalBlock command="true" exitCode={0} />)
-    expect(screen.getByText('无输出')).toBeTruthy()
+    expect(screen.getByText('No output')).toBeTruthy()
   })
 
   it('settled with an empty string shows the placeholder', () => {
     render(<TerminalBlock command="true" output="" exitCode={0} />)
-    expect(screen.getByText('无输出')).toBeTruthy()
+    expect(screen.getByText('No output')).toBeTruthy()
   })
 
   it('treats output that renders nothing visible as empty', () => {
@@ -159,10 +159,10 @@ describe('TerminalBlock states', () => {
     // to nothing. Judging emptiness on the raw text drew a box of blank rows
     // plus a copy control for invisible bytes, and hid the placeholder.
     const view = render(<TerminalBlock command="true" output={`${ESC}[0m`} exitCode={0} />)
-    expect(view.getByText('无输出')).toBeTruthy()
-    expect(view.queryByText('复制')).toBeNull()
+    expect(view.getByText('No output')).toBeTruthy()
+    expect(view.queryByText('Copy')).toBeNull()
     view.rerender(<TerminalBlock command="true" output={`${ESC}]0;title${ESC}\\`} exitCode={0} />)
-    expect(view.getByText('无输出')).toBeTruthy()
+    expect(view.getByText('No output')).toBeTruthy()
   })
 
   it('merges className onto the wrapper', () => {

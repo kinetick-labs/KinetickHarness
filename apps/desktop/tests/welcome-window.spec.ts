@@ -56,7 +56,7 @@ describe('desktop welcome window', () => {
       resizable: false, maximizable: false, fullscreenable: false,
       webPreferences: {
         nodeIntegration: false, contextIsolation: true, sandbox: true, webSecurity: true,
-        additionalArguments: ['--kh-welcome-locale=zh-CN'],
+        additionalArguments: ['--kh-welcome-locale=en'],
       },
     })
     expect(options.webPreferences?.preload).toMatch(/preload-welcome\.cjs$/u)

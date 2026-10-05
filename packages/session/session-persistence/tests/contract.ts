@@ -121,7 +121,6 @@ export function releasedV1OneTurnLog(): SessionEvent[] {
   ]
 }
 
-
 /** A contiguous second-turn batch continuing {@link oneTurnLog}. */
 function secondTurn(startSeq = 6): SessionEvent[] {
   return [

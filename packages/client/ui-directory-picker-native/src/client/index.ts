@@ -7,7 +7,6 @@ import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { NativeFlowInjected } from './flow.ts'
 import { NativeDirectoryFlow } from './flow.ts'
 
-
 /** Required services (cordis fiber inject): the slot registry and workspace UI service. */
 export const inject = ['slots', 'uiWorkspace']
 

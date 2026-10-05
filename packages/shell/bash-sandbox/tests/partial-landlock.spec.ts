@@ -28,7 +28,6 @@ function start(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> }, spe
   return x.execute({ ...spec, onExpiry: 'none' })
 }
 
-
 const NOTICE = 'landlock-run: partial enforcement (older Landlock ABI)'
 const FATAL_PREFIX = 'landlock-run: '
 const FATAL = `${FATAL_PREFIX}landlock ruleset error: Invalid argument`

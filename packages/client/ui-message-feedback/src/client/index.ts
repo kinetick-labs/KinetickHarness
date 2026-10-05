@@ -8,25 +8,25 @@
  * @module @kinetick-labs/kh-client-ui-message-feedback/client
  */
 
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type {} from '@kinetick-labs/kh-client-ui-commands/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 // Type-only: pulls the generated Remote API and ctx.remote merge through the Client assembly boundary.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 // Type-only: pulls the ui-conversation SlotMap merge (the assistant-actions and overlay entries).
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 // Type-only: pulls the command UI's Context merge (ctx.commandUi).
-import type {} from '@kinetick-labs/kh-client-ui-commands/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: pulls the SlotRegistry service merge (ctx.slots).
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-chat/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import { FeedbackDialog } from './FeedbackDialog.tsx'
 import { MessageFeedbackActions } from './MessageFeedbackActions.tsx'
 import type { FeedbackDialogInjected, MessageFeedbackInjected } from './slots.ts'
 import { FeedbackSurface } from './surface.ts'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 
 export type {
   MessageFeedbackActionFailure, MessageFeedbackActionResult, MessageFeedbackStatus,
@@ -66,7 +66,7 @@ export const inject = ['slots', 'remote', 'remote.messageFeedback', 'remote.sess
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-message-feedback: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-message-feedback: dictionaries')
 
   const surfaces = new Map<SessionId, FeedbackSurface>()
   const surfaceFor = (sessionId: SessionId): FeedbackSurface => {

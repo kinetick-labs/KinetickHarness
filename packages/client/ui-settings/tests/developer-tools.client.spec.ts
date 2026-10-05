@@ -6,7 +6,6 @@ import { DEVELOPER_TOOLS_NAMESPACE, DeveloperToolsSettingsSchema, type Developer
 import { DeveloperToolsPreference } from '../src/client/developer-tools.ts'
 import { apply as clientApply, inject } from '../src/client/index.ts'
 
-
 describe('developer tools settings', () => {
   it('reports a refused Host write after recovering accepted state', async () => {
     const ctx = new Context()

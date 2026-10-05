@@ -1,4 +1,7 @@
 /** Web subagent catalog, navigation, and addressed-session composer owner. */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SubagentAddress } from '@kinetick-labs/kh-subagent/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
@@ -8,13 +11,10 @@ import {
   SubagentReadOnlyComposer, type SubagentReadOnlyMatch,
 } from './SubagentReadOnlyComposer.tsx'
 import { registerSidebarChat, subagentChatAddress } from './sidebar-chat/index.tsx'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-chat/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-session/client'
-import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
-import { en, NS, zh, type SubagentKey } from './locales.ts'
+import { en,NS,type SubagentKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -53,7 +53,7 @@ function selectReadOnlySubagent(owner: ComposerChainProps): SubagentReadOnlyMatc
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-subagent: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-subagent: dictionaries')
   ctx.inject(['resources', 'sidebarRightTabs'], (scope) => {
     registerSidebarChat(scope, ctx.locale.bind(NS))
   })

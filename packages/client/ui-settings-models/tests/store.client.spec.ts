@@ -352,7 +352,6 @@ describe('edge joins', () => {
   })
 })
 
-
 it.each([false, true])('uses account availability without asking for an API key: %s', async (accountAvailable) => {
   const { ctx, mirror, seenRefs } = api({ accountAvailable, providers: async () => ok({ providers: [{
     provider: 'deepseek-account', displayName: 'DeepSeek Account', settingsNs: 'llm-deepseek-account', settingsPath: [], active: true,

@@ -543,7 +543,7 @@ export interface LlmsTxtSite {
 
 /** Locale groups llms.txt lists, in the order the site's navigation presents them. */
 const llmsTxtLocales: readonly { heading: string; locale: DocsLocale }[] = [
-  { heading: '简体中文', locale: 'root' },
+  { heading: 'English', locale: 'root' },
   { heading: 'English', locale: 'en' },
 ]
 

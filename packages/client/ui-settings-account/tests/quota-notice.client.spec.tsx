@@ -1,15 +1,15 @@
 // @vitest-environment jsdom
 /** Account take-over of the frame-wide quota notice, and its generic fallback. */
+import type {} from '../src/client/index.ts'
 import { act, cleanup, render, fireEvent, screen } from '@testing-library/react'
 import { afterEach, expect, it, vi, type Mock } from 'vitest'
 import type { GlobalStandardProps } from '@kinetick-labs/kh-client-ui-slots'
 import type { QuotaNoticeOwnerProps } from '@kinetick-labs/kh-client-ui-chat/client'
 import type { AccountView } from '@kinetick-labs/kh-deepseek-account/types'
 import type { AccountSnapshot } from '../src/client/AccountSection.tsx'
-import type {} from '../src/client/index.ts'
 import { AccountQuotaNotice } from '../src/client/AccountQuotaNotice.tsx'
 import { createPlatformPages, type PlatformPages } from '../src/client/platform-pages.ts'
-import { en, zh, type AccountKey } from '../src/client/locales.ts'
+import { en, type AccountKey , en as zh } from '../src/client/locales.ts'
 
 /** Subscriptions opened by one mounted entry, released with the entry. */
 const mountedSubscriptions: Array<() => void> = []

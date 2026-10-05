@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-goal-round-driver
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 `kh-goal-round-driver` automatically continues an active goal in the same session while the agent is idle, continuation is armed, and the configured round allowance remains. Each round gives the model another turn toward the objective; only goal rounds that reach model history consume the allowance, and exhaustion records a blocker. The driver has no configuration: the goal defines the round limit, and `kh-tool-goal` defines when repeated blocking stops continuation. Mount it with `kh-goal` and `kh-tool-goal` for unattended multi-round progress; omit it when each step requires human steering.
@@ -118,7 +116,6 @@ Append-only within an epoch: each admitted round extends the existing conversati
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define when the driver is a poor fit or needs special care. They are current package constraints, not a task backlog.
 

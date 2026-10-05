@@ -10,18 +10,18 @@
  * `plan-review` intent as the plan decision card and every other request as
  * the generic question flow. Both use the same carrier and composer seat.
  */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-chat/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { InboxWireState } from '@kinetick-labs/kh-agent/types'
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import type {} from '@kinetick-labs/kh-client-ui-chat/client'
 import type { ComposerChainProps } from '@kinetick-labs/kh-client-ui-conversation/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { PendingInteractionPublisher } from '@kinetick-labs/kh-client-ui-session/client'
 import type { TypertClientEventListener } from '@kinetick-labs/kh-typert-protocol'
 import type { AskUserQuestionItem, PendingUserQuestion, UserQuestionProjectionView } from '@kinetick-labs/kh-user-questions/types'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { UserQuestionPanels, UserQuestionRecord } from '@kinetick-labs/kh-client-ui-tool/client'
 import type { ToolCallId } from '@kinetick-labs/kh-llm'
 import { brandString } from '@kinetick-labs/kh-brand'
@@ -30,7 +30,7 @@ import { createQuestionDraftStore } from './draft-store.ts'
 import { QuestionComposer } from './QuestionComposer.tsx'
 import { questionReplyDefinition } from './question-reply.ts'
 import { QuestionReplyView } from './QuestionReplyView.tsx'
-import { en, zh, type QuestionKey } from './locales.ts'
+import { en,type QuestionKey } from './locales.ts'
 
 export type {
   PendingQuestion, PlanReview, QuestionAnswer, QuestionComposerProps, QuestionWait,
@@ -366,7 +366,7 @@ function publishContinuedQuestions(ctx: ClientContext, cards: QuestionCards): ()
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-user-questions: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-user-questions: dictionaries')
   const questionDraftStore = createQuestionDraftStore()
   const registerPendingInteraction = ctx.uiSession.registerPendingInteraction<PendingQuestion>(
     pending => pending.kind === 'plan-review' ? 2 : 1,

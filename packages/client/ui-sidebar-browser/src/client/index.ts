@@ -1,11 +1,11 @@
 /** Register the HTTP(S) Browser tab type in the right Sidebar. */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
+import type {} from '@kinetick-labs/kh-api-workspace-controller/client'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
 import type { Context } from '@deepseek-ai/cordis'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
-import type {} from '@kinetick-labs/kh-api-workspace-controller/client'
 import { BrowserBody, type BrowserBodyProps } from './view/BrowserBody.tsx'
 import { BrowserTitle } from './view/BrowserTitle.tsx'
 import { createBrowserControllers } from './browser/BrowserController.ts'
@@ -16,7 +16,7 @@ import type { DesktopBrowserBridge } from '../types.ts'
 import { browserWorkspace } from './electron/workspace.ts'
 import type { BrowserPageFactory } from './browser/BrowserPage.ts'
 import { BROWSER_ID, browserDefinition } from './definition.tsx'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 import { createBrowserStore } from './browser/store.ts'
 
 export type { BrowserBodyProps } from './view/BrowserBody.tsx'
@@ -70,7 +70,7 @@ export function apply(ctx: Context): void {
     khDesktop?: { readonly protocolVersion: number; readonly browser?: DesktopBrowserBridge }
   }).khDesktop
   const desktop = carrier?.protocolVersion === 1 ? carrier.browser : undefined
-  ctx.effect(() => ctx.locale.register(namespace, { zh, en }), 'ui-sidebar-browser.copy')
+  ctx.effect(() => ctx.locale.register(namespace, { en }), 'ui-sidebar-browser.copy')
   ctx.effect(() => ctx.sidebarRightTabs.register({ ...browserDefinition(t), keepMounted: desktop !== undefined }), 'ui-sidebar-browser.type')
   const installFrames = (scope: Context, factory: (sessionId: BrowserBodyProps['sessionId']) => BrowserPageFactory): void => {
     const controllers = new Map<BrowserBodyProps['sessionId'], BrowserInjected>()

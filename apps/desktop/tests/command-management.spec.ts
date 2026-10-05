@@ -1,7 +1,7 @@
 /** Locale-owned native command-management states. */
 
 import { expect, it } from 'vitest'
-import { en, zh } from '../src/locale.ts'
+import { en , en as zh } from '../src/locale.ts'
 import { presentCommandManagement } from '../src/command-management.ts'
 
 it.each([en, zh])('shows installation, repair/removal and shadowed command locations', (messages) => {

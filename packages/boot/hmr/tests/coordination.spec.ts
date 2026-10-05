@@ -106,7 +106,6 @@ it('can dispose HMR from its own transaction without waiting on itself', async (
   await expect(hmr.runExclusive(async () => {})).rejects.toThrow('disposed')
 })
 
-
 it('refreshes an Include through the queue and skips registered exact paths', async () => {
   const { ctx, dir, hmr } = await fixture()
   const moduleWatcher = watchers.at(-1)!
@@ -175,7 +174,6 @@ it('requests the host full-reload hook for framework files', async () => {
   await hmr.runExclusive(async () => {})
   expect(exit).toHaveBeenCalledOnce()
 })
-
 
 it('closes an exact watcher from its running transaction', async () => {
   const { hmr, dir } = await fixture()

@@ -6,7 +6,7 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { SurfaceSnapshot } from '@kinetick-labs/kh-experimental-claude-code-mods/types'
 import { afterEach, expect, it, vi } from 'vitest'
 import { Band, type BandProps } from '../src/client/Band.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 

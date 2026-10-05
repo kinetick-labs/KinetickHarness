@@ -1,14 +1,14 @@
 /** Cordis dynamic-plugin cards, inventory panel, business-view host. */
 
+import type {} from '@kinetick-labs/kh-client-ui-tool/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from './events.ts'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import type {} from '@kinetick-labs/kh-client-ui-tool/client'
 import type {} from '@kinetick-labs/kh-client-locale/client'
-import type {} from '@kinetick-labs/kh-client-ui-sidebar/client'
 import type {} from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-session/client'
-import type {} from './events.ts'
 import { CordisActionRow } from './CordisActionRow.tsx'
 import { CordisDefineRow } from './CordisDefineRow.tsx'
 import { CordisRunRow } from './CordisRunRow.tsx'
@@ -17,7 +17,7 @@ import { createCordisInventory } from './inventory.ts'
 import { CordisRunCardRegistry } from './run-card-index.ts'
 import type { CordisDynamicPort } from './dynamic-port.ts'
 import type { CordisCardFace, CordisPanelFace, CordisRunCardFace } from './slots.ts'
-import { en, NS, zh } from './locales.ts'
+import { en,NS } from './locales.ts'
 
 export type { CordisCardFace, CordisPanelFace, CordisRunCardFace, CordisToolViewOwnerProps } from './slots.ts'
 export type { CordisActionResult, CordisDynamicPort, CordisInventoryRow } from './dynamic-port.ts'
@@ -40,7 +40,7 @@ export const inject = [
 
 /** Mount every Cordis browser surface over the shared Host inventory. */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-cordis: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-cordis: dictionaries')
 
   const port: CordisDynamicPort = {
     stop: async (sessionId, pluginId) => {

@@ -305,7 +305,6 @@ export class SessionProjectionCache extends Service {
     return restored.snapshot
   }
 
-
   // --- write-behind (throttle + mandatory points) ---
 
   private installWritePath(): void {

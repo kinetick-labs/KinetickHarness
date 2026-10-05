@@ -187,7 +187,6 @@ describe('Presented workspace file native open route', () => {
   })
 })
 
-
 it('reports the serving desktop and reveals only an authorized declared source', async () => {
   const { cwd, file, open, opener, handler } = await fixture()
   const info = await handler.fetch(new Request('http://localhost/api/present.host'))
@@ -209,7 +208,6 @@ it('refuses native actions when the configured Host desktop is unavailable', asy
   }
   expect(opener).not.toHaveBeenCalled()
 })
-
 
 it('refuses native opening without a matching Host mapping even when a same-name Host file exists', async () => {
   const { ctx, open, opener } = await fixture()
@@ -234,7 +232,6 @@ it('uses the deployment workspace root when the viewed Session has no cwd', asyn
   expect((await open()).status).toBe(204)
   expect(opener.mock.lastCall?.[0].path).toBe(await realpath(join(cwd, file.path)))
 })
-
 
 it('queries handlers only after file authorization and forwards explicit application choices', async () => {
   const { handler, applications, opener, open, ctx } = await fixture()

@@ -50,7 +50,6 @@ async function agent(ctx: Context, cwd: string | undefined): Promise<Agent> {
   return value
 }
 
-
 async function setup() {
   const root = await mkdtemp(join(tmpdir(), 'kh-present-minimal-'))
   cleanups.push(() => rm(root, { recursive: true, force: true }))
@@ -144,9 +143,7 @@ describe('present', () => {
     expect(owner.session.snapshotEvents().some(event => event.type === 'deliverables/presented')).toBe(false)
   })
 
-
 })
-
 
 it('validates deployment limits before registering the tool', () => {
   for (const config of [{ maxFiles: 0 }, { maxFiles: 1.5 }, { maxFiles: Number.POSITIVE_INFINITY }]) {
@@ -166,7 +163,6 @@ it('requires an agent, an open turn, and a workspace', async () => {
   expect(absent.isError).toBe(true)
 })
 
-
 it('declares readable files outside the Session directory using absolute and relative paths', async () => {
   const { root, execute, owner } = await setup()
   const outside = await mkdtemp(join(tmpdir(), 'kh-present-external-'))
@@ -184,7 +180,6 @@ it('refuses a final symlink to an ordinary file', async () => {
   await symlink(join(root, 'source'), join(root, 'link'))
   expect((await execute([{ path: 'link' }])).isError).toBe(true)
 })
-
 
 it('refuses a file replaced by a directory after inspecting its final component', async () => {
   const { ctx, root, execute } = await setup()

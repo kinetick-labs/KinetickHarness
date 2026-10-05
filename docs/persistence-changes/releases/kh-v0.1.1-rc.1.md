@@ -5,8 +5,6 @@ kind: persistence-release
 
 # Persistence release: kh-v0.1.1-rc.1
 
-English | [中文](kh-v0.1.1-rc.1.zh.md)
-
 ## Summary
 
 permission/preset gains optional origin with default, selection, and inferred values. The writer format remains 0.

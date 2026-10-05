@@ -419,7 +419,6 @@ describe('SubagentModelSelectionConfig', () => {
   })
 })
 
-
 it('reads the saved default depth at each delegation without remounting the tool', async () => {
   const ctx = await boot(false)
   const depths: Array<number | undefined> = []

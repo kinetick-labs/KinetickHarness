@@ -1582,7 +1582,7 @@ describe('LocalPtySession bounds, signals, and teardown', () => {
     const tiny = new LocalPtySession(tinyTerminal, config({ maxReadBytes: 1 }))
     await initialize(tiny, tinyTerminal)
     const tinyOperation = tiny.startSend({ text: '', submit: false })
-    tinyTerminal.emitData('一')
+    tinyTerminal.emitData('Mon')
     await vi.advanceTimersByTimeAsync(60)
     await tinyOperation.done
     expect(tiny.read({ offset: 0, count: 1 }).text).toBe('')

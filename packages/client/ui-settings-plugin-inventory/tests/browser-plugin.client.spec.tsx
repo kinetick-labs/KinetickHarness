@@ -70,7 +70,7 @@ describe('ui-settings-plugin-inventory browser plugin', () => {
     expect(b.list).not.toHaveBeenCalled()
 
     const injected = (entry.inject as unknown as () => PluginInventorySettingsTabInjected)()
-    const text = { en: 'Local tools', zh: '本地工具' }
+    const text = { en: 'Local tools' }
     expect(injected.resolveText(text)).toBe('本地工具')
     b.locale.setLocale('en')
     expect(injected.resolveText(text)).toBe('Local tools')
@@ -88,8 +88,8 @@ describe('ui-settings-plugin-inventory browser plugin', () => {
 
     // Shipped preset names resolve over the agent-preset dictionaries the
     // real plugin registers; user-authored metadata stays untranslated.
-    b.locale.register('settings.agentPreset', 'zh', { presetStandardName: '标准模式' } as never)
-    expect(injected.presetName({ id: 'standard', isDefault: true, rows: [] })).toBe('标准模式')
+    b.locale.register('settings.agentPreset', 'zh', { presetStandardName: 'Standard mode' } as never)
+    expect(injected.presetName({ id: 'standard', isDefault: true, rows: [] })).toBe('Standard mode')
     expect(injected.presetName({ id: 'mine', name: '我自己的', isDefault: false, rows: [] })).toBe('我自己的')
     await b.ctx.fiber.dispose()
   })

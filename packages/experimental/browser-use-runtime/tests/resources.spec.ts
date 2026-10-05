@@ -333,7 +333,6 @@ describe('Session browser resource ownership', () => {
   })
 })
 
-
 it('reports early disposal cleanup failure while retaining the owned resource', async () => {
   const { ctx, owner } = await fixture()
   const a = await owner('early-close-failure')

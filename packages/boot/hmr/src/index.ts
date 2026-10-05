@@ -734,7 +734,6 @@ namespace Hmr {
   /** Cordis-compatible configuration type. */
   export type Config = HmrConfig
 
-
 }
 
 export default Hmr

@@ -3,7 +3,7 @@
 import { cleanup, fireEvent, render, screen, act } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { SignOutDialog } from '../src/client/SignOutDialog.tsx'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 function mount(running: boolean | 'unknown', copy: typeof en | typeof zh = en, signOut = vi.fn(async () => {})) {

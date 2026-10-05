@@ -14,6 +14,6 @@
 - combobox "Model download source":
   - option "Automatic (recommended)"
   - option "Hugging Face"
-  - option "HF-Mirror (China mirror)" [selected]
+  - option "HF-Mirror" [selected]
 - text: Download only from the selected source. Verified downloaded files are reused.
 - button "Download and prepare"

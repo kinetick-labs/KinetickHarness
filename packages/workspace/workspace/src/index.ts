@@ -93,7 +93,6 @@ export class WorkspaceOrderInvalidError extends Error {
   }
 }
 
-
 /** The session an archive request is about to write into the archive set. */
 export interface SessionActivityRequest {
   readonly sessionId: SessionId

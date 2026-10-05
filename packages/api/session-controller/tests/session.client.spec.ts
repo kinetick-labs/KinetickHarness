@@ -493,7 +493,7 @@ describe('prompt and cancel errors', () => {
         requestId: expect.any(String) as unknown as string,
         ...CHILD,
         delivery: 'queue',
-        content: [{ type: 'text', text: '继续' }],
+        content: [{ type: 'text', text: 'Continue' }],
         clientTimeZone: TIME_ZONE,
       },
       {
@@ -552,7 +552,7 @@ describe('prompt and cancel errors', () => {
 
     const prompted = await session.prompt([
       { type: 'file', receiptId: 'receipt' as never },
-      { type: 'text', text: '继续' },
+      { type: 'text', text: 'Continue' },
     ], 'queue')
 
     expect(prompted).toMatchObject({
@@ -571,7 +571,7 @@ describe('prompt and cancel errors', () => {
       'subagent/not-resumable', 'subagent cannot be resumed', { childSessionId: SID },
     )))
     await session.open()
-    const prompted = await session.prompt([{ type: 'text', text: '继续' }], 'queue')
+    const prompted = await session.prompt([{ type: 'text', text: 'Continue' }], 'queue')
     const cancelled = await session.cancel()
 
     // The Host reads the durable descriptor; the wire marker stays 'continuable'.
@@ -628,7 +628,7 @@ describe('prompt and cancel errors', () => {
   it('does not await a first turn when the history already contains one', async ({ mock, start }) => {
     const session = await sessionBench(mock, start, SID)
     session.handleBlank(false)
-    const inFlight = session.prompt([{ type: 'text', text: '继续' }], 'queue')
+    const inFlight = session.prompt([{ type: 'text', text: 'Continue' }], 'queue')
     expect(session.getSnapshot()).toMatchObject({ blank: false, promptAttempted: true, awaitingFirstTurn: false })
     expect((await inFlight).ok).toBe(true)
     expect(session.getSnapshot()).toMatchObject({ blank: false, awaitingFirstTurn: false })

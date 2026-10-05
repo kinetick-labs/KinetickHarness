@@ -1,17 +1,17 @@
 /** Source-safe browser registration of the mods band: the Remote stream behind a store, the dock entry, the press. */
 
-import type { Context } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-api-session-controller/client'
 import type {} from '@kinetick-labs/kh-client-locale/client'
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type { Context } from '@deepseek-ai/cordis'
+import type {} from '@kinetick-labs/kh-api-session-controller/client'
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type {} from '@kinetick-labs/kh-experimental-claude-code-mods/remote'
 import type { SurfaceSnapshot } from '@kinetick-labs/kh-experimental-claude-code-mods/types'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { TypertRemoteContribution } from '@kinetick-labs/kh-typert-protocol'
 import { Band, type BandInjected } from './Band.tsx'
-import { en, NS, zh, type ModsBandKey } from './locales.ts'
+import { en,NS,type ModsBandKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -75,7 +75,7 @@ function watchSession(ctx: Context, sessionId: SessionId, onEnd: () => void): { 
 }
 
 function registerUi(ctx: Context): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'client-ui-claude-code-mods: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'client-ui-claude-code-mods: dictionaries')
   const watches = new Map<SessionId, ReturnType<typeof watchSession>>()
   ctx.effect(() => () => {
     for (const watch of watches.values()) watch.dispose()

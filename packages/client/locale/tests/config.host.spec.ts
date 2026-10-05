@@ -7,7 +7,6 @@ import {
   Config, apply,
 } from '@kinetick-labs/kh-client-locale'
 
-
 describe('locale host', () => {
   it('registers an open locale preference with the Host settings lifecycle', async () => {
     const ctx = new Context()

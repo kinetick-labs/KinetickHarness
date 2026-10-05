@@ -10,7 +10,7 @@ import { ComposerBlockRegistry } from '../src/client/input/blocks.ts'
 import { InputHub } from '../src/client/input/hub.ts'
 import { ConversationController } from '../src/client/service.ts'
 import { installStopShortcut } from '../src/client/stop-shortcut.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 const disposers: (() => void | Promise<void>)[] = []
 afterEach(async () => {

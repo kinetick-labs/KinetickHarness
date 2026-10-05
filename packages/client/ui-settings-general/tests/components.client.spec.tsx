@@ -22,7 +22,7 @@ function derivedDocumentStore(remote: object) {
   const ctx = { remote } as never
   return new SettingsDocumentStore(ctx, new SettingsDescribeMirror(ctx))
 }
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import { CurrentVersionRow } from '../src/client/CurrentVersionRow.tsx'
 import { DesktopUpdateBadge } from '../src/client/DesktopUpdateIndicator.tsx'
 import type { DesktopUpdateView } from '../src/types.ts'

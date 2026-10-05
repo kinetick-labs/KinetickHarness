@@ -1,6 +1,6 @@
 KinetickHarness
 KinetickHarness
-欢迎使用 KinetickHarness
-组装无限可能，共探智能上限
-登录
-添加 API Key
+Welcome to KinetickHarness
+Build potential. Explore intelligence.
+Sign in
+Add API Key

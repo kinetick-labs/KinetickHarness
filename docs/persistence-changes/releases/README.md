@@ -4,8 +4,6 @@ description: "Browse Session persistence-type changes across every captured KH a
 
 # Persistence changes across KH prereleases
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 This archive provides an approximate historical view of 26 KH alpha/RC tags and their 25 adjacent transitions. Each release includes a short explanation, source tag, before/after digests, and complete snapshots of changed types for reading and format validation. It does not establish historical runtime compatibility or replace [current-source acknowledgements](../README.md).

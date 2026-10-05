@@ -36,7 +36,6 @@ declare module '@kinetick-labs/kh-llm' {
   }
 }
 
-
 /** Cordis plugin name used by loader diagnostics. */
 export const name = 'tmux-context'
 

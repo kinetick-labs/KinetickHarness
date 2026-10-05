@@ -51,7 +51,6 @@ it('rejects missing content-type metadata instead of fabricating associations', 
   await expect(nativeFileApplications('/file.mp3', new AbortController().signal, facts)).rejects.toThrow('content type')
 })
 
-
 it('tolerates absent desktop roots and directory-shaped icon paths without a locale override', async () => {
   const { root, facts } = await fixture()
   const icon = join(root, 'folder.png')

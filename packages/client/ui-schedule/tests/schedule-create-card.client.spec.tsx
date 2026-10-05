@@ -11,7 +11,7 @@ import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import { ScheduleCreateCard, type ScheduleCreateCardProps } from '../src/client/ScheduleCreateCard.tsx'
 import { narrowScheduleRecord, scheduleCreateCardModel } from '../src/client/schedule-create-card.ts'
 import { zoneLabel } from '../src/client/schedule-format.ts'
-import { en, zh } from '../src/client/task-manager-locales.ts'
+import { en , en as zh } from '../src/client/task-manager-locales.ts'
 
 type ToolBlock = ToolCallViewProps['block']
 
@@ -230,7 +230,7 @@ describe('ScheduleCreateCard', () => {
   it('opens the task in the active locale', () => {
     render(<ScheduleCreateCard {...props(settled(dailyTask), vi.fn(), makeTranslate(zh))} />)
     expect(screen.getByRole('button', { name: '打开任务详情：Check the deployment' })).toBeDefined()
-    expect(screen.getByRole('button', { name: '打开' })).toBeDefined()
+    expect(screen.getByRole('button', { name: 'Open' })).toBeDefined()
   })
 
   it('shows the weekly frequency in the active locale', () => {

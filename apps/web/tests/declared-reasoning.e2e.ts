@@ -150,7 +150,7 @@ describe.skipIf(MODE === 'record').each([
       } else {
         await page.getByRole('menuitem', { name: pane === 'model' ? /^模型/ : /推理等级/ }).click()
         const focused = pane === 'model'
-          ? page.getByRole('searchbox', { name: '搜索模型…' })
+          ? page.getByRole('searchbox', { name: 'Search models…' })
           : page.locator('[role="menuitemradio"][aria-checked="true"]')
         await expect.poll(() => focused.evaluate(element => element === element.ownerDocument.activeElement)).toBe(true)
       }
@@ -175,7 +175,7 @@ describe.skipIf(MODE === 'record').each([
     await page.getByRole('menuitem', { name: /^模型/ }).click()
     const current = page.getByRole('menuitemradio', { name: 'Acme Think', exact: true })
     const target = page.getByRole('menuitemradio', { name: 'Acme Swift', exact: true })
-    const search = page.getByRole('searchbox', { name: '搜索模型…' })
+    const search = page.getByRole('searchbox', { name: 'Search models…' })
     await expect.poll(() => search.evaluate(element => element === element.ownerDocument.activeElement)).toBe(true)
     expect(await search.getAttribute('aria-activedescendant')).toBe(await current.getAttribute('id'))
 

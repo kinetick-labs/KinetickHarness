@@ -5,8 +5,6 @@ description: "Session upload, product analytics, and the anonymous user id are r
 
 # Session upload and product analytics removed
 
-English | [中文](guide.zh.md)
-
 ## Change
 
 Shipped profiles no longer include session telemetry, OpenTelemetry export, DeepSeek session-log upload, the plugin-package inventory request field, product analytics, or the anonymous user id. `DSH_TELEMETRY_DISABLED`, `DSH_TELEMETRY_MODE`, `DSH_TELEMETRY_OTLP_URL`, and `DSH_PRODUCT_ANALYTICS_OTLP_URL` are not read. `/feedback` acknowledges only the session id and does not create `$KH_HOME/.anonymous-user-id`.

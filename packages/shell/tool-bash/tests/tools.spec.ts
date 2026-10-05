@@ -109,7 +109,6 @@ async function callUntilText(
   throw new Error(`${name} output did not include ${JSON.stringify(expected)}; last text was ${JSON.stringify(last !== undefined ? text(last) : '')}`)
 }
 
-
 /** Wrap a canned handle (and optional foreground result) as the unified execute() surface. */
 function fakeExecution(proc: ShellProcess, result?: () => Promise<ShellRunResult>): ShellExecution {
   return {

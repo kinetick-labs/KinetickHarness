@@ -85,11 +85,11 @@ describe('Toast', () => {
       const filter = vi.fn()
       const view = render(
         <Toast
-          text="会话已归档，可"
+          text="Session archived. You can "
           tone="success"
           actions={[
             { label: '撤销', onClick: undo },
-            { prefix: '或', label: '筛选已归档会话', onClick: filter },
+            { prefix: ' or ', label: 'filter archived sessions', onClick: filter },
           ]}
           onDone={vi.fn()}
         />,
@@ -101,7 +101,7 @@ describe('Toast', () => {
       expect(view.getByRole('alert').textContent).toBe('会话已归档，可撤销或筛选已归档会话')
       fireEvent.click(view.getByRole('button', { name: '撤销' }))
       expect(undo).toHaveBeenCalledTimes(1)
-      fireEvent.click(view.getByRole('button', { name: '筛选已归档会话' }))
+      fireEvent.click(view.getByRole('button', { name: 'filter archived sessions' }))
       expect(filter).toHaveBeenCalledTimes(1)
     } finally {
       vi.useRealTimers()

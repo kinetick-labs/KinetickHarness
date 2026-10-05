@@ -301,7 +301,7 @@ it('validates root and multiple exported plugins independently', () => {
   })
   json('locale/root/en.json', { meta: { title: 'Bundle' } })
   json('locale/search/en.json', { meta: { title: 'Search' } })
-  json('locale/search/zh.json', { meta: { title: '搜索' } })
+  json('locale/search/zh.json', { meta: { title: 'Search' } })
   json('locale/write/en.json', { meta: { description: 'Write files' } })
   json('locale/write/zh.json', { meta: { description: '写入文件' } })
   expect(packageMetaProblems(root)).toEqual([])
@@ -374,7 +374,7 @@ it.each([
     files: ['resources/search'],
   })
   json('resources/search/en.json', { meta: { title: 'Search' } })
-  json('resources/search/zh.json', { meta: { title: '搜索' } })
+  json('resources/search/zh.json', { meta: { title: 'Search' } })
   expect(packageMetaProblems(root)).toEqual([])
 })
 
@@ -388,7 +388,7 @@ it('accepts individually exported resources in an independent physical directory
     files: ['resources'],
   })
   json('resources/search/en.json', { meta: { title: 'Search' } })
-  json('resources/search/zh.json', { meta: { title: '搜索' } })
+  json('resources/search/zh.json', { meta: { title: 'Search' } })
   expect(packageMetaProblems(root)).toEqual([])
 })
 
@@ -465,7 +465,7 @@ it('rejects language resources mapped outside the English resource directory', (
   })
   json('locale/en.json', { meta: { title: 'Plugin' } })
   json('locale/zh.json', { meta: { title: '插件' } })
-  json('elsewhere/zh.json', { meta: { title: '其他' } })
+  json('elsewhere/zh.json', { meta: { title: 'Other' } })
   expect(packageMetaProblems(root).join('\n')).toContain('zh.json')
 })
 
@@ -502,7 +502,7 @@ it.each([{ files: ['locale'] }, { files: ['resources', '!resources/search/zh.jso
       files,
     })
     json('resources/search/en.json', { meta: { title: 'Search' } })
-    json('resources/search/zh.json', { meta: { title: '搜索' } })
+    json('resources/search/zh.json', { meta: { title: 'Search' } })
     expect(packageMetaProblems(root).join('\n')).toContain('files must include resources/search/')
   },
 )

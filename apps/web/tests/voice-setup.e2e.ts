@@ -42,7 +42,7 @@ it('guides a newly enabled voice plugin to installation and lets the user postpo
   expect(await page.getByText('Audio is recognized on the machine running KH. If models need downloading, that machine must be able to reach the selected source and its file services. Configure a proxy on that machine if needed.', { exact: true }).count()).toBe(1)
   const source = page.getByLabel('Model download source', { exact: true })
   expect(await source.inputValue()).toBe('')
-  expect(await source.getByRole('option').allTextContents()).toEqual(['Automatic (recommended)', 'Hugging Face', 'HF-Mirror (China mirror)'])
+  expect(await source.getByRole('option').allTextContents()).toEqual(['Automatic (recommended)', 'Hugging Face', 'HF-Mirror'])
   await compareOrRefreshGolden(fileURLToPath(new URL('./expected/voice-source-auto.expected.md', import.meta.url)),
     await captureStableAria(page, '[data-speech-provider]', scaffold.workspaceCwd), webSnapshotMode())
   await source.selectOption('https://hf-mirror.com')

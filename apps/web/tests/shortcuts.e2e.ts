@@ -19,7 +19,7 @@ describe('web e2e: shortcut reference', () => {
   afterAll(async () => { await browser?.close(); await scaffold?.close() })
 
   it.each([
-    { locale: 'zh-CN', platform: 'MacIntel', title: '快捷键', settings: '设置', view: '编辑快捷键', search: '搜索快捷键', key: 'Meta' },
+    { locale: 'zh-CN', platform: 'MacIntel', title: '快捷键', settings: 'Settings', view: '编辑快捷键', search: '搜索快捷键', key: 'Meta' },
     { locale: 'en-US', platform: 'Win32', title: 'Keyboard shortcuts', settings: 'Settings', view: 'Edit shortcuts', search: 'Search shortcuts', key: 'Control' },
   ])('opens, searches, and restores nested focus in $locale', async ({ locale, platform, title, settings, view, search, key }) => {
     const referenceKey = platform === 'Win32' ? 'Control+Slash' : 'Meta+Slash'
@@ -50,7 +50,7 @@ describe('web e2e: shortcut reference', () => {
       const rows = dialog.getByRole('listitem')
       const stopRow = dialog.getByRole('region', { name: locale === 'zh-CN' ? '消息输入' : 'Message input', exact: true })
         .getByRole('listitem').last()
-      await stopRow.getByText(locale === 'zh-CN' ? '停止生成' : 'Stop generating', { exact: true }).waitFor()
+      await stopRow.getByText('Stop generating', { exact: true }).waitFor()
       const stopButtons = stopRow.getByRole('button')
       expect(await stopButtons.count()).toBe(0)
       expect(new Set(await rows.evaluateAll(items => items.map(row => row.getBoundingClientRect().height))))
@@ -105,7 +105,7 @@ describe('web e2e: shortcut reference', () => {
       expect(await dialog.getByRole('button', { disabled: false }).last().evaluate(element => element === document.activeElement)).toBe(true)
       expect(await dialog.getByRole('button', { disabled: false }).last().evaluate(element => getComputedStyle(element).outlineStyle)).not.toBe('none')
       await badge.click()
-      await boundRow.getByRole('button', { name: locale === 'zh-CN' ? '恢复默认' : 'Restore default', exact: true }).click()
+      await boundRow.getByRole('button', { name: locale === 'zh-CN' ? 'Reset to default' : 'Restore default', exact: true }).click()
       await boundRow.getByRole('group').waitFor({ state: 'hidden' })
       await dialog.getByRole('heading', { name: title, exact: true }).hover()
       expect(await boundActionsOpacity()).toBe('0')
@@ -141,8 +141,7 @@ describe('web e2e: shortcut reference', () => {
         .toEqual({ color: 'rgb(236, 19, 19)', width: '1px' })
       await compareOrRefreshGolden(join(expected, `${locale}-conflict.expected.md`), await errorToast.ariaSnapshot(), mode)
       await page.keyboard.press('i')
-      await page.getByRole('alert').filter({ hasText: locale === 'zh-CN'
-        ? '请同时按下 Command、Ctrl 或 Alt 修饰键。' : 'Include Command, Ctrl, or Alt in the combination.' }).waitFor()
+      await page.getByRole('alert').filter({ hasText: 'Include Command, Ctrl, or Alt in the combination.' }).waitFor()
       await page.keyboard.press(`${key}+Shift+.`)
       await inline.waitFor({ state: 'hidden' })
       expect(await dialog.evaluate(element => element === document.activeElement)).toBe(true)
@@ -184,7 +183,7 @@ describe('web e2e: shortcut reference', () => {
       for (const query of ['abc', 'sendEnter']) {
         await page.getByRole('searchbox').fill(query)
         expect(await dialog.getByRole('listitem').count()).toBe(0)
-        expect(await dialog.getByRole('status').textContent()).toBe(locale === 'zh-CN' ? '没有匹配的快捷键' : 'No matching shortcuts')
+        expect(await dialog.getByRole('status').textContent()).toBe('No matching shortcuts')
         if (query === 'abc') await compareOrRefreshGolden(join(expected, `${locale}-empty.expected.md`),
           await captureStableAria(page, '[data-shortcut-modal="shortcuts"]', scaffold.workspaceCwd), mode)
       }
@@ -260,7 +259,7 @@ describe('web e2e: shortcut reference', () => {
       expect(await viewButton.getAttribute('aria-keyshortcuts')).toBeNull()
       await viewButton.click()
       await badge.click()
-      await boundRow.getByRole('button', { name: locale === 'zh-CN' ? '恢复默认' : 'Restore default', exact: true }).click()
+      await boundRow.getByRole('button', { name: locale === 'zh-CN' ? 'Reset to default' : 'Restore default', exact: true }).click()
       await boundRow.getByRole('group').waitFor({ state: 'hidden' })
       await page.keyboard.press('Escape')
       await dialog.waitFor({ state: 'hidden' })
@@ -271,8 +270,8 @@ describe('web e2e: shortcut reference', () => {
       expect(await dialog.getByRole('listitem').count()).toBe(0)
       expect(await dialog.locator('footer').textContent()).toContain(locale === 'zh-CN' ? '1 项已自定义' : '1 customized')
       await resetAll.click()
-      const confirm = page.getByRole('dialog', { name: locale === 'zh-CN' ? '恢复全部默认快捷键？' : 'Restore all default shortcuts?', exact: true })
-      const cancel = confirm.getByRole('button', { name: locale === 'zh-CN' ? '取消' : 'Cancel', exact: true })
+      const confirm = page.getByRole('dialog', { name: 'Restore all default shortcuts?', exact: true })
+      const cancel = confirm.getByRole('button', { name: 'Cancel', exact: true })
       expect(await cancel.evaluate(element => element === document.activeElement)).toBe(true)
       expect(await cancel.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('none')
       await compareOrRefreshGolden(join(expected, `${locale}-reset-confirm.expected.md`), await confirm.ariaSnapshot(), mode)
@@ -282,7 +281,7 @@ describe('web e2e: shortcut reference', () => {
       expect(await resetAll.evaluate(element => getComputedStyle(element).outlineStyle)).toBe('none')
       expect(await dialog.locator('footer').textContent()).toContain(locale === 'zh-CN' ? '1 项已自定义' : '1 customized')
       await resetAll.click()
-      await confirm.getByRole('button', { name: locale === 'zh-CN' ? '恢复默认' : 'Restore default', exact: true }).click()
+      await confirm.getByRole('button', { name: locale === 'zh-CN' ? 'Reset to default' : 'Restore default', exact: true }).click()
       await confirm.waitFor({ state: 'hidden' })
       expect(await resetAll.isDisabled()).toBe(true)
       expect(await dialog.locator('footer').textContent()).toBe(locale === 'zh-CN' ? '恢复全部默认' : 'Restore all defaults')
@@ -292,7 +291,7 @@ describe('web e2e: shortcut reference', () => {
       await page.keyboard.press('Escape')
       await page.keyboard.press('Escape')
       await page.keyboard.press(referenceKey)
-      const settingsCommand = locale === 'zh-CN' ? '打开设置' : 'Open settings'
+      const settingsCommand = 'Open settings'
       await dialog.getByRole('button', { name: locale === 'zh-CN' ? `修改${settingsCommand}快捷键` : `Edit shortcut for ${settingsCommand}`, exact: true }).click()
       await page.keyboard.press(`${key}+Shift+Comma`)
       await dialog.getByRole('group').waitFor({ state: 'hidden' })
@@ -305,13 +304,13 @@ describe('web e2e: shortcut reference', () => {
       expect(await trigger.evaluate(element => element === document.activeElement)).toBe(true)
       await page.keyboard.press(referenceKey)
       await dialog.getByRole('button', { name: locale === 'zh-CN' ? `修改${settingsCommand}快捷键` : `Edit shortcut for ${settingsCommand}`, exact: true }).click()
-      await dialog.getByRole('button', { name: locale === 'zh-CN' ? '恢复默认' : 'Restore default', exact: true }).click()
+      await dialog.getByRole('button', { name: locale === 'zh-CN' ? 'Reset to default' : 'Restore default', exact: true }).click()
       await dialog.getByRole('group').waitFor({ state: 'hidden' })
       await page.keyboard.press('Escape')
       expect(await trigger.getAttribute('aria-keyshortcuts')).toBe(key === 'Meta' ? 'Alt+Meta+,' : 'Control+Alt+,')
       await trigger.hover()
       await page.getByRole('tooltip', { name: settingsHint, exact: true }).waitFor()
-      const sidebar = page.getByRole('button', { name: locale === 'zh-CN' ? '收起侧边栏' : 'Collapse sidebar', exact: true })
+      const sidebar = page.getByRole('button', { name: 'Collapse sidebar', exact: true })
       expect(await sidebar.getAttribute('aria-keyshortcuts')).toBe(key === 'Meta' ? 'Alt+Meta+B' : 'Control+Alt+B')
       await page.reload({ waitUntil: 'load' })
       await sidebar.waitFor()

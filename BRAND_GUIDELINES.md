@@ -1,7 +1,5 @@
 # KinetickHarness Brand Asset Usage Guidelines
 
-English | [中文](BRAND_GUIDELINES.zh.md)
-
 To maintain the long\-term healthy development of the KinetickHarness ecosystem, avoid user confusion, and facilitate the retrieval and identification of related resources, we have established these specifications and hope that everyone will adhere to them:
 
 - In your project's descriptive text, you may use "KinetickHarness" to truthfully and accurately describe your project's relationship with KinetickHarness, for example, "built on KinetickHarness" or "compatible with KinetickHarness\." Such descriptions comply with license requirements and help users understand your project's positioning\.

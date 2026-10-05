@@ -5,8 +5,6 @@ kind: "package-bundle"
 
 # @kinetick-labs/kh-web-app
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Run `kh --profile web` for browser chat, model and settings management, and session history, using the same model access, tools, and safety defaults as other kh surfaces. Startup prints a tokenized URL and normally opens the default browser; SSH sessions and `--no-open` require manual opening. You can change the port and allow extra hosts, but cannot bind all network interfaces. Remote access supports an advertised public HTTP(S) URL behind a prefix-stripping proxy. For one-shot command-line tasks, use `kh-headless`.
@@ -149,7 +147,6 @@ Source and Web sections follow first-party reusable instructions. Different chec
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits tell you what to expect in unusual setups — a source checkout, SSH sessions, or strict networks. They are current package constraints, not a general browser comparison or a task backlog.
 

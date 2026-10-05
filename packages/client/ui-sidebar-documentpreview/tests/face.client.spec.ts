@@ -386,7 +386,6 @@ describe('textFace', () => {
     expect(tab()).toMatchObject({ mode: 'bytes-complete', complete: complete('v2', new Uint8Array([2, 3, 255])).value, pages: {} })
   })
 
-
   it.each([PATH, ABSOLUTE_PATH, 'C:/w/notes.md', '//host/share/notes.md'])('uses the addressed Session for %s in both reading modes', async (path) => {
     const first = bench()
     const secondSession = 'second-caller-session' as SessionId

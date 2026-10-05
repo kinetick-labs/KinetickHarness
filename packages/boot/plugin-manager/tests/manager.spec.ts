@@ -415,7 +415,7 @@ it.each(['native', 'runtime'] as const)('reads a disabled bundle and its indepen
   }
   await ctx.plugin(PluginPackages, mode === 'runtime' ? { resolution } : {})
   const result = (await manager.listBundles()).find(row => row.name === 'localized')
-  expect(result).toMatchObject({ enabled: false, meta: { title: { en: 'Local bundle', zh: '本地组合包' } }, rows: [
+  expect(result).toMatchObject({ enabled: false, meta: { title: { en: 'Local bundle' } }, rows: [
     { rowId: 'first', moduleName: 'local-child/first', meta: { title: { en: 'First plugin' } } },
     { rowId: 'second', moduleName: 'local-child/second', meta: { title: { en: 'Second plugin' } } },
   ] })
@@ -694,7 +694,6 @@ it('keeps saved changes after activation failure and allows a corrected configur
   const result = await manager.setPluginEnabled(id, true)
   expect(result, JSON.stringify(result)).toMatchObject({ application: 'applied' })
 })
-
 
 it('reports a selected plain dependency as a problem, omits an unselected one, and reports missing versions', async () => {
   const { manager, dir, profile } = await fixture()

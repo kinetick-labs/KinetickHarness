@@ -417,7 +417,6 @@ describe('cross-process write lock', () => {
     expect(existsSync(join(dir, LOCK))).toBe(true)
   })
 
-
   it('keeps distinct sessions independently lockable', async () => {
     const root = await freshRoot()
     const backend = await mount(root)

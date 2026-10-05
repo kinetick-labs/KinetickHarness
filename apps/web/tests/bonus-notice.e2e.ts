@@ -307,7 +307,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     })
 
     // Closing the card only hides it; the acknowledgement already sent is not repeated.
-    await noticeCards(page).getByRole('button', { name: '关闭', exact: true }).click()
+    await noticeCards(page).getByRole('button', { name: 'Close', exact: true }).click()
     expect(await noticeCards(page).count()).toBe(0)
     expect(platform.acks).toHaveLength(1)
 
@@ -372,7 +372,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     expect(await noticeCards(page).count()).toBe(1)
     expect(platform.acks).toHaveLength(2)
     // Closing the card hides it; the double already stopped serving this acknowledged order.
-    await noticeCards(page).getByRole('button', { name: '关闭', exact: true }).click()
+    await noticeCards(page).getByRole('button', { name: 'Close', exact: true }).click()
     expect(await noticeCards(page).count()).toBe(0)
     expect(platform.acks).toHaveLength(2)
     observations.push(`open.dismissed cards=0 acks=${String(platform.acks.length)}`)
@@ -381,7 +381,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     const reopenGetsBefore = platform.gets.length
     const reopenSummariesBefore = platform.summaries.length
     await openSettings(page, 'zh')
-    const reopened = page.getByRole('dialog', { name: '设置', exact: true })
+    const reopened = page.getByRole('dialog', { name: 'Settings', exact: true })
     await reopened.waitFor()
     await expect.poll(() => platform.gets.length, { timeout: 30_000 }).toBe(reopenGetsBefore + 1)
     await expect.poll(() => platform.summaries.length, { timeout: 30_000 }).toBe(reopenSummariesBefore + 1)
@@ -417,7 +417,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     const topUpGetsBefore = platform.gets.length
     const topUpSummariesBefore = platform.summaries.length
     await openSettings(page, 'zh')
-    const topUpSettings = page.getByRole('dialog', { name: '设置', exact: true })
+    const topUpSettings = page.getByRole('dialog', { name: 'Settings', exact: true })
     await topUpSettings.waitFor()
     await expect.poll(() => platform.gets.length, { timeout: 30_000 }).toBe(topUpGetsBefore + 1)
     await expect.poll(() => platform.summaries.length, { timeout: 30_000 }).toBe(topUpSummariesBefore + 1)
@@ -459,7 +459,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     observations.push(`topup.closed cards=${String(await noticeCards(page).count())} acks=${String(topUpAttempts().length)}`)
     expect(await noticeCards(page).count()).toBe(1)
     expect(topUpAttempts()).toHaveLength(1)
-    await noticeCards(page).getByRole('button', { name: '关闭', exact: true }).click()
+    await noticeCards(page).getByRole('button', { name: 'Close', exact: true }).click()
     expect(await noticeCards(page).count()).toBe(0)
 
     // A transient acknowledgement failure keeps the card and retries the same order after
@@ -468,7 +468,7 @@ describe.skipIf(MODE === 'record')('web e2e: bonus notice', () => {
     platform.grant(ORDER_RETRY, '6.00')
     platform.failNextAcks(ORDER_RETRY, 1)
     await openSettings(page, 'zh')
-    const retryDialog = page.getByRole('dialog', { name: '设置', exact: true })
+    const retryDialog = page.getByRole('dialog', { name: 'Settings', exact: true })
     await retryDialog.waitFor()
     observations.push(`retry.notice=${await shownNotice(page, zhRetry)}`)
     const retryAttempts = (): AckRecord[] => platform.acks.filter(item => item.orderId === ORDER_RETRY)

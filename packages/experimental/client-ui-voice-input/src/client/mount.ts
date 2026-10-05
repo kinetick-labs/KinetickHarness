@@ -1,15 +1,15 @@
 /** Source-safe lifecycle for the optional speech Remote and browser UI. */
-import type { Context } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-experimental-api-speech-to-text/remote'
 import type {} from '@kinetick-labs/kh-client-locale/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type {} from '@kinetick-labs/kh-client-ui-plugin-manager/client'
+import type { Context } from '@deepseek-ai/cordis'
+import type {} from '@kinetick-labs/kh-experimental-api-speech-to-text/remote'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { TypertRemoteContribution } from '@kinetick-labs/kh-typert-protocol'
 import { VoiceInput, type VoiceInputInjected } from './VoiceInput.tsx'
 import { Recording } from './audio.ts'
-import { en, NS, zh } from './locales.ts'
-import type {} from '@kinetick-labs/kh-client-ui-plugin-manager/client'
+import { en,NS } from './locales.ts'
 import { observeReadiness } from './readiness.ts'
 import { VoicePreparation } from './PreparationCard.tsx'
 import { VoiceSetupPrompt } from './VoiceSetupPrompt.tsx'
@@ -17,7 +17,7 @@ import { VoiceSetupPrompt } from './VoiceSetupPrompt.tsx'
 export const inject = ['remote', 'slots', 'locale', 'pluginNavigation']
 
 function registerUi(ctx: Context): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }))
+  ctx.effect(() => ctx.locale.register(NS, { en }))
   const recordings = new Set<Recording>()
   const readiness = observeReadiness(ctx)
   ctx.effect(() => readiness.dispose)

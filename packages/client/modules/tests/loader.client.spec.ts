@@ -909,7 +909,6 @@ describe('default transport seam', () => {
   })
 })
 
-
 it('rejects invalid revision URLs and keeps bootstrap exports pinned under invalidation', () => {
   const b = bench([row(MODULES_ID), row('a', { url: '/unrevisioned' })])
   b.loader.invalidate(MODULES_ID)
@@ -926,7 +925,6 @@ it('prefetch skips platform requests, cached dependencies and absent optional in
   await b.loader.import('b', '', {})
   expect(b.fetched).toEqual([APPLICATION_URL])
 })
-
 
 it('rejects a wire request with no dynamic row or platform supplier at materialization', async () => {
   const b = bench([row('a', { external: ['missing'] })], { a: require => ({ value: require('missing') }) })

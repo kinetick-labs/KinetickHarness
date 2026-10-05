@@ -5,8 +5,6 @@ kind: "package-library"
 
 # @kinetick-labs/kh-home-paths
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 `@kinetick-labs/kh-home-paths` lets package authors resolve one KinetickHarness data root and derive child paths from it. An explicit path wins over `$KH_HOME`, which wins over `~/.kh`; blank environment values are ignored. Its public helpers can render the root without revealing an absolute machine path, expand only bare or current-user tilde forms, and canonicalize watch targets whose final components do not yet exist. Use it as a direct library dependency, not through `cordis.yml`.
@@ -93,7 +91,6 @@ Read these pages when you need the launcher or the consumers that depend on a si
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define when the helpers are not the right tool. They are current package constraints, not a task backlog.
 

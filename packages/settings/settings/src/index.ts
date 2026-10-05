@@ -184,7 +184,6 @@ function mergeLayers(under: unknown, over: unknown): unknown {
   return merged
 }
 
-
 /** Read one member of a plain object or array; `own` limits the read to own properties.
  * @param node Candidate container.
  * @param key Member name.

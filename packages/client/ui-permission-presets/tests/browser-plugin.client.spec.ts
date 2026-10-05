@@ -27,7 +27,7 @@ import {
 import { PermissionSelect } from '../src/client/PermissionSelect.tsx'
 import type { PermissionSelectInjected } from '../src/client/PermissionSelect.tsx'
 import { apply, inject } from '../src/client/index.ts'
-import { accessEn, accessZh } from '../src/client/locales.ts'
+import { accessEn , accessEn as accessZh } from '../src/client/locales.ts'
 
 const sid = (k: string): SessionId => k as SessionId
 
@@ -225,13 +225,13 @@ describe('ui-permission browser plugin', () => {
     })
     b.locale.setLocale('zh')
     const localized = await b.popup().options(proj, new AbortController().signal)
-    expect(localized.map(option => option.label)).toEqual(['仅可查看', '工作区内修改', '完全权限', 'Auto review'])
+    expect(localized.map(option => option.label)).toEqual(['Read Only', 'Workspace Write', 'Full access', 'Auto review'])
     expect(localized.find(option => option.id === 'danger-full-access')?.confirmation).toEqual({
-      title: '确认启用完全权限？',
+      title: 'Enable Full access?',
       description: accessZh['confirm.description'],
-      acknowledgeLabel: '我已了解风险，并愿意继续',
-      cancelLabel: '取消',
-      confirmLabel: '启用完全权限',
+      acknowledgeLabel: 'I understand the risks and want to continue',
+      cancelLabel: 'Cancel',
+      confirmLabel: 'Enable Full access',
     })
     b.setCatalog({ ...CATALOG, options: [
       { value: 'workspace-write', name: 'Project Files' },
@@ -309,7 +309,7 @@ describe('ui-permission browser plugin', () => {
     b.values.set(sid('s1'), { currentValue: 'workspace-write' })
     const options = await b.popup().options(proj, new AbortController().signal)
     expect(options.find(option => option.id === 'auto')?.detail)
-      .toBe('无沙箱运行；每次原生工具调用和 PTC 内层调用前由同一模型进行实验性审查。')
+      .toBe('Run without a sandbox after an experimental same-model review of every native tool call and PTC inner call.')
   })
 
   it('a pick submits the /permission line; rejection and unmatched throw', async () => {

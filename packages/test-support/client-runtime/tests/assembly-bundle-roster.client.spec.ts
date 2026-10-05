@@ -306,7 +306,6 @@ describe('bundleRoster on a scratch installation', () => {
   })
 })
 
-
 it('exhausts uneven linked-bundle search paths before reporting a missing plugin', () => {
   const scratch = new Scratch()
   onTestFinished(() => { rmSync(scratch.root, { recursive: true, force: true }) })

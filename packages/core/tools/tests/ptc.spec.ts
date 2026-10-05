@@ -2158,7 +2158,6 @@ describe('per-agent presentation', () => {
   })
 })
 
-
 class ConfinedFakeRuntime extends FakeRuntime {
   override get sandboxMode() { return 'read-only' as const }
 }

@@ -277,7 +277,6 @@ async function compileFixture(): Promise<{ script: string; css: string }> {
   }
 }
 
-
 /**
  * The painted ring's colour, style and width, plus its WCAG contrast against the surface the
  * ring sits on. A control that disables its outline reports `style: 'none'` and null contrast.

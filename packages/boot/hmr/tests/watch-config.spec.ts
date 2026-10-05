@@ -367,7 +367,6 @@ describe('HMR exact config paths', () => {
   })
 })
 
-
 it('reports inaccessible configuration paths and missing filesystem roots', async () => {
   const dir = mkdtempSync(join(tmpdir(), 'kh-hmr-path-error-'))
   const ctx = await bootHmr(dir)

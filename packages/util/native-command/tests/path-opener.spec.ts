@@ -374,7 +374,6 @@ describe('canOpenNativePath', () => {
   })
 })
 
-
 describe('native file manager', () => {
   it.each([
     ['darwin', 'finder', '/tmp/my report.txt', 'open', ['-R', '/tmp/my report.txt']],
@@ -420,13 +419,11 @@ describe('native file manager', () => {
   })
 })
 
-
 it('uses the native runner for a file-manager handoff when none is injected', async () => {
   execFileMock.mockImplementation((_command, _args, _options, callback) => { callback(null, '', '') })
   await revealNativePath('/tmp/report.txt', signal())
   expect(execFileMock).toHaveBeenCalled()
 })
-
 
 it.each(['win32', 'linux'] as const)('accepts Explorer delegate exit 1 through the native runner on %s', async (platform) => {
   execFileMock.mockImplementation((command, _args, _options, callback) => {
@@ -479,7 +476,6 @@ it.each([
   await revealNativePath(path, signal(), { platform: 'win32', run })
   expect(run).toHaveBeenCalledWith('explorer.exe', ['/select,', target], expect.any(AbortSignal), 'visible')
 })
-
 
 it.each(['.html', '.svg'])('uses the file association for %s despite a configured browser', async (extension) => {
   const path = `/work/report${extension}`

@@ -88,9 +88,9 @@ it.each([
   {
     locale: 'zh-CN', file: 'zh', plugins: '插件', open: '查看 开发者工具', bundle: '开发者工具',
     description: '查看调试会话原始数据、聊天消息分组数据，以及调试 NodeJS 后端',
-    inspector: 'NodeJS 诊断', inspectorDescription: '按 Ctrl/Cmd+Shift+. 在底部面板打开 Chrome DevTools 进行开发调试',
-    session: '会话数据诊断', sessionDescription: '在会话侧边栏启用当前会话的原始数据和聊天分组数据分析功能',
-    openSidebar: '打开右侧边栏', sidebarDescription: '在侧边栏分析当前会话原始日志和聊天分组数据',
+    inspector: 'NodeJS Inspector', inspectorDescription: '按 Ctrl/Cmd+Shift+. 在底部面板打开 Chrome DevTools 进行开发调试',
+    session: 'Session Log', sessionDescription: '在会话侧边栏启用当前会话的原始数据和聊天分组数据分析功能',
+    openSidebar: 'Open right sidebar', sidebarDescription: 'Analyze raw logs and grouped chat messages for the current session in the sidebar.',
   },
   {
     locale: 'en-US', file: 'en', plugins: 'Plugins', open: 'View Developer Tools', bundle: 'Developer Tools',

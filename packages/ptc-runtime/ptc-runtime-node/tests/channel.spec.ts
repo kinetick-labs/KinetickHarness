@@ -157,7 +157,6 @@ it.each(['error', 'close'])('settles a blocked write when the stream emits %s', 
   channel.close()
 })
 
-
 it.each([new Error('write failed'), 'write failed'])('rejects a synchronous transport write failure: %s', async (failure) => {
   const stream = new Duplex({ read() {}, write() { throw failure } })
   const channel = new JsonChannel(stream, 64, () => {}, () => {})

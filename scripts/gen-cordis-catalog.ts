@@ -1002,7 +1002,6 @@ export const CORDIS_CATALOG_POLICY: CordisCatalogPolicy = {
   ],
 }
 
-
 /**
  * Splice a page's generated Cordis API region into its Markdown content.
  * The page must contain exactly one `cordis-surface` marker region (the markers are

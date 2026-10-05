@@ -320,7 +320,6 @@ describe('shared Schedule management', () => {
   })
 })
 
-
 describe('retained Schedule delivery', () => {
   it('keeps ended tasks through restart without redelivery and deletes only within their Session binding', async () => {
     const first = await setup()
@@ -387,7 +386,6 @@ describe('retained Schedule delivery', () => {
     expect(followup).toHaveBeenCalledTimes(1)
   })
 })
-
 
 describe('Schedule activation and shutdown', () => {
   it('reads pre-existing bindings and retains delivery receipts for one-shot and recurring tasks', async () => {

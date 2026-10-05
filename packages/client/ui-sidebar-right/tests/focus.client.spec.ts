@@ -362,7 +362,6 @@ describe('sidebar focus targets', () => {
   })
 })
 
-
 describe('sidebar keyboard commands', () => {
   it('refuses Web close without focus and drops a refresh captured before replacement', () => {
     const h = harness(), commands = new Map<string, ShortcutCommand>()

@@ -282,7 +282,6 @@ it('rejects failed replacement activation and restores the prior plugin', async 
   expect(event).not.toHaveBeenCalled()
 })
 
-
 it('leaves disposed child instances to their replacing parent', async () => {
   const { ctx, module, imports, reload } = await fixture()
   const seen: string[] = []
@@ -409,7 +408,6 @@ it('ignores framework entries and reports unresolved entry modules', async () =>
   expect(warn).toHaveBeenCalledWith(expect.objectContaining({ message: 'entry gone' }))
   expect(await ctx.hmr.getLinked('missing')).toEqual([])
 })
-
 
 it.each(['uncached', 'no-plugin'])('leaves an entry alone when its cache is %s', async (state) => {
   const { ctx, module, cache, imported, reload } = await fixture()

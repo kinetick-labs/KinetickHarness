@@ -661,7 +661,6 @@ describe('tool-pwsh-persistent', () => {
     }
   })
 
-
   it('settles cancellation during the first spawn and releases queued work', async () => {
     const { ctx, owner, stub } = await setup()
     const started = Promise.withResolvers<undefined>()

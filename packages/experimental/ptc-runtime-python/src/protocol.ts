@@ -260,7 +260,6 @@ export const WIRE_FRAME_FIELDS =
     }),
   ) as Record<keyof typeof WIRE_FRAME_FIELD_ROLES, { required: string[]; optional: string[] }>
 
-
 /**
  * The in-band marker text announcing that log capture stopped at the byte
  * budget. Shared wire vocabulary: the Python-side LogBuffer emits it when ITS

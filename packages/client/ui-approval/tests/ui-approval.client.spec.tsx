@@ -223,14 +223,14 @@ describe('approval Remote Event consumer', () => {
       toolName: 'bash',
       callId: 'call-1',
       reason: 'needs access',
-      displayReason: { en: 'Display reason', zh: '展示原因' },
+      displayReason: { en: 'Display reason' },
       signal: controller.signal,
     }, next)
     const pending = bench.pending.getSnapshot()[0]!
     const { options, component } = bench.registration()
 
     expect(component).toBe(ApprovalPanel)
-    expect(pending.displayReason).toEqual({ en: 'Display reason', zh: '展示原因' })
+    expect(pending.displayReason).toEqual({ en: 'Display reason' })
     expect(options.inject().resolveReason(pending.displayReason!)).toBe('Display reason')
     expect(options.select({ pendingInteraction: undefined })).toBeNull()
     expect(options.select({ pendingInteraction: pending })).toBe(pending)
@@ -374,7 +374,7 @@ describe('ApprovalPanel', () => {
     const pending = new PendingApproval(id('s1'), {
       toolName: 'bash',
       reason: 'audit reason',
-      displayReason: { en: 'English explanation', zh: '中文说明' },
+      displayReason: { en: 'English explanation' },
     })
     const props = panelProps(pending)
     const view = render(<ApprovalPanel {...props} />)

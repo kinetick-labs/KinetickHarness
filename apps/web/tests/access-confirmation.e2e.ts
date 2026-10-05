@@ -13,9 +13,7 @@ import {
   assertFixtureInventory, captureStableAria, compareOrRefreshGolden,
   launchWebScaffold, watchConsole, webSnapshotMode, type WebScaffold,
 } from './scaffold.ts'
-import {
-  ZH_BROWSER_LOCALE, connectFreshWorkspaceZh, saveFailureShot, writeComposerDraft,
-} from './support.ts'
+import { ZH_BROWSER_LOCALE, connectFreshWorkspaceZh, saveFailureShot, writeComposerDraft } from './support.ts'
 
 import { AUTO_REVIEW_FIXTURE, captureAutoReviewState } from './auto-review-fixture.ts'
 
@@ -271,7 +269,6 @@ describe('web e2e: experimental Auto and Full access confirmation', () => {
     ])
   })
 })
-
 
 describe('web e2e: default permission choices', () => {
   let scaffold: WebScaffold

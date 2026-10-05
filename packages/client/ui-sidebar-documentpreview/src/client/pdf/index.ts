@@ -1,7 +1,7 @@
 /** Builtin PDF registration through document metadata and the keyed body slot. */
+import type {} from '../index.ts'
 import type { Context } from '@deepseek-ai/cordis'
 import { retainDocumentTabs } from '../document/tab-lifetime.ts'
-import type {} from '../index.ts'
 import type { DocumentPreviewDefinition } from '../document/registry.ts'
 import type { PdfBodyInjected } from './pdf.tsx'
 import { LazyPdfBody } from './LazyPdfBody.tsx'
@@ -9,7 +9,7 @@ import type { BoundActions } from '@kinetick-labs/kh-client-store'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { createPdfStore, type PdfStore } from './store.ts'
 import { ZoomViewport, zoomSurfaceClass } from '../zoom/ZoomViewport.tsx'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 
 /** PDF metadata and keyed body share this package-local implementation identity. */
 export const PDF_BODY_ID = '@kinetick-labs/kh-client-ui-sidebar-documentpreview/pdf'
@@ -25,7 +25,7 @@ export function pdfBodyDefinition(title: () => string): DocumentPreviewDefinitio
 
 /** @param ctx - context carrying the locale, document registry, and slot registry. */
 export function apply(ctx: Context): void {
-  ctx.effect(() => ctx.locale.register('sidebarPdf', { zh, en }))
+  ctx.effect(() => ctx.locale.register('sidebarPdf', { en }))
   const t = ctx.locale.bind('sidebarPdf')
   ctx.effect(() => ctx.documentPreviews.register(pdfBodyDefinition(() => t('title'))))
   const presentation = pdfBodyRegistration(ctx)

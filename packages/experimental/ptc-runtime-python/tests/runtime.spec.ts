@@ -2428,7 +2428,6 @@ describe('PythonPtcRuntime — programs and bindings', () => {
     expect(result.logs).toEqual(['a'.repeat(29) + 'b'.repeat(30)])
   }, 15_000)
 
-
   it('rejects a new open entry once the ledger has only two bytes left', async () => {
     // The jsonStringCostUpTo sub-2-byte guard: forged open frames drive the
     // host ledger down to 1 byte, then a new open entry's first-fragment cap

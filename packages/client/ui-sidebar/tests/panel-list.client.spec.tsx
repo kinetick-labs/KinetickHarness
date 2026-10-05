@@ -7,7 +7,6 @@ import { act, cleanup, fireEvent, waitFor, within } from '@testing-library/react
 import { SlotTestRuntime } from '@kinetick-labs/kh-client-test-runtime'
 import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
 import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
 import { IconGlobeOutlineRegular } from '@kinetick-labs/kh-client-ui-primitives'
 import type { ILayout, MainPanelId } from '@kinetick-labs/kh-client-ui-layout/client'
 import type { PropsRenderSlots, PropsRuntime, SlotLabel } from '@kinetick-labs/kh-client-ui-slots'
@@ -52,9 +51,9 @@ async function bench(collapsed = false) {
       ctx.provide('layout', layout)
       ctx.provide('uiWorkspace', { startSession: vi.fn() } as never)
       ctx.provide('locale', locale)
-      ctx.effect(() => locale.register('common', { zh: commonZh, en: commonEn }), 'panel test: common locale')
+      ctx.effect(() => locale.register('common', { en: commonEn }), 'panel test: common locale')
       ctx.effect(() => locale.register('sidebar-panel-test', {
-        zh: { alpha: '甲面板' }, en: { alpha: 'Alpha panel' },
+        en: { alpha: 'Alpha panel' },
       }), 'panel test: panel locale')
       ctx.slots.installLocale(locale)
       ctx.slots.inject('main', () => ctx.slots.register({ name: 'main', key: 'conversation' }, () => (

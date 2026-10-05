@@ -16,7 +16,6 @@ async function run(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> },
   return (await x.execute(spec)).result()
 }
 
-
 vi.mock('node:child_process', async () => await import('../../src/node/builtin_modules/implemented/child_process.ts'))
 
 const WORKSPACE = '/kh/workspace'

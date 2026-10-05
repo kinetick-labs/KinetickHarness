@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-agent-preset-registry
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Choose an Agent’s tools, prompt sections and skills through declarative presets. One process can run several compositions. Failed definitions remain visible, while existing Agents retain the composition they already use.

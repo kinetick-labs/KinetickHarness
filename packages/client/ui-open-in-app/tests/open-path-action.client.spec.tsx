@@ -12,7 +12,7 @@ import { OpenPathAction, type OpenPathActionProps } from '../src/client/OpenPath
 import { OpenPathEmptyAction, type OpenPathEmptyActionProps } from '../src/client/OpenPathEmptyAction.tsx'
 import type { OpenInAppPathAction, OpenInAppPathFailure } from '../src/client/open-path.ts'
 import { useOpenTargetGesture } from '../src/client/OpenTargetButton.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()
@@ -148,7 +148,6 @@ it('dismisses a failure on schedule even when its owner rerenders', async () => 
   expect(screen.queryByRole('alert')).toBeNull()
 })
 
-
 it('shows the default icon and current application list, and selects an application without replacing default opening', async () => {
   const b = bench()
   const icon = 'data:image/png;base64,aGVsbG8='
@@ -166,7 +165,6 @@ it('shows the default icon and current application list, and selects an applicat
   await act(async () => { fireEvent.click(screen.getByRole('button', { name: t('open.title', { app: 'Music' }) })) })
   expect(b.openPath).toHaveBeenLastCalledWith(ABSOLUTE_PATH, 'open', undefined)
 })
-
 
 it('ignores an obsolete file query and refreshes the default application when the menu opens', async () => {
   const b = bench()
@@ -216,7 +214,6 @@ it('uses reveal as the default only when no application is registered', async ()
   expect(b.openPath).toHaveBeenLastCalledWith(ABSOLUTE_PATH, 'reveal', undefined)
 })
 
-
 it('coalesces repeated gestures before the busy state renders', async () => {
   const pending = Promise.withResolvers<OpenInAppPathFailure | null>()
   const b = bench({ openPath: vi.fn(() => pending.promise) })
@@ -226,7 +223,6 @@ it('coalesces repeated gestures before the busy state renders', async () => {
   await act(async () => { pending.resolve(null) })
   expect(result.current.pending).toBe(false)
 })
-
 
 it('closes the application menu from its chevron without querying again', async () => {
   const b = bench()
@@ -241,7 +237,6 @@ it('closes the application menu from its chevron without querying again', async 
   expect(b.props.applications).toHaveBeenCalledTimes(calls)
 })
 
-
 it('waits for the file association query before allowing a default action', async () => {
   const b = bench()
   const query = Promise.withResolvers<Awaited<ReturnType<OpenPathActionProps['applications']>>>()
@@ -255,7 +250,6 @@ it('waits for the file association query before allowing a default action', asyn
   await act(async () => { fireEvent.click(main) })
   expect(b.openPath).toHaveBeenLastCalledWith(ABSOLUTE_PATH, 'reveal', undefined)
 })
-
 
 it('uses the same application menu in the prominent empty-state control', async () => {
   const b = bench()
@@ -277,7 +271,6 @@ it('labels the prominent default action as reveal when no application is registe
   await act(async () => { fireEvent.click(screen.getByRole('button', { name: zh['path.reveal'] })) })
   expect(b.openPath).toHaveBeenLastCalledWith(ABSOLUTE_PATH, 'reveal', undefined)
 })
-
 
 it('uses a skeleton while associations load and pins reveal outside the application list', async () => {
   const b = bench()

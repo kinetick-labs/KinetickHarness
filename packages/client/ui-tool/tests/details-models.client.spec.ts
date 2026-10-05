@@ -3,9 +3,8 @@
 import { describe, expect, it } from 'vitest'
 import type { ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { en, zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
-import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en , en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as commonEn , en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { statusLine } from '@kinetick-labs/kh-tool-jobs/src/render.ts'
 import { presentation } from '@kinetick-labs/kh-tool-session-query/src/presentation.ts'
 import { renderList, renderRead, renderSpawn } from '@kinetick-labs/kh-tool-terminal/src/render.ts'
@@ -57,10 +56,10 @@ describe('control detail adapters', () => {
   it.each([
     [{ timedOut: false }, '子智能体状态 · 检测到变化'],
     [{ timedOut: true }, '子智能体状态 · 等待超时'],
-    [{ timedOut: false, noProgress: { message: 'No pending work' } }, '没有正在运行的子智能体'],
+    [{ timedOut: false, noProgress: { message: 'No pending work' } }, 'No active subagents'],
   ] as const)('names subagents in Chinese wait results (%j)', (value, summary) => {
     const translate = makeTranslate(zh, commonZh)
-    expect(translate('tool.title.waitAgent')).toBe('等待子智能体')
+    expect(translate('tool.title.waitAgent')).toBe('Wait for subagent')
     expect(detailsCardModel(output('wait_agent', JSON.stringify(value)), translate, 'zh-CN')?.summary).toBe(summary)
   })
 

@@ -1,12 +1,10 @@
 # Contributing
 
-English | [中文](CONTRIBUTING.zh.md)
-
 Thank you for your interest in contributing to KinetickHarness!
 
-We deeply believe in the power of open source communities, and that belief has shaped this project from the very beginning.
+KinetickHarness is a fork of [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), maintained at [kinetick-labs/KinetickHarness](https://github.com/kinetick-labs/KinetickHarness). Pull requests for this fork belong here. The upstream project is a separate repository.
 
-KinetickHarness is still at an early stage and under active development. We are sorry that we cannot accept external pull requests at the moment. However, contributing code to this repository is far from the only way to help. There are many other ways to get involved:
+This fork is still at an early stage and under active development. Contributing code is one way to help. There are many other ways to get involved:
 
 - Identify and report issues or bugs in GitHub Discussions:
   - Upvote discussions that you would like to bring to the team's attention. We are a very small team and may not be able to reply to every post, but we monitor them and consider them when allocating resources.

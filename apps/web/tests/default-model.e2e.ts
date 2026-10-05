@@ -94,10 +94,10 @@ describe('web e2e: the composer model switch is the default for later sessions',
 
   it('keeps command popup search borders transparent in both palettes', async () => {
     const composer = page.locator('[data-composer-input]').first()
-    await page.getByRole('button', { name: '添加文件或调用指令', exact: true }).click()
+    await page.getByRole('button', { name: 'Add files or run commands', exact: true }).click()
     const commandMenuBounds = await page.locator('[data-trigger-menu]').boundingBox()
     await page.getByRole('option', { name: /^模型/ }).click()
-    const search = page.getByRole('textbox', { name: '筛选选项', exact: true })
+    const search = page.getByRole('textbox', { name: 'Filter options', exact: true })
     await search.waitFor()
     try {
       const popupBounds = await page.locator('[aria-label="/model 选项"]').boundingBox()
@@ -105,7 +105,7 @@ describe('web e2e: the composer model switch is the default for later sessions',
       expect(commandMenuBounds).not.toBeNull()
       expect(popupBounds!.width).toBeCloseTo(commandMenuBounds!.width)
       expect(popupBounds!.x).toBeCloseTo(commandMenuBounds!.x)
-      expect(await search.getAttribute('placeholder')).toBe('搜索模型…')
+      expect(await search.getAttribute('placeholder')).toBe('Search models…')
       await page.getByRole('option').first().waitFor()
       await compareOrRefreshGolden(
         fileURLToPath(new URL('./expected/default-model/command-picker.expected.md', import.meta.url)),
@@ -113,7 +113,7 @@ describe('web e2e: the composer model switch is the default for later sessions',
         webSnapshotMode(),
       )
       await search.fill('no-model-matches')
-      await page.getByText('没有匹配的模型。', { exact: true }).waitFor()
+      await page.getByText('No matching models.', { exact: true }).waitFor()
       await search.fill('')
       const borders = await search.evaluate((input) => {
         const body = input.ownerDocument.body
@@ -423,7 +423,7 @@ describe('web e2e: the composer model switch is the default for later sessions',
     expect(await page.getByRole('group', { name: 'Origin Gateway', exact: true }).count()).toBe(0)
     await compareOrRefreshGolden(
       fileURLToPath(new URL('./expected/default-model/search.expected.md', import.meta.url)),
-      await captureStableAria(page, '[role="group"][aria-label="模型与推理等级"]', scaffold.workspaceCwd),
+      await captureStableAria(page, '[role="group"][aria-label="Model and reasoning effort"]', scaffold.workspaceCwd),
       webSnapshotMode(),
     )
     const entered = Promise.withResolvers<undefined>()

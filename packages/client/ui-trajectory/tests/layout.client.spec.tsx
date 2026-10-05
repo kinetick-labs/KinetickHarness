@@ -16,7 +16,7 @@ import {
   appendTrajectoryPartialLayout as appendTrajectoryPartialLayoutWithLocale,
   deriveTrajectoryLayout as deriveTrajectoryLayoutWithLocale,
 } from '../src/client/layout.ts'
-import { t, tZh } from './locale.client.ts'
+import { t, tEn as tZh } from './locale.client.ts'
 
 const deriveTrajectoryLayout = (
   input: Parameters<typeof deriveTrajectoryLayoutWithLocale>[0],

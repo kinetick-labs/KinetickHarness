@@ -9,10 +9,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { TodoItem } from '@kinetick-labs/kh-tool-todo/client'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { TodoDockProps } from '../src/client/skeleton/TodoPanel.tsx'
 import { TodoDock, TodoPanel, todoDockEntry } from '../src/client/skeleton/TodoPanel.tsx'
-import { NS, zh } from '../src/client/locales.ts'
+import { NS, en as zh } from '../src/client/locales.ts'
 
 const t: TodoDockProps['t'] = makeTranslate(zh, commonZh)
 
@@ -42,7 +42,7 @@ describe('TodoPanel', () => {
   it('starts collapsed with the per-status count summary visible', () => {
     render(<TodoPanel todos={LIST} t={t} />)
     expect(screen.getByTestId('todo-panel')).toBeTruthy()
-    expect(screen.getByText('任务')).toBeTruthy()
+    expect(screen.getByText('To-dos')).toBeTruthy()
     expect(screen.getByText('1 已完成 · 1 进行中 · 1 待处理')).toBeTruthy()
     expect(screen.getByRole('button', { expanded: false })).toBeTruthy()
     expect(screen.queryByRole('list')).toBeNull()
@@ -67,7 +67,7 @@ describe('TodoPanel', () => {
     expect(items.map(li => li.querySelector('[data-state]')?.getAttribute('data-state')))
       .toEqual(['done', 'ongoing', 'idle'])
     expect(screen.getAllByRole('img').map(node => node.getAttribute('aria-label')))
-      .toEqual(['已完成', '进行中', '待处理'])
+      .toEqual(['已完成', '进行中', 'Pending'])
   })
 
   it('collapse hides an expanded list; expand restores; header keeps the count summary', () => {

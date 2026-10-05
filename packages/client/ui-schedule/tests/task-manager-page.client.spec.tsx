@@ -17,7 +17,7 @@ import {
   formatScheduleRelative, zoneLabel,
 } from '../src/client/schedule-format.ts'
 import { timingSnapshot } from '../src/client/task-timing.ts'
-import { en, zh } from '../src/client/task-manager-locales.ts'
+import { en , en as zh } from '../src/client/task-manager-locales.ts'
 import { zoneDifferingFrom, zoneOffsetMinutes } from './zone-fixture.ts'
 import css from '../src/client/TaskManagerPage.module.css'
 import taskMenuCss from '../src/client/TaskMenu.module.css'

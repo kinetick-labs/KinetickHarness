@@ -1,25 +1,25 @@
 /** Register the Chat Conversation target, renderers, stats, and details surface. */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
+import type {} from '@kinetick-labs/kh-client-ui-input-trigger/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar-documentpreview/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-layout/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
+import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
 import type { Context } from '@deepseek-ai/cordis'
 import type { ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { SessionBinding } from '@kinetick-labs/kh-api-session-controller/client'
 import type { GroupKey } from '@kinetick-labs/kh-client-ui-conversation/client'
 import { createSnapshotStore, type ObservableSnapshot } from '@kinetick-labs/kh-client-store'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-browser/client'
-import type {} from '@kinetick-labs/kh-client-ui-input-trigger/client'
 // The `file` entry of `SidebarRightResourceParamsMap`, which types `{ params: { line } }` below.
-import type {} from '@kinetick-labs/kh-client-ui-sidebar-documentpreview/client'
 import { fileAddressFor } from '@kinetick-labs/kh-util-workspace-path'
 // Type-only service and declaration merges used by the apply world.
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
-import type {} from '@kinetick-labs/kh-client-ui-layout/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {} from '@kinetick-labs/kh-client-ui-settings/client'
-import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
 import type {
   ChatNodeInjected, ChatScrollPosition, ChatViewInjected, QuotaNoticeInjected, QuotaNoticeState, TurnTailOwnerProps,
 } from './contract/slots.ts'
@@ -31,7 +31,7 @@ import { registerChatNodeRenderers } from './chat/register-node-renderers.ts'
 import { ActivityPill, UsagePill } from './chat/StatsPills.tsx'
 import { registerConversationNodes } from './conversation-nodes/register.ts'
 import { QuotaNoticeHost } from './chat/QuotaNoticeHost.tsx'
-import { en, NS, zh } from './locale.ts'
+import { en,NS } from './locale.ts'
 import { TranscriptViewRow, type TranscriptViewRowInjected } from './settings/TranscriptViewRow.tsx'
 import { createChatStore } from './stores.ts'
 import { TranscriptViewPolicy } from './transcript-view.ts'
@@ -113,7 +113,7 @@ export function apply(ctx: Context): void {
     resolve: binding => ({ hooks: { chat: chatSource(binding) } }),
   })
 
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-chat: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-chat: dictionaries')
   const t = ctx.locale.bind(NS)
   const chatStore = createChatStore()
   const chatScrollPositions = new Map<SessionId, ChatScrollPosition>()

@@ -29,7 +29,6 @@ function env(values: Record<string, string>): EnvLookup {
   } }
 }
 
-
 describe('loopback routing', () => {
   const proxied = { httpProxy: PROXY, httpsProxy: PROXY, noProxy: '', source: 'env' } as const
 

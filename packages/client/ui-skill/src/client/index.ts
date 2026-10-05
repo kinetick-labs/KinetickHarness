@@ -33,19 +33,19 @@
  */
 // Type-only: the carrier types, the forwarded Host-event face and the ctx.remote merge.
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
+import type {} from '@kinetick-labs/kh-api-session-controller/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SkillEntry } from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-api-session-controller/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { InputTriggerServiceContract, InputTriggerSource } from '@kinetick-labs/kh-client-ui-input-trigger/client'
 import { fileAddressFor } from '@kinetick-labs/kh-util-workspace-path'
 import { rankByName } from '@kinetick-labs/kh-client-ui-primitives'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: pulls the SlotRegistry service merge (ctx.slots).
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import { SkillRow } from './SkillRow.tsx'
-import { en, NS, zh, type SkillKey } from './locales.ts'
+import { en,NS,type SkillKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-api-session-controller/client' {
   interface SessionReferenceSourceMap {
@@ -77,7 +77,7 @@ export const inject = ['inputTriggers', 'sessions', 'slots', 'locale', 'remote',
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-skill: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-skill: dictionaries')
   ctx.slots.inject('tool.call.toolview', () => ctx.slots.register(
     { name: 'tool.call.toolview', key: 'skill', locale: NS },
     SkillRow,

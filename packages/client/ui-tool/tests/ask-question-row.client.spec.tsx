@@ -13,12 +13,12 @@ import { useDisclosure } from '@kinetick-labs/kh-client-ui-chat/src/client/chat/
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { ToolCallBlock, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 // Export discipline: packages/client/AGENTS.md.
 import { AskQuestionRow, askQuestionToolview } from '../src/client/tool/toolviews/ask-question-row.tsx'
 import type { UserQuestionPanels } from '../src/client/contract/slots.ts'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
@@ -93,7 +93,7 @@ const queuedReply = (callId: string, entries: unknown[]): unknown => ({
 })
 
 /** Every pill the row can offer, by its visible copy. */
-const PILL = { reopen: '回答', review: '查看回答' } as const
+const PILL = { reopen: 'Answer', review: 'View answers' } as const
 
 /** The panel verbs the registered toolview hands each row of one Session. */
 interface PanelFace {
@@ -259,7 +259,7 @@ describe('AskQuestionRow', () => {
     expect(screen.queryByRole('button', { name: PILL.reopen })).toBeNull()
     expect(screen.queryByRole('button', { name: PILL.review })).toBeNull()
     fireEvent.click(screen.getByRole('button', { expanded: false }))
-    expect(screen.getByText('该问题已结束，结果见下方对话')).toBeTruthy()
+    expect(screen.getByText('This question is closed; its outcome is in the conversation below.')).toBeTruthy()
     expect(screen.getByText('What do you want to accomplish?')).toBeTruthy()
     expect(screen.queryByText(/"pending"/)).toBeNull()
   })
@@ -580,7 +580,7 @@ describe('AskQuestionRow', () => {
     expect(screen.getByText('已取消')).toBeTruthy()
     expect(view.container.querySelector('[data-state="ok"]')).not.toBeNull()
     fireEvent.click(screen.getByRole('button', { expanded: false }))
-    expect(screen.getByText('本轮已取消，未提交回答')).toBeTruthy()
+    expect(screen.getByText('This question set was cancelled before answers were submitted.')).toBeTruthy()
     expect(screen.getByText('What do you want to accomplish?')).toBeTruthy()
     expect(screen.getByText('Which project should this apply to?')).toBeTruthy()
     expect(screen.getByText('Anything else?')).toBeTruthy()

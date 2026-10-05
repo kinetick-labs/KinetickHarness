@@ -3,10 +3,9 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonEn, en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { ContextInjectionRow } from '../src/client/chat/ContextInjectionRow.tsx'
-import { en, zh } from '../src/client/locale.ts'
+import { en , en as zh } from '../src/client/locale.ts'
 
 afterEach(cleanup)
 

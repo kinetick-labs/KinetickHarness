@@ -979,7 +979,6 @@ describe('system/message surface node', () => {
   })
 })
 
-
 describe('developer message history', () => {
   it.each(['user/message', 'developer/message'] as const)('rejects a mismatched developer role in %s at event admission', (type) => {
     const message = createDeveloperMessage({ source: { kind: 'test' }, content: [] })

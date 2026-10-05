@@ -10,14 +10,14 @@
  * business, read through its face. Every import from another
  * client plugin is a type.
  */
-import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-resources/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-session/client'
-import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type {} from '@kinetick-labs/kh-api-gateway/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import type {} from '@kinetick-labs/kh-api-workspace-files/remote'
 import type { WorkspaceFileParams } from '@kinetick-labs/kh-api-workspace-files/client'
 import { TextPreview } from './TextPreview.tsx'
@@ -27,7 +27,7 @@ import { TEXTPREVIEW_ID, textDefinition } from './definition.ts'
 import { textFace } from './face.ts'
 import { createReadPage } from './rpc.ts'
 import { createTextStore } from './store.ts'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 import { DocumentPreviewRegistry } from './document/registry.ts'
 import { documentTabInfoFactory } from './document/contract.ts'
 import { apply as registerText } from './text/index.ts'
@@ -91,7 +91,7 @@ export function apply(ctx: ClientContext): void {
   const disposePreviews = ctx.reflect.provide('documentPreviews', previews)
   ctx.effect(() => disposePreviews)
   ctx.effect(() => ctx.sidebarRightTabs.register(textDefinition()), 'ui-sidebar-documentpreview: text type')
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-sidebar-documentpreview: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-sidebar-documentpreview: dictionaries')
 
   const store = createTextStore()
   const face = textFace(

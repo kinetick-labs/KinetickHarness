@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render, screen, act } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import type { AccountView, SignInAttemptId } from '@kinetick-labs/kh-deepseek-account/types'
 import { SignInDialog } from '../src/client/SignInDialog.tsx'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 const id = 'login-attempt' as SignInAttemptId

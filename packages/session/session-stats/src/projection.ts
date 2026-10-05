@@ -27,7 +27,6 @@ import { z } from 'zod'
 import { assistantStreamFirstTokenTime } from '@kinetick-labs/kh-llm'
 import type { ProjectionDefinition } from '@kinetick-labs/kh-session-projection'
 
-
 /** Accumulated whole-log figures (the view is exactly these totals). */
 interface SessionStatsTotals {
   /** Distinct turns with at least one closed step so far. */

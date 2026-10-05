@@ -1,4 +1,6 @@
 /** Window-local Inspector frontend in the layout's bottom slot. */
+import type {} from '@kinetick-labs/kh-client-ui-layout/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { Context } from '@deepseek-ai/cordis'
 import { useCallback, useId, useRef, useState } from 'react'
 import type { CSSProperties } from 'react'
@@ -6,13 +8,11 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import { Button, IconCloseOutlineRegular, Tooltip } from '@kinetick-labs/kh-client-ui-primitives'
 import type { HostObservable, InjectFace, PropsLocale, PropsRuntime } from '@kinetick-labs/kh-client-ui-slots'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
-import type {} from '@kinetick-labs/kh-client-ui-layout/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { InspectorSourceId } from '../../shared/bridge/ids.ts'
 import { bindInspectorKeyboard } from './keyboard.ts'
 import { InspectorResizeHandle } from './resize.tsx'
-import { zh, en } from './locales.ts'
+import { en } from './locales.ts'
 import css from './page.module.css'
 
 const ID = 'inspector.toggle' as ShortcutCommandId
@@ -58,7 +58,7 @@ function InspectorPage({ t, frontendUrl, close, bindFrame, usePanel }:
 export function registerInspectorPage(ctx: Context, sourceId: InspectorSourceId): void {
   const query = new URLSearchParams({ disableLocaleInfoBar: 'true', clientSourceId: sourceId })
   const frontendUrl = `inspector/devtools/devtools_app.html?${query}`
-  ctx.effect(() => ctx.locale.register('inspectorPanel', { zh, en }))
+  ctx.effect(() => ctx.locale.register('inspectorPanel', { en }))
   const t = ctx.locale.bind('inspectorPanel')
   ctx.slots.inject('shell.bottom', function* () {
     const panel = createSnapshotStore<PanelState>('unopened')

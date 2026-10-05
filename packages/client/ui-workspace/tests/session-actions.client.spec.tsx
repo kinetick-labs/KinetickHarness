@@ -17,8 +17,7 @@ import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { GlobalStandardProps, PropsLocale, PropsRuntime } from '@kinetick-labs/kh-client-ui-slots'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonEn, en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type {
   MenuOpenState, RowToast, RowToastState, SessionArchiveConfirmInjected, SessionArchiveConfirmRequest,
   SessionRenameDialogInjected, SessionRenameTarget,
@@ -31,7 +30,7 @@ import { PinSessionMenuItem, PinSessionRowButton } from '../src/client/session-a
 import { RenameSessionMenuItem, SessionRenameDialog } from '../src/client/session-actions/RenameSession.tsx'
 import { RowActionToast } from '../src/client/session-actions/RowActionToast.tsx'
 import { createWorkspaceViewStore } from '../src/client/stores.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import { ShortcutRegistry } from '../../shortcuts/src/client/registry.ts'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
 
@@ -546,7 +545,7 @@ describe('RowActionToast', () => {
     expect(screen.queryByRole('alert')).toBeNull()
 
     notify({ kind: 'archived', sessionId: sid('two') })
-    fireEvent.click(screen.getByRole('button', { name: '筛选已归档会话' }))
+    fireEvent.click(screen.getByRole('button', { name: 'filter archived sessions' }))
     expect(dismissToast).toHaveBeenCalledTimes(2)
     expect(showArchived).toHaveBeenCalledOnce()
     expect(callOrder(dismissToast, 1)).toBeLessThan(callOrder(showArchived))
@@ -564,15 +563,15 @@ describe('RowActionToast', () => {
     const { notify } = toastSurface({ archivedFilter })
     notify({ kind: 'archived', sessionId: sid('one') })
     expect(screen.getByRole('alert').textContent).toBe('会话已归档，可撤销')
-    expect(screen.queryByRole('button', { name: '筛选已归档会话' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'filter archived sessions' })).toBeNull()
     expect(screen.getByRole('button', { name: '撤销' })).toBeTruthy()
   })
 
   it.each([
-    ['pinFailed', '置顶失败，请稍后重试'],
-    ['unpinFailed', '取消置顶失败，请稍后重试'],
-    ['archivedNotOpenable', '已归档对话暂时无法查看，请取消归档后查看'],
-    ['defaultWorkspaceFailed', '无法创建默认工作区，请通过“选择工作区”选择文件夹'],
+    ['pinFailed', 'Pin failed. Try again later.'],
+    ['unpinFailed', 'Unpin failed. Try again later.'],
+    ['archivedNotOpenable', 'Archived sessions cannot be opened. Unarchive it to view.'],
+    ['defaultWorkspaceFailed', 'Unable to create default workspace. Use Choose workspace to select a folder.'],
   ] as const)('shows the %s warning and takes it down when its hold ends', (kind, text) => {
     vi.useFakeTimers()
     try {
@@ -648,8 +647,8 @@ it('shows effective Session shortcuts while menu clicks keep the row target', ()
   </>)
   expect(screen.getAllByRole('menuitem').map(item => item.getAttribute('aria-keyshortcuts')))
     .toEqual(['Alt+Meta+R', 'Alt+Meta+F', 'Shift+Meta+A'])
-  fireEvent.click(screen.getByRole('menuitem', { name: '重命名' }))
-  fireEvent.click(screen.getByRole('menuitem', { name: '分叉会话' }))
+  fireEvent.click(screen.getByRole('menuitem', { name: 'Rename' }))
+  fireEvent.click(screen.getByRole('menuitem', { name: 'Fork session' }))
   fireEvent.click(screen.getByRole('menuitem', { name: '归档会话' }))
   expect(requestSessionRename).toHaveBeenCalledWith(ROW.sessionId, ROW.displayTitle)
   expect(forkSession).toHaveBeenCalledWith(ROW.sessionId)

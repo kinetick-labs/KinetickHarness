@@ -14,7 +14,7 @@ import { ReferenceChipNode } from '../src/client/input/editor/chip-node.tsx'
 import { TextRefNode } from '../src/client/input/editor/text-ref.ts'
 import { SessionInputShell } from '../src/client/input/facade.ts'
 import { InputHub } from '../src/client/input/hub.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 const mention = '@src/main.ts'
 const saved: DraftSnapshot = {

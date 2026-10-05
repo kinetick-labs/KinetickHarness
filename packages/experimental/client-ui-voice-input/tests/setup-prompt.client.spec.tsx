@@ -7,7 +7,7 @@ import type { SpeechPreparationState, SpeechProviderId } from '@kinetick-labs/kh
 import { afterEach, expect, it, vi } from 'vitest'
 import { VoiceSetupPrompt, type VoiceSetupPromptProps } from '../src/client/VoiceSetupPrompt.tsx'
 import type { SpeechReadiness } from '../src/client/readiness.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 

@@ -11,7 +11,7 @@ function make() {
 describe('package text resolution', () => {
   it('keeps strings verbatim without common lookup or interpolation', () => {
     const { ctx, locale } = make()
-    ctx.effect(() => locale.register('common', 'zh', { retry: '重试' }), 'test: common dictionary')
+    ctx.effect(() => locale.register('common', 'zh', { retry: 'Retry' }), 'test: common dictionary')
     locale.setLocale('zh')
 
     expect(locale.resolveText('retry')).toBe('retry')
@@ -22,7 +22,7 @@ describe('package text resolution', () => {
 
   it('resolves each field in the current locale without registering map languages', () => {
     const { locale } = make()
-    const title = { en: 'Tools', zh: '工具', ja: 'ツール' }
+    const title = { en: 'Tools', ja: 'ツール' }
     locale.setLocale('zh')
     const snapshot = locale.getSnapshot()
 
@@ -44,7 +44,7 @@ describe('package text resolution', () => {
 
     expect(locale.resolveText({ en: 'Tools', fr: 'Outils', 'fr-ca': 'Outils Québec' })).toBe('Outils Québec')
     expect(locale.resolveText({ en: 'Tools', fr: 'Outils' })).toBe('Outils')
-    expect(locale.resolveText({ en: 'Tools', zh: '工具' })).toBe('Tools')
+    expect(locale.resolveText({ en: 'Tools' })).toBe('Tools')
   })
 
   it('uses English across an unloaded fallback and follows its replacement', () => {

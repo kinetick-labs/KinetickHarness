@@ -164,7 +164,7 @@ describe('ui-settings-general apply', () => {
       expect(c.ctx.configForms.describe().getSnapshot().view?.namespaces).toEqual([english])
     })
     c.ctx.locale.setLocale('zh')
-    expect(generalLabel(c)).toBe('通用设置')
+    expect(generalLabel(c)).toBe('General')
     await vi.waitFor(() => {
       expect(settings.mutate.mock.calls).toEqual([
         [LOCALE_SETTINGS_NAMESPACE, [{ op: 'set', path: ['preference'], value: 'en' }], 0],
@@ -221,7 +221,7 @@ describe('ui-settings-general apply', () => {
     c.ctx.locale.setLocale('en')
     expect(generalLabel(c)).toBe('General')
     c.ctx.locale.setLocale('zh')
-    expect(generalLabel(c)).toBe('通用设置')
+    expect(generalLabel(c)).toBe('General')
     await vi.waitFor(() => {
       expect(settings.mutate.mock.calls).toEqual([
         [LOCALE_SETTINGS_NAMESPACE, [{ op: 'set', path: ['preference'], value: 'en' }], 0],

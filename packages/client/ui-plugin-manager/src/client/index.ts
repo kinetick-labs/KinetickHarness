@@ -7,27 +7,26 @@
  * the slots the page declares (`slot-contract.ts`).
  */
 import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-sidebar/client'
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-plugin-manager/types'
+import type {} from './slot-contract.ts'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 // Type-only: the root `main` keyed slot the page registers into, declared by
 // ui-layout with the panel id brand, and the `sidebar.panellist` list the
 // entry registers into, declared by ui-sidebar.
 import type { MainPanelId } from '@kinetick-labs/kh-client-ui-layout/client'
-import type {} from '@kinetick-labs/kh-client-ui-sidebar/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 // Type-only: the ctx.remote Context merge and the forwarded-event key face.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 // Type-only: the forwarded events' own declaration (`$on`'s key face resolves
 // through the owning package's client-safe types subpath).
-import type {} from '@kinetick-labs/kh-plugin-manager/types'
 import { PluginManagerPage } from './PluginManagerPage.tsx'
 import { PluginRefreshToast, type PluginRefreshToastFace } from './PluginRefreshToast.tsx'
 import { PluginsPanelIcon } from './PluginsPanelIcon.tsx'
 import { configLedgerSource } from './config-ledger.ts'
 import { PluginManagerController } from './manager-store.ts'
-import { en, zh, type PluginManagerLocaleKey } from './locales.ts'
+import { en,type PluginManagerLocaleKey } from './locales.ts'
 import { createNavigationStore } from './navigation-store.ts'
-import type {} from './slot-contract.ts'
-
 declare module '@deepseek-ai/cordis' {
   interface Context {
     /** Cross-plugin navigation to the Plugins panel. */
@@ -73,7 +72,7 @@ export const inject = ['slots', 'locale', 'remote', 'remote.pluginManager', 'rem
  * @param ctx - the browser plugin context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-plugin-manager: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-plugin-manager: dictionaries')
   const t = ctx.locale.bind(NS)
   const controller = new PluginManagerController(ctx)
   ctx.effect(() => () => { controller.dispose() }, 'ui-plugin-manager: controller')

@@ -170,7 +170,7 @@ it('keeps modal arbitration and updates locale without replacing the iframe', as
   press()
   const frame = body.view.getByTitle('NodeJS Inspector')
   act(() => { locale.setLocale('zh') })
-  expect(body.view.getByTitle('NodeJS 诊断')).toBe(frame)
+  expect(body.view.getByTitle('NodeJS Inspector')).toBe(frame)
   act(() => { body.view.getByRole('button', { name: '收起' }).click() })
   expect(body.container.querySelector('section')?.hidden).toBe(true)
 })

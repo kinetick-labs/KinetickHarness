@@ -4,7 +4,7 @@ import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { useDisclosure } from '@kinetick-labs/kh-client-ui-chat/src/client/chat/use-disclosure.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 import { QuestionReplyBubble, QuestionReplyView } from '../src/client/QuestionReplyView.tsx'
 import type { QuestionReplyData } from '../src/client/question-reply.ts'
 
@@ -60,7 +60,7 @@ describe('QuestionReplyView', () => {
     expect(screen.getByText('What should we build?')).toBeTruthy()
     expect(screen.getAllByText('What should we build?')).toHaveLength(1)
     expect(screen.getByText('A dashboard — A focused web surface.')).toBeTruthy()
-    expect(screen.getByText('回答：')).toBeTruthy()
+    expect(screen.getByText('Answer: ')).toBeTruthy()
     expect(screen.getAllByText('A dashboard')).toHaveLength(1)
   })
 

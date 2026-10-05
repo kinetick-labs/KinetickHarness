@@ -88,7 +88,6 @@ export interface ProxyDiagnostic {
   readonly message: string
 }
 
-
 /** A resolved policy plus every candidate value that was rejected on the way to it. */
 export interface ProxyResolution {
   /** The policy to install. Never carries a rejected value. */

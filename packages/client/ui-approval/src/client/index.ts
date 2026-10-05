@@ -1,16 +1,16 @@
 /** Browser approval consumer over the existing scoped Remote Event waterfall. */
-import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-session-controller/client'
 import type { ComposerChainProps } from '@kinetick-labs/kh-client-ui-conversation/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { PendingInteractionPublisher } from '@kinetick-labs/kh-client-ui-session/client'
 import type { TypertClientEventListener } from '@kinetick-labs/kh-typert-protocol'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
 import { ApprovalPanel } from './ApprovalPanel.tsx'
 import { PendingApproval } from './contract/slots.ts'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 
 export type {
   ApprovalComposerProps,
@@ -75,7 +75,7 @@ async function answerApproval(
  * @param ctx - Client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-approval: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-approval: dictionaries')
   ctx.inject(['shortcuts'], (scope) => {
     const t = ctx.locale.bind(NS)
     scope.effect(() => scope.shortcuts.registerFixed({

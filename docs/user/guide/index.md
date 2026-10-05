@@ -1,14 +1,12 @@
 # Use the Web UI
 
-English | [中文](index.zh.md)
-
 Start the Web UI through the [root README](../../../README.md#run); the command prints its URL. This guide begins after that server is running. The `kh` process uses its invoking directory as the default filesystem location, but a fresh Web UI has no selected workspace until you add one.
 
 ## Configure a model
 
-Open **Settings → Models**, enter a [DeepSeek API key](https://platform.deepseek.com/), and save it. The model route becomes usable immediately without restarting the server.
+Open **Settings → Models** and save a provider you choose. A DeepSeek API key is optional. The model route becomes usable on the next request without restarting the server.
 
-The [model configuration guide](./providers.md) covers other providers and custom OpenAI-compatible endpoints.
+The [model configuration guide](./providers.md) covers DeepSeek, other built-in providers, and a custom OpenAI-compatible endpoint.
 
 ## Choose a workspace
 

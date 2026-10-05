@@ -54,7 +54,6 @@ it('reports transport failure without exposing the thrown error', async () => {
   }
 })
 
-
 it('identifies invalid envelope fields without logging response values', async () => {
   const output = vi.spyOn(console, 'info').mockImplementation(() => undefined)
   const fetcher = vi.spyOn(globalThis, 'fetch').mockResolvedValue(new Response(JSON.stringify({

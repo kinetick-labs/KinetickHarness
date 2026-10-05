@@ -1,7 +1,6 @@
 /** Pure archive-format, triplet, and immutable-manifest helpers. */
 
 import { createHash } from 'node:crypto'
-import { basename } from 'node:path'
 import { AGENT_NOTE_CLASSES } from './agent-note-tree.ts'
 
 /** Versioned fields in the frozen-content manifest. */
@@ -72,7 +71,27 @@ const figmaLinkRemovals = [
   },
 ]
 
-/** Reject sealed changes except the exact authorized Figma-link removal hashes. */
+/** Whether an archived path is a retired Chinese sibling or pairing record. */
+export function isRetiredChineseArchivePath(path: string): boolean {
+  return path.endsWith('.zh.md') || path.endsWith('.i18n.yaml')
+}
+
+/**
+ * Drop a language switcher and Chinese counterpart links from archived English prose.
+ * @param content - archived English note.
+ * @returns the note with Chinese documentation links removed.
+ */
+export function retireChineseArchiveProse(content: string): string {
+  if (!content.includes('.zh.md') && !/^English \| \[中文\]\(/m.test(content)) return content
+  const kept: string[] = []
+  for (const line of content.split('\n')) {
+    if (/^English \| \[中文\]\(/.test(line)) continue
+    kept.push(line.replace(/\]\(([^)\s]+)\.zh\.md(#[^)\s]*)?\)/g, ']($1.md$2)'))
+  }
+  return kept.join('\n').replace(/\n{3,}/g, '\n\n')
+}
+
+/** Reject sealed changes except retired Chinese paths and the authorized Figma-link removal. */
 export function validateArchiveManifestExtension(
   baseline: ArchiveManifest,
   current: ArchiveManifest,
@@ -80,8 +99,9 @@ export function validateArchiveManifestExtension(
   const errors: string[] = []
   for (const [path, expected] of Object.entries(baseline.files)) {
     const actual = current.files[path]
-    if (actual === undefined) errors.push(`${path}: sealed manifest entry is missing`)
-    else if (actual !== expected && !figmaLinkRemovals.some(change =>
+    if (actual === undefined) {
+      if (!isRetiredChineseArchivePath(path)) errors.push(`${path}: sealed manifest entry is missing`)
+    } else if (actual !== expected && !figmaLinkRemovals.some(change =>
       change.path === path && change.before === expected && change.after === actual,
     )) errors.push(`${path}: sealed manifest hash changed`)
   }
@@ -98,23 +118,6 @@ function validDate(value: string): boolean {
   return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day
 }
 
-interface Triplet {
-  source?: Buffer
-  zh?: Buffer
-  meta?: Buffer
-}
-
-function pairMeta(content: string): Map<string, string> | undefined {
-  const entries = new Map<string, string>()
-  for (const line of content.split('\n')) {
-    if (line === '' || line.startsWith('#')) continue
-    const match = /^([^:#]+\.md): ([0-9a-f]{40})$/.exec(line)
-    if (match?.[1] === undefined || match[2] === undefined) return undefined
-    entries.set(match[1], match[2])
-  }
-  return entries
-}
-
 function validateMetadata(path: string, content: Buffer, sourceBase: string): { errors: string[]; date: string | undefined } {
   const errors: string[] = []
   const lines = content.toString('utf8').split('\n')
@@ -129,55 +132,24 @@ function validateMetadata(path: string, content: Buffer, sourceBase: string): { 
   return { errors, date: archived }
 }
 
-/** Validate the closed kind tree, implemented/archive metadata, and complete bilingual triplets. */
+/** Validate the closed kind tree and implemented/archive metadata of English notes. */
 export function validateArchiveArtifacts(artifacts: ReadonlyMap<string, Buffer>): string[] {
   const errors: string[] = []
-  const triplets = new Map<string, Triplet>()
-  for (const [path, content] of artifacts) {
-    const match = /^([^/]+)\/(\d{4}-\d{2}-\d{2}-.+?)(\.zh\.md|\.i18n\.yaml|\.md)$/.exec(path)
-    if (match?.[1] === undefined || match[2] === undefined || match[3] === undefined) {
-      errors.push(`${path}: expected {kind}/yyyy-mm-dd-topic.{md,zh.md,i18n.yaml}`)
+  for (const [path, content] of [...artifacts].sort(([left], [right]) => left.localeCompare(right))) {
+    if (isRetiredChineseArchivePath(path)) {
+      errors.push(`${path}: Chinese archive artifacts are not part of this tree`)
+      continue
+    }
+    const match = /^([^/]+)\/(\d{4}-\d{2}-\d{2}-.+)\.md$/.exec(path)
+    if (match?.[1] === undefined || match[2] === undefined) {
+      errors.push(`${path}: expected {kind}/yyyy-mm-dd-topic.md`)
       continue
     }
     if (!(AGENT_NOTE_CLASSES as readonly string[]).includes(match[1])) {
       errors.push(`${path}: unknown Agent Note kind ${JSON.stringify(match[1])}`)
       continue
     }
-    const key = `${match[1]}/${match[2]}`
-    const triplet = triplets.get(key) ?? {}
-    if (match[3] === '.md') triplet.source = content
-    else if (match[3] === '.zh.md') triplet.zh = content
-    else triplet.meta = content
-    triplets.set(key, triplet)
-  }
-
-  for (const [key, triplet] of [...triplets].sort(([left], [right]) => left.localeCompare(right))) {
-    const sourcePath = `${key}.md`
-    const zhPath = `${key}.zh.md`
-    const metaPath = `${key}.i18n.yaml`
-    const { source, zh, meta } = triplet
-    const missing = [
-      source === undefined ? sourcePath : undefined,
-      zh === undefined ? zhPath : undefined,
-      meta === undefined ? metaPath : undefined,
-    ].filter((path): path is string => path !== undefined)
-    if (source === undefined || zh === undefined || meta === undefined) {
-      errors.push(`${key}: incomplete archived triplet; missing ${missing.join(', ')}`)
-      continue
-    }
-    const sourceBase = basename(key)
-    const { errors: sourceErrors, date: sourceDate } = validateMetadata(sourcePath, source, sourceBase)
-    const { errors: zhErrors, date: zhDate } = validateMetadata(zhPath, zh, sourceBase)
-    errors.push(...sourceErrors, ...zhErrors)
-    if (sourceDate !== undefined && zhDate !== undefined && sourceDate !== zhDate) {
-      errors.push(`${key}: English and Chinese archive dates differ (${sourceDate} vs ${zhDate})`)
-    }
-    const pair = pairMeta(meta.toString('utf8'))
-    if (pair === undefined || pair.size !== 2
-      || pair.get(`${sourceBase}.md`) !== gitBlobHash(source)
-      || pair.get(`${sourceBase}.zh.md`) !== gitBlobHash(zh)) {
-      errors.push(`${metaPath}: consistency record must contain the current Git blob hashes of both archived sides`)
-    }
+    errors.push(...validateMetadata(path, content, match[2]).errors)
   }
   return errors
 }
@@ -188,14 +160,20 @@ export function extendArchiveManifest(
   artifacts: ReadonlyMap<string, Buffer>,
 ): { files: Record<string, string>; added: string[]; errors: string[] } {
   const errors: string[] = []
-  const files: Record<string, string> = { ...existing.files }
+  const files: Record<string, string> = {}
   for (const [path, expected] of Object.entries(existing.files)) {
+    if (isRetiredChineseArchivePath(path)) continue
+    files[path] = expected
     const content = artifacts.get(path)
     if (content === undefined) errors.push(`${path}: sealed artifact is missing`)
     else if (archiveContentHash(content) !== expected) errors.push(`${path}: sealed content hash changed`)
   }
   const added: string[] = []
   for (const [path, content] of [...artifacts].sort(([left], [right]) => left.localeCompare(right))) {
+    if (isRetiredChineseArchivePath(path)) {
+      errors.push(`${path}: Chinese archive artifacts are not sealed`)
+      continue
+    }
     if (files[path] !== undefined) continue
     files[path] = archiveContentHash(content)
     added.push(path)

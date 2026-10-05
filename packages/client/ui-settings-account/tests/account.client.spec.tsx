@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import type {} from '../src/client/index.ts'
 import { cleanup, fireEvent, render, screen, act, within } from '@testing-library/react'
 import { useMemo, useSyncExternalStore } from 'react'
 import { afterEach, expect, it, onTestFinished, vi } from 'vitest'
@@ -11,8 +12,7 @@ import { AccountPlatformHost } from '../src/client/AccountPlatformHost.tsx'
 import { AccountSection, type AccountSectionInjected, type AccountSnapshot } from '../src/client/AccountSection.tsx'
 import type { BonusNotice } from '../src/client/bonus-notices.ts'
 import type { AccountMenuProps } from '../src/client/AccountMenu.tsx'
-import type {} from '../src/client/index.ts'
-import { en, zh, type AccountKey } from '../src/client/locales.ts'
+import { en, type AccountKey , en as zh } from '../src/client/locales.ts'
 import css from '../src/client/AccountSection.module.css'
 
 afterEach(() => { cleanup(); vi.unstubAllGlobals() })
@@ -267,7 +267,6 @@ it.each([en, zh])('shows the signed-out settings prompt without balance or Platf
     .toMatchFileSnapshot(`./expected/account-signed-out-${copy === en ? 'en' : 'zh'}.txt`)
 })
 
-
 it('opens usage inside Desktop and returns to the same Account settings', async () => {
   vi.stubGlobal('ResizeObserver', class { observe() {} disconnect() {} })
   const platform: PlatformBridge = { open: vi.fn(async () => {}), setBounds: vi.fn(async () => {}), close: vi.fn(async () => {}) }
@@ -362,7 +361,6 @@ it('shows the profile while the balance is still loading', async () => {
   await expect(`${screen.getByRole('region').textContent}\n`).toMatchFileSnapshot('./expected/profile-before-balance.txt')
 })
 
-
 it.each(['usage', 'top-up'] as const)('shows an accessible spinner until %s finishes loading', async (page) => {
   vi.stubGlobal('ResizeObserver', class { observe() {} disconnect() {} })
   const loaded = Promise.withResolvers<undefined>()
@@ -381,7 +379,6 @@ it.each(['usage', 'top-up'] as const)('shows an accessible spinner until %s fini
   await act(async () => { loaded.resolve(undefined) })
   expect(screen.queryByRole('status', { name: en.loading })).toBeNull()
 })
-
 
 it.each([
   ['Preferred name', '138****0000', 'Preferred name'],

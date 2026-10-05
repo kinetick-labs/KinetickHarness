@@ -12,7 +12,7 @@ import type { CatalogSnapshot } from '../src/client/catalog-source.ts'
 import { ScheduleTaskTab, type ScheduleTaskTabProps } from '../src/client/ScheduleTaskTab.tsx'
 import { ScheduleTaskTabTitle, type ScheduleTaskTabTitleProps } from '../src/client/ScheduleTaskTabTitle.tsx'
 import { TaskTabBindings, type TaskTabPage } from '../src/client/task-tab-bindings.ts'
-import { en, zh } from '../src/client/task-manager-locales.ts'
+import { en , en as zh } from '../src/client/task-manager-locales.ts'
 import css from '../src/client/TaskManagerPage.module.css'
 
 const SESSION = 'session-alpha' as SessionId

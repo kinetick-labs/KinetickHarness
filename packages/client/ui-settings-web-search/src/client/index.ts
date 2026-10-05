@@ -7,19 +7,19 @@
  */
 
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: the ctx.configForms Context merge. Cross-plugin collaboration
 // goes through the service, never a value import (client bundle purity gate).
-import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 // Type-only: the Plugins page's SlotMap merge (the 'plugins.item' entry).
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 import type {} from '@kinetick-labs/kh-client-ui-plugin-manager/client'
+import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 // Type-only: the ctx.remote Context merge and the forwarded-event key face.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import { WebSearchCard } from './WebSearchCard.tsx'
 import { WEB_SEARCH_NS, WebSearchCardController } from './web-search-card-controller.ts'
-import { en, zh, type WebSearchSettingsLocaleKey } from './locales.ts'
+import { en,type WebSearchSettingsLocaleKey } from './locales.ts'
 
 export type { WebSearchCardProps } from './WebSearchCard.tsx'
 export type { WebSearchCardFace, WebSearchCardState, WebSearchSettings } from './web-search-card-controller.ts'
@@ -44,7 +44,7 @@ export const inject = ['slots', 'locale', 'remote', 'remote.credentials', 'confi
  */
 export function apply(ctx: ClientContext): void {
   const t = ctx.locale.bind(NS)
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-settings-web-search: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-settings-web-search: dictionaries')
   const card = new WebSearchCardController(ctx.configForms.get(WEB_SEARCH_NS), ctx)
   ctx.effect(() => () => { card.dispose() }, 'ui-settings-web-search: form subscription')
   // The credential the page reports is not part of any settings section, so

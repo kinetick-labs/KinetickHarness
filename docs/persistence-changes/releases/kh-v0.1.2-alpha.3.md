@@ -5,8 +5,6 @@ kind: persistence-release
 
 # Persistence release: kh-v0.1.2-alpha.3
 
-English | [中文](kh-v0.1.2-alpha.3.zh.md)
-
 ## Summary
 
 All reconstructed persistence root digests match the preceding alpha tag. The writer format remains 0.

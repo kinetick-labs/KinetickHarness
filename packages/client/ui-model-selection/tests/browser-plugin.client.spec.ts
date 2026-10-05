@@ -19,7 +19,7 @@ import type { ModelSelection, ModelSelectionProjection } from '@kinetick-labs/kh
 import type { CommandContribution, PopupSelectSpec, SelectOption } from '@kinetick-labs/kh-client-ui-commands/client'
 import type { ModelSelectInjected } from '../src/client/slots.ts'
 import { apply, inject } from '../src/client/index.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 const sid = (k: string): SessionId => k as SessionId
 
@@ -235,9 +235,7 @@ describe('ui-model-selection dual entry', () => {
     expect(b.popup().searchMode).toBe('fuzzy-label')
     expect(options[0]?.active).toBe(true)
     expect(options[1]?.active).toBeUndefined()
-    expect(b.popup().searchLabels?.()).toEqual(locale === 'zh'
-      ? { placeholder: '搜索模型…', empty: '没有可用的模型。', noResults: '没有匹配的模型。' }
-      : { placeholder: 'Search models…', empty: 'No models available.', noResults: 'No matching models.' })
+    expect(b.popup().searchLabels?.()).toEqual({ placeholder: 'Search models…', empty: 'No models available.', noResults: 'No matching models.' })
   })
 
   it('orders popup provider groups account-first while retaining third-party catalog order', async () => {
@@ -535,7 +533,6 @@ describe('ui-model-selection dual entry', () => {
     expect(b.calls).toEqual({ models: 2, select: 0 })
   })
 })
-
 
 it.each([false, true])('accepts a model and effort change and leaves a refused switch unchanged, blank=%s', async (blank) => {
   const b = await bench('en')

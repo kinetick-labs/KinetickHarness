@@ -197,7 +197,6 @@ describe('client manifest entries', () => {
   })
 })
 
-
 it('publishes stable local snapshots and contains a failing subscriber', async () => {
   const b = await bench(graph(), {})
   const error = vi.spyOn(console, 'error').mockImplementation(() => {})
@@ -296,7 +295,6 @@ it('stops an obsolete multi-entry application after awaiting removal', async () 
   expect(b.fetched).toEqual(['/batch'])
 })
 
-
 it('keeps bootstrap ownership explicit and diagnoses removal without changing entries', async () => {
   const b = await bench(graph(row('bootstrap')), {})
   await expect(b.modules.entries.sync(graph())).rejects.toThrow('removing bootstrap module')
@@ -321,7 +319,6 @@ it('retains unrelated style tags while reporting a failed replacement', async ()
   expect(b.modules.entries.state.getSnapshot().failures[0]?.message).toContain('changed factory failed')
   expect(unrelated.isConnected).toBe(true)
 })
-
 
 it('keeps unrelated page failures visible when a rebuilt download fails', async () => {
   const b = await bench(graph(row('a'), row('bad')), {
