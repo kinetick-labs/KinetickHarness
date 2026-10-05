@@ -1,7 +1,5 @@
 # Get started with the Python SDK
 
-English | [中文](python-sdk.zh.md)
-
 This tutorial installs the published Python SDK, runs the shipped standalone minimal profile, and shows how to customize the same `kh` profile from your own program.
 
 ## Prerequisites
@@ -9,7 +7,7 @@ This tutorial installs the published Python SDK, runs the shipped standalone min
 - Python 3.10 or newer
 - Git
 - Linux x64, Linux arm64, macOS 14 or newer on arm64, or Windows x64
-- A DeepSeek-compatible API endpoint and credential
+- An API endpoint and credential for the provider you configure
 - An isolated workspace and an isolated Harness home
 
 ## Install the SDK
@@ -23,7 +21,7 @@ This tutorial installs the published Python SDK, runs the shipped standalone min
 
 ```sh [Linux/macOS]
 git clone https://github.com/kinetick-labs/KinetickHarness.git
-cd kinetick-harness
+cd KinetickHarness
 python -m venv .venv
 . .venv/bin/activate
 python -m pip install kinetick-harness-sdk
@@ -31,7 +29,7 @@ python -m pip install kinetick-harness-sdk
 
 ```powershell [Windows PowerShell]
 git clone https://github.com/kinetick-labs/KinetickHarness.git
-Set-Location kinetick-harness
+Set-Location KinetickHarness
 py -3.10 -m venv .venv
 .venv\Scripts\Activate.ps1
 python -m pip install kinetick-harness-sdk
