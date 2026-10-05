@@ -468,7 +468,7 @@ describe('headless runner', () => {
     expect(await test.run()).toMatchObject({
       code: 1,
       out: '\n',
-      err: 'kh: reasoning:\ntrying recovery\ndsh: SERVER: provider unavailable\n',
+      err: 'kh: reasoning:\ntrying recovery\nkh: SERVER: provider unavailable\n',
     })
     await test.ctx.fiber.dispose()
   })
