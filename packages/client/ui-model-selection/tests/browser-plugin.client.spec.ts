@@ -153,8 +153,6 @@ async function bench(locale: 'zh' | 'en' = 'zh') {
       ? { parentSessionId: sid('parent'), childSessionId: id, mode: 'continuable' as const }
       : undefined,
   })
-  const track = vi.fn()
-  ctx.provide('productAnalytics', { enabled: true, track } as never)
   const fiber = ctx.plugin({ inject: [...inject], apply })
   await fiber.await()
   await ctx.plugin(function probe() {}).await()
@@ -179,7 +177,7 @@ async function bench(locale: 'zh' | 'en' = 'zh') {
     return { ...handle, projection }
   }
   return {
-    ctx, fiber, mint, calls, remote, track,
+    ctx, fiber, mint, calls, remote,
     contribution: () => contribution!,
     popup: (): PopupSelectSpec => {
       const ui = contribution!.ui
@@ -539,21 +537,18 @@ describe('ui-model-selection dual entry', () => {
 })
 
 
-it.each([false, true])('reports accepted switches with blank=%s and no refused switch', async (blank) => {
+it.each([false, true])('accepts a model and effort change and leaves a refused switch unchanged, blank=%s', async (blank) => {
   const b = await bench('en')
-  const scope = b.mint('analytics', blank)
+  const scope = b.mint('chosen', blank)
   try {
-    const face = b.seat().inject!(sid('analytics'))
+    const face = b.seat().inject!(sid('chosen'))
     await face.select({ provider: 'deepseek-official', model: 'deepseek-v4-pro', reasoningEffort: 'max' })
-    expect(b.track).toHaveBeenCalledWith('model_switch', { ...blank ? {} : { session_id: 'analytics' }, switch_from: 'deepseek-official/deepseek-v4-flash', switch_to: 'deepseek-official/deepseek-v4-pro' })
-    b.track.mockClear()
+    expect(b.calls.select).toBe(1)
     await face.select({ provider: 'deepseek-official', model: 'deepseek-v4-pro', reasoningEffort: 'high' })
-    expect(b.track).toHaveBeenCalledExactlyOnceWith('thinking_level_switch', {
-      ...blank ? {} : { session_id: 'analytics' }, model_name: 'deepseek-official/deepseek-v4-pro', switch_from: 'max', switch_to: 'high',
-    })
-    b.track.mockClear()
+    expect(b.calls.select).toBe(2)
     b.rejectSelection()
     await face.select({ provider: 'deepseek-official', model: 'deepseek-v4-flash' })
-    expect(b.track).not.toHaveBeenCalled()
+    expect(b.calls.select).toBe(3)
+    expect(b.hostCurrent()).toEqual({ provider: 'deepseek-official', model: 'deepseek-v4-pro', reasoningEffort: 'high' })
   } finally { await scope.fiber.dispose(); await b.ctx.fiber.dispose() }
 })

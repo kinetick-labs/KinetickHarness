@@ -30,8 +30,8 @@
 - button "compact Compacted 5 history items (~{{tokens}} tokens)"
 - status: Completed
 - button "Completed in {{duration}}" [disabled]
-- 'button "feedback Feedback recorded for session {{seededId}} Anonymous user: {{uuid}}." [expanded]'
-- text: "Feedback recorded for session {{seededId}} Anonymous user: {{uuid}}."
+- 'button "feedback Feedback recorded for session {{seededId}}." [expanded]'
+- text: "Feedback recorded for session {{seededId}}."
 - textbox "Message or run a task, / commands, @ files or sessions"
 - button "Add files or run commands"
 - 'button "Access mode, current: Read Only"': Read Only

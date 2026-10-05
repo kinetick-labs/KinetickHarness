@@ -82,7 +82,6 @@ describe.skipIf(!process.env.DEEPSEEK_API_KEY || !runtime)('Excel validation sco
       env: {
         DSH_PRIMARY_RUNTIME: runtime,
         DSH_PERMISSION_MODE: 'danger-full-access',
-        DSH_TELEMETRY_DISABLED: '1',
         DSH_TOOLS_MODE: 'native',
       },
       async prepare(cwd) {

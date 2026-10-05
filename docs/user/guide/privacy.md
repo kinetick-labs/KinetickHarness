@@ -18,4 +18,4 @@ Network use is limited to destinations you choose:
 - Optional tools you install, including MCP servers, and web search or fetch when those tools are enabled.
 - Package installs you start yourself.
 
-No collector URL is built in. Enabling OpenTelemetry session upload or product analytics requires an endpoint you supply, and both rows stay disabled until you do.
+Session logs stay on disk. This build has no OpenTelemetry exporter, product-analytics reporter, or DeepSeek session-log upload.

@@ -75,7 +75,7 @@ Read these pages when the provider contract is not enough. They move from the sh
 - [Shared LLM title policy](../session-title-llm/README.md) — the generation helper this provider uses.
 - [All-messages title provider](../session-title-all-prompts-llm/README.md) — the cadence that retitles after every new prompt.
 - [Session title service](../session-title/README.md) — fallback behavior, rename, refresh, and provider registration.
-- [Session package map](../README.md) — adjacent persistence, projection, title, and telemetry packages.
+- [Session package map](../README.md) — adjacent persistence, projection, and title packages.
 
 -----
 

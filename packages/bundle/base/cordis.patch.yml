@@ -40,14 +40,6 @@
     - id: session
       name: '@deepseek-ai/dsh-session'
 
-    # Official DeepSeek request metadata stays out of the shipped profile.
-    # Opt in with `disabled: false` and `config.enabled: true` on this row.
-    - id: session-log-deepseek
-      name: '@deepseek-ai/dsh-session-log-deepseek'
-      disabled: true
-      config:
-        enabled: false
-
     - id: typert
       name: '@deepseek-ai/dsh-typert-registry'
 
@@ -78,14 +70,6 @@
 
     - id: agent
       name: '@deepseek-ai/dsh-agent'
-
-    # Active package names are local composition facts. They are not attached
-    # to official DeepSeek requests unless this row is explicitly enabled.
-    - id: plugin-package-inventory-deepseek
-      name: '@deepseek-ai/dsh-plugin-package-inventory-deepseek'
-      disabled: true
-      config:
-        enabled: false
 
     # The transport-independent default for Agents created by entry points.
     # Settings may supply a saved selection; consumers read it at creation time.
@@ -194,19 +178,6 @@
       config:
         writeEveryEvents: 200
         writeIntervalMs: 5000
-
-    - id: otel
-      name: '@deepseek-ai/dsh-otel'
-
-    # Session logs stay on disk. This row does not open a collector. A deployment
-    # that wants OpenTelemetry must set `disabled: false`, choose `FEEDBACK_ONLY`,
-    # and supply its own `exporter.url`. There is no default collector. A non-empty
-    # DSH_TELEMETRY_DISABLED still forces the row off at launch.
-    - id: session-telemetry-otel
-      name: '@deepseek-ai/dsh-session-telemetry-otel'
-      disabled: true
-      config:
-        mode: DISABLED
 
     - id: subprocess
       name: '@deepseek-ai/dsh-subprocess-local'

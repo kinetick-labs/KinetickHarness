@@ -91,7 +91,7 @@ Independent. Feedback does not change the model request prefix.
 - **Deletion retains history:** delete removes current feedback, not earlier ratings or notes from the append-only log; it is not a privacy-erasure operation.
 - **Writer ownership:** another process holding a Session write handle causes cold mutations to reject. The service does not wake that owner or coordinate Remote calls across processes.
 - **Trusted callers:** requests contain no authenticated actor or audit identity. Deployments must protect the Host gateway.
-- **Telemetry export:** shipped profiles leave the OTel session backend disabled, so feedback stays in the Session log. An explicit `FEEDBACK_ONLY` deployment releases the complete canonical prefix only after new explicit text feedback, rating, note, or category edits, or withdrawal. The prefix includes context and verbatim notes. Deployments own the collector URL and redaction; see the [OTel export policy](../../session/session-telemetry-otel/README.md).
+- **Local only:** feedback stays in the Session log. Recording it does not upload the log.
 - **Scan cost:** each `list`, `put`, or `delete` that reaches an existing Session scans its full event log to derive current feedback; cold operations also read the full log from persistence. Work grows with total Session history, not just the number of feedback items.
 - **Retention:** `maxNoteBytes` limits one note, not aggregate log size or mutation count.
 

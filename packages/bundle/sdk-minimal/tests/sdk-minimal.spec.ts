@@ -29,8 +29,6 @@ describe('dsh-sdk-minimal bundle', () => {
       ['sdk-app-startup', '@deepseek-ai/dsh-sdk-app'],
       ['sdk-jsonrpc-server', '@deepseek-ai/dsh-sdk-jsonrpc-server'],
       ['deepseek-llm-api-extensions', '@deepseek-ai/dsh-deepseek-llm-api-extensions'],
-      ['session-log-deepseek', '@deepseek-ai/dsh-session-log-deepseek'],
-      ['plugin-package-inventory-deepseek', '@deepseek-ai/dsh-plugin-package-inventory-deepseek'],
       ['llm-deepseek', '@deepseek-ai/dsh-llm-deepseek-api-key'],
       ['sandbox', '@deepseek-ai/dsh-sandbox-local'],
       ['session-projection', '@deepseek-ai/dsh-session-projection'],
@@ -68,12 +66,6 @@ describe('dsh-sdk-minimal bundle', () => {
       includeHarnessIdentity: false,
       includeRuntimeContext: false,
       personaPrefix: { __jsExpr: "process.env.DSH_SYSTEM_PROMPT ?? 'You are a helpful software engineer assistant.'" },
-    })
-    expect(rows.find(row => row.id === 'session-log-deepseek')).toMatchObject({
-      disabled: true, config: { enabled: false },
-    })
-    expect(rows.find(row => row.id === 'plugin-package-inventory-deepseek')).toMatchObject({
-      disabled: true, config: { enabled: false },
     })
     expect(rows.find(row => row.id === 'agent-loop')?.config).toEqual({ agents: [] })
     expect(rows.find(row => row.id === 'terminal-bash')).toMatchObject({
