@@ -580,7 +580,6 @@ it('retains partial package-manager changes after a failed install without activ
   expect(readProfileManifest('test', dir).kh?.profile?.bundles).toEqual([])
 })
 
-
 it('initializes missing profiles under the same lock and reports initialization', async () => {
   const { home, context } = fixture()
   const messages: string[] = []
@@ -856,7 +855,6 @@ it('preserves an unexpected subprocess rejection after both streams settle', asy
   }))
   await expect(runProfilePnpm(context, ['root'], { execution: 'service', outputBytes: 100 })).rejects.toThrow('subprocess failed')
 })
-
 
 it('allows inventory commands when a declared dependency is missing from disk', async () => {
   const { context, dir } = fixture()

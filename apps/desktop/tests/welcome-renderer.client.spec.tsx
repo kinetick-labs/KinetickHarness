@@ -313,7 +313,6 @@ it('ignores a notification received after its renderer unmounts', async () => {
   expect(screen.queryByRole('alert')).toBeNull()
 })
 
-
 it.each(['zh-CN', 'en'])('returns from completed sign-in to the initial page after sign-out: %s', async (language) => {
   const view = mount(language)
   const publish = view.api.onAccountState.mock.calls[0]![0]

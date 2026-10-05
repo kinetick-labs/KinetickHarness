@@ -16,7 +16,7 @@ import { PluginRefreshToast } from '../src/client/PluginRefreshToast.tsx'
 import type { PluginManagerPageProps } from '../src/client/index.ts'
 import type { ConfigLedger } from '../src/client/config-ledger.ts'
 import { rowKey, type InstallState, type PackageRow, type PackageView, type PluginManagerState } from '../src/client/manager-store.ts'
-import { INSTALL_GIT_EXAMPLE, INSTALL_PATH_EXAMPLE, en, zh, type PluginManagerLocaleKey } from '../src/client/locales.ts'
+import { INSTALL_GIT_EXAMPLE, INSTALL_PATH_EXAMPLE, en, type PluginManagerLocaleKey , en as zh } from '../src/client/locales.ts'
 import type { PluginActivationOwnerProps, PluginAddActionsProps, PluginDetailProps, PluginsSubject } from '../src/client/slot-contract.ts'
 
 afterEach(cleanup)
@@ -582,11 +582,11 @@ describe('PluginManagerPage', () => {
     '@acme/kh-local-tools',
   ])('localizes Host metadata for %s across cards, details, switches, and uninstall confirmation', (name) => {
     const meta = {
-      title: { en: 'Installed tools', zh: '已安装工具' },
-      description: { en: 'Tools on this host.', zh: '本机工具。' },
+      title: { en: 'Installed tools' },
+      description: { en: 'Tools on this host.' },
     }
-    const title = (dict: typeof en): string => dict === zh ? meta.title.zh : meta.title.en
-    const description = (dict: typeof en): string => dict === zh ? meta.description.zh : meta.description.en
+    const title = (_dict: typeof en): string => meta.title.en
+    const description = (_dict: typeof en): string => meta.description.en
     const { actions, set, setLanguage } = renderTab({ packages: [pkg({ name, meta, description: 'Original metadata.' })] })
     const assertCard = (dict: typeof en) => {
       const card = screen.getByRole('button', { name: dict.openDetail.replace('{name}', title(dict)) })
@@ -688,13 +688,13 @@ describe('PluginManagerPage', () => {
   }>([
     {
       field: 'title',
-      meta: { title: { en: '@acme/kh-sidebar', zh: '侧栏套件' }, description: 'Package description.' },
+      meta: { title: { en: '@acme/kh-sidebar' }, description: 'Package description.' },
       englishTitle: '@acme/kh-sidebar', chineseTitle: '侧栏套件',
       englishDescription: 'Package description.', chineseDescription: 'Package description.',
     },
     {
       field: 'description',
-      meta: { title: { en: 'English title' }, description: { en: '', zh: '中文套件说明。' } },
+      meta: { title: { en: 'English title' }, description: { en: '' } },
       englishTitle: 'English title', chineseTitle: 'English title', chineseDescription: '中文套件说明。',
     },
   ])('resolves bundle $field independently and hides empty descriptions on cards and details', ({ meta, englishTitle, chineseTitle, englishDescription, chineseDescription }) => {
@@ -722,7 +722,7 @@ describe('PluginManagerPage', () => {
       expect(screen.getByRole('heading', { level: 3 }).textContent).toBe(title)
       if (description === undefined) {
         expect(screen.queryByText(chineseDescription)).toBeNull()
-        expect(screen.queryByText(dict === zh ? '暂无描述。' : 'No description.')).toBeNull()
+        expect(screen.queryByText('No description.')).toBeNull()
       } else {
         expect(screen.getByText(description)).toBeTruthy()
       }
@@ -734,7 +734,7 @@ describe('PluginManagerPage', () => {
       row({ moduleName: '@acme/kh-sidebar/navigation', meta: { description: { en: 'Navigation description.' } } }),
       row({
         rowId: 'theme', entryId: 'include:theme' as PluginEntryId, moduleName: '@acme/kh-theme/client',
-        meta: { title: { en: '@acme/kh-theme', zh: '主题插件' }, description: { en: '', zh: '中文主题说明。' } },
+        meta: { title: { en: '@acme/kh-theme' }, description: { en: '' } },
       }),
     ]
     const { actions, setLanguage } = renderTab(
@@ -799,8 +799,8 @@ describe('PluginManagerPage', () => {
     const localized = row({
       moduleName: '@acme/kh-sidebar-widget',
       meta: {
-        title: { en: 'Sidebar component', zh: '导航组件' },
-        description: { en: 'Sidebar navigation', zh: '侧边导航' },
+        title: { en: 'Sidebar component' },
+        description: { en: 'Sidebar navigation' },
         error,
       },
     })
@@ -808,7 +808,7 @@ describe('PluginManagerPage', () => {
       rowId: `extra-${String(index)}`, entryId: `include:extra-${String(index)}` as PluginEntryId, moduleName: '@acme/other',
     }))]
     const { actions, setLanguage } = renderTab(
-      { packages: [pkg({ meta: { title: { en: 'Personal tools', zh: '个人工具' } }, rows })] },
+      { packages: [pkg({ meta: { title: { en: 'Personal tools' } }, rows })] },
       { rows: new Set(['kh-better-sidebar#sidebar']) },
       { 'plugins.row.config:kh-better-sidebar#sidebar': view => view === 'summary' ? 'Config summary' : <form aria-label="row settings" /> },
     )
@@ -1528,8 +1528,8 @@ describe('PluginManagerPage', () => {
     fireEvent.click(within(dialog).getByRole('button', { name: en.cancel }))
     expect(actions.closeInstall).toHaveBeenCalledOnce()
     setLanguage(zh)
-    expect(screen.getByRole('dialog', { name: kind === 'timeout' ? '连接 GitHub 超时' : '无法访问 GitHub' })).toBeTruthy()
-    expect(screen.getByText('请尝试其他安装来源。')).toBeTruthy()
+    expect(screen.getByRole('dialog', { name: kind === 'timeout' ? 'GitHub connection timed out' : 'Cannot access GitHub' })).toBeTruthy()
+    expect(screen.getByText('Try another installation source.')).toBeTruthy()
     set({ install: { ...IDLE_INSTALL, open: true, mirrorRecovery: true, registries: REGISTRIES, registry: { kind: 'offered', registry: MIRROR } } })
     const form = within(screen.getByRole('dialog', { name: zh.installTitle }))
     expect(form.queryByText(zh.installDescription)).toBeNull()
@@ -1582,8 +1582,8 @@ describe('PluginManagerPage', () => {
     expect(screen.getByRole('button', { name: en.installUseGithubMirror })).toBeTruthy()
     setLanguage(zh)
     set({ install: failed })
-    expect(screen.getByRole('button', { name: '试试其他方式' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: '改用国内镜像' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Try another way' })).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Use npmmirror' })).toBeNull()
   })
 
   it('keeps the ordinary failure view for registry errors, other hosts, and unavailable mirrors', () => {

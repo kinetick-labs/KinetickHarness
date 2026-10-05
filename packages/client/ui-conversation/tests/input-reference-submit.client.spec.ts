@@ -290,7 +290,6 @@ describe('submit transaction hardening', () => {
   })
 })
 
-
 it('captures click and Enter submission intent before async admission, excluding empty submits', async () => {
   const report = vi.fn()
   const submissionState = vi.fn(() => ({ runMode: 'default' as const, running: false }))
@@ -309,7 +308,6 @@ it('captures click and Enter submission intent before async admission, excluding
   } finally { shell.dispose() }
 })
 
-
 it.each(['capture', 'report'])('analytics %s failure does not interrupt a message', async (stage) => {
   const sink = vi.fn(async (): Promise<SubmitOutcome> => ({ kind: 'success' }))
   const fail = () => { throw new Error('analytics unavailable') }
@@ -322,7 +320,6 @@ it.each(['capture', 'report'])('analytics %s failure does not interrupt a messag
     await vi.waitFor(() => { expect(shell.snapshot.phase).toBe('plain') })
   } finally { shell.dispose() }
 })
-
 
 it.each(['handled', 'claim', 'message'] as const)('counts only a message after asynchronous slash adjudication: %s', async (kind) => {
   const pending = Promise.withResolvers<PickOutcome>()

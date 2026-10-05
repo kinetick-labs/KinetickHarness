@@ -5,8 +5,6 @@ kind: "package-bundle"
 
 # @kinetick-labs/kh-experimental-auto-review
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Add Auto review to the current-session permission pickers in a Web profile. Before each native or PTC inner tool call, the current agent's provider and model assess the pending action; an allowed call executes with Full access, and a denied call asks the user. The kh installation ships this layer switched off; default Web keeps its three permission modes until it is switched on from the Web sidebar's Plugins page or installed explicitly. Auto review is experimental: it can allow unsafe actions, deny useful work, and spend additional tokens.

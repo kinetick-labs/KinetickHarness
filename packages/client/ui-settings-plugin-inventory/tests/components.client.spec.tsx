@@ -12,7 +12,7 @@ import type {
   PluginInventorySettingsTabInjected,
   PluginInventorySettingsTabProps,
 } from '../src/client/PluginInventorySettingsTab.tsx'
-import { en, zh, type PluginInventoryLocaleKey } from '../src/client/locales.ts'
+import { en, type PluginInventoryLocaleKey , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 
@@ -66,7 +66,7 @@ const SNAPSHOT = {
   agentPresets: [
     {
       id: 'standard',
-      name: '标准模式',
+      name: 'Standard mode',
       isDefault: true,
       rows: [
         { entryId: 'bash', moduleName: '@kinetick-labs/kh-tool-bash', enabled: true, fiberPhase: 'active' },
@@ -153,7 +153,7 @@ describe('PluginInventorySettingsTab', () => {
     const { locale, pageProps } = localizedProps(async () => ({
       entries: [{
         entryId: 'include:navigation' as PluginEntryId, moduleName: '@acme/kh-navigation', enabled: true, fiberPhase: null,
-        meta: { title: { en: 'kh-Navigation', zh: 'kh-导航' } },
+        meta: { title: { en: 'kh-Navigation' } },
       }],
     }))
     const view = render(<PluginInventorySettingsTab {...pageProps} />)
@@ -172,8 +172,8 @@ describe('PluginInventorySettingsTab', () => {
       entries: [{
         entryId: 'include:global-navigation' as PluginEntryId, moduleName: '@acme/navigation', enabled: true, fiberPhase: 'active',
         meta: {
-          title: { en: 'Navigation', zh: '导航' },
-          description: { en: 'Global navigation controls', zh: '全局导航控件' },
+          title: { en: 'Navigation' },
+          description: { en: 'Global navigation controls' },
           error: globalError,
         },
       }],
@@ -182,8 +182,8 @@ describe('PluginInventorySettingsTab', () => {
         rows: [{
           entryId: 'include:preset-runner', moduleName: '@acme/runner', enabled: true, fiberPhase: null,
           meta: {
-            title: { en: 'Session runner', zh: '会话执行器' },
-            description: { en: 'Run per session', zh: '运行会话命令' },
+            title: { en: 'Session runner' },
+            description: { en: 'Run per session' },
             error: presetError,
           },
         }],
@@ -241,11 +241,11 @@ describe('PluginInventorySettingsTab', () => {
       },
       {
         entryId: 'include:commands' as PluginEntryId, moduleName: '@acme/kh-sidebar/commands', enabled: true, fiberPhase: null,
-        meta: { title: { en: 'English title' }, description: { en: 'Package description.', zh: '中文命令说明。' } },
+        meta: { title: { en: 'English title' }, description: { en: 'Package description.' } },
       },
       {
         entryId: 'include:theme' as PluginEntryId, moduleName: '@acme/kh-theme/client', enabled: true, fiberPhase: null,
-        meta: { title: { en: '@acme/kh-theme', zh: '主题插件' }, description: { en: '', zh: '中文主题说明。' } },
+        meta: { title: { en: '@acme/kh-theme' }, description: { en: '' } },
       },
     ]
     const snapshot: Snapshot = scope === 'global'
@@ -344,7 +344,7 @@ describe('PluginInventorySettingsTab', () => {
     // A preset row expands into its source facts.
     fireEvent.click(screen.getByRole('button', { name: 'pwsh, Conditional' }))
     expect(screen.getByText(en.fromPreset)).toBeTruthy()
-    expect(screen.getByText('标准模式')).toBeTruthy()
+    expect(screen.getByText('Standard mode')).toBeTruthy()
     expect(screen.getByText(en.condition)).toBeTruthy()
     expect(screen.getByText('process.platform === \'win32\'')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'pwsh, Conditional' }))

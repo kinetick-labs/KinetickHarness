@@ -1017,8 +1017,6 @@ function collectCallIds(
   return ids
 }
 
-
-
 /** Interleave each tool cell's nested child calls right after it, reindexing followers. */
 function withSubCalls(laidList: LaidCell[], t: TrajectoryTranslate): LaidCell[] {
   if (!laidList.some(laid => laid.subCalls !== undefined && laid.subCalls.length > 0)) return laidList

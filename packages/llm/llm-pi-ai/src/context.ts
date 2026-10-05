@@ -27,7 +27,6 @@ function flattenText(message: RequestMessage): string {
     .join('')
 }
 
-
 /** Recover the pi-ai toolResult message for one harness tool-role message. */
 function toolResultOf(
   message: Extract<Message, { role: 'tool' }>,

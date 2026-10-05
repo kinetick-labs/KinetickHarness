@@ -111,7 +111,6 @@ export class SessionManager {
   private readonly projectionLoads = new Map<SessionId, ProjectionLoad>()
   private readonly projectionInflight = new Map<SessionId, ProjectionInflight>()
 
-
   private listSnapshotCache: SessionListSnapshot
   /** Entry-identity cache (reference stability): list rebuilds reuse the previous entry
    *  object when every field matches — wire refreshes mint all-new summary objects, so identity

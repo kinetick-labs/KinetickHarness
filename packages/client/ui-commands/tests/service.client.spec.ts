@@ -20,7 +20,7 @@ import type { ClientSessionContext, ConsumeTokenRequest, InputTriggerPick, Input
 import type { CommandContribution, CommandDecoration, PopupSelectSpec, SelectOption } from '../src/client/contract.ts'
 import type { CommandDescriptor } from '../src/client/directory.ts'
 import { CommandUiRuntime } from '../src/client/service.ts'
-import { en, zh, type CommandKey } from '../src/client/locales.ts'
+import { en, type CommandKey , en as zh } from '../src/client/locales.ts'
 
 const sid = (k: string): SessionId => k as SessionId
 
@@ -378,7 +378,7 @@ describe('candidates', () => {
     const modelContribution = (): CommandContribution => ({
       name: 'model',
       label: () => '模型',
-      description: () => '选择本会话使用的模型',
+      description: () => 'Select the model for this conversation',
       icon: Glyph,
       available: () => true,
       ui: themeUi(),
@@ -405,7 +405,7 @@ describe('candidates', () => {
         section: 'command:section.add',
       })
       expect(rows[0]).toEqual({ name: 'file', label: 'command:label.file', icon: Glyph, section: 'command:section.add' })
-      expect(rows[6]).toMatchObject({ name: 'model', label: '模型', description: '选择本会话使用的模型', icon: Glyph })
+      expect(rows[6]).toMatchObject({ name: 'model', label: '模型', description: 'Select the model for this conversation', icon: Glyph })
       // A third-party command keeps its catalog text and gets no glyph.
       expect(rows[8]).toEqual({ name: 'deploy', description: 'third-party command', section: 'command:section.commands' })
     })

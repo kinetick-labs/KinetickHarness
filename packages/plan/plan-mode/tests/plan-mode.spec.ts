@@ -354,7 +354,6 @@ describe('the boundary flush', () => {
     expect(foldPlanMode(agent.session.snapshotEvents())).toBe(true)
   })
 
-
   it('nets out a flip sequence that returns to the folded mode (no append, no notice)', async () => {
     const ctx = await setup()
     const agent = await agentWithSession(ctx)
@@ -406,7 +405,6 @@ describe('the boundary flush', () => {
     expect(foldPlanMode(agent.session.snapshotEvents())).toBe(true)
     expect(noticeTexts(agent.session)).toEqual([])
   })
-
 
   it('contains an append failure instead of blocking the prompt or the turn', async () => {
     const ctx = await setup()

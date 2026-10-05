@@ -1,7 +1,5 @@
 # User Approval
 
-English | [中文](approval.zh.md)
-
 The user-approval seam of [kh-user-approval](../../packages/interaction/user-approval) answers one question: may this specific action proceed? It owns the shared request/outcome vocabulary, the `ctx.approval` dispatch service, the `approval/request` answerer waterfall, the log-only audit pair, and the per-session `ask`/`never` policy. UI channels may provide human answerers; the [ACP automation bridge](../../packages/acp/acp) provides one-shot machine decisions for its own agents. Callers such as [kh-tools](../../packages/core/tools) and [kh-tool-bash](../../packages/shell/tool-bash) consume the closed outcome and fail closed unless it is `allowed-once`.
 
 Source: [`packages/interaction/user-approval/src/index.ts`](../../packages/interaction/user-approval/src/index.ts)

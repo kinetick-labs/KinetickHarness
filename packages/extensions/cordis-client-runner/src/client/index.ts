@@ -57,7 +57,6 @@ export type {
   DynamicCordisPackage,
 } from '@kinetick-labs/kh-api-remotes/client'
 
-
 /**
  * What a run surface reads and calls. The activity map is the single home of
  * "a run is in flight", so an affordance never keeps its own copy — that is what

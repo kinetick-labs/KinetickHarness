@@ -189,8 +189,8 @@ describe('PluginManagerController', () => {
   })
 
   it('keeps local package and row metadata in the loaded view without changing technical identities', async () => {
-    const meta = { title: { en: 'Sidebar', zh: '侧栏' }, description: 'Local package', error: 'locale/zh.json: invalid title' }
-    const rowMeta = { title: { en: 'Theme', zh: '主题' }, description: { en: 'Display options', zh: '显示选项' } }
+    const meta = { title: { en: 'Sidebar' }, description: 'Local package', error: 'locale/zh.json: invalid title' }
+    const rowMeta = { title: { en: 'Theme' }, description: { en: 'Display options' } }
     const bundle: BundleInfo = {
       ...BUNDLE,
       meta,
@@ -1701,7 +1701,6 @@ it('recognizes the official registry without a trailing slash and with uppercase
   await vi.waitFor(() => { expect(state().install.registry).toEqual({ kind: 'offered', registry: MIRROR }) })
 })
 
-
 describe('desktop analytics outcomes', () => {
   it('redacts authenticated installer URLs from click and failed-result events', async () => {
     const b = bench({ inspect: vi.fn(async () => ok({ status: 'refused', problem: 'not-bundle', reason: 'refused' })) })
@@ -1767,7 +1766,6 @@ describe('desktop analytics outcomes', () => {
     expect(b.track.mock.calls.filter(call => call[0] === 'plugin_toggle')).toHaveLength(2)
   })
 })
-
 
 it('does not retain install identity when analytics is disabled', async () => {
   const b = bench({}, false)

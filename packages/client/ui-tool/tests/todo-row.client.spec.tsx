@@ -6,11 +6,11 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { TodoItem } from '@kinetick-labs/kh-client-ui-conversation/client'
 import type { ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { TodoRow, todoToolview } from '../src/client/tool/toolviews/todo-row.tsx'
 import { planSummary } from '../src/client/tool/toolviews/plan-summary.ts'
 import { CONVERSATION_NS as NS } from '../src/client/locale.ts'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 type TodoRowProps = Parameters<typeof TodoRow>[0]
@@ -88,7 +88,7 @@ describe('TodoRow', () => {
 
   it('summarizes counts and the active item from the call args', () => {
     render(<TodoRow {...rowProps(resultNode(ARGS))} />)
-    expect(screen.getByText('更新任务清单')).toBeTruthy()
+    expect(screen.getByText('Update to-do list')).toBeTruthy()
     expect(screen.getByText('1/3 已完成 · 写组件')).toBeTruthy()
   })
 

@@ -38,7 +38,7 @@ import {
   type ConversationSessionHeaderProps, type ConversationSessionProps,
 } from '@kinetick-labs/kh-client-ui-conversation/src/client/skeleton/ConversationSession.tsx'
 import { createConversationStore } from '@kinetick-labs/kh-client-ui-conversation/src/client/stores.ts'
-import { zh as conversationZh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as conversationZh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import * as localePlugin from '@kinetick-labs/kh-client-locale/client'
 import { apply, inject } from '@kinetick-labs/kh-client-ui-trajectory/client'
 import { apply as nodeApply } from '@kinetick-labs/kh-client-ui-trajectory'
@@ -52,7 +52,7 @@ import { createTrajectoryDurationStore } from '../src/client/duration-store.ts'
 import { EMPTY_TRAJECTORY_SNAPSHOT } from '../src/client/trajectory-snapshot-builder.ts'
 import type { TrajectorySnapshot } from '../src/client/trajectory-contract.ts'
 import { deriveTrajectoryTimeline } from '../src/client/timeline.ts'
-import { t as tTrajectory, tZh } from './locale.client.ts'
+import { t as tTrajectory, tEn as tZh } from './locale.client.ts'
 
 // Every session-scope fixture carries the resource hook the resources plugin merges into GlobalStandardProps.
 const useResource = (() => ({ status: 'none' as const, value: undefined, failure: undefined, reload: () => {} })) as GlobalStandardProps['useResource']
@@ -63,7 +63,6 @@ function TrajectoryTimeline(
 ) {
   return <LocalizedTrajectoryTimeline {...props} t={tTrajectory} />
 }
-
 
 const SID = 's1' as SessionId
 const tConversation: ConversationSessionHeaderProps['t'] =
@@ -1501,8 +1500,6 @@ describe('TrajectoryView state', () => {
     expect(screen.getByRole('button', { name: '使用实际时长' }).getAttribute('aria-pressed'))
       .toBe('true')
   })
-
-
 
   it('keeps ledger and timeline selection on the same event after prepend', () => {
     const older: LegacyConversationSlice['nodes'][number] = {

@@ -20,9 +20,9 @@ const SESSION_TITLE = 'Session action extension'
 async function openInventory(page: Page, url: string) {
   await page.goto(url, { waitUntil: 'load' })
   await openSettings(page, 'zh')
-  const dialog = page.getByRole('dialog', { name: '设置' })
-  await dialog.getByRole('button', { name: '内置插件', exact: true }).click()
-  await dialog.getByRole('searchbox', { name: '搜索插件' }).waitFor()
+  const dialog = page.getByRole('dialog', { name: 'Settings' })
+  await dialog.getByRole('button', { name: 'Built-in plugins', exact: true }).click()
+  await dialog.getByRole('searchbox', { name: 'Search plugins' }).waitFor()
   return dialog
 }
 
@@ -130,7 +130,7 @@ it('synchronizes two pages, disposes effects and restores an offline page from t
     await compareOrRefreshGolden(join(EXPECTED, 'enabled.expected.md'), await captureStableAria(page, '[data-live-client]', scaffold.workspaceCwd), webSnapshotMode())
 
     // The inventory filter is page-owned state that live composition must preserve.
-    const draft = otherInventory.getByRole('searchbox', { name: '搜索插件' })
+    const draft = otherInventory.getByRole('searchbox', { name: 'Search plugins' })
     await draft.fill('unfinished-filter')
     await toggle()
     for (const target of [page, other]) {

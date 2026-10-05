@@ -14,7 +14,7 @@ import { apply as applyLocale, inject as localeInject } from '@kinetick-labs/kh-
 import { apply, inject } from '../src/client/index.ts'
 import type { JobListInjected } from '../src/client/JobListAction.tsx'
 import { apply as applyNode } from '../src/index.ts'
-import { en, NS, zh } from '../src/client/locales.ts'
+import { en, NS , en as zh } from '../src/client/locales.ts'
 
 /** Slot ledger reader: entry ids currently registered in the header list. */
 function headerEntryIds(ctx: Context): (string | undefined)[] {

@@ -52,7 +52,6 @@ function disposeChildLifecycle(parent: Agent): void {
   void lifecycle()
 }
 
-
 /** The system prompt a loop-built request carries as its leading system-role message ('' when none). */
 function systemPromptOf(request: GenerateOptions): string {
   const head = request.messages[0]

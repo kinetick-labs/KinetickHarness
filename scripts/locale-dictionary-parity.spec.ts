@@ -21,7 +21,7 @@
 
 import type { Dirent } from 'node:fs'
 import { readdirSync, readFileSync } from 'node:fs'
-import { dirname, resolve } from 'node:path'
+import { resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import ts from 'typescript'
 import { describe, expect, it } from 'vitest'
@@ -240,7 +240,7 @@ function localeOf(name: string): { locale: 'zh' | 'en'; pair: string } | undefin
 }
 
 describe('shipped locale dictionaries', () => {
-  it('declares the same keys in zh and en, so the single fallback locale always resolves', () => {
+  it('ships English dictionaries and no Chinese dictionaries', () => {
     const files = sourceFiles()
     // Guard the discovery itself: an empty or narrowed sweep would pass every
     // assertion below while checking nothing.
@@ -256,53 +256,21 @@ describe('shipped locale dictionaries', () => {
       if (dicts.length > 0) perFile.set(relative(file), dicts)
     }
 
-    const groups = new Map<string, Map<'zh' | 'en', Dictionary>>()
-    const place = (key: string, locale: 'zh' | 'en', dict: Dictionary): void => {
-      const slot = groups.get(key) ?? new Map<'zh' | 'en', Dictionary>()
-      if (slot.has(locale)) {
-        throw new Error(`two ${locale} dictionaries claim pair ${key}: ${slot.get(locale)?.file} and ${dict.file}`)
-      }
-      slot.set(locale, dict)
-      groups.set(key, slot)
-    }
-
-    for (const [rel, dicts] of perFile) {
+    const problems: string[] = []
+    let englishDictionaries = 0
+    for (const [, dicts] of [...perFile].sort()) {
       for (const dict of dicts) {
         const parsed = localeOf(dict.name)
         if (parsed === undefined) continue
-        const sameFileCounterpart = dicts.some((other) => {
-          const otherParsed = localeOf(other.name)
-          return otherParsed !== undefined
-            && otherParsed.pair === parsed.pair
-            && otherParsed.locale !== parsed.locale
-        })
-        // Same-file pairs key by file so two pairs in one directory stay
-        // distinct; split pairs key by directory so siblings meet.
-        const key = sameFileCounterpart ? `${rel}::${parsed.pair}` : `${dirname(rel)}::${parsed.pair}`
-        place(key, parsed.locale, dict)
+        if (parsed.locale === 'zh') {
+          problems.push(`${dict.file} still declares Chinese dictionary ${dict.name}`)
+          continue
+        }
+        englishDictionaries++
       }
     }
 
-    const problems: string[] = []
-    let comparedPairs = 0
-    for (const [key, slot] of [...groups].sort()) {
-      const zh = slot.get('zh')
-      const en = slot.get('en')
-      if (zh === undefined || en === undefined) {
-        const present = zh ?? en
-        problems.push(`${present?.file} declares ${present?.name} with no counterpart for pair ${key}`)
-        continue
-      }
-      comparedPairs++
-      const zhOnly = zh.keys.filter(k => !en.keys.includes(k))
-      const enOnly = en.keys.filter(k => !zh.keys.includes(k))
-      if (zhOnly.length > 0) problems.push(`${zh.file} ${zh.name} has keys absent from ${en.name}: ${zhOnly.join(', ')}`)
-      if (enOnly.length > 0) problems.push(`${en.file} ${en.name} has keys absent from ${zh.name}: ${enOnly.join(', ')}`)
-    }
-
-    // The shipped dictionary count only grows; a collapse means discovery or
-    // pairing broke, which would hide real asymmetry.
-    expect(comparedPairs).toBeGreaterThan(25)
+    expect(englishDictionaries).toBeGreaterThan(25)
     expect(problems).toEqual([])
   })
 })

@@ -1,24 +1,24 @@
 [
   {
-    "label": "检查更新…"
+    "label": "Check for Updates…"
   },
   {
-    "label": "管理 kh 命令…"
+    "label": "Manage kh Command…"
   },
   {
     "role": "hide",
-    "label": "隐藏 KinetickHarness"
+    "label": "Hide KinetickHarness"
   },
   {
     "role": "hideOthers",
-    "label": "隐藏其他"
+    "label": "Hide Others"
   },
   {
     "role": "unhide",
-    "label": "显示全部"
+    "label": "Show All"
   },
   {
     "role": "quit",
-    "label": "退出 KinetickHarness"
+    "label": "Quit KinetickHarness"
   }
 ]

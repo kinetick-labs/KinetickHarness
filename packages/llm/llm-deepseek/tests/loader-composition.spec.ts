@@ -111,7 +111,6 @@ async function loadComposition(
   return { ctx, settingsPath, credentialsPath }
 }
 
-
 describe('llm-deepseek real dynamic composition', () => {
   it('boots from cordis.yml and routes the next request after external settings and credential edits', async () => {
     vi.stubEnv('DEEPSEEK_API_KEY', '')

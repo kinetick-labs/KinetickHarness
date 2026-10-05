@@ -1254,7 +1254,6 @@ describe('Session', () => {
   })
 })
 
-
 describe('SessionStore', () => {
   it('creates sessions, emits session/created and session/event', async () => {
     const ctx = new Context()

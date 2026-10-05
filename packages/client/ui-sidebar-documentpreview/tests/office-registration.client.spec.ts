@@ -1,10 +1,10 @@
 /** Authorized Host PDFs remain binary through Client reuse and disposal. */
+import type {} from '@kinetick-labs/kh-office-to-pdf/remote'
 import type { OfficeToPdfGeneration } from '@kinetick-labs/kh-office-to-pdf/types'
 import { Context } from '@deepseek-ai/cordis'
 import { expect, it, vi } from 'vitest'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { ClientRemote } from '@kinetick-labs/kh-api-remotes/client'
-import type {} from '@kinetick-labs/kh-office-to-pdf/remote'
 import { makeTranslate, RemoteError } from '@kinetick-labs/kh-client-test-runtime'
 import { DocumentPreviewRegistry } from '../src/client/document/registry.ts'
 import { apply } from '../src/client/office/index.ts'
@@ -13,7 +13,7 @@ import { Config } from '../src/config.ts'
 import { OfficeBody, type OfficeBodyInjected } from '../src/client/office/OfficeBody.tsx'
 import type { OfficeStore } from '../src/client/office/store.ts'
 import type { TabId } from '@kinetick-labs/kh-client-ui-dockkit'
-import { en, zh } from '../src/client/office/locales.ts'
+import { en } from '../src/client/office/locales.ts'
 import { en as documentEn } from '../src/client/locales.ts'
 
 vi.mock('../src/client/office/face.ts', async (importOriginal) => {
@@ -91,7 +91,7 @@ async function harness(config: Partial<Config['office']> = {}, missing?: 'remote
 it.each(['remote', 'render', 'files'] as const)('keeps Word and PowerPoint registration and guidance when %s is absent', async (missing) => {
   const h = await harness(undefined, missing)
   try {
-    expect(h.locale.register).toHaveBeenCalledWith('sidebarOffice', { zh, en })
+    expect(h.locale.register).toHaveBeenCalledWith('sidebarOffice', { en })
     for (const path of ['a.DOC', 'b.DOCX', 'c.PPT', 'd.pptx']) {
       expect(h.registry.candidates(path)[0]!.binaryExtensions).toEqual(['doc', 'docx', 'ppt', 'pptx'])
       expect(h.registry.candidates(path)[0]!.title()).toBe(en.title)

@@ -1,4 +1,5 @@
 // @vitest-environment jsdom
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 /**
  * Browser-half lifecycle over the real SlotRegistry: the dictionary,
@@ -16,13 +17,12 @@ import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
 import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
 import { LayoutController, type MainPanelId } from '@kinetick-labs/kh-client-ui-layout/client'
 import { createLayoutStore } from '@kinetick-labs/kh-client-ui-layout/src/client/stores.ts'
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import { apply, inject, type OpenInAppActionInjected, type OpenPathInjected } from '../src/client/index.ts'
 import { apply as nodeApply } from '../src/index.ts'
 import { OpenInAppAction } from '../src/client/OpenInAppAction.tsx'
 import { OpenPathAction } from '../src/client/OpenPathAction.tsx'
 import { OpenPathEmptyAction } from '../src/client/OpenPathEmptyAction.tsx'
-import { en, NS, zh } from '../src/client/locales.ts'
+import { en, NS , en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   vi.unstubAllGlobals()

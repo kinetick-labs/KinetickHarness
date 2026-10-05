@@ -8,11 +8,11 @@ import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-te
 import type { SessionListState } from '@kinetick-labs/kh-api-session-controller/client'
 import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { GenericToolCard, type GenericToolCardProps } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { ToolRow } from '../src/client/tool/components/ToolRow.tsx'
 import { BashRow } from '../src/client/tool/toolviews/bash-sample.tsx'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 type BashRowProps = Parameters<typeof BashRow>[0]
@@ -120,7 +120,7 @@ describe('Tool presentation tails', () => {
     expect(stoppedView.container.querySelector('[data-state="stopped"]')).not.toBeNull()
     expect(stoppedView.container.querySelector('[data-state="stopped"] svg')).not.toBeNull()
     const stoppedSummary = stoppedView.getByRole('button').querySelector('[class*="_stoppedSummary_"]')
-    expect(stoppedSummary?.textContent).toBe('已停止')
-    expect(stoppedView.getAllByText('已停止')).toHaveLength(2)
+    expect(stoppedSummary?.textContent).toBe('Stopped')
+    expect(stoppedView.getAllByText('Stopped')).toHaveLength(2)
   })
 })

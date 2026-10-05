@@ -23,7 +23,6 @@ function start(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> }, spe
   return x.execute({ ...spec, onExpiry: 'none' })
 }
 
-
 /**
  * KEYLESS consumer-integration proof: the REAL `LocalSandboxProvider` (bwrap
  * rung forced off, so the workspace `landlock-run` launcher confines) underneath the

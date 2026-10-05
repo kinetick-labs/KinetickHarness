@@ -56,7 +56,7 @@ interface MirroredPage {
 }
 
 type PairedPage = Omit<MirroredPage, 'source' | 'contentLocale' | 'sourceAliases'> & {
-  /** English side of a sibling `foo.md` / `foo.zh.md` pair. */
+  /** English Markdown source projected on the root and `/en/` routes. */
   source: string
   /** Language-neutral repository aliases, such as the directory of an index page. */
   sourceAliases?: string[]
@@ -90,16 +90,15 @@ function mirroredPages(pages: MirroredPage[]): DocsPage[] {
 
 function pairedPages(pages: PairedPage[]): DocsPage[] {
   return mirroredPages(pages.map((page) => {
-    const chineseSource = page.source.replace(/\.md$/, '.zh.md')
     const sharedAliases = page.sourceAliases ?? []
     return {
       ...page,
-      source: { root: chineseSource, en: page.source },
-      contentLocale: { root: 'zh-CN', en: 'en-US' },
-      sourceAliases: {
-        root: [...sharedAliases, page.source],
-        en: [...sharedAliases, chineseSource],
-      },
+      label: { root: page.label.en, en: page.label.en },
+      section: { root: page.section.en, en: page.section.en },
+      sidebar: { root: page.sidebar.en, en: page.sidebar.en },
+      source: { root: page.source, en: page.source },
+      contentLocale: { root: 'en-US', en: 'en-US' },
+      sourceAliases: { root: sharedAliases, en: sharedAliases },
     }
   }))
 }
@@ -472,7 +471,7 @@ const reference = [
  * sequence, so a new collection lands in both surfaces together.
  */
 export const localeCollections = {
-  root: ['zh-guide', 'zh-develop', 'zh-reference'],
+  root: ['en-guide', 'en-develop', 'en-reference'],
   en: ['en-guide', 'en-develop', 'en-reference'],
 } as const satisfies Record<DocsLocale, readonly DocsSidebar[]>
 
@@ -490,31 +489,23 @@ export interface DocsSection {
  * The subsystem groups collapse because together they outnumber the rest of the
  * reference sidebar; expanded, they push every other group below the fold.
  */
+const englishSections: readonly DocsSection[] = [
+  { label: 'Guide' }, { label: 'SDK' }, { label: 'Automation' }, { label: 'Integrations' },
+  { label: 'Basics' }, { label: 'Framework' }, { label: 'Practice' }, { label: 'Cordis framework tutorial' },
+  { label: 'Concepts' }, { label: 'Generated reference' }, { label: 'Cordis Core API' }, { label: 'Cookbook' },
+  { label: 'Overview' },
+  { label: 'Core and scopes', collapsed: true },
+  { label: 'Sessions and persistence', collapsed: true },
+  { label: 'Model and context', collapsed: true },
+  { label: 'Execution and tools', collapsed: true },
+  { label: 'Policy and interaction', collapsed: true },
+  { label: 'Platform and access', collapsed: true },
+]
+
+/** Sidebar groups for both route trees. The site publishes English at each tree. */
 const sections: Record<DocsLocale, readonly DocsSection[]> = {
-  root: [
-    { label: '入门' }, { label: 'SDK' }, { label: '自动化' }, { label: '集成' },
-    { label: '基础' }, { label: '框架能力' }, { label: '实战' }, { label: 'Cordis 框架教程' },
-    { label: '概念' }, { label: '生成参考' }, { label: 'Cordis API' }, { label: '开发手册' },
-    { label: '总览' },
-    { label: '内核与作用域', collapsed: true },
-    { label: '会话与持久化', collapsed: true },
-    { label: '模型与上下文', collapsed: true },
-    { label: '执行与工具', collapsed: true },
-    { label: '策略与交互', collapsed: true },
-    { label: '平台与接入', collapsed: true },
-  ],
-  en: [
-    { label: 'Guide' }, { label: 'SDK' }, { label: 'Automation' }, { label: 'Integrations' },
-    { label: 'Basics' }, { label: 'Framework' }, { label: 'Practice' }, { label: 'Cordis framework tutorial' },
-    { label: 'Concepts' }, { label: 'Generated reference' }, { label: 'Cordis Core API' }, { label: 'Cookbook' },
-    { label: 'Overview' },
-    { label: 'Core and scopes', collapsed: true },
-    { label: 'Sessions and persistence', collapsed: true },
-    { label: 'Model and context', collapsed: true },
-    { label: 'Execution and tools', collapsed: true },
-    { label: 'Policy and interaction', collapsed: true },
-    { label: 'Platform and access', collapsed: true },
-  ],
+  root: englishSections,
+  en: englishSections,
 }
 
 /**

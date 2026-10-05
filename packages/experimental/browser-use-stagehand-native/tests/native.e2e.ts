@@ -139,7 +139,6 @@ it.skipIf(process.env.KH_STAGEHAND_E2E !== '1' || !process.env.KH_STAGEHAND_MODE
   }
 })
 
-
 // The executable wrapper uses a POSIX shebang; the ordinary browser smoke runs on every platform.
 it.skipIf(process.env.KH_STAGEHAND_E2E !== '1' || process.platform === 'win32')('scrubs real Chromium environment and closes it during canceled Stagehand initialization', { timeout: 120_000, retry: 0 }, async () => {
   const executable = process.env.KH_BROWSER_EXECUTABLE

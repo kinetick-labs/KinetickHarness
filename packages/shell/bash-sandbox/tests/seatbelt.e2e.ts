@@ -23,7 +23,6 @@ function start(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> }, spe
   return x.execute({ ...spec, onExpiry: 'none' })
 }
 
-
 /**
  * Keyless macOS integration of the real provider and executor through public run/start paths.
  * Linux rungs are forced off so Seatbelt is selected. The tests check world effects and stamped

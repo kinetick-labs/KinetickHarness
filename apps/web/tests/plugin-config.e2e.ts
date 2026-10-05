@@ -58,17 +58,17 @@ describe('web e2e: plugin configuration pages', () => {
    * dialog a previous scenario left open and leaves whatever page it opened.
    */
   async function openPlugins(): Promise<Locator> {
-    if (await page.getByRole('dialog', { name: '设置' }).count() > 0) {
+    if (await page.getByRole('dialog', { name: 'Settings' }).count() > 0) {
       await page.keyboard.press('Escape')
-      await expect.poll(() => page.getByRole('dialog', { name: '设置' }).count(), { timeout: 5_000 }).toBe(0)
+      await expect.poll(() => page.getByRole('dialog', { name: 'Settings' }).count(), { timeout: 5_000 }).toBe(0)
     }
-    await page.getByRole('navigation', { name: '全局面板' }).getByRole('button', { name: '插件', exact: true }).click()
+    await page.getByRole('navigation', { name: 'Global panels' }).getByRole('button', { name: '插件', exact: true }).click()
     const panel = page.locator('[data-plugin-panel]')
     await panel.waitFor({ timeout: 10_000 })
     while (await panel.getByRole('button', { name: /^返回/ }).count() > 0) {
       await panel.getByRole('button', { name: /^返回/ }).first().click()
     }
-    await panel.getByRole('heading', { name: '官方', exact: true }).waitFor({ timeout: 20_000 })
+    await panel.getByRole('heading', { name: 'Official', exact: true }).waitFor({ timeout: 20_000 })
     return panel
   }
 
@@ -353,6 +353,5 @@ describe('web e2e: plugin configuration pages', () => {
     expect(tripwire.warnings).toEqual([])
     await assertFixtureInventory(SNAPSHOT_DIR, ['bundle.expected.md', 'official.expected.md', 'row.expected.md', 'subagent.expected.md'])
   })
-
 
 })

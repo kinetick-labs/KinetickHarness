@@ -124,7 +124,7 @@ describe('PluginInventoryGateway', () => {
         rows: [
           {
             entryId: 'feature', moduleName: 'local-plugin/feature', enabled: false, fiberPhase: null,
-            meta: { title: { en: 'Preset plugin', zh: '预设插件' }, description: { en: 'Preset description' } },
+            meta: { title: { en: 'Preset plugin' }, description: { en: 'Preset description' } },
           },
           { entryId: null, moduleName: 'local-plugin/private', enabled: false, fiberPhase: null },
         ],
@@ -202,7 +202,7 @@ describe('PluginInventoryGateway', () => {
       compositionInventory: async () => [
         {
           id: 'standard',
-          name: '标准模式',
+          name: 'Standard mode',
           isDefault: true,
           rows: [
             { entryId: 'alpha', moduleName: 'pkg-alpha', enabled: true, fiberState: FiberState.ACTIVE },
@@ -217,7 +217,7 @@ describe('PluginInventoryGateway', () => {
     expect(snapshot.agentPresets).toEqual([
       {
         id: 'standard',
-        name: '标准模式',
+        name: 'Standard mode',
         isDefault: true,
         rows: [
           { entryId: 'alpha', moduleName: 'pkg-alpha', enabled: true, fiberPhase: 'active' },

@@ -1,7 +1,5 @@
 # KinetickHarness Python SDK
 
-English | [中文](README.zh.md)
-
 Python subprocess SDK for driving KinetickHarness over newline-delimited JSON-RPC on stdio. Install `kinetick-harness-sdk`; it installs the exact same-version `kinetick-harness-runtime-bin` wheel for the current platform.
 
 ```sh

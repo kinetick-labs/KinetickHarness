@@ -7,10 +7,10 @@
  * selection belongs to the Session Controller. A second effect seats the theme
  * presenter, which projects ctx.theme snapshots onto document.body.
  */
-import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-client-locale/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-session/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-theme/client'
 import type { HostObservable, SnapshotSelectorHook } from '@kinetick-labs/kh-client-ui-slots'
 import type { PanelInfo } from './service.ts'
@@ -18,7 +18,7 @@ import { AppFrame } from './AppFrame.tsx'
 import { createLayoutStore } from './stores.ts'
 import { LayoutController } from './service.ts'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
-import { en, zh } from './shortcut-locales.ts'
+import { en } from './shortcut-locales.ts'
 import { ThemePresenter } from './theme-presenter.ts'
 
 // Contract exports only (export-convergence rule: cross-package consumers
@@ -42,7 +42,7 @@ declare module '@deepseek-ai/cordis' {
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
     /** Layout keyboard command labels. */
-    'shortcuts.layout': keyof typeof zh
+    'shortcuts.layout': keyof typeof en
   }
 
   interface GlobalStandardProps {
@@ -156,7 +156,7 @@ export const inject = ['slots', 'theme', 'locale', 'shortcuts']
  * @param ctx - client root context.
  */
 export function apply(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register('shortcuts.layout', { zh, en }), 'layout: command labels')
+  ctx.effect(() => ctx.locale.register('shortcuts.layout', { en }), 'layout: command labels')
   const t = ctx.locale.bind('shortcuts.layout')
 
   ctx.effect(() => {

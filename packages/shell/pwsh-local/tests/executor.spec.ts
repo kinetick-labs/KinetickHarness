@@ -32,7 +32,6 @@ function start(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> }, spe
   return x.execute({ ...spec, onExpiry: 'none' })
 }
 
-
 const spillDir = mkdtempSync(join(tmpdir(), 'kh-pwsh-exec-spec-'))
 
 afterAll(() => {

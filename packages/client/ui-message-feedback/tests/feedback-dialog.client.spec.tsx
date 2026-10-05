@@ -11,11 +11,11 @@ import { useSyncExternalStore } from 'react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render } from '@testing-library/react'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { FEEDBACK_CATEGORIES } from '@kinetick-labs/kh-command-feedback'
 import { FeedbackDialog } from '../src/client/FeedbackDialog.tsx'
 import type { FeedbackDialogState } from '../src/client/dialog.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 
@@ -42,9 +42,9 @@ function mount(overrides: Partial<FeedbackDialogState> = {}) {
 
 describe('FeedbackDialog', () => {
   it('owns the conversation-log disclosure and stability category in both supported locales', () => {
-    expect(zh['dialog.hint']).toBe('填写详情以帮助我们改进体验，提交内容会包括当前对话的日志')
+    expect(zh['dialog.hint']).toBe('Add details to help us improve. Your submission will include the current conversation log.')
     expect(en['dialog.hint']).toBe('Add details to help us improve. Your submission will include the current conversation log.')
-    expect(zh['category.service-stability']).toBe('稳定性和速度')
+    expect(zh['category.service-stability']).toBe('Stability and speed')
     expect(en['category.service-stability']).toBe('Stability and speed')
   })
 

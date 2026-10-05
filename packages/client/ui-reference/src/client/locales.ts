@@ -1,33 +1,16 @@
-/** `reference` namespace dictionaries for the unified `@` source. */
-
-import type {} from '@kinetick-labs/kh-client-ui-slots'
 
 /** Dictionary namespace owned by this plugin. */
+import type {} from '@kinetick-labs/kh-client-ui-slots'
 export const NS = 'reference'
 
 /**
- * Simplified Chinese dictionary (the key-set source of truth).
- *
  * The `time.*` bucket words are this namespace's own copy of the session-row
  * vocabulary: locale-owned copy keeps the words per plugin, while the
  * bucketing they name is the one shared {@link relativeTime} in ui-primitives.
  */
-export const zh = {
-  'section.files': '文件与文件夹',
-  'section.subagents': '子智能体',
-  'section.sessions': '对话',
-  'candidate.noCwd': '（无工作目录）',
-  'crumb.root': '工作区',
-  'time.now': '刚刚',
-  'time.minutes': '{n}分钟',
-  'time.hours': '{n}小时',
-  'time.days': '{n}天',
-  'time.months': '{n}个月',
-  'time.years': '{n}年',
-} satisfies Record<string, string>
 
 /** The reference namespace key union. */
-export type ReferenceKey = keyof typeof zh
+export type ReferenceKey = keyof typeof en
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -49,4 +32,4 @@ export const en = {
   'time.days': '{n}d',
   'time.months': '{n}mo',
   'time.years': '{n}y',
-} satisfies Record<ReferenceKey, string>
+} satisfies Record<string, string>

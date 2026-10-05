@@ -26,7 +26,6 @@ async function run(x: { execute(spec: ShellExecSpec): Promise<ShellExecution> },
   return (await x.execute(spec)).result()
 }
 
-
 const isWin32 = process.platform === 'win32'
 
 function pwshAvailable(): boolean {

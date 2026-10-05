@@ -11,9 +11,9 @@ import type { SessionListState, SessionSnapshot, SessionSummary, UseProjection }
 import type { SessionStatusSnapshot } from '@kinetick-labs/kh-client-ui-session/client'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { TeamAction, type TeamActionInjected, type TeamActionProps } from '../src/client/TeamAction.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()
@@ -253,7 +253,7 @@ describe('TeamAction', () => {
     render(<TeamAction {...b.props} />)
     openPanel()
     expect(screen.queryByText(zh.loading)).toBeNull()
-    expect(screen.getByRole('status').textContent).toBe('Team 暂不可用')
+    expect(screen.getByRole('status').textContent).toBe('Team is unavailable')
   })
 
   it('surfaces a Team projection failure beside the last valid state', () => {

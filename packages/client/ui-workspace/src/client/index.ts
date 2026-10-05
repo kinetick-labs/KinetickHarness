@@ -15,6 +15,10 @@
  * its relative time and its trailing status line. Export discipline:
  * packages/client/AGENTS.md.
  */
+import type {} from '@kinetick-labs/kh-api-session-controller/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context } from '@deepseek-ai/cordis'
 import type { RemoteHostFacts } from '@kinetick-labs/kh-api-remotes/client'
 import type { ISessions } from '@kinetick-labs/kh-api-session-controller/client'
@@ -25,15 +29,11 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { HostObservable, SnapshotSelectorHook } from '@kinetick-labs/kh-client-ui-slots'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 // Type-only: pulls the Controller service merges.
-import type {} from '@kinetick-labs/kh-api-session-controller/client'
 import type {} from '@kinetick-labs/kh-api-workspace-controller/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: pulls the SlotRegistry service merge (ctx.slots).
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-layout/client'
 // Type-only: pulls the Session root standard-hook merge.
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import {
   type ArchiveSessionInjected, type ForkSessionInjected, menuOpenStateFactory, type PinSessionInjected,
   type SessionArchiveConfirmInjected, type SessionArchiveConfirmRequest,
@@ -51,7 +51,7 @@ import { PinSessionMenuItem, PinSessionRowButton } from './session-actions/PinSe
 import { RenameSessionMenuItem, SessionRenameDialog } from './session-actions/RenameSession.tsx'
 import { RowActionToast } from './session-actions/RowActionToast.tsx'
 import { WorkspacePicker } from './WorkspacePicker.tsx'
-import { en, zh, type WorkspaceKey } from './locales.ts'
+import { en,type WorkspaceKey } from './locales.ts'
 
 export type { StartSessionOptions, UiWorkspace } from './navigation.ts'
 export type {
@@ -118,7 +118,7 @@ export function apply(ctx: Context): void {
     ctx, ctx.remote.directoryPicker, workspaces, sessions, viewInstance.actions, notify,
   )
   ctx.slots.provideRoot({ hooks: { workspaces: workspaces.list } })
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-workspace: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-workspace: dictionaries')
   const shortcutControls = createWorkspaceShortcutControls()
 
   const searchSessions: WorkspaceBrowserInjected['searchSessions'] = async (query, signal) => {

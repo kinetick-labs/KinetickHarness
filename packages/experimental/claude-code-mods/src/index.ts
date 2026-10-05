@@ -506,7 +506,6 @@ export class ClaudeCodeMods extends TypertRemoteService {
     return this.surfaces.press(agent.session.id, generation, actionId)
   }
 
-
   /**
    * Load one mod beneath every mod loaded before it: run its `register`,
    * keep its hooks, and report which of its events this host never raises.

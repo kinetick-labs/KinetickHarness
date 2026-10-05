@@ -1591,7 +1591,6 @@ describe('stabilizeRefreshLog', () => {
   })
 })
 
-
 describe('raw parent and child catalog clocks', () => {
   const child = '{"type":"session","id":"child","createdAt":100}\n'
   const parent = (time: number) => [

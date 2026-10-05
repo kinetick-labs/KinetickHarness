@@ -5,8 +5,6 @@ kind: "package-library"
 
 # @kinetick-labs/kh-package-manifest
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Use `KhPackageManifest` for package metadata, `KhManifest` for the public fields under `kh`, and member types such as `KhClientManifest` for one domain. Each reader owns JSON parsing, validation, and default resolution.

@@ -122,7 +122,6 @@ describe('GuideBody', () => {
     cleanup()
   })
 
-
   it('draws an empty guide while no type contributed an entry, and follows the registry when one does', () => {
     const { view, guideEntries, boxes } = mountGuide([])
     expect(view.container.querySelector('[data-sidebar-right-guide]')).not.toBeNull()

@@ -277,7 +277,6 @@ it('releases an attachment whose initialization completes after provider disposa
   }
 })
 
-
 it.each([false, true])('disposes a real AgentHandle while its screenshot waits, with prior user cancel %s', async (cancelFirst) => {
   const entered: PromiseWithResolvers<void> = Promise.withResolvers()
   const stopped: PromiseWithResolvers<void> = Promise.withResolvers()
@@ -308,7 +307,6 @@ it.each([false, true])('disposes a real AgentHandle while its screenshot waits, 
   }
 })
 
-
 it('releases the provider after a terminated connection reports an SDK cleanup warning', async () => {
   const warning = vi.spyOn(ctx.logger, 'warn')
   acquisition.warning = 'Stagehand SDK cleanup did not finish: deadline'
@@ -330,7 +328,6 @@ it('closes owned Chromium but retains the reservation if its Worker fails to ter
   expect(fixture.browsers[0]?.closed).toBe(true)
   expect(ctx.browserUse.providerName).toBe('stagehand-native')
 })
-
 
 it('reconnects after cancellation while preserving the owned browser and its tabs', async () => {
   const entered: PromiseWithResolvers<void> = Promise.withResolvers()

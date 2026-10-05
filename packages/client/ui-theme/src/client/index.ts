@@ -7,22 +7,22 @@
  * document. The plugin also registers the Appearance preference row into the
  * settings General section — the theme feature owns its own settings surface.
  */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { BoundActions } from '@kinetick-labs/kh-client-ui-slots'
 // Type-only: the ctx.configForms Context merge. Cross-plugin collaboration
 // goes through the service, never a value import (client bundle purity gate).
 import type { ConfigForm } from '@kinetick-labs/kh-client-ui-settings/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: pulls the SlotRegistry service merge (ctx.slots).
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type { AppearanceRowInjected } from './AppearanceRow.tsx'
 import { AppearanceRow } from './AppearanceRow.tsx'
 import type { FontSizeRowInjected } from './FontSizeRow.tsx'
 import { FontSizeRow } from './FontSizeRow.tsx'
 import { createAppearanceRowStore, createFontSizeRowStore } from './settings-store.ts'
 import { installThemeStyles } from './styles.ts'
-import { en, zh, type ThemeKey } from './locales.ts'
+import { en,type ThemeKey } from './locales.ts'
 import {
   DEFAULT_FONT_SIZE, DEFAULT_PREFERENCE, FONT_SIZE_FIELD, FONT_SIZE_MAX, FONT_SIZE_MIN,
   isThemePreference, THEME_PREFERENCE_FIELD, THEME_SETTINGS_NAMESPACE,
@@ -432,7 +432,7 @@ export function apply(ctx: ClientContext): void {
   const theme = new ThemeRuntime(ctx, host)
   ctx.provide('theme', theme)
 
-  ctx.effect(() => ctx.locale.register(SETTINGS_NS, { zh, en }), 'ui-theme: settings row dictionaries')
+  ctx.effect(() => ctx.locale.register(SETTINGS_NS, { en }), 'ui-theme: settings row dictionaries')
 
   const store = createAppearanceRowStore()
   let bound: BoundActions<typeof store> | undefined

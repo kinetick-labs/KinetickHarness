@@ -59,7 +59,6 @@ describe.each(modes)('native developer admission ($compression, $access)', ({ co
     expect(await readFile(path)).toEqual(bytes)
   })
 
-
   it('reads name-only additions bound to their historical header without copying definitions', async () => {
     const event = { ...developer, data: { ...developer.data, headerSeq: 3, message: {
       ...developer.data.message, content: [{ type: 'tool-removal', toolName: 'old' }, { type: 'tool-addition', toolName: 'search' }],

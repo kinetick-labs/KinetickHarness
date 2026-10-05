@@ -409,7 +409,6 @@ describe('model list editing', () => {
     expect(screen.queryByText(en.resetModels)).toBeNull()
   })
 
-
   it('keeps expansion on the row it belongs to after an earlier one is removed', async () => {
     await mountSection({
       providers: {

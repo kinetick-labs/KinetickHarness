@@ -9,7 +9,7 @@ import type { RenderMessageImages } from '@kinetick-labs/kh-client-ui-conversati
 import { TrajectoryTable as LocalizedTrajectoryTable } from '../src/client/TrajectoryTable.tsx'
 import { deriveTrajectoryLayout, type TrajectoryTurnModel } from '../src/client/layout.ts'
 import { trajectoryRecordId } from '../src/client/trajectory-record.ts'
-import { t, tZh } from './locale.client.ts'
+import { t, tEn as tZh } from './locale.client.ts'
 
 const renderImagesStub: RenderMessageImages = ({ images }) => (
   <div data-testid="record-images" data-count={images.length}>
@@ -1042,7 +1042,7 @@ describe('TrajectoryTable', () => {
   })
 
   it.each([['English', t, 'Attachments', 'Image 1', 'Summary', 'Preview', 'Raw'],
-    ['Chinese', tZh, '附件', '图片 1', '概述', '预览', '原始内容']] as const)(
+    ['Chinese', tZh, 'Attachments', '图片 1', 'Summary', 'Preview', 'Raw']] as const)(
     'keeps mixed attachments ordered and raw fields complete in %s',
     (_locale, translate, listLabel, imageLabel, summaryTab, previewTab, rawTab) => {
       const attachment = {

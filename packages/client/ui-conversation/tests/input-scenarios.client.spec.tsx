@@ -26,13 +26,13 @@ import {
 } from '@kinetick-labs/kh-client-test-runtime'
 import type { SessionStatusSnapshot } from '@kinetick-labs/kh-client-ui-session/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { DraftAttachmentId } from '../src/client/contract/input.ts'
 import { SessionInputShell } from '../src/client/input/facade.ts'
 import { $replaceDetectSpanWithText } from '../src/client/input/editor/span-map.ts'
 import { InputBar } from '../src/client/skeleton/InputBar.tsx'
 import type { InputBarProps } from '../src/client/skeleton/InputBar.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 // Every fixture carries the resource hook the resources plugin merges into GlobalStandardProps.
 const useResource = (() => ({ status: 'none' as const, value: undefined, failure: undefined })) as GlobalStandardProps['useResource']
@@ -42,7 +42,6 @@ const useResource = (() => ({ status: 'none' as const, value: undefined, failure
 Range.prototype.getBoundingClientRect = () => ({
   top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0, x: 0, y: 0, toJSON: () => ({}),
 })
-
 
 afterEach(cleanup)
 
@@ -110,7 +109,7 @@ function commandSource(
 }
 
 const COMMANDS: FakeCommand[] = [
-  { name: 'goal', description: '设定目标', input: { hint: '目标内容' } },
+  { name: 'goal', description: '设定目标', input: { hint: 'Goal objective' } },
   { name: 'compact', description: '压缩上下文' },
   { name: 'vision', description: '识别图片', input: { hint: '想问什么', attachments: true } },
 ]

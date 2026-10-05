@@ -452,7 +452,6 @@ describe('JsonlSessionPersistence: default Zstandard encoding', () => {
     await expect(readFile(currentPath)).rejects.toMatchObject({ code: 'ENOENT' })
   })
 
-
   it('a read rejects a present zstd artifact that carries no frame', async () => {
     const root = await freshRoot()
     const ctx = await mount(root)

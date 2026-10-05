@@ -724,7 +724,6 @@ describe('Tooltip', () => {
   })
 })
 
-
 it('keeps the anchor in its clipping container and portals only the tooltip', () => {
   const view = render(<div style={{ overflow: 'hidden', contain: 'layout' }}>
     <Tooltip portal label="Open in Music" side="bottom"><button type="button">File action</button></Tooltip>

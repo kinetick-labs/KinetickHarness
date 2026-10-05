@@ -1,4 +1,5 @@
 /** A turn that edits, creates, and shell-appends files in a git workspace ends with the changed-files card; its rows open the review. */
+import type {} from '@kinetick-labs/kh-workspace-changes'
 import { execFileSync } from 'node:child_process'
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -6,7 +7,6 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium, type Browser, type Page } from 'playwright'
 import { afterAll, beforeAll, describe, expect, it, onTestFinished } from 'vitest'
-import type {} from '@kinetick-labs/kh-workspace-changes'
 import type { ChangesSummary } from '@kinetick-labs/kh-client-ui-deliverables/src/changes.ts'
 import { deriveReplayScript, parseSessionLog } from '@kinetick-labs/kh-llm-replay'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
@@ -203,10 +203,10 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     const compactHeight = await header.evaluate(element => element.getBoundingClientRect().height)
     expect(compactHeight).toBeLessThan(60)
     await openSettings(page, 'zh')
-    const settings = page.getByRole('dialog', { name: '设置' })
-    await settings.getByRole('switch', { name: '显示代码工作视图' }).click()
-    await expect.poll(() => settings.getByRole('switch', { name: '显示代码工作视图' }).getAttribute('aria-checked')).toBe('true')
-    await settings.getByRole('button', { name: '关闭', exact: true }).click()
+    const settings = page.getByRole('dialog', { name: 'Settings' })
+    await settings.getByRole('switch', { name: 'Show coding view' }).click()
+    await expect.poll(() => settings.getByRole('switch', { name: 'Show coding view' }).getAttribute('aria-checked')).toBe('true')
+    await settings.getByRole('button', { name: 'Close', exact: true }).click()
     await header.getByRole('tablist').waitFor({ state: 'visible' })
     expect(await header.evaluate(element => element.getBoundingClientRect().height)).toBeGreaterThan(compactHeight)
     await card.waitFor({ state: 'visible' })
@@ -576,7 +576,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     }
     const floating = page.locator('[data-dockkit-float]').filter({ has: page.locator('[data-changes-review]') })
     await floating.waitFor({ state: 'visible' })
-    const selector = floating.getByRole('button', { name: '选择要查看的文件' })
+    const selector = floating.getByRole('button', { name: 'Choose the file to review' })
     await selector.click()
     const menu = page.getByRole('menu')
     await menu.waitFor({ state: 'visible' })
@@ -739,9 +739,9 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
       } })
     })
     await preview.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
-    await preview.locator('[data-changed-files]').getByRole('button', { name: '在侧边栏查看本轮改动' }).click()
+    await preview.locator('[data-changed-files]').getByRole('button', { name: 'Review this turn’s changes in the sidebar' }).click()
     const review = preview.locator('[data-changes-review]')
-    const selector = review.getByRole('button', { name: '选择要查看的文件' })
+    const selector = review.getByRole('button', { name: 'Choose the file to review' })
     const label = selector.locator('[data-path-label]')
     const layout = await preview.addStyleTag({ content: '[data-sidebar-right-panel] { width: 340px !important; }' })
     const resize = async (width: number) => {

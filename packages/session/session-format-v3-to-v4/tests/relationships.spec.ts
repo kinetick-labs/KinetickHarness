@@ -185,7 +185,6 @@ describe('mandatory V4 dependent event restoration', () => {
   })
 })
 
-
 describe('V4 protected system surface and malformed relationship inputs', () => {
   const system = (): Row => ({ ...row('system/message', { ...step, message: { id: 'system', role: 'system', source: { kind: 'system-prompt' }, content: [{ type: 'text', text: 'system' }] } }), surfaceOp: 'append' })
   it('keeps the first system head protected across exact replacements', () => {

@@ -9,7 +9,7 @@ import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { DeliveryHistory, type DeliveryHistoryInjected } from '../src/client/DeliveryHistory.tsx'
 import { formatScheduleNextRun } from '../src/client/schedule-format.ts'
 import { zoneDifferingFrom, zoneOffsetMinutes } from './zone-fixture.ts'
-import { en, zh } from '../src/client/task-manager-locales.ts'
+import { en , en as zh } from '../src/client/task-manager-locales.ts'
 import css from '../src/client/TaskManagerPage.module.css'
 
 type Result = Awaited<ReturnType<DeliveryHistoryInjected['loadHistory']>>

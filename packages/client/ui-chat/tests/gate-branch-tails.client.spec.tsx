@@ -3,12 +3,12 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { cleanup, render } from '@testing-library/react'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { AssistantMarkdown, type AssistantMarkdownProps } from '../src/client/chat/AssistantMarkdown.tsx'
 import { useDetailedPresentation } from './presentation-fixture.client.ts'
 import { useDisclosure } from '../src/client/chat/use-disclosure.ts'
 import { ActivityPill, UsagePill, type StatPillProps } from '../src/client/chat/StatsPills.tsx'
-import { zh } from '../src/client/locale.ts'
+import { en as zh } from '../src/client/locale.ts'
 import { chatSnapshotFixture } from './chat-snapshot-fixture.client.ts'
 
 const t: AssistantMarkdownProps['t'] = makeTranslate(zh, commonZh)
@@ -18,7 +18,6 @@ afterEach(() => {
   cleanup()
   vi.unstubAllGlobals()
 })
-
 
 describe('render branch tails', () => {
   it('AssistantMarkdown reasoning row is ok-state when not the streaming tail', () => {

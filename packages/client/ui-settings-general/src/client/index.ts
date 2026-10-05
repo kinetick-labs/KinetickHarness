@@ -7,20 +7,20 @@
  * Feature-owned rows and sections stay with their features.
  * Export discipline: packages/client/AGENTS.md.
  */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-settings/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 // Type-only: pulls the ctx.remote merge and its fixed Host facts.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { ConnectionHandle } from '@kinetick-labs/kh-client-connection/client'
 import { resolveSlotLabel } from '@kinetick-labs/kh-client-ui-slots'
 import { closeTopModal } from '@kinetick-labs/kh-client-ui-primitives'
 // Type-only: the settings slot declarations plus the ctx.configForms Context
 // merge. Cross-plugin collaboration goes through the service, never a value
 // import (client bundle purity gate).
-import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 // Type-only: pulls ctx.locale into this program.
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {
   SettingsOnboardingStep, SettingsRootInjected, SettingsSectionRow,
 } from './shell-contract.ts'
@@ -37,7 +37,7 @@ import { DeveloperToolsRow, type DeveloperToolsRowInjected } from './DeveloperTo
 import { SettingsDocumentAction } from './SettingsDocumentAction.tsx'
 import type { SettingsDocumentActionInjected } from './SettingsDocumentAction.tsx'
 import { SettingsDocumentStore } from './settings-document-store.ts'
-import { en, zh, type SettingsKey } from './locales.ts'
+import { en,type SettingsKey } from './locales.ts'
 
 export type {
   CloseLabelProps, HeaderContentProps, TriggerContentProps,
@@ -84,7 +84,7 @@ export function apply(ctx: ClientContext): void {
   ctx.slots.inject('settings.general.item', () => ctx.slots.register({
     name: 'settings.general.item', id: 'current-version', order: 100, locale: NS,
   }, CurrentVersionRow))
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-settings-general: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-settings-general: dictionaries')
   const connection = ctx.get('connection') as ConnectionHandle
   const carrier = (globalThis as typeof globalThis & { khDesktop?: { protocolVersion: number; updates?: DesktopUpdateBridge } }).khDesktop
   const desktopUpdate = new DesktopUpdateSource(carrier?.protocolVersion === 1 ? carrier.updates : undefined)

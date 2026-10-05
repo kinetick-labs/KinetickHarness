@@ -112,7 +112,6 @@ export interface DeepSeekAdapterOptions<Connection extends DeepSeekConnectionOpt
   prepareExtensions: (request: DeepSeekLlmApiExtensionRequest) => Promise<PreparedDeepSeekLlmApiExtensions>
 }
 
-
 /** Adapter-level request defaults (from plugin config). */
 export interface RequestDefaults {
   thinking?: 'enabled' | 'disabled' | undefined

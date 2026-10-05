@@ -81,7 +81,6 @@ export const MODULE_PROXIES: Record<string, string> = {
   'ws': './node/external_packages/ws.ts',
 }
 
-
 /** pi-ai subpaths (`/providers/all`, `/api/*.lazy`) share the one structural stub. */
 export const MODULE_PROXY_PREFIXES: Record<string, string> = {
   '@earendil-works/pi-ai/': './node/external_packages/pi-ai.ts',

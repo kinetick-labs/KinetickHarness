@@ -15,23 +15,23 @@
  * The General-settings row separately writes the default preset for sessions
  * created later through the host Settings API.
  */
+import type {} from '@kinetick-labs/kh-client-connection/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-settings/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
+import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SessionFace } from '@kinetick-labs/kh-api-session-controller/client'
 import type { SessionId } from '@kinetick-labs/kh-api-remotes/client'
 import type { PermissionCatalog, PermissionSelection } from '@kinetick-labs/kh-permission-presets/client'
 // Direct dependency: catalog settlements are fenced by the actual connection
 // generation rather than by a parallel domain counter.
-import type {} from '@kinetick-labs/kh-client-connection/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: the settings slot types (this package registers a General row).
-import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 // Type-only: pulls the ctx.remote merge and the forwarded-event key face
 // (the settings invalidation rides the allowlist) into this program.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { CommandUiContract, SelectOption } from '@kinetick-labs/kh-client-ui-commands/client'
 import type { ClientSessionContext } from '@kinetick-labs/kh-client-ui-input-trigger/client'
 import type { TranslateNS } from '@kinetick-labs/kh-client-ui-slots'
@@ -40,9 +40,7 @@ import { PermissionSelect } from './PermissionSelect.tsx'
 import type { PermissionSelectInjected } from './PermissionSelect.tsx'
 import { PermissionRow } from './PermissionRow.tsx'
 import type { PermissionRowInjected } from './PermissionRow.tsx'
-import {
-  accessEn, accessZh, en, PERMISSION_ACCESS_NS, zh,
-} from './locales.ts'
+import { accessEn,en,PERMISSION_ACCESS_NS } from './locales.ts'
 import {
   AUTO_REVIEW_PRESET, displayPermissionPreset, FULL_ACCESS_PRESET,
 } from './presentation.ts'
@@ -114,7 +112,7 @@ export function apply(ctx: ClientContext): void {
   const command = ctx.get('commandUi') as CommandUiContract
   const sessions = ctx.sessions
   ctx.effect(
-    () => ctx.locale.register(PERMISSION_ACCESS_NS, { zh: accessZh, en: accessEn }),
+    () => ctx.locale.register(PERMISSION_ACCESS_NS, { en: accessEn }),
     'ui-permission: current-session dictionaries',
   )
   const t = ctx.locale.bind(PERMISSION_ACCESS_NS)
@@ -141,7 +139,7 @@ export function apply(ctx: ClientContext): void {
     'ui-permission: dismiss stale slash choices',
   )
 
-  ctx.effect(() => ctx.locale.register('settings.permission', { zh, en }), 'ui-permission: settings row dictionaries')
+  ctx.effect(() => ctx.locale.register('settings.permission', { en }), 'ui-permission: settings row dictionaries')
 
   // The shared ConfigForm mirror updates after document commits and reconnects.
   const controller = new PermissionPresetSettingsController(

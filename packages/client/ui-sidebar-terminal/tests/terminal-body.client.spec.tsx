@@ -10,7 +10,7 @@ import type { TerminalViewState } from '@kinetick-labs/kh-api-terminal-controlle
 import type { WebTerminalId } from '@kinetick-labs/kh-api-terminal-controller/types'
 import { TerminalBody, type TerminalBodyProps } from '../src/client/terminal.tsx'
 import { TerminalTitle } from '../src/client/TerminalTitle.tsx'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 const fake = vi.hoisted(() => ({
   terminals: [] as FakeTerminal[],
@@ -364,7 +364,6 @@ it('starts a recovered screen with no local history when environment discovery i
   mount({ ...idle, info, environment: undefined })
   expect(fake.terminals[0]!.options).toHaveProperty('scrollback', 0)
 })
-
 
 it.each([en, zh])('translates known terminal failures while retaining unknown Host diagnostics', (dictionary) => {
   const h = mount(idle, dictionary)

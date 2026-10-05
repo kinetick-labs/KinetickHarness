@@ -4,14 +4,14 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { bindSnapshotSelector, makeTranslate, RemoteError } from '@kinetick-labs/kh-client-test-runtime'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { SpeechPreparationState, SpeechProviderId, Transcript } from '@kinetick-labs/kh-experimental-speech-to-text/types'
 import type { RemoteResult } from '@kinetick-labs/kh-typert-protocol'
 import { VoiceInput, type VoiceInputProps } from '../src/client/VoiceInput.tsx'
 import { RecordingError, Recording } from '../src/client/audio.ts'
 import type { SpeechReadiness } from '../src/client/readiness.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 import { captureFixture } from './audio-fixture.client.ts'
 
 beforeEach(() => { vi.stubGlobal('requestAnimationFrame', vi.fn(() => 1)); vi.stubGlobal('cancelAnimationFrame', vi.fn()) })
@@ -46,7 +46,7 @@ function stop(): void { fireEvent.click(screen.getByRole('button', { name: zh.st
 it('clicks to record, shows measured audio, and stops to insert without sending or a popup', async () => {
   const b = fixture()
   fireEvent.mouseEnter(screen.getByRole('button', { name: zh.start }).parentElement!)
-  expect(screen.getByRole('tooltip').textContent).toBe('听写')
+  expect(screen.getByRole('tooltip').textContent).toBe('Dictate')
   fireEvent.mouseDown(screen.getByRole('button', { name: zh.start }))
   await start()
   expect(b.props.onActiveChange).toHaveBeenLastCalledWith(true)

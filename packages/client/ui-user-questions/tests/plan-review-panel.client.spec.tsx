@@ -9,16 +9,14 @@ import {
 } from '../src/client/contract/slots.ts'
 import { createQuestionDraftStore } from '../src/client/draft-store.ts'
 import { QuestionComposer } from '../src/client/QuestionComposer.tsx'
-import { en, zh } from '../src/client/locales.ts'
-import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en , en as zh } from '../src/client/locales.ts'
+import { en as commonEn , en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 
 // Every session-scope fixture carries the resource hook the resources plugin merges into GlobalStandardProps.
 const useResource = (() => ({ status: 'none' as const, value: undefined, failure: undefined, reload: () => {} })) as GlobalStandardProps['useResource']
 const usePanelInfo: GlobalStandardProps['usePanelInfo'] = selector => selector({ activePanelId: null })
 
 afterEach(cleanup)
-
 
 const SID = 's1' as SessionId
 
@@ -323,7 +321,6 @@ describe('PlanReviewPanel', () => {
     expect(await screen.findByText(zh['status.sent'])).toBeTruthy()
     expect(answer).toHaveBeenCalledOnce()
   })
-
 
   it('dismisses the request so the composer returns for a plain message', () => {
     const { carrier, cancel, answer } = wait()

@@ -53,16 +53,16 @@ describe('web e2e: plugin manager', () => {
 
   /** Close any open settings dialog, so the sidebar and the main column are clickable. */
   async function closeSettings() {
-    if (await page.getByRole('dialog', { name: '设置' }).count() > 0) {
+    if (await page.getByRole('dialog', { name: 'Settings' }).count() > 0) {
       await page.keyboard.press('Escape')
-      await expect.poll(() => page.getByRole('dialog', { name: '设置' }).count(), { timeout: 5_000 }).toBe(0)
+      await expect.poll(() => page.getByRole('dialog', { name: 'Settings' }).count(), { timeout: 5_000 }).toBe(0)
     }
   }
 
   /** Change the UI language through Settings and close the dialog. */
   async function setLanguage(language: 'en' | 'zh'): Promise<void> {
     if (await page.locator('html').getAttribute('lang') === language) return
-    const settings = language === 'en' ? '设置' : 'Settings'
+    const settings = 'Settings'
     const source = language === 'en' ? '中文' : 'English'
     const target = language === 'en' ? 'English' : '中文'
     if (await page.getByRole('dialog', { name: settings }).count() === 0) {
@@ -70,7 +70,7 @@ describe('web e2e: plugin manager', () => {
     }
     await page.getByRole('dialog', { name: settings }).getByRole('button', { name: source }).click()
     await page.getByRole('menuitem', { name: target }).click()
-    const dialog = page.getByRole('dialog', { name: language === 'en' ? 'Settings' : '设置' })
+    const dialog = page.getByRole('dialog', { name: 'Settings' })
     await dialog.waitFor()
     await page.keyboard.press('Escape')
     await expect.poll(() => dialog.count()).toBe(0)
@@ -325,9 +325,9 @@ describe('web e2e: plugin manager', () => {
             expect(await cards.allTextContents()).toEqual(cardText)
             expect(await panel.locator('[data-plugin-loading]').count()).toBe(0)
             expect(await panel.getByRole('alert').count()).toBe(0)
-            expect(await panel.getByRole('button', { name: '重试', exact: true }).count()).toBe(0)
+            expect(await panel.getByRole('button', { name: 'Retry', exact: true }).count()).toBe(0)
             const toasts = probe.locator('body > [role="alert"]')
-            await expect.poll(() => toasts.allTextContents()).toEqual(['刷新失败，请重试'])
+            await expect.poll(() => toasts.allTextContents()).toEqual(['Refresh failed. Please try again.'])
             await recordRefresh(`${outcome}: settled`)
           } finally {
             release.resolve(undefined)
@@ -376,10 +376,10 @@ describe('web e2e: plugin manager', () => {
     onTestFailed(() => saveFailureShot(page, 'web-e2e-plugin-manager-list'))
     const panel = await openPluginsPanel()
 
-    const info = panel.getByRole('button', { name: '插件说明' })
+    const info = panel.getByRole('button', { name: 'About plugins' })
     const infoBounds = await info.boundingBox()
     const iconBounds = await info.locator('svg').boundingBox()
-    const subtitleBounds = await panel.getByText('安装、启用和配置插件', { exact: true }).boundingBox()
+    const subtitleBounds = await panel.getByText('Install, enable, and configure plugins', { exact: true }).boundingBox()
     if (infoBounds === null || iconBounds === null || subtitleBounds === null) {
       throw new Error('Plugin information button, icon, and subtitle must be visible')
     }
@@ -392,7 +392,7 @@ describe('web e2e: plugin manager', () => {
     await info.hover()
     const hoverHelp = page.getByRole('tooltip')
     await hoverHelp.waitFor()
-    expect(await hoverHelp.textContent()).toBe('在这里配置官方插件，安装和管理其他插件。内置插件列表及运行状态可在「设置 → 内置插件」中查看')
+    expect(await hoverHelp.textContent()).toBe('Configure official plugins and install or manage other plugins here. View the built-in plugin list and runtime status in Settings → Built-in plugins.')
     await panel.getByRole('heading', { name: '插件', exact: true }).hover()
     await hoverHelp.waitFor({ state: 'hidden' })
     await info.focus()
@@ -914,7 +914,7 @@ describe('web e2e: plugin manager', () => {
     await expect.poll(() => mounted()?.fiber?.state, { timeout: 20_000 }).not.toBe(2)
     await rowSwitch.click()
     await expect.poll(() => mounted()?.fiber?.state, { timeout: 20_000 }).toBe(2)
-    await panel.getByRole('button', { name: '返回插件列表' }).click()
+    await panel.getByRole('button', { name: 'Back to plugins' }).click()
 
     await toggle.click()
     await expect.poll(() => mounted()?.fiber?.state, { timeout: 20_000 }).not.toBe(2)
@@ -931,7 +931,6 @@ describe('web e2e: plugin manager', () => {
   })
 })
 
-
 describe('web e2e: startup-applied plugin management', () => {
   it('saves a bundle selection that waits for the next start and keeps its rows read-only', async () => {
     const scaffold = await launchWebScaffold({
@@ -945,7 +944,7 @@ describe('web e2e: startup-applied plugin management', () => {
       const tripwire = watchConsole(page)
       onTestFailed(() => saveFailureShot(page, 'web-e2e-plugin-manager-live'))
       await page.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
-      await page.getByRole('navigation', { name: '全局面板' }).getByRole('button', { name: '插件', exact: true }).click()
+      await page.getByRole('navigation', { name: 'Global panels' }).getByRole('button', { name: '插件', exact: true }).click()
       const panel = page.locator('[data-plugin-panel]')
       const toggle = panel.getByRole('switch', { name: '启用 @fixture/bundle' })
       await toggle.waitFor({ timeout: 20_000 })
@@ -959,7 +958,7 @@ describe('web e2e: startup-applied plugin management', () => {
       // The selection is saved and the switch turns on, but nothing mounts before the next start; a toast says so.
       await expect.poll(bundles).toEqual([...SCAFFOLD_BUNDLES, '@fixture/bundle'])
       await expect.poll(() => toggle.getAttribute('aria-checked')).toBe('true')
-      await page.getByText('更改将在下次启动生效', { exact: true }).waitFor({ timeout: 10_000 })
+      await page.getByText('The change takes effect at the next start', { exact: true }).waitFor({ timeout: 10_000 })
       expect(mounted()?.fiber?.state).toBeUndefined()
       // The pack's page lists its rows from their declarations, with no live entry to switch.
       await panel.getByRole('button', { name: '查看 @fixture/bundle' }).click()

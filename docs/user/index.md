@@ -7,5 +7,3 @@ head:
 ---
 
 # KinetickHarness
-
-English | [中文](index.zh.md)

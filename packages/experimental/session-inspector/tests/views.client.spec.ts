@@ -18,7 +18,7 @@ import type { SessionInspectorInjected } from '../src/client/views/View.tsx'
 import { chatNodeWithLocation } from './chat-node-fixture.client.ts'
 import { apply, inject } from '../src/client/index.ts'
 import * as discovery from '../src/index.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 async function fixture(services?: { sessions: object; uiConversation: object; uiSession: object }) {
   const ctx = new Context()

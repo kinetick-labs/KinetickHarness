@@ -360,7 +360,6 @@ describe('native V3 codec and restorer', () => {
   })
 })
 
-
 describe('composed V3 system and PTC migration', () => {
   const message = (plugin: string, id = plugin) => ({ ...user(id), source: { kind: 'plugin', plugin } })
   const dispatch = { rootCallId: 'tools-code-mode:root', parentCallId: 'tools-code-mode:root', subCallId: 'tools-code-mode:child', name: 'read', arguments: { text: 'tools-code-mode', type: 'tool/code-dispatch' } }

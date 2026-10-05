@@ -55,7 +55,6 @@ const KILL_ARM_MS = 3_000
 /** How long a failed kill keeps its hint before the button resets. */
 const KILL_FAILED_MS = 4_000
 
-
 function isLive(job: JobView): boolean {
   return job.status === 'running' || job.status === 'stopping'
 }

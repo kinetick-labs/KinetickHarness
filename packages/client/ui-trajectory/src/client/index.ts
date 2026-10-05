@@ -2,21 +2,21 @@
  * Browser trajectory plugin contributing one entry to the conversation view
  * slot without defining a service.
  */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context } from '@deepseek-ai/cordis'
 import type { ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
 import type { SessionBinding } from '@kinetick-labs/kh-api-session-controller/client'
 import type { ObservableSnapshot } from '@kinetick-labs/kh-client-store'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: the 'conversation.view' SlotMap row (declared by the slot's
 // owning package) must be in the program for the register calls to type.
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import { createTrajectoryDurationStore } from './duration-store.ts'
 import { createTrajectoryStringWrappingStore } from './string-wrapping-store.ts'
-import { en, NS, zh } from './locales.ts'
+import { en,NS } from './locales.ts'
 import { registerTrajectoryAssistantDefinition } from './trajectory-assistant-definition.ts'
 import { registerTrajectoryCompactionDefinitions } from './trajectory-compaction-definition.ts'
 import { registerTrajectoryMessageDefinitions } from './trajectory-message-definitions.ts'
@@ -59,7 +59,7 @@ export function apply(ctx: Context): void {
     }
     return source
   }
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-trajectory: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-trajectory: dictionaries')
   // Registration-time text (the view tab label) reads through the bound
   // translate as a thunk, so it follows the active locale without
   // re-registration.

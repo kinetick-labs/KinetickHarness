@@ -201,7 +201,6 @@ describe('changed files native open route', () => {
   })
 })
 
-
 it('queries handlers only after file authorization and forwards explicit application choices', async () => {
   const { handler, applications, opener, open, ctx } = await fixture()
   const url = 'http://localhost/api/changes.open?sessionId=owner&seq=9&index=0'
@@ -216,7 +215,6 @@ it('queries handlers only after file authorization and forwards explicit applica
   expect((await handler.fetch(new Request(url))).status).toBe(422)
   expect(applications).toHaveBeenCalledOnce()
 })
-
 
 it('rejects an unsupported changed-file action before invoking the desktop', async () => {
   const { open, opener } = await fixture()

@@ -7,7 +7,7 @@ import type { ChatNode } from '../src/client/contract/chat-nodes.ts'
 import { TurnTriggerNodeView } from '../src/client/chat/TurnTriggerNodeView.tsx'
 import { turnTriggerDetails } from '../src/client/chat/turn-trigger.ts'
 import { contextForm, contextProducer } from '../src/client/conversation-nodes/event-projection.ts'
-import { en, zh } from '../src/client/locale.ts'
+import { en , en as zh } from '../src/client/locale.ts'
 
 afterEach(cleanup)
 

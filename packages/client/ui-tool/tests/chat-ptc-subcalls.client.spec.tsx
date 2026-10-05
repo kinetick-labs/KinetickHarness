@@ -13,7 +13,7 @@ import type { PropsRenderSlots } from '@kinetick-labs/kh-client-ui-slots'
 import {
   ConversationEventRegistry, ConversationViewRegistry, EMPTY_CONVERSATION_SNAPSHOT, type ConvViewOwnerProps,
 } from '@kinetick-labs/kh-client-ui-conversation/client'
-import { en as conversationEn, NS as CONVERSATION_NS, zh as conversationZh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as conversationEn,NS as CONVERSATION_NS } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { apply as applyChat, inject as injectChat } from '@kinetick-labs/kh-client-ui-chat/client'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import { apply as applyTool, inject as injectTool } from '../src/client/apply.ts'
@@ -135,7 +135,7 @@ async function bench(snapshot: ChatSnapshot) {
   runtime.remote.provideNamespaces({ session: { openWorkspacePath } })
   const locale = new LocaleRuntime(ctx)
   ctx.provide('locale', locale)
-  locale.register(CONVERSATION_NS, { zh: conversationZh, en: conversationEn })
+  locale.register(CONVERSATION_NS, { en: conversationEn })
   runtime.slots.installLocale(locale)
 
   await runtime.root.declare(ROOT_CHILDREN, AppRoot)

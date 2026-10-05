@@ -12,7 +12,7 @@ import {
   formatScheduleAbsolute, formatScheduleFrequency, formatScheduleRelative,
 } from '../src/client/schedule-format.ts'
 import { SessionScheduleHover, type SessionScheduleHoverProps } from '../src/client/SessionScheduleHover.tsx'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import css from '../src/client/SessionScheduleMark.module.css'
 
 const SESSION = 'hover-session' as SessionId

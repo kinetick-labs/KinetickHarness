@@ -11,8 +11,8 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
+import { en as zh } from '../src/client/locales.ts'
 import type {
   InputTriggerCrumb, MenuState, TriggerHit,
 } from '@kinetick-labs/kh-client-ui-input-trigger/client'
@@ -110,7 +110,7 @@ describe('MenuView', () => {
     // The icon token renders as an SVG glyph, not text.
     expect(options[0]?.querySelector('svg')).not.toBeNull()
     expect(options[1]?.querySelector('svg')).toBeNull()
-    const status = screen.getByRole('status', { name: '正在加载…' })
+    const status = screen.getByRole('status', { name: 'Loading…' })
     expect(status.children).toHaveLength(2)
   })
 
@@ -121,8 +121,8 @@ describe('MenuView', () => {
         source: 'command',
         status: 'ready',
         items: [
-          { name: 'plan', label: '计划', description: '进入或退出计划模式', icon: Glyph, section: '添加' },
-          { name: 'file', label: 'File', section: '添加' },
+          { name: 'plan', label: '计划', description: 'Enter or leave plan mode', icon: Glyph, section: 'Add' },
+          { name: 'file', label: 'File', section: 'Add' },
         ],
       }],
     }))
@@ -131,7 +131,7 @@ describe('MenuView', () => {
     expect(options[0]?.querySelector('[data-glyph="plan"]')?.getAttribute('width')).toBe('14')
     // A label that is the name in another letter case renders no alias.
     expect(options[1]?.querySelectorAll('span')).toHaveLength(1)
-    expect(screen.getAllByText('添加')).toHaveLength(1)
+    expect(screen.getAllByText('Add')).toHaveLength(1)
   })
 
   it('keeps an opted-out source title hidden while its candidates are pending', () => {
@@ -140,7 +140,7 @@ describe('MenuView', () => {
       highlight: null,
     }))
     expect(screen.queryByText('reference')).toBeNull()
-    expect(screen.getByRole('status', { name: '正在加载…' })).toBeTruthy()
+    expect(screen.getByRole('status', { name: 'Loading…' })).toBeTruthy()
   })
 
   it('renders retained items instead of skeletons while a refinement is pending', () => {
@@ -161,7 +161,7 @@ describe('MenuView', () => {
         { source: 'skill', status: 'pending', items: [] },
       ],
     }))
-    expect(titles(view.container)).toEqual(['指令', 'mystery', '技能'])
+    expect(titles(view.container)).toEqual(['指令', 'mystery', 'Skills'])
   })
 
   it('renders contiguous candidate sections once without changing option indexes', () => {
@@ -170,15 +170,15 @@ describe('MenuView', () => {
         source: 'reference',
         status: 'ready',
         items: [
-          { name: 'Folder · src/', section: '文件与文件夹' },
-          { name: 'File · README.md', section: '文件与文件夹' },
+          { name: 'Folder · src/', section: 'Files & folders' },
+          { name: 'File · README.md', section: 'Files & folders' },
           { name: 'Session · Research', section: '对话' },
         ],
       }],
       highlight: { source: 'reference', index: 0 },
     }))
     expect(screen.queryByText('reference')).toBeNull()
-    expect(screen.getAllByText('文件与文件夹')).toHaveLength(1)
+    expect(screen.getAllByText('Files & folders')).toHaveLength(1)
     expect(screen.getAllByText('对话')).toHaveLength(1)
     const options = screen.getAllByRole('option')
     expect(options.map(option => option.textContent)).toEqual([
@@ -202,7 +202,7 @@ describe('MenuView', () => {
       }],
       highlight: { source: 'reference', index: 0 },
     }))
-    const chevrons = screen.getAllByRole('button', { name: '进入目录' })
+    const chevrons = screen.getAllByRole('button', { name: 'Browse folder' })
     expect(chevrons).toHaveLength(1)
     // The chevron drills; the row body still settles the pick untouched.
     fireEvent.mouseDown(chevrons[0]!)
@@ -348,7 +348,7 @@ describe('MenuView', () => {
       { label: 'src', value: 'src' },
       { label: 'module1', value: 'module1', current: true },
     ]]]))
-    const nav = screen.getByRole('navigation', { name: '目录导航' })
+    const nav = screen.getByRole('navigation', { name: 'Folder navigation' })
     expect([...nav.querySelectorAll('button')].map(button => button.textContent))
       .toEqual(['Workspace', 'src', 'module1'])
     // The listbox holds options alone; the header is its sibling, not a row.
@@ -360,7 +360,7 @@ describe('MenuView', () => {
       { label: 'Workspace', value: 'root' },
       { label: 'src', value: 'src', current: true },
     ]]]))
-    const crumbs = screen.getByRole('navigation', { name: '目录导航' }).querySelectorAll('button')
+    const crumbs = screen.getByRole('navigation', { name: 'Folder navigation' }).querySelectorAll('button')
     expect(fireEvent.mouseDown(crumbs[0]!)).toBe(false)
     expect(onCrumb).toHaveBeenCalledWith('command', 0)
     onCrumb.mockClear()

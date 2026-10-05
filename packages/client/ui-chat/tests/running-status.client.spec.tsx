@@ -3,9 +3,9 @@
 import { act, cleanup, render } from '@testing-library/react'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { RunningStatus } from '../src/client/chat/RunningStatus.tsx'
-import { zh } from '../src/client/locale.ts'
+import { en as zh } from '../src/client/locale.ts'
 
 const t = makeTranslate(zh, commonZh)
 
@@ -24,14 +24,14 @@ function statusHarness(startTime?: number) {
 describe('RunningStatus', () => {
   it('waits for an open Turn start before allocating its clock', () => {
     const view = statusHarness()
-    expect(view.content()?.textContent).toBe('深度求索中')
+    expect(view.content()?.textContent).toBe('Deep diving')
     expect(vi.getTimerCount()).toBe(0)
     view.set(1_000)
     expect(view.content()?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
     expect(view.content()?.querySelectorAll('[data-shimmer="true"]')).toHaveLength(1)
     expect(vi.getTimerCount()).toBe(1)
     view.set()
-    expect(view.content()?.textContent).toBe('深度求索中')
+    expect(view.content()?.textContent).toBe('Deep diving')
     expect(vi.getTimerCount()).toBe(0)
   })
 
@@ -52,7 +52,7 @@ describe('RunningStatus', () => {
     expect(content?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
     expect(content?.textContent).not.toBe(nextTurnText)
     expect(view.getByRole('status')).toBe(status)
-    expect(status.textContent).toBe('深度求索中')
+    expect(status.textContent).toBe('Deep diving')
     view.unmount()
     expect(vi.getTimerCount()).toBe(0)
   })

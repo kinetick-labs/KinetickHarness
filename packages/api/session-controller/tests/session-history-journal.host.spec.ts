@@ -649,7 +649,6 @@ describe('Session history raw journal', () => {
     await ctx.fiber.dispose()
   })
 
-
   it('follows raw tool events and preserves result metadata without a Tools service', async () => {
     const { ctx } = await harness()
     const session = ctx.sessions.create(undefined, { meta: { cwd: '/workspace' } })

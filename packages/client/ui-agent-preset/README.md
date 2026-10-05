@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-client-ui-agent-preset
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Choose Agent presets and the new-task default in Web, read what each mode does and what it declares. Authoring is guided to Creator mode.

@@ -110,7 +110,6 @@ export function prepareManagedProcessBinding(
   }
 }
 
-
 /**
  * Collects one stream with a bounded in-memory tail. With spill options, on
  * first overflow a spill file is created and every chunk (including those

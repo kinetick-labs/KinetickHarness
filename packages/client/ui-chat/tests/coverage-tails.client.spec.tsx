@@ -3,11 +3,11 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, render } from '@testing-library/react'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { AssistantMarkdown, type AssistantMarkdownProps } from '../src/client/chat/AssistantMarkdown.tsx'
 import { useDetailedPresentation } from './presentation-fixture.client.ts'
 import { useDisclosure } from '../src/client/chat/use-disclosure.ts'
-import { zh } from '../src/client/locale.ts'
+import { en as zh } from '../src/client/locale.ts'
 
 const t: AssistantMarkdownProps['t'] = makeTranslate(zh, commonZh)
 const renderMessageImages: AssistantMarkdownProps['renderMessageImages'] = () => null
@@ -42,7 +42,7 @@ describe('tails', () => {
         renderMessageImages={renderMessageImages}
       />,
     )
-    expect(stopped.getByText('已停止')).toBeTruthy()
+    expect(stopped.getByText('Stopped')).toBeTruthy()
   })
 
   it('AssistantMarkdown skips the root shell when only tool-call heads remain', () => {

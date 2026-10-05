@@ -7,7 +7,6 @@ import {
   Config, apply,
 } from '../src/index.ts'
 
-
 describe('ui-chat Host settings', () => {
   it('registers, validates, and disposes the transcript-view namespace', async () => {
     const ctx = new Context()

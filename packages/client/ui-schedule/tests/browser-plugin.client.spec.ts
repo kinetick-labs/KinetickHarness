@@ -24,7 +24,7 @@ import { ScheduleCatalogAction } from '../src/client/ScheduleCatalogAction.tsx'
 import { SessionScheduleHover } from '../src/client/SessionScheduleHover.tsx'
 import { SessionScheduleMark } from '../src/client/SessionScheduleMark.tsx'
 import { ScheduleTurnCard, type ScheduleTurnCardInjected } from '../src/client/ScheduleTurnCard.tsx'
-import { en, NS, zh } from '../src/client/locales.ts'
+import { en, NS , en as zh } from '../src/client/locales.ts'
 
 const Empty = () => null
 

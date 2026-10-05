@@ -577,7 +577,6 @@ it('rejects invalid catalog context windows at the options resolver', () => {
   expect(() => Messages.resolveAdapterOptions({ models: [{ id: 'invalid-window', contextWindow: 0 }] })).toThrow('contextWindow must be a positive integer')
 })
 
-
 it.each([
   ['https://api.deepseek.com', 'account-token'],
   ['https://custom.example.test', 'ambient-key'],

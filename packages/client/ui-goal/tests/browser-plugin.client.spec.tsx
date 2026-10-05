@@ -21,11 +21,11 @@ import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
 import { makeTranslate, RemoteError, TestSessions } from '@kinetick-labs/kh-client-test-runtime'
 import type { SessionFixture } from '@kinetick-labs/kh-client-test-runtime'
 import type { RemoteFailure } from '@kinetick-labs/kh-api-remotes/client'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { GoalActivationSnapshot, GoalBarActions, GoalBarInjected } from '../src/client/slots.ts'
 import { apply, inject } from '../src/client/index.ts'
 import { GoalDock } from '../src/client/GoalBar.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 import { apply as nodeApply } from '../src/index.ts'
 
 afterEach(cleanup)
@@ -380,8 +380,8 @@ describe('GoalDock adapter', () => {
     const props = { useProjection, useGoalActivation, ...actions, t } as unknown as Parameters<typeof GoalDock>[0]
     const rendered = render(<GoalDock {...props} />)
     expect(rendered.getByText('已暂停的目标')).toBeTruthy()
-    expect(screen.getByRole('button', { name: '恢复目标' })).toBeTruthy()
-    expect(rendered.queryByRole('button', { name: '暂停目标' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Resume goal' })).toBeTruthy()
+    expect(rendered.queryByRole('button', { name: 'Pause goal' })).toBeNull()
   })
 })
 

@@ -9,11 +9,11 @@ import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-u
 import type { SessionListState } from '@kinetick-labs/kh-api-session-controller/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { CHAT_DIFF_MAX_LINES, diffCardModel } from '../src/client/tool/models/diff-card-model.ts'
 import { GenericToolCard, type GenericToolCardProps } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { FileMutationRow, fileMutationToolview } from '../src/client/tool/toolviews/file-mutation-row.tsx'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
@@ -310,7 +310,7 @@ describe('FileMutationRow diff card', () => {
     }))} />)
     expect(view.container.querySelector('[data-state="stopped"]')).not.toBeNull()
     expect(view.container.querySelector('[data-state="stopped"] svg')).not.toBeNull()
-    expect(view.getByText('已停止').className).toContain('visuallyHidden')
+    expect(view.getByText('Stopped').className).toContain('visuallyHidden')
     expect(view.container.querySelector('[class*="_stoppedSummary_"]')?.textContent).toBe('notes/demo.txt')
   })
 

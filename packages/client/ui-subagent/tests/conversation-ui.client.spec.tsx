@@ -13,7 +13,7 @@ import {
   type SubagentCatalogActionProps, type SubagentHeaderLineageProps,
 } from '../src/client/SubagentHeaderLineage.tsx'
 import { SubagentReadOnlyComposer } from '../src/client/SubagentReadOnlyComposer.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()
@@ -508,7 +508,7 @@ describe('SubagentHeaderLineage', () => {
     render(<HeaderCatalog {...input} />)
     hoverCatalog(screen.getByRole('button', { name: /子智能体/ }))
     const row = screen.getByRole('treeitem', { name: new RegExp(CHILD) })
-    expect(row.textContent).toContain('模式未知')
+    expect(row.textContent).toContain('unknown mode')
     fireEvent.keyDown(row, { key: 'Enter' })
     expect(input.openChild).toHaveBeenCalledWith({ parentSessionId: PARENT, childSessionId: CHILD, mode: 'unknown' })
   })
@@ -701,14 +701,14 @@ describe('SubagentHeaderLineage', () => {
 
     expect(deferred.refreshProjection).toHaveBeenCalledWith(CHILD)
     expect(screen.getByRole('group').getAttribute('aria-busy')).toBe('true')
-    expect(screen.getByText('正在加载子智能体…')).toBeTruthy()
+    expect(screen.getByText('Loading subagents…')).toBeTruthy()
     expect(screen.queryByRole('treeitem', { name: '正在加载子智能体' })).toBeNull()
 
     const loading = props(catalog(), {
       [CHILD]: catalog({ entries: [], state: 'loading' }),
     }, summaries)
     view.rerender(<HeaderCatalog {...loading} />)
-    expect(screen.getByText('正在加载子智能体…')).toBeTruthy()
+    expect(screen.getByText('Loading subagents…')).toBeTruthy()
 
     const ready = props(catalog(), {
       [CHILD]: catalog({
@@ -728,7 +728,7 @@ describe('SubagentHeaderLineage', () => {
     expect(screen.getByRole('group').getAttribute('aria-busy')).toBeNull()
     expect(screen.getByRole('treeitem', { name: /indexer/ }).querySelector('[data-state="idle"]')).not.toBeNull()
     expect(screen.getByRole('treeitem', { name: /critic/ }).querySelector('[data-state="ongoing"]')).not.toBeNull()
-    expect(screen.queryByText('正在加载子智能体…')).toBeNull()
+    expect(screen.queryByText('Loading subagents…')).toBeNull()
   })
 
   it('uses ArrowRight and ArrowLeft for branch disclosure', async () => {
@@ -821,7 +821,7 @@ describe('SubagentHeaderLineage', () => {
     render(<HeaderCatalog {...failed} />)
     const trigger = screen.getByRole('button', { name: /0 个子智能体/ })
     hoverCatalog(trigger)
-    expect(screen.getByText('无法加载子智能体')).toBeTruthy()
+    expect(screen.getByText('Unable to load subagents')).toBeTruthy()
     fireEvent.keyDown(trigger, { key: 'ArrowDown' })
     await Promise.resolve()
     expect(screen.getByRole('tree')).toBeTruthy()

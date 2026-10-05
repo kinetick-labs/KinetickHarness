@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-lsp
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Use `kh-lsp` to give agents language-server navigation for definitions, references, implementations, and hover documentation. Queries select the configured provider by file extension and return normalized results with structured failures, so backend changes do not alter the navigation request or model-visible response. Navigation is read-only and deliberately excludes generic JSON-RPC access, rename, formatting, diagnostics, and symbol lists. This package must be combined with a provider such as `kh-lsp-stdio` and the model-facing `kh-tool-lsp`; alone it provides no navigation.
@@ -120,7 +118,6 @@ No direct invalidation; `kh-tool-lsp` owns request-prefix changes.
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define the seam's current scope. They are package constraints, not a task backlog.
 

@@ -1916,7 +1916,6 @@ describe('plugin registration and config', () => {
     ])
   })
 
-
   it('advertises configured models without restricting arbitrary request ids', async () => {
     vi.stubEnv('DEEPSEEK_API_KEY', 'catalog-fixture-key')
     const ctx = new Context()
@@ -2263,7 +2262,6 @@ describe('plugin registration and config', () => {
     await assemble(ctx,{ model: 'deepseek-v4-flash', messages: [] })
     expect(server.requests).toHaveLength(1)
   })
-
 
   it('takes DEEPSEEK_BASE_URL from any environment layer, with explicit config still on top', () => {
     const trusted = createLaunchEnvironmentSnapshot([

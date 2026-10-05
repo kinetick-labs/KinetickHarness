@@ -4,7 +4,7 @@ import { cleanup, fireEvent, render } from '@testing-library/react'
 import { afterEach, expect, it, vi } from 'vitest'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { PresentedFileCard } from '../src/client/PresentedFileCard.tsx'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 const props = () => ({
@@ -25,7 +25,6 @@ it('localizes reveal failures and accurately reports a directory-only action', (
   view.rerender(<PresentedFileCard {...p} phase="revealed" />)
   expect(view.getByText(en['presented.revealed'])).toBeTruthy()
 })
-
 
 it('shows the basename while retaining the full location for hover and actions', () => {
   const p = props()
@@ -48,7 +47,6 @@ it.each([
   expect(view.queryByText(description)).toBeNull()
 })
 
-
 it.each([en, zh])('distinguishes directory-only progress and errors in each locale', (dictionary) => {
   const p = { ...props(), t: makeTranslate(dictionary) }
   const view = render(<PresentedFileCard {...p} phase="revealing" />)
@@ -58,7 +56,6 @@ it.each([en, zh])('distinguishes directory-only progress and errors in each loca
   view.rerender(<PresentedFileCard {...p} phase="revealError" host={{ ...p.host, fileManager: 'directory' }} />)
   expect(view.getByText(dictionary['presented.directoryError'])).toBeTruthy()
 })
-
 
 it('renders the supplied action independently from the card preview', () => {
   const p = props()

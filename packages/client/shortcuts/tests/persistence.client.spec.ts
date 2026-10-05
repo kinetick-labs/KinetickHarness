@@ -129,7 +129,6 @@ describe('serialized preference persistence', () => {
   })
 })
 
-
 it('continues transactions after a rejected unsupported code and contains subscriber failures', async () => {
   const f = fixture(); await f.store.readCurrent()
   await expect(f.store.edit({ ...edit, binding: { ...binding, code: 'Unidentified' } }, f.state().revision)).rejects.toThrow('Unsupported')

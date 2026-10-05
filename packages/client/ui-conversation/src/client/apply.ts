@@ -1,4 +1,6 @@
 /** Registers the target-neutral Conversation assembly, shell, input, and docks. */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
 import type { ISessions, SessionBinding } from '@kinetick-labs/kh-api-session-controller/client'
@@ -7,9 +9,7 @@ import { createSnapshotStore, type BoundActions } from '@kinetick-labs/kh-client
 import { resolveSlotLabel } from '@kinetick-labs/kh-client-ui-slots'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 // Type-only service and declaration merges used by this assembly.
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 import type { ShortcutCommandId, ShortcutFixedCommand } from '@kinetick-labs/kh-client-shortcuts/client'
 import { UiConversation } from './conversation/assembly.ts'
@@ -41,7 +41,7 @@ import { InputBar } from './skeleton/InputBar.tsx'
 import { todoDockEntry } from './skeleton/TodoPanel.tsx'
 import { installStopShortcut } from './stop-shortcut.ts'
 import { TRAJECTORY_VIEW_ID, resolveActiveView } from './view-selection.ts'
-import { en, NS, zh, type ConversationKey } from './locales.ts'
+import { en,NS,type ConversationKey } from './locales.ts'
 import { CONVERSATION_SETTINGS_NAMESPACE, type ConversationSettings } from '../submission-settings.ts'
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
@@ -156,7 +156,7 @@ export function apply(ctx: Context, config: Config = Config({})): void {
   const workspaceNavigation = ctx.get('uiWorkspace') as unknown as WorkspaceNavigation
   const uiConversation = new UiConversation(ctx, sessions)
 
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-conversation: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-conversation: dictionaries')
   const t = ctx.locale.bind(NS)
   const conversationStore = createConversationStore()
   const submissionPolicy = new ComposerSubmissionPolicy(

@@ -1,7 +1,7 @@
 /** Command identity and localized input spelling over the effective Host catalog. */
 import type { CommandDescriptor } from '@kinetick-labs/kh-commands/types'
 import type { TranslateNS } from '@kinetick-labs/kh-client-locale/client'
-import { en, zh } from './locales.ts'
+import { en , en as zh } from './locales.ts'
 
 const BUILTINS = {
   goal: '@kinetick-labs/kh-command-goal',

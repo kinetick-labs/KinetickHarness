@@ -106,7 +106,6 @@ describe('native file associations', () => {
   })
 })
 
-
 it('uses the production command adapter and current platform when no override is supplied', async () => {
   const run = vi.spyOn(runner, 'runNativeCommand').mockImplementation(async command => ({
     stdout: command === 'gio' ? 'standard::content-type: audio/mpeg' : command === 'env' ? 'No applications found' : JSON.stringify([application]), stderr: '',
@@ -116,7 +115,6 @@ it('uses the production command adapter and current platform when no override is
   await openNativeFileApplication('/file.mp3', application.id, signal, { platform: 'darwin' })
   expect(run).toHaveBeenLastCalledWith('open', ['-a', application.id, '/file.mp3'], signal, 'hidden')
 })
-
 
 it('encodes Windows query and invocation data separately from native adapter source', async () => {
   const scripts: string[] = []
@@ -171,7 +169,6 @@ it('uses the Windows desktop for WSL paths and rejects an empty translation', as
   const empty = async () => ({ stdout: '', stderr: '' })
   await expect(nativeFileApplications('/a', signal, { ...facts, run: empty })).rejects.toThrow('no Windows path')
 })
-
 
 it('uses production environment and runner defaults for Linux and WSL', async () => {
   const run = vi.spyOn(runner, 'runNativeCommand').mockImplementation(async command => ({

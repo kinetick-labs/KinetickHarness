@@ -103,7 +103,6 @@ async function abortAndExpectTreeStopped(promise: Promise<GateResult>, controlle
   expect(procStopped(pid)).toBe(true)
 }
 
-
 function gate(id: string, options: Partial<Gate> = {}): Gate {
   return {
     id,

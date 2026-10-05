@@ -166,7 +166,7 @@ describe('ui-plugin-manager browser plugin', () => {
     expect(overlayFace.dismissNotice).toBe(face.dismissNotice)
     expect(Object.keys(overlayFace).sort()).toEqual(['dismissNotice', 'hooks'])
     expect(Object.keys(overlayFace.hooks)).toEqual(['pluginManager'])
-    const text = { en: 'Local tools', zh: '本地工具' }
+    const text = { en: 'Local tools' }
     expect(face.resolveText(text)).toBe('本地工具')
     b.locale.setLocale('en')
     expect(face.resolveText(text)).toBe('Local tools')

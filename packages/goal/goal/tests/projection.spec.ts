@@ -143,7 +143,6 @@ describe('goal projection unit', () => {
       })],
     })
 
-
     expect(bench.tailValues().goal).toBeNull()
     expect(foldGoal(bench.session.snapshotEvents()).goal).toBeUndefined()
   })

@@ -150,7 +150,7 @@ function packageReadmeMetadataErrors(file: string, metadata: Record<string, unkn
 function packageReadmeStructureErrors(file: string, source: string): string[] {
   const chinese = file.endsWith('.zh.md')
   const required = chinese
-    ? [[/^## 概述$/m, '概述'], [/^## 目录$/m, '目录'], [/^#{2,3} 开发备注$/m, '开发备注']] as const
+    ? [[/^## 概述$/m, 'Summary'], [/^## 目录$/m, '目录'], [/^#{2,3} 开发备注$/m, '开发备注']] as const
     : [[/^## Summary$/m, 'Summary'], [/^## Table of Contents$/m, 'Table of Contents'], [/^#{2,3} Dev Note$/m, 'Dev Note']] as const
   return required.flatMap(([pattern, label]) => pattern.test(source) ? [] : [`missing ${label}`])
 }
@@ -208,11 +208,13 @@ function releaseDocument(body: string, evidence: string): string {
 }
 
 describe('Session format release authority', () => {
-  it('keeps bilingual release metadata consistent with the writer and tagged evidence', () => {
-    const records = ['docs/session-format-status.md', 'docs/session-format-status.zh.md'].map(file =>
-      validateSessionFormatRelease(readFileSync(resolve(root, file), 'utf8'), readCurrentSessionFormatVersion(root)),
+  it('keeps release metadata consistent with the writer and tagged evidence', () => {
+    const record = validateSessionFormatRelease(
+      readFileSync(resolve(root, 'docs/session-format-status.md'), 'utf8'),
+      readCurrentSessionFormatVersion(root),
     )
-    expect(records[0]).toEqual(records[1])
+    expect(record.latestReleasedVersion).toBeGreaterThanOrEqual(0)
+    expect(record.evidenceTag).toMatch(/^kh-v/)
   })
 
   it('accepts a released writer and a newer development writer, including format zero', () => {
@@ -320,7 +322,7 @@ describe('kh-doc skill consolidation', () => {
   it('keeps the reference example linked from the skill', () => {
     const skill = readFileSync(resolve(root, '.agents/skills/kh-doc/SKILL.md'), 'utf8')
     expect(skill).toContain('session-persistence-jsonl/README.md')
-    expect(skill).toContain('session-persistence-jsonl/README.zh.md')
+    expect(skill).not.toContain('README.zh.md')
   })
 
   it('defines controlled English as a precision-preserving review discipline', () => {

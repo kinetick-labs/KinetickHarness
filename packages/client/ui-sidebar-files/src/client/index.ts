@@ -10,17 +10,17 @@
  * it draws (`FilesBody.tsx`, `FilesTitle.tsx`), what it says (`locales.ts`),
  * and this module, which only wires them together.
  */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
 import { FILES_ID, filesDefinition } from './definition.tsx'
 import { createList, createWatch, filesFace } from './face.ts'
 import { FilesBody } from './FilesBody.tsx'
 import { FilesTitle } from './FilesTitle.tsx'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 import { createFilesStore } from './store.ts'
 
 export type { SidebarFilesKey } from './locales.ts'
@@ -79,7 +79,7 @@ export function apply(ctx: ClientContext): void {
     }), 'ui-sidebar-files: shortcut')
   })
   ctx.effect(() => ctx.sidebarRightTabs.register(filesDefinition(t)), 'ui-sidebar-files: files type')
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-sidebar-files: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-sidebar-files: dictionaries')
 
   const store = createFilesStore()
   const inject = filesFace(createList(ctx.remote), createWatch(ctx.remote))

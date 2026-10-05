@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-file-reference
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Host-backed user interfaces use `kh-file-reference` to offer `@file` completion: a UI asks for path candidates for the addressed agent, the model types `@path` or `@"path with spaces"`, and picking a candidate inserts the matching mention as ordinary prompt text. The seam itself owns no filesystem access — a concrete provider such as `@kinetick-labs/kh-file-reference-local` supplies candidates, ranking, caching, and invalidation. Selecting a candidate never reads or attaches file contents; the model must call a filesystem tool to inspect a file. Session Controller exposes the same discovery to browser consumers through the `fileReferences/list` Remote.
@@ -93,7 +91,6 @@ The interface and grammar add no request tokens; a provider-owned prompt section
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define when the seam is a poor fit. They are current package constraints.
 

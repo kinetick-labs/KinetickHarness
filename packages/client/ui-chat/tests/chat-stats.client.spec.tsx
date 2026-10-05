@@ -6,12 +6,11 @@ import type {
   AssistantMessageNode, ChatSnapshot, LegacyConversationSlice, ToolResultNode,
 } from '@kinetick-labs/kh-client-ui-chat/client'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { en as commonEn } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonEn, en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import { ActivityPill, UsagePill, deriveStats, formatDuration, type StatPillProps } from '../src/client/chat/StatsPills.tsx'
 import { formatTokens } from '../src/client/chat/token-format.ts'
-import { en, zh } from '../src/client/locale.ts'
+import { en , en as zh } from '../src/client/locale.ts'
 import { chatSnapshotFixture } from './chat-snapshot-fixture.client.ts'
 
 const t: StatPillProps['t'] = makeTranslate(zh, commonZh)
@@ -364,14 +363,14 @@ describe('composer stats pills', () => {
     expect(usagePill.textContent).toBe('10K tok·缓存命中 99.95%')
     fireEvent.click(timePill)
     const timeDialog = view.getByRole('dialog')
-    expect(timeDialog.getAttribute('aria-label')).toBe('会话统计')
+    expect(timeDialog.getAttribute('aria-label')).toBe('Session statistics')
     expect(timeDialog.textContent).toContain('模型用时3.8秒')
     expect(timeDialog.textContent).toContain('首 token 平均（TTFT）0.8秒')
     expect(timeDialog.textContent).toContain('输出速度（TPS）20 tok/s')
     fireEvent.keyDown(document, { key: 'Escape' })
     fireEvent.click(usagePill)
     const usageDialog = view.getByRole('dialog')
-    expect(usageDialog.getAttribute('aria-label')).toBe('Token 用量')
+    expect(usageDialog.getAttribute('aria-label')).toBe('Token usage')
     expect(usageDialog.textContent).toContain('未缓存输入5 tok')
   })
 

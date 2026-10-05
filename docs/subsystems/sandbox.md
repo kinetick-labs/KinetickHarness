@@ -1,7 +1,5 @@
 # Process Sandbox
 
-English | [中文](sandbox.zh.md)
-
 The process-sandbox seam of [kh-sandbox](../../packages/sandbox/sandbox) wraps a same-world subprocess argv in a file-effect policy without coupling consumers to a platform runner. [kh-sandbox-local](../../packages/sandbox/sandbox-local) supplies Linux bwrap/Landlock, macOS Seatbelt, and the Windows ACL restricted-token backend; [kh-bash-sandbox](../../packages/shell/bash-sandbox) and [kh-pwsh-sandbox](../../packages/shell/pwsh-sandbox) consume it. [kh-sandbox-ssh](../../packages/ssh/sandbox-ssh/README.md) applies the same policy through a remote backend paired with the SSH filesystem and subprocess providers.
 
 Source: [`packages/sandbox/sandbox/src/index.ts`](../../packages/sandbox/sandbox/src/index.ts)

@@ -21,9 +21,9 @@ import {
   type ScheduleCatalogActionProps,
 } from '../src/client/ScheduleCatalogAction.tsx'
 import type { CatalogSnapshot } from '../src/client/catalog-source.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import catalogCss from '../src/client/ScheduleCatalogAction.module.css'
-import { en as managerEn, zh as managerZh } from '../src/client/task-manager-locales.ts'
+import { en as managerEn, en as managerZh } from '../src/client/task-manager-locales.ts'
 
 const SESSION = 'schedule-session' as SessionId
 const START = Date.parse('2026-08-25T12:00:00.000Z')
@@ -416,9 +416,9 @@ describe('ScheduleCatalogAction rows', () => {
     for (const kind of ['at', 'after'] as const) {
       const once = record(`once-${kind}`, kind, START + 1_000)
       expect(formatScheduleFrequency(once, frequency)).toBe('Once')
-      expect(formatScheduleFrequency(once, tZh)).toBe('单次')
+      expect(formatScheduleFrequency(once, tZh)).toBe('Once')
     }
-    expect(tZh('list.nextRun')).toBe('下次运行')
+    expect(tZh('list.nextRun')).toBe('Next run')
   })
 
   it.each([

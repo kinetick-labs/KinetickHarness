@@ -1,6 +1,6 @@
 import { expect, it } from 'vitest'
 import { desktopUpdateErrorSummary, presentDesktopUpdate } from '../src/update-presentation.ts'
-import { en, zh } from '../src/locale.ts'
+import { en , en as zh } from '../src/locale.ts'
 import type { DesktopUpdateState, KhDesktopProductApi } from '../src/ipc.ts'
 import type { DesktopUpdateBridge } from '@kinetick-labs/kh-client-ui-settings-general/types'
 

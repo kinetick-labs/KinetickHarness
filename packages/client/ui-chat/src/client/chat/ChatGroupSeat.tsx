@@ -80,7 +80,6 @@ function useStableLiveProcessTitle(desired: LiveProcessTitle, active: boolean): 
   return active ? displayed : desired
 }
 
-
 const GroupMembers = memo(function GroupMembers({ members, ...props }: SeatProps & {
   readonly members: readonly NodeReference[]
 }) {

@@ -71,7 +71,6 @@ describe('OpenInAppPathController gestures', () => {
   })
 })
 
-
 it('queries current handlers and carries an explicit application without changing the default gesture', async () => {
   const applications = [{ id: '/Applications/Music.app', name: 'Music', default: true, icon: null }]
   const query = vi.fn(async () => ({ ok: true as const, value: applications }))
@@ -85,7 +84,6 @@ it('queries current handlers and carries an explicit application without changin
   await controller.openPath('/file.mp3', 'open')
   expect(open).toHaveBeenLastCalledWith({ path: '/file.mp3' })
 })
-
 
 it('distinguishes failed association queries from an empty application list', async () => {
   const remote = remoteOf({ workspacePathApplications: async () => ({ ok: false, error: new RemoteError('gateway/internal', 'unavailable', {}) }) })

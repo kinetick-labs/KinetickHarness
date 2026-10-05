@@ -1,7 +1,5 @@
 # Cookbook: adding a workspace package
 
-English | [中文](adding-a-package.zh.md)
-
 The file-by-file checklist for a new `@kinetick-labs/kh-<name>` package. This checklist is validated against the bash and adapter packages as templates; if it drifts from them, fix it here.
 
 ## 1. Create the package
@@ -15,7 +13,6 @@ packages/<group>/<pkg>/
                    # you use Config, + ../../<group>/<dep> for each kh dep)
   src/index.ts     # service default export or plugin (name/inject/apply/Config)
   locale/en.json   # optional display metadata: meta.title and meta.description
-  locale/zh.json   # translations using the same fields
   README.md        # service API, events, extension points, design notes,
                    # + gated Model Experience context blocks or short form
                    # + the gated "Known Limitations and Deferred Work" section
@@ -113,7 +110,7 @@ A package with no context effect or one consumer-owned path uses the audited `No
 
 ## 5. Add optional plugin display metadata
 
-For an npm package plugin, define its title and description in `locale/en.json`. Other language files, such as `locale/zh.json`, use the same fields:
+For an npm package plugin, define its title and description in `locale/en.json`:
 
 ```json
 {

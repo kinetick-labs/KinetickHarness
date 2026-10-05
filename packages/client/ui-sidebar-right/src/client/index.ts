@@ -21,17 +21,17 @@
  * from another package does — `ui-sidebar-documentpreview` is the live proof.
  */
 import type {} from '@kinetick-labs/kh-client-shortcuts/client'
+import type {} from '@kinetick-labs/kh-client-resources/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
+import type {} from '@kinetick-labs/kh-client-ui-layout/client'
+import type {} from './contract/slots.ts'
 import { observeSidebarFocus } from './focus.ts'
 import { registerSidebarShortcuts } from './shortcuts.ts'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
-import type {} from '@kinetick-labs/kh-client-resources/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { ILayout } from '@kinetick-labs/kh-client-ui-layout/client'
-import type {} from '@kinetick-labs/kh-client-ui-layout/client'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
-import type {} from './contract/slots.ts'
 import { GuideBody, type GuideInjected } from './tabs/guide/GuideBody.tsx'
 import { GuideTitle } from './tabs/guide/GuideTitle.tsx'
 import { ExpandButton } from './shell/ExpandButton.tsx'
@@ -42,7 +42,7 @@ import { SidebarSessionViews } from './session-views.ts'
 import { createSidebarRightController, type SidebarRightController } from './service.ts'
 import { SidebarRightTabRegistry } from './tab-registry.ts'
 import { createSidebarRightStore } from './stores.ts'
-import { en, zh } from './locales.ts'
+import { en } from './locales.ts'
 import { GUIDE_ID, guideDefinition } from './tabs/guide/definition.ts'
 import { guideTabInfoFactory, tabInfoFactory } from './tab-info.ts'
 import type { TabId } from '@kinetick-labs/kh-client-ui-dockkit'
@@ -159,7 +159,7 @@ export function apply(ctx: ClientContext): void {
     void disposeRegistry()
   }, 'ui-sidebar-right: service faces')
 
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-sidebar-right: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-sidebar-right: dictionaries')
   ctx.effect(() => registerSidebarShortcuts(ctx.shortcuts, controller, t, () => {
     void ctx.shortcuts.closeWindow().catch((error: unknown) => { console.error('Window close failed', error) })
   }), 'ui-sidebar-right: shortcuts')

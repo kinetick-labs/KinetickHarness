@@ -6,7 +6,7 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { ShortcutCatalogEntry, ShortcutCommandId, ShortcutFixedCatalogEntry } from '@kinetick-labs/kh-client-shortcuts/client'
 import { ShortcutReference, ShortcutsRow } from '../src/client/Reference.tsx'
 import { createShortcutsStore } from '../src/client/store.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import { initialShortcutConfig, bindingIssue, normalizeBinding, presentBinding } from '@kinetick-labs/kh-client-shortcuts/protocol'
 import type { ShortcutConfigSnapshot } from '@kinetick-labs/kh-client-shortcuts/protocol'
 import { ShortcutRegistry } from '../../shortcuts/src/client/registry.ts'
@@ -114,7 +114,6 @@ it.each(['macos', 'windows'] as const)('shows the reference, filters labels and 
   expect(opener.hasAttribute('aria-keyshortcuts')).toBe(false)
   expect(makeTranslate(zh)('title')).toBe('快捷键')
 })
-
 
 it('saves individual edits and disables changes when configuration cannot be read', async () => {
   const store = createShortcutsStore().create()

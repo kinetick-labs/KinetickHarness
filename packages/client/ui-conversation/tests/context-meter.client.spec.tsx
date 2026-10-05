@@ -3,11 +3,11 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render } from '@testing-library/react'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { en as commonEn, zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/index.ts'
+import { en as commonEn, en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/index.ts'
 import { ContextMeter, type ContextMeterProps } from '../src/client/skeleton/ContextMeter.tsx'
 import { contextOccupancy } from '../src/client/context-occupancy.ts'
 import css from '../src/client/skeleton/ContextMeter.module.css'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(cleanup)
 
@@ -56,7 +56,7 @@ describe('ContextMeter', () => {
     const panel = view.queryByRole('dialog')!
     expect(panel.textContent).toContain('~32K / 128K')
     expect(panel.textContent).toContain('25%')
-    expect(panel.textContent).toContain('上下文已用')
+    expect(panel.textContent).toContain('of context used')
     expect(panel.textContent).toContain('系统提示词~120')
     expect(panel.textContent).toContain('工具定义~21.5K')
     expect(panel.textContent).toContain('对话消息~477K')
@@ -115,7 +115,7 @@ describe('ContextMeter', () => {
     const panel = view.queryByRole('dialog')!
     expect(panel.textContent).toContain('~32K / 128K')
     expect(panel.textContent).not.toContain('系统提示词')
-    expect(panel.textContent).not.toContain('对话消息')
+    expect(panel.textContent).not.toContain('Messages')
     // Without composition shares, the bar falls back to one plain segment.
     expect(panel.getElementsByClassName(segmentClass)).toHaveLength(1)
   })

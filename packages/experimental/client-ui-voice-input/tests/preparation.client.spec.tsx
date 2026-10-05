@@ -3,13 +3,13 @@
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from '@testing-library/react'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { SpeechPreparationState, SpeechPreparationStep, SpeechProviderId } from '@kinetick-labs/kh-experimental-speech-to-text/types'
 import { afterEach, expect, it, vi } from 'vitest'
 import { PreparationCard, VoicePreparation } from '../src/client/PreparationCard.tsx'
 import type { VoiceInputProps } from '../src/client/VoiceInput.tsx'
 import type { SpeechReadiness } from '../src/client/readiness.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => { cleanup(); vi.useRealTimers() })
 const id = 'local' as SpeechProviderId, t = makeTranslate(zh, commonZh)

@@ -1474,10 +1474,6 @@ describe('JsonlSessionPersistence: durability and crash semantics', () => {
     await otherCtx.fiber.dispose()
   })
 
-
-
-
-
   it('an unchanged cold log parses once across an observe-then-resume handoff', async () => {
     const m = meta('memo-handoff', '/work')
     await writeLog(ctx.sessionPersistence, m, oneTurnLog())

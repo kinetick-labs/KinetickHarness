@@ -55,7 +55,6 @@ const nativePrefix: readonly SessionFormatJsonObject[] = [
   { type: 'request/header', data: { header: { config }, reason: 'initial' } },
 ]
 
-
 function checkpointSource(): SessionFormatJsonObject {
   const restore = createSessionFormatCatalogWithChildren([]).createRestore({
     type: 'session', version: 3, id: 'checkpoint-source', createdAt: 0, isSeeded: false, delegationDepth: 0,

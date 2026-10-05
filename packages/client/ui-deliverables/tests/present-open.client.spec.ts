@@ -75,7 +75,6 @@ it('awaits cancellation and prevents late state publication or new requests afte
   expect(fetcher).toHaveBeenCalledOnce()
 })
 
-
 it('shares pending state across open and reveal and retries the selected action', async () => {
   const reply = Promise.withResolvers<Response>()
   const fetcher = vi.fn().mockReturnValueOnce(reply.promise).mockResolvedValue(new Response(null, { status: 204 }))
@@ -130,7 +129,6 @@ it('coalesces metadata reads and suppresses their publication after disposal', a
   expect(controller.host.getSnapshot()).toBeNull()
 })
 
-
 it('invalidates cached desktop metadata without eagerly fetching an unused Host', async () => {
   const fetcher = vi.fn().mockResolvedValue(Response.json({ name: 'old', available: false, fileManager: null }))
   vi.stubGlobal('fetch', fetcher)
@@ -166,7 +164,6 @@ it('discards a replaced Host response and keeps the new metadata request coalesc
   await controller.dispose()
 })
 
-
 it.each(['open', 'reveal'] as const)('reports an unavailable Host path for %s while retaining the declaration', async (action) => {
   vi.stubGlobal('fetch', vi.fn().mockResolvedValue(new Response(null, { status: 422 })))
   const controller = new PresentedOpenController()
@@ -174,7 +171,6 @@ it.each(['open', 'reveal'] as const)('reports an unavailable Host path for %s wh
   expect(controller.state.getSnapshot()[url]).toBe('nativeUnavailable')
   await controller.dispose()
 })
-
 
 it('encodes an explicit application identifier without changing the file coordinates', async () => {
   const fetcher = vi.fn(async () => new Response(null, { status: 204 }))
@@ -184,7 +180,6 @@ it('encodes an explicit application identifier without changing the file coordin
   expect(fetcher).toHaveBeenCalledWith(`${url}&application=%2FApps%2FA%26B.app`, { method: 'POST', signal: expect.any(AbortSignal) as AbortSignal })
   await controller.dispose()
 })
-
 
 it.each(['open', 'reveal'] as const)('expires successful %s feedback after five seconds and its fade', async (action) => {
   vi.useFakeTimers()
@@ -222,7 +217,6 @@ it('cancels success expiry when its controller is disposed', async () => {
   await vi.advanceTimersByTimeAsync(6000)
   expect(controller.state.getSnapshot()).toBe(state)
 })
-
 
 it('owns the expiry before notifying subscribers that can dispose the controller', async () => {
   vi.useFakeTimers()

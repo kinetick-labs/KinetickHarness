@@ -4,7 +4,7 @@ import { act, cleanup, fireEvent, render, screen, waitFor } from '@testing-libra
 import { afterEach, expect, it, vi } from 'vitest'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { Config } from '../src/config.ts'
-import { en, zh } from '../src/client/excel/locales.ts'
+import { en , en as zh } from '../src/client/excel/locales.ts'
 import type { ExcelBodyProps, LoadedExcelBodyProps } from '../src/client/excel/LazyExcelBody.tsx'
 
 const mocked = vi.hoisted(() => ({ parse: vi.fn(), workbook: vi.fn((_props: unknown) => null) }))

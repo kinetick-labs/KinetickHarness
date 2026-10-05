@@ -5,7 +5,7 @@ import { afterEach, beforeEach, expect, it, vi } from 'vitest'
 import type { AccountSnapshot } from '../src/client/AccountSection.tsx'
 import { DesktopOnboardingEntry } from '../src/client/DesktopOnboardingEntry.tsx'
 import type { DesktopOnboardingState } from '../src/client/onboarding-contract.ts'
-import { zh, type AccountKey } from '../src/client/locales.ts'
+import { en as zh, type AccountKey } from '../src/client/locales.ts'
 
 let appRoot: HTMLDivElement
 

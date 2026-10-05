@@ -348,7 +348,6 @@ describe('UiSession bindings', () => {
     expect(changed).not.toHaveBeenCalled()
   })
 
-
   it('contains a failing binding subscriber and continues dispatch', () => {
     const ctx = new Context()
     const bench = createSessionsBench(ctx)

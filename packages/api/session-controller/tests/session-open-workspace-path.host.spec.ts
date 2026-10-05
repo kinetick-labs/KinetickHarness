@@ -145,7 +145,6 @@ describe('session/openWorkspacePath', () => {
   })
 })
 
-
 it('reports Host file-manager metadata and dispatches reveal separately from default-app open', async () => {
   const ctx = await context()
   const revealPath = vi.fn(async (_path: string, _signal: AbortSignal) => {})
@@ -175,7 +174,6 @@ it('uses the native reveal adapter without a test override and respects unsuppor
     expect(reveal).toHaveBeenCalledOnce()
   } finally { manager.mockRestore(); reveal.mockRestore(); await ctx.fiber.dispose() }
 })
-
 
 it.each(['open', 'reveal'] as const)('rejects an unmapped remote path before native %s', async (action) => {
   const ctx = await context()
@@ -217,7 +215,6 @@ it('dispatches default-app opening to the association adapter', async () => {
   expect(open).toHaveBeenCalledWith(resolve('/report.html'), signal)
 })
 
-
 it('uses the same path verification for handler queries and explicit application opening', async () => {
   const ctx = await context()
   const applications = [{ id: '/Applications/Music.app', name: 'Music', default: true, icon: null }]
@@ -239,7 +236,6 @@ it('uses the same path verification for handler queries and explicit application
   expect(openFileApplication).toHaveBeenCalledOnce()
 })
 
-
 it('avoids desktop queries when unavailable and rejects an empty query path', async () => {
   const fileApplications = vi.fn(async () => [])
   const unavailable = createSessionTestController(await context(), {
@@ -252,7 +248,6 @@ it('avoids desktop queries when unavailable and rejects an empty query path', as
   await expect(available.workspacePathApplications({ path: '' }, new AbortController().signal)).rejects.toMatchObject({ code: 'gateway/bad-request' })
   expect(fileApplications).not.toHaveBeenCalled()
 })
-
 
 it('returns bounded query failures and classifies cancellation through the Remote', async () => {
   const lifetime = new AbortController()

@@ -445,7 +445,6 @@ describe('apply (plugin lifecycle)', () => {
   })
 })
 
-
 describe('server instruction limits', () => {
   it('counts the complete attributed UTF-8 text before publishing tools', async () => {
     const ctx = await mountRegistry()

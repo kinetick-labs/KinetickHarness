@@ -7,7 +7,7 @@ import { afterEach, expect, it, onTestFinished, vi } from 'vitest'
 import type { ExecFileOptions } from 'node:child_process'
 import type { MessageBoxOptions, MessageBoxReturnValue } from 'electron'
 import { DesktopCommandManager } from '../src/command-management.ts'
-import { en, zh, type DesktopMessages } from '../src/locale.ts'
+import { en, type DesktopMessages , en as zh } from '../src/locale.ts'
 
 const external = vi.hoisted(() => ({ shell: null as string | null, cancelAuthorization: false, elevations: 0 }))
 

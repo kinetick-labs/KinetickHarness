@@ -5,7 +5,7 @@ import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import type { JobsSnapshot, JobView, ObservedJob } from '@kinetick-labs/kh-api-job-controller/client'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import { JobListAction, type JobListActionProps } from '../src/client/JobListAction.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()
@@ -244,7 +244,7 @@ describe('JobListAction rows', () => {
     ])} />)
     openList()
     fireEvent.click(screen.getByRole('button', { name: zh['section.settledCount'].replace('{count}', '3') }))
-    for (const word of ['已完成', '已取消', '已失败']) {
+    for (const word of ['已完成', '已取消', 'failed']) {
       expect(within(screen.getByRole('list')).getByText(word)).toBeDefined()
     }
     expect([...screen.getByRole('list').querySelectorAll('li [data-state]')].map(node => node.getAttribute('data-state')))

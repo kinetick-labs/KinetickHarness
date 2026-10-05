@@ -89,7 +89,6 @@ function normalizedImageDiagnostic(
     + 'The provider rejected bytes already normalized by the harness; PNG, JPEG, WebP, and GIF remain supported input formats.'
 }
 
-
 /** Files state owned by one model request, including at most one stale-id retry. */
 export class RequestFiles {
   private used: UsedRequestFile[] = []

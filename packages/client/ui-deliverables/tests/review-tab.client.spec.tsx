@@ -23,7 +23,7 @@ import {
 import { hunkRows, MAX_RENDERED_LINES, renderedHunks, splitRows } from '../src/client/FileDiff.tsx'
 import { changesReviewDefinition } from '../src/client/review-definition.ts'
 import { createReviewStore } from '../src/client/review-store.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()

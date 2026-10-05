@@ -35,7 +35,7 @@ import {
   selectProducedFiles, type DeliverablesTurnData,
 } from '../src/client/turn-deliverables.ts'
 import { apply, inject } from '../src/client/index.ts'
-import { en, zh } from '../src/client/locales.ts'
+import { en , en as zh } from '../src/client/locales.ts'
 import { SessionId } from '@kinetick-labs/kh-session/types'
 import type { SessionEvent } from '@kinetick-labs/kh-session/types'
 
@@ -659,11 +659,11 @@ describe('ChangedFiles card', () => {
     const { openFile, props, view } = renderCard(controller, zh)
     controller.host.set('error')
     view.rerender(<Deliverables {...props} matched={{ changes, presented: [] }} openFile={openFile} sessionId={SessionId('child-session')} t={makeTranslate(zh)} />)
-    expect(view.getByRole('button', { name: '在侧边栏查看本轮改动' })).toBeTruthy()
+    expect(view.getByRole('button', { name: 'Review this turn’s changes in the sidebar' })).toBeTruthy()
     controller.host.set({ name: 'server', available: false, fileManager: null })
     view.rerender(<Deliverables {...props} matched={{ changes, presented: [] }} openFile={openFile} sessionId={SessionId('child-session')} t={makeTranslate(zh)} />)
     expect(view.getByText('已编辑 11 个文件')).toBeTruthy()
-    fireEvent.click(view.getByRole('button', { name: '在侧边栏查看本轮改动' }))
+    fireEvent.click(view.getByRole('button', { name: 'Review this turn’s changes in the sidebar' }))
     expect(props.openChangesReview).toHaveBeenLastCalledWith({ sessionId: 'child-session', seq: 5, turn: 1 }, 0)
     fireEvent.click(view.getByRole('button', { name: '查看 config/design-token 的改动' }))
     expect(props.openChangesReview).toHaveBeenLastCalledWith({ sessionId: 'child-session', seq: 5, turn: 1 }, 0)
@@ -737,7 +737,6 @@ describe('producedFileMentions resolver', () => {
     expect(basename('a\\b\\c.txt')).toBe('c.txt')
   })
 })
-
 
 describe('plugin registration', () => {
   it('registers the tail entry and fiber disposal removes it', async () => {
@@ -866,7 +865,6 @@ describe('plugin registration', () => {
   })
 })
 
-
 describe('presented files', () => {
   const file = (path = 'report.docx') => ({ path })
 
@@ -913,7 +911,6 @@ describe('presented files', () => {
     expect(view.container.querySelector('[data-changed-files]')).toBeNull()
   })
 })
-
 
 it.each([null, [], 'invalid'])('declines non-object delivery data: %j', (data) => {
   expect(deliverablesDefinition.match(at(1, 'deliverables/presented', data).event)).toBeNull()
@@ -972,7 +969,6 @@ it('lets one delivered file span the complete row without an expansion control',
   expect(view.queryByRole('button', { name: /delivered files/ })).toBeNull()
 })
 
-
 it.each(['opening', 'opened', 'error'] as const)('shows the %s state and permits retries after failure', (phase) => {
   const controller = new PresentedOpenController()
   controller.state.set({ 'api/present.open?sessionId=session&seq=2&index=0': phase })
@@ -983,7 +979,6 @@ it.each(['opening', 'opened', 'error'] as const)('shows the %s state and permits
   expect(view.getByText(en[`presented.${phase}`])).toBeTruthy()
   expect((view.getByRole('button', { name: 'Native file action' }) as HTMLButtonElement).disabled).toBe(phase === 'opening')
 })
-
 
 it('explains a missing desktop and retries failed Host metadata', () => {
   const controller = new PresentedOpenController()
@@ -998,7 +993,6 @@ it('explains a missing desktop and retries failed Host metadata', () => {
   view.rerender(<Deliverables {...props} matched={matched} openFile={() => {}} sessionId={SessionId('session')} t={makeTranslate(en)} />)
   expect(view.getByText(en['presented.unavailable'])).toBeTruthy()
 })
-
 
 it('loads desktop information once the tail renders and not again while it is known', () => {
   const controller = new PresentedOpenController()

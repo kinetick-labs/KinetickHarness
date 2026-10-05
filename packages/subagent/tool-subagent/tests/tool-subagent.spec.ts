@@ -48,7 +48,6 @@ async function projectedContext(): Promise<Context> {
  * shipping code path.
  */
 
-
 describe('kh-tool-subagent', () => {
   it('rejects continuable background policy when the provider cannot prepare continuable children', async () => {
     let failure: unknown

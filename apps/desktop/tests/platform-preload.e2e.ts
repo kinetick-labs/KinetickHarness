@@ -56,7 +56,6 @@ it('exposes no bridge when the document leaves the allowed origin', () => {
   expect(invoke).not.toHaveBeenCalled()
 })
 
-
 it('caches language changes before subscription and removes disposed listeners', () => {
   const { bridge, ipc, invoke } = load(true, { origin: 'https://platform.deepseek.com', token: 'fixture-secret', locale: 'zh_CN' })
   expect(bridge!.getLocale()).toBe('zh_CN')

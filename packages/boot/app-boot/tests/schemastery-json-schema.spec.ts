@@ -317,7 +317,7 @@ describe('Schemastery input projection', () => {
   it('preserves roles, units, presentation metadata, and localized descriptions', () => {
     const schema = Schema.string().role('credential-ref', { source: 'environment' }).hidden().collapse().disabled()
       .link('https://example.com').comment('Credential name').experimental()
-    schema.meta.description = { en: 'Credential reference', zh: '凭据引用' }
+    schema.meta.description = { en: 'Credential reference' }
     const result = project(schema)
     expect(JSON.stringify(result.schema)).toContain('credential-ref')
     expect(JSON.stringify(result.schema)).toContain('Credential reference')
@@ -420,7 +420,7 @@ describe('Schemastery input projection', () => {
     expect(project(Schema.number().step(0.1)).limitations.length).toBeGreaterThan(0)
   })
 
-  it.each([{ '': 'Default language' }, { zh: '中文' }, {}])('preserves descriptions without an English entry: %j', (description) => {
+  it.each([{ '': 'Default language' }, { }, {}])('preserves descriptions without an English entry: %j', (description) => {
     const schema = Schema.string()
     schema.meta.description = description
     const result = project(schema)

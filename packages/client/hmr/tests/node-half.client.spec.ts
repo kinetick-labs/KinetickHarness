@@ -253,7 +253,6 @@ describe('hmr node half', () => {
   })
 })
 
-
 it('broadcasts the desired graph without waiting for Host activation or cleanup', async () => {
   const ctx = new Context()
   await ctx.plugin(Loader)

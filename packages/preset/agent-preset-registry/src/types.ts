@@ -1,7 +1,6 @@
 /** Client-safe payloads and event declarations owned by the agent-preset domain. */
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 
-
 /**
  * One declared preset as a client reads it.
  */

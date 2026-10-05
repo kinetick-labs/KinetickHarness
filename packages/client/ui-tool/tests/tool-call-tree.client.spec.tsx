@@ -7,10 +7,10 @@ import { bindDisclosure, useDisclosure } from '@kinetick-labs/kh-client-ui-chat/
 import type { SessionSnapshot } from '@kinetick-labs/kh-api-session-controller/client'
 import type { ToolCallBlock, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type { ToolCallOwnerProps, ToolTreeProps } from '../src/client/contract/slots.ts'
 import { ToolCallTree } from '../src/client/tool/ToolCallTree.tsx'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
@@ -201,6 +201,6 @@ describe('ToolCallTree', () => {
 
     expect(renderSlot).not.toHaveBeenCalled()
     expect(view.queryByTestId('keyed-skill')).toBeNull()
-    expect(view.getByText('Auto review 已拒绝')).toBeTruthy()
+    expect(view.getByText('Rejected by Auto review')).toBeTruthy()
   })
 })

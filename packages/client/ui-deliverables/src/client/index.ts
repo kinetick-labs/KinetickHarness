@@ -8,16 +8,16 @@
  * cap, and copy — so composing this plugin out of cordis.yml removes every
  * surface; the owning view renders an empty list and inert prose at zero cost.
  */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 import './file-actions.ts'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type {} from '@kinetick-labs/kh-client-connection/client'
 import type { ChatFileMentions } from '@kinetick-labs/kh-client-ui-chat/client'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-sidebar-right/client'
-import type {} from '@kinetick-labs/kh-client-ui-settings/client'
 import { changesReviewAddress } from '../changes.ts'
 import { ChangesDiffStore } from './changes-diff.ts'
 import { ChangesSummaryStore } from './changes-summary.ts'
@@ -27,7 +27,7 @@ import { DeliverablesTail, type DeliverablesInjected } from './Deliverables.tsx'
 import { ReviewTab, type ReviewInjected } from './ReviewTab.tsx'
 import { CHANGES_REVIEW_ID, changesReviewDefinition } from './review-definition.ts'
 import { createReviewStore } from './review-store.ts'
-import { en, NS, zh, type DeliverablesKey } from './locales.ts'
+import { en,NS,type DeliverablesKey } from './locales.ts'
 import {
   deliverablesDefinition, presentedForClosing, producedFileMentions, selectProducedFiles,
 } from './turn-deliverables.ts'
@@ -57,7 +57,7 @@ export function apply(ctx: ClientContext): void {
     diffs.reset()
   })
   ctx.uiConversation.events.register(deliverablesDefinition)
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-deliverables: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-deliverables: dictionaries')
   ctx.slots.inject(
     'conversation.chat.turnTail',
     () => ctx.slots.register({

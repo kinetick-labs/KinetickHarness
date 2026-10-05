@@ -6,8 +6,10 @@ import { resolve } from 'node:path'
 import { AGENT_NOTE_CLASSES, agentNoteRoot } from './agent-note-tree.ts'
 import {
   extendArchiveManifest,
+  isRetiredChineseArchivePath,
   parseArchiveManifest,
   renderArchiveManifest,
+  retireChineseArchiveProse,
   validateArchiveArtifacts,
   validateArchiveManifestExtension,
   type ArchiveManifest,
@@ -87,7 +89,17 @@ if (existsSync(manifestPath)) {
 const baselineRef = process.env.KH_ARCHIVE_BASE_REF ?? 'HEAD'
 try {
   const baseline = readBaselineManifest(baselineRef)
-  errors.push(...validateArchiveManifestExtension(baseline, manifest))
+  const files: Record<string, string> = {}
+  for (const [path, expected] of Object.entries(baseline.files)) {
+    if (isRetiredChineseArchivePath(path)) continue
+    files[path] = expected
+    const actual = manifest.files[path]
+    if (actual === undefined || actual === expected) continue
+    const previous = runGit(['show', `${baselineRef}:.agents/notes/archived/${path}`])
+    const current = artifacts.get(path)?.toString('utf8')
+    if (current !== undefined && retireChineseArchiveProse(previous) === current) files[path] = actual
+  }
+  errors.push(...validateArchiveManifestExtension({ version: 1, files }, manifest))
 } catch (error: unknown) {
   errors.push(`archived/manifest.json: cannot read baseline ${JSON.stringify(baselineRef)}: ${error instanceof Error ? error.message : String(error)}`)
 }

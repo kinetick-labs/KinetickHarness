@@ -1,13 +1,13 @@
 /** Desktop account settings registration and reconnecting Remote subscription. */
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-chat/client'
+import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { TranscriptViewMode } from '@kinetick-labs/kh-client-ui-chat/client'
 import type { Context } from '@deepseek-ai/cordis'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-settings/client'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-client-ui-theme/client'
-import type {} from '@kinetick-labs/kh-client-ui-chat/client'
 import type {} from '@kinetick-labs/kh-client-ui-layout/client'
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 import type { AccountView, AccountDetails } from '@kinetick-labs/kh-deepseek-account/types'
 import type { OnboardingChange } from './onboarding-contract.ts'
 import type { PlatformBridge } from './PlatformOverlay.tsx'
@@ -20,7 +20,7 @@ import { createPlatformPages, type PlatformPages } from './platform-pages.ts'
 import { AccountSection, type AccountSnapshot, type AccountSectionInjected } from './AccountSection.tsx'
 import { createBonusNoticeController } from './bonus-notices.ts'
 import { accountClientMetadata } from './client-metadata.ts'
-import { en, zh, type AccountKey } from './locales.ts'
+import { en,type AccountKey } from './locales.ts'
 import { AccountQuotaNotice, type AccountQuotaNoticeInjected } from './AccountQuotaNotice.tsx'
 import { DESKTOP_ONBOARDING_NAMESPACE, type OnboardingSettings } from '../onboarding-settings.ts'
 import { DesktopOnboardingController } from './onboarding-state.ts'
@@ -41,7 +41,7 @@ export const inject = ['slots', 'locale', 'remote', 'remote.account', 'remote.se
 /** Register account UI only in the Desktop renderer. @param ctx - client plugin context. */
 export function apply(ctx: Context): void {
   if (!('khDesktop' in globalThis)) return
-  ctx.effect(() => ctx.locale.register('settings.account', { en, zh }), 'account: dictionaries')
+  ctx.effect(() => ctx.locale.register('settings.account', { en }), 'account: dictionaries')
   const t = ctx.locale.bind('settings.account')
   const page = globalThis as Partial<Record<typeof CONTACT_CONFIG_GLOBAL, unknown>>
   const config = ContactConfig(page[CONTACT_CONFIG_GLOBAL] ?? {})

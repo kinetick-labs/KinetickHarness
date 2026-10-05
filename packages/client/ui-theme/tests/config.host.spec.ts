@@ -8,7 +8,6 @@ import {
   DEFAULT_PREFERENCE, Config, apply,
 } from '@kinetick-labs/kh-client-ui-theme'
 
-
 /** Collect the injection table the way an index render or boot payload does. */
 function collect(ctx: Context): IndexInjection[] {
   const table: IndexInjection[] = []
@@ -66,7 +65,6 @@ describe('ui-theme host', () => {
     await ctx.plugin({ Config, apply }).await()
     expect(rowText(collect(ctx)[1])).toContain('const preference = "system"')
   })
-
 
 })
 

@@ -1,14 +1,14 @@
 /** Source-safe Agent Teams browser registration. */
 
-import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type {} from '@kinetick-labs/kh-api-session-controller/client'
-import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type { Context as ClientContext } from '@deepseek-ai/cordis'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
 import { TeamAction, type TeamActionInjected } from './TeamAction.tsx'
-import { en, NS, zh, type TeamKey } from './locales.ts'
+import { en,NS,type TeamKey } from './locales.ts'
 
 declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
@@ -27,7 +27,7 @@ export const inject = ['sessions', 'uiWorkspace', 'slots', 'locale']
  * @param ctx - Client Context carrying the injected navigation, locale, slot, and Session services.
  */
 export function registerAgentTeamUi(ctx: ClientContext): void {
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'client-ui-agent-team: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'client-ui-agent-team: dictionaries')
   const sessions = ctx.sessions
   const leadSessionId = (sessionId: SessionId): SessionId => {
     const address = sessions.binding(sessionId)?.session.getSnapshot().subagent?.address

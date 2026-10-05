@@ -5,8 +5,6 @@ description: "The kh command, @kinetick-labs/kh-* packages, KH_* variables, and 
 
 # KinetickHarness names replace dsh
 
-English | [中文](guide.zh.md)
-
 ## Change
 
 The next release renames the product from DeepSeek Harness to KinetickHarness. The command is `kh` (`pnpm kh` from a source checkout). Published packages move from `@deepseek-ai/dsh` and `@deepseek-ai/dsh-*` to `@kinetick-labs/kh` and `@kinetick-labs/kh-*`. Environment variables use the `KH_` prefix. The default home directory is `~/.kh`. Profile and package manifests store composition under `kh` (`kh.profile.bundles`, `kh.bundle`, `kh.client`) instead of `dsh`. DeepSeek remains an optional model provider. The session message source kind `dsh-session-title-llm` stays so existing logs still match. The compaction header `x-deepseek-harness-compact` stays. Session-log upload and product telemetry are removed in this same version.

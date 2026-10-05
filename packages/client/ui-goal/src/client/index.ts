@@ -8,23 +8,23 @@
  * for its initial history open to succeed before contacting the Host.
  * This plugin does not create goals; deployments may expose /goal separately.
  */
+import type {} from '@kinetick-labs/kh-api-remotes/client'
+import type {} from '@kinetick-labs/kh-api-session-controller/client'
+import type {} from '@kinetick-labs/kh-client-ui-chat/client'
+import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-session/client'
 import type { Context as ClientContext } from '@deepseek-ai/cordis'
 import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { HostObservable } from '@kinetick-labs/kh-client-ui-slots'
 // Type-only: pulls the generated Remote API and ctx.remote merge through the Client assembly boundary.
-import type {} from '@kinetick-labs/kh-api-remotes/client'
 // Type-only: pulls the Session Controller service used for projected goal state.
-import type {} from '@kinetick-labs/kh-api-session-controller/client'
 // Type-only: pulls the Chat node slot and its keyed data map.
-import type {} from '@kinetick-labs/kh-client-ui-chat/client'
 // Type-only: pulls the Conversation service and input-dock slot.
-import type {} from '@kinetick-labs/kh-client-ui-conversation/client'
 // Type-only: pulls the locale plugin's Context merge (ctx.locale).
-import type {} from '@kinetick-labs/kh-client-locale/client'
 // Type-only: pulls the renderer-owned slots service.
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 // Type-only: pulls the Session standard useProjection seat.
-import type {} from '@kinetick-labs/kh-client-ui-session/client'
 // Type-only: the `goal` SessionProjectionMap key merge (single source, the domain's pure outlet).
 import type { GoalProjection, GoalRef } from '@kinetick-labs/kh-goal/client'
 import type { GoalActionResult, GoalBarInjected } from './slots.ts'
@@ -32,7 +32,7 @@ import { createGoalActivationSource } from './activation-source.ts'
 import { GoalDock } from './GoalBar.tsx'
 import { GoalCommandInputView } from './GoalCommandInputView.tsx'
 import { goalCommandInputDefinition } from './goal-command-input.ts'
-import { en, zh, type GoalKey } from './locales.ts'
+import { en,type GoalKey } from './locales.ts'
 
 export { GoalBar, GoalDock } from './GoalBar.tsx'
 export type {
@@ -66,7 +66,7 @@ export const inject = ['slots', 'sessions', 'remote', 'remote.goals', 'locale', 
  */
 export function apply(ctx: ClientContext): void {
   ctx.uiConversation.events.register(goalCommandInputDefinition)
-  ctx.effect(() => ctx.locale.register(NS, { zh, en }), 'ui-goal: dictionaries')
+  ctx.effect(() => ctx.locale.register(NS, { en }), 'ui-goal: dictionaries')
 
   ctx.slots.inject('conversation.chat.node', () => ctx.slots.register({
     name: 'conversation.chat.node',

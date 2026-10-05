@@ -174,9 +174,9 @@ it('cancels installation, retries and highlights the enabled plugin at 40% alpha
           activeReplySettled.resolve(undefined)
         }
       }
-      await panel.getByRole('button', { name: '添加插件', exact: true }).click()
+      await panel.getByRole('button', { name: 'Add plugin', exact: true }).click()
       await dialog.getByRole('textbox').fill('slow-package')
-      await dialog.getByRole('button', { name: '安装', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Install', exact: true }).click()
       // The check passed: the running screen names the package and folds pnpm's output behind the details.
       await dialog.getByText('版本 1.0.0', { exact: true }).waitFor()
       await dialog.getByRole('button', { name: '查看安装详情', exact: true }).click()
@@ -186,7 +186,7 @@ it('cancels installation, retries and highlights the enabled plugin at 40% alpha
       await dialog.getByRole('button', { name: '取消安装', exact: true }).click()
       // The Host's confirmation returns the dialog to the spec and says so in a toast.
       await dialog.getByRole('textbox').waitFor()
-      await page.getByText('已取消安装，插件未启用，下载的文件可能保留', { exact: true }).waitFor()
+      await page.getByText('Installation cancelled; the plugin is not enabled, and downloaded files may remain', { exact: true }).waitFor()
       expect(await readFile(manifestPath, 'utf8')).toBe(manifest)
       expect(await readFile(lockPath, 'utf8')).toBe('original lockfile\n')
       expect(await dialog.getByRole('textbox').inputValue()).toBe('slow-package')
@@ -207,9 +207,9 @@ it('cancels installation, retries and highlights the enabled plugin at 40% alpha
         console.log('Retry completed');
         });
       `)
-      await dialog.getByRole('button', { name: '安装', exact: true }).click()
-      await dialog.getByRole('button', { name: '立即启用', exact: true }).waitFor()
-      await dialog.getByRole('button', { name: '查看安装详情', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Install', exact: true }).click()
+      await dialog.getByRole('button', { name: 'Enable now', exact: true }).waitFor()
+      await dialog.getByRole('button', { name: 'Show install details', exact: true }).click()
       await dialog.getByText('Retry completed', { exact: true }).waitFor()
       expect(JSON.parse(await readFile(manifestPath, 'utf8'))).toMatchObject({ dependencies: { 'slow-package': '1.0.0' } })
       // Freeze the real highlight's expiry timer and CSS first frame independently.

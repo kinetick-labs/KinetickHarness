@@ -89,7 +89,6 @@ export interface SidebarRightGuideBox extends SidebarRightGuideEntry {
   readonly kind: string
 }
 
-
 /** One registered tab type: its static face, and nothing else. */
 export interface SidebarRightTabDefinition {
   /**

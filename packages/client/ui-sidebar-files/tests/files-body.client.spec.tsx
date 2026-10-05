@@ -7,7 +7,7 @@ import type { RemoteFailure } from '@kinetick-labs/kh-api-remotes/client'
 import { fileAddressFor } from '@kinetick-labs/kh-util-workspace-path'
 import { failureLine, orderEntries } from '../src/client/FilesBody.tsx'
 import type { DirLevel } from '../src/client/store.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 import { mountBody, ROOT, SESSION, TAB } from './mount.client.tsx'
 
 const ROOT_LEVEL: DirLevel = {

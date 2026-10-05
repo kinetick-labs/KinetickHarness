@@ -7,7 +7,6 @@ import {
   DEFAULT_BUSY_ENTER_BEHAVIOR, Config, apply,
 } from '@kinetick-labs/kh-client-ui-conversation'
 
-
 describe('ui-conversation host', () => {
   it('registers, validates, and disposes the durable busy-Enter preference', async () => {
     const ctx = new Context()

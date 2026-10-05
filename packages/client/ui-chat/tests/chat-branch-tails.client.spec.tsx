@@ -3,7 +3,7 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { act, cleanup, fireEvent, render, screen } from '@testing-library/react'
 import { bindSnapshotSelector, makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import type {
   ChatConversationViewNode, ConversationNode,
 } from '@kinetick-labs/kh-client-ui-chat/client'
@@ -19,7 +19,7 @@ import { AssistantMarkdown, type AssistantMarkdownProps } from '../src/client/ch
 import { useDetailedPresentation } from './presentation-fixture.client.ts'
 import { useDisclosure } from '../src/client/chat/use-disclosure.ts'
 import { ActivityPill, UsagePill, type StatPillProps } from '../src/client/chat/StatsPills.tsx'
-import { zh } from '../src/client/locale.ts'
+import { en as zh } from '../src/client/locale.ts'
 import { chatSnapshotFixture } from './chat-snapshot-fixture.client.ts'
 
 afterEach(() => {
@@ -176,10 +176,10 @@ describe('MessageItem arms', () => {
       />,
     )
     expect(screen.getByText('14:24')).toBeTruthy()
-    expect(screen.getByRole('button', { name: '复制' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: '在新对话中分支' })).toBeNull()
-    expect(screen.queryByRole('button', { name: '编辑' })).toBeNull()
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    expect(screen.getByRole('button', { name: 'Copy' })).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Branch into a new conversation' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Edit' })).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     expect(writeText).toHaveBeenCalledWith('hello bubble')
   })
 
@@ -201,7 +201,7 @@ describe('MessageItem arms', () => {
       }}
       />,
     )
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     expect(exec).toHaveBeenCalledWith('copy')
   })
 
@@ -218,13 +218,13 @@ describe('MessageItem arms', () => {
       }}
       />,
     )
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     await act(async () => {
       await Promise.resolve()
       await Promise.resolve()
     })
-    expect(screen.getByRole('button', { name: '复制' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: '复制成功' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Copy' })).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Copied' })).toBeNull()
   })
 
   it('copy swaps to the check success chrome, gates re-clicks, and reverts after a second', async () => {
@@ -242,7 +242,7 @@ describe('MessageItem arms', () => {
       }}
       />,
     )
-    const copy = screen.getByRole('button', { name: '复制' })
+    const copy = screen.getByRole('button', { name: 'Copy' })
     fireEvent.click(copy)
     fireEvent.click(copy)
     expect(writeText).toHaveBeenCalledTimes(1)
@@ -753,7 +753,7 @@ describe('MessageItem arms', () => {
     )
     fireEvent.click(view.getByRole('button', { name: /^上下文注入\s*plugin$/ }))
     expect(view.container.querySelector('[data-context-snapshot-supersedes]')?.textContent)
-      .toBe('取代先前的快照')
+      .toBe('Supersedes earlier snapshots')
   })
 
   it('a relay names the agent that sent it above what it said', () => {
@@ -1086,7 +1086,7 @@ describe('small branch tails', () => {
     fireEvent.click(usagePill)
     const dialog = view.getByRole('dialog')
     expect(dialog.textContent).toContain('输出10 tok')
-    expect(dialog.textContent).not.toContain('缓存命中')
+    expect(dialog.textContent).not.toContain('Cache hit')
   })
 })
 

@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-command-feedback
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 `kh-command-feedback` lets a user tell the harness what they think of a session. Typing `/feedback` plus a remark records it and acknowledges the session id; the Web feedback dialog records a category and an optional description through the `sessionFeedback` Host Remote. Recording is immediate and never starts model work: the model neither sees the remark nor is interrupted by it. The package also owns the fixed category taxonomy every feedback surface files under. It ships with the standard `kh` base and needs no configuration; headless, ACP, and JSON-RPC entry points provide no slash commands.
@@ -129,7 +127,6 @@ Independent of the model request path. Recording appends to the session log only
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define where session feedback is a poor fit or behaves differently than a user might expect. They are current package constraints, not a task backlog.
 

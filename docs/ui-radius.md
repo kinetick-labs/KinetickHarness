@@ -1,7 +1,5 @@
 # KH unified corner-radius standard
 
-English | [中文](ui-radius.zh.md)
-
 ## Summary
 
 Choose consistent corner radii by component role and size, and align nested regions, hover fills, backgrounds, and strokes. This standard covers buttons, cells, cards, menus, dialogs, and avatars in KH Web and Desktop.

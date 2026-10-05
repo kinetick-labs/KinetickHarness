@@ -197,7 +197,7 @@ describe.skipIf(MODE === 'record')('web e2e: App-only desktop onboarding', () =>
     const web = await browser.newPage({ viewport: { width: 1280, height: 840 }, locale: ZH_BROWSER_LOCALE })
     try {
       await web.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
-      await web.getByText('选择一个工作区开始', { exact: true }).waitFor()
+      await web.getByText('Choose a workspace to start', { exact: true }).waitFor()
       expect(await web.locator('[data-desktop-onboarding]').count()).toBe(0)
       expect((scaffold.ctx.settings.describe().find(row => row.ns === NS)?.value as { step: string }).step).toBe('welcome')
     } finally { await web.close() }
@@ -207,7 +207,7 @@ describe.skipIf(MODE === 'record')('web e2e: App-only desktop onboarding', () =>
     onTestFailed(() => saveFailureShot(page, 'desktop-onboarding'))
     await page.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
     await page.getByRole('button', { name: '开始设置', exact: true }).waitFor()
-    expect(await page.getByRole('button', { name: '跳过', exact: true }).count()).toBe(0)
+    expect(await page.getByRole('button', { name: 'Skip', exact: true }).count()).toBe(0)
     expect(await page.locator('[data-desktop-onboarding]').count()).toBe(1)
     await snapshot('welcome')
     for (const platform of ['darwin', 'win32']) {
@@ -312,14 +312,14 @@ describe.skipIf(MODE === 'record')('web e2e: App-only desktop onboarding', () =>
     expect(hoverBack.text).not.toBe(restingBackColor)
     expect(hoverBack.arrow).toBe(hoverBack.text)
     if (screenshots !== undefined) await page.screenshot({ path: join(screenshots, 'purpose-selected-back-hover.png') })
-    await page.getByRole('button', { name: '继续', exact: true }).click()
+    await page.getByRole('button', { name: 'Continue', exact: true }).click()
     await page.getByRole('radiogroup').waitFor()
     await page.getByRole('button', { name: '上一步', exact: true }).click()
     await office.waitFor()
     await page.emulateMedia({ reducedMotion: 'no-preference' })
     expect(await icons.evaluateAll(elements => elements.map(e => getComputedStyle(e).animationName))).toEqual(Array(5).fill('none'))
     await page.emulateMedia({ reducedMotion: 'reduce' })
-    await page.getByRole('button', { name: '继续', exact: true }).click()
+    await page.getByRole('button', { name: 'Continue', exact: true }).click()
     await page.getByRole('radiogroup').waitFor()
     await page.getByRole('radio', { name: /聚焦结果/ }).focus()
     for (const [name, process] of [['关键细节', 'standard'], ['完整过程', 'detailed']] as const) {
@@ -358,7 +358,7 @@ describe.skipIf(MODE === 'record')('web e2e: App-only desktop onboarding', () =>
     const warningsAfter = tripwire.warnings.length
     await page.reload({ waitUntil: 'load' })
     acknowledgeReloadConnectionLoss(tripwire, warningsAfter)
-    await page.getByText('选择一个工作区开始', { exact: true }).waitFor()
+    await page.getByText('Choose a workspace to start', { exact: true }).waitFor()
     expect(await page.locator('[data-desktop-onboarding]').count()).toBe(0)
     expect(tripwire.pageErrors).toEqual([])
     await page.close()
@@ -424,7 +424,7 @@ describe.skipIf(MODE === 'record')('web e2e: App-only desktop onboarding', () =>
       kind: 'grant', payload: { version: 1, issuer: origin, token: 'onboarding-fixture-token' },
     }))
     await page.reload({ waitUntil: 'load' })
-    await page.getByText('选择一个工作区开始', { exact: true }).waitFor()
+    await page.getByText('Choose a workspace to start', { exact: true }).waitFor()
     expect(await page.locator('[data-desktop-onboarding]').count()).toBe(0)
     await page.close()
   })

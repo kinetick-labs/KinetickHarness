@@ -47,7 +47,6 @@ it.each(['- id: [broken', 'mapping: true\n'])('refuses malformed documents witho
   expect(await readFile(file, 'utf8')).toBe(text)
 })
 
-
 it('retains name-asserting overrides and appends an unambiguous switch', async () => {
   const file = await fixture('- id: tool\n  name: another-package\n  disabled: false\n')
   await writePluginEnabled(file, 'tool', 'package', false)

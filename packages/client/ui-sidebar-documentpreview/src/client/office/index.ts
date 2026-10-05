@@ -1,13 +1,13 @@
 /** Office preview registration backed by authorized Host rendering and the existing PDF body. */
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-locale/client'
 import type { Context } from '@deepseek-ai/cordis'
 import { retainDocumentTabs } from '../document/tab-lifetime.ts'
-import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
 import type {} from '@kinetick-labs/kh-office-to-pdf/remote'
-import type {} from '@kinetick-labs/kh-client-locale/client'
 import type {} from '@kinetick-labs/kh-api-workspace-files/remote'
 import { failureLine } from '../failure-line.ts'
 import { documentTabInfoFactory } from '../document/contract.ts'
-import { en, zh, type OfficePreviewKey } from './locales.ts'
+import { en,type OfficePreviewKey } from './locales.ts'
 import { OfficePreviewCache, type ReadOfficeBytes, type ReadOfficeDocument } from './cache.ts'
 import { pdfBodyRegistration } from '../pdf/index.ts'
 import { LazyPdfBody } from '../pdf/LazyPdfBody.tsx'
@@ -31,7 +31,7 @@ declare module '@kinetick-labs/kh-client-ui-slots' {
 export function apply(ctx: Context, config: Config['office']): void {
   const id = '@kinetick-labs/kh-client-ui-sidebar-documentpreview/office'
   const extensions = ['doc', 'docx', 'ppt', 'pptx']
-  ctx.effect(() => ctx.locale.register('sidebarOffice', { zh, en }))
+  ctx.effect(() => ctx.locale.register('sidebarOffice', { en }))
   const t = ctx.locale.bind('sidebarOffice')
   const unavailable: ReadOfficeDocument = (_file, signal) => {
     signal.throwIfAborted()

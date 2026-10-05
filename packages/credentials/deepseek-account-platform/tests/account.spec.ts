@@ -369,7 +369,6 @@ it.each([2, 17])('uses the generic failure for business code %s without guessing
   expect(JSON.stringify(state)).not.toContain('sensitive diagnostic')
 })
 
-
 it('removes its callback route without closing the shared server on disposal', async () => {
   const f = await fixture()
   await f.account.startSignIn(clientMetadata(), f.callbackOrigin, 'desktop')
@@ -380,7 +379,6 @@ it('removes its callback route without closing the shared server on disposal', a
   await expect(f.account.startSignIn(clientMetadata(), f.callbackOrigin, 'desktop')).rejects.toThrow()
   expect(await f.ctx.credentials.readRecord(credentialKey('deepseek-account-platform', 'default'))).toBeUndefined()
 })
-
 
 it('derives every portal link from the private platform origin', async () => {
   const f = await fixture()
@@ -746,7 +744,6 @@ it('returns the profile while the balance request is still pending', async () =>
   expect(await balance).toMatchObject({ status: 'ready' })
 })
 
-
 it('uses exchange user for the first profile read and fetches current on refresh', async () => {
   const f = await fixture()
   f.exchangeResponse({ user: { id: 'exchange-user', email: 'e***@example.invalid', id_profile: { name: 'Exchange User' }, token: 'discard-me' } })
@@ -780,7 +777,6 @@ it.each([undefined, null, { email: 123 }])('fetches current when exchange user i
   expect(f.detailRequests).toHaveLength(1)
 })
 
-
 it('uses the initialization payload ID for cancellation without extracting it from the browser URL', async () => {
   const f = await fixture()
   f.initResponse({ authorize_id: 'payload-id', authorize_url: `${f.origin}/kh/authorize?opaque=value` })
@@ -799,7 +795,6 @@ it.each([undefined, '', 123])('rejects an invalid initialization authorize_id: %
   expect(f.count()).toBe(0)
 })
 
-
 it('overlays account cookies without changing authorization or logout routing', async () => {
   const f = await fixture(undefined, { Cookie: 'gate=private; route=auth', 'x-private': 'keep' }, false, { Cookie: 'route=account' })
   await f.account.startSignIn(clientMetadata(), f.callbackOrigin, 'desktop')
@@ -816,7 +811,6 @@ it('overlays account cookies without changing authorization or logout routing', 
   expect(JSON.stringify(await f.account.getState())).not.toContain('private')
 })
 
-
 it('sends a development grant only to its configured inference origin', async () => {
   const f = await fixture(undefined, {}, false, {}, 'http://inference.example.test:8094')
   f.exchangeResponse({ token: 'test-account-token' })
@@ -830,7 +824,6 @@ it('sends a development grant only to its configured inference origin', async ()
     expect(await f.account.resolveToken(url)).toBeUndefined()
   }
 })
-
 
 it('starts signed out after discarding another Platform issuer without remote logout or unrelated credential loss', async () => {
   const accountKey = credentialKey('deepseek-account-platform', 'default')
@@ -1632,7 +1625,6 @@ it('ignores an inference rejection while already signed out', async () => {
   expect(await f.account.getState()).not.toHaveProperty('signOutReason')
 })
 
-
 it('clears a completed login from snapshots while credential deletion is still settling', async () => {
   const f = await fixture()
   await f.account.startSignIn(clientMetadata('en'), f.callbackOrigin, 'desktop')
@@ -1657,7 +1649,6 @@ it('clears a completed login from snapshots while credential deletion is still s
     deletion.mockRestore()
   }
 })
-
 
 it('reads credential-free device identity without minting a device', async () => {
   const f = await fixture()

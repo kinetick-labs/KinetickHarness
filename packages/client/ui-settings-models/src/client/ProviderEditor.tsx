@@ -43,8 +43,6 @@ import styles from './ModelsSection.module.css'
 /** Per-adapter-family curated field sets (unknown namespaces get the hint alone). */
 type EditorLayout = 'deepseek' | 'pi-ai' | 'unknown'
 
-
-
 /** Props of {@link ProviderEditor}. */
 export interface ProviderEditorProps {
   /** Provider route id. */

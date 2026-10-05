@@ -5,10 +5,10 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
 import type { ToolCallOwnerProps } from '@kinetick-labs/kh-client-ui-tool/client'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import { SkillRow } from '../src/client/SkillRow.tsx'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 type SkillRowProps = Parameters<typeof SkillRow>[0]
 
@@ -58,7 +58,7 @@ describe('SkillRow', () => {
     const view = render(<SkillRow {...props({
       phase: 'preparing', args: PartialArguments.EMPTY, callId: 'call-skill', name: 'skill', turn: 1, step: 1, time: 1, subCalls: [],
     })} />)
-    expect(view.getByText('准备加载技能')).toBeTruthy()
+    expect(view.getByText('Preparing to load a skill')).toBeTruthy()
     expect(view.container.querySelector('svg')).not.toBeNull()
     expect(view.queryByRole('button')).toBeNull()
     expect(view.container.querySelector('pre')).toBeNull()
@@ -71,14 +71,14 @@ describe('SkillRow', () => {
     expect(row.getAttribute('aria-expanded')).toBe('false')
     expect(view.container.querySelector('[data-tool="skill"]')?.getAttribute('data-state')).toBe('ok')
     expect(view.container.querySelector('[data-tool="skill"] svg')?.getAttribute('width')).toBe('14')
-    expect(screen.queryByLabelText('说明')).toBeNull()
+    expect(screen.queryByLabelText('Instructions')).toBeNull()
 
     fireEvent.click(row)
     expect(row.getAttribute('aria-expanded')).toBe('true')
-    const card = screen.getByLabelText('说明')
+    const card = screen.getByLabelText('Instructions')
     expect(card.textContent).toBe('说明Follow the issue workflow.\nKeep project fields in sync.')
     expect(view.container.textContent).not.toContain('{"name":"kh-manage-issues"}')
-    fireEvent.click(screen.getByRole('button', { name: '查看' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Inspect' }))
     expect(inspect).toHaveBeenCalledTimes(1)
 
     fireEvent.click(row)
@@ -100,7 +100,7 @@ describe('SkillRow', () => {
     const view = render(<SkillRow {...props(running())} />)
     const row = view.container.querySelector('[data-tool="skill"] > div')!
     expect(row.getAttribute('role')).toBeNull()
-    expect(view.container.textContent).toContain('正在加载 skill')
+    expect(view.container.textContent).toContain('Loading skill')
     expect(view.container.textContent).toContain('kh-manage-issues')
     expect(view.container.querySelector('svg [fill="currentColor"]')).not.toBeNull()
   })
@@ -126,7 +126,7 @@ describe('SkillRow', () => {
     const stoppedView = render(<SkillRow {...props(settled({
       error: { name: 'InterruptedError', code: 'interrupted' },
     }))} />)
-    const stoppedSummary = stoppedView.getByText('skill 加载已中止')
+    const stoppedSummary = stoppedView.getByText('Skill load stopped')
     expect(stoppedSummary.parentElement?.className).toContain('stoppedSummary')
     expect(stoppedView.container.querySelector('[data-tool="skill"] [role="button"] svg')).not.toBeNull()
     expect(stoppedView.container.querySelector('[data-tool="skill"] [data-state]')).toBeNull()
@@ -165,6 +165,6 @@ describe('SkillRow', () => {
     const blank = render(<SkillRow {...props(settled({ call: null, content: [] }))} />)
     expect(blank.container.textContent).toContain('call-skill')
     expect(blank.container.querySelector('[role="button"]')).toBeNull()
-    expect(blank.container.textContent).not.toContain('正在加载 skill')
+    expect(blank.container.textContent).not.toContain('Loading skill')
   })
 })

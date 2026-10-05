@@ -296,7 +296,6 @@ describe('the session-persistence Agent Note: AgentLoop factory create/resume', 
     await ctx.fiber.dispose()
   })
 
-
   it('a setup failure before publication leaves no stored residue; the id creates again', async () => {
     const { ctx } = await persistentHarness(new MockAdapter([]))
     const sessionId = SessionId('setup-fail-no-residue')

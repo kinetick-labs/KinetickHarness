@@ -75,7 +75,6 @@ describe('V4 developer relationship admission', () => {
     expect(() => restore(rows)).toThrow(/open.*step/)
   })
 
-
   it('defers ignorable developer payloads during physical decoding while keeping encoder validation', () => {
     const opaque: Row = { type: 'developer/message', ignorable: true, data: {
       message: { role: 'developer', source: { kind: 'plugin' } }, future: true,

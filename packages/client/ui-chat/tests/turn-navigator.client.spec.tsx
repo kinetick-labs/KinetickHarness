@@ -4,10 +4,10 @@ import { createRef, StrictMode } from 'react'
 import { act, cleanup, fireEvent, render, within } from '@testing-library/react'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
 import { TurnNavigator, type TurnNavigatorHandle } from '../src/client/chat/TurnNavigator.tsx'
 import type { TurnRailItem } from '../src/client/chat/turn-rail-items.ts'
-import { zh } from '../src/client/locale.ts'
+import { en as zh } from '../src/client/locale.ts'
 import { installTurnNavigatorObserver } from './turn-navigator-fixture.ts'
 
 afterEach(() => {

@@ -6,7 +6,7 @@ import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type { ShortcutCatalogEntry, ShortcutCommandId } from '@kinetick-labs/kh-client-shortcuts/client'
 import { OpenInAppAction, type OpenInAppActionProps } from '../src/client/OpenInAppAction.tsx'
 import { OpenInAppController } from '../src/client/controller.ts'
-import { zh } from '../src/client/locales.ts'
+import { en as zh } from '../src/client/locales.ts'
 
 afterEach(() => {
   cleanup()
@@ -138,7 +138,6 @@ describe('OpenInAppAction launching', () => {
     expect(await screen.findByText(t('open.title', { app: zh['app.finder'] }))).toBeTruthy()
   })
 })
-
 
 it('omits the dropdown when only one directory application is available', () => {
   render(<OpenInAppAction {...bench({ apps: ['finder'], absolutePath: '/w' }).props} />)

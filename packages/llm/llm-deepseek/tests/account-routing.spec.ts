@@ -154,7 +154,6 @@ it('does not infer a provider while the first request is still being prepared', 
   expect(agent.session.snapshotEvents().at(-1)?.data).toMatchObject({ reason: { kind: 'error', error: { code: 'ACCOUNT_SIGN_IN_REQUIRED' } } })
 })
 
-
 it('never borrows an account token for a missing API key', async () => {
   vi.stubEnv('DEEPSEEK_API_KEY', '')
   const ctx = new Context()
@@ -170,7 +169,6 @@ it('never borrows an account token for a missing API key', async () => {
   expect(resolveToken).not.toHaveBeenCalled()
   expect(fetch).not.toHaveBeenCalled()
 })
-
 
 it('propagates account sign-out to the HTTP request signal', async () => {
   const ctx = await harness()
@@ -192,7 +190,6 @@ it('propagates account sign-out to the HTTP request signal', async () => {
   expect(signal.aborted).toBe(true)
   expect(agent.session.snapshotEvents().at(-1)?.data).toMatchObject({ reason: { kind: 'aborted', reason: { kind: 'hook', reason: 'deepseek-account/signed-out' } } })
 })
-
 
 it('cancels an account child without stopping its API-key parent', async () => {
   const ctx = await harness()

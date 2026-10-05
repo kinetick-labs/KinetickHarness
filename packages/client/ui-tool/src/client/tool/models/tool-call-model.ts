@@ -223,7 +223,6 @@ const SUMMARY_KEYS: Record<ToolRowVariant, readonly string[]> = {
   others: [],
 }
 
-
 function deriveSummary(variant: ToolRowVariant, argsRaw: string): string {
   const parsed = parseArgs(argsRaw)
   if (typeof parsed !== 'object' || parsed === null) return firstLine(argsRaw)

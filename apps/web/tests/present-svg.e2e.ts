@@ -1,11 +1,11 @@
 /** An explicit file-card request exercises SVG delivery without naming the present tool. */
+import type {} from '@kinetick-labs/kh-tool-present/types'
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium, type Browser, type Page } from 'playwright'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
-import type {} from '@kinetick-labs/kh-tool-present/types'
 import { deriveReplayScript, parseSessionLog } from '@kinetick-labs/kh-llm-replay'
 import {
   assertFinalWorkspaceSnapshot, captureExpandedTurnProcessAria, compareOrRefreshGolden,

@@ -10,12 +10,11 @@ import { webCardModel, webFetchHref } from '../src/client/tool/models/web-card-m
 import { GenericToolCard } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { WebRow, webToolview } from '../src/client/tool/toolviews/web-row.tsx'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
-import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
-import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/en.ts'
+import { en as zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
 import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
-
 
 const t = makeTranslate(zh, commonZh)
 
@@ -182,7 +181,7 @@ describe('chat row web body', () => {
 
   it('the WebRow expands to the fetch card, titled Fetch', () => {
     const view = render(<WebRow {...rowProps(settledFetch(), 'web_fetch')} />)
-    expect(view.getByText('网页获取')).toBeTruthy()
+    expect(view.getByText('Fetch')).toBeTruthy()
     expect(view.container.querySelector('[data-web]')).toBeNull()
     toggleRow(view)
     // The url shows as the card's link; scope to the card.

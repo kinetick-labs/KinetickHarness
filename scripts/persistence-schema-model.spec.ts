@@ -88,7 +88,6 @@ describe('canonical persisted type graphs', () => {
   })
 })
 
-
 describe('policy-aware graph normalization', () => {
   it('normalizes recorded policy fields and kind order without changing unrelated graph digests', () => {
     const policy: SourceCompatibility = { version: 1, policy: 'session-source-attribution', binding: 'session.user-message.source',

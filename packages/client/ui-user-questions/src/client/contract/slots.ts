@@ -100,7 +100,6 @@ export function planReviewOf(questions: readonly QuestionItem[]): PlanReview | u
   }
 }
 
-
 /** Reload-unique prefix so an unnamed legacy card cannot reuse a persisted draft. */
 const unnamedQuestionPrefix = Array.from(globalThis.crypto.getRandomValues(new Uint8Array(16)),
   byte => byte.toString(16).padStart(2, '0')).join('')

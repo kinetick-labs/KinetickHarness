@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-llm
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 Use `@kinetick-labs/kh-llm` to stream model calls through configured provider adapters, discover models, and resolve model capabilities and call defaults. Callers must keep all model-visible input reconstructable from the session log. Loop-built requests arrive deep-frozen, so extensions and adapters cannot rewrite them. Each stream is one provider attempt: provider-specific translation stays with its adapter, while the optional `@kinetick-labs/kh-llm-retry` package re-runs failed requests. Streams always end with a terminal result, so callers can handle success, failure, and cancellation consistently.
@@ -150,7 +148,6 @@ Reasoning-effort materialization preserves the assembled request prefix. Image i
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define where this service stops and other packages or future work begin. They are current package constraints, not a task backlog.
 

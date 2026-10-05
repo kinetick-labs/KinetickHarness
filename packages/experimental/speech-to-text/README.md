@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-experimental-speech-to-text
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 This Service Definition selects named speech recognizers through `ctx.speechToText`. Consumers resolve their request before execution; providers register independently.

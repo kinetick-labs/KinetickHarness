@@ -5,8 +5,6 @@ kind: "package-reference"
 
 # @kinetick-labs/kh-client-ui-sidebar
 
-English | [中文](README.zh.md)
-
 ## Summary
 
 The kh web client sidebar lets users recognize the active build, start a new session, collapse navigation to a 56px rail, browse Workspaces and Sessions, and open Settings. It preserves a bottom-pinned Settings entry and hides idle scrollbars without moving browser rows. New Session uses an explicitly selected Workspace, then the current Session's Workspace, then the most recently active Workspace; if none exists, it opens a blank New Session page. Deployments can replace the brand mark or name while retaining the navigation controls and rail geometry.
@@ -96,7 +94,6 @@ None; this package neither assembles nor sends a provider request.
 ## Known Limitations and Deferred Work
 
 <a id="known-limitations-and-deferred-work"></a>
-
 
 These limits define what the shell owns versus what its occupants own; they are current package constraints.
 
