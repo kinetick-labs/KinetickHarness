@@ -9,7 +9,7 @@ description: "随附 profile 移除了会话上传、产品埋点和匿名用户
 
 ## 变更
 
-随附 profile 不再包含会话遥测、OpenTelemetry 导出、DeepSeek 会话日志上传、插件包清单请求字段、产品埋点或匿名用户 id。程序不再读取 `DSH_TELEMETRY_DISABLED`、`DSH_TELEMETRY_MODE`、`DSH_TELEMETRY_OTLP_URL` 和 `DSH_PRODUCT_ANALYTICS_OTLP_URL`。`/feedback` 只确认会话 id，也不会创建 `$DSH_HOME/.anonymous-user-id`。
+随附 profile 不再包含会话遥测、OpenTelemetry 导出、DeepSeek 会话日志上传、插件包清单请求字段、产品埋点或匿名用户 id。程序不再读取 `DSH_TELEMETRY_DISABLED`、`DSH_TELEMETRY_MODE`、`DSH_TELEMETRY_OTLP_URL` 和 `DSH_PRODUCT_ANALYTICS_OTLP_URL`。`/feedback` 只确认会话 id，也不会创建 `$KH_HOME/.anonymous-user-id`。
 
 harness home 下的本地 JSONL 会话仍留在磁盘上。官方模型请求仍发送 `user-agent`，压缩请求仍发送 `x-deepseek-harness-compact: 1`。它们不发送 `dsh_session_log`、`dsh_plugin_packages`、`x-deepseek-harness-user-id` 或 `x-deepseek-harness-session-id`。
 

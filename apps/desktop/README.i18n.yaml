@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write apps/desktop/README.md
 /kinetickharness-desktop:
-  en: 1f82c1fb6e7b3c74
-  zh: fb25d8a10de28f72
+  en: 66c3f18be3e5390b
+  zh: 413d5e167a196c9d
 /kinetickharness-desktop/terminal-command:
   en: fd246c5ee4a65a3a
   zh: b5ed88ee7e663487

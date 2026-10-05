@@ -9,7 +9,7 @@ English | [中文](guide.zh.md)
 
 ## Change
 
-Shipped profiles no longer include session telemetry, OpenTelemetry export, DeepSeek session-log upload, the plugin-package inventory request field, product analytics, or the anonymous user id. `DSH_TELEMETRY_DISABLED`, `DSH_TELEMETRY_MODE`, `DSH_TELEMETRY_OTLP_URL`, and `DSH_PRODUCT_ANALYTICS_OTLP_URL` are not read. `/feedback` acknowledges only the session id and does not create `$DSH_HOME/.anonymous-user-id`.
+Shipped profiles no longer include session telemetry, OpenTelemetry export, DeepSeek session-log upload, the plugin-package inventory request field, product analytics, or the anonymous user id. `DSH_TELEMETRY_DISABLED`, `DSH_TELEMETRY_MODE`, `DSH_TELEMETRY_OTLP_URL`, and `DSH_PRODUCT_ANALYTICS_OTLP_URL` are not read. `/feedback` acknowledges only the session id and does not create `$KH_HOME/.anonymous-user-id`.
 
 Local JSONL sessions under the harness home stay on disk. Official model requests still send `user-agent` and, for compaction, `x-deepseek-harness-compact: 1`. They do not send `dsh_session_log`, `dsh_plugin_packages`, `x-deepseek-harness-user-id`, or `x-deepseek-harness-session-id`.
 

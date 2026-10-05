@@ -495,7 +495,6 @@ export interface Config {
 ```
 <!-- END GENERATED config-catalog:@kinetick-labs/kh-client-hmr -->
 
-
 <!-- BEGIN GENERATED config-catalog:@kinetick-labs/kh-client-shortcuts -->
 <a id="kinetick-labskh-client-shortcuts"></a>
 
@@ -1461,7 +1460,6 @@ export interface Config {
 ```
 <!-- END GENERATED config-catalog:@kinetick-labs/kh-host-open-in-app -->
 
-
 <!-- BEGIN GENERATED config-catalog:@kinetick-labs/kh-host-webserver -->
 <a id="kinetick-labskh-host-webserver"></a>
 
@@ -2230,7 +2228,6 @@ export interface Config {
 ```
 <!-- END GENERATED config-catalog:@kinetick-labs/kh-plugin-manager -->
 
-
 <!-- BEGIN GENERATED config-catalog:@kinetick-labs/kh-ptc-runtime-node -->
 <a id="kinetick-labskh-ptc-runtime-node"></a>
 
@@ -2490,7 +2487,6 @@ export interface JsonRpcConfig {
 ```
 <!-- END GENERATED config-catalog:@kinetick-labs/kh-sdk-jsonrpc-server -->
 
-
 <!-- BEGIN GENERATED config-catalog:@kinetick-labs/kh-session-log-export -->
 <a id="kinetick-labskh-session-log-export"></a>
 
@@ -2633,7 +2629,6 @@ export interface Config {
 }
 ```
 <!-- END GENERATED config-catalog:@kinetick-labs/kh-session-reference -->
-
 
 <!-- BEGIN GENERATED config-catalog:@kinetick-labs/kh-session-title -->
 <a id="kinetick-labskh-session-title"></a>
@@ -4246,7 +4241,6 @@ These load from a `cordis.yml` entry with no `config:` block; they declare no co
 | `@kinetick-labs/kh-client-ui-settings-general` | — | [`packages/client/ui-settings-general/src/index.ts`](../packages/client/ui-settings-general/src/index.ts) |
 | `@kinetick-labs/kh-client-ui-settings-plugin-inventory` | — | [`packages/client/ui-settings-plugin-inventory/src/index.ts`](../packages/client/ui-settings-plugin-inventory/src/index.ts) |
 | `@kinetick-labs/kh-client-ui-settings-plugins` | — | [`packages/client/ui-settings-plugins/src/index.ts`](../packages/client/ui-settings-plugins/src/index.ts) |
-| `@kinetick-labs/kh-client-ui-settings-session-log` | — | [`packages/client/ui-settings-session-log/src/index.ts`](../packages/client/ui-settings-session-log/src/index.ts) |
 | `@kinetick-labs/kh-client-ui-settings-shell` | — | [`packages/client/ui-settings-shell/src/index.ts`](../packages/client/ui-settings-shell/src/index.ts) |
 | `@kinetick-labs/kh-client-ui-settings-subagent` | — | [`packages/client/ui-settings-subagent/src/index.ts`](../packages/client/ui-settings-subagent/src/index.ts) |
 | `@kinetick-labs/kh-client-ui-settings-web-search` | — | [`packages/client/ui-settings-web-search/src/index.ts`](../packages/client/ui-settings-web-search/src/index.ts) |
@@ -4287,7 +4281,6 @@ These load from a `cordis.yml` entry with no `config:` block; they declare no co
 | `@kinetick-labs/kh-llm` | — | [`packages/llm/llm/src/index.ts`](../packages/llm/llm/src/index.ts) |
 | `@kinetick-labs/kh-lsp` | — | [`packages/lsp/lsp/src/index.ts`](../packages/lsp/lsp/src/index.ts) |
 | `@kinetick-labs/kh-mcp-resources` | `tools` | [`packages/mcp/mcp-resources/src/index.ts`](../packages/mcp/mcp-resources/src/index.ts) |
-| `@kinetick-labs/kh-otel` | — | [`packages/telemetry/otel/src/index.ts`](../packages/telemetry/otel/src/index.ts) |
 | `@kinetick-labs/kh-sandbox-ssh` | `ssh` | [`packages/ssh/sandbox-ssh/src/index.ts`](../packages/ssh/sandbox-ssh/src/index.ts) |
 | `@kinetick-labs/kh-session` | — | [`packages/core/session/src/index.ts`](../packages/core/session/src/index.ts) |
 | `@kinetick-labs/kh-session-checkpoint-policy` | `llm` · `sessionPersistence` · `sessions` · `tools` | [`packages/session/session-checkpoint-policy/src/index.ts`](../packages/session/session-checkpoint-policy/src/index.ts) |
@@ -4342,7 +4335,6 @@ Imported as libraries by other packages; a `cordis.yml` cannot load them.
 | `package` | `inject` | `source` |
 | --- | --- | --- |
 | `@kinetick-labs/kh-agent-loop-testkit` | — | [`packages/test-support/agent-loop-testkit/src/index.ts`](../packages/test-support/agent-loop-testkit/src/index.ts) |
-| `@kinetick-labs/kh-anonymous-user-id` | — | [`packages/identity/anonymous-user-id/src/index.ts`](../packages/identity/anonymous-user-id/src/index.ts) |
 | `@kinetick-labs/kh-app-boot` | — | [`packages/boot/app-boot/src/index.ts`](../packages/boot/app-boot/src/index.ts) |
 | `@kinetick-labs/kh-atomic-write` | — | [`packages/util/atomic-write/src/index.ts`](../packages/util/atomic-write/src/index.ts) |
 | `@kinetick-labs/kh-base` | — | [`packages/bundle/base/src/index.ts`](../packages/bundle/base/src/index.ts) |
@@ -4386,7 +4378,6 @@ Imported as libraries by other packages; a `cordis.yml` cannot load them.
 | `@kinetick-labs/kh-session-format-v2-to-v3` | — | [`packages/session/session-format-v2-to-v3/src/index.ts`](../packages/session/session-format-v2-to-v3/src/index.ts) |
 | `@kinetick-labs/kh-session-format-v3-to-v4` | — | [`packages/session/session-format-v3-to-v4/src/index.ts`](../packages/session/session-format-v3-to-v4/src/index.ts) |
 | `@kinetick-labs/kh-session-snapshot` | — | [`packages/test-support/session-snapshot/src/index.ts`](../packages/test-support/session-snapshot/src/index.ts) |
-| `@kinetick-labs/kh-session-telemetry` | — | [`packages/session/session-telemetry/src/index.ts`](../packages/session/session-telemetry/src/index.ts) |
 | `@kinetick-labs/kh-session-title-llm` | — | [`packages/session/session-title-llm/src/index.ts`](../packages/session/session-title-llm/src/index.ts) |
 | `@kinetick-labs/kh-subagent-in-process-driver` | — | [`packages/subagent/subagent-in-process-driver/src/index.ts`](../packages/subagent/subagent-in-process-driver/src/index.ts) |
 | `@kinetick-labs/kh-timeout` | — | [`packages/util/timeout/src/index.ts`](../packages/util/timeout/src/index.ts) |
