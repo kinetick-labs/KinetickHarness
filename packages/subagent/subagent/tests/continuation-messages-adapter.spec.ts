@@ -3,19 +3,19 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import { DeepSeekAdapter, resolveAdapterOptions } from '@deepseek-ai/dsh-llm-deepseek'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import { DeepSeekAdapter, resolveAdapterOptions } from '@kinetick-labs/kh-llm-deepseek'
+import { SessionId } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
 import { end, MODEL, server, sse, start } from '../../../llm/llm-deepseek/tests/helpers.ts'
 import SubagentRuntime, { type SubagentRunEndInfo } from '../src/index.ts'
 import { loadStoredSession } from './persistence-helpers.ts'
 
 it('continues the parent through default Messages after a reasoning-bearing continuable child settles', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'dsh-settlement-messages-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-settlement-messages-'))
   const ctx = new Context()
   let http: Awaited<ReturnType<typeof server>> | undefined
   try {

@@ -1,13 +1,13 @@
 // Sessions remain resident after creation so their open Remote sources keep running off-screen.
 
 import type { Context } from '@deepseek-ai/cordis'
-import type { InboxState, InboxTarget } from '@deepseek-ai/dsh-agent/types'
-import { randomUUID } from '@deepseek-ai/dsh-util-crypto'
-import type { AttachmentIdType, FileAttachmentRef, ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'
-import type { SubagentAddress } from '@deepseek-ai/dsh-subagent/client'
-import type { MessageId } from '@deepseek-ai/dsh-llm/brand'
-import type { UserMessage } from '@deepseek-ai/dsh-llm/types'
-import { SessionLogOffset, SessionSeq, type SessionId } from '@deepseek-ai/dsh-session/types'
+import type { InboxState, InboxTarget } from '@kinetick-labs/kh-agent/types'
+import { randomUUID } from '@kinetick-labs/kh-util-crypto'
+import type { AttachmentIdType, FileAttachmentRef, ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
+import type { SubagentAddress } from '@kinetick-labs/kh-subagent/client'
+import type { MessageId } from '@kinetick-labs/kh-llm/brand'
+import type { UserMessage } from '@kinetick-labs/kh-llm/types'
+import { SessionLogOffset, SessionSeq, type SessionId } from '@kinetick-labs/kh-session/types'
 import { SessionEventStream } from '../transport.ts'
 import type { SessionJournalChange } from '../transport.ts'
 import type {
@@ -29,9 +29,9 @@ import type {
   SessionEventLike, SessionEventLikeEntry, SessionLiveEventEntry,
 } from '../contract/events.ts'
 import { Notifier } from './notifier.ts'
-import { isRemoteFailure } from '@deepseek-ai/dsh-api-gateway/client'
-import { RemoteError } from '@deepseek-ai/dsh-typert-protocol'
-import type { RemoteFailure, RemoteResult } from '@deepseek-ai/dsh-typert-protocol'
+import { isRemoteFailure } from '@kinetick-labs/kh-api-gateway/client'
+import { RemoteError } from '@kinetick-labs/kh-typert-protocol'
+import type { RemoteFailure, RemoteResult } from '@kinetick-labs/kh-typert-protocol'
 import type { SessionRemotes } from './remotes.ts'
 import { ProjectionValueStore } from './projection-store.ts'
 import type { ProjectionsBaseline } from './projection-store.ts'

@@ -1,18 +1,18 @@
 /** Chat-owned Slot declarations and composed component props. */
-import type { MessageId } from '@deepseek-ai/dsh-llm/brand'
-import type { SessionId, SessionSeq } from '@deepseek-ai/dsh-session/types'
+import type { MessageId } from '@kinetick-labs/kh-llm/brand'
+import type { SessionId, SessionSeq } from '@kinetick-labs/kh-session/types'
 import type {
   CommandNode, CompactionSummaryNode, ConversationLocationDataStore, ConversationTurnDataMap,
   ConversationGroupData, GroupSnapshot,
   MessageImageLoader, MessageImagesOwnerProps, RenderMessageImages, TurnLocation,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type {
   HostObservable, InjectFace, KeyedSnapshotSelectorHook, PropsLocale, PropsRenderSlots, PropsRuntime,
   PropsStore, SlotHookFactory, SnapshotSelectorHook,
-} from '@deepseek-ai/dsh-client-ui-slots'
-import type { ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
-import type { MarkdownFileMentions } from '@deepseek-ai/dsh-client-ui-primitives'
-import type {} from '@deepseek-ai/dsh-client-ui-layout/client'
+} from '@kinetick-labs/kh-client-ui-slots'
+import type { ObservableSnapshot } from '@kinetick-labs/kh-client-store'
+import type { MarkdownFileMentions } from '@kinetick-labs/kh-client-ui-primitives'
+import type {} from '@kinetick-labs/kh-client-ui-layout/client'
 import type { createChatStore } from '../stores.ts'
 import type { ChatPresentationPolicy } from '../presentation-policy.ts'
 import type { ToolCallId } from './store.ts'
@@ -270,7 +270,7 @@ export type ChatViewSlotProps =
 /** Full props of the durable-message image renderer. */
 export type MessageImagesProps = PropsRuntime<'conversation.message.images'> & PropsLocale<'conversation'>
 
-declare module '@deepseek-ai/dsh-client-ui-slots' {
+declare module '@kinetick-labs/kh-client-ui-slots' {
   interface SessionStandardProps {
     /** Selector hook over the current Conversation binding's Chat target. */
     useChat: UseChat

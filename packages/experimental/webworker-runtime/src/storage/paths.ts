@@ -5,19 +5,19 @@
  */
 
 /** Virtual filesystem root; `process.cwd()` and every absolute path start here. */
-export const DSH_ROOT = '/dsh'
+export const KH_ROOT = '/kh'
 
-/** `$DSH_HOME`: durable-state directory inside the image. */
-export const DSH_HOME = `${DSH_ROOT}/home`
+/** `$KH_HOME`: durable-state directory inside the image. */
+export const KH_HOME = `${KH_ROOT}/home`
 
 /** Flat, symlink-free package tree resolved by the worker module loader. */
-export const DSH_NODE_MODULES = `${DSH_ROOT}/node_modules`
+export const KH_NODE_MODULES = `${KH_ROOT}/node_modules`
 
 /** Directory holding the composed cordis.yml. */
-export const DSH_CONFIG = `${DSH_ROOT}/config`
+export const KH_CONFIG = `${KH_ROOT}/config`
 
 /** Default (empty) workspace directory. */
-export const DSH_WORKSPACE = `${DSH_ROOT}/workspace`
+export const KH_WORKSPACE = `${KH_ROOT}/workspace`
 
 /** Temporary directory reported by `os.tmpdir()`. */
-export const DSH_TMP = `${DSH_ROOT}/tmp`
+export const KH_TMP = `${KH_ROOT}/tmp`

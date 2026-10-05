@@ -3,13 +3,13 @@ description: "The model-facing web tools (web_search, web_fetch) over ctx.web: h
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tool-web
+# @kinetick-labs/kh-tool-web
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-tool-web` lets models search the web with `web_search` and retrieve pages with `web_fetch`. Choose it when an agent needs current information or full source text, and enable either tool independently through package configuration. Results label provider-controlled text as external and untrusted, while fetched HTML excludes active and hidden content. If a configured provider is missing or unavailable, the tool remains visible and returns a structured error the model can act on. Timeout and result-size limits are deployment settings rather than model arguments.
+`kh-tool-web` lets models search the web with `web_search` and retrieve pages with `web_fetch`. Choose it when an agent needs current information or full source text, and enable either tool independently through package configuration. Results label provider-controlled text as external and untrusted, while fetched HTML excludes active and hidden content. If a configured provider is missing or unavailable, the tool remains visible and returns a structured error the model can act on. Timeout and result-size limits are deployment settings rather than model arguments.
 
 ## Table of Contents
 
@@ -36,9 +36,9 @@ Choose this package when the model should discover current information or read a
 Load the web service, at least one backend, and this package; both tools register by default.
 
 ```yaml
-- name: '@deepseek-ai/dsh-web'
-- name: '@deepseek-ai/dsh-web-search-exa'
-- name: '@deepseek-ai/dsh-tool-web'
+- name: '@kinetick-labs/kh-web'
+- name: '@kinetick-labs/kh-web-search-exa'
+- name: '@kinetick-labs/kh-tool-web'
 ```
 
 | Field | Default | Meaning |
@@ -51,7 +51,7 @@ Load the web service, at least one backend, and this package; both tools registe
 | `searchTimeoutMs` | `30000` | Cooperative tool-call timeout budget (ms) for `web_search` |
 | `fetchMaxOutputChars` | `200000` | Cap on source characters converted synchronously and on one complete `web_fetch` output |
 
-The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-tool-web) is the exhaustive source for every accepted field and its JSDoc. `searchMaxQueries` bounds the accepted array before exact-string deduplication and provider fan-out; validation rejects an oversized array before any search starts. The timeout budgets attach to each tool definition and are enforced by [`@deepseek-ai/dsh-tool-call-timeout-policy`](../../guard/timeout-policy/README.md); the model-facing schemas expose no timeout argument.
+The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-tool-web) is the exhaustive source for every accepted field and its JSDoc. `searchMaxQueries` bounds the accepted array before exact-string deduplication and provider fan-out; validation rejects an oversized array before any search starts. The timeout budgets attach to each tool definition and are enforced by [`@kinetick-labs/kh-tool-call-timeout-policy`](../../guard/timeout-policy/README.md); the model-facing schemas expose no timeout argument.
 
 ### Using web_search
 
@@ -127,9 +127,9 @@ Read these pages when the package-level contract is not enough. They move from t
 
 - [Web subsystem](../../../docs/subsystems/web.md) — the exhaustive search/fetch requests and results, provider availability, and error codes.
 - [Web package map](../README.md) — the six-package family and each role.
-- [dsh-web](../web/README.md) — the web service the tools execute through.
+- [kh-web](../web/README.md) — the web service the tools execute through.
 - [Generated tool catalog](../../../docs/tool-catalog.md#deepseek-aidsh-tool-web) — the exact `web_search` and `web_fetch` schemas.
-- [dsh-tool-call-timeout-policy](../../guard/timeout-policy/README.md) — the deployment policy that enforces each tool's timeout budget.
+- [kh-tool-call-timeout-policy](../../guard/timeout-policy/README.md) — the deployment policy that enforces each tool's timeout budget.
 - [Generated configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-tool-web) — every accepted config field and its source declaration.
 - [Web capability seam decision](../../../.agents/notes/implemented/architecture/2026-06-24-web-capability-seam.md) — why search and fetch share one provider-selection service.
 

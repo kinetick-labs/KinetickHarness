@@ -1,13 +1,13 @@
 // @vitest-environment jsdom
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { stubConfigForm, type StubConfigForm } from '@deepseek-ai/dsh-client-test-runtime'
+import { stubConfigForm, type StubConfigForm } from '@kinetick-labs/kh-client-test-runtime'
 import type {
   ThemeSettings,
   ThemeSnapshot,
   ThemeTokenOverrides,
-} from '@deepseek-ai/dsh-client-ui-theme/client'
-import { ThemeRuntime } from '@deepseek-ai/dsh-client-ui-theme/client'
+} from '@kinetick-labs/kh-client-ui-theme/client'
+import { ThemeRuntime } from '@kinetick-labs/kh-client-ui-theme/client'
 
 const make = (host = stubConfigForm<ThemeSettings>()): {
   ctx: Context
@@ -36,13 +36,13 @@ describe('ThemeRuntime', () => {
   it('seeds the initial font size from the boot-script body variable, ignoring junk', () => {
     // The Host boot script writes the durable size on body before any plugin
     // runs; the first snapshot must match it so activation never flashes 14.
-    document.body.style.setProperty('--dsh-content-font-size', '22px')
+    document.body.style.setProperty('--kh-content-font-size', '22px')
     try {
       expect(make().theme.getTheme().fontSize).toBe(22)
-      document.body.style.setProperty('--dsh-content-font-size', '23px')
+      document.body.style.setProperty('--kh-content-font-size', '23px')
       expect(make().theme.getTheme().fontSize).toBe(14)
     } finally {
-      document.body.style.removeProperty('--dsh-content-font-size')
+      document.body.style.removeProperty('--kh-content-font-size')
     }
   })
 

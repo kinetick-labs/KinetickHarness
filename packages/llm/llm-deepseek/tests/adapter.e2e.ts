@@ -1,4 +1,4 @@
-import * as Protocol from '@deepseek-ai/dsh-llm-deepseek'
+import * as Protocol from '@kinetick-labs/kh-llm-deepseek'
 /**
  * Real Messages round trips use the official root and require credentials.
  * System-update checks additionally require DEEPSEEK_IN_HISTORY_MODEL.
@@ -8,10 +8,10 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context, LoggerLevel } from '@deepseek-ai/cordis'
-import LocalAttachments from '@deepseek-ai/dsh-attachment-local'
-import LlmRuntime, { createAssistantMessage, createSystemMessage, createToolResultMessage, ReasoningEffortId, ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { Message } from '@deepseek-ai/dsh-llm'
-import * as Messages from '@deepseek-ai/dsh-llm-deepseek-api-key'
+import LocalAttachments from '@kinetick-labs/kh-attachment-local'
+import LlmRuntime, { createAssistantMessage, createSystemMessage, createToolResultMessage, ReasoningEffortId, ToolCallId } from '@kinetick-labs/kh-llm'
+import type { Message } from '@kinetick-labs/kh-llm'
+import * as Messages from '@kinetick-labs/kh-llm-deepseek-api-key'
 import { DeepSeekFilesClient } from '../src/files-api.ts'
 import { MESSAGES_FILES_BETA } from '../src/messages-api.ts'
 import { assemble, options, user } from './helpers.ts'
@@ -24,9 +24,9 @@ afterEach(async () => {
   vi.unstubAllGlobals()
 })
 async function boot(models?: Messages.Options['models']) {
-  const home = await mkdtemp(join(tmpdir(), 'dsh-messages-e2e-'))
+  const home = await mkdtemp(join(tmpdir(), 'kh-messages-e2e-'))
   cleanups.push(() => rm(home, { recursive: true, force: true }))
-  vi.stubEnv('DSH_HOME', home)
+  vi.stubEnv('KH_HOME', home)
   const ctx = new Context()
   cleanups.push(() => ctx.fiber.dispose())
   await ctx.plugin(LlmRuntime)

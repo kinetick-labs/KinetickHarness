@@ -1,6 +1,6 @@
-/** JSON string-prefix accounting for the outer-output ledger. @module @deepseek-ai/dsh-ptc-runtime-node/output-json */
+/** JSON string-prefix accounting for the outer-output ledger. @module @kinetick-labs/kh-ptc-runtime-node/output-json */
 
-import type { PtcJsonValue } from '@deepseek-ai/dsh-ptc-runtime'
+import type { PtcJsonValue } from '@kinetick-labs/kh-ptc-runtime'
 
 type IntrinsicCallable = (this: unknown, ...args: unknown[]) => unknown
 

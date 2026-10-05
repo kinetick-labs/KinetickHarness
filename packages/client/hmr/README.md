@@ -3,13 +3,13 @@ description: "Live graph synchronization and development bundle reloads for Web 
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-client-hmr
+# @kinetick-labs/kh-client-hmr
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-client-hmr` keeps open Web pages in sync with the Host plugin graph and reloads rebuilt browser bundles. Ordinary plugin enable/disable changes take effect without reloading the page or restarting the Host. Code rebuilds replace the affected plugin with fresh component state. The model sees no new input or output.
+`kh-client-hmr` keeps open Web pages in sync with the Host plugin graph and reloads rebuilt browser bundles. Ordinary plugin enable/disable changes take effect without reloading the page or restarting the Host. Code rebuilds replace the affected plugin with fresh component state. The model sees no new input or output.
 
 ## Table of Contents
 

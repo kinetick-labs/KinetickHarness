@@ -1,28 +1,28 @@
 import { describe, expect, it, onTestFinished, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { TOOL_ABORTED_BEFORE_DISPATCH } from '@deepseek-ai/dsh-tools'
-import type { ToolExecutionResult, ToolExecutionToken } from '@deepseek-ai/dsh-tools'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { WorkflowRunId, WorkflowEngine } from '@deepseek-ai/dsh-workflow'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { TOOL_ABORTED_BEFORE_DISPATCH } from '@kinetick-labs/kh-tools'
+import type { ToolExecutionResult, ToolExecutionToken } from '@kinetick-labs/kh-tools'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
+import { WorkflowRunId, WorkflowEngine } from '@kinetick-labs/kh-workflow'
 import type {
   WorkflowAgentEndInfo, WorkflowAgentInfo, WorkflowResult, WorkflowRun,
   WorkflowRunId as WorkflowRunIdType, WorkflowStartRequest,
-} from '@deepseek-ai/dsh-workflow'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import type { JobId } from '@deepseek-ai/dsh-jobs'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import LocalJobRegistry from '@deepseek-ai/dsh-jobs-local'
-import * as ToolTasks from '@deepseek-ai/dsh-tool-jobs'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
-import PtcWorkflowEngine from '@deepseek-ai/dsh-workflow-ptc'
+} from '@kinetick-labs/kh-workflow'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import type { JobId } from '@kinetick-labs/kh-jobs'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import LocalJobRegistry from '@kinetick-labs/kh-jobs-local'
+import * as ToolTasks from '@kinetick-labs/kh-tool-jobs'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
+import PtcWorkflowEngine from '@kinetick-labs/kh-workflow-ptc'
 import { mountWorkflowRuntime } from '../../workflow-ptc/tests/setup.ts'
 import * as toolWorkflow from '../src/index.ts'
 import type {} from '../src/types.ts'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
 
 const testToolSignal = new AbortController().signal
 
@@ -129,7 +129,7 @@ function execute(ctx: Context, args: unknown, extra?: {
   })
 }
 
-describe('dsh-tool-workflow', () => {
+describe('kh-tool-workflow', () => {
   it('starts a run with the script/args/parent/signal and renders the completed value', async () => {
     const { ctx, engine, parent } = await setup()
     const controller = new AbortController()
@@ -593,7 +593,7 @@ describe('dsh-tool-workflow', () => {
       const result = await execute(ctx, { script: SCRIPT, meta: META, run_in_background: true }, { agent: parent })
       expect(result.isError).toBe(true)
       expect((result.content[0] as { text: string }).text)
-        .toContain('background jobs unavailable: load @deepseek-ai/dsh-jobs and @deepseek-ai/dsh-tool-jobs')
+        .toContain('background jobs unavailable: load @kinetick-labs/kh-jobs and @kinetick-labs/kh-tool-jobs')
     })
 
     it('a disabled composition hides the parameter and rejects the call', async () => {

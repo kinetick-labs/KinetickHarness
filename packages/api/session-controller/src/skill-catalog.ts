@@ -1,11 +1,11 @@
 /** Session-addressed, cold-readable skill catalog Remote. */
 
 import type { Context } from '@deepseek-ai/cordis'
-import type {} from '@deepseek-ai/dsh-agent-preset-registry/types'
-import { SessionQueryError } from '@deepseek-ai/dsh-session-query'
-import { isUserInvocable } from '@deepseek-ai/dsh-skill'
-import type { ScopeKey } from '@deepseek-ai/dsh-scope'
-import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
+import type {} from '@kinetick-labs/kh-agent-preset-registry/types'
+import { SessionQueryError } from '@kinetick-labs/kh-session-query'
+import { isUserInvocable } from '@kinetick-labs/kh-skill'
+import type { ScopeKey } from '@kinetick-labs/kh-scope'
+import { Remote, RemoteError, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
 import type { SkillListRequest, SkillListValue } from './types.ts'
 
 declare module '@deepseek-ai/cordis' {
@@ -66,7 +66,7 @@ export class SessionSkillCatalog extends TypertRemoteService {
     if (skillRegistry === undefined) {
       throw new RemoteError(
         'gateway/internal',
-        'skill registry is absent: neither this session\'s agent preset nor the host composition mounts @deepseek-ai/dsh-skill',
+        'skill registry is absent: neither this session\'s agent preset nor the host composition mounts @kinetick-labs/kh-skill',
         {},
       )
     }

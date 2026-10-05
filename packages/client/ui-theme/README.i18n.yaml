@@ -3,53 +3,53 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write packages/client/ui-theme/README.md
 /:
-  en: 1f98ae39f4e5a3a1
-  zh: d83f563eb12a023d
-/deepseek-ai-dsh-client-ui-theme:
-  en: 06c7d7624947a72a
-  zh: ac4ca82984564825
-/deepseek-ai-dsh-client-ui-theme/summary:
-  en: c98899d108fd8318
-  zh: ae2103e46d723784
-/deepseek-ai-dsh-client-ui-theme/table-of-contents:
+  en: d6e24f903d484e5b
+  zh: d4024a1e2c09597a
+/kinetick-labs-kh-client-ui-theme:
+  en: 88165cdde4d4c23c
+  zh: d2dadfe8fdf8d6fb
+/kinetick-labs-kh-client-ui-theme/summary:
+  en: 21bc5ed0ea3ef2d3
+  zh: a3e30f825dc9df83
+/kinetick-labs-kh-client-ui-theme/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-client-ui-theme/use-this-package:
+/kinetick-labs-kh-client-ui-theme/use-this-package:
   en: 5d64b3d918d5edfa
   zh: fc929354a0faf33a
-/deepseek-ai-dsh-client-ui-theme/use-this-package/appearance-and-font-size:
+/kinetick-labs-kh-client-ui-theme/use-this-package/appearance-and-font-size:
   en: ec98904b19d1b12b
   zh: 59d5823ddb168195
-/deepseek-ai-dsh-client-ui-theme/use-this-package/registering-a-theme:
+/kinetick-labs-kh-client-ui-theme/use-this-package/registering-a-theme:
   en: 2cd32ccaba33b3e9
   zh: 53ea78d19929ea02
-/deepseek-ai-dsh-client-ui-theme/use-this-package/pre-plugin-palette:
-  en: 54296471349d9f77
-  zh: 8ca162b7b57b822e
-/deepseek-ai-dsh-client-ui-theme/understand-the-implementation:
-  en: 687ff0a8bccc9c0c
-  zh: 463d6b7afd4bd4a4
-/deepseek-ai-dsh-client-ui-theme/understand-the-implementation/stylesheets:
-  en: a6f0aaf2d24a913b
-  zh: 4116ea5685953a9c
-/deepseek-ai-dsh-client-ui-theme/understand-the-implementation/scrollbar-rebinding:
-  en: bf76e7c34a331595
-  zh: 5accd0260ef7c61e
-/deepseek-ai-dsh-client-ui-theme/understand-the-implementation/preference-persistence:
-  en: 818da56a938d5394
-  zh: e6fd46a9e964b0a4
-/deepseek-ai-dsh-client-ui-theme/further-exploration:
-  en: 10664fe91f2ca00b
-  zh: 086f8dffdc223c22
-/deepseek-ai-dsh-client-ui-theme/model-experience:
+/kinetick-labs-kh-client-ui-theme/use-this-package/pre-plugin-palette:
+  en: 12ff6f0c40249c6c
+  zh: 018449d4a5f3cb65
+/kinetick-labs-kh-client-ui-theme/understand-the-implementation:
+  en: 355cdbc6f7259b72
+  zh: 1989ba97c9da4995
+/kinetick-labs-kh-client-ui-theme/understand-the-implementation/stylesheets:
+  en: fb767451840dfe83
+  zh: 0c00e9de8253b617
+/kinetick-labs-kh-client-ui-theme/understand-the-implementation/scrollbar-rebinding:
+  en: 2d53e726975e77db
+  zh: 32b9965f0f8ea473
+/kinetick-labs-kh-client-ui-theme/understand-the-implementation/preference-persistence:
+  en: f1cce3974c7781d0
+  zh: daa5162bef42bdb7
+/kinetick-labs-kh-client-ui-theme/further-exploration:
+  en: 50b6a49107d86c68
+  zh: 05828bdd1db2fe28
+/kinetick-labs-kh-client-ui-theme/model-experience:
   en: 3120df665299c634
   zh: 1d9f365d091d0d2a
-/deepseek-ai-dsh-client-ui-theme/model-experience/kv-cache-effect:
+/kinetick-labs-kh-client-ui-theme/model-experience/kv-cache-effect:
   en: ca75c51c89c2c9b0
   zh: de54f3467ef3b9be
-/deepseek-ai-dsh-client-ui-theme/known-limitations-and-deferred-work:
+/kinetick-labs-kh-client-ui-theme/known-limitations-and-deferred-work:
   en: 0d328dbced31a041
   zh: 2951de356ba6bb82
-/deepseek-ai-dsh-client-ui-theme/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-client-ui-theme/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

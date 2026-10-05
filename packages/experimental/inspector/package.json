@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-experimental-inspector",
+  "name": "@kinetick-labs/kh-experimental-inspector",
   "description": "Experimental cross-realm CDP hub for Host debugging and Client Runtime inspection",
   "version": "0.2.1-alpha.1",
   "icon": "./icon.svg",
@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/experimental/inspector"
   },
   "type": "module",
@@ -27,7 +27,7 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "dsh": {
+  "kh": {
     "client": {
       "inject": [],
       "platform": "web",
@@ -46,9 +46,9 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@deepseek-ai/dsh-app-boot": "workspace:*",
-    "@deepseek-ai/dsh-brand": "workspace:*",
-    "@deepseek-ai/dsh-util-crypto": "workspace:*",
+    "@kinetick-labs/kh-app-boot": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
+    "@kinetick-labs/kh-util-crypto": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~",
     "open": "^11.0.0",
     "serve-static": "^2.2.1",
@@ -57,30 +57,30 @@
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-client-modules": "workspace:*",
-    "@deepseek-ai/dsh-client-connection": "workspace:*",
-    "@deepseek-ai/dsh-host-webserver": "workspace:*"
+    "@kinetick-labs/kh-client-modules": "workspace:*",
+    "@kinetick-labs/kh-client-connection": "workspace:*",
+    "@kinetick-labs/kh-host-webserver": "workspace:*"
   },
   "devDependencies": {
     "chrome-devtools-frontend": "1.0.1638082",
     "@types/serve-static": "^2.2.0",
-    "@deepseek-ai/dsh-client-test-runtime": "workspace:*",
+    "@kinetick-labs/kh-client-test-runtime": "workspace:*",
     "@testing-library/react": "^16.1.0",
-    "@deepseek-ai/dsh-client-ui-renderer": "workspace:*",
+    "@kinetick-labs/kh-client-ui-renderer": "workspace:*",
     "@types/react": "~18.3.1",
-    "@deepseek-ai/dsh-client-ui-layout": "workspace:*",
-    "@deepseek-ai/dsh-client-shortcuts": "workspace:*",
-    "@deepseek-ai/dsh-client-store": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-slots": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-primitives": "workspace:*",
-    "@deepseek-ai/dsh-client-locale": "workspace:*",
+    "@kinetick-labs/kh-client-ui-layout": "workspace:*",
+    "@kinetick-labs/kh-client-shortcuts": "workspace:*",
+    "@kinetick-labs/kh-client-store": "workspace:*",
+    "@kinetick-labs/kh-client-ui-slots": "workspace:*",
+    "@kinetick-labs/kh-client-ui-primitives": "workspace:*",
+    "@kinetick-labs/kh-client-locale": "workspace:*",
     "react": "^18.2.0",
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-host-webserver": "workspace:*",
-    "@deepseek-ai/dsh-cmdline": "workspace:*",
-    "@deepseek-ai/dsh-client-connection": "workspace:*",
+    "@kinetick-labs/kh-host-webserver": "workspace:*",
+    "@kinetick-labs/kh-cmdline": "workspace:*",
+    "@kinetick-labs/kh-client-connection": "workspace:*",
     "@types/ws": "^8.18.1",
     "playwright": "^1.49.0",
     "tsx": "^4.19.2"

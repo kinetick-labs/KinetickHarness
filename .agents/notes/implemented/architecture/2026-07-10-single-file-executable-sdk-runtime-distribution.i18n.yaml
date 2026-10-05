@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-07-10-single-file-executable-sdk-runtime-distribution.md
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe:
-  en: 00b5d91d3e44a9f8
-  zh: eabd3c4b338249b3
+  en: 058bddc814a7e453
+  zh: 38a7c2e7efc9bb63
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/problem:
   en: 112178b76e5209f6
   zh: 68726254ae530566
@@ -15,23 +15,23 @@
   en: f1c2b60e9474111d
   zh: 5de398b5e8554429
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/decision/the-serving-interface-is-a-plugin-inside-the-dsh-application:
-  en: 5fdde26e9e8c6108
-  zh: 629559d733c1f0c5
+  en: 4269b4cf362a7cb3
+  zh: 9111eb1104d55b02
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/decision/plugin-resolution-the-vfs-holds-a-real-package-tree-the-closure-manifest-is-the-deploy-root:
-  en: c35ea4b858448b49
-  zh: 1f8ff0a9f82ca881
+  en: 5023f2b59905256a
+  zh: cadc949f649265ad
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/decision/build-pipeline-and-artifacts:
-  en: 6356c325e36dc2a8
-  zh: 63da32299cb356c9
+  en: a0d40cd60536d3be
+  zh: f70b831329d0c51d
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/decision/python-sdk-distribution-two-carriers-exe-for-production-node-for-development:
-  en: 9bd60549d4a52ec0
-  zh: e2343b7210212ee0
+  en: b65431c0de9dbee7
+  zh: e23fc4089dd7ad2f
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/decision/naming-lineage:
   en: 31a5aecb8bf828bb
   zh: 2dffb6fd2e0f8194
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/packaged-workflow-and-code-execution:
-  en: 0426f598f3f44e64
-  zh: fc66728e17f3bcfb
+  en: 26a0257b826e96df
+  zh: 1acad44e143490db
 /agent-note-single-file-executable-sdk-runtime-distribution-single-exe/testing:
   en: b3c9820f4dc7c6c8
   zh: 3b5768ef1770bfcb

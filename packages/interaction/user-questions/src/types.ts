@@ -1,10 +1,10 @@
-/** Client-safe question, answer, and event types. @module @deepseek-ai/dsh-user-questions/types */
+/** Client-safe question, answer, and event types. @module @kinetick-labs/kh-user-questions/types */
 
-import type { Scoped } from '@deepseek-ai/dsh-scope'
-import type { Agent } from '@deepseek-ai/dsh-agent/types'
-import type { ToolCallId } from '@deepseek-ai/dsh-llm/brand'
-import type {} from '@deepseek-ai/dsh-session/types'
-import type {} from '@deepseek-ai/dsh-session-projection/types'
+import type { Scoped } from '@kinetick-labs/kh-scope'
+import type { Agent } from '@kinetick-labs/kh-agent/types'
+import type { ToolCallId } from '@kinetick-labs/kh-llm/brand'
+import type {} from '@kinetick-labs/kh-session/types'
+import type {} from '@kinetick-labs/kh-session-projection/types'
 
 /** One selectable answer offered to the user. */
 export interface AskUserQuestionOption {
@@ -104,11 +104,11 @@ export interface UserQuestionProjectionView {
   readonly settled: readonly SettledUserQuestion[]
 }
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     /**
      * Late reply to a continued `ask_user_question` call, steered into the
-     * agent by `dsh-user-questions` as an answer batch. Closing a question
+     * agent by `kh-user-questions` as an answer batch. Closing a question
      * panel persists no reply. Readers preserve this message without the
      * producer; only the `userQuestions` projection reads the kind to close
      * the question and record its answers.
@@ -118,7 +118,7 @@ declare module '@deepseek-ai/dsh-llm' {
   }
 }
 
-declare module '@deepseek-ai/dsh-session-projection/types' {
+declare module '@kinetick-labs/kh-session-projection/types' {
   interface SessionProjectionMap {
     /** Timed questions that remain answerable in this Session, and the ones a late reply settled. */
     userQuestions: UserQuestionProjectionView
@@ -150,7 +150,7 @@ declare module '@deepseek-ai/cordis' {
     /**
      * Ask composed answerers for structured user input. Return an answer to
      * claim the request or call `next()` to delegate. Scope-filtered dispatch
-     * (`@deepseek-ai/dsh-scope`): agent-scoped listeners receive only that agent.
+     * (`@kinetick-labs/kh-scope`): agent-scoped listeners receive only that agent.
      * @param request - pending user-question request.
      * @mode waterfall
      */

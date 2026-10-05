@@ -1,9 +1,9 @@
 /** Host catalog, durable projection caches, and explicitly retained Client instances. */
 
-import type { SubagentAddress } from '@deepseek-ai/dsh-subagent/client'
-import { SessionSeq, type SessionId, type SessionSeqCursor } from '@deepseek-ai/dsh-session/types'
-import type { SessionProjectionMap } from '@deepseek-ai/dsh-session-projection/types'
-import type { WorkspaceId } from '@deepseek-ai/dsh-workspace/types'
+import type { SubagentAddress } from '@kinetick-labs/kh-subagent/client'
+import { SessionSeq, type SessionId, type SessionSeqCursor } from '@kinetick-labs/kh-session/types'
+import type { SessionProjectionMap } from '@kinetick-labs/kh-session-projection/types'
+import type { WorkspaceId } from '@kinetick-labs/kh-workspace/types'
 import type {
   SessionControlBaseline,
   SessionControlFrame,
@@ -12,15 +12,15 @@ import type {
   SessionSummary,
 } from '../../types.ts'
 import { mergeOrderedBaseline } from '../ordered-baseline.ts'
-import { isRemoteFailure } from '@deepseek-ai/dsh-api-gateway/client'
-import { assertNever } from '@deepseek-ai/dsh-util-values'
-import type { RemoteFailure, RemoteResult } from '@deepseek-ai/dsh-typert-protocol'
+import { isRemoteFailure } from '@kinetick-labs/kh-api-gateway/client'
+import { assertNever } from '@kinetick-labs/kh-util-values'
+import type { RemoteFailure, RemoteResult } from '@kinetick-labs/kh-typert-protocol'
 import type { SessionListEntry, TitledSessionSummary } from './lineage.ts'
 import { flattenLineage } from './lineage.ts'
 // Type-only merge edge: the title domain's client-namespace outlet declares
 // the 'title' projection key this manager projects into list rows (and any
 // useProjection('title') consumer reads). Zero value imports by construction.
-import type {} from '@deepseek-ai/dsh-session-title/client'
+import type {} from '@kinetick-labs/kh-session-title/client'
 import { Notifier } from './notifier.ts'
 import { ProjectionValueStore } from './projection-store.ts'
 import { Session } from './session.ts'

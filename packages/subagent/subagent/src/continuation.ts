@@ -10,19 +10,19 @@
  * execution. No continuable path creates a Task or an intermediate
  * result-bearing wrapper.
  *
- * @module @deepseek-ai/dsh-subagent
+ * @module @kinetick-labs/kh-subagent
  */
 
 import { randomUUID } from 'node:crypto'
 import type { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { brandString } from '@deepseek-ai/dsh-brand'
-import { ReasoningEffortId, contentHasImage, createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, MessageId, MessageSource } from '@deepseek-ai/dsh-llm'
-import { SessionLogOffset } from '@deepseek-ai/dsh-session'
-import type { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionPersistence } from '@deepseek-ai/dsh-session-persistence'
-import type { SessionObservation, SessionQueryEngine } from '@deepseek-ai/dsh-session-query'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { brandString } from '@kinetick-labs/kh-brand'
+import { ReasoningEffortId, contentHasImage, createUserMessage } from '@kinetick-labs/kh-llm'
+import type { ContentBlock, MessageId, MessageSource } from '@kinetick-labs/kh-llm'
+import { SessionLogOffset } from '@kinetick-labs/kh-session'
+import type { SessionId } from '@kinetick-labs/kh-session'
+import type { SessionPersistence } from '@kinetick-labs/kh-session-persistence'
+import type { SessionObservation, SessionQueryEngine } from '@kinetick-labs/kh-session-query'
 import {
   childSessionMeta,
   captureDelegatedPolicyOverrides,
@@ -529,7 +529,7 @@ export class SubagentContinuationManager {
     const persistence = this.ctx.get('sessionPersistence')
     if (persistence === undefined) {
       throw new SubagentError(
-        'continuable subagents require session persistence (load a dsh-session-persistence backend)',
+        'continuable subagents require session persistence (load a kh-session-persistence backend)',
         'PERSISTENCE_UNAVAILABLE',
       )
     }
@@ -541,7 +541,7 @@ export class SubagentContinuationManager {
     const query = this.ctx.get('sessionQuery')
     if (query === undefined) {
       throw new SubagentError(
-        'continuable subagents require session query (load @deepseek-ai/dsh-session-query)',
+        'continuable subagents require session query (load @kinetick-labs/kh-session-query)',
         'CONTINUATION_UNAVAILABLE',
       )
     }

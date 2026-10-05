@@ -18,8 +18,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-SDK_DISTRIBUTION = "deepseek-harness-sdk"
-RUNTIME_DISTRIBUTION = "deepseek-harness-runtime-bin"
+SDK_DISTRIBUTION = "kinetick-harness-sdk"
+RUNTIME_DISTRIBUTION = "kinetick-harness-runtime-bin"
 PLATFORM_MANIFEST = ROOT / "python" / "sdk-runtime" / "platforms.json"
 
 
@@ -83,7 +83,7 @@ def main() -> None:
 
     output_dir = args.output_dir.resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    with tempfile.TemporaryDirectory(prefix="dsh-python-release-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-python-release-") as temporary:
         staging = Path(temporary) / args.package
         if args.package == "sdk":
             stage_sdk(staging, wheel_version)
@@ -92,7 +92,7 @@ def main() -> None:
         else:
             platform_tag, executable_name = PLATFORMS[args.platform]
             stage_runtime(staging, wheel_version, args.runtime_exe.resolve(), executable_name)
-            environment = {"DSH_RUNTIME_PLATFORM_TAG": platform_tag}
+            environment = {"KH_RUNTIME_PLATFORM_TAG": platform_tag}
             expected = output_dir / f"deepseek_harness_runtime_bin-{wheel_version}-py3-none-{platform_tag}.whl"
         command = ["uv", "build", "--wheel", "--out-dir", str(output_dir), str(staging)]
         subprocess.run(command, cwd=ROOT, env=None if environment is None else {**os.environ, **environment}, check=True)
@@ -206,8 +206,8 @@ def stage_sdk(destination: Path, version: str) -> None:
     pyproject = destination / "pyproject.toml"
     rewrite_version(pyproject, version)
     text, count = re.subn(
-        r'"deepseek-harness-runtime-bin==[^"]+"',
-        f'"deepseek-harness-runtime-bin=={version}"',
+        r'"kinetick-harness-runtime-bin==[^"]+"',
+        f'"kinetick-harness-runtime-bin=={version}"',
         pyproject.read_text(),
         count=1,
     )
@@ -231,7 +231,7 @@ def stage_runtime(destination: Path, version: str, executable: Path, executable_
         shutil.copy2(source_directory / filename, runtime_dir / filename)
     office = office_sidecar_name(executable_name)
     shutil.copytree(source_directory / office, runtime_dir / office)
-    resources = executable_name.removeprefix("deepseek-harness-sdk-runtime-").removesuffix(".exe")
+    resources = executable_name.removeprefix("kinetick-harness-sdk-runtime-").removesuffix(".exe")
     shutil.copytree(source_directory / resources, runtime_dir / resources)
 
 
@@ -309,7 +309,7 @@ def verify_wheel(
         if package == "runtime":
             assert platform is not None
             office = office_sidecar_name(platform[1])
-            resources = platform[1].removeprefix("deepseek-harness-sdk-runtime-").removesuffix(".exe")
+            resources = platform[1].removeprefix("kinetick-harness-sdk-runtime-").removesuffix(".exe")
             expected_files = sorted((*runtime_filenames(platform[1]), office, resources))
             found_files = sorted({name.split("/runtime/", 1)[1].split("/", 1)[0] for name in runtime_payload})
             if found_files != expected_files:

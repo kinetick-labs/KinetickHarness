@@ -3,15 +3,15 @@ import { stripTypeScriptTypes } from 'node:module'
 import { isAbsolute } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import { PtcRuntime } from '@deepseek-ai/dsh-ptc-runtime'
-import type { PtcBindingNamespace, PtcJsonValue, PtcRunFailure, PtcRunRequest, PtcRunResult, PtcRunSandbox, PtcRunSpec } from '@deepseek-ai/dsh-ptc-runtime'
-import { MAX_TIMER_DELAY_MS, clampTimeout } from '@deepseek-ai/dsh-timeout'
-import { SandboxUnavailableError, classifyRunnerFailure, isRunnerSpawnFailure } from '@deepseek-ai/dsh-sandbox'
-import type { ConfinedArgv, SandboxExecutionPolicy, SandboxMode } from '@deepseek-ai/dsh-sandbox'
-import type { SubprocessHandle, SubprocessOutcome } from '@deepseek-ai/dsh-subprocess'
-import type {} from '@deepseek-ai/dsh-sandbox-policy'
-import type {} from '@deepseek-ai/dsh-fs'
-import { snapshotJsonValue } from '@deepseek-ai/dsh-util-values'
+import { PtcRuntime } from '@kinetick-labs/kh-ptc-runtime'
+import type { PtcBindingNamespace, PtcJsonValue, PtcRunFailure, PtcRunRequest, PtcRunResult, PtcRunSandbox, PtcRunSpec } from '@kinetick-labs/kh-ptc-runtime'
+import { MAX_TIMER_DELAY_MS, clampTimeout } from '@kinetick-labs/kh-timeout'
+import { SandboxUnavailableError, classifyRunnerFailure, isRunnerSpawnFailure } from '@kinetick-labs/kh-sandbox'
+import type { ConfinedArgv, SandboxExecutionPolicy, SandboxMode } from '@kinetick-labs/kh-sandbox'
+import type { SubprocessHandle, SubprocessOutcome } from '@kinetick-labs/kh-subprocess'
+import type {} from '@kinetick-labs/kh-sandbox-policy'
+import type {} from '@kinetick-labs/kh-fs'
+import { snapshotJsonValue } from '@kinetick-labs/kh-util-values'
 import { validateBindings } from './bindings.ts'
 import { JsonChannel } from './channel.ts'
 import { bootstrapArgs } from './launch.ts'
@@ -230,7 +230,7 @@ export class NodePtcRuntime extends PtcRuntime {
         .filter(key => !STARTUP_ENVIRONMENT_NAMES.has(key.toUpperCase()) && key.toUpperCase() !== 'ELECTRON_RUN_AS_NODE')
         .map(key => [key, undefined]))
       if (packaged) {
-        env.DSH_PTC_RUNTIME_NODE = '1'
+        env.KH_PTC_RUNTIME_NODE = '1'
         env.NODE_OPTIONS = heapFlag
       }
       handle = this.ctx.subprocess.spawn({ argv: confined?.argv ?? argv, cwd: spec.cwd, env, stdio: { stdin: 'ignore', stdout: 'pipe', stderr: 'pipe', control: 'pipe' }, graceMs: this.config.graceMs, signal })

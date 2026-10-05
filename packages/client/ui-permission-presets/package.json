@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-client-ui-permission-presets",
+  "name": "@kinetick-labs/kh-client-ui-permission-presets",
   "description": "Permission surfaces: a new-session default in General settings and a current-session /permission popup over the permissions projection",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/client/ui-permission-presets"
   },
   "type": "module",
@@ -25,16 +25,16 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "dsh": {
+  "kh": {
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-api-session-controller",
-        "@deepseek-ai/dsh-client-connection",
-        "@deepseek-ai/dsh-client-locale",
-        "@deepseek-ai/dsh-client-ui-commands",
-        "@deepseek-ai/dsh-client-ui-conversation",
-        "@deepseek-ai/dsh-api-remotes",
-        "@deepseek-ai/dsh-client-ui-settings"
+        "@kinetick-labs/kh-api-session-controller",
+        "@kinetick-labs/kh-client-connection",
+        "@kinetick-labs/kh-client-locale",
+        "@kinetick-labs/kh-client-ui-commands",
+        "@kinetick-labs/kh-client-ui-conversation",
+        "@kinetick-labs/kh-api-remotes",
+        "@kinetick-labs/kh-client-ui-settings"
       ],
       "platform": "web"
     }
@@ -48,26 +48,26 @@
     "@deepseek-ai/cordis": "workspace:~"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-remote-mock": "workspace:*",
+    "@kinetick-labs/kh-remote-mock": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-api-remotes": "workspace:*",
-    "@deepseek-ai/dsh-api-session-controller": "workspace:*",
-    "@deepseek-ai/dsh-client-connection": "workspace:*",
-    "@deepseek-ai/dsh-client-locale": "workspace:*",
-    "@deepseek-ai/dsh-client-store": "workspace:*",
-    "@deepseek-ai/dsh-client-test-runtime": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-commands": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-conversation": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-primitives": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-settings": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-input-trigger": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-slots": "workspace:*",
-    "@deepseek-ai/dsh-permission-presets": "workspace:*",
+    "@kinetick-labs/kh-api-remotes": "workspace:*",
+    "@kinetick-labs/kh-api-session-controller": "workspace:*",
+    "@kinetick-labs/kh-client-connection": "workspace:*",
+    "@kinetick-labs/kh-client-locale": "workspace:*",
+    "@kinetick-labs/kh-client-store": "workspace:*",
+    "@kinetick-labs/kh-client-test-runtime": "workspace:*",
+    "@kinetick-labs/kh-client-ui-commands": "workspace:*",
+    "@kinetick-labs/kh-client-ui-conversation": "workspace:*",
+    "@kinetick-labs/kh-client-ui-primitives": "workspace:*",
+    "@kinetick-labs/kh-client-ui-settings": "workspace:*",
+    "@kinetick-labs/kh-client-ui-input-trigger": "workspace:*",
+    "@kinetick-labs/kh-client-ui-slots": "workspace:*",
+    "@kinetick-labs/kh-permission-presets": "workspace:*",
     "@types/react": "~18.3.1",
     "clsx": "^2.0.0",
     "react": "^18.2.0",
-    "@deepseek-ai/dsh-client-ui-renderer": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-session": "workspace:*"
+    "@kinetick-labs/kh-client-ui-renderer": "workspace:*",
+    "@kinetick-labs/kh-client-ui-session": "workspace:*"
   },
   "files": [
     "lib/index.js",

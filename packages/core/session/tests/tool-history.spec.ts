@@ -1,9 +1,9 @@
 /** Capability-independent tool history folded from committed headers and developer messages. */
 import { describe, expect, it } from 'vitest'
-import { createDeveloperMessage, projectToolUpdates } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, ToolSchema } from '@deepseek-ai/dsh-llm'
-import { Session, SessionId, SessionLogOffset, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
+import { createDeveloperMessage, projectToolUpdates } from '@kinetick-labs/kh-llm'
+import type { ContentBlock, ToolSchema } from '@kinetick-labs/kh-llm'
+import { Session, SessionId, SessionLogOffset, SessionSeq } from '@kinetick-labs/kh-session'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
 import { ToolHistoryProjection } from '../src/tool-history.ts'
 
 const search: ToolSchema = { name: 'search', description: 'Search', parameters: {} }

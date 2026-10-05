@@ -8,8 +8,8 @@ import type { Include } from '@deepseek-ai/cordis-plugin-include'
 import { FSWatcher, watch, type ChokidarOptions } from 'chokidar'
 import { basename, dirname, join, relative, resolve, sep } from 'node:path'
 import { readFileSync, realpathSync } from 'node:fs'
-import { readProfileManifest, readProfilePatches, reconcileProfilePatches, PROFILE_PATCH_FILENAME } from '@deepseek-ai/dsh-app-boot'
-import type {} from '@deepseek-ai/dsh-cmdline'
+import { readProfileManifest, readProfilePatches, reconcileProfilePatches, PROFILE_PATCH_FILENAME } from '@kinetick-labs/kh-app-boot'
+import type {} from '@kinetick-labs/kh-cmdline'
 import { handleError } from './error.ts'
 import { PackageManifests } from './package-manifest.ts'
 import type {} from '@deepseek-ai/cordis-plugin-timer'
@@ -330,7 +330,7 @@ class Hmr extends Service {
       let lastInputs: string | undefined
       let lastBundles = JSON.stringify(profile.startedBundles)
       const refresh = async (manifestOnly: boolean): Promise<void> => {
-        const bundles = JSON.stringify(readProfileManifest('dsh', profile.dir).dsh?.profile?.bundles ?? [])
+        const bundles = JSON.stringify(readProfileManifest('kh', profile.dir).kh?.profile?.bundles ?? [])
         if (manifestOnly && bundles === lastBundles) return
         const inputs = JSON.stringify([bundles, ...patchFiles.map((filename) => {
           try { return readFileSync(filename, 'utf8') }
@@ -340,8 +340,8 @@ class Hmr extends Service {
           }
         })])
         if (inputs === lastInputs) return
-        const patches = readProfilePatches('dsh', profile)
-        const warnings = await reconcileProfilePatches(this.ownerContext.root, patches, 'dsh')
+        const patches = readProfilePatches('kh', profile)
+        const warnings = await reconcileProfilePatches(this.ownerContext.root, patches, 'kh')
         lastInputs = inputs
         lastBundles = bundles
         for (const diagnostic of warnings) this.ctx.logger.warn(diagnostic)

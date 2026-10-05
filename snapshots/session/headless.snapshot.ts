@@ -1,4 +1,4 @@
-/** Recorded-session replay through the shipped headless `dsh` profile. */
+/** Recorded-session replay through the shipped headless `kh` profile. */
 
 import { startHttpMcpFixture } from '../../packages/mcp/mcp-client/tests/http-fixture.ts'
 import { cp, copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, utimes, writeFile } from 'node:fs/promises'
@@ -9,9 +9,9 @@ import { basename, delimiter, dirname, isAbsolute, join, relative, sep } from 'n
 import { fileURLToPath } from 'node:url'
 import { describe, expect, it } from 'vitest'
 import ts from 'typescript'
-import { SESSION_FORMAT_VERSION } from '@deepseek-ai/dsh-session'
-import { releasedV0SessionFormatCodec } from '@deepseek-ai/dsh-session-format-v0-to-v1'
-import type { SessionFormatEvent, SessionFormatMigrationContext } from '@deepseek-ai/dsh-session-format'
+import { SESSION_FORMAT_VERSION } from '@kinetick-labs/kh-session'
+import { releasedV0SessionFormatCodec } from '@kinetick-labs/kh-session-format-v0-to-v1'
+import type { SessionFormatEvent, SessionFormatMigrationContext } from '@kinetick-labs/kh-session-format'
 import { assertWorkspaceOutsideTemp, outsideTempWorkspaceParent } from '../../scripts/snapshot-workspace-parent.ts'
 import {
   assertPersistedSessionVersion,
@@ -49,14 +49,14 @@ import {
   type NormalizeContext,
   type SnapshotManifest,
   type WorkspaceSnapshotEntry,
-} from '@deepseek-ai/dsh-session-snapshot'
-import { LOADER_SMOKE_TEST_TIMEOUT_MS, runLoaderSmoke } from '@deepseek-ai/dsh-loader-smoke'
-import { resolvePwshPath } from '@deepseek-ai/dsh-pwsh-local'
-import { parseSessionLog, prepareSessionSnapshotFixtureForComparison } from '@deepseek-ai/dsh-llm-replay'
+} from '@kinetick-labs/kh-session-snapshot'
+import { LOADER_SMOKE_TEST_TIMEOUT_MS, runLoaderSmoke } from '@kinetick-labs/kh-loader-smoke'
+import { resolvePwshPath } from '@kinetick-labs/kh-pwsh-local'
+import { parseSessionLog, prepareSessionSnapshotFixtureForComparison } from '@kinetick-labs/kh-llm-replay'
 
 const repoRoot = fileURLToPath(new URL('../../', import.meta.url))
 const snapshotsRoot = fileURLToPath(new URL('./', import.meta.url))
-const dshBin = join(repoRoot, 'apps/cli/src/bin.ts')
+const khBin = join(repoRoot, 'apps/cli/src/bin.ts')
 const tsconfigPath = join(repoRoot, 'tsconfig.json')
 const editingCordisSkill = join(
   repoRoot,
@@ -72,12 +72,12 @@ function snapshotMode(value: string | undefined): SnapshotMode {
     case 'replay': return 'replay'
     case 'record': return 'record'
     case 'refresh': return 'refresh'
-    default: throw new Error(`unknown DSH_SNAPSHOT mode: ${value}`)
+    default: throw new Error(`unknown KH_SNAPSHOT mode: ${value}`)
   }
 }
 
-const mode = snapshotMode(process.env.DSH_SNAPSHOT)
-const RUNTIME_WORKSPACE_ENTRIES = ['.agents', '.dsh', '.snapshot-patches'] as const
+const mode = snapshotMode(process.env.KH_SNAPSHOT)
+const RUNTIME_WORKSPACE_ENTRIES = ['.agents', '.kh', '.snapshot-patches'] as const
 
 interface JsonObject {
   [key: string]: unknown
@@ -184,7 +184,7 @@ function contextOf(logs: readonly string[]): NormalizeContext {
 }
 
 async function persistedSessions(cwd: string): Promise<SessionLog[]> {
-  const root = join(cwd, '.dsh', 'sessions')
+  const root = join(cwd, '.kh', 'sessions')
   const files = latestPersistedSessionPaths(await readdir(root, { recursive: true }))
   const logs = await Promise.all(files.map(async (file): Promise<SessionLog> => {
     const content = await readFile(join(root, file), 'utf8')
@@ -367,7 +367,7 @@ function stderrFromSession(log: string): string {
   const appendReasoning = (text: string): void => {
     if (text === '') return
     if (!open) {
-      output += 'dsh: reasoning:\n'
+      output += 'kh: reasoning:\n'
       open = true
     }
     output += text
@@ -444,7 +444,7 @@ function stderrFromSession(log: string): string {
   if (typeof error?.code !== 'string' || typeof error.message !== 'string') {
     throw new Error('headless snapshot error reason has no code and message')
   }
-  return `${output}dsh: ${error.code}: ${error.message}\n`
+  return `${output}kh: ${error.code}: ${error.message}\n`
 }
 
 function modelFromSession(log: string): { provider: string; model: string } {
@@ -476,7 +476,7 @@ async function seedWorkspace(scenario: HeadlessScenario, cwd: string): Promise<v
 
 const workspaceSetups: Record<string, (cwd: string) => Promise<void>> = {
   async 'windows-acl-skill'(cwd) {
-    const target = join(cwd, '.dsh', 'skills', 'diagnose-windows-sandbox-acl', 'SKILL.md')
+    const target = join(cwd, '.kh', 'skills', 'diagnose-windows-sandbox-acl', 'SKILL.md')
     await mkdir(dirname(target), { recursive: true })
     await copyFile(join(repoRoot, 'packages/sandbox/sandbox-windows-acl/assets/diagnose-windows-sandbox-acl/SKILL.md'), target)
   },
@@ -486,7 +486,7 @@ const workspaceSetups: Record<string, (cwd: string) => Promise<void>> = {
     await symlink(join(repoRoot, 'packages/skill/skill-office/node_modules/@deepseek-ai/libreoffice-kit/lib/cli.js'), join(cwd, 'office-cli.js'))
   },
   async 'editing-cordis-skill'(cwd) {
-    const target = join(cwd, '.dsh', 'skills', 'editing-cordis-compositions', 'SKILL.md')
+    const target = join(cwd, '.kh', 'skills', 'editing-cordis-compositions', 'SKILL.md')
     await mkdir(dirname(target), { recursive: true })
     await copyFile(editingCordisSkill, target)
   },
@@ -699,24 +699,24 @@ async function verifyProviderCwdResume(
   fixture: string,
   task: string,
 ): Promise<void> {
-  const providerCwd = scenario.manifest.environment?.DSH_SNAPSHOT_PROVIDER_CWD
+  const providerCwd = scenario.manifest.environment?.KH_SNAPSHOT_PROVIDER_CWD
   const primary = initial[0]
   expect(providerCwd).toBeDefined()
   expect(primary?.header.cwd).toBe(providerCwd)
   expect(primary?.header.cwd).not.toBe(cwd)
-  const otherHostCwd = await mkdtemp(join(tmpdir(), 'dsh-provider-resume-'))
+  const otherHostCwd = await mkdtemp(join(tmpdir(), 'kh-provider-resume-'))
   const env = {
-    DSH_HOME: join(cwd, '.dsh'),
-    DSH_SNAPSHOT: 'replay',
-    DSH_SNAPSHOT_FILE: fixture,
-    DSH_SNAPSHOT_PROVIDER: model.provider,
-    DSH_SNAPSHOT_MODEL: model.model,
-    DSH_PERMISSION_MODE: 'read-only',
+    KH_HOME: join(cwd, '.kh'),
+    KH_SNAPSHOT: 'replay',
+    KH_SNAPSHOT_FILE: fixture,
+    KH_SNAPSHOT_PROVIDER: model.provider,
+    KH_SNAPSHOT_MODEL: model.model,
+    KH_PERMISSION_MODE: 'read-only',
     NODE_OPTIONS: [process.env.NODE_OPTIONS, '--disable-warning=ExperimentalWarning'].filter(Boolean).join(' '),
   }
   const launch = {
     cwd: otherHostCwd,
-    binScript: dshBin,
+    binScript: khBin,
     configPath: patches[0] as string,
     tsconfigPath,
     binArgs: [
@@ -728,7 +728,7 @@ async function verifyProviderCwdResume(
   try {
     const refused = await runLoaderSmoke({
       ...launch, label: 'provider-cwd mismatched resume', expectedExitCode: 1,
-      env: { ...env, DSH_SNAPSHOT_PROVIDER_CWD: `${providerCwd}/other` },
+      env: { ...env, KH_SNAPSHOT_PROVIDER_CWD: `${providerCwd}/other` },
     })
     expect(refused.stdout).toBe('')
     expect(refused.stderr).toContain(`was recorded in "${providerCwd}", not "${providerCwd}/other"`)
@@ -736,7 +736,7 @@ async function verifyProviderCwdResume(
     const resumed = await runLoaderSmoke({
       ...launch, label: 'provider-cwd matching resume',
       binArgs: [...launch.binArgs.slice(0, -1), '--json', task],
-      env: { ...env, DSH_SNAPSHOT_PROVIDER_CWD: providerCwd },
+      env: { ...env, KH_SNAPSHOT_PROVIDER_CWD: providerCwd },
     })
     const output = records(resumed.stdout)
     expect(output[0]).toEqual({ type: 'session', sessionId: primary?.header.id, cwd: providerCwd })
@@ -882,7 +882,7 @@ describe('headless recorded-session snapshots', () => {
 
   it('replays original inbox mentions before normalized user messages', () => {
     const message = (text: string) => ({ source: { kind: 'user' }, content: [{ type: 'text', text }] })
-    const original = 'Use @[Research](dsh-session:InJlZmVyZW5jZS1zb3VyY2Ui)'
+    const original = 'Use @[Research](kh-session:InJlZmVyZW5jZS1zb3VyY2Ui)'
     const log = [
       { type: 'agent/inbox/spliced', data: { inserted: [message(original)] } },
       { type: 'user/message', data: message('Use @Research') },
@@ -903,11 +903,11 @@ describe('headless recorded-session snapshots', () => {
     ].map(record => JSON.stringify(record)).join('\n')
 
     expect(stderrFromSession(log)).toBe([
-      'dsh: reasoning:',
+      'kh: reasoning:',
       'first',
-      'dsh: reasoning:',
+      'kh: reasoning:',
       'second',
-      'dsh: reasoning:',
+      'kh: reasoning:',
       'third',
       '',
     ].join('\n'))
@@ -931,7 +931,7 @@ describe('headless recorded-session snapshots', () => {
         { type: 'turn/end', data: { turn: 1, reason: { kind: 'completed' } } },
       ].map(record => JSON.stringify(record)).join('\n')
 
-      expect(stderrFromSession(log)).toBe('dsh: reasoning:\nfirst thought\n')
+      expect(stderrFromSession(log)).toBe('kh: reasoning:\nfirst thought\n')
     },
   )
 
@@ -954,11 +954,11 @@ describe('headless recorded-session snapshots', () => {
       { type: 'turn/end', data: { turn: 1, reason: { kind: 'completed' } } },
     ].map(record => JSON.stringify(record)).join('\n')
 
-    expect(stderrFromSession(log)).toBe('dsh: reasoning:\nfirst thought\ndsh: reasoning:\nsecond\n')
+    expect(stderrFromSession(log)).toBe('kh: reasoning:\nfirst thought\ndsh: reasoning:\nsecond\n')
   })
 
   it.each([10, 20])('assigns sibling roles by catalog order when the first child timestamp is %i', async (firstCreatedAt) => {
-    const cwd = await mkdtemp(join(tmpdir(), 'dsh-headless-catalog-order-'))
+    const cwd = await mkdtemp(join(tmpdir(), 'kh-headless-catalog-order-'))
     try {
       const logs = [
         [
@@ -970,7 +970,7 @@ describe('headless recorded-session snapshots', () => {
         [{ type: 'session', version: SESSION_FORMAT_VERSION, id: 'child-a', createdAt: 10, parentSession: 'parent' }],
       ].map(rows => rows.map(row => JSON.stringify(row)).join('\n') + '\n')
       for (const content of logs) {
-        const directory = join(cwd, '.dsh', 'sessions', String(headerOf(content).id))
+        const directory = join(cwd, '.kh', 'sessions', String(headerOf(content).id))
         await mkdir(directory, { recursive: true })
         await writeFile(join(directory, `session.v${SESSION_FORMAT_VERSION}.jsonl`), content)
       }
@@ -983,7 +983,7 @@ describe('headless recorded-session snapshots', () => {
   })
 
   it('writes header sidecars without replacing a retained Session generation', async () => {
-    const directory = await mkdtemp(join(tmpdir(), 'dsh-headless-sidecars-'))
+    const directory = await mkdtemp(join(tmpdir(), 'kh-headless-sidecars-'))
     try {
       const scenario: HeadlessScenario = {
         name: 'retained-pin',
@@ -1009,7 +1009,7 @@ describe('headless recorded-session snapshots', () => {
         { type: 'system/message', seq: 2, time: 3, data: {
           turn: 1, step: 1,
           message: { role: 'system', content: [{ type: 'text', text: 'fresh system prompt' }],
-            source: { kind: 'plugin', plugin: '@deepseek-ai/dsh-system-prompt' }, id: 'fresh-msg' },
+            source: { kind: 'plugin', plugin: '@kinetick-labs/kh-system-prompt' }, id: 'fresh-msg' },
         }, surfaceOp: 'append' },
         {
           type: 'request/header',
@@ -1082,7 +1082,7 @@ describe('headless recorded-session snapshots', () => {
       || mode === 'record' && scenario.manifest.sessionFormat !== undefined
     const scenarioTest = skipped ? it.skip : mode === 'replay' ? it.concurrent : it
     const inputLabel = retainedToolInput === undefined ? '' : ' from retained V3 input'
-    scenarioTest(`${mode}s ${scenario.name}${inputLabel} through dsh --profile headless`, async () => {
+    scenarioTest(`${mode}s ${scenario.name}${inputLabel} through kh --profile headless`, async () => {
       let fixtureFiles = retainedToolInput === undefined
         ? sessionFixtureNames(await readdir(scenario.dir)) : [retainedToolInput]
       let fixtures = await fixtureSessions(scenario, fixtureFiles)
@@ -1122,9 +1122,9 @@ describe('headless recorded-session snapshots', () => {
       try {
         result = await runLoaderSmoke({
           label: `${scenario.name} headless snapshot`,
-          tempDirPrefix: 'dsh-log-snap-',
+          tempDirPrefix: 'kh-log-snap-',
           ...(scenario.manifest.workspace?.parent === 'outside-temp' ? { tempDirParent: outsideTempWorkspaceParent() } : {}),
-          binScript: dshBin,
+          binScript: khBin,
           sourceImport: 'tsx/esm',
           configPath: join(baseComposition.dir, 'cordis.yml'),
           binArgs: [
@@ -1138,27 +1138,27 @@ describe('headless recorded-session snapshots', () => {
             ? 0
             : 1,
           env: {
-            DSH_SNAPSHOT: replaying ? 'replay' : 'record',
-            DSH_SNAPSHOT_PROVIDER: model.provider,
-            DSH_SNAPSHOT_MODEL: model.model,
-            DSH_SNAPSHOT_SPILL_ROOT: spillRoot,
-            DSH_SNAPSHOT_SPILL_LOCATOR_ROOT: locatorRoot,
-            DSH_SNAPSHOT_FILE: join(scenario.dir, fixtureFiles[0] as string),
+            KH_SNAPSHOT: replaying ? 'replay' : 'record',
+            KH_SNAPSHOT_PROVIDER: model.provider,
+            KH_SNAPSHOT_MODEL: model.model,
+            KH_SNAPSHOT_SPILL_ROOT: spillRoot,
+            KH_SNAPSHOT_SPILL_LOCATOR_ROOT: locatorRoot,
+            KH_SNAPSHOT_FILE: join(scenario.dir, fixtureFiles[0] as string),
             ...(replaying && fixtureFiles.length > 1
-              ? { DSH_SNAPSHOT_CHILD_FILES: fixtureFiles.slice(1).map(file => join(scenario.dir, file)).join(delimiter) }
+              ? { KH_SNAPSHOT_CHILD_FILES: fixtureFiles.slice(1).map(file => join(scenario.dir, file)).join(delimiter) }
               : {}),
             ...(replaying && scenario.manifest.replay?.override === true
-              ? { DSH_SNAPSHOT_OVERRIDE: join(scenario.dir, 'replay.override.json') }
+              ? { KH_SNAPSHOT_OVERRIDE: join(scenario.dir, 'replay.override.json') }
               : {}),
             ...(scenario.manifest.permission === undefined
               ? {}
-              : { DSH_PERMISSION_MODE: scenario.manifest.permission }),
+              : { KH_PERMISSION_MODE: scenario.manifest.permission }),
             ...scenario.manifest.environment,
             ...(scenario.name === 'mcp-resources' || scenario.name === 'mcp-resources-ptc' ? {
-              DSH_MCP_RESOURCES_FIXTURE: join(repoRoot, 'packages/mcp/mcp-client/tests/fixtures/resources-server.ts'),
+              KH_MCP_RESOURCES_FIXTURE: join(repoRoot, 'packages/mcp/mcp-client/tests/fixtures/resources-server.ts'),
             } : {}),
             NODE_OPTIONS: [process.env.NODE_OPTIONS, '--disable-warning=ExperimentalWarning'].filter(Boolean).join(' '),
-            ...(mcpDemo === undefined ? {} : { DSH_MCP_DEMO_URL: mcpDemo.url }),
+            ...(mcpDemo === undefined ? {} : { KH_MCP_DEMO_URL: mcpDemo.url }),
           },
           prepare: async (cwd) => {
             if (scenario.manifest.workspace?.parent === 'outside-temp') assertWorkspaceOutsideTemp(cwd)
@@ -1169,7 +1169,7 @@ describe('headless recorded-session snapshots', () => {
               }
             })
             if (mcpDemo !== undefined) {
-              const profileDir = join(cwd, '.dsh/profiles/headless')
+              const profileDir = join(cwd, '.kh/profiles/headless')
               await mkdir(profileDir, { recursive: true })
               await copyFile(join(scenario.dir, 'profile.patch.yml'), join(profileDir, 'cordis.patch.yml'))
             }
@@ -1188,7 +1188,7 @@ describe('headless recorded-session snapshots', () => {
               expect(log).toContain('mcp__demo__ping')
               expect(log).toContain('pong')
               expect(mcpDemo.calls).toEqual(['ping'])
-              const saved = await readFile(join(cwd, '.dsh/profiles/headless/cordis.patch.yml'), 'utf8')
+              const saved = await readFile(join(cwd, '.kh/profiles/headless/cordis.patch.yml'), 'utf8')
               expect(saved).toContain('id: demo')
               expect(saved).toContain('disabled: false')
             }

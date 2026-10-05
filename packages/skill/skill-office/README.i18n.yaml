@@ -5,39 +5,39 @@
 /:
   en: cc4e875ac37d9354
   zh: e121819cde2ce76c
-/deepseek-ai-dsh-skill-office:
-  en: f855ac5e12b4e604
-  zh: b2e875d31d56cb2e
-/deepseek-ai-dsh-skill-office/summary:
+/kinetick-labs-kh-skill-office:
+  en: fe9dd3fe913f7532
+  zh: 3ae77f6dcc91f997
+/kinetick-labs-kh-skill-office/summary:
   en: 4fe3cb4544ce7d9d
   zh: 2749b1d0ffa468a1
-/deepseek-ai-dsh-skill-office/table-of-contents:
+/kinetick-labs-kh-skill-office/table-of-contents:
   en: d152484eb41ac6b4
   zh: 43ad67236ccda19a
-/deepseek-ai-dsh-skill-office/use-this-package:
-  en: 6987594a0cf6e53d
-  zh: ecf4c4f52e7a50eb
-/deepseek-ai-dsh-skill-office/use-this-package/minimal-configuration:
+/kinetick-labs-kh-skill-office/use-this-package:
+  en: c7fadc23eaa18729
+  zh: 065bacacf96fbce0
+/kinetick-labs-kh-skill-office/use-this-package/minimal-configuration:
   en: 088f223318dff9d7
   zh: ce944bf61fb1f821
-/deepseek-ai-dsh-skill-office/use-this-package/structural-checks:
+/kinetick-labs-kh-skill-office/use-this-package/structural-checks:
   en: 1bb872d63bdd78b7
   zh: 355dee19bdfb3798
-/deepseek-ai-dsh-skill-office/understand-the-implementation:
+/kinetick-labs-kh-skill-office/understand-the-implementation:
   en: 9c45ee3de51adb4d
   zh: 0f24d44dfa58df25
-/deepseek-ai-dsh-skill-office/further-exploration:
-  en: b08fc992559d8fda
-  zh: ad74e037ecd81c0b
-/deepseek-ai-dsh-skill-office/model-experience:
-  en: f9fe51841bd9de8d
-  zh: 773af8cc0e0335e4
-/deepseek-ai-dsh-skill-office/model-experience/kv-cache-effect:
+/kinetick-labs-kh-skill-office/further-exploration:
+  en: 75d9190c54d8b048
+  zh: dd63d440ea5e018e
+/kinetick-labs-kh-skill-office/model-experience:
+  en: ac8fb57600d3ec48
+  zh: 8c6af4d4ba2dd9c2
+/kinetick-labs-kh-skill-office/model-experience/kv-cache-effect:
   en: c77beb1c0d28f221
   zh: 99643101d2b915b9
-/deepseek-ai-dsh-skill-office/known-limitations-and-deferred-work:
+/kinetick-labs-kh-skill-office/known-limitations-and-deferred-work:
   en: 22d0a8196c2c48c3
   zh: ef2e38a0a91476a8
-/deepseek-ai-dsh-skill-office/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-skill-office/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

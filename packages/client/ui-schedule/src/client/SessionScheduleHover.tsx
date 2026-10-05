@@ -8,9 +8,9 @@
  */
 
 import { useState } from 'react'
-import { IconClockOutlineRegular } from '@deepseek-ai/dsh-client-ui-primitives'
-import type { InjectFace, PropsLocale, PropsRuntime } from '@deepseek-ai/dsh-client-ui-slots'
-import type {} from '@deepseek-ai/dsh-client-ui-workspace/client'
+import { IconClockOutlineRegular } from '@kinetick-labs/kh-client-ui-primitives'
+import type { InjectFace, PropsLocale, PropsRuntime } from '@kinetick-labs/kh-client-ui-slots'
+import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
 import { formatScheduleFrequency, nextRunParts, orderScheduleRecords, taskName } from './schedule-format.ts'
 import {
   useSessionScheduleFacts, type SessionScheduleCatalogObservable,

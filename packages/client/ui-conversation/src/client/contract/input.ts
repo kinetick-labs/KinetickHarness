@@ -7,10 +7,10 @@
  * here is the submit plane (phase, claim, attempt) alone.
  */
 import type { Context } from '@deepseek-ai/cordis'
-import type { SessionBinding } from '@deepseek-ai/dsh-api-session-controller/client'
-import type { InboxState } from '@deepseek-ai/dsh-agent/types'
-import type { ObservableSnapshot, SnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { Branded } from '@deepseek-ai/dsh-brand'
+import type { SessionBinding } from '@kinetick-labs/kh-api-session-controller/client'
+import type { InboxState } from '@kinetick-labs/kh-agent/types'
+import type { ObservableSnapshot, SnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { Branded } from '@kinetick-labs/kh-brand'
 import type { ArbitrateKey, ArbitrateOutcome, Occurrence, ReferenceInsert, TokenSpan } from './draft-editor.ts'
 import type { InputSubmitMode, MessageSubmission } from './composer-submission.ts'
 

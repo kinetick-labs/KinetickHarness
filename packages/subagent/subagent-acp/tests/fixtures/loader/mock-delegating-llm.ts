@@ -1,6 +1,6 @@
 import type { Context } from '@deepseek-ai/cordis'
-import type { GenerateOptions, StreamChunk } from '@deepseek-ai/dsh-llm'
-import { ToolCallId, LlmAdapter } from '@deepseek-ai/dsh-llm'
+import type { GenerateOptions, StreamChunk } from '@kinetick-labs/kh-llm'
+import { ToolCallId, LlmAdapter } from '@kinetick-labs/kh-llm'
 
 /**
  * Test adapter for the `mock-delegate` model: the first request calls the

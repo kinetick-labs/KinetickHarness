@@ -3,7 +3,7 @@ description: "面向部署方与维护者的持久会话投影缓存说明，用
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-session-projection-cache
+# @kinetick-labs/kh-session-projection-cache
 
 [English](README.md) | 中文
 
@@ -35,11 +35,11 @@ kind: "package-reference"
 
 两个节流字段均必填——写入节奏是部署选择，没有普适正确值：
 
-缓存通过存储栈打开自己的域，因此 base 先挂 `storage`、`storage-json`（根 `dshHomePath('storages')`）与 `storage-domain`（`backend: json`）：
+缓存通过存储栈打开自己的域，因此 base 先挂 `storage`、`storage-json`（根 `khHomePath('storages')`）与 `storage-domain`（`backend: json`）：
 
 ```yaml
 - id: session-projection-cache
-  name: '@deepseek-ai/dsh-session-projection-cache'
+  name: '@kinetick-labs/kh-session-projection-cache'
   config:
     writeEveryEvents: 200
     writeIntervalMs: 5000

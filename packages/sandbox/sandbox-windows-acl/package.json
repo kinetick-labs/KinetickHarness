@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-sandbox-windows-acl",
-  "description": "Windows ACL write-restriction sandbox backend (restricted-token spawn with capability-SID write allowlist) for the DeepSeek Harness sandbox seam",
+  "name": "@kinetick-labs/kh-sandbox-windows-acl",
+  "description": "Windows ACL write-restriction sandbox backend (restricted-token spawn with capability-SID write allowlist) for the KinetickHarness sandbox seam",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/sandbox/sandbox-windows-acl"
   },
   "type": "module",
@@ -35,23 +35,23 @@
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-skill": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*"
+    "@kinetick-labs/kh-skill": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*"
   },
   "dependencies": {
-    "@deepseek-ai/dsh-lazy-require": "workspace:*",
-    "@deepseek-ai/dsh-win32-process": "workspace:*",
+    "@kinetick-labs/kh-lazy-require": "workspace:*",
+    "@kinetick-labs/kh-win32-process": "workspace:*",
     "koffi": "3.1.1",
     "yaml": "^2.4.2"
   },
   "devDependencies": {
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
-    "@deepseek-ai/dsh-pwsh-local": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-local": "workspace:*",
+    "@kinetick-labs/kh-pwsh-local": "workspace:*",
+    "@kinetick-labs/kh-sandbox-local": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-skill": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*",
-    "@deepseek-ai/dsh-subprocess-local": "workspace:*"
+    "@kinetick-labs/kh-skill": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*",
+    "@kinetick-labs/kh-subprocess-local": "workspace:*"
   }
 }

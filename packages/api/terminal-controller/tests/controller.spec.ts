@@ -4,11 +4,11 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { PassThrough } from 'node:stream'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { SessionEvent, SessionId } from '@deepseek-ai/dsh-session'
-import type { SandboxExecutionPolicy, SandboxMode } from '@deepseek-ai/dsh-sandbox'
-import { SubprocessExecutableNotFoundError, type SubprocessRuntime, type SubprocessTerminalEnvironment, type SubprocessTerminalHandle } from '@deepseek-ai/dsh-subprocess'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { SessionEvent, SessionId } from '@kinetick-labs/kh-session'
+import type { SandboxExecutionPolicy, SandboxMode } from '@kinetick-labs/kh-sandbox'
+import { SubprocessExecutableNotFoundError, type SubprocessRuntime, type SubprocessTerminalEnvironment, type SubprocessTerminalHandle } from '@kinetick-labs/kh-subprocess'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { TerminalController, type Config } from '../src/index.ts'
 import { resolveShell } from '../src/shells.ts'
@@ -288,7 +288,7 @@ describe('TerminalController', () => {
     await controller.create(agent, request, signal())
     expect(confine).not.toHaveBeenCalled()
     expect(sandboxPolicy.resolve).not.toHaveBeenCalled()
-    expect(subprocess.spawnTerminal).toHaveBeenCalledWith(expect.objectContaining({ argv: ['/bin/bash', '--noprofile', '--norc', '-i'], env: { DSH_SESSION_ID: agent.id }, graceMs: 100 }))
+    expect(subprocess.spawnTerminal).toHaveBeenCalledWith(expect.objectContaining({ argv: ['/bin/bash', '--noprofile', '--norc', '-i'], env: { KH_SESSION_ID: agent.id }, graceMs: 100 }))
   })
 
   it('uses the Session working directory without requiring a sandbox provider', async () => {
@@ -486,7 +486,7 @@ describe('shell resolution', () => {
 })
 
 it.skipIf(process.platform === 'win32')('runs a real interactive shell with completion, TERM and live window dimensions', async () => {
-  const cwd = await mkdtemp(join(tmpdir(), 'dsh-web-terminal-'))
+  const cwd = await mkdtemp(join(tmpdir(), 'kh-web-terminal-'))
   const ctx = new Context()
   const runtime = await ctx.plugin(LocalSubprocessRuntime)
   try {

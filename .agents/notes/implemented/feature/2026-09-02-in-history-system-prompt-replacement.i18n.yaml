@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-09-02-in-history-system-prompt-replacement.md
 /agent-note-in-history-system-prompt-replacement-for-cache-stable-prompt-changes:
-  en: 7b69ac848815886a
-  zh: db7a9f4000fe5359
+  en: cc893508e66efdeb
+  zh: 07eaa9aaa30fb0df
 /agent-note-in-history-system-prompt-replacement-for-cache-stable-prompt-changes/problem:
-  en: 87965b88be0e831f
-  zh: d96767a2cef52269
+  en: f66aad05102d9958
+  zh: da4096879172e72d
 /agent-note-in-history-system-prompt-replacement-for-cache-stable-prompt-changes/decision:
-  en: da6d3f0677f0343b
-  zh: 8b5dcf7e1108edc9
+  en: 04a9e587963e360c
+  zh: e2aa4b634a85c64e
 /agent-note-in-history-system-prompt-replacement-for-cache-stable-prompt-changes/decision/capability:
   en: 2f23fa55e1ce652c
   zh: 335695fc654ab1db
@@ -30,5 +30,5 @@
   en: beda064bcd194a2a
   zh: 8a3bb81d5edcd60a
 /agent-note-in-history-system-prompt-replacement-for-cache-stable-prompt-changes/testing:
-  en: 3f9750d67404ac92
-  zh: 80cb9aced02e2950
+  en: 3e5f516d3f342534
+  zh: bccbe03aecfae96f

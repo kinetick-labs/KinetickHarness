@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-session-reference",
+  "name": "@kinetick-labs/kh-session-reference",
   "description": "Cross-session snapshot references and durable untrusted model context (ctx.sessionReferenceResolver)",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/context/session-reference"
   },
   "type": "module",
@@ -44,32 +44,32 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:*",
-    "@deepseek-ai/dsh-util-values": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
+    "@kinetick-labs/kh-util-values": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~",
     "zod": "^4.4.3"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-compaction": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-output-retention": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-session-projection-cache": "workspace:*",
-    "@deepseek-ai/dsh-session-query": "workspace:*",
-    "@deepseek-ai/dsh-session-title": "workspace:*",
-    "@deepseek-ai/dsh-spill": "workspace:*",
-    "@deepseek-ai/dsh-subagent": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-typert-protocol": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-compaction": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-output-retention": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-session-projection-cache": "workspace:*",
+    "@kinetick-labs/kh-session-query": "workspace:*",
+    "@kinetick-labs/kh-session-title": "workspace:*",
+    "@kinetick-labs/kh-spill": "workspace:*",
+    "@kinetick-labs/kh-subagent": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-typert-protocol": "workspace:*"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/dsh-spill": {
+    "@kinetick-labs/kh-spill": {
       "optional": true
     },
-    "@deepseek-ai/dsh-session-projection-cache": {
+    "@kinetick-labs/kh-session-projection-cache": {
       "optional": true
     }
   },
@@ -77,23 +77,23 @@
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-compaction": "workspace:*",
-    "@deepseek-ai/dsh-fs-local": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-output-retention": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-session-projection-cache": "workspace:*",
-    "@deepseek-ai/dsh-session-query": "workspace:*",
-    "@deepseek-ai/dsh-session-query-sqlite": "workspace:*",
-    "@deepseek-ai/dsh-session-title": "workspace:*",
-    "@deepseek-ai/dsh-spill": "workspace:*",
-    "@deepseek-ai/dsh-subagent": "workspace:*",
-    "@deepseek-ai/dsh-spill-local": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-tool-fs": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-typert-protocol": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-compaction": "workspace:*",
+    "@kinetick-labs/kh-fs-local": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-output-retention": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-session-projection-cache": "workspace:*",
+    "@kinetick-labs/kh-session-query": "workspace:*",
+    "@kinetick-labs/kh-session-query-sqlite": "workspace:*",
+    "@kinetick-labs/kh-session-title": "workspace:*",
+    "@kinetick-labs/kh-spill": "workspace:*",
+    "@kinetick-labs/kh-subagent": "workspace:*",
+    "@kinetick-labs/kh-spill-local": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-tool-fs": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-typert-protocol": "workspace:*"
   }
 }

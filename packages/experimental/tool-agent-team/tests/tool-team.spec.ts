@@ -3,23 +3,23 @@ import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { ToolCallId, createUserMessage } from '@deepseek-ai/dsh-llm'
-import { scopeOf } from '@deepseek-ai/dsh-scope'
-import { SessionId, SessionLogOffset } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import SessionQueryEngine from '@deepseek-ai/dsh-session-query'
-import SubagentService from '@deepseek-ai/dsh-subagent'
-import * as SubagentFork from '@deepseek-ai/dsh-subagent-fork-in-process'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import { renderPrompt, renderContextSnapshot } from '@deepseek-ai/dsh-system-prompt'
-import * as ToolSubagentControl from '@deepseek-ai/dsh-tool-subagent-control'
-import { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import { resolveAdapterOptions } from '@deepseek-ai/dsh-llm-deepseek'
-import { serialize } from '@deepseek-ai/dsh-llm-deepseek/src/serialize.ts'
-import type { GenerateOptions } from '@deepseek-ai/dsh-llm'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { ToolCallId, createUserMessage } from '@kinetick-labs/kh-llm'
+import { scopeOf } from '@kinetick-labs/kh-scope'
+import { SessionId, SessionLogOffset } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import SessionQueryEngine from '@kinetick-labs/kh-session-query'
+import SubagentService from '@kinetick-labs/kh-subagent'
+import * as SubagentFork from '@kinetick-labs/kh-subagent-fork-in-process'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import { renderPrompt, renderContextSnapshot } from '@kinetick-labs/kh-system-prompt'
+import * as ToolSubagentControl from '@kinetick-labs/kh-tool-subagent-control'
+import { defineContentToolFixture } from '@kinetick-labs/kh-tools'
+import { resolveAdapterOptions } from '@kinetick-labs/kh-llm-deepseek'
+import { serialize } from '@kinetick-labs/kh-llm-deepseek/src/serialize.ts'
+import type { GenerateOptions } from '@kinetick-labs/kh-llm'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import TeamService from '../../agent-team/src/index.ts'
 import * as toolTeam from '../src/index.ts'
@@ -67,7 +67,7 @@ async function setup(script: ConstructorParameters<typeof MockAdapter>[0], legac
   const ctx = new Context()
   contexts.add(ctx)
   await mountAgentLoopTestDependencies(ctx)
-  const storageRoot = mkdtempSync(join(tmpdir(), 'dsh-tool-team-'))
+  const storageRoot = mkdtempSync(join(tmpdir(), 'kh-tool-team-'))
   roots.push(storageRoot)
   await ctx.plugin(JsonlSessionPersistence, { root: storageRoot })
   await ctx.plugin(TestSessionQuery)
@@ -134,7 +134,7 @@ async function waitNoAgent(ctx: Context, id: SessionId): Promise<void> {
   await vi.waitFor(() => { expect(ctx.agents.get(id)).toBeUndefined() }, { timeout: 5_000 })
 }
 
-describe('dsh-tool-team', () => {
+describe('kh-tool-team', () => {
   it.each(['running', 'inactive', 'provisioning', 'failed'] as const)(
     'projects %s members consistently in creation, listing, and schemas', async (status) => {
       const { ctx, lead } = await setup([])

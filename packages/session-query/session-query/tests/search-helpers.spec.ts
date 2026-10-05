@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createUserMessage, ToolCallId , createMessage, createToolResultMessage } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
+import { createUserMessage, ToolCallId , createMessage, createToolResultMessage } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
 import SessionStore, {
   SESSION_FORMAT_VERSION,
   SessionId,
   SessionSeq,
-} from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import type { SessionEvent, SessionHeader } from '@deepseek-ai/dsh-session'
+} from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import type { SessionEvent, SessionHeader } from '@kinetick-labs/kh-session'
 import {
   buildSessionEventRecords,
   buildSessionEventSearchDocuments,
@@ -19,10 +19,10 @@ import {
   materializeSessionEventResultFilters,
   materializeSessionResultFilters,
   type SessionQueryErrorCode,
-} from '@deepseek-ai/dsh-session-query'
+} from '@kinetick-labs/kh-session-query'
 import { TestSessionQueryEngine } from './test-service.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
   }

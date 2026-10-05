@@ -2,7 +2,7 @@
 
 English | [中文](deepseek-llm-api-wire-extensions.zh.md)
 
-This reference defines every DeepSeek Harness-specific HTTP header sent by [`@deepseek-ai/dsh-llm-deepseek`](../packages/llm/llm-deepseek/README.md) on `deepseek-official` Messages requests. It does not redefine fields owned by the upstream DeepSeek API. The provider-neutral LLM interface and `llm-pi-ai` do not implement these additions.
+This reference defines every KinetickHarness-specific HTTP header sent by [`@kinetick-labs/kh-llm-deepseek`](../packages/llm/llm-deepseek/README.md) on `deepseek-official` Messages requests. It does not redefine fields owned by the upstream DeepSeek API. The provider-neutral LLM interface and `llm-pi-ai` do not implement these additions.
 
 The adapter sends the additions to its resolved `baseURL`, including a configured gateway. They remain outside `messages`, system prompts, and tool schemas, so they do not add model-input tokens or alter the model-visible prefix. Shipped profiles attach no session log, plugin inventory, anonymous user id, or session id.
 
@@ -18,10 +18,10 @@ The [`DeepSeekLlmApiExtensionRegistry`](../packages/llm/deepseek-llm-api-extensi
 
 | Header | Presence | Value |
 |---|---|---|
-| `user-agent` | Every provider HTTP request, including Files API operations | Application identity in `product/version (+url)` form; the default product is `deepseek-harness` |
+| `user-agent` | Every provider HTTP request, including Files API operations | Application identity in `product/version (+url)` form; the default product is `kinetick-harness` |
 | `x-deepseek-harness-compact` | Model requests whose purpose is `compaction` | The literal string `1` |
 
-Official model requests do not send `x-deepseek-harness-user-id` or `x-deepseek-harness-session-id`, and a model call does not create `$DSH_HOME/.anonymous-user-id`. Session-title requests have no additional purpose header. `x-deepseek-harness-compact` names a compaction request; it is not a usage report.
+Official model requests do not send `x-deepseek-harness-user-id` or `x-deepseek-harness-session-id`, and a model call does not create `$KH_HOME/.anonymous-user-id`. Session-title requests have no additional purpose header. `x-deepseek-harness-compact` names a compaction request; it is not a usage report.
 
 ## Body-extension transaction
 

@@ -1,18 +1,18 @@
 import {
   ToolCallId, createMessage, createToolResultMessage, createUserMessage,
-} from '@deepseek-ai/dsh-llm'
-import { SessionSeq } from '@deepseek-ai/dsh-session/types'
+} from '@kinetick-labs/kh-llm'
+import { SessionSeq } from '@kinetick-labs/kh-session/types'
 // Minimal SessionEvent builders for orchestration tests (shape mirrors what the
 // host emits; only the fields the object layer reads).
-import type { ContentBlock } from '@deepseek-ai/dsh-llm/types'
-import type { SessionEvent } from '@deepseek-ai/dsh-session/types'
+import type { ContentBlock } from '@kinetick-labs/kh-llm/types'
+import type { SessionEvent } from '@kinetick-labs/kh-session/types'
 import type {
   SessionEventEntry,
   SessionPage,
   SessionWireEvent,
 } from '../src/types.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'compact-checkpoint': { kind: 'compact-checkpoint'; compactionId: string }
   }

@@ -8,17 +8,17 @@
  * composes and drives them directly, so this driver owns exactly one turn with
  * one result.
  *
- * @module @deepseek-ai/dsh-subagent-in-process-driver
+ * @module @kinetick-labs/kh-subagent-in-process-driver
  */
 
 import { randomUUID } from 'node:crypto'
 import type { Context } from '@deepseek-ai/cordis'
-import { brandString } from '@deepseek-ai/dsh-brand'
-import { foldConsumedWork } from '@deepseek-ai/dsh-agent'
-import type { Agent, AgentHandle } from '@deepseek-ai/dsh-agent'
-import { SessionLogOffset } from '@deepseek-ai/dsh-session'
-import type { SessionEvent, SessionId, SessionLogOffset as SessionLogOffsetType, TurnEndReason } from '@deepseek-ai/dsh-session'
-import { createUserMessage, type ContentBlock } from '@deepseek-ai/dsh-llm'
+import { brandString } from '@kinetick-labs/kh-brand'
+import { foldConsumedWork } from '@kinetick-labs/kh-agent'
+import type { Agent, AgentHandle } from '@kinetick-labs/kh-agent'
+import { SessionLogOffset } from '@kinetick-labs/kh-session'
+import type { SessionEvent, SessionId, SessionLogOffset as SessionLogOffsetType, TurnEndReason } from '@kinetick-labs/kh-session'
+import { createUserMessage, type ContentBlock } from '@kinetick-labs/kh-llm'
 import {
   appendDelegatedPolicyOverrides,
   applyChildComposition,
@@ -28,14 +28,14 @@ import {
   finalAssistantOutput,
   resolveChildAgentOptions,
   resolveChildDepth,
-} from '@deepseek-ai/dsh-subagent'
+} from '@kinetick-labs/kh-subagent'
 import type {
   ResolvedSubagentStartRequest,
   SubagentDescriptorData,
   SubagentResult,
   SubagentRun,
   SubagentStopReason,
-} from '@deepseek-ai/dsh-subagent'
+} from '@kinetick-labs/kh-subagent'
 import {
   attachStructuredRuntime,
   type StructuredAttachment,

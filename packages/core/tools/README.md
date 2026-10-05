@@ -3,13 +3,13 @@ description: "The tool registry and execution pipeline for tool authors and main
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tools
+# @kinetick-labs/kh-tools
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-Use `dsh-tools` to expose typed capabilities to models, validate calls, enforce allow/deny/ask policy, and return finalized results without ending a turn on ordinary tool failures. Choose native Function Calling, [PTC mode](#ptc-mode), or both with `mode`; an agent can override the default through `presentAs`. Tool authors use `defineTool` to declare typed parameters and outputs, cooperative timeouts, parallel-safety, and optional UI presentation. Models see each permitted tool's declared name, description, and parameter schema; per-agent restrictions can narrow that visible set.
+Use `kh-tools` to expose typed capabilities to models, validate calls, enforce allow/deny/ask policy, and return finalized results without ending a turn on ordinary tool failures. Choose native Function Calling, [PTC mode](#ptc-mode), or both with `mode`; an agent can override the default through `presentAs`. Tool authors use `defineTool` to declare typed parameters and outputs, cooperative timeouts, parallel-safety, and optional UI presentation. Models see each permitted tool's declared name, description, and parameter schema; per-agent restrictions can narrow that visible set.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ Use `dsh-tools` to expose typed capabilities to models, validate calls, enforce 
 <a id="use-this-package"></a>
 ## Use this package
 
-Mount `dsh-tools` wherever agents call tools: it provides `ctx.tools`, the registry every tool plugin registers into and the loop dispatches through. Registering a tool is enough to make it visible — the registry feeds its schemas into the system-prompt assembly automatically.
+Mount `kh-tools` wherever agents call tools: it provides `ctx.tools`, the registry every tool plugin registers into and the loop dispatches through. Registering a tool is enough to make it visible — the registry feeds its schemas into the system-prompt assembly automatically.
 
 ### Register a tool
 
@@ -36,7 +36,7 @@ Canonical values belong to execution; the Session records rendered content and o
 ```ts
 import { readFile } from 'node:fs/promises'
 import type { Context } from '@deepseek-ai/cordis'
-import { defineTool } from '@deepseek-ai/dsh-tools'
+import { defineTool } from '@kinetick-labs/kh-tools'
 
 declare const ctx: Context
 
@@ -66,7 +66,7 @@ The unified schema DSL supports `string`, `number`, `integer`, `boolean`, `null`
 The `mode` config decides what the model sees: `native` (every visible schema), `ptc` (only `run_code` plus a generated SDK), or `both`.
 
 ```yaml
-- name: '@deepseek-ai/dsh-tools'
+- name: '@kinetick-labs/kh-tools'
   config:
     mode: native
 ```
@@ -76,7 +76,7 @@ The `mode` config decides what the model sees: `native` (every visible schema), 
 | `mode` | `native` | How visible tools are presented to the model: `native`, `ptc`, or `both` |
 | `maxParallelSubCalls` | `10` | Concurrency cap for a `run_code` program's overlapping sub-calls; `1` restores strictly serial dispatch |
 
-The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-tools) is the exhaustive source for every accepted field. Non-native modes require a composed `ctx.ptcRuntime` whose language has a registered SDK renderer; an agent preset selects its own presentation with [`dsh-agent-tool-presentation`](../agent-tool-presentation/README.md), and one agent can shadow the default with `presentAs(mode)`.
+The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-tools) is the exhaustive source for every accepted field. Non-native modes require a composed `ctx.ptcRuntime` whose language has a registered SDK renderer; an agent preset selects its own presentation with [`kh-agent-tool-presentation`](../agent-tool-presentation/README.md), and one agent can shadow the default with `presentAs(mode)`.
 
 ### Restrict tools per agent
 
@@ -230,7 +230,7 @@ These limits define when the registry needs special care. They are current packa
 - **Concurrency policy is not an event gate** — `executionMode()` reads the resolved tool definition directly; plugins can only declare a classifier on definitions they own.
 - **`tools/pre-execute` deliberately cannot rewrite `exec.arguments`** — logged and rendered args would desync from what ran; the rewrite design is [a proposed Agent Note](../../../.agents/notes/proposed/feature/2026-06-30-pre-tool-input-rewrite.md).
 - **Caller-defined subagent and workflow structured outputs remain object-rooted** — this is a consumer-level guard; the shared schema vocabulary and tool outputs support every JSON root.
-- **`timeoutMs` on a definition is declarative only** — the registry never enforces deadlines; enforcement requires the `@deepseek-ai/dsh-tool-call-timeout-policy` wrapper.
+- **`timeoutMs` on a definition is declarative only** — the registry never enforces deadlines; enforcement requires the `@kinetick-labs/kh-tool-call-timeout-policy` wrapper.
 - **PTC mode's SDK language follows the one loaded runtime, and a presentation is per agent rather than per tool** — `mode: ptc`/`both` rejects prompt assembly unless `ctx.ptcRuntime.language` has a registered SDK renderer; within one agent no tool can be native-only while another is ptc-only.
 - **PTC mode intermediate values are execution-local and unbounded by bytes** — they cannot be reconstructed from session replay and may exhaust process or worker memory; only the outer `run_code` output has the worker's configurable hard cap.
 - **`run_code` state is fresh per run** — a persistent REPL-style kernel is rejected for the MVP, because cross-call state would be invisible to the log.

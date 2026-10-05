@@ -15,13 +15,13 @@
  */
 import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it, onTestFinished, vi } from 'vitest'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import { InputTriggerService } from '@deepseek-ai/dsh-client-ui-input-trigger/client'
-import { RemoteError, TestRemote, TestSessions } from '@deepseek-ai/dsh-client-test-runtime'
-import type { SessionFixture } from '@deepseek-ai/dsh-client-test-runtime'
-import type { RemoteFailure } from '@deepseek-ai/dsh-api-remotes/client'
-import type { ClientSessionContext, InputTriggerSource } from '@deepseek-ai/dsh-client-ui-input-trigger/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import { InputTriggerService } from '@kinetick-labs/kh-client-ui-input-trigger/client'
+import { RemoteError, TestRemote, TestSessions } from '@kinetick-labs/kh-client-test-runtime'
+import type { SessionFixture } from '@kinetick-labs/kh-client-test-runtime'
+import type { RemoteFailure } from '@kinetick-labs/kh-api-remotes/client'
+import type { ClientSessionContext, InputTriggerSource } from '@kinetick-labs/kh-client-ui-input-trigger/client'
 import { apply, inject } from '../src/client/index.ts'
 import { SkillRow as SkillToolRow } from '../src/client/SkillRow.tsx'
 
@@ -472,7 +472,7 @@ describe('reference preview', () => {
     await vi.waitFor(() => { expect(list).toHaveBeenCalledTimes(1) })
     gate.resolve({ ok: true, value: { skills: rows } })
     await candidates
-    expect(openResource).toHaveBeenCalledExactlyOnceWith('dsh-resource://file/session/preview//skills/review/SKILL.md')
+    expect(openResource).toHaveBeenCalledExactlyOnceWith('kh-resource://file/session/preview//skills/review/SKILL.md')
     expect(source.openReference!(session, { ref: '/virtual' })).toBe(false)
     expect(source.openReference!(session, { ref: '/missing' })).toBe(false)
     expect(source.openReference!(session, { ref: '/review' })).toBe(true)
@@ -494,10 +494,10 @@ describe('reference preview', () => {
     const secondDone = source.candidates(proj('second'), req(''))
     second.resolve({ ok: true, value: { skills: [{ ...rows[0]!, path: '/second/SKILL.md' }] } })
     await secondDone
-    expect(openResource).toHaveBeenLastCalledWith('dsh-resource://file/session/second//second/SKILL.md')
+    expect(openResource).toHaveBeenLastCalledWith('kh-resource://file/session/second//second/SKILL.md')
     first.resolve({ ok: true, value: { skills: rows } })
     await firstDone
-    expect(openResource).toHaveBeenLastCalledWith('dsh-resource://file/session/first//skills/review/SKILL.md')
+    expect(openResource).toHaveBeenLastCalledWith('kh-resource://file/session/first//skills/review/SKILL.md')
     expect(list.mock.calls.map(([payload]) => payload)).toEqual([{ sessionId: 'first' }, { sessionId: 'second' }])
   })
 

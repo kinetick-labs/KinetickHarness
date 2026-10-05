@@ -1,15 +1,15 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, relative } from 'node:path'
 import { describe, expect, it } from 'vitest'
-import { SESSION_FORMAT_VERSION, Session, SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import { scheduleDomain } from '@deepseek-ai/dsh-schedule'
-import { createSessionFormatCatalogWithChildren } from '@deepseek-ai/dsh-session-format-catalog'
+import { SESSION_FORMAT_VERSION, Session, SessionId, type SessionEvent } from '@kinetick-labs/kh-session'
+import { scheduleDomain } from '@kinetick-labs/kh-schedule'
+import { createSessionFormatCatalogWithChildren } from '@kinetick-labs/kh-session-format-catalog'
 import {
   generationLogFilename,
   scanLog,
-} from '@deepseek-ai/dsh-session-persistence-jsonl/src/format.ts'
-import { foldSubagentDescriptor } from '@deepseek-ai/dsh-subagent'
-import { projectionCacheDomainSpec } from '@deepseek-ai/dsh-session-projection-cache'
+} from '@kinetick-labs/kh-session-persistence-jsonl/src/format.ts'
+import { foldSubagentDescriptor } from '@kinetick-labs/kh-subagent'
+import { projectionCacheDomainSpec } from '@kinetick-labs/kh-session-projection-cache'
 import {
   buildVfsExampleFiles,
   VFS_EXAMPLE_OLDEST_MESSAGE,
@@ -34,7 +34,7 @@ function filesUnder(root: string): string[] {
 }
 
 function readSession(id: string): ReturnType<typeof scanLog> {
-  const path = `home/sessions/--dsh-workspace--/${id}/${generationLogFilename(SESSION_FORMAT_VERSION, 'none')}`
+  const path = `home/sessions/--kh-workspace--/${id}/${generationLogFilename(SESSION_FORMAT_VERSION, 'none')}`
   const generated = buildVfsExampleFiles().get(path)
   if (generated === undefined) throw new Error(`missing generated VFS example Session ${path}`)
   return scanLog(Buffer.from(generated))
@@ -66,7 +66,7 @@ describe('WebWorker preview VFS example', () => {
       ? `${path.slice(0, -currentName.length)}session.v3.jsonl`
       : path
     const predecessors = Object.values(VFS_EXAMPLE_SESSION_IDS)
-      .map(id => `home/sessions/--dsh-workspace--/${id}/session.v2.jsonl`)
+      .map(id => `home/sessions/--kh-workspace--/${id}/session.v2.jsonl`)
     expect(filesUnder(VFS_EXAMPLE_ROOT)).toEqual([...expected.keys()].map(committedPath).concat(predecessors).sort())
     for (const [path, content] of expected) {
       if (path === 'home/storages/session_projcache.json') continue
@@ -115,7 +115,7 @@ describe('WebWorker preview VFS example', () => {
       identity: {
         formatVersion: SESSION_FORMAT_VERSION,
         createdAt: 1_787_472_000_000,
-        cwd: '/dsh/workspace',
+        cwd: '/kh/workspace',
         isSeeded: false,
         inheritedEventCount: 0,
       },
@@ -150,7 +150,7 @@ describe('WebWorker preview VFS example', () => {
     const { meta, inheritedEventCount, events } = readSession(VFS_EXAMPLE_SESSION_IDS.main)
     expect(meta).toMatchObject({
       id: VFS_EXAMPLE_SESSION_IDS.main,
-      cwd: '/dsh/workspace',
+      cwd: '/kh/workspace',
       delegationDepth: 0,
       agentPreset: 'standard',
     })
@@ -189,7 +189,7 @@ describe('WebWorker preview VFS example', () => {
       const { meta, inheritedEventCount, events } = readSession(id)
       expect(meta).toMatchObject({
         id,
-        cwd: '/dsh/workspace',
+        cwd: '/kh/workspace',
         parentSession: VFS_EXAMPLE_SESSION_IDS.main,
         origin: 'subagent',
         delegationDepth: 1,

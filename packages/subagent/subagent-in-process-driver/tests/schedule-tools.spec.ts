@@ -12,14 +12,14 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import AgentPresets from '@deepseek-ai/dsh-agent-preset-registry'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import AgentPresets from '@kinetick-labs/kh-agent-preset-registry'
+import { SessionId } from '@kinetick-labs/kh-session'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
 import JsonlSessionPersistence from '../../../session/session-persistence-jsonl/src/index.ts'
-import { snapshotSubagentDescriptor } from '@deepseek-ai/dsh-subagent'
+import { snapshotSubagentDescriptor } from '@kinetick-labs/kh-subagent'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import Storage from '../../../storage/storage/src/index.ts'
 import { DomainFacility } from '../../../storage/storage-domain/src/index.ts'
@@ -41,7 +41,7 @@ afterEach(async () => {
 async function setupScheduleHost(): Promise<{ ctx: Context; parent: Agent; dispatched: ReturnType<typeof vi.fn> }> {
   const ctx = new Context()
   contexts.push(ctx)
-  const root = mkdtempSync(join(tmpdir(), 'dsh-schedule-tools-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-schedule-tools-'))
   roots.push(root)
   ctx.baseUrl = pathToFileURL(FIXTURES).href + '/'
   await ctx.plugin(Loader)

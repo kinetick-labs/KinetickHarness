@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/architecture/2026-07-24-single-harness-home-resolver.md
 /agent-note-one-harness-home-resolver:
-  en: 4177acbdd51411da
-  zh: 53f10d4c54b431b2
+  en: 1ad014c1e3c25328
+  zh: a6c05bf77d752e55
 /agent-note-one-harness-home-resolver/problem:
   en: fa4d3622fb18dd58
   zh: 2b98640594c8344b

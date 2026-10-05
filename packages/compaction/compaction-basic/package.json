@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-compaction-basic",
-  "description": "Token-meter-driven compaction policy and LLM summarization backend for the DeepSeek Harness",
+  "name": "@kinetick-labs/kh-compaction-basic",
+  "description": "Token-meter-driven compaction policy and LLM summarization backend for the KinetickHarness",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/compaction/compaction-basic"
   },
   "type": "module",
@@ -28,39 +28,39 @@
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-commands": "workspace:*",
-    "@deepseek-ai/dsh-compaction": "workspace:*",
-    "@deepseek-ai/dsh-compaction-tool-result-pruner": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-token-meter": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-commands": "workspace:*",
+    "@kinetick-labs/kh-compaction": "workspace:*",
+    "@kinetick-labs/kh-compaction-tool-result-pruner": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-token-meter": "workspace:*"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/dsh-compaction-tool-result-pruner": {
+    "@kinetick-labs/kh-compaction-tool-result-pruner": {
       "optional": true
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-util-values": "workspace:*",
+    "@kinetick-labs/kh-util-values": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop-testkit": "workspace:*",
-    "@deepseek-ai/dsh-commands": "workspace:*",
-    "@deepseek-ai/dsh-compaction": "workspace:*",
-    "@deepseek-ai/dsh-compaction-tool-result-pruner": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-llm-retry": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-token-meter": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-compaction-image-offload": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-agent-loop-testkit": "workspace:*",
+    "@kinetick-labs/kh-commands": "workspace:*",
+    "@kinetick-labs/kh-compaction": "workspace:*",
+    "@kinetick-labs/kh-compaction-tool-result-pruner": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-llm-retry": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-token-meter": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-compaction-image-offload": "workspace:*"
   }
 }

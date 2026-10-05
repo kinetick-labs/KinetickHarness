@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-tool-session-query",
+  "name": "@kinetick-labs/kh-tool-session-query",
   "description": "Workspace-authorized model-facing session history search, trace, and event read tools",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/session-query/tool-session-query"
   },
   "type": "module",
@@ -28,34 +28,34 @@
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-session-query": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-session-query": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*"
   },
   "dependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-persistence": "workspace:*",
-    "@deepseek-ai/dsh-session-persistence-jsonl": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-session-query": "workspace:*",
-    "@deepseek-ai/dsh-session-query-sqlite": "workspace:*",
-    "@deepseek-ai/dsh-session-title": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
-    "@deepseek-ai/dsh-tool-call-timeout-policy": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-persistence": "workspace:*",
+    "@kinetick-labs/kh-session-persistence-jsonl": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-session-query": "workspace:*",
+    "@kinetick-labs/kh-session-query-sqlite": "workspace:*",
+    "@kinetick-labs/kh-session-title": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
+    "@kinetick-labs/kh-tool-call-timeout-policy": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*"
   }
 }

@@ -3,14 +3,14 @@
  * The tool pauses until a UI provider returns a human answer, then feeds that
  * answer back into the agent loop as an ordinary tool result.
  *
- * @module @deepseek-ai/dsh-tool-ask-user
+ * @module @kinetick-labs/kh-tool-ask-user
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import { defineTool } from '@deepseek-ai/dsh-tools'
+import { defineTool } from '@kinetick-labs/kh-tools'
 import z from '@deepseek-ai/schemastery'
 import { registerTimedAskUser } from './timed.ts'
-import '@deepseek-ai/dsh-user-questions'
+import '@kinetick-labs/kh-user-questions'
 
 /** Cordis row selecting the tool schema and its default foreground wait. */
 export interface Config {

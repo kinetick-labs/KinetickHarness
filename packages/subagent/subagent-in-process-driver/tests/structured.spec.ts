@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createUserMessage, ToolCallId, type ContentBlock, type GenerateOptions } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import type {} from '@deepseek-ai/dsh-system-prompt'
+import { createUserMessage, ToolCallId, type ContentBlock, type GenerateOptions } from '@kinetick-labs/kh-llm'
+import { SessionId } from '@kinetick-labs/kh-session'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import type {} from '@kinetick-labs/kh-system-prompt'
 import SubagentRuntime, {
   type ResolvedSubagentStartRequest,
   type SubagentStartRequest,
-} from '@deepseek-ai/dsh-subagent'
-import type { Config as ToolConfig, ObjectJsonSchema } from '@deepseek-ai/dsh-tools'
-import { defineContentToolFixture, RUN_CODE_NAME } from '@deepseek-ai/dsh-tools'
+} from '@kinetick-labs/kh-subagent'
+import type { Config as ToolConfig, ObjectJsonSchema } from '@kinetick-labs/kh-tools'
+import { defineContentToolFixture, RUN_CODE_NAME } from '@kinetick-labs/kh-tools'
 import { MockAdapter, textResponse, toolCallResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import { startInProcessRun } from '../src/index.ts'
 import {
@@ -52,7 +52,7 @@ async function setup(script: Script, options: SetupOptions = {}) {
     ctx.provide('ptcRuntime', {
       language: 'typescript',
       isolation: 'test',
-      resolve: (request: import('@deepseek-ai/dsh-ptc-runtime').PtcRunRequest) => ({ ...request, cwd: request.cwd ?? process.cwd(), timeoutMs: 120_000 }),
+      resolve: (request: import('@kinetick-labs/kh-ptc-runtime').PtcRunRequest) => ({ ...request, cwd: request.cwd ?? process.cwd(), timeoutMs: 120_000 }),
       run: options.codeRun ?? (() => Promise.resolve({ logs: [] })),
     } as never)
   }

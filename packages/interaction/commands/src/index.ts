@@ -1,19 +1,19 @@
 /**
  * Plugin-owned human-command registry shared by interactive UI adapters.
- * @module @deepseek-ai/dsh-commands
+ * @module @kinetick-labs/kh-commands
  */
 
 import { Context } from '@deepseek-ai/cordis'
-import { randomUUID } from '@deepseek-ai/dsh-util-crypto'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { AttachmentError, admitEncodedImages } from '@deepseek-ai/dsh-attachment'
-import type { EncodedImageAttachment, FileAttachmentRef, ImageAttachmentRef } from '@deepseek-ai/dsh-attachment/types'
-import type { FileBlock, ImageBlock } from '@deepseek-ai/dsh-llm'
-import { NamedEntries, ScopedLayers } from '@deepseek-ai/dsh-scope'
-import type { ScopeKey, ScopeLayer } from '@deepseek-ai/dsh-scope'
-import { SessionSeq } from '@deepseek-ai/dsh-session'
-import type { Session, SessionEvent, SessionEventMap } from '@deepseek-ai/dsh-session'
-import { TypertRemoteService, Remote } from '@deepseek-ai/dsh-typert-protocol'
+import { randomUUID } from '@kinetick-labs/kh-util-crypto'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { AttachmentError, admitEncodedImages } from '@kinetick-labs/kh-attachment'
+import type { EncodedImageAttachment, FileAttachmentRef, ImageAttachmentRef } from '@kinetick-labs/kh-attachment/types'
+import type { FileBlock, ImageBlock } from '@kinetick-labs/kh-llm'
+import { NamedEntries, ScopedLayers } from '@kinetick-labs/kh-scope'
+import type { ScopeKey, ScopeLayer } from '@kinetick-labs/kh-scope'
+import { SessionSeq } from '@kinetick-labs/kh-session'
+import type { Session, SessionEvent, SessionEventMap } from '@kinetick-labs/kh-session'
+import { TypertRemoteService, Remote } from '@kinetick-labs/kh-typert-protocol'
 import { CommandId } from './brand.ts'
 import type { CommandDefinitionId } from './brand.ts'
 import type {

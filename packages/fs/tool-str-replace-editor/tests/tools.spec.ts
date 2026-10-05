@@ -3,20 +3,20 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { FsVersion } from '@deepseek-ai/dsh-fs'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { SESSION_FORMAT_VERSION, Session, SessionId } from '@deepseek-ai/dsh-session'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import * as FsPolicy from '@deepseek-ai/dsh-fs-observation-policy'
-import SandboxedFileSystem from '@deepseek-ai/dsh-fs-sandbox'
-import SandboxPolicy from '@deepseek-ai/dsh-sandbox-policy'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import * as ToolStrReplaceEditor from '@deepseek-ai/dsh-tool-str-replace-editor'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
+import { FsVersion } from '@kinetick-labs/kh-fs'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { SESSION_FORMAT_VERSION, Session, SessionId } from '@kinetick-labs/kh-session'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import LocalFileSystem from '@kinetick-labs/kh-fs-local'
+import * as FsPolicy from '@kinetick-labs/kh-fs-observation-policy'
+import SandboxedFileSystem from '@kinetick-labs/kh-fs-sandbox'
+import SandboxPolicy from '@kinetick-labs/kh-sandbox-policy'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import * as ToolStrReplaceEditor from '@kinetick-labs/kh-tool-str-replace-editor'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
 
 const contexts: Context[] = []
 const roots: string[] = []
@@ -70,7 +70,7 @@ async function setup(
   config: ToolStrReplaceEditor.Config = {},
   options: { fsPolicy?: boolean; sandboxMode?: 'read-only' | 'workspace-write' | 'danger-full-access'; root?: string } = {},
 ) {
-  const root = options.root ?? await mkdtemp(join(tmpdir(), 'dsh-tool-str-replace-editor-'))
+  const root = options.root ?? await mkdtemp(join(tmpdir(), 'kh-tool-str-replace-editor-'))
   if (options.root === undefined) roots.push(root)
   const ctx = new Context()
   contexts.push(ctx)
@@ -610,7 +610,7 @@ describe('tool-str-replace-editor', () => {
   })
 
   it('reports missing sandbox-policy composition during plugin startup', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-tool-str-replace-editor-missing-policy-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-tool-str-replace-editor-missing-policy-'))
     roots.push(root)
     const ctx = new Context()
     contexts.push(ctx)

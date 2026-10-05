@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-jobs-local",
-  "description": "Process-local implementation of the DeepSeek Harness background job registry seam",
+  "name": "@kinetick-labs/kh-jobs-local",
+  "description": "Process-local implementation of the KinetickHarness background job registry seam",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/jobs/jobs-local"
   },
   "type": "module",
@@ -27,10 +27,10 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-scope": "workspace:*",
-    "@deepseek-ai/dsh-jobs": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-scope": "workspace:*",
+    "@kinetick-labs/kh-jobs": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "dependencies": {
@@ -39,13 +39,13 @@
   "devDependencies": {
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop-testkit": "workspace:*",
-    "@deepseek-ai/dsh-brand": "workspace:*",
-    "@deepseek-ai/dsh-scope": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-jobs": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop-testkit": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
+    "@kinetick-labs/kh-scope": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-jobs": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   }
 }

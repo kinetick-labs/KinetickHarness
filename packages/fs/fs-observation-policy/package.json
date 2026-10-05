@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-fs-observation-policy",
-  "description": "File-context policy plugin for the DeepSeek Harness — observed-state, read-before-edit, and version-guarded write/edit added over the ctx.fs provider seam through the fs/* event gate (no service API)",
+  "name": "@kinetick-labs/kh-fs-observation-policy",
+  "description": "File-context policy plugin for the KinetickHarness — observed-state, read-before-edit, and version-guarded write/edit added over the ctx.fs provider seam through the fs/* event gate (no service API)",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/fs/fs-observation-policy"
   },
   "type": "module",
@@ -27,12 +27,12 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   }
 }

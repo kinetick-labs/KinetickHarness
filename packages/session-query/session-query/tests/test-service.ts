@@ -1,4 +1,4 @@
-import SessionQueryEngine from '@deepseek-ai/dsh-session-query'
+import SessionQueryEngine from '@kinetick-labs/kh-session-query'
 import type {
   SessionEventSearchPage,
   SessionEventSearchRequest,
@@ -6,7 +6,7 @@ import type {
   SessionSearchHit,
   SessionSearchPage,
   SessionSearchRequest,
-} from '@deepseek-ai/dsh-session-query'
+} from '@kinetick-labs/kh-session-query'
 
 /** Test-only concrete query service for backend-independent behavior. */
 export class TestSessionQueryEngine extends SessionQueryEngine {

@@ -1,13 +1,13 @@
 import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import { deepFreeze } from '@deepseek-ai/dsh-util-values'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import { deepFreeze } from '@kinetick-labs/kh-util-values'
 import SessionStore, { Session, SessionId, SessionSeq, SessionLogOffset, foldSurface, deriveEventMessage } from '../src/index.ts'
 import type { SessionEvent, SessionMessageProjection } from '../src/index.ts'
 import { MESSAGE_PROJECTION_EVENT_TYPES } from '../src/known-event-types.ts'
 import { SurfaceManager } from '../src/surface.ts'
 
-declare module '@deepseek-ai/dsh-session/types' {
+declare module '@kinetick-labs/kh-session/types' {
   interface SessionEventMap {
     'test/project': { seq: SessionSeq; text: string }
   }

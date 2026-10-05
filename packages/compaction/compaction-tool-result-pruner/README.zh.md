@@ -3,13 +3,13 @@ description: "面向组合压缩（compaction）部署场景的工具输出修�
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-compaction-tool-result-pruner
+# @kinetick-labs/kh-compaction-tool-result-pruner
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-compaction-tool-result-pruner` 防止超大工具输出填满上下文窗口。压缩触发条件满足后，它会把超出预算的文本替换为长度受限的头部、简短的「middle pruned」标记与长度受限的尾部；未达到压力阈值的对话保持不变。完整原始结果仍保留在会话日志中，可供精确回放与检查。修剪不发起模型调用，并可能充分缓解 token 压力，使压缩跳过摘要。字符预算只能近似 token 用量；token meter 负责判定压力是否得到缓解。
+`kh-compaction-tool-result-pruner` 防止超大工具输出填满上下文窗口。压缩触发条件满足后，它会把超出预算的文本替换为长度受限的头部、简短的「middle pruned」标记与长度受限的尾部；未达到压力阈值的对话保持不变。完整原始结果仍保留在会话日志中，可供精确回放与检查。修剪不发起模型调用，并可能充分缓解 token 压力，使压缩跳过摘要。字符预算只能近似 token 用量；token meter 负责判定压力是否得到缓解。
 
 ## 目录
 
@@ -25,16 +25,16 @@ kind: "package-reference"
 <a id="use-this-package"></a>
 ## 使用本包
 
-当工具输出经常主导对话窗口时，在 `dsh-compaction-basic` 旁挂载本包。修剪会改变模型看到的内容——更短的结果——并让压缩有更少的历史需要压缩。
+当工具输出经常主导对话窗口时，在 `kh-compaction-basic` 旁挂载本包。修剪会改变模型看到的内容——更短的结果——并让压缩有更少的历史需要压缩。
 
 ### 最小可用组合
 
 按此顺序挂载 token 测量、本包与后端：
 
 ```yaml
-- name: '@deepseek-ai/dsh-token-meter'
-- name: '@deepseek-ai/dsh-compaction-tool-result-pruner'
-- name: '@deepseek-ai/dsh-compaction-basic'
+- name: '@kinetick-labs/kh-token-meter'
+- name: '@kinetick-labs/kh-compaction-tool-result-pruner'
+- name: '@kinetick-labs/kh-compaction-basic'
 ```
 
 有了这些配置行，超大工具结果会在压缩过程中自动被修剪。你可以通过检查后续请求是否显示修剪后的结果来确认成功；完整原始内容仍保留在会话日志中。
@@ -57,7 +57,7 @@ kind: "package-reference"
 
 ### 修剪何时运行
 
-修剪只在压缩触发条件满足后运行：`dsh-compaction-basic` 在压力或溢出确认后、选择要压缩的内容之前调用它。低于压力时不会修剪任何内容，修剪本身也不发起模型调用。
+修剪只在压缩触发条件满足后运行：`kh-compaction-basic` 在压力或溢出确认后、选择要压缩的内容之前调用它。低于压力时不会修剪任何内容，修剪本身也不发起模型调用。
 
 -----
 

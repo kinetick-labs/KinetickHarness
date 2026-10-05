@@ -4,22 +4,22 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import { bindScopeParent, createScope, scopeOf } from '@deepseek-ai/dsh-scope'
-import LocalFileReference from '@deepseek-ai/dsh-file-reference-local'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import * as SubagentTool from '@deepseek-ai/dsh-tool-subagent'
-import Selection from '@deepseek-ai/dsh-tool-subagent/model-selection-settings'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { SessionId } from '@kinetick-labs/kh-session'
+import { defineContentToolFixture } from '@kinetick-labs/kh-tools'
+import { bindScopeParent, createScope, scopeOf } from '@kinetick-labs/kh-scope'
+import LocalFileReference from '@kinetick-labs/kh-file-reference-local'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import * as SubagentTool from '@kinetick-labs/kh-tool-subagent'
+import Selection from '@kinetick-labs/kh-tool-subagent/model-selection-settings'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'due-work': { kind: 'due-work'; plugin: string } & ContextFormed
   }
@@ -125,7 +125,7 @@ describe('serial creation listener integrations', () => {
   })
 
   it('starts due plugin work only after every creation listener finishes', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-serial-due-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-serial-due-'))
     roots.push(root)
     const ctx = await core(root)
     const sessionId = SessionId('review-due-work')

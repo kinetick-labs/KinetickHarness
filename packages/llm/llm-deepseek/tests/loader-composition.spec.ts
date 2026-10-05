@@ -8,14 +8,14 @@ import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import SessionStore from '@deepseek-ai/dsh-session'
-import { credentialRef } from '@deepseek-ai/dsh-credentials'
-import LocalCredentialProvider from '@deepseek-ai/dsh-credentials-local'
+import LlmRuntime from '@kinetick-labs/kh-llm'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import SessionStore from '@kinetick-labs/kh-session'
+import { credentialRef } from '@kinetick-labs/kh-credentials'
+import LocalCredentialProvider from '@kinetick-labs/kh-credentials-local'
 import { profileComposition } from '../../../settings/settings/tests/profile-composition.ts'
-import DeepSeekLlmApiExtensionRegistry from '@deepseek-ai/dsh-deepseek-llm-api-extensions'
-import * as LlmDeepSeek from '@deepseek-ai/dsh-llm-deepseek-api-key'
+import DeepSeekLlmApiExtensionRegistry from '@kinetick-labs/kh-deepseek-llm-api-extensions'
+import * as LlmDeepSeek from '@kinetick-labs/kh-llm-deepseek-api-key'
 import { assemble } from './assemble.ts'
 import { closeMockServers, mockServer, textEvents } from './mock-server.ts'
 import { sourceModuleLoader } from './helpers.ts'
@@ -41,8 +41,8 @@ async function loadComposition(
   // A reused root is the restart case: the same harness home, its documents
   // exactly as the previous process left them.
   const fresh = options.reuseRoot === undefined
-  root = options.reuseRoot ?? await mkdtemp(join(tmpdir(), 'dsh-llm-composition-'))
-  vi.stubEnv('DSH_HOME', root)
+  root = options.reuseRoot ?? await mkdtemp(join(tmpdir(), 'kh-llm-composition-'))
+  vi.stubEnv('KH_HOME', root)
   const settingsPath = join(root, 'profile', 'cordis.patch.yml')
   const credentialsPath = join(root, '.credentials.yaml')
   if (options.withDynamic && fresh) {
@@ -52,24 +52,24 @@ async function loadComposition(
   const configPath = join(root, 'cordis.yml')
   await writeFile(configPath, [
     '- id: llm',
-    "  name: '@deepseek-ai/dsh-llm'",
+    "  name: '@kinetick-labs/kh-llm'",
     '- id: session',
-    "  name: '@deepseek-ai/dsh-session'",
+    "  name: '@kinetick-labs/kh-session'",
     '- id: agents',
-    "  name: '@deepseek-ai/dsh-agent'",
+    "  name: '@kinetick-labs/kh-agent'",
     '- id: deepseek-llm-api-extensions',
-    "  name: '@deepseek-ai/dsh-deepseek-llm-api-extensions'",
+    "  name: '@kinetick-labs/kh-deepseek-llm-api-extensions'",
     ...options.withDynamic
       ? [
         '- id: credentials',
-        "  name: '@deepseek-ai/dsh-credentials-local'",
+        "  name: '@kinetick-labs/kh-credentials-local'",
         '  config:',
         `    path: ${JSON.stringify(credentialsPath)}`,
         '    debounceMs: 10',
       ]
       : [],
     '- id: llm-deepseek',
-    "  name: '@deepseek-ai/dsh-llm-deepseek-api-key'",
+    "  name: '@kinetick-labs/kh-llm-deepseek-api-key'",
     '  config:',
     `    baseURL: ${JSON.stringify(options.baseURL)}`,
     '',
@@ -81,12 +81,12 @@ async function loadComposition(
   await ctx.plugin(Loader)
   ctx.loader.builtins.include = Include
   const modules = new Map<string, unknown>([
-    ['@deepseek-ai/dsh-llm', LlmRuntime],
-    ['@deepseek-ai/dsh-session', SessionStore],
-    ['@deepseek-ai/dsh-agent', AgentRegistry],
-    ['@deepseek-ai/dsh-deepseek-llm-api-extensions', DeepSeekLlmApiExtensionRegistry],
-    ['@deepseek-ai/dsh-credentials-local', LocalCredentialProvider],
-    ['@deepseek-ai/dsh-llm-deepseek-api-key', LlmDeepSeek],
+    ['@kinetick-labs/kh-llm', LlmRuntime],
+    ['@kinetick-labs/kh-session', SessionStore],
+    ['@kinetick-labs/kh-agent', AgentRegistry],
+    ['@kinetick-labs/kh-deepseek-llm-api-extensions', DeepSeekLlmApiExtensionRegistry],
+    ['@kinetick-labs/kh-credentials-local', LocalCredentialProvider],
+    ['@kinetick-labs/kh-llm-deepseek-api-key', LlmDeepSeek],
   ])
   // The custom importer bypasses Node resolution; mirror the package manifests
   // a deployed cordis.yml has beside its declared dependencies.

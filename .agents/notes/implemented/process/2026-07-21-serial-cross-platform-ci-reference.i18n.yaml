@@ -3,14 +3,14 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-07-21-serial-cross-platform-ci-reference.md
 /agent-note-serial-cross-platform-ci-reference:
-  en: 4dd700fefdda5d17
-  zh: 3a6a9bc2a28b3f39
+  en: 38e86fe52702241b
+  zh: d2ec11990eee0090
 /agent-note-serial-cross-platform-ci-reference/problem:
   en: 4fb1c27a631b32d3
   zh: 9dbe9a4b9aadfca9
 /agent-note-serial-cross-platform-ci-reference/decision:
-  en: c88f606c0749bd67
-  zh: b2038b0d92fd8890
+  en: b95765d0d89d08a5
+  zh: c0939250e164a9cb
 /agent-note-serial-cross-platform-ci-reference/alternatives-considered:
   en: 3610152c5c4e93af
   zh: f4c09d327716f750

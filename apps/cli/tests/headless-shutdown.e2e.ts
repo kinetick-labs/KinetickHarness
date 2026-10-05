@@ -4,9 +4,9 @@ import { join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { execa } from 'execa'
 import { describe, expect, it } from 'vitest'
-import { LOADER_SMOKE_TEST_TIMEOUT_MS, resolveExampleLaunch } from '@deepseek-ai/dsh-loader-smoke'
+import { LOADER_SMOKE_TEST_TIMEOUT_MS, resolveExampleLaunch } from '@kinetick-labs/kh-loader-smoke'
 
-const dshBinScript = fileURLToPath(new URL('../src/bin.ts', import.meta.url))
+const khBinScript = fileURLToPath(new URL('../src/bin.ts', import.meta.url))
 const tsconfigPath = fileURLToPath(new URL('../../../tsconfig.json', import.meta.url))
 const neverDisposePlugin = pathToFileURL(
   fileURLToPath(new URL('./fixtures/never-dispose.mjs', import.meta.url)),
@@ -22,7 +22,7 @@ if pid == 0:
     os.chdir(cwd)
     os.execvpe(node, [node, *json.loads(launch_args_json)], env)
 
-markers = [b"dsh-test: never-dispose ready", b"dsh-test: never-dispose started"]
+markers = [b"kh-test: never-dispose ready", b"kh-test: never-dispose started"]
 output = bytearray()
 marker_index = 0
 deadline = time.monotonic() + float(timeout_seconds)
@@ -62,18 +62,18 @@ if actual_exit != 130:
 `
 
 async function runHeadlessPtySmoke(): Promise<string> {
-  const cwd = await mkdtemp(join(tmpdir(), 'dsh-headless-shutdown-'))
+  const cwd = await mkdtemp(join(tmpdir(), 'kh-headless-shutdown-'))
   try {
-    const home = join(cwd, '.dsh')
+    const home = join(cwd, '.kh')
     // Pre-initialize the headless profile with the never-dispose row in its
     // user patch layer (the same file a long-lived profile boot hot-reloads).
     const profileDir = join(home, 'profiles', 'headless')
     await mkdir(profileDir, { recursive: true })
     await writeFile(join(profileDir, 'package.json'), JSON.stringify({
-      name: 'dsh-profile-headless',
+      name: 'kh-profile-headless',
       private: true,
       dependencies: {},
-      dsh: { profile: { bundles: ['@deepseek-ai/dsh-base', '@deepseek-ai/dsh-headless'] } },
+      kh: { profile: { bundles: ['@kinetick-labs/kh-base', '@kinetick-labs/kh-headless'] } },
     }, undefined, 2))
     await writeFile(join(profileDir, 'cordis.patch.yml'), [
       '- insert:',
@@ -82,14 +82,14 @@ async function runHeadlessPtySmoke(): Promise<string> {
       '',
     ].join('\n'))
     const launch = resolveExampleLaunch({
-      srcBin: dshBinScript,
+      srcBin: khBinScript,
       configArgs: ['--profile', 'headless', 'never complete'],
       tsconfigPath,
       env: {
-        DSH_HOME: home,
-        DSH_AGENTS_HOME: join(cwd, '.agents'),
+        KH_HOME: home,
+        KH_AGENTS_HOME: join(cwd, '.agents'),
         DEEPSEEK_API_KEY: 'keyless-shutdown-no-call',
-        DSH_TEST_SHUTDOWN_ARM_FILE: join(cwd, 'shutdown-armed'),
+        KH_TEST_SHUTDOWN_ARM_FILE: join(cwd, 'shutdown-armed'),
       },
     })
     const timeoutMs = 15_000
@@ -109,10 +109,10 @@ async function runHeadlessPtySmoke(): Promise<string> {
       stripFinalNewline: false,
     })
     if (result.timedOut) {
-      throw new Error(`dsh headless PTY driver did not exit. stdout:\n${result.stdout}\nstderr:\n${result.stderr}`)
+      throw new Error(`kh headless PTY driver did not exit. stdout:\n${result.stdout}\nstderr:\n${result.stderr}`)
     }
     if (result.failed) {
-      throw new Error(`dsh headless PTY driver exited ${String(result.exitCode)}. stdout:\n${result.stdout}\nstderr:\n${result.stderr}`)
+      throw new Error(`kh headless PTY driver exited ${String(result.exitCode)}. stdout:\n${result.stdout}\nstderr:\n${result.stderr}`)
     }
     return result.stdout
   } finally {
@@ -123,8 +123,8 @@ async function runHeadlessPtySmoke(): Promise<string> {
 describe.skipIf(process.platform === 'win32')('headless process shutdown (real Loader tree in a PTY)', () => {
   it('lets a second Ctrl+C force exit while the first signal is draining', async () => {
     const output = await runHeadlessPtySmoke()
-    expect(output).not.toContain('dsh: observing at ')
-    expect(output).toContain('dsh-test: never-dispose ready')
-    expect(output).toContain('dsh-test: never-dispose started')
+    expect(output).not.toContain('kh: observing at ')
+    expect(output).toContain('kh-test: never-dispose ready')
+    expect(output).toContain('kh-test: never-dispose started')
   }, LOADER_SMOKE_TEST_TIMEOUT_MS)
 })

@@ -5,36 +5,36 @@
 /:
   en: 6f45a471a5e9305f
   zh: d771883685e91a45
-/deepseek-ai-dsh-client-ui-directory-picker-native:
-  en: dd00fd3c4c22a356
-  zh: 070b3db2cce5ecc3
-/deepseek-ai-dsh-client-ui-directory-picker-native/summary:
-  en: e039fd6b8a89ef2e
-  zh: dd4b40cfc0bc4fd5
-/deepseek-ai-dsh-client-ui-directory-picker-native/table-of-contents:
+/kinetick-labs-kh-client-ui-directory-picker-native:
+  en: aa6ccc684c7b43bd
+  zh: 4d850d949bcc9550
+/kinetick-labs-kh-client-ui-directory-picker-native/summary:
+  en: 19a1e94f7a160801
+  zh: 8aca88488172cd66
+/kinetick-labs-kh-client-ui-directory-picker-native/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-client-ui-directory-picker-native/use-this-package:
-  en: 1e2172c756246031
-  zh: f33dc7b40b14cceb
-/deepseek-ai-dsh-client-ui-directory-picker-native/use-this-package/when-to-choose-it:
-  en: bcba761168d2162c
-  zh: d484e2305e074c0b
-/deepseek-ai-dsh-client-ui-directory-picker-native/understand-the-implementation:
+/kinetick-labs-kh-client-ui-directory-picker-native/use-this-package:
+  en: 9bb68d685c275e6f
+  zh: 6c3b1da5d4c2ff06
+/kinetick-labs-kh-client-ui-directory-picker-native/use-this-package/when-to-choose-it:
+  en: f582a8ff3ed4a44d
+  zh: a0b0d6ed150c58a1
+/kinetick-labs-kh-client-ui-directory-picker-native/understand-the-implementation:
   en: f7a287740b4b08f9
   zh: 3347375c4e486b22
-/deepseek-ai-dsh-client-ui-directory-picker-native/further-exploration:
-  en: e775e2ad37a55005
-  zh: 1d420301c12bc4a1
-/deepseek-ai-dsh-client-ui-directory-picker-native/model-experience:
+/kinetick-labs-kh-client-ui-directory-picker-native/further-exploration:
+  en: d22458fd71498a38
+  zh: b16526b85e792b09
+/kinetick-labs-kh-client-ui-directory-picker-native/model-experience:
   en: 35d8546cfb4b540b
   zh: 25e4ce35c66c92e2
-/deepseek-ai-dsh-client-ui-directory-picker-native/model-experience/kv-cache-effect:
+/kinetick-labs-kh-client-ui-directory-picker-native/model-experience/kv-cache-effect:
   en: ca75c51c89c2c9b0
   zh: f57cc48a1b5cbfa9
-/deepseek-ai-dsh-client-ui-directory-picker-native/known-limitations-and-deferred-work:
+/kinetick-labs-kh-client-ui-directory-picker-native/known-limitations-and-deferred-work:
   en: d041273e43ca0541
   zh: 8b7a718ed22e7f18
-/deepseek-ai-dsh-client-ui-directory-picker-native/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-client-ui-directory-picker-native/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: 3bb0c20c93f16f98

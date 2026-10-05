@@ -1,30 +1,30 @@
 /**
  * Single replay-aware token-meter service for request and surface pressure.
  *
- * @module @deepseek-ai/dsh-token-meter
+ * @module @kinetick-labs/kh-token-meter
  */
 
 import { Context, Service } from '@deepseek-ai/cordis'
-import type {} from '@deepseek-ai/dsh-compaction-image-offload/projection'
+import type {} from '@kinetick-labs/kh-compaction-image-offload/projection'
 import z from '@deepseek-ai/schemastery'
-import { assembleAssistantStream } from '@deepseek-ai/dsh-llm'
-import type { LlmImageRequestPricing, LlmRuntime, Message, TokenUsage } from '@deepseek-ai/dsh-llm'
-import { deepFreeze } from '@deepseek-ai/dsh-util-values'
+import { assembleAssistantStream } from '@kinetick-labs/kh-llm'
+import type { LlmImageRequestPricing, LlmRuntime, Message, TokenUsage } from '@kinetick-labs/kh-llm'
+import { deepFreeze } from '@kinetick-labs/kh-util-values'
 import type {
   EpochHeader,
   Session,
   SessionEvent,
   SessionLogOffset as SessionLogOffsetType,
-} from '@deepseek-ai/dsh-session'
+} from '@kinetick-labs/kh-session'
 import {
   canonicalHeader,
   headerEquals,
   isSurfaceEvent,
   SessionLogOffset,
   SessionSeq,
-} from '@deepseek-ai/dsh-session'
+} from '@kinetick-labs/kh-session'
 // Type-only: activates the `ctx.sessionProjections` Context declaration.
-import type {} from '@deepseek-ai/dsh-session-projection'
+import type {} from '@kinetick-labs/kh-session-projection'
 import type {
   TokenMeasurement,
   TokenMeasurementBaseline,

@@ -58,10 +58,10 @@ jobs:
         env:
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY_EXTERNAL }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY_EXTERNAL }}
-          DSH_PI_AI_OPENAI_MODEL: ${{ inputs.azure_openai_model }}
-          DSH_PI_AI_OPENAI_BASE_URL: https://openai-routerhub-resource.services.ai.azure.com/api/projects/openai/openai/v1
-          DSH_PI_AI_ANTHROPIC_MODEL: ${{ inputs.anthropic_model }}
-          DSH_E2E_MAX_WORKERS: 2
+          KH_PI_AI_OPENAI_MODEL: ${{ inputs.azure_openai_model }}
+          KH_PI_AI_OPENAI_BASE_URL: https://openai-routerhub-resource.services.ai.azure.com/api/projects/openai/openai/v1
+          KH_PI_AI_ANTHROPIC_MODEL: ${{ inputs.anthropic_model }}
+          KH_E2E_MAX_WORKERS: 2
         run: >-
           pnpm exec vitest run --config vitest.e2e.config.ts
           packages/llm/llm-pi-ai/tests/provider-apis.e2e.ts

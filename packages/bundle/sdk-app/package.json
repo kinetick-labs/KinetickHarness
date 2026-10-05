@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-sdk-app",
-  "description": "The dsh SDK profile bundle: stdio JSON-RPC serving and process lifecycle over dsh-base",
+  "name": "@kinetick-labs/kh-sdk-app",
+  "description": "The kh SDK profile bundle: stdio JSON-RPC serving and process lifecycle over kh-base",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/bundle/sdk-app"
   },
   "type": "module",
@@ -28,18 +28,18 @@
     "lib/types/**/*.d.ts"
   ],
   "license": "MIT",
-  "dsh": {
+  "kh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-cmdline": "workspace:*",
-    "@deepseek-ai/dsh-sdk-jsonrpc-server": "workspace:*",
+    "@kinetick-labs/kh-cmdline": "workspace:*",
+    "@kinetick-labs/kh-sdk-jsonrpc-server": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~",
     "commander": "^15.0.0",
-    "@deepseek-ai/dsh-skill-office": "workspace:*",
-    "@deepseek-ai/dsh-tool-workspace-dependencies": "workspace:*"
+    "@kinetick-labs/kh-skill-office": "workspace:*",
+    "@kinetick-labs/kh-tool-workspace-dependencies": "workspace:*"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~"

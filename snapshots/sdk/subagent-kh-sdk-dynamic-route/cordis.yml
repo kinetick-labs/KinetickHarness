@@ -1,0 +1,60 @@
+# SDK-profile patch for a deterministic parent model that selects a route for
+# a separate SDK child runtime. Both runtimes persist their request headers.
+
+- id: llm-deepseek
+  name: '@kinetick-labs/kh-llm-deepseek-api-key'
+  disabled: true
+
+- id: tool-subagent
+  name: '@kinetick-labs/kh-tool-subagent'
+  disabled: true
+
+- id: sdk-jsonrpc-server
+  name: '@kinetick-labs/kh-sdk-jsonrpc-server'
+  disabled: true
+
+- id: session-persistence-jsonl
+  name: '@kinetick-labs/kh-session-persistence-jsonl'
+  config:
+    root: !!js khHomePath('sessions')
+    compression: none
+
+- insert:
+    - id: mock-llm
+      name: '../../../packages/subagent/subagent-kh-sdk/tests/fixtures/loader/mock-delegating-llm.ts'
+      disabled: !!js process.env.KH_SNAPSHOT !== 'record'
+
+    - id: subagent-kh-sdk
+      name: '@kinetick-labs/kh-subagent-kh-sdk'
+      config:
+        profile: sdk
+        patches: !!js JSON.parse(process.env.KH_TEST_CHILD_PATCHES ?? '[]')
+        khHome: !!js process.env.KH_TEST_CHILD_HOME
+        provider: mock
+        model: mock-routed
+        env:
+
+    - id: subagent-model-selection-settings
+      name: '@kinetick-labs/kh-tool-subagent/model-selection-settings'
+      config:
+        enabled: true
+        allowedModels:
+          - provider: mock
+            model: mock-routed
+
+    - id: tool-subagent-kh-sdk
+      name: '../../../packages/subagent/subagent-kh-sdk/tests/fixtures/loader/scoped-tool-subagent.ts'
+      config:
+        provider: kh-sdk
+        toolName: subagent
+        enableRunInBackground: false
+        agentOptions:
+          maxTokens: 777
+        maxDepth: 'provider-managed'
+
+    - id: sdk-jsonrpc-server-dynamic-live
+      name: '@kinetick-labs/kh-sdk-jsonrpc-server'
+      inject: [sdkAppStartup, loader]
+      disabled: !!js process.env.KH_SNAPSHOT !== 'record'
+      config:
+        maxTokensAsSuccess: true

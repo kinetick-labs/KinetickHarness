@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/process/2026-08-26-published-dependency-faces.md
 /agent-note-published-dependency-faces-and-bounded-peer-relays:
-  en: 553313933867d0f4
-  zh: 11288efed41eea50
+  en: 1ce2462d0382623f
+  zh: 465a8b19574d8c9c
 /agent-note-published-dependency-faces-and-bounded-peer-relays/problem:
   en: a8357e7e0735ad71
   zh: 5217d99a4ef921c7
@@ -15,8 +15,8 @@
   en: 5ea13b09ae774437
   zh: ef9dbccada39107a
 /agent-note-published-dependency-faces-and-bounded-peer-relays/decision/dependency-sections:
-  en: d34ebac6c1c7642b
-  zh: 2cf3a60df14b072a
+  en: 2ad587308a0aa560
+  zh: db40adac0402e0f4
 /agent-note-published-dependency-faces-and-bounded-peer-relays/decision/maintainer-workflow:
   en: 5983475fa551ca90
   zh: a5519f4817f65e8c

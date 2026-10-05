@@ -5,9 +5,9 @@ import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { chromium } from 'playwright'
 import { expect, it } from 'vitest'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import { initialShortcutConfig, parseShortcutDefinitions, parseShortcutEdit } from '@deepseek-ai/dsh-client-shortcuts/protocol'
-import type { DesktopShortcutInput, DesktopShortcutsApi, ShortcutCommandId, ShortcutRevision } from '@deepseek-ai/dsh-client-shortcuts/protocol'
+import { SessionId } from '@kinetick-labs/kh-session'
+import { initialShortcutConfig, parseShortcutDefinitions, parseShortcutEdit } from '@kinetick-labs/kh-client-shortcuts/protocol'
+import type { DesktopShortcutInput, DesktopShortcutsApi, ShortcutCommandId, ShortcutRevision } from '@kinetick-labs/kh-client-shortcuts/protocol'
 import { desktopKeybindings } from '../../desktop/src/keybindings.ts'
 import { compareOrRefreshGolden, launchWebScaffold, seedSession, watchConsole, webSnapshotMode } from './scaffold.ts'
 import { writeComposerDraft } from './support.ts'
@@ -28,7 +28,7 @@ it.each([
   { platform: 'macos', marker: 'darwin', primary: 'Meta' },
   { platform: 'windows', marker: 'win32', primary: 'Control' },
 ] as const)('records, persists and prioritizes $platform Desktop single keys and chords over recorded history', async ({ platform, marker, primary }) => {
-  const userData = await mkdtemp(join(tmpdir(), 'dsh-shortcuts-desktop-'))
+  const userData = await mkdtemp(join(tmpdir(), 'kh-shortcuts-desktop-'))
   let snapshot = initialShortcutConfig()
   const persistence = desktopKeybindings(userData, platform, (value) => { snapshot = value })
   try {
@@ -52,7 +52,7 @@ it.each([
           const fixture = { recording: false, closedWindows: 0,
             deliver(input: DesktopShortcutInput) { for (const listener of listeners) listener(input) },
           }
-          Object.assign(window, { shortcutFixture: fixture, dshDesktop: { protocolVersion: 1,
+          Object.assign(window, { shortcutFixture: fixture, khDesktop: { protocolVersion: 1,
             shortcuts: {
               get: window.desktopShortcutsGet, edit: window.desktopShortcutsEdit,
               recording: async (active: boolean) => { fixture.recording = active }, subscribe: () => () => {},
@@ -156,7 +156,7 @@ it.each([
           }
           await page.getByRole('dialog', { name, exact: true }).waitFor({ state: 'hidden' })
           expect(await page.evaluate(() => window.shortcutFixture.closedWindows)).toBe(0)
-          expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-dsh-automatic-focus'))).toBe(true)
+          expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-kh-automatic-focus'))).toBe(true)
           expect((await automaticFocusStyle()).outline).toBe('none')
         }
         await deliverPrimary('Comma')
@@ -176,7 +176,7 @@ it.each([
         expect(await page.evaluate(() => Number.parseFloat(getComputedStyle(document.activeElement!).outlineWidth))).toBeGreaterThan(0)
         await deliverPrimary('Comma')
         await settings.waitFor({ state: 'hidden' })
-        expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-dsh-automatic-focus'))).toBe(true)
+        expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-kh-automatic-focus'))).toBe(true)
         expect((await automaticFocusStyle()).outline).toBe('none')
         const dialogsAfterSettingsToggle = await page.getByRole('dialog').count()
         expect(dialogsAfterSettingsToggle).toBe(0)
@@ -192,7 +192,7 @@ it.each([
         const referenceShadow = await dialog.evaluate(node => getComputedStyle(node).boxShadow)
         await deliverPrimary('Slash')
         await dialog.waitFor({ state: 'hidden' })
-        expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-dsh-automatic-focus'))).toBe(true)
+        expect(await page.evaluate(() => document.activeElement?.hasAttribute('data-kh-automatic-focus'))).toBe(true)
         expect((await automaticFocusStyle()).outline).toBe('none')
         const dialogsAfterReferenceToggle = await page.getByRole('dialog').count()
         expect(dialogsAfterReferenceToggle).toBe(0)
@@ -225,7 +225,7 @@ it.each([
         expect(await settings.isVisible()).toBe(true)
         const settingsAfterReferenceToggle = await modalState()
         expect(settingsAfterReferenceToggle).toEqual({ focused: 'Settings', foreground: 'Settings' })
-        expect(await selectedCategory.getAttribute('data-dsh-automatic-focus')).toBe('')
+        expect(await selectedCategory.getAttribute('data-kh-automatic-focus')).toBe('')
         expect(await automaticFocusStyle()).toEqual(noFocusRing)
         await openReference()
         await dialog.waitFor()
@@ -234,7 +234,7 @@ it.each([
         const settingsAfterClose = await modalState()
         expect(settingsAfterClose).toEqual({ focused: 'Settings', foreground: 'Settings' })
         expect(await automaticFocusStyle()).toEqual(noFocusRing)
-        expect(await selectedCategory.getAttribute('data-dsh-automatic-focus')).toBe('')
+        expect(await selectedCategory.getAttribute('data-kh-automatic-focus')).toBe('')
         expect(await settings.evaluate(node => getComputedStyle(node).boxShadow)).toBe(settingsShadow)
         await closeModal('Settings')
         const closedWindows = await page.evaluate(() => window.shortcutFixture.closedWindows)

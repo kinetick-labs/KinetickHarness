@@ -3,18 +3,18 @@ import { mkdirSync, mkdtempSync, readFileSync, readdirSync, rmSync, writeFileSyn
 import { tmpdir } from 'node:os'
 import { dirname, join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import SessionStore, { SESSION_FORMAT_VERSION, SessionId } from '@deepseek-ai/dsh-session'
-import type { Session } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import SessionStore, { SESSION_FORMAT_VERSION, SessionId } from '@kinetick-labs/kh-session'
+import type { Session } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
 import { generationLogPath } from '../../../session/session-persistence-jsonl/src/format.ts'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
-import type { SubagentCatalogEntry } from '@deepseek-ai/dsh-subagent'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import * as SubagentFork from '@deepseek-ai/dsh-subagent-fork-in-process'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
+import type { SubagentCatalogEntry } from '@kinetick-labs/kh-subagent'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import * as SubagentFork from '@kinetick-labs/kh-subagent-fork-in-process'
 import { MockAdapter, textResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import { TestSessionQuery } from './test-session-query.ts'
 import { seedStoredSession } from './persistence-helpers.ts'
@@ -37,7 +37,7 @@ async function setup(
 ) {
   const ctx = new Context()
   await mountAgentLoopTestDependencies(ctx)
-  const root = mkdtempSync(join(tmpdir(), 'dsh-subagent-list-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-subagent-list-'))
   roots.push(root)
   const persistence = await ctx.plugin(JsonlSessionPersistence, {
     root,

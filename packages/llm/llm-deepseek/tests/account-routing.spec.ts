@@ -1,16 +1,16 @@
 /** Account route cancellation uses the real loop, registry, and tool lifecycle. */
 import { afterEach, expect, it, vi } from 'vitest'
-import { installAccountTaskCancellation, type DeepSeekAccount } from '@deepseek-ai/dsh-deepseek-account'
+import { installAccountTaskCancellation, type DeepSeekAccount } from '@kinetick-labs/kh-deepseek-account'
 import { Context } from '@deepseek-ai/cordis'
-import LlmRuntime, { createUserMessage, LlmAdapter, type GenerateOptions, type StreamChunk, ToolCallId } from '@deepseek-ai/dsh-llm'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
-import * as DeepSeek from '@deepseek-ai/dsh-llm-deepseek-api-key'
-import * as AccountProvider from '@deepseek-ai/dsh-llm-deepseek-account'
+import LlmRuntime, { createUserMessage, LlmAdapter, type GenerateOptions, type StreamChunk, ToolCallId } from '@kinetick-labs/kh-llm'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { defineContentToolFixture } from '@kinetick-labs/kh-tools'
+import * as DeepSeek from '@kinetick-labs/kh-llm-deepseek-api-key'
+import * as AccountProvider from '@kinetick-labs/kh-llm-deepseek-account'
 import { assemble } from './assemble.ts'
 
 const contexts: Context[] = []
@@ -178,7 +178,7 @@ it('propagates account sign-out to the HTTP request signal', async () => {
   const started = Promise.withResolvers<AbortSignal>()
   vi.spyOn(globalThis, 'fetch').mockImplementation(async (_url, init) => {
     const signal = init!.signal!
-    expect(new Headers(init!.headers).get('x-dsh-auth-token')).toBe('fixture-account-token')
+    expect(new Headers(init!.headers).get('x-kh-auth-token')).toBe('fixture-account-token')
     started.resolve(signal)
     return new Promise<Response>((_resolve, reject) => {
       signal.addEventListener('abort', () => { reject(new Error('request aborted', { cause: signal.reason })) }, { once: true })

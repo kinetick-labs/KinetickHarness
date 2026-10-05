@@ -3,13 +3,13 @@ description: "Log-backed session titles for users and maintainers choosing a tit
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-session-title
+# @kinetick-labs/kh-session-title
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-Use `dsh-session-title` to give each session a client-visible title from the first eligible human message, an optional asynchronous generator, or an explicit user rename. Accepted titles persist through replay, resume, and paging but never enter model input. Automatic generation never delays the main agent response, and newer title requests supersede older work. Choose the package when clients need durable titles with configurable length limits and a deliberate `refresh()` path for regenerating them.
+Use `kh-session-title` to give each session a client-visible title from the first eligible human message, an optional asynchronous generator, or an explicit user rename. Accepted titles persist through replay, resume, and paging but never enter model input. Automatic generation never delays the main agent response, and newer title requests supersede older work. Choose the package when clients need durable titles with configurable length limits and a deliberate `refresh()` path for regenerating them.
 
 ## Table of Contents
 
@@ -36,8 +36,8 @@ Titles come from three sources, newest wins. The built-in fallback derives from 
 All limits are required; the library supplies no defaults. Mount the service with the three bounds:
 
 ```yaml
-- name: '@deepseek-ai/dsh-session'
-- name: '@deepseek-ai/dsh-session-title'
+- name: '@kinetick-labs/kh-session'
+- name: '@kinetick-labs/kh-session-title'
   config:
     fallbackMaxWords: 8
     fallbackMaxBytes: 96

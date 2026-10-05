@@ -11,46 +11,46 @@ function packageName(specifier: string): string {
   return specifier.startsWith('@') ? specifier.split('/').slice(0, 2).join('/') : specifier.split('/')[0]!
 }
 
-describe('dsh-sdk-minimal bundle', () => {
+describe('kh-sdk-minimal bundle', () => {
   it('declares one standalone allowlisted tree with every row dependency', () => {
     const root = fileURLToPath(new URL('..', import.meta.url))
     const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8')) as {
       dependencies?: Record<string, string>
-      dsh?: { bundle?: { patch?: string } }
+      kh?: { bundle?: { patch?: string } }
     }
-    expect(manifest.dsh?.bundle?.patch).toBe('./cordis.patch.yml')
+    expect(manifest.kh?.bundle?.patch).toBe('./cordis.patch.yml')
     const patches = yaml.load(
-      readFileSync(resolve(root, manifest.dsh!.bundle!.patch!), 'utf8'),
+      readFileSync(resolve(root, manifest.kh!.bundle!.patch!), 'utf8'),
       { schema: entryListSchema },
     ) as Array<{ insert?: Array<{ id?: string; inject?: string[]; name?: string; config?: Record<string, unknown>; disabled?: unknown }> }>
     expect(patches).toHaveLength(1)
     const rows = patches[0]?.insert ?? []
     expect(rows.map(row => [row.id, row.name])).toEqual([
-      ['sdk-app-startup', '@deepseek-ai/dsh-sdk-app'],
-      ['sdk-jsonrpc-server', '@deepseek-ai/dsh-sdk-jsonrpc-server'],
-      ['deepseek-llm-api-extensions', '@deepseek-ai/dsh-deepseek-llm-api-extensions'],
-      ['llm-deepseek', '@deepseek-ai/dsh-llm-deepseek-api-key'],
-      ['sandbox', '@deepseek-ai/dsh-sandbox-local'],
-      ['session-projection', '@deepseek-ai/dsh-session-projection'],
-      ['sandbox-policy', '@deepseek-ai/dsh-sandbox-policy'],
-      ['subprocess', '@deepseek-ai/dsh-subprocess-local'],
-      ['pty', '@deepseek-ai/dsh-terminal'],
-      ['terminal-bash', '@deepseek-ai/dsh-terminal-bash'],
-      ['terminal-pwsh', '@deepseek-ai/dsh-terminal-bash'],
+      ['sdk-app-startup', '@kinetick-labs/kh-sdk-app'],
+      ['sdk-jsonrpc-server', '@kinetick-labs/kh-sdk-jsonrpc-server'],
+      ['deepseek-llm-api-extensions', '@kinetick-labs/kh-deepseek-llm-api-extensions'],
+      ['llm-deepseek', '@kinetick-labs/kh-llm-deepseek-api-key'],
+      ['sandbox', '@kinetick-labs/kh-sandbox-local'],
+      ['session-projection', '@kinetick-labs/kh-session-projection'],
+      ['sandbox-policy', '@kinetick-labs/kh-sandbox-policy'],
+      ['subprocess', '@kinetick-labs/kh-subprocess-local'],
+      ['pty', '@kinetick-labs/kh-terminal'],
+      ['terminal-bash', '@kinetick-labs/kh-terminal-bash'],
+      ['terminal-pwsh', '@kinetick-labs/kh-terminal-bash'],
       ['timer', '@deepseek-ai/cordis-plugin-timer'],
-      ['llm', '@deepseek-ai/dsh-llm'],
-      ['session', '@deepseek-ai/dsh-session'],
-      ['session-title', '@deepseek-ai/dsh-session-title'],
-      ['system-prompt', '@deepseek-ai/dsh-system-prompt'],
-      ['tools', '@deepseek-ai/dsh-tools'],
-      ['mcp-resources', '@deepseek-ai/dsh-mcp-resources'],
-      ['agent', '@deepseek-ai/dsh-agent'],
-      ['llm-retry', '@deepseek-ai/dsh-llm-retry'],
-      ['jobs', '@deepseek-ai/dsh-jobs-local'],
-      ['agent-loop', '@deepseek-ai/dsh-agent-loop'],
-      ['persistent-bash', '@deepseek-ai/dsh-tool-bash-persistent'],
-      ['persistent-pwsh', '@deepseek-ai/dsh-tool-pwsh-persistent'],
-      ['sessions', '@deepseek-ai/dsh-session-persistence-jsonl'],
+      ['llm', '@kinetick-labs/kh-llm'],
+      ['session', '@kinetick-labs/kh-session'],
+      ['session-title', '@kinetick-labs/kh-session-title'],
+      ['system-prompt', '@kinetick-labs/kh-system-prompt'],
+      ['tools', '@kinetick-labs/kh-tools'],
+      ['mcp-resources', '@kinetick-labs/kh-mcp-resources'],
+      ['agent', '@kinetick-labs/kh-agent'],
+      ['llm-retry', '@kinetick-labs/kh-llm-retry'],
+      ['jobs', '@kinetick-labs/kh-jobs-local'],
+      ['agent-loop', '@kinetick-labs/kh-agent-loop'],
+      ['persistent-bash', '@kinetick-labs/kh-tool-bash-persistent'],
+      ['persistent-pwsh', '@kinetick-labs/kh-tool-pwsh-persistent'],
+      ['sessions', '@kinetick-labs/kh-session-persistence-jsonl'],
     ])
     expect(rows.find(row => row.id === 'sdk-app-startup')?.config).toEqual({ profile: 'sdk-minimal' })
     expect(rows.find(row => row.id === 'sdk-jsonrpc-server')).toMatchObject({
@@ -59,13 +59,13 @@ describe('dsh-sdk-minimal bundle', () => {
     })
     expect(rows.find(row => row.id === 'llm-deepseek')?.config).toEqual({
       apiKeyEnv: 'DEEPSEEK_API_KEY',
-      defaultContextWindow: { __jsExpr: 'Number(process.env.DSH_CONTEXT_WINDOW ?? 1000000)' },
+      defaultContextWindow: { __jsExpr: 'Number(process.env.KH_CONTEXT_WINDOW ?? 1000000)' },
       streamIdleTimeoutMs: 172800000,
     })
     expect(rows.find(row => row.id === 'system-prompt')?.config).toEqual({
       includeHarnessIdentity: false,
       includeRuntimeContext: false,
-      personaPrefix: { __jsExpr: "process.env.DSH_SYSTEM_PROMPT ?? 'You are a helpful software engineer assistant.'" },
+      personaPrefix: { __jsExpr: "process.env.KH_SYSTEM_PROMPT ?? 'You are a helpful software engineer assistant.'" },
     })
     expect(rows.find(row => row.id === 'agent-loop')?.config).toEqual({ agents: [] })
     expect(rows.find(row => row.id === 'terminal-bash')).toMatchObject({

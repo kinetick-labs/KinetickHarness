@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-api-workspace-files",
+  "name": "@kinetick-labs/kh-api-workspace-files",
   "description": "Workspace file service and Client resource provider: bounded reads, directory listing, and live metadata over the workspaceFiles Remote namespace",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/api/workspace-files"
   },
   "type": "module",
@@ -37,11 +37,11 @@
     "./src/*": "./src/*",
     "./package.json": "./package.json"
   },
-  "dsh": {
+  "kh": {
     "client": {
       "inject": [
-        "@deepseek-ai/dsh-api-gateway",
-        "@deepseek-ai/dsh-client-resources"
+        "@kinetick-labs/kh-api-gateway",
+        "@kinetick-labs/kh-client-resources"
       ],
       "platform": "web"
     }
@@ -52,8 +52,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@deepseek-ai/dsh-deque": "workspace:*",
-    "@deepseek-ai/dsh-typert-protocol": "workspace:*",
+    "@kinetick-labs/kh-deque": "workspace:*",
+    "@kinetick-labs/kh-typert-protocol": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~",
     "zod": "^4.4.3"
   },
@@ -62,16 +62,16 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-api-gateway": "workspace:*",
-    "@deepseek-ai/dsh-client-connection": "workspace:*",
-    "@deepseek-ai/dsh-client-resources": "workspace:*",
-    "@deepseek-ai/dsh-client-ui-slots": "workspace:*",
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-remote-mock": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-policy": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-persistence": "workspace:*",
-    "@deepseek-ai/dsh-util-workspace-path": "workspace:*"
+    "@kinetick-labs/kh-api-gateway": "workspace:*",
+    "@kinetick-labs/kh-client-connection": "workspace:*",
+    "@kinetick-labs/kh-client-resources": "workspace:*",
+    "@kinetick-labs/kh-client-ui-slots": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-remote-mock": "workspace:*",
+    "@kinetick-labs/kh-sandbox-policy": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-persistence": "workspace:*",
+    "@kinetick-labs/kh-util-workspace-path": "workspace:*"
   },
   "files": [
     "lib/index.js",

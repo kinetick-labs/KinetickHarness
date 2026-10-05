@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createMessage, createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { TokenUsage } from '@deepseek-ai/dsh-llm'
-import SessionStore from '@deepseek-ai/dsh-session'
-import type { Session, SessionSeq } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import TokenMeter from '@deepseek-ai/dsh-token-meter'
-import type { ContextPressureProjection, TokenUsageProjection } from '@deepseek-ai/dsh-token-meter/client'
-import { RetryId } from '@deepseek-ai/dsh-llm-retry'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
-import { CompactionId } from '@deepseek-ai/dsh-compaction'
+import { createMessage, createUserMessage } from '@kinetick-labs/kh-llm'
+import type { TokenUsage } from '@kinetick-labs/kh-llm'
+import SessionStore from '@kinetick-labs/kh-session'
+import type { Session, SessionSeq } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import TokenMeter from '@kinetick-labs/kh-token-meter'
+import type { ContextPressureProjection, TokenUsageProjection } from '@kinetick-labs/kh-token-meter/client'
+import { RetryId } from '@kinetick-labs/kh-llm-retry'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
+import { CompactionId } from '@kinetick-labs/kh-compaction'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
   }

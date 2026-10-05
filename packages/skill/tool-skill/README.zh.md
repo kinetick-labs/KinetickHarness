@@ -3,7 +3,7 @@ description: "面向模型的 skill（技能）目录与加载工具，供希望
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-tool-skill
+# @kinetick-labs/kh-tool-skill
 
 [English](README.md) | 中文
 
@@ -36,9 +36,9 @@ agent 可以在会话期间发现并加载 skill。在首次请求前，如果�
 与 skill 注册表和至少一个提供方一起加载该插件。唯一配置项限制目录中渲染的规范化描述长度。
 
 ```yaml
-- name: '@deepseek-ai/dsh-skill'
-- name: '@deepseek-ai/dsh-skill-filesystem'
-- name: '@deepseek-ai/dsh-tool-skill'
+- name: '@kinetick-labs/kh-skill'
+- name: '@kinetick-labs/kh-skill-filesystem'
+- name: '@kinetick-labs/kh-tool-skill'
 ```
 
 | 字段 | 默认值 | 含义 |
@@ -70,7 +70,7 @@ agent 可以在会话期间发现并加载 skill。在首次请求前，如果�
 
 ### 设计理念
 
-本包建立在两个想法之上。第一，目录是一种持久投影，按已发布条目的 digest 而非渲染后的正文做差异比较，因此 `<system-reminder>` 包装永远不会强制重新发布，消费方也不需要重新解析 `<available_skills>` 块。第二，一条规范渲染服务两条加载路径——工具结果与用户显式注入——经由共享自 `dsh-skill` 的 `renderSkillContent`，因此无论加载由谁发起，模型看到的都是同一种 `<skill_content>` 形态。
+本包建立在两个想法之上。第一，目录是一种持久投影，按已发布条目的 digest 而非渲染后的正文做差异比较，因此 `<system-reminder>` 包装永远不会强制重新发布，消费方也不需要重新解析 `<available_skills>` 块。第二，一条规范渲染服务两条加载路径——工具结果与用户显式注入——经由共享自 `kh-skill` 的 `renderSkillContent`，因此无论加载由谁发起，模型看到的都是同一种 `<skill_content>` 形态。
 
 ### 源码地图
 
@@ -109,7 +109,7 @@ agent 可以在会话期间发现并加载 skill。在首次请求前，如果�
 
 #### 模型看到什么
 
-如果存在模型可调用 skill，且可见的正是这个 `skill` 工具，agent 会在第一个请求之前收到下方目录模板，其中包含每个已排序 skill 的一条随数据而定的条目。该目录是一条持久的用户角色消息。后续成员关系、描述或可见性的变化会使用同一个 `<available_skills>` 信封追加完整替换；删除所有 skill 时，会追加一个空信封，并明确指示不得使用旧名称。模板的结尾一句是防止双重加载的规则：用户显式的手势边界（下文的 pre-step 监听器）会把同一份 `renderSkillContent` 输出（共享自 `@deepseek-ai/dsh-skill`）内联注入，目录则告诉模型遵循该块，而不是再经工具重新加载该 skill；替换目录模板的两个分支——包括清空后的目录——都携带同一条防双重加载规则。
+如果存在模型可调用 skill，且可见的正是这个 `skill` 工具，agent 会在第一个请求之前收到下方目录模板，其中包含每个已排序 skill 的一条随数据而定的条目。该目录是一条持久的用户角色消息。后续成员关系、描述或可见性的变化会使用同一个 `<available_skills>` 信封追加完整替换；删除所有 skill 时，会追加一个空信封，并明确指示不得使用旧名称。模板的结尾一句是防止双重加载的规则：用户显式的手势边界（下文的 pre-step 监听器）会把同一份 `renderSkillContent` 输出（共享自 `@kinetick-labs/kh-skill`）内联注入，目录则告诉模型遵循该块，而不是再经工具重新加载该 skill；替换目录模板的两个分支——包括清空后的目录——都携带同一条防双重加载规则。
 
 ##### Skill 目录模板
 

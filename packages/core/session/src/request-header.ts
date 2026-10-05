@@ -4,11 +4,11 @@
  * any request was built under by taking the latest canonical snapshot; the
  * loop uses the same equality helper to avoid logging unchanged headers.
  *
- * @module dsh-session/request-header
+ * @module kh-session/request-header
  */
 
-import { callConfigEquals } from '@deepseek-ai/dsh-llm'
-import type { ToolSchema } from '@deepseek-ai/dsh-llm'
+import { callConfigEquals } from '@kinetick-labs/kh-llm'
+import type { ToolSchema } from '@kinetick-labs/kh-llm'
 import type { EpochHeader, SessionEvent } from './types.ts'
 
 /**

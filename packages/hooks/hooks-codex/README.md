@@ -3,13 +3,13 @@ description: "Run your existing Codex hooks.json hook config during agent runs �
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-hooks-codex
+# @kinetick-labs/kh-hooks-codex
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-hooks-codex` runs command hooks from an existing Codex `hooks.json` during agent runs, so prompt and tool gates work without being rewritten. It supports five Codex hook points: session start, prompt submission, before and after tool execution, and stop. Hooks can block prompts or tool calls with model-visible reasons, add conversation context, or force another agent step. Choose this package to reuse Codex command hooks in the harness; use a native plugin for behavior outside this supported subset.
+`kh-hooks-codex` runs command hooks from an existing Codex `hooks.json` during agent runs, so prompt and tool gates work without being rewritten. It supports five Codex hook points: session start, prompt submission, before and after tool execution, and stop. Hooks can block prompts or tool calls with model-visible reasons, add conversation context, or force another agent step. Choose this package to reuse Codex command hooks in the harness; use a native plugin for behavior outside this supported subset.
 
 ## Table of Contents
 
@@ -34,7 +34,7 @@ Use it when you own a Codex `hooks.json` and its command hooks should gate promp
 ### Smallest working setup
 
 ```yaml
-- name: '@deepseek-ai/dsh-hooks-codex'
+- name: '@kinetick-labs/kh-hooks-codex'
   config:
     configPath: ./.codex/hooks.json
     model: deepseek-v4
@@ -92,7 +92,7 @@ The matcher subject is the tool name (`PreToolUse` / `PostToolUse`) or the sessi
 
 ### Detached runs and disposal
 
-`SessionStart` is the one emit point and runs detached — no extension point awaits it. Each run chain is tracked, and disposing the bridge aborts a still-running hook process, then drains the continuation before the dispose resolves (`createDetachedRuns` in `dsh-hook-protocol`).
+`SessionStart` is the one emit point and runs detached — no extension point awaits it. Each run chain is tracked, and disposing the bridge aborts a still-running hook process, then drains the continuation before the dispose resolves (`createDetachedRuns` in `kh-hook-protocol`).
 
 ### Design philosophy
 

@@ -3,13 +3,13 @@ description: "面向提供方插件的官方 DeepSeek 请求扩展注册表，�
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-deepseek-llm-api-extensions
+# @kinetick-labs/kh-deepseek-llm-api-extensions
 
 [English](README.md) | 中文
 
 ## 概述
 
-用于向 DeepSeek 官方 LLM（大语言模型）API 请求添加顶层字段的提供方特定注册表。`DeepSeekLlmApiExtensionRegistry` 注册 `ctx.deepseekLlmApiExtensions`；贡献插件分别认领一个经声明合并的字段，`dsh-llm-deepseek` 则在序列化基础请求后准备当前贡献。当插件必须添加经过验证的提供方特定字段且不能修改基础适配器时，请使用它。
+用于向 DeepSeek 官方 LLM（大语言模型）API 请求添加顶层字段的提供方特定注册表。`DeepSeekLlmApiExtensionRegistry` 注册 `ctx.deepseekLlmApiExtensions`；贡献插件分别认领一个经声明合并的字段，`kh-llm-deepseek` 则在序列化基础请求后准备当前贡献。当插件必须添加经过验证的提供方特定字段且不能修改基础适配器时，请使用它。
 
 ## 目录
 
@@ -34,7 +34,7 @@ kind: "package-reference"
 <a id="model-experience"></a>
 ## 模型体验
 
-通过 `@deepseek-ai/dsh-llm-deepseek` 间接生效；该包在模型的 `messages`、系统提示词与工具 schema 之外发送已注册字段。
+通过 `@kinetick-labs/kh-llm-deepseek` 间接生效；该包在模型的 `messages`、系统提示词与工具 schema 之外发送已注册字段。
 
 #### KV Cache 影响
 

@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-host-webserver",
+  "name": "@kinetick-labs/kh-host-webserver",
   "description": "Web route-registration plugin: HTTP and upgrade routes, index transform taps, and static dist fallback; knows no harness concepts",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/host/webserver"
   },
   "type": "module",

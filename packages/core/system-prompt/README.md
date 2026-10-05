@@ -3,13 +3,13 @@ description: "System-prompt assembly for users and maintainers adding prompt sec
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-system-prompt
+# @kinetick-labs/kh-system-prompt
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-system-prompt` lets agents receive one ordered system prompt and the available tool schemas for each model step. Use it to add prompt sections, dynamic runtime facts, reusable variables, or tool schemas, or to control the fixed harness identity, deployment persona, runtime context, and model-facing tool order. Agent-scoped contributions override same-named global defaults without affecting other agents. Invalid complete-prompt combinations and unresolved variables fail assembly instead of sending a malformed prompt.
+`kh-system-prompt` lets agents receive one ordered system prompt and the available tool schemas for each model step. Use it to add prompt sections, dynamic runtime facts, reusable variables, or tool schemas, or to control the fixed harness identity, deployment persona, runtime context, and model-facing tool order. Agent-scoped contributions override same-named global defaults without affecting other agents. Invalid complete-prompt combinations and unresolved variables fail assembly instead of sending a malformed prompt.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ English | [中文](README.zh.md)
 <a id="use-this-package"></a>
 ## Use this package
 
-Mount `dsh-system-prompt` wherever agents run: it provides `ctx.systemPrompt`, the registry every prompt contribution lands in. Contributions are scoped — registering through `agent.ctx` affects that agent alone and shadows a same-named global.
+Mount `kh-system-prompt` wherever agents run: it provides `ctx.systemPrompt`, the registry every prompt contribution lands in. Contributions are scoped — registering through `agent.ctx` affects that agent alone and shadows a same-named global.
 
 <a id="configure-the-prompt"></a>
 ### Configure the prompt
@@ -33,7 +33,7 @@ Mount `dsh-system-prompt` wherever agents run: it provides `ctx.systemPrompt`, t
 The config owns the fixed opener, runtime context, deployment persona prefix and suffix, and tool order; everything else comes from registered contributions.
 
 ```yaml
-- name: '@deepseek-ai/dsh-system-prompt'
+- name: '@kinetick-labs/kh-system-prompt'
   config:
     includeHarnessIdentity: true
     includeRuntimeContext: true
@@ -43,7 +43,7 @@ The config owns the fixed opener, runtime context, deployment persona prefix and
 
 | Field | Default | Meaning |
 |---|---|---|
-| `includeHarnessIdentity` | `true` | Include the fixed `You are an AI agent powered by DeepSeek Harness.` first-party opener at order −1000. Set false only when a compatibility deployment owns the complete system prompt. |
+| `includeHarnessIdentity` | `true` | Include the fixed `You are an AI agent powered by KinetickHarness.` first-party opener at order −1000. Set false only when a compatibility deployment owns the complete system prompt. |
 | `includeRuntimeContext` | `true` | Include ordered dynamic runtime context in assembly |
 | `personaPrefix` | `''` | Global persona prefix template at order `0`, before first-party guidance |
 | `personaSuffix` | `''` | Global `deployment:persona-suffix` template at order `10200`, after first-party guidance |
@@ -138,7 +138,7 @@ First-party sections render the harness identity, deployment persona prefix (inc
 ##### Harness identity
 
 ```markdown
-You are an AI agent powered by DeepSeek Harness.
+You are an AI agent powered by KinetickHarness.
 ```
 
 #### Token effect

@@ -1,18 +1,18 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry, { installModelSelection, type Agent, type ModelSelectionRef } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import LlmRuntime, { createUserMessage, LlmError, type GenerateOptions } from '@deepseek-ai/dsh-llm'
-import { toPiContext } from '@deepseek-ai/dsh-llm-pi-ai/src/context.ts'
-import SessionStore, { Session, SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
+import AgentRegistry, { installModelSelection, type Agent, type ModelSelectionRef } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import LlmRuntime, { createUserMessage, LlmError, type GenerateOptions } from '@kinetick-labs/kh-llm'
+import { toPiContext } from '@kinetick-labs/kh-llm-pi-ai/src/context.ts'
+import SessionStore, { Session, SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { defineContentToolFixture } from '@kinetick-labs/kh-tools'
 import { MockAdapter, textResponse } from './mock-adapter.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
-    'test-compaction': { kind: 'test-compaction' } & import('@deepseek-ai/dsh-llm').ContextFormed
+    'test-compaction': { kind: 'test-compaction' } & import('@kinetick-labs/kh-llm').ContextFormed
   }
 }
 

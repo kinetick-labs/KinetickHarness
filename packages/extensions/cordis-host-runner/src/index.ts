@@ -1,22 +1,22 @@
 /**
  * Dynamic Cordis Plugin service: immutable package definitions, one active run
  * per Plugin, human-approved Client activation, and Host/Client invocation.
- * @module @deepseek-ai/dsh-cordis-host-runner
+ * @module @kinetick-labs/kh-cordis-host-runner
  */
 
 import { Context } from '@deepseek-ai/cordis'
 import type { Fiber } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-declare module '@deepseek-ai/dsh-llm' {
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'cordis-host-runner': { kind: 'cordis-host-runner' }
   }
 }
 
-import { TypertRemoteService, Remote } from '@deepseek-ai/dsh-typert-protocol'
-import type { JsonValue } from '@deepseek-ai/dsh-util-values'
+import { TypertRemoteService, Remote } from '@kinetick-labs/kh-typert-protocol'
+import type { JsonValue } from '@kinetick-labs/kh-util-values'
 import { isPlugin, normalizeHandler } from './guard.ts'
 import { CordisInspectRegistryService } from './inspect-registry.ts'
 import { missingServices, startHostHalf } from './lifecycle.ts'
@@ -1251,7 +1251,7 @@ function missingFor(ctx: Context, run: DynamicCordisRun): string[] {
 }
 
 function missingPluginMessage(id: CordisDynamicPluginId): string {
-  return `no dynamic plugin "${id}" in this process — it may have been removed or lost on DSH restart`
+  return `no dynamic plugin "${id}" in this process — it may have been removed or lost on KH restart`
 }
 
 function errorDetails(error: unknown): CordisErrorDetails {

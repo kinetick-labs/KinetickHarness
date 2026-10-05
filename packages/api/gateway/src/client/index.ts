@@ -5,12 +5,12 @@
  */
 
 import { Service } from '@deepseek-ai/cordis'
-import { RemoteError, isRemoteUplinkItem, remoteErrorOf } from '@deepseek-ai/dsh-typert-protocol'
+import { RemoteError, isRemoteUplinkItem, remoteErrorOf } from '@kinetick-labs/kh-typert-protocol'
 export type { TypertGatewayFaultDetails } from '../remote-error-codes.ts'
 import type { Context } from '@deepseek-ai/cordis'
 import type {
   ConnectionHandle,
-} from '@deepseek-ai/dsh-client-connection/client'
+} from '@kinetick-labs/kh-client-connection/client'
 import type {
   InvocationDescriptor,
   TypertClientEventListener,
@@ -22,7 +22,7 @@ import type {
   TypertDisposer,
   TypertRemoteContribution,
   TypertRemoteEvent,
-} from '@deepseek-ai/dsh-typert-protocol'
+} from '@kinetick-labs/kh-typert-protocol'
 import {
   ClientUplinkQueue,
   RemoteStreamCarrierError,
@@ -859,7 +859,7 @@ function rebuiltFailure(error: { code: string; message: string; details: object 
 }
 
 type MarkedConnectionStreamFailure = Error & {
-  readonly dshRemoteStreamFailure?:
+  readonly khRemoteStreamFailure?:
     | { readonly kind: 'remote'; readonly code: string; readonly details: object }
     | { readonly kind: 'carrier' }
 }
@@ -870,7 +870,7 @@ async function *normalizeConnectionStream(source: AsyncIterable<unknown>): Async
     yield * source
   } catch (error) {
     if (!(error instanceof Error)) throw error
-    const marker = (error as MarkedConnectionStreamFailure).dshRemoteStreamFailure
+    const marker = (error as MarkedConnectionStreamFailure).khRemoteStreamFailure
     if (marker?.kind === 'remote') {
       throw new RemoteError(marker.code as never, error.message, marker.details as never)
     }

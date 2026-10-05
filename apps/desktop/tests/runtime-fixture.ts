@@ -25,23 +25,23 @@ export function writePackage(modules: string, name: string, fields: Record<strin
 /**
  * Seal a minimal release containing Host entry files and a shared Cordis package.
  * @param root - New runtime directory.
- * @param version - Shell and dsh version.
+ * @param version - Shell and kh version.
  * @param nodeVersion - Bundled Node version recorded in resource metadata.
  * @returns Sealed runtime metadata.
  */
 export function runtimeFixture(root: string, version = '1.0.0', nodeVersion = '24.17.0'): DesktopRuntimeDescriptor {
-  const names = ['@deepseek-ai/dsh', '@deepseek-ai/dsh-desktop-host', '@deepseek-ai/dsh-base', '@deepseek-ai/dsh-web-app', '@deepseek-ai/cordis']
+  const names = ['@kinetick-labs/kh', '@kinetick-labs/kh-desktop-host', '@kinetick-labs/kh-base', '@kinetick-labs/kh-web-app', '@deepseek-ai/cordis']
   for (const name of names) {
-    const bundle = name === '@deepseek-ai/dsh-base' || name === '@deepseek-ai/dsh-web-app'
+    const bundle = name === '@kinetick-labs/kh-base' || name === '@kinetick-labs/kh-web-app'
     const path = writePackage(join(root, 'node_modules'), name, {
       version,
-      ...(name === '@deepseek-ai/dsh' ? { dependencies: Object.fromEntries(names.slice(1).map(dependency => [dependency, version])) } : {}),
-      ...(bundle ? { dsh: { bundle: { patch: './bundle.yml' } } } : {}),
+      ...(name === '@kinetick-labs/kh' ? { dependencies: Object.fromEntries(names.slice(1).map(dependency => [dependency, version])) } : {}),
+      ...(bundle ? { kh: { bundle: { patch: './bundle.yml' } } } : {}),
     })
     if (bundle) writeFileSync(join(path, 'bundle.yml'), '[]\n')
   }
   for (const file of DESKTOP_HOST_RUNTIME_FILES) {
-    const path = join(root, 'node_modules', '@deepseek-ai/dsh-desktop-host', file)
+    const path = join(root, 'node_modules', '@kinetick-labs/kh-desktop-host', file)
     mkdirSync(join(path, '..'), { recursive: true })
     writeFileSync(path, '')
   }

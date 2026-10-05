@@ -1,9 +1,9 @@
 {
-  "organization": "deepseek-harness",
-  "repository": "deepseek-harness",
+  "organization": "kinetick-harness",
+  "repository": "kinetick-harness",
   "projectNumber": 1,
-  "projectTitle": "DSH Issue Management",
-  "lifecycleActor": "dsh-issue-management",
+  "projectTitle": "KH Issue Management",
+  "lifecycleActor": "kh-issue-management",
   "priorityField": "Priority",
   "startDateField": "Start Date",
   "projectTimeZone": "Asia/Shanghai",

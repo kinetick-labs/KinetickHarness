@@ -6,21 +6,21 @@
  * 404, missing descendant → errored stream).
  */
 
-import { SESSION_FORMAT_VERSION, SessionSeq } from '@deepseek-ai/dsh-session'
+import { SESSION_FORMAT_VERSION, SessionSeq } from '@kinetick-labs/kh-session'
 import { randomBytes } from 'node:crypto'
 import { describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import { unzipSync, strFromU8 } from 'fflate'
-import type { FileAttachmentRef, ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'
-import type { SessionEvent, SessionHeader, SessionId, ToolResultMessage, UserMessage } from '@deepseek-ai/dsh-session'
-import type { SessionLineageNode } from '@deepseek-ai/dsh-session-query'
-import { SessionPersistenceNotFoundError } from '@deepseek-ai/dsh-session-persistence'
-import type { SessionAccess, SessionHandle } from '@deepseek-ai/dsh-session-persistence'
-import { HostConnectionService } from '@deepseek-ai/dsh-client-connection'
-import type { BrowserAuth } from '@deepseek-ai/dsh-client-connection/src/browser-auth.ts'
+import type { FileAttachmentRef, ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
+import type { SessionEvent, SessionHeader, SessionId, ToolResultMessage, UserMessage } from '@kinetick-labs/kh-session'
+import type { SessionLineageNode } from '@kinetick-labs/kh-session-query'
+import { SessionPersistenceNotFoundError } from '@kinetick-labs/kh-session-persistence'
+import type { SessionAccess, SessionHandle } from '@kinetick-labs/kh-session-persistence'
+import { HostConnectionService } from '@kinetick-labs/kh-client-connection'
+import type { BrowserAuth } from '@kinetick-labs/kh-client-connection/src/browser-auth.ts'
 import * as SessionLogExport from '../src/index.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface ContentBlockMap {
     'plugin:vendor': { type: 'plugin:vendor'; data: { content: readonly unknown[] }; content: readonly unknown[] }
   }
@@ -313,7 +313,7 @@ describe('session.export download endpoint', () => {
     )
     expect(response.status).toBe(200)
     expect(response.headers.get('content-type')).toBe('application/zip')
-    expect(response.headers.get('content-disposition')).toContain('dsh-session-session-root.zip')
+    expect(response.headers.get('content-disposition')).toContain('kh-session-session-root.zip')
     const files = unzipSync(await responseBytes(response))
     expect(Object.keys(files)).toEqual([exportLogName])
     expect(strFromU8(files[exportLogName] as Uint8Array)).toBe(logText(stored))
@@ -328,7 +328,7 @@ describe('session.export download endpoint', () => {
 
     expect(response.status).toBe(200)
     expect(response.headers.get('content-type')).toBe('application/zip')
-    expect(response.headers.get('content-disposition')).toContain('dsh-session-session-root.zip')
+    expect(response.headers.get('content-disposition')).toContain('kh-session-session-root.zip')
     expect(response.body).toBeNull()
     expect(open).toHaveBeenCalledOnce()
   })

@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-tool-cordis",
+  "name": "@kinetick-labs/kh-tool-cordis",
   "description": "Read-only runtime API inspection for Harness plugin development",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/extensions/tool-cordis"
   },
   "type": "module",
@@ -34,20 +34,20 @@
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-app-boot": "workspace:*",
-    "@deepseek-ai/dsh-cordis-host-runner": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-app-boot": "workspace:*",
+    "@kinetick-labs/kh-cordis-host-runner": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-group": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-app-boot": "workspace:*",
-    "@deepseek-ai/dsh-cordis-host-runner": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-app-boot": "workspace:*",
+    "@kinetick-labs/kh-cordis-host-runner": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@deepseek-ai/schemastery": "workspace:~"
   }
 }

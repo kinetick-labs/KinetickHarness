@@ -11,13 +11,13 @@
  * VFS as well would pass either way.
  */
 import { describe, expect, it } from 'vitest'
-import { runShellCommand } from '@deepseek-ai/dsh-experimental-webworker-runtime/src/shell/interpret.ts'
-import { filesystemError } from '@deepseek-ai/dsh-experimental-webworker-runtime/src/shell/fs-access.ts'
+import { runShellCommand } from '@kinetick-labs/kh-experimental-webworker-runtime/src/shell/interpret.ts'
+import { filesystemError } from '@kinetick-labs/kh-experimental-webworker-runtime/src/shell/fs-access.ts'
 import type {
   ShellDirent, ShellFileSystem, ShellRunOutcome, ShellStats,
-} from '@deepseek-ai/dsh-experimental-webworker-runtime/src/shell/types.ts'
+} from '@kinetick-labs/kh-experimental-webworker-runtime/src/shell/types.ts'
 
-const WORKSPACE = '/dsh/workspace'
+const WORKSPACE = '/kh/workspace'
 
 /** One call a program made on the injected filesystem. */
 interface Call {

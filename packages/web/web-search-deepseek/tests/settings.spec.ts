@@ -3,8 +3,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
 import { liveConfig } from '../../../settings/settings/tests/live-config.ts'
-import WebRuntime from '@deepseek-ai/dsh-web'
-import * as deepseekPlugin from '@deepseek-ai/dsh-web-search-deepseek'
+import WebRuntime from '@kinetick-labs/kh-web'
+import * as deepseekPlugin from '@kinetick-labs/kh-web-search-deepseek'
 
 function jsonResponse(body: unknown): Response {
   return new Response(JSON.stringify(body), {

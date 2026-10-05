@@ -1,19 +1,19 @@
 import { describe, expect, it, vi } from 'vitest'
 import type {
   SessionEventLike, SessionEventLikeEntry, SessionLiveEventEntry,
-} from '@deepseek-ai/dsh-api-session-controller/client'
-import { LlmAttemptId, ToolCallId } from '@deepseek-ai/dsh-llm/brand'
-import type { StreamChunk } from '@deepseek-ai/dsh-llm'
-import { SessionSeq } from '@deepseek-ai/dsh-session/types'
-import type { SessionEvent } from '@deepseek-ai/dsh-session/types'
+} from '@kinetick-labs/kh-api-session-controller/client'
+import { LlmAttemptId, ToolCallId } from '@kinetick-labs/kh-llm/brand'
+import type { StreamChunk } from '@kinetick-labs/kh-llm'
+import { SessionSeq } from '@kinetick-labs/kh-session/types'
+import type { SessionEvent } from '@kinetick-labs/kh-session/types'
 import {
   ConversationLocationIndex,
   ConversationNodeAssembler as RuntimeConversationNodeAssembler,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
 import type {
   ConversationMatch, ConversationNodeContext,
   ConversationNodeDefinition, ConversationViewDefinition, ConversationViewNode,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
 
 interface ScopeProbeStepData {
   readonly value: number
@@ -23,7 +23,7 @@ interface ScopeProbeTurnData {
   readonly valueSeenFromStep: number
 }
 
-declare module '@deepseek-ai/dsh-client-ui-conversation/client' {
+declare module '@kinetick-labs/kh-client-ui-conversation/client' {
   interface ConversationStepDataMap {
     'scope-probe': ScopeProbeStepData
   }

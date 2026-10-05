@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-hmr",
+  "name": "@kinetick-labs/kh-hmr",
   "description": "Coordinated module and profile configuration hot reload",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/boot/hmr"
   },
   "type": "module",
@@ -32,8 +32,8 @@
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
-    "@deepseek-ai/dsh-app-boot": "workspace:*",
-    "@deepseek-ai/dsh-cmdline": "workspace:*"
+    "@kinetick-labs/kh-app-boot": "workspace:*",
+    "@kinetick-labs/kh-cmdline": "workspace:*"
   },
   "dependencies": {
     "@babel/code-frame": "^7.29.0",
@@ -50,8 +50,8 @@
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
-    "@deepseek-ai/dsh-app-boot": "workspace:*",
-    "@deepseek-ai/dsh-cmdline": "workspace:*",
-    "@deepseek-ai/dsh-atomic-write": "workspace:*"
+    "@kinetick-labs/kh-app-boot": "workspace:*",
+    "@kinetick-labs/kh-cmdline": "workspace:*",
+    "@kinetick-labs/kh-atomic-write": "workspace:*"
   }
 }

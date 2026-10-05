@@ -1,12 +1,12 @@
 import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it, vi } from 'vitest'
-import LlmRuntime, { createUserMessage, LlmAdapter  } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions, StreamChunk } from '@deepseek-ai/dsh-llm'
-import SessionStore, { Session, SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { turnBoundaryProjectionDefinition } from '@deepseek-ai/dsh-agent-loop'
-import SessionTitleService, { type SessionTitleProvider } from '@deepseek-ai/dsh-session-title'
-import * as providerPlugin from '@deepseek-ai/dsh-session-title-first-prompt-llm'
+import LlmRuntime, { createUserMessage, LlmAdapter  } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions, StreamChunk } from '@kinetick-labs/kh-llm'
+import SessionStore, { Session, SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { turnBoundaryProjectionDefinition } from '@kinetick-labs/kh-agent-loop'
+import SessionTitleService, { type SessionTitleProvider } from '@kinetick-labs/kh-session-title'
+import * as providerPlugin from '@kinetick-labs/kh-session-title-first-prompt-llm'
 
 class RecordingAdapter extends LlmAdapter {
   readonly requests: GenerateOptions[] = []

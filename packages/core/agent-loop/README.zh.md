@@ -3,13 +3,13 @@ description: "面向用户与维护者的默认 agent（智能体）驱动器说
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-agent-loop
+# @kinetick-labs/kh-agent-loop
 
 [English](README.md) | 中文
 
 ## 概述
 
-`dsh-agent-loop` 创建全新 agent 或恢复持久化会话，随后通过模型请求、流式响应、工具执行和持久会话历史驱动每个轮次。标准 agent 组合应挂载本包；声明式条目会在启动时启动 agent，公开的 `ctx.agents` API 则支持以编程方式创建和恢复 agent。`maxParallelToolCalls` 限制同时运行的并行安全调用数量，独占调用保留顺序。取消会保留已经流式交付给用户的文本。只有标准的「调用模型、运行工具、重复」生命周期无法满足需求时，才应选择自定义 `Agent` 实现。
+`kh-agent-loop` 创建全新 agent 或恢复持久化会话，随后通过模型请求、流式响应、工具执行和持久会话历史驱动每个轮次。标准 agent 组合应挂载本包；声明式条目会在启动时启动 agent，公开的 `ctx.agents` API 则支持以编程方式创建和恢复 agent。`maxParallelToolCalls` 限制同时运行的并行安全调用数量，独占调用保留顺序。取消会保留已经流式交付给用户的文本。只有标准的「调用模型、运行工具、重复」生命周期无法满足需求时，才应选择自定义 `Agent` 实现。
 
 ## 目录
 
@@ -25,14 +25,14 @@ kind: "package-reference"
 <a id="use-this-package"></a>
 ## 使用本包
 
-在任何应运行 agent 的组合中挂载 `dsh-agent-loop`。它提供 `ctx.agents` 背后的驱动器，并启动你在配置中声明的 agent；[`dsh-base`](../../bundle/base/README.zh.md) 与 [`dsh-sdk-minimal`](../../bundle/sdk-minimal/README.zh.md) 都将它作为显式配置行挂载。
+在任何应运行 agent 的组合中挂载 `kh-agent-loop`。它提供 `ctx.agents` 背后的驱动器，并启动你在配置中声明的 agent；[`kh-base`](../../bundle/base/README.zh.md) 与 [`kh-sdk-minimal`](../../bundle/sdk-minimal/README.zh.md) 都将它作为显式配置行挂载。
 
 ### 配置声明式 agent
 
 配置中声明的 agent 会在插件加载时自动启动。每个条目需要一个 `id` 标签；模型调用还同时需要 `provider` 与 `model`（`agent/request` 可以在分发前补齐缺失的这一对值）。
 
 ```yaml
-- name: '@deepseek-ai/dsh-agent-loop'
+- name: '@kinetick-labs/kh-agent-loop'
   config:
     maxParallelToolCalls: 10
     agents:

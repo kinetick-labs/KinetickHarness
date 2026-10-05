@@ -1,11 +1,11 @@
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent, AgentHandle, CreateAgentOptions } from '@deepseek-ai/dsh-agent'
-import type {} from '@deepseek-ai/dsh-agent-preset-registry'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import { RemoteError } from '@deepseek-ai/dsh-typert-protocol'
-import type { Workspace, WorkspaceId } from '@deepseek-ai/dsh-workspace'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent, AgentHandle, CreateAgentOptions } from '@kinetick-labs/kh-agent'
+import type {} from '@kinetick-labs/kh-agent-preset-registry'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import { RemoteError } from '@kinetick-labs/kh-typert-protocol'
+import type { Workspace, WorkspaceId } from '@kinetick-labs/kh-workspace'
 import { describe, expect, it, vi } from 'vitest'
 import {
   ApiSessionAgentController,

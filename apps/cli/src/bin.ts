@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 /**
- * Command-line entry for dsh.
- * @module @deepseek-ai/dsh/bin
+ * Command-line entry for kh.
+ * @module @kinetick-labs/kh/bin
  */
 
 /* v8 ignore file -- built-bin acceptance exercises this self-executing dispatch. */
 
-import { getDshRuntimeVersion, loadLayeredEnv, StartupError } from '@deepseek-ai/dsh-app-boot'
-import { resolveDshHome } from '@deepseek-ai/dsh-home-paths'
-import { parseDshArgs } from './args.ts'
+import { getKhRuntimeVersion, loadLayeredEnv, StartupError } from '@kinetick-labs/kh-app-boot'
+import { resolveKhHome } from '@kinetick-labs/kh-home-paths'
+import { parseKhArgs } from './args.ts'
 import { reportStartupFailure } from './startup-diagnostics.ts'
 import type { RunProfileOptions } from './profile-boot.ts'
 
@@ -19,21 +19,21 @@ export type RunCliOptions = Pick<RunProfileOptions, 'packageManager'> & {
 }
 
 /**
- * Run the public dsh command-line interface.
+ * Run the public kh command-line interface.
  * @param options - Package runtime and Desktop profile access supplied by the installation.
  * @returns a promise that settles when the selected command mode finishes.
  */
 export async function runCli(options: RunCliOptions = {}): Promise<void> {
-  const version = getDshRuntimeVersion()
+  const version = getKhRuntimeVersion()
   const { manageDesktopProfile, ...profileOptions } = options
-  const invocation = parseDshArgs(process.argv.slice(2), version, manageDesktopProfile)
+  const invocation = parseKhArgs(process.argv.slice(2), version, manageDesktopProfile)
 
   switch (invocation.mode) {
     case 'profile': {
       const { runProfile } = await import('./profile-boot.ts')
       try {
         await runProfile({
-          environment: loadLayeredEnv('dsh'),
+          environment: loadLayeredEnv('kh'),
           profile: invocation.profile,
           fromDefaultProfile: invocation.fromDefaultProfile,
           patchFiles: invocation.patches,
@@ -42,7 +42,7 @@ export async function runCli(options: RunCliOptions = {}): Promise<void> {
         })
       } catch (error) {
         if (!(error instanceof StartupError)) throw error
-        await reportStartupFailure(error, { home: resolveDshHome(), version, profile: invocation.profile })
+        await reportStartupFailure(error, { home: resolveKhHome(), version, profile: invocation.profile })
         process.exit(1)
       }
       break
@@ -69,7 +69,7 @@ export async function runCli(options: RunCliOptions = {}): Promise<void> {
     }
     default:
       invocation satisfies never
-      throw new Error(`dsh: unhandled invocation mode ${JSON.stringify(invocation)}`)
+      throw new Error(`kh: unhandled invocation mode ${JSON.stringify(invocation)}`)
   }
 }
 

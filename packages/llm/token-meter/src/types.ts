@@ -1,11 +1,11 @@
 /**
  * Public configuration and measurement vocabulary for replay token metering.
  *
- * @module @deepseek-ai/dsh-token-meter/types
+ * @module @kinetick-labs/kh-token-meter/types
  */
 
-import type { TokenUsage } from '@deepseek-ai/dsh-llm'
-import type { SessionLogOffset, SessionSeq } from '@deepseek-ai/dsh-session/types'
+import type { TokenUsage } from '@kinetick-labs/kh-llm'
+import type { SessionLogOffset, SessionSeq } from '@kinetick-labs/kh-session/types'
 
 export type { ContextBreakdownProjection, ContextPressureProjection, TokenUsageProjection } from './projection.ts'
 

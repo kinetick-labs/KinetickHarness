@@ -2,11 +2,11 @@
 
 import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it, vi } from 'vitest'
-import { resolveSlotLabel } from '@deepseek-ai/dsh-client-ui-slots'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import { apply, inject } from '@deepseek-ai/dsh-client-ui-settings-plugins/client'
-import type { PluginsSettingsSectionInjected } from '@deepseek-ai/dsh-client-ui-settings-plugins/client'
+import { resolveSlotLabel } from '@kinetick-labs/kh-client-ui-slots'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import { apply, inject } from '@kinetick-labs/kh-client-ui-settings-plugins/client'
+import type { PluginsSettingsSectionInjected } from '@kinetick-labs/kh-client-ui-settings-plugins/client'
 import { apply as hostApply } from '../src/index.ts'
 
 // These specs assert the shipped Chinese copy. The lane has no jsdom `window`,

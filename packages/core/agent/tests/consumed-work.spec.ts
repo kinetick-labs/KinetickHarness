@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import type { TurnEndReason } from '@deepseek-ai/dsh-session'
-import { foldConsumedWork } from '@deepseek-ai/dsh-agent'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import type { TurnEndReason } from '@kinetick-labs/kh-session'
+import { foldConsumedWork } from '@kinetick-labs/kh-agent'
 
 /** One pending message, as the inbox records it. */
 function message(text: string) {

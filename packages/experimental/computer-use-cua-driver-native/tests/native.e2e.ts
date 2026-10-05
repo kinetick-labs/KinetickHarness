@@ -2,13 +2,13 @@
 
 import { expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import ComputerUseRegistry from '@deepseek-ai/dsh-computer-use'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
+import ComputerUseRegistry from '@kinetick-labs/kh-computer-use'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
 import * as NativeProvider from '../src/index.ts'
 
-it.skipIf(process.env.DSH_COMPUTER_USE_NATIVE_E2E !== '1')(
+it.skipIf(process.env.KH_COMPUTER_USE_NATIVE_E2E !== '1')(
   'loads the installed native SDK, reads permission status without prompting, and shuts down',
   { retry: 0 },
   async ({ signal }) => {

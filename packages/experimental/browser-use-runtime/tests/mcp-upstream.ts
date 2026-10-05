@@ -10,15 +10,15 @@ import { Context } from '@deepseek-ai/cordis'
 import type { Plugin } from '@deepseek-ai/cordis'
 import Loader from '@deepseek-ai/cordis-plugin-loader'
 import Include from '@deepseek-ai/cordis-plugin-include'
-import BrowserUse from '@deepseek-ai/dsh-browser-use'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import Tools from '@deepseek-ai/dsh-tools'
-import Llm from '@deepseek-ai/dsh-llm'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import Sessions, { SessionId } from '@deepseek-ai/dsh-session'
-import Agents from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import Projections from '@deepseek-ai/dsh-session-projection'
+import BrowserUse from '@kinetick-labs/kh-browser-use'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import Tools from '@kinetick-labs/kh-tools'
+import Llm from '@kinetick-labs/kh-llm'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import Sessions, { SessionId } from '@kinetick-labs/kh-session'
+import Agents from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import Projections from '@kinetick-labs/kh-session-projection'
 import { expect, vi } from 'vitest'
 import type { BrowserMcpConfig } from '../src/mcp.ts'
 
@@ -28,13 +28,13 @@ export async function verifyMcpBrowser(
   navigate: { name: string; arguments(url: string): Record<string, unknown> },
   mode: 'launch' | 'attach',
 ): Promise<void> {
-  const executable = process.env.DSH_BROWSER_EXECUTABLE!
-  const root = await mkdtemp(join(tmpdir(), 'dsh-browser-upstream-'))
+  const executable = process.env.KH_BROWSER_EXECUTABLE!
+  const root = await mkdtemp(join(tmpdir(), 'kh-browser-upstream-'))
   const observed = new Set<string>()
   const server = createServer((request, response) => {
     observed.add(request.url!)
     response.writeHead(200, { 'Content-Type': 'text/html' })
-    response.end('<!doctype html><title>DSH browser fixture</title><h1>Browser integration works</h1>')
+    response.end('<!doctype html><title>KH browser fixture</title><h1>Browser integration works</h1>')
   })
   const ctx = new Context()
   let external: ReturnType<typeof spawn> | undefined

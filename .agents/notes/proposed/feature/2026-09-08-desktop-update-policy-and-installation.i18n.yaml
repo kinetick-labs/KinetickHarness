@@ -3,20 +3,20 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/proposed/feature/2026-09-08-desktop-update-policy-and-installation.md
 /agent-note-desktop-update-policy-and-installation:
-  en: 250865822f42a08a
-  zh: f7fab178a4835c04
+  en: c4f615a439f005c1
+  zh: 2f770e1d715e5792
 /agent-note-desktop-update-policy-and-installation/problem:
   en: 96e7c7a206e06f15
   zh: 189133653543a98c
 /agent-note-desktop-update-policy-and-installation/proposal:
-  en: 68c7ebc3e29eb4d8
-  zh: c98d151b6ca44ecb
+  en: f15184c2357e0474
+  zh: 8a43012c460d2c77
 /agent-note-desktop-update-policy-and-installation/proposal/release-and-backend-qualification:
-  en: 03612a65e4a65939
-  zh: 4d45467930e9f364
+  en: afd8750daa95e06d
+  zh: cdc73fd8a2c1b44e
 /agent-note-desktop-update-policy-and-installation/proposal/open-product-choices:
-  en: 1ced7c2ababf429f
-  zh: 9879fba6f288236c
+  en: 01854b049a20ac15
+  zh: 2ea806d61fe0dfff
 /agent-note-desktop-update-policy-and-installation/proposal/cdn-and-capacity-qualification:
   en: a857e8c566e0cbd2
   zh: 6b4fd99b7482c2b1

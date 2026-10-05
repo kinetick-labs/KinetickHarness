@@ -13,24 +13,24 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
 import { z } from 'zod'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import { AttachmentStore } from '@deepseek-ai/dsh-attachment'
-import { agentPresetProjectionDefinition } from '@deepseek-ai/dsh-agent-preset-registry'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SESSION_FORMAT_VERSION, SessionId, SessionLogOffset, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { Session, SessionEvent, SessionHeader, UserMessage } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import type { ProjectionDefinition } from '@deepseek-ai/dsh-session-projection'
-import SessionProjectionCache, { projectionCacheDomainSpec } from '@deepseek-ai/dsh-session-projection-cache'
-import { titleProjectionDefinition } from '@deepseek-ai/dsh-session-title'
-import Storage from '@deepseek-ai/dsh-storage'
-import * as StorageDomain from '@deepseek-ai/dsh-storage-domain'
-import * as StorageJson from '@deepseek-ai/dsh-storage-json'
-import type { SessionControlFrame, SessionFollowFrame } from '@deepseek-ai/dsh-api-session-controller/types'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import { AttachmentStore } from '@kinetick-labs/kh-attachment'
+import { agentPresetProjectionDefinition } from '@kinetick-labs/kh-agent-preset-registry'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import SessionStore, { SESSION_FORMAT_VERSION, SessionId, SessionLogOffset, SessionSeq } from '@kinetick-labs/kh-session'
+import type { Session, SessionEvent, SessionHeader, UserMessage } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import type { ProjectionDefinition } from '@kinetick-labs/kh-session-projection'
+import SessionProjectionCache, { projectionCacheDomainSpec } from '@kinetick-labs/kh-session-projection-cache'
+import { titleProjectionDefinition } from '@kinetick-labs/kh-session-title'
+import Storage from '@kinetick-labs/kh-storage'
+import * as StorageDomain from '@kinetick-labs/kh-storage-domain'
+import * as StorageJson from '@kinetick-labs/kh-storage-json'
+import type { SessionControlFrame, SessionFollowFrame } from '@kinetick-labs/kh-api-session-controller/types'
 import {
   mountAgentLoopTestDependencies,
   mountAgentLoopTestHarness,
-} from '@deepseek-ai/dsh-agent-loop-testkit'
+} from '@kinetick-labs/kh-agent-loop-testkit'
 import { createSessionTestRemote, testSessionPersistence, type TestSessionRemote } from './test-remote.ts'
 
 const ownedContexts = new Set<Context>()
@@ -40,7 +40,7 @@ afterEach(async () => {
 })
 let nextHarnessSession = 1
 
-declare module '@deepseek-ai/dsh-session-projection/types' {
+declare module '@kinetick-labs/kh-session-projection/types' {
   interface SessionProjectionStateMap {
     'test/last-user': LastUserState
     'test/internal-count': number
@@ -571,7 +571,7 @@ describe('session.list projections column', () => {
   })
 
   it('keeps persisted host-only state out of a cold session.list response', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-api-projcache-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-api-projcache-'))
     const ctx = new Context()
     try {
       await ctx.plugin(Storage)
@@ -624,7 +624,7 @@ describe('session.list projections column', () => {
   })
 
   it('lists a forked Session\'s cached title after a Host restart without opening its body', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-api-projcache-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-api-projcache-'))
     const id = SessionId('session-cold-fork')
     /** One Host process over `root`: storage stack, registry with the title unit, and the cache. */
     const boot = async (): Promise<Context> => {

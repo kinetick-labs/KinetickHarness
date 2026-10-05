@@ -1,6 +1,6 @@
 {
-  "name": "DeepSeek Harness",
-  "short_name": "DSH",
+  "name": "KinetickHarness",
+  "short_name": "KH",
   "start_url": "./",
   "scope": "./",
   "display": "fullscreen",

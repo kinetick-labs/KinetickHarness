@@ -3,7 +3,7 @@ description: "Bundled Word, PowerPoint, and Excel instructions for deployments p
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-skill-office
+# @kinetick-labs/kh-skill-office
 
 English | [中文](README.zh.md)
 
@@ -25,12 +25,12 @@ Agents can load Word, PowerPoint, and Excel workflows that use the bundled Pytho
 <a id="use-this-package"></a>
 ## Use this package
 
-Mount this provider beside the skill registry and `dsh-tool-skill` to expose `office-docx`, `office-pptx`, and `office-xlsx` in the session catalog. The provider supplies instructions and scripts; the deployment supplies its interpreters, authoring libraries, execution tools, and file delivery tool.
+Mount this provider beside the skill registry and `kh-tool-skill` to expose `office-docx`, `office-pptx`, and `office-xlsx` in the session catalog. The provider supplies instructions and scripts; the deployment supplies its interpreters, authoring libraries, execution tools, and file delivery tool.
 
 ### Minimal configuration
 
 ```yaml
-- name: '@deepseek-ai/dsh-skill-office'
+- name: '@kinetick-labs/kh-skill-office'
 ```
 
 | Field | Default | Meaning |
@@ -80,7 +80,7 @@ The provider registers three bundled candidates and reads their descriptions fro
 <a id="model-experience"></a>
 ## Model Experience
 
-Indirectly, through `dsh-tool-skill`, which renders the catalog entries and selected instruction body.
+Indirectly, through `kh-tool-skill`, which renders the catalog entries and selected instruction body.
 
 #### KV Cache effect
 

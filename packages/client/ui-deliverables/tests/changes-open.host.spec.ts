@@ -2,15 +2,15 @@
 import { mkdtemp, rm, writeFile, mkdir, realpath, unlink } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { LocalFileSystem } from '@deepseek-ai/dsh-fs-local'
-import { WorkspaceFiles } from '@deepseek-ai/dsh-api-workspace-files'
+import { LocalFileSystem } from '@kinetick-labs/kh-fs-local'
+import { WorkspaceFiles } from '@kinetick-labs/kh-api-workspace-files'
 import { Context } from '@deepseek-ai/cordis'
-import { HostConnectionService } from '@deepseek-ai/dsh-client-connection'
-import type { BrowserAuth } from '@deepseek-ai/dsh-client-connection/src/browser-auth.ts'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import { SessionQueryError } from '@deepseek-ai/dsh-session-query'
-import type { SessionEventReadRequest } from '@deepseek-ai/dsh-session-query'
-import type { WorkspaceChangedFile, WorkspaceChangesSummary, WorkspaceFileDiff } from '@deepseek-ai/dsh-workspace-changes/types'
+import { HostConnectionService } from '@kinetick-labs/kh-client-connection'
+import type { BrowserAuth } from '@kinetick-labs/kh-client-connection/src/browser-auth.ts'
+import { SessionId } from '@kinetick-labs/kh-session'
+import { SessionQueryError } from '@kinetick-labs/kh-session-query'
+import type { SessionEventReadRequest } from '@kinetick-labs/kh-session-query'
+import type { WorkspaceChangedFile, WorkspaceChangesSummary, WorkspaceFileDiff } from '@kinetick-labs/kh-workspace-changes/types'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { registerPresentOpen } from '../src/present-open.ts'
 import {
@@ -28,7 +28,7 @@ afterEach(async () => {
 const changed = (path: string, display = path): WorkspaceChangedFile => ({ path, display, added: 1, deleted: 0 })
 
 async function fixture() {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-changes-open-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-changes-open-'))
   cleanups.push(() => rm(root, { recursive: true, force: true }))
   const cwd = join(root, 'workspace')
   await mkdir(join(cwd, 'src', 'lib'), { recursive: true })

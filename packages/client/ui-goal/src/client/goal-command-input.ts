@@ -1,9 +1,9 @@
-import type { SessionEvent } from '@deepseek-ai/dsh-session/types'
-import type { CommandId } from '@deepseek-ai/dsh-commands/brand'
-import type {} from '@deepseek-ai/dsh-commands/types'
+import type { SessionEvent } from '@kinetick-labs/kh-session/types'
+import type { CommandId } from '@kinetick-labs/kh-commands/brand'
+import type {} from '@kinetick-labs/kh-commands/types'
 import type {
   ConversationNodeDefinition,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
 
 /** The command name whose runs this projection owns. */
 export const GOAL_COMMAND = 'goal'
@@ -15,7 +15,7 @@ export interface GoalCommandInputData {
   readonly time: number
 }
 
-declare module '@deepseek-ai/dsh-client-ui-chat/client' {
+declare module '@kinetick-labs/kh-client-ui-chat/client' {
   interface ChatNodeDataMap {
     /** Human-entered `/goal` command input. */
     'command-input': GoalCommandInputData

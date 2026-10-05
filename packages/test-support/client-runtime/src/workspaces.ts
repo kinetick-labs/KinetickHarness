@@ -1,10 +1,10 @@
 /** Test-owned workspaces face: the renderer standard-kit observable plus recorded actions. */
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
 import type {
   IWorkspaces, WorkspaceId, WorkspaceSnapshot, WorkspaceView,
-} from '@deepseek-ai/dsh-api-workspace-controller/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { SnapshotStore } from '@deepseek-ai/dsh-client-store'
+} from '@kinetick-labs/kh-api-workspace-controller/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type { SnapshotStore } from '@kinetick-labs/kh-client-store'
 import { workspaceSnapshot } from './fixtures.ts'
 import type { FixtureSnapshot, Stabilizer } from './fixtures.ts'
 

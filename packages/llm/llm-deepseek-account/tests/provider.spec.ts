@@ -1,8 +1,8 @@
 /** Account and API-key plugins own independent route registrations and catalogs. */
 import { Context } from '@deepseek-ai/cordis'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import type { DeepSeekAccount } from '@deepseek-ai/dsh-deepseek-account'
-import * as ApiKey from '@deepseek-ai/dsh-llm-deepseek-api-key'
+import LlmRuntime from '@kinetick-labs/kh-llm'
+import type { DeepSeekAccount } from '@kinetick-labs/kh-deepseek-account'
+import * as ApiKey from '@kinetick-labs/kh-llm-deepseek-api-key'
 import { afterEach, expect, it, vi } from 'vitest'
 import * as Account from '../src/index.ts'
 

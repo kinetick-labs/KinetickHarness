@@ -1,8 +1,8 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { PROTOCOL_VERSION } from '@agentclientprotocol/sdk'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { StreamChunk } from '@deepseek-ai/dsh-llm'
-import { SessionId } from '@deepseek-ai/dsh-session'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { StreamChunk } from '@kinetick-labs/kh-llm'
+import { SessionId } from '@kinetick-labs/kh-session'
 import { makeBridgeHarness, type BridgeHarness } from './harness.ts'
 
 describe('ACP connection ownership', () => {

@@ -1,9 +1,9 @@
 /** Shared projection of the live LLM registry into the browser model catalog. */
 
-import { RemoteError } from '@deepseek-ai/dsh-typert-protocol'
-import { credentialRef } from '@deepseek-ai/dsh-credentials'
-import type {} from '@deepseek-ai/dsh-settings'
-import type { LlmModelInfo } from '@deepseek-ai/dsh-llm'
+import { RemoteError } from '@kinetick-labs/kh-typert-protocol'
+import { credentialRef } from '@kinetick-labs/kh-credentials'
+import type {} from '@kinetick-labs/kh-settings'
+import type { LlmModelInfo } from '@kinetick-labs/kh-llm'
 import type { Context } from '@deepseek-ai/cordis'
 import type {
   ModelCatalog,

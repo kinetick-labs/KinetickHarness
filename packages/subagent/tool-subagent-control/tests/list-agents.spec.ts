@@ -3,16 +3,16 @@ import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import SubagentRuntime from '@deepseek-ai/dsh-subagent'
-import type { SubagentCatalogEntry } from '@deepseek-ai/dsh-subagent'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import type { GenerateOptions, StreamChunk } from '@deepseek-ai/dsh-llm'
-import { LlmAdapter } from '@deepseek-ai/dsh-llm'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { SessionId } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import SubagentRuntime from '@kinetick-labs/kh-subagent'
+import type { SubagentCatalogEntry } from '@kinetick-labs/kh-subagent'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import type { GenerateOptions, StreamChunk } from '@kinetick-labs/kh-llm'
+import { LlmAdapter } from '@kinetick-labs/kh-llm'
 import { MockAdapter, textResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import * as tool from '../src/list-agents.ts'
 import { parkParent } from './park-parent.ts'
@@ -59,7 +59,7 @@ async function setupWith(adapter: MockAdapter | GatedAdapter) {
   const ctx = new Context()
   contexts.add(ctx)
   await mountAgentLoopTestDependencies(ctx)
-  const root = mkdtempSync(join(tmpdir(), 'dsh-tool-list-agents-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-tool-list-agents-'))
   roots.push(root)
   await ctx.plugin(JsonlSessionPersistence, { root })
   await ctx.plugin(TestSessionQuery)
@@ -105,7 +105,7 @@ async function waitNoActivation(ctx: Context, childId: SessionId): Promise<void>
   }, { timeout: 5_000 })
 }
 
-describe('dsh-tool-subagent-control/list-agents', () => {
+describe('kh-tool-subagent-control/list-agents', () => {
   it('registers list_agents once, globally, with only the optional scope parameter', async () => {
     const { ctx } = await setup([])
     const schemas = ctx.tools.schemas().filter(schema => schema.name === 'list_agents')

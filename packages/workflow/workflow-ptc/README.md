@@ -3,7 +3,7 @@ description: "Run workflow orchestration through the shared sandboxed PTC Node p
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-workflow-ptc
+# @kinetick-labs/kh-workflow-ptc
 
 English | [中文](README.zh.md)
 
@@ -25,15 +25,15 @@ Run JavaScript workflows in fresh Node processes under the calling Session's fil
 <a id="use-this-package"></a>
 ## Use this package
 
-Mount this engine in a composition that provides subagents, sandbox policy and the [Node PTC runtime](../../ptc-runtime/ptc-runtime-node/README.md). It supplies workflow execution for `dsh-tool-workflow` and for `dsh-tool-ralph` when explicitly enabled. Ralph remains disabled in shipped defaults. The engine rejects non-TypeScript PTC providers when it loads. Python PTC compositions must disable the `workflow-ptc`, `tool-workflow` and any enabled `tool-ralph` rows.
+Mount this engine in a composition that provides subagents, sandbox policy and the [Node PTC runtime](../../ptc-runtime/ptc-runtime-node/README.md). It supplies workflow execution for `kh-tool-workflow` and for `kh-tool-ralph` when explicitly enabled. Ralph remains disabled in shipped defaults. The engine rejects non-TypeScript PTC providers when it loads. Python PTC compositions must disable the `workflow-ptc`, `tool-workflow` and any enabled `tool-ralph` rows.
 
 ### Minimal configuration
 
 With those dependencies available, mount the engine and its model-facing consumer:
 
 ```yaml
-- name: '@deepseek-ai/dsh-workflow-ptc'
-- name: '@deepseek-ai/dsh-tool-workflow'
+- name: '@kinetick-labs/kh-workflow-ptc'
+- name: '@kinetick-labs/kh-tool-workflow'
 ```
 
 | Field | Default | Meaning |

@@ -3,13 +3,13 @@ import assert from 'node:assert/strict'
 import { Context, Service } from '@deepseek-ai/cordis'
 import { afterEach, describe, expect, it, onTestFinished, vi } from 'vitest'
 import { cleanup, render } from '@testing-library/react'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import { createSnapshotStore } from '@deepseek-ai/dsh-client-store'
-import type { ILayout, PanelInfo } from '@deepseek-ai/dsh-client-ui-layout/client'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import { resolveSlotLabel } from '@deepseek-ai/dsh-client-ui-slots'
-import { TestRemote, usePinnedBrowserLanguages } from '@deepseek-ai/dsh-client-test-runtime'
-import * as settings from '@deepseek-ai/dsh-client-ui-settings/client'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import { createSnapshotStore } from '@kinetick-labs/kh-client-store'
+import type { ILayout, PanelInfo } from '@kinetick-labs/kh-client-ui-layout/client'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import { resolveSlotLabel } from '@kinetick-labs/kh-client-ui-slots'
+import { TestRemote, usePinnedBrowserLanguages } from '@kinetick-labs/kh-client-test-runtime'
+import * as settings from '@kinetick-labs/kh-client-ui-settings/client'
 import { apply, inject, NS, PANEL_ID } from '../src/client/index.ts'
 import { PluginManagerPage } from '../src/client/PluginManagerPage.tsx'
 import { PluginRefreshToast, type PluginRefreshToastFace } from '../src/client/PluginRefreshToast.tsx'
@@ -69,17 +69,17 @@ describe('ui-plugin-manager browser plugin', () => {
     const entry = b.slots.entries('main')[0]!
     assert(entry.store && 'create' in entry.store)
     const navigation = entry.store.create()
-    b.ctx.pluginNavigation.openBundle('dsh-navigation-test')
+    b.ctx.pluginNavigation.openBundle('kh-navigation-test')
     expect(b.panelInfo.getSnapshot().activePanelId).toBe(PANEL_ID)
-    expect(navigation.getSnapshot()).toEqual({ view: { kind: 'package', name: 'dsh-navigation-test' } })
+    expect(navigation.getSnapshot()).toEqual({ view: { kind: 'package', name: 'kh-navigation-test' } })
     b.selectPanel(null)
     expect(navigation.getSnapshot()).toEqual({ view: { kind: 'list' } })
     b.selectPanel(PANEL_ID)
     expect(navigation.getSnapshot()).toEqual({ view: { kind: 'list' } })
-    b.ctx.pluginNavigation.openBundle('dsh-navigation-test')
+    b.ctx.pluginNavigation.openBundle('kh-navigation-test')
     removeRoot()
     b.selectPanel(null)
-    expect(navigation.getSnapshot()).toEqual({ view: { kind: 'package', name: 'dsh-navigation-test' } })
+    expect(navigation.getSnapshot()).toEqual({ view: { kind: 'package', name: 'kh-navigation-test' } })
   })
 
   it('shares refresh failures with the overlay after navigation and releases both registrations across reloads', async () => {
@@ -127,11 +127,11 @@ describe('ui-plugin-manager browser plugin', () => {
     const fiber = b.ctx.plugin({ inject: [...inject], apply })
     await fiber.await()
 
-    b.ctx.pluginNavigation.openBundle('dsh-navigation-test')
+    b.ctx.pluginNavigation.openBundle('kh-navigation-test')
     expect(b.selectPanel).toHaveBeenCalledWith(PANEL_ID)
     const entry = b.slots.entries('main')[0]!
     assert(entry.store && 'create' in entry.store)
-    expect(entry.store.create().getSnapshot()).toEqual({ view: { kind: 'package', name: 'dsh-navigation-test' } })
+    expect(entry.store.create().getSnapshot()).toEqual({ view: { kind: 'package', name: 'kh-navigation-test' } })
     expect(entry.component).toBe(PluginManagerPage)
     expect(entry.options).toMatchObject({ key: PANEL_ID })
     expect(entry.locale).toBe(NS)

@@ -3,13 +3,13 @@ description: "Discover and read MCP resources on demand with shared tools, expli
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-mcp-resources
+# @kinetick-labs/kh-mcp-resources
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-mcp-resources` lets the model discover and read documents from configured MCP servers. Shipped profiles make its three shared tools available automatically when a server is configured in the caller's scope. Each tool requires an explicit server name and reads content only when called. Resource text enters conversation history; binary payloads remain available to programmatic callers and appear as descriptions to the model.
+`kh-mcp-resources` lets the model discover and read documents from configured MCP servers. Shipped profiles make its three shared tools available automatically when a server is configured in the caller's scope. Each tool requires an explicit server name and reads content only when called. Resource text enters conversation history; binary payloads remain available to programmatic callers and appear as descriptions to the model.
 
 ## Table of Contents
 
@@ -51,7 +51,7 @@ The [base](../../bundle/base/README.md) and standalone [sdk-minimal](../../bundl
 
 ```yaml
 - id: mcp-resources
-  name: '@deepseek-ai/dsh-mcp-resources'
+  name: '@kinetick-labs/kh-mcp-resources'
 ```
 
 The first provider in a scope registers its shared tools; removing the last removes those local registrations, while inherited providers and tools remain visible. The resource service owns the shared tool effects independently of the first provider's plugin, so unloading that provider cannot remove tools needed by another server. Provider selection and the server-name prompt use the same scoped registry. Each call resolves its server before dispatch.

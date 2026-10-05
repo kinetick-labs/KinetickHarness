@@ -4,19 +4,19 @@
  * `ctx.settings`, owned by the class below; and `credentials`, mounted from
  * here as its own plugin.
  *
- * @module @deepseek-ai/dsh-api-settings-controller
+ * @module @kinetick-labs/kh-api-settings-controller
  */
 
 import { Context } from '@deepseek-ai/cordis'
 import {
   openNativeTextFile,
-} from '@deepseek-ai/dsh-native-command'
-import type { SettingsDescriptor, SettingsPathOp, SettingsForms } from '@deepseek-ai/dsh-settings'
+} from '@kinetick-labs/kh-native-command'
+import type { SettingsDescriptor, SettingsPathOp, SettingsForms } from '@kinetick-labs/kh-settings'
 import type {
   SettingsDescribeValue, SettingsNamespaceView, SettingsPathOpView,
-} from '@deepseek-ai/dsh-settings/types'
-import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
-import type { JsonValue } from '@deepseek-ai/dsh-util-values'
+} from '@kinetick-labs/kh-settings/types'
+import { Remote, RemoteError, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
+import type { JsonValue } from '@kinetick-labs/kh-util-values'
 import { z } from 'zod'
 import { CredentialsController } from './credentials.ts'
 import type { SettingsDocumentOpenValue } from './types.ts'
@@ -218,7 +218,7 @@ export class SettingsController extends TypertRemoteService {
     if (settings === undefined) {
       throw new RemoteError(
         'gateway/internal',
-        'settings service is absent: mount @deepseek-ai/dsh-settings with @deepseek-ai/dsh-config-editor in the profile composition',
+        'settings service is absent: mount @kinetick-labs/kh-settings with @kinetick-labs/kh-config-editor in the profile composition',
         {},
       )
     }

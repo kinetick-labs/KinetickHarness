@@ -25,7 +25,7 @@ env:
   # Cloudflare Pages project receiving the upload. Its preview deployments are
   # the surface the Access application protects; the project's production branch
   # is deliberately a name no deployment uses, so no unprotected URL exists.
-  CF_PROJECT: dsh-build-preview
+  CF_PROJECT: kh-build-preview
 
 jobs:
   preview:
@@ -72,12 +72,12 @@ jobs:
 
       - name: Build the preview page and pack the VFS image
         env:
-          DSH_CLIENT_TITLE: DSH preview pr-${{ github.event.pull_request.number }}
-        run: pnpm --filter @deepseek-ai/dsh-web-frontend run build:preview
+          KH_CLIENT_TITLE: KH preview pr-${{ github.event.pull_request.number }}
+        run: pnpm --filter @kinetick-labs/kh-web-frontend run build:preview
 
       # Sourcemaps carry complete sources and stay off the deployment platform.
       # index.html is the served page, which cannot boot without a host
-      # injecting window.__DSH_BOOT__; replacing it with the worker page makes
+      # injecting window.__KH_BOOT__; replacing it with the worker page makes
       # the deployment root the usable entry instead of a page that never boots.
       - name: Shape the upload
         run: |
@@ -152,7 +152,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR: ${{ github.event.pull_request.number }}
         run: |
-          marker='<!-- dsh-preview-url -->'
+          marker='<!-- kh-preview-url -->'
           existing=$(gh pr view "$PR" --json comments \
             --jq "[.comments[] | select(.body | contains(\"$marker\")) | .url] | first // empty")
           if [ -n "$existing" ]; then

@@ -3,24 +3,24 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { ToolCallId } from '@deepseek-ai/dsh-llm'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import { SESSION_FORMAT_VERSION } from '@deepseek-ai/dsh-session/types'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { TOOL_ABORTED } from '@deepseek-ai/dsh-tools'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { unsupportedInbox } from '@deepseek-ai/dsh-agent-loop-testkit'
-import LocalJobRegistry from '@deepseek-ai/dsh-jobs-local'
-import type { JobId } from '@deepseek-ai/dsh-jobs'
-import * as ToolTasks from '@deepseek-ai/dsh-tool-jobs'
-import type { ShellExecution, ShellProcess } from '@deepseek-ai/dsh-shell'
-import { LocalBashExecutor } from '@deepseek-ai/dsh-bash-local'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
-import * as ToolBash from '@deepseek-ai/dsh-tool-bash'
+import { ToolCallId } from '@kinetick-labs/kh-llm'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import { SESSION_FORMAT_VERSION } from '@kinetick-labs/kh-session/types'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { TOOL_ABORTED } from '@kinetick-labs/kh-tools'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { unsupportedInbox } from '@kinetick-labs/kh-agent-loop-testkit'
+import LocalJobRegistry from '@kinetick-labs/kh-jobs-local'
+import type { JobId } from '@kinetick-labs/kh-jobs'
+import * as ToolTasks from '@kinetick-labs/kh-tool-jobs'
+import type { ShellExecution, ShellProcess } from '@kinetick-labs/kh-shell'
+import { LocalBashExecutor } from '@kinetick-labs/kh-bash-local'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
+import * as ToolBash from '@kinetick-labs/kh-tool-bash'
 import { processSources, ringDelta } from '../src/background.ts'
 import { renderPromoted } from '../src/render.ts'
-import * as BashEnvPlugin from '@deepseek-ai/dsh-shell-env'
+import * as BashEnvPlugin from '@kinetick-labs/kh-shell-env'
 
 // Readiness polling stays on wall time while a test controls the execution deadline.
 const pollingTimeout = setTimeout
@@ -29,7 +29,7 @@ const pollingTimeout = setTimeout
 const silentReader = { readFrom: (fromByte: number) => ({ text: '', nextOffset: fromByte, lossy: false }) }
 
 const testToolSignal = new AbortController().signal
-const spillDir = mkdtempSync(join(tmpdir(), 'dsh-tool-bash-background-spec-'))
+const spillDir = mkdtempSync(join(tmpdir(), 'kh-tool-bash-background-spec-'))
 
 /** Job harness with a fast registry pump for tests. */
 async function setup() {
@@ -118,7 +118,7 @@ describe('background bash output', () => {
     const started = await call(ctx, {
       command: 'true',
       description: 'test command',
-      workdir: '/nonexistent-dsh',
+      workdir: '/nonexistent-kh',
       run_in_background: true,
     })
     expect(text(started)).toMatch(/^started background job bash-\d+$/)

@@ -4,14 +4,14 @@ import { rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent, AgentHandle } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import { SessionId, type SessionEvent } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import SubagentService, { snapshotSubagentDescriptor } from '@deepseek-ai/dsh-subagent'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
+import type { Agent, AgentHandle } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import { SessionId, type SessionEvent } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import SubagentService, { snapshotSubagentDescriptor } from '@kinetick-labs/kh-subagent'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
 import { MockAdapter, textResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import TeamService, { TeamId, TeamMessageId } from '../src/index.ts'
 import type { TeamMailbox } from '../src/mailbox.ts'
@@ -168,7 +168,7 @@ for (const backend of backends) {
     it('reconciles a persisted child to active and a missing child to durable failed', {
       timeout: PERSISTENCE_TEST_TIMEOUT_MS,
     }, async () => {
-      const storageRoot = mkdtempSync(join(tmpdir(), `dsh-team-${backend.name.toLowerCase()}-`))
+      const storageRoot = mkdtempSync(join(tmpdir(), `kh-team-${backend.name.toLowerCase()}-`))
       roots.push(storageRoot)
       const first = await stack(backend, storageRoot, [textResponse('initial child answer')])
       const activeRootId = SessionId(`${backend.name.toLowerCase()}-active-root`)
@@ -243,7 +243,7 @@ for (const backend of backends) {
     it('reconciles a provisioning child whose initial prompt is durably pending', {
       timeout: PERSISTENCE_TEST_TIMEOUT_MS,
     }, async () => {
-      const storageRoot = mkdtempSync(join(tmpdir(), `dsh-team-pending-${backend.name.toLowerCase()}-`))
+      const storageRoot = mkdtempSync(join(tmpdir(), `kh-team-pending-${backend.name.toLowerCase()}-`))
       roots.push(storageRoot)
       const rootId = SessionId(`${backend.name.toLowerCase()}-pending-root`)
       const childId = SessionId(`${backend.name.toLowerCase()}-pending-child`)
@@ -284,7 +284,7 @@ for (const backend of backends) {
     it('retries queued mail through cold-resume Steer after restart', {
       timeout: PERSISTENCE_TEST_TIMEOUT_MS,
     }, async () => {
-      const storageRoot = mkdtempSync(join(tmpdir(), `dsh-team-mail-${backend.name.toLowerCase()}-`))
+      const storageRoot = mkdtempSync(join(tmpdir(), `kh-team-mail-${backend.name.toLowerCase()}-`))
       roots.push(storageRoot)
       const rootId = SessionId(`${backend.name.toLowerCase()}-mail-root`)
 
@@ -332,7 +332,7 @@ for (const backend of backends) {
     it('acknowledges target-recorded mail after restart without delivering it twice', {
       timeout: PERSISTENCE_TEST_TIMEOUT_MS,
     }, async () => {
-      const storageRoot = mkdtempSync(join(tmpdir(), `dsh-team-dedup-${backend.name.toLowerCase()}-`))
+      const storageRoot = mkdtempSync(join(tmpdir(), `kh-team-dedup-${backend.name.toLowerCase()}-`))
       roots.push(storageRoot)
       const rootId = SessionId(`${backend.name.toLowerCase()}-dedup-root`)
       const messageId = TeamMessageId(`${backend.name.toLowerCase()}-recorded-message`)
@@ -439,7 +439,7 @@ for (const backend of backends) {
     it('acknowledges durably pending target mail without cold-resume duplication', {
       timeout: PERSISTENCE_TEST_TIMEOUT_MS,
     }, async () => {
-      const storageRoot = mkdtempSync(join(tmpdir(), `dsh-team-inbox-${backend.name.toLowerCase()}-`))
+      const storageRoot = mkdtempSync(join(tmpdir(), `kh-team-inbox-${backend.name.toLowerCase()}-`))
       roots.push(storageRoot)
       const rootId = SessionId(`${backend.name.toLowerCase()}-inbox-root`)
       const childId = SessionId(`${backend.name.toLowerCase()}-inbox-child`)

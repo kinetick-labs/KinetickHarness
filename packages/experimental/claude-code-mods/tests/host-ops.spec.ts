@@ -3,12 +3,12 @@ import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type { Message } from '@deepseek-ai/dsh-llm'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import CommandRuntime from '@deepseek-ai/dsh-commands'
-import LocalFileSystem from '@deepseek-ai/dsh-fs-local'
-import LocalSubprocessRuntime from '@deepseek-ai/dsh-subprocess-local'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type { Message } from '@kinetick-labs/kh-llm'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import CommandRuntime from '@kinetick-labs/kh-commands'
+import LocalFileSystem from '@kinetick-labs/kh-fs-local'
+import LocalSubprocessRuntime from '@kinetick-labs/kh-subprocess-local'
 import { ModsEngine } from '../src/engine.ts'
 import type { OpContext } from '../src/engine.ts'
 import { createHostOps, FS_MAX_BYTES, STORE_MAX_BYTES, toolCallResultOf } from '../src/host-ops.ts'
@@ -100,17 +100,17 @@ describe('services a deployment did not compose', () => {
   it('names the missing service in each call', async () => {
     const { call, ctx } = setup()
     const agent = fakeAgent(ctx)
-    await expect(call('ui.ask', { question: 'q' }, agent)).rejects.toThrow(/dsh-user-questions/)
-    await expect(call('command.register', { name: 'x', description: 'd' }, agent)).rejects.toThrow(/dsh-commands/)
-    await expect(call('command.run', { command: 'x' }, agent)).rejects.toThrow(/dsh-commands/)
+    await expect(call('ui.ask', { question: 'q' }, agent)).rejects.toThrow(/kh-user-questions/)
+    await expect(call('command.register', { name: 'x', description: 'd' }, agent)).rejects.toThrow(/kh-commands/)
+    await expect(call('command.run', { command: 'x' }, agent)).rejects.toThrow(/kh-commands/)
     await expect(call('command.list', {}, agent)).resolves.toEqual([])
-    await expect(call('tool.register', { name: 'x', description: 'd' }, agent)).rejects.toThrow(/dsh-tools/)
-    await expect(call('tool.call', { tool: 'x' }, agent)).rejects.toThrow(/dsh-tools/)
+    await expect(call('tool.register', { name: 'x', description: 'd' }, agent)).rejects.toThrow(/kh-tools/)
+    await expect(call('tool.call', { tool: 'x' }, agent)).rejects.toThrow(/kh-tools/)
     await expect(call('tool.list', {}, agent)).resolves.toEqual([])
     await expect(call('tool.list', {})).resolves.toEqual([])
-    await expect(call('store.get', { key: 'k' })).rejects.toThrow(/dsh-storage-domain/)
-    await expect(call('fs.read', { path: 'x' })).rejects.toThrow(/dsh-fs/)
-    await expect(call('process.run', { argv: ['ls'] })).rejects.toThrow(/dsh-subprocess/)
+    await expect(call('store.get', { key: 'k' })).rejects.toThrow(/kh-storage-domain/)
+    await expect(call('fs.read', { path: 'x' })).rejects.toThrow(/kh-fs/)
+    await expect(call('process.run', { argv: ['ls'] })).rejects.toThrow(/kh-subprocess/)
     await expect(call('session.turns', {}, agent)).rejects.toThrow(/turnBoundary projection/)
     // Without a drawn surface the ui calls that would redraw the band are plain no-ops.
     await expect(call('ui.invalidate', {}, agent)).resolves.toBeUndefined()
@@ -150,7 +150,7 @@ describe('session facts from the agent', () => {
 
 describe('files through the filesystem seam', () => {
   it('resolves against the session cwd or the filesystem cwd, enforces the size limits, and reports links', async () => {
-    const root = mkdtempSync(join(tmpdir(), 'dsh-cc-mods-fs-'))
+    const root = mkdtempSync(join(tmpdir(), 'kh-cc-mods-fs-'))
     dirs.push(root)
     const ctx = new Context()
     await ctx.plugin(LocalFileSystem, { cwd: root })
@@ -179,7 +179,7 @@ describe('processes through the subprocess seam', () => {
     const ctx = new Context()
     await ctx.plugin(LocalSubprocessRuntime)
     const { call } = setup(ctx)
-    const cwd = mkdtempSync(join(tmpdir(), 'dsh-cc-mods-proc-'))
+    const cwd = mkdtempSync(join(tmpdir(), 'kh-cc-mods-proc-'))
     dirs.push(cwd)
     const run = await call('process.run', {
       argv: ['node', '-e', 'process.stdout.write(process.cwd() + "|" + process.env.CC_MODS_ENV)'],

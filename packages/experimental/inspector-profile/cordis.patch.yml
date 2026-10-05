@@ -1,8 +1,8 @@
 - insert:
     - id: experimental-inspector
-      name: '@deepseek-ai/dsh-experimental-inspector'
+      name: '@kinetick-labs/kh-experimental-inspector'
       disabled: false
       config:
         captureFetch: true
     - id: session-inspector
-      name: '@deepseek-ai/dsh-experimental-session-inspector'
+      name: '@kinetick-labs/kh-experimental-session-inspector'

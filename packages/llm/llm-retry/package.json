@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-llm-retry",
-  "description": "Provider-routed LLM request retry policy for the DeepSeek Harness",
+  "name": "@kinetick-labs/kh-llm-retry",
+  "description": "Provider-routed LLM request retry policy for the KinetickHarness",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/llm/llm-retry"
   },
   "type": "module",
@@ -31,35 +31,35 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:*",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-session-projection": "workspace:*"
+    "@kinetick-labs/kh-session-projection": "workspace:*"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "workspace:~",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop-testkit": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-llm-deepseek": "workspace:*",
-    "@deepseek-ai/dsh-llm-deepseek-api-key": "workspace:*",
-    "@deepseek-ai/dsh-llm-mock-server": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-session-persistence-jsonl": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-timeout": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-agent-loop-testkit": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-llm-deepseek": "workspace:*",
+    "@kinetick-labs/kh-llm-deepseek-api-key": "workspace:*",
+    "@kinetick-labs/kh-llm-mock-server": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-session-persistence-jsonl": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-timeout": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   }
 }

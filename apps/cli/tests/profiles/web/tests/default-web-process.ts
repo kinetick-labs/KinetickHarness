@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { request as httpRequest } from 'node:http'
 import type { IncomingHttpHeaders } from 'node:http'
-import { resolveExampleLaunch } from '@deepseek-ai/dsh-loader-smoke'
+import { resolveExampleLaunch } from '@kinetick-labs/kh-loader-smoke'
 import ts from 'typescript'
 import { expect } from 'vitest'
 import type { TestContext } from 'vitest'
@@ -34,7 +34,7 @@ export async function withDefaultWeb(
   inspect: (app: DefaultWeb) => Promise<void>,
   options: { patches?: readonly string[]; prepare?: (root: string) => Promise<void> } = {},
 ): Promise<void> {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-web-default-isolation-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-web-default-isolation-'))
   let removal: Promise<void> | undefined
   const removeRoot = (): Promise<void> => removal ??= rm(root, { recursive: true, force: true })
   test.onTestFinished(removeRoot)
@@ -68,8 +68,8 @@ export async function withDefaultWeb(
         NODE_OPTIONS: undefined,
         NODE_PATH: undefined,
         TSX_TSCONFIG_PATH: undefined,
-        DSH_HOME: join(root, 'home'),
-        DSH_AGENTS_HOME: join(root, '.agents'),
+        KH_HOME: join(root, 'home'),
+        KH_AGENTS_HOME: join(root, '.agents'),
         DEEPSEEK_API_KEY: 'keyless-default-web-no-call',
         NODE_NO_WARNINGS: '1',
       },
@@ -151,9 +151,9 @@ export async function withDefaultWeb(
       await expect.poll(() => {
         test.signal.throwIfAborted()
         if (exited) throw new Error(`Web exited before readiness\n${stdout}\n${stderr}`)
-        return /dsh web: (http:\/\/[^\s]+)/u.exec(stdout)?.[1]
+        return /kh web: (http:\/\/[^\s]+)/u.exec(stdout)?.[1]
       }, { timeout: test.task.timeout }).toBeDefined()
-      const url = /dsh web: (http:\/\/[^\s]+)/u.exec(stdout)![1]!
+      const url = /kh web: (http:\/\/[^\s]+)/u.exec(stdout)![1]!
       await inspect({ root, url, request })
     } finally {
       const result = await close()

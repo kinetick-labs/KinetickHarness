@@ -23,7 +23,7 @@
  * so a configuration change rebuilds the collection without forgetting who is
  * signed in.
  *
- * @module dsh-llm-pi-ai/adapter
+ * @module kh-llm-pi-ai/adapter
  */
 
 import type {
@@ -43,7 +43,7 @@ import {
   LlmAdapter,
   LlmError,
   ReasoningEffortId,
-} from '@deepseek-ai/dsh-llm'
+} from '@kinetick-labs/kh-llm'
 import type {
   GenerateOptions,
   ImageAttachmentAccess,
@@ -54,9 +54,9 @@ import type {
   ReasoningEffortId as ReasoningEffortIdType,
   ResolvedRetryPolicy,
   StreamChunk,
-} from '@deepseek-ai/dsh-llm'
-import type { AttachmentStore, ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'
-import { idleWatchdog, timeoutOf } from '@deepseek-ai/dsh-timeout'
+} from '@kinetick-labs/kh-llm'
+import type { AttachmentStore, ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
+import { idleWatchdog, timeoutOf } from '@kinetick-labs/kh-timeout'
 import type { ResolvedPiAiProviderProfile } from './config.ts'
 import { toPiContext } from './context.ts'
 import { createModels, getSupportedThinkingLevels } from './models.ts'

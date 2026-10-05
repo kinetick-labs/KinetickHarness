@@ -1,14 +1,14 @@
 /** The loop logs tool changes as developer messages and carries session tool history to the runtime. */
 import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import LlmRuntime, { createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { GenerateOptions } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { defineContentToolFixture } from '@deepseek-ai/dsh-tools'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import LlmRuntime, { createUserMessage } from '@kinetick-labs/kh-llm'
+import type { GenerateOptions } from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { defineContentToolFixture } from '@kinetick-labs/kh-tools'
 import { MockAdapter, textResponse } from './mock-adapter.ts'
 
 const contexts: Context[] = []

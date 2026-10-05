@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-repeat-tool-reminder",
+  "name": "@kinetick-labs/kh-repeat-tool-reminder",
   "description": "Repeat-tool-call guard plugin: advisory reminders when an agent loops on identical tool calls",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/guard/repeat-tool-reminder"
   },
   "type": "module",
@@ -30,18 +30,18 @@
     "@deepseek-ai/schemastery": "workspace:~"
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop-testkit": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-agent-loop-testkit": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-session-projection": "workspace:*"
+    "@kinetick-labs/kh-session-projection": "workspace:*"
   }
 }

@@ -1,16 +1,16 @@
 /**
  * Default one-shot summarization and durable checkpoint framing.
  *
- * @module @deepseek-ai/dsh-compaction-basic/summarizer
+ * @module @kinetick-labs/kh-compaction-basic/summarizer
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import { contentHasImage, BlockAssembler, LlmError } from '@deepseek-ai/dsh-llm'
-import { deepFreeze } from '@deepseek-ai/dsh-util-values'
+import { contentHasImage, BlockAssembler, LlmError } from '@kinetick-labs/kh-llm'
+import { deepFreeze } from '@kinetick-labs/kh-util-values'
 import type {
   ContentBlock, FinishReason, GenerateOptions, Message, RequestMessage, TokenUsage, ToolSchema,
-} from '@deepseek-ai/dsh-llm'
-import type { Agent } from '@deepseek-ai/dsh-agent'
+} from '@kinetick-labs/kh-llm'
+import type { Agent } from '@kinetick-labs/kh-agent'
 
 interface SummaryConfig {
   readonly summarizationProvider: string

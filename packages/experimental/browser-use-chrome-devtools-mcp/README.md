@@ -3,7 +3,7 @@ description: "Operate Chromium through Chrome DevTools MCP with separate browser
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-experimental-browser-use-chrome-devtools-mcp
+# @kinetick-labs/kh-experimental-browser-use-chrome-devtools-mcp
 
 English | [中文](README.zh.md)
 
@@ -28,8 +28,8 @@ Use Chrome DevTools MCP to inspect pages and operate Chromium through its upstre
 Mount both entries before creating or resuming a Session, in a profile composition that supplies Agents, tools, and system prompts. Loading or reloading this provider does not adopt Sessions that are already active. Browser installation follows the upstream runtime; select an existing Chromium installation with `executablePath`.
 
 ```yaml
-- name: '@deepseek-ai/dsh-browser-use'
-- name: '@deepseek-ai/dsh-experimental-browser-use-chrome-devtools-mcp'
+- name: '@kinetick-labs/kh-browser-use'
+- name: '@kinetick-labs/kh-experimental-browser-use-chrome-devtools-mcp'
   config:
     mode: launch
     headless: true
@@ -102,7 +102,7 @@ The integration retains the pinned server's browser and tool restrictions.
 - Attachment exclusivity is local to this provider instance. Other processes and browser users can still modify the same pages.
 - The shared resource-server inventory can show inherited server names; it does not grant access to another Session's browser.
 - Cancellation does not undo navigation, clicks, or other actions already delivered to the browser.
-- Tool schemas follow the pinned experimental dependency and carry no DSH stability promise.
+- Tool schemas follow the pinned experimental dependency and carry no KH stability promise.
 - Usage statistics are disabled. Other features, including performance tools, retain their upstream behavior.
 
 <a id="dev-note"></a>

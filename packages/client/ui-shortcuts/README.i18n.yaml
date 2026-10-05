@@ -5,33 +5,33 @@
 /:
   en: 425afaf83c04db08
   zh: d9e6db1541ba0911
-/deepseek-ai-dsh-client-ui-shortcuts:
-  en: 736bacbd5c6483a5
-  zh: 1c49a7b2c6141a74
-/deepseek-ai-dsh-client-ui-shortcuts/summary:
+/kinetick-labs-kh-client-ui-shortcuts:
+  en: c162de389b185aa6
+  zh: ffa1353e46b9aba8
+/kinetick-labs-kh-client-ui-shortcuts/summary:
   en: 17b5fa1a23fa2756
   zh: ec6223b8d2a090f0
-/deepseek-ai-dsh-client-ui-shortcuts/table-of-contents:
+/kinetick-labs-kh-client-ui-shortcuts/table-of-contents:
   en: d152484eb41ac6b4
   zh: 0cd57b7b8d8c9b59
-/deepseek-ai-dsh-client-ui-shortcuts/use-this-package:
-  en: 045d38d5efdf1ff0
-  zh: 86a700339f5abc49
-/deepseek-ai-dsh-client-ui-shortcuts/understand-the-implementation:
+/kinetick-labs-kh-client-ui-shortcuts/use-this-package:
+  en: 6772acb10c189be1
+  zh: 07c00051b6322bbe
+/kinetick-labs-kh-client-ui-shortcuts/understand-the-implementation:
   en: f56f2610e7258825
   zh: 249d7cdd55c57166
-/deepseek-ai-dsh-client-ui-shortcuts/further-exploration:
-  en: 8fe02ef5221e434d
-  zh: 3aabfcfeb6d49a0e
-/deepseek-ai-dsh-client-ui-shortcuts/model-experience:
+/kinetick-labs-kh-client-ui-shortcuts/further-exploration:
+  en: 84f658d92ddffdc3
+  zh: 9a5dfb04931d3618
+/kinetick-labs-kh-client-ui-shortcuts/model-experience:
   en: 3120df665299c634
   zh: e2dc75ed76d271bc
-/deepseek-ai-dsh-client-ui-shortcuts/model-experience/kv-cache-effect:
+/kinetick-labs-kh-client-ui-shortcuts/model-experience/kv-cache-effect:
   en: ca75c51c89c2c9b0
   zh: a0e9f8d52b4b62ee
-/deepseek-ai-dsh-client-ui-shortcuts/known-limitations-and-deferred-work:
-  en: 4c1ee388c3bbb5b0
-  zh: f3e5d73036a449b5
-/deepseek-ai-dsh-client-ui-shortcuts/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-client-ui-shortcuts/known-limitations-and-deferred-work:
+  en: f5b6ba5b57194268
+  zh: bdd5c7b52a3f4dad
+/kinetick-labs-kh-client-ui-shortcuts/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: e88aeb617ffb74ea

@@ -1,7 +1,7 @@
 /** Model catalog and request-local dependencies for DeepSeek Messages. */
-import type { LlmModelInfo, ModelModality, SystemPromptUpdate, ToolUpdate, ResolvedRetryPolicy, ImageAttachmentAccess } from '@deepseek-ai/dsh-llm'
-import type { AttachmentStore, ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'
-import type { DeepSeekLlmApiExtensionRequest, PreparedDeepSeekLlmApiExtensions } from '@deepseek-ai/dsh-deepseek-llm-api-extensions'
+import type { LlmModelInfo, ModelModality, SystemPromptUpdate, ToolUpdate, ResolvedRetryPolicy, ImageAttachmentAccess } from '@kinetick-labs/kh-llm'
+import type { AttachmentStore, ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
+import type { DeepSeekLlmApiExtensionRequest, PreparedDeepSeekLlmApiExtensions } from '@kinetick-labs/kh-deepseek-llm-api-extensions'
 import type { DeepSeekFileStore, DeepSeekFilePolicy } from './file-store.ts'
 
 /** One optional model entry advertised by the direct-fetch adapter. */

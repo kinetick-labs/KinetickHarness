@@ -4,10 +4,10 @@ import { queryObjects } from 'node:v8'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import WebSocket, { type RawData } from 'ws'
 import { Context, symbols } from '@deepseek-ai/cordis'
-import { apply as applyConnection, inject as connectionInject } from '@deepseek-ai/dsh-client-connection'
-import WebServer from '@deepseek-ai/dsh-host-webserver'
-import { MAX_TIMER_DELAY_MS } from '@deepseek-ai/dsh-timeout'
-import type { AppReady } from '@deepseek-ai/dsh-cmdline'
+import { apply as applyConnection, inject as connectionInject } from '@kinetick-labs/kh-client-connection'
+import WebServer from '@kinetick-labs/kh-host-webserver'
+import { MAX_TIMER_DELAY_MS } from '@kinetick-labs/kh-timeout'
+import type { AppReady } from '@kinetick-labs/kh-cmdline'
 import {
   Remote,
   remoteErrorOf,
@@ -19,10 +19,10 @@ import {
   type TypertContextMap,
   type TypertContextWire,
   RemoteError,
-} from '@deepseek-ai/dsh-typert-protocol'
-import TypertRegistry from '@deepseek-ai/dsh-typert-registry'
+} from '@kinetick-labs/kh-typert-protocol'
+import TypertRegistry from '@kinetick-labs/kh-typert-registry'
 
-declare module '@deepseek-ai/dsh-typert-protocol' {
+declare module '@kinetick-labs/kh-typert-protocol' {
   interface RemoteErrorDetailsMap {
     'fixture/rejected': { readonly retryable: boolean }
     'fixture/broken': { readonly count: bigint }
@@ -35,7 +35,7 @@ import TypertGatewayService, {
   type TypertRemoteEventDispatch,
   type TypertRemoteEventInvocation,
   type TypertRemoteEventOutcome,
-} from '@deepseek-ai/dsh-api-gateway'
+} from '@kinetick-labs/kh-api-gateway'
 import { z } from 'zod'
 import type {
   RemoteEventClientId,

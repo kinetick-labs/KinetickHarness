@@ -3,8 +3,8 @@
 # After editing either side, bring the other along and re-record with:
 #   pnpm run verify-translation-pairing --write .agents/notes/implemented/feature/2026-07-12-subagent-persona-tool-filter-and-depth.md
 /agent-note-configure-subagent-persona-tool-visibility-and-depth:
-  en: ea51f1e98afc88b7
-  zh: 6aa0101b8de5097f
+  en: be486c4fb2a2d431
+  zh: ddc9ad152aa071aa
 /agent-note-configure-subagent-persona-tool-visibility-and-depth/problem:
   en: 311bc04b9c36ab53
   zh: 0c52e6493e9350a5

@@ -11,18 +11,18 @@ import { mkdtempSync, rmSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import SandboxPolicyService, { setSandboxMode } from '@deepseek-ai/dsh-sandbox-policy'
-import { Session, SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionEvent } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import { queueHostSubagentPrompt } from '@deepseek-ai/dsh-subagent/internal'
-import * as SubagentFork from '@deepseek-ai/dsh-subagent-fork-in-process'
-import * as SubagentSpawn from '@deepseek-ai/dsh-subagent-spawn-in-process'
-import ApprovalService from '@deepseek-ai/dsh-user-approval'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import SandboxPolicyService, { setSandboxMode } from '@kinetick-labs/kh-sandbox-policy'
+import { Session, SessionId } from '@kinetick-labs/kh-session'
+import type { SessionEvent } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import { queueHostSubagentPrompt } from '@kinetick-labs/kh-subagent/internal'
+import * as SubagentFork from '@kinetick-labs/kh-subagent-fork-in-process'
+import * as SubagentSpawn from '@kinetick-labs/kh-subagent-spawn-in-process'
+import ApprovalService from '@kinetick-labs/kh-user-approval'
 import { MockAdapter, textResponse } from '../../../core/agent-loop/tests/mock-adapter.ts'
 import SubagentRuntime from '../src/index.ts'
 import { TestSessionQuery } from './test-session-query.ts'
@@ -42,7 +42,7 @@ async function setup(script: Script) {
   const ctx = new Context()
   contexts.push(ctx)
   await mountAgentLoopTestDependencies(ctx)
-  const root = mkdtempSync(join(tmpdir(), 'dsh-continuation-inherit-'))
+  const root = mkdtempSync(join(tmpdir(), 'kh-continuation-inherit-'))
   roots.push(root)
   await ctx.plugin(JsonlSessionPersistence, { root })
   await ctx.plugin(SandboxPolicyService, { mode: 'workspace-write', workspaceRoot: root })

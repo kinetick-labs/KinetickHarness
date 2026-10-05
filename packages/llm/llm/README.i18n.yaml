@@ -5,60 +5,60 @@
 /:
   en: 860509fb08c860f4
   zh: b2c4448e8afc1f12
-/deepseek-ai-dsh-llm:
-  en: 919467ab4b4ef583
-  zh: cb5752f140e58813
-/deepseek-ai-dsh-llm/summary:
-  en: 9b9ea6fea3088244
-  zh: 09f2eb6606a030da
-/deepseek-ai-dsh-llm/table-of-contents:
+/kinetick-labs-kh-llm:
+  en: 8771ec92f4e61665
+  zh: 07ee9ae6b8534bc4
+/kinetick-labs-kh-llm/summary:
+  en: 0e597a9b56de94ae
+  zh: e59acb243b03058e
+/kinetick-labs-kh-llm/table-of-contents:
   en: d152484eb41ac6b4
   zh: 09388d293f9be9cb
-/deepseek-ai-dsh-llm/use-this-package:
+/kinetick-labs-kh-llm/use-this-package:
   en: 33738e61ce410ac0
   zh: 363760460f4d4bed
-/deepseek-ai-dsh-llm/use-this-package/when-to-choose-it:
-  en: c3ecb5a1421f27db
-  zh: 4bbd3c0e513845e1
-/deepseek-ai-dsh-llm/use-this-package/minimal-composition:
+/kinetick-labs-kh-llm/use-this-package/when-to-choose-it:
+  en: 48819b311a615b4a
+  zh: 3a53cc5b8e094807
+/kinetick-labs-kh-llm/use-this-package/minimal-composition:
   en: 7550d716b90fcb09
   zh: 77891a44ee623c7a
-/deepseek-ai-dsh-llm/use-this-package/what-you-can-do:
+/kinetick-labs-kh-llm/use-this-package/what-you-can-do:
   en: b45d7a414141734e
   zh: a641c8ea3827cee6
-/deepseek-ai-dsh-llm/use-this-package/failures-and-recovery:
-  en: 311d8c92447b7094
-  zh: 68cf5cb1c3853cc1
-/deepseek-ai-dsh-llm/understand-the-implementation:
+/kinetick-labs-kh-llm/use-this-package/failures-and-recovery:
+  en: bb1333c34f5788eb
+  zh: 7c60d0233e1fa371
+/kinetick-labs-kh-llm/understand-the-implementation:
   en: 9630d7e26193a512
   zh: 94222c2a487c4b8c
-/deepseek-ai-dsh-llm/understand-the-implementation/design-philosophy:
+/kinetick-labs-kh-llm/understand-the-implementation/design-philosophy:
   en: 12d0444c18a397c7
   zh: 9d4a5468b4bb7fcd
-/deepseek-ai-dsh-llm/understand-the-implementation/source-map:
+/kinetick-labs-kh-llm/understand-the-implementation/source-map:
   en: ae1618577f4e8364
   zh: a6e8ab1563c08dfb
-/deepseek-ai-dsh-llm/understand-the-implementation/main-flow:
-  en: da12553c289e1705
-  zh: 28827a81cd63ff84
-/deepseek-ai-dsh-llm/understand-the-implementation/invariants:
+/kinetick-labs-kh-llm/understand-the-implementation/main-flow:
+  en: c04daf4be091c577
+  zh: a763c656f72386cd
+/kinetick-labs-kh-llm/understand-the-implementation/invariants:
   en: 0163a050239248e5
   zh: 885c95bedcbe2ff4
-/deepseek-ai-dsh-llm/further-exploration:
-  en: 37e1d696afef8a88
-  zh: 81f99c4507663cad
-/deepseek-ai-dsh-llm/model-experience:
+/kinetick-labs-kh-llm/further-exploration:
+  en: 4a5b6d993b43ce14
+  zh: 7a88b8254664d907
+/kinetick-labs-kh-llm/model-experience:
   en: fa5677003ad6bc0a
   zh: ba33cfc860d9c37c
-/deepseek-ai-dsh-llm/model-experience/kv-cache-effect:
+/kinetick-labs-kh-llm/model-experience/kv-cache-effect:
   en: a81634136baef72f
   zh: b92dda883986b0e1
-/deepseek-ai-dsh-llm/known-limitations-and-deferred-work:
-  en: d60b9121545c99ec
-  zh: 3d4434a0e427470b
-/deepseek-ai-dsh-llm/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-llm/known-limitations-and-deferred-work:
+  en: 4a241e0542416570
+  zh: 2369f85f91ca4c34
+/kinetick-labs-kh-llm/known-limitations-and-deferred-work/dev-note:
   en: ecbc333b88e14d88
   zh: 77c725d92efd8646
-/deepseek-ai-dsh-llm/known-limitations-and-deferred-work/dev-note/open-items:
-  en: 6b1a7e903e13ee21
-  zh: bb62f2b1cc484bd5
+/kinetick-labs-kh-llm/known-limitations-and-deferred-work/dev-note/open-items:
+  en: f71b6a73b96b0cb1
+  zh: e261048fdad368ee

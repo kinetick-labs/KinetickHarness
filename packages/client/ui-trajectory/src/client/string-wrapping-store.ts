@@ -1,6 +1,6 @@
 import {
   createSnapshotStore, type SnapshotStore,
-} from '@deepseek-ai/dsh-client-store'
+} from '@kinetick-labs/kh-client-store'
 
 /**
  * Create the browser-wide default for expanded JSON strings.
@@ -8,6 +8,6 @@ import {
  */
 export function createTrajectoryStringWrappingStore(): SnapshotStore<boolean> {
   return createSnapshotStore(false, {
-    persist: { name: 'dsh.trajectory.jsonStringWrapping' },
+    persist: { name: 'kh.trajectory.jsonStringWrapping' },
   })
 }

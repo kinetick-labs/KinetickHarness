@@ -1,21 +1,21 @@
 /**
  * Basic replay-aware compaction backend.
  *
- * @module @deepseek-ai/dsh-compaction-basic
+ * @module @kinetick-labs/kh-compaction-basic
  */
 
 import { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import { CompactionEngine, ManualCompactionError } from '@deepseek-ai/dsh-compaction'
-import type { CompactionResult, CompactionTrigger } from '@deepseek-ai/dsh-compaction'
-import type { Session, SessionSeq } from '@deepseek-ai/dsh-session'
-import { CONTEXT_WINDOW_EXCEEDED_CODE } from '@deepseek-ai/dsh-llm'
-import type { LlmCallConfig } from '@deepseek-ai/dsh-llm'
-import { assertNever } from '@deepseek-ai/dsh-util-values'
-import type { Agent, PreStepDecision } from '@deepseek-ai/dsh-agent'
-import type { CommandId } from '@deepseek-ai/dsh-commands/brand'
+import { CompactionEngine, ManualCompactionError } from '@kinetick-labs/kh-compaction'
+import type { CompactionResult, CompactionTrigger } from '@kinetick-labs/kh-compaction'
+import type { Session, SessionSeq } from '@kinetick-labs/kh-session'
+import { CONTEXT_WINDOW_EXCEEDED_CODE } from '@kinetick-labs/kh-llm'
+import type { LlmCallConfig } from '@kinetick-labs/kh-llm'
+import { assertNever } from '@kinetick-labs/kh-util-values'
+import type { Agent, PreStepDecision } from '@kinetick-labs/kh-agent'
+import type { CommandId } from '@kinetick-labs/kh-commands/brand'
 // Type-only: makes the optional sibling service available to `ctx.get()`.
-import type {} from '@deepseek-ai/dsh-compaction-tool-result-pruner'
+import type {} from '@kinetick-labs/kh-compaction-tool-result-pruner'
 import {
   resolveCompactSpec,
   resolveConfig,

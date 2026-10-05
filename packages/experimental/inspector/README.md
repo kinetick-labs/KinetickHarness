@@ -3,13 +3,13 @@ description: "Experimental Chrome DevTools inspection for Host and browser Clien
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-experimental-inspector
+# @kinetick-labs/kh-experimental-inspector
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-Inspect one running dsh Host and its browser Clients in Chrome DevTools: Host and Client Console contexts, Host Sources and debugging, captured Host fetches, and a shared Cordis tree, with all CDP state in a Worker.
+Inspect one running kh Host and its browser Clients in Chrome DevTools: Host and Client Console contexts, Host Sources and debugging, captured Host fetches, and a shared Cordis tree, with all CDP state in a Worker.
 
 The optional [Developer Tools bundle](../inspector-profile/README.md) enables both NodeJS Inspector and Session Log, including Host fetch capture. Web startup does not require or accept `--inspect`.
 
@@ -105,7 +105,7 @@ Both plugin faces provide the same service:
 
 ```ts
 import type { Context } from '@deepseek-ai/cordis'
-import type { InspectorJsonValue } from '@deepseek-ai/dsh-experimental-inspector'
+import type { InspectorJsonValue } from '@kinetick-labs/kh-experimental-inspector'
 
 declare const ctx: Context
 declare const topic: string

@@ -4,7 +4,7 @@ import { existsSync, readdirSync, readFileSync, realpathSync, statSync } from 'n
 import { dirname, extname, isAbsolute, join, relative, resolve, sep, win32 } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { ModuleLoader } from '@deepseek-ai/cordis-plugin-loader'
-import type { LocalizedText, PluginLocalizedMeta } from '@deepseek-ai/dsh-package-manifest'
+import type { LocalizedText, PluginLocalizedMeta } from '@kinetick-labs/kh-package-manifest'
 import { barePackageName } from './profile-resolution/resolver.ts'
 
 const LANGUAGE_ID = /^[A-Za-z]{2,8}(?:-[A-Za-z0-9]{1,8})*$/u

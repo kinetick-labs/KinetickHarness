@@ -3,10 +3,10 @@ import type {
   AssistantBlock, AssistantMessageNode, ConversationLocation,
   ConversationMatch, ConversationNodeContext, ConversationNodeDefinition,
   PartialAssistant, RequestView,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import type { StreamChunk } from '@deepseek-ai/dsh-llm'
-import { assistantStreamFirstTokenTime } from '@deepseek-ai/dsh-llm/assistant-stream'
-import type { SessionEvent } from '@deepseek-ai/dsh-session/types'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
+import type { StreamChunk } from '@kinetick-labs/kh-llm'
+import { assistantStreamFirstTokenTime } from '@kinetick-labs/kh-llm/assistant-stream'
+import type { SessionEvent } from '@kinetick-labs/kh-session/types'
 import { trajectoryNode } from './trajectory-definition-common.ts'
 import {
   displayFailure, emptyAssistantBlock, isTokenDelta, toAssistantBlock, toAssistantBlocks,

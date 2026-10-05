@@ -1,24 +1,24 @@
-import { RemoteError } from '@deepseek-ai/dsh-typert-protocol'
+import { RemoteError } from '@kinetick-labs/kh-typert-protocol'
 import { Context } from '@deepseek-ai/cordis'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent, Inbox, ModelSelectionRef } from '@deepseek-ai/dsh-agent'
-import { AttachmentError, AttachmentId } from '@deepseek-ai/dsh-attachment'
-import type { ImageAttachmentRef } from '@deepseek-ai/dsh-attachment'
-import { createAssistantMessage, createUserMessage, MessageId } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent, Inbox, ModelSelectionRef } from '@kinetick-labs/kh-agent'
+import { AttachmentError, AttachmentId } from '@kinetick-labs/kh-attachment'
+import type { ImageAttachmentRef } from '@kinetick-labs/kh-attachment'
+import { createAssistantMessage, createUserMessage, MessageId } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
 import SessionStore, {
   SESSION_FORMAT_VERSION, Session, SessionId, SessionLogOffset, SessionSeq,
-} from '@deepseek-ai/dsh-session'
-import type { SessionEvent, SessionHeader, UserMessage } from '@deepseek-ai/dsh-session'
-import { snapshotSubagentDescriptor, SUBAGENT_DESCRIPTOR_VERSION } from '@deepseek-ai/dsh-subagent'
-import { subagentIdentityProjectionDefinition } from '@deepseek-ai/dsh-subagent/src/projection.ts'
+} from '@kinetick-labs/kh-session'
+import type { SessionEvent, SessionHeader, UserMessage } from '@kinetick-labs/kh-session'
+import { snapshotSubagentDescriptor, SUBAGENT_DESCRIPTOR_VERSION } from '@kinetick-labs/kh-subagent'
+import { subagentIdentityProjectionDefinition } from '@kinetick-labs/kh-subagent/src/projection.ts'
 import { describe, expect, it, vi } from 'vitest'
 import { ApiSessionAgentController } from '../src/agent.ts'
 import { SessionCommandController } from '../src/commands.ts'
-import { createInboxStub } from '@deepseek-ai/dsh-agent-loop-testkit'
+import { createInboxStub } from '@kinetick-labs/kh-agent-loop-testkit'
 import { installSessionReadTestServices, testSessionPersistence } from './test-remote.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
   }

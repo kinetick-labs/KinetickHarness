@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-acp-app",
-  "description": "The dsh ACP profile bundle: automation-only JSON-RPC stdio and process lifecycle over dsh-base",
+  "name": "@kinetick-labs/kh-acp-app",
+  "description": "The kh ACP profile bundle: automation-only JSON-RPC stdio and process lifecycle over kh-base",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/bundle/acp-app"
   },
   "type": "module",
@@ -28,14 +28,14 @@
     "lib/types/**/*.d.ts"
   ],
   "license": "MIT",
-  "dsh": {
+  "kh": {
     "bundle": {
       "patch": "./cordis.patch.yml"
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-acp": "workspace:*",
-    "@deepseek-ai/dsh-cmdline": "workspace:*",
+    "@kinetick-labs/kh-acp": "workspace:*",
+    "@kinetick-labs/kh-cmdline": "workspace:*",
     "commander": "^15.0.0"
   },
   "peerDependencies": {

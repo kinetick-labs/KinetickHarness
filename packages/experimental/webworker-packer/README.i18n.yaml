@@ -5,27 +5,27 @@
 /:
   en: 5bf871fc6ff3da7c
   zh: eae970e01432a92a
-/deepseek-ai-dsh-experimental-webworker-packer:
-  en: 7ecd0d6282f6ccf1
-  zh: 782c000a57a5e3d8
-/deepseek-ai-dsh-experimental-webworker-packer/summary:
-  en: 2cafd7568fd7ba2d
-  zh: 8879b809950a6034
-/deepseek-ai-dsh-experimental-webworker-packer/table-of-contents:
+/kinetick-labs-kh-experimental-webworker-packer:
+  en: 0bf136e00c40f0ee
+  zh: 2afec8d793a8c09e
+/kinetick-labs-kh-experimental-webworker-packer/summary:
+  en: cf390c61703d837e
+  zh: e8f88b3cc953b4a8
+/kinetick-labs-kh-experimental-webworker-packer/table-of-contents:
   en: 4e53164159b5ce41
   zh: 89582dc0294d0776
-/deepseek-ai-dsh-experimental-webworker-packer/use-this-package:
-  en: c0795340638d1eb3
-  zh: 5e6ece80b713eb79
-/deepseek-ai-dsh-experimental-webworker-packer/model-experience:
+/kinetick-labs-kh-experimental-webworker-packer/use-this-package:
+  en: c1bed726a2a7bbd0
+  zh: 0455a3d32014b176
+/kinetick-labs-kh-experimental-webworker-packer/model-experience:
   en: e16b355530dadc1c
   zh: 8488e03b253b7b33
-/deepseek-ai-dsh-experimental-webworker-packer/model-experience/kv-cache-effect:
+/kinetick-labs-kh-experimental-webworker-packer/model-experience/kv-cache-effect:
   en: ca75c51c89c2c9b0
   zh: 64715dc7e6d02f71
-/deepseek-ai-dsh-experimental-webworker-packer/known-limitations-and-deferred-work:
-  en: 6cd07b34072a2d61
-  zh: 44c4017e727c19ff
-/deepseek-ai-dsh-experimental-webworker-packer/known-limitations-and-deferred-work/dev-note:
+/kinetick-labs-kh-experimental-webworker-packer/known-limitations-and-deferred-work:
+  en: 52075f519cde16d0
+  zh: e31f615675a5e9d1
+/kinetick-labs-kh-experimental-webworker-packer/known-limitations-and-deferred-work/dev-note:
   en: e67f633dc6fe7773
   zh: e88aeb617ffb74ea

@@ -1,7 +1,7 @@
 /** Metadata inventory of saved and adopted layouts without mounting their content. */
-import { createSnapshotStore, type ObservableSnapshot } from '@deepseek-ai/dsh-client-store'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type { TabId, TabRecord } from '@deepseek-ai/dsh-client-ui-dockkit'
+import { createSnapshotStore, type ObservableSnapshot } from '@kinetick-labs/kh-client-store'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type { TabId, TabRecord } from '@kinetick-labs/kh-client-ui-dockkit'
 import { readSidebarLayout, sidebarPersistence } from './persistence.ts'
 
 /** One open occurrence; resource recovery belongs to its kind's provider. */

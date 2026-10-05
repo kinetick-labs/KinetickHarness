@@ -6,12 +6,12 @@
  */
 import { Context } from '@deepseek-ai/cordis'
 import { describe, expect, it } from 'vitest'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import { createScope, scopeOf } from '@deepseek-ai/dsh-api-session-controller/client'
-import { SlotRegistry } from '@deepseek-ai/dsh-client-ui-renderer/client'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import { apply, inject, InputTriggerService } from '@deepseek-ai/dsh-client-ui-input-trigger/client'
-import type { MenuViewInjected } from '@deepseek-ai/dsh-client-ui-input-trigger/client'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import { createScope, scopeOf } from '@kinetick-labs/kh-api-session-controller/client'
+import { SlotRegistry } from '@kinetick-labs/kh-client-ui-renderer/client'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import { apply, inject, InputTriggerService } from '@kinetick-labs/kh-client-ui-input-trigger/client'
+import type { MenuViewInjected } from '@kinetick-labs/kh-client-ui-input-trigger/client'
 
 const sid = (k: string): SessionId => k as SessionId
 

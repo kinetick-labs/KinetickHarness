@@ -17,7 +17,7 @@ const JsExpr = new yaml.Type('tag:yaml.org,2002:js', {
 /**
  * The entry-list YAML dialect: `!!js` scalars round-trip as expression nodes
  * the Loader evaluates at entry activation. Exported so config tooling
- * (`dsh --dump-config`) parses and prints exactly the dialect this include
+ * (`kh --dump-config`) parses and prints exactly the dialect this include
  * mounts.
  */
 export const entryListSchema = yaml.JSON_SCHEMA.extend(JsExpr)
@@ -43,7 +43,7 @@ function retryableWriteError(error: unknown): boolean {
 /**
  * Apply patch lists to an entry list — THE patch semantics of this include,
  * shared by mounting (`applyPatches`) and offline config tooling
- * (`dsh --dump-config`) so a dump can never drift from what boots. The input
+ * (`kh --dump-config`) so a dump can never drift from what boots. The input
  * is never mutated: patching shared entry objects would bake earlier patch
  * values into the cached parse, so repeated application (config hot-reloads)
  * could never revert a removed or changed patch. Inserted entries are indexed

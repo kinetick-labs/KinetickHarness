@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-fs-ssh",
+  "name": "@kinetick-labs/kh-fs-ssh",
   "description": "Filesystem provider over the shared POSIX SSH helper",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/ssh/fs-ssh"
   },
   "type": "module",
@@ -28,10 +28,10 @@
   "license": "MIT",
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-ssh": "workspace:*",
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-sandbox": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-policy": "workspace:*"
+    "@kinetick-labs/kh-ssh": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-sandbox": "workspace:*",
+    "@kinetick-labs/kh-sandbox-policy": "workspace:*"
   },
   "dependencies": {
     "@deepseek-ai/schemastery": "workspace:~",
@@ -39,9 +39,9 @@
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-ssh": "workspace:*",
-    "@deepseek-ai/dsh-fs": "workspace:*",
-    "@deepseek-ai/dsh-sandbox": "workspace:*",
-    "@deepseek-ai/dsh-sandbox-policy": "workspace:*"
+    "@kinetick-labs/kh-ssh": "workspace:*",
+    "@kinetick-labs/kh-fs": "workspace:*",
+    "@kinetick-labs/kh-sandbox": "workspace:*",
+    "@kinetick-labs/kh-sandbox-policy": "workspace:*"
   }
 }

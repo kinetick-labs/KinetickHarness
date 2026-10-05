@@ -3,15 +3,15 @@
 
 import { afterEach, describe, expect, it } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createMessage, createSystemMessage, createUserMessage } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock, ToolSchema } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionLogOffset, SessionSeq } from '@deepseek-ai/dsh-session'
-import type { Session, SessionEvent, SessionSeq as SessionSeqType } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import TokenMeter from '@deepseek-ai/dsh-token-meter'
-import type { ContextBreakdownProjection } from '@deepseek-ai/dsh-token-meter/client'
-import { CompactionId } from '@deepseek-ai/dsh-compaction'
+import { createMessage, createSystemMessage, createUserMessage } from '@kinetick-labs/kh-llm'
+import type { ContentBlock, ToolSchema } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionLogOffset, SessionSeq } from '@kinetick-labs/kh-session'
+import type { Session, SessionEvent, SessionSeq as SessionSeqType } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import TokenMeter from '@kinetick-labs/kh-token-meter'
+import type { ContextBreakdownProjection } from '@kinetick-labs/kh-token-meter/client'
+import { CompactionId } from '@kinetick-labs/kh-compaction'
 import { contextBreakdownProjectionDefinition } from '../src/breakdown-projection.ts'
 import {
   estimateContent,
@@ -20,7 +20,7 @@ import {
   estimateToolsTokens,
 } from '../src/estimate.ts'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
   }

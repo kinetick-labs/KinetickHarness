@@ -2,11 +2,11 @@
 /** Markdown metadata, deferred slot registration, localization, and unload through the real renderer. */
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { act, waitFor } from '@testing-library/react'
-import { apply as resourcesApply, inject as resourcesInject } from '@deepseek-ai/dsh-client-resources/src/client/index.ts'
-import { SlotTestRuntime } from '@deepseek-ai/dsh-client-test-runtime'
-import { LocaleRuntime } from '@deepseek-ai/dsh-client-locale/client'
-import type { UseSidebarRightTabInfo } from '@deepseek-ai/dsh-client-ui-sidebar-right/client'
-import { SessionId } from '@deepseek-ai/dsh-session/types'
+import { apply as resourcesApply, inject as resourcesInject } from '@kinetick-labs/kh-client-resources/src/client/index.ts'
+import { SlotTestRuntime } from '@kinetick-labs/kh-client-test-runtime'
+import { LocaleRuntime } from '@kinetick-labs/kh-client-locale/client'
+import type { UseSidebarRightTabInfo } from '@kinetick-labs/kh-client-ui-sidebar-right/client'
+import { SessionId } from '@kinetick-labs/kh-session/types'
 import { DocumentPreviewRegistry } from '../src/client/document/registry.ts'
 import { documentTabInfoFactory } from '../src/client/document/contract.ts'
 import { apply, MARKDOWN_BODY_ID, markdownDefinition } from '../src/client/markdown/index.ts'
@@ -65,7 +65,7 @@ describe('Markdown implementation registration', () => {
     }, ({ renderSlot, SessionProvider }) => (
       <SessionProvider session={reference}>
         {renderSlot('sidebar.right.tab.document', {
-          resourceAddress: 'dsh-resource://file/session/markdown-registration/notes.md',
+          resourceAddress: 'kh-resource://file/session/markdown-registration/notes.md',
           content: { kind: 'text', text: '# Notes\n\n```ts\nconst value = 1\n```\n\n![diagram](images/a.png)', pages: [], eof: true },
           wrap: false,
           scrollportRef: vi.fn(),

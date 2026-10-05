@@ -1,13 +1,13 @@
 {
-  "name": "@deepseek-ai/dsh-workspace-changes",
-  "description": "Per-turn workspace file changes recorded from git working-tree snapshots and whole-file captures, with per-file comparisons, for the DeepSeek Harness",
+  "name": "@kinetick-labs/kh-workspace-changes",
+  "description": "Per-turn workspace file changes recorded from git working-tree snapshots and whole-file captures, with per-file comparisons, for the KinetickHarness",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
     "access": "public"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/deliverables/workspace-changes"
   },
   "type": "module",
@@ -37,20 +37,20 @@
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-subprocess": "workspace:*",
-    "@deepseek-ai/dsh-subprocess-local": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*"
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-subprocess": "workspace:*",
+    "@kinetick-labs/kh-subprocess-local": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*"
   }
 }

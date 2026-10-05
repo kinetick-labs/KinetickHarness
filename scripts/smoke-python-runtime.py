@@ -43,16 +43,16 @@ FS_SEARCH_TEXT = "filesystem search smoke ok"
 FS_SEARCH_MARKER = "PACKAGED_FS_SEARCH_OK"
 MCP_PROMPT = "Exercise the packaged MCP client with one external stdio server."
 MCP_TEXT = "MCP client smoke ok"
-PROFILE_PLUGIN_PROMPT = "Verify the Python-installed dsh profile plugin."
+PROFILE_PLUGIN_PROMPT = "Verify the Python-installed kh profile plugin."
 PROFILE_PLUGIN_TEXT = "profile plugin smoke ok"
-PROFILE_PLUGIN_MARKER = "PYTHON_INSTALLED_DSH_PROFILE_PLUGIN"
+PROFILE_PLUGIN_MARKER = "PYTHON_INSTALLED_KH_PROFILE_PLUGIN"
 AUTHORING_PROMPT = "Query the packaged Python environment for Office authoring."
 IS_WINDOWS = sys.platform == "win32"
 MINIMAL_SHELL_TOOL = "pwsh" if IS_WINDOWS else "bash"
 MINIMAL_SHELL_COMMAND = (
-    "$global:dshSdkCounter = [int]$global:dshSdkCounter + 1; "
-    'Write-Output "COUNT=$global:dshSdkCounter CWD=$((Get-Location).Path)"; '
-    "if ($global:dshSdkCounter -eq 1) { Set-Location $env:TEMP }"
+    "$global:khSdkCounter = [int]$global:khSdkCounter + 1; "
+    'Write-Output "COUNT=$global:khSdkCounter CWD=$((Get-Location).Path)"; '
+    "if ($global:khSdkCounter -eq 1) { Set-Location $env:TEMP }"
     if IS_WINDOWS
     else (
         "counter=$(( ${counter:-0} + 1 )); export counter; "
@@ -229,7 +229,7 @@ def write_profile_patch(
     sessions: Path,
     patches: list[dict[str, object]],
 ) -> Path:
-    """Write one JSON-form dsh profile patch with deterministic persistence."""
+    """Write one JSON-form kh profile patch with deterministic persistence."""
     path = root / name
     path.write_text(json.dumps([
         {
@@ -263,9 +263,9 @@ def write_advanced_profile_patch(root: Path, name: str, sessions: Path) -> Path:
             },
         },
         {"insert": [
-            {"id": "ptc-runtime", "name": "@deepseek-ai/dsh-ptc-runtime-node"},
-            {"id": "cordis-host-runner", "name": "@deepseek-ai/dsh-cordis-host-runner"},
-            {"id": "cordis-tool", "name": "@deepseek-ai/dsh-tool-cordis"},
+            {"id": "ptc-runtime", "name": "@kinetick-labs/kh-ptc-runtime-node"},
+            {"id": "cordis-host-runner", "name": "@kinetick-labs/kh-cordis-host-runner"},
+            {"id": "cordis-tool", "name": "@kinetick-labs/kh-tool-cordis"},
         ]},
     ])
 
@@ -275,7 +275,7 @@ def write_mcp_patch(root: Path, sessions: Path, server_script: Path) -> Path:
     return write_profile_patch(root, "mcp.patch.yml", sessions, [{
         "insert": [{
             "id": "mcp-fixture",
-            "name": "@deepseek-ai/dsh-mcp-client",
+            "name": "@kinetick-labs/kh-mcp-client",
             "config": {
                 "serverName": "fixture",
                 "transport": "stdio",
@@ -870,10 +870,10 @@ def smoke_sdk_authoring(base_url: str, executable: Path, update_snapshots: bool)
     """Query the bundled Python and switch skills without replacing that environment."""
     from deepseek_harness import DeepSeekHarness
 
-    resources = executable.with_name(executable.name.removeprefix("deepseek-harness-sdk-runtime-").removesuffix(".exe"))
+    resources = executable.with_name(executable.name.removeprefix("kinetick-harness-sdk-runtime-").removesuffix(".exe"))
     manifest = json.loads((resources / "primary-runtime/runtime.json").read_text())
     for mode in ("default", "replacement", "disabled"):
-        with tempfile.TemporaryDirectory(prefix="dsh-sdk-authoring-") as temporary:
+        with tempfile.TemporaryDirectory(prefix="kh-sdk-authoring-") as temporary:
             root = Path(temporary).resolve()
             home = root / "home"
             if mode == "replacement":
@@ -887,7 +887,7 @@ def smoke_sdk_authoring(base_url: str, executable: Path, update_snapshots: bool)
                 provider="deepseek-official", model="smoke-model", cwd=str(root),
                 dsh_bin=str(executable), dsh_home=str(home), patches=(str(patch),),
                 api_key="sk-keyless-smoke", base_url=base_url,
-                env={"DSH_PERMISSION_MODE": "danger-full-access"},
+                env={"KH_PERMISSION_MODE": "danger-full-access"},
                 request_timeout_seconds=60,
             ) as harness:
                 result = harness.run(AUTHORING_PROMPT, session_id="authoring")
@@ -907,7 +907,7 @@ def smoke_sdk_authoring(base_url: str, executable: Path, update_snapshots: bool)
             assert Path(dependencies["node"]).is_relative_to(resources), dependencies
             assert Path(dependencies["pnpm"]).is_relative_to(resources), dependencies
             assert dependencies["pythonDistributions"] == manifest["pythonPackages"], dependencies
-            assert not (home / "dsh-runtimes").exists()
+            assert not (home / "kh-runtimes").exists()
             if mode == "default":
                 subprocess.run([
                     str(python), "-I", "-B", str(Path(__file__).parent / "primary-runtime/smoke.py"),
@@ -931,11 +931,11 @@ def smoke_sdk_office(executable: Path) -> None:
     """Relocate the wheel payload and convert a real DOCX with the target platform engine."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-office-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-office-") as temporary:
         root = Path(temporary).resolve()
         relocated = root / executable.name
         stem = executable.name.removesuffix(".exe")
-        resources = executable.with_name(stem.removeprefix("deepseek-harness-sdk-runtime-"))
+        resources = executable.with_name(stem.removeprefix("kinetick-harness-sdk-runtime-"))
         for source in [*executable.parent.glob(f"{stem}*"), resources]:
             destination = root / source.name
             if source.is_dir():
@@ -944,7 +944,7 @@ def smoke_sdk_office(executable: Path) -> None:
                 shutil.copy2(source, destination)
         office = root / f"{stem}-office"
         adapter = office / "node_modules/@deepseek-ai/libreoffice-kit/package.json"
-        native = stem.removeprefix("deepseek-harness-sdk-runtime-").replace("win-", "win32-").replace("macos-", "darwin-")
+        native = stem.removeprefix("kinetick-harness-sdk-runtime-").replace("win-", "win32-").replace("macos-", "darwin-")
         declared = json.loads(adapter.read_text(encoding="utf-8")).get("optionalDependencies", {})
         selected = native if f"@deepseek-ai/libreoffice-kit-{native}" in declared else "wasm"
         expected_backend = "wasm" if selected == "wasm" else "native"
@@ -981,7 +981,7 @@ def smoke_sdk_office(executable: Path) -> None:
             patches=(str(patch),),
             api_key="sk-keyless-smoke",
             base_url="http://127.0.0.1:9",
-            env={"DSH_PERMISSION_MODE": "danger-full-access"},
+            env={"KH_PERMISSION_MODE": "danger-full-access"},
             # The startup plugin awaits a converter with a 120-second deadline before JSON-RPC is ready.
             initialize_timeout_seconds=180,
             request_timeout_seconds=180,
@@ -1004,22 +1004,22 @@ def assert_installed_wheel_environment() -> Path:
         raise AssertionError("installed-wheel smoke must run inside a virtual environment")
     if os.environ.get("PYTHONPATH"):
         raise AssertionError("installed-wheel smoke requires PYTHONPATH to be unset")
-    if os.environ.get("DSH_RUNTIME_MODE"):
-        raise AssertionError("installed-wheel smoke requires DSH_RUNTIME_MODE to be unset")
+    if os.environ.get("KH_RUNTIME_MODE"):
+        raise AssertionError("installed-wheel smoke requires KH_RUNTIME_MODE to be unset")
 
     repo_root = Path(__file__).resolve().parent.parent
     cwd = Path.cwd().resolve()
     if cwd.is_relative_to(repo_root):
         raise AssertionError(f"installed-wheel smoke must run outside the repository, got {cwd}")
 
-    sdk_version = importlib.metadata.version("deepseek-harness-sdk")
-    runtime_version = importlib.metadata.version("deepseek-harness-runtime-bin")
+    sdk_version = importlib.metadata.version("kinetick-harness-sdk")
+    runtime_version = importlib.metadata.version("kinetick-harness-runtime-bin")
     if sdk_version != runtime_version:
         raise AssertionError(
             f"installed SDK/runtime versions differ: {sdk_version} != {runtime_version}"
         )
-    expected_runtime_requirement = f"deepseek-harness-runtime-bin=={sdk_version}"
-    requirements = importlib.metadata.requires("deepseek-harness-sdk") or []
+    expected_runtime_requirement = f"kinetick-harness-runtime-bin=={sdk_version}"
+    requirements = importlib.metadata.requires("kinetick-harness-sdk") or []
     if expected_runtime_requirement not in requirements:
         raise AssertionError(
             f"installed SDK does not require {expected_runtime_requirement}: {requirements}"
@@ -1044,7 +1044,7 @@ def assert_installed_wheel_environment() -> Path:
     runtime_package = imported["deepseek_harness_runtime"].parent
     if not executable.is_relative_to(runtime_package):
         raise AssertionError(f"bundled runtime came from outside the installed runtime wheel: {executable}")
-    runtime_files = importlib.metadata.files("deepseek-harness-runtime-bin") or []
+    runtime_files = importlib.metadata.files("kinetick-harness-runtime-bin") or []
     if not any(Path(file).name == executable.name for file in runtime_files):
         raise AssertionError(f"runtime executable is absent from installed distribution records: {executable}")
     return executable
@@ -1061,7 +1061,7 @@ def smoke_sdk_live() -> None:
     if not base_url:
         raise AssertionError("sdk-live requires an explicit DEEPSEEK_BASE_URL")
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-live-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-live-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1079,7 +1079,7 @@ def smoke_sdk_live() -> None:
             cwd=str(root),
             dsh_home=str(dsh_home),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key=api_key,
             base_url=base_url,
@@ -1166,7 +1166,7 @@ def safe_turn_end(value: object) -> object:
 def smoke_sdk_default(base_url: str) -> None:
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-default-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-default-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1176,7 +1176,7 @@ def smoke_sdk_default(base_url: str) -> None:
             cwd=str(root),
             dsh_home=str(dsh_home),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1194,7 +1194,7 @@ def smoke_sdk_default(base_url: str) -> None:
 def smoke_sdk_custom(base_url: str, executable: Path) -> None:
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-custom-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-custom-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1207,7 +1207,7 @@ def smoke_sdk_custom(base_url: str, executable: Path) -> None:
             dsh_home=str(dsh_home),
             patches=(str(patch),),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1230,7 +1230,7 @@ def smoke_sdk_minimal(
 
     # One mock model serves every scenario of a run, so the snapshot takes this turn's slice.
     first_request = len(MockModelHandler.requests)
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-minimal-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-minimal-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1285,7 +1285,7 @@ def smoke_sdk_dynamic_tools(base_url: str, executable: Path, update_snapshots: b
     from deepseek_harness import DeepSeekHarness
 
     first_request = len(MockModelHandler.requests)
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-dynamic-tools-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-dynamic-tools-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1306,7 +1306,7 @@ def smoke_sdk_dynamic_tools(base_url: str, executable: Path, update_snapshots: b
         with DeepSeekHarness(
             provider="deepseek-official", model="smoke-model", cwd=str(root),
             dsh_bin=str(executable), dsh_home=str(dsh_home), patches=(str(patch),),
-            env={"DSH_PERMISSION_MODE": "danger-full-access"},
+            env={"KH_PERMISSION_MODE": "danger-full-access"},
             api_key="sk-keyless-smoke", base_url=base_url, request_timeout_seconds=60,
         ) as harness:
             result = harness.run(DYNAMIC_TOOLS_PROMPT, session_id="dynamic-tools-smoke")
@@ -1326,7 +1326,7 @@ def smoke_sdk_fs_search(base_url: str, executable: Path) -> None:
     """Exercise real grep and glob spawns through the packaged executable."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-fs-search-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-fs-search-") as temporary:
         root = Path(temporary).resolve()
         (root / "needle.txt").write_text(f"{FS_SEARCH_MARKER}\n")
         dsh_home = root / "home"
@@ -1343,7 +1343,7 @@ def smoke_sdk_fs_search(base_url: str, executable: Path) -> None:
             dsh_home=str(dsh_home),
             patches=(str(patch),),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1359,7 +1359,7 @@ def smoke_sdk_spawn_node(base_url: str, executable: Path) -> None:
     """A shell command starting with `node` must reach the machine's Node, not the executable."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-spawn-node-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-spawn-node-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1372,7 +1372,7 @@ def smoke_sdk_spawn_node(base_url: str, executable: Path) -> None:
             dsh_home=str(dsh_home),
             patches=(str(patch),),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1388,7 +1388,7 @@ def smoke_sdk_mcp(base_url: str, executable: Path | None) -> None:
     """Discover and call an external stdio MCP tool through the packaged client."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-mcp-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-mcp-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1404,7 +1404,7 @@ def smoke_sdk_mcp(base_url: str, executable: Path | None) -> None:
             dsh_home=str(dsh_home),
             patches=(str(patch),),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1424,22 +1424,22 @@ def smoke_sdk_mcp(base_url: str, executable: Path | None) -> None:
 
 
 def smoke_sdk_profile_plugin(base_url: str) -> None:
-    """Install an external bundle through Python's dsh command and load it in the SDK."""
+    """Install an external bundle through Python's kh command and load it in the SDK."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-profile-plugin-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-profile-plugin-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         plugin = root / "plugin"
         plugin.mkdir()
         (plugin / "package.json").write_text(json.dumps({
-            "name": "dsh-python-blackbox-plugin",
+            "name": "kh-python-blackbox-plugin",
             "version": "1.0.0",
             "private": True,
             "type": "module",
             "exports": "./index.js",
             "peerDependencies": {"@deepseek-ai/cordis": "*"},
-            "dsh": {"bundle": {"patch": "./cordis.patch.yml"}},
+            "kh": {"bundle": {"patch": "./cordis.patch.yml"}},
         }, indent=2))
         (plugin / "index.js").write_text(
             "import { Context } from '@deepseek-ai/cordis'\n"
@@ -1455,13 +1455,13 @@ def smoke_sdk_profile_plugin(base_url: str) -> None:
             "}\n"
         )
         (plugin / "cordis.patch.yml").write_text(json.dumps([{
-            "insert": [{"id": "python-sdk-blackbox-plugin", "name": "dsh-python-blackbox-plugin"}],
+            "insert": [{"id": "python-sdk-blackbox-plugin", "name": "kh-python-blackbox-plugin"}],
         }], indent=2))
 
-        dsh = Path(sysconfig.get_path("scripts")) / ("dsh.exe" if IS_WINDOWS else "dsh")
-        environment = {**os.environ, "DSH_HOME": str(dsh_home)}
+        kh = Path(sysconfig.get_path("scripts")) / ("kh.exe" if IS_WINDOWS else "kh")
+        environment = {**os.environ, "KH_HOME": str(dsh_home)}
         installed = subprocess.run(
-            [str(dsh), "plugin", "--profile", "sdk", "add", f"file:{plugin}"],
+            [str(kh), "plugin", "--profile", "sdk", "add", f"file:{plugin}"],
             cwd=root,
             env=environment,
             text=True,
@@ -1470,15 +1470,15 @@ def smoke_sdk_profile_plugin(base_url: str) -> None:
         )
         if installed.returncode != 0:
             raise AssertionError(
-                f"Python-installed dsh could not add the external profile plugin: "
+                f"Python-installed kh could not add the external profile plugin: "
                 f"returncode={installed.returncode} (0x{installed.returncode & 0xffffffff:08x}) "
                 f"stdout={installed.stdout!r} stderr={installed.stderr!r}"
             )
         manifest = json.loads((dsh_home / "profiles" / "sdk" / "package.json").read_text())
-        if "dsh-python-blackbox-plugin" not in manifest.get("dependencies", {}):
-            raise AssertionError(f"dsh plugin did not record the external dependency: {manifest}")
-        if "dsh-python-blackbox-plugin" not in manifest["dsh"]["profile"]["bundles"]:
-            raise AssertionError(f"dsh plugin did not activate the external bundle: {manifest}")
+        if "kh-python-blackbox-plugin" not in manifest.get("dependencies", {}):
+            raise AssertionError(f"kh plugin did not record the external dependency: {manifest}")
+        if "kh-python-blackbox-plugin" not in manifest["kh"]["profile"]["bundles"]:
+            raise AssertionError(f"kh plugin did not activate the external bundle: {manifest}")
 
         harness = DeepSeekHarness(
             provider="deepseek-official",
@@ -1486,7 +1486,7 @@ def smoke_sdk_profile_plugin(base_url: str) -> None:
             cwd=str(root),
             dsh_home=str(dsh_home),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1508,7 +1508,7 @@ def smoke_sdk_snapshot(base_url: str, executable: Path, update_snapshots: bool) 
     """Drive and compare the advanced SDK/executable behavioral snapshot."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-snapshot-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-snapshot-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1525,7 +1525,7 @@ def smoke_sdk_snapshot(base_url: str, executable: Path, update_snapshots: bool) 
             ).as_uri(), "config": {
                 "parentSessionId": SNAPSHOT_SESSION_ID, "prompt": SNAPSHOT_WORKFLOW_CHILD_PROMPT,
             }},
-            {"id": "snapshot-message-feedback", "name": "@deepseek-ai/dsh-message-feedback",
+            {"id": "snapshot-message-feedback", "name": "@kinetick-labs/kh-message-feedback",
              "config": {"maxNoteBytes": 1024}},
             {"id": "snapshot-feedback-producer", "name": (
                 Path(__file__).resolve().parent.parent / "snapshots/sdk/text-turn/feedback-producer.mjs"
@@ -1545,7 +1545,7 @@ def smoke_sdk_snapshot(base_url: str, executable: Path, update_snapshots: bool) 
             dsh_home=str(dsh_home),
             patches=(str(patch), str(feedback_patch), str(creation_patch)),
             env={
-                "DSH_PERMISSION_MODE": "danger-full-access",
+                "KH_PERMISSION_MODE": "danger-full-access",
             },
             api_key="sk-keyless-smoke",
             base_url=base_url,
@@ -1606,7 +1606,7 @@ def smoke_sdk_restart_snapshot(base_url: str, executable: Path, update_snapshots
     """Snapshot two isolated sessions across complete SDK runtime restarts."""
     from deepseek_harness import DeepSeekHarness
 
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-restart-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-restart-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1622,7 +1622,7 @@ def smoke_sdk_restart_snapshot(base_url: str, executable: Path, update_snapshots
                 dsh_home=str(dsh_home),
                 patches=(str(patch),),
                 env={
-                    "DSH_PERMISSION_MODE": "danger-full-access",
+                    "KH_PERMISSION_MODE": "danger-full-access",
                 },
                 api_key="sk-keyless-smoke",
                 base_url=base_url,
@@ -1673,7 +1673,7 @@ def smoke_sdk_scheduler_recovery(base_url: str, executable: Path, update_snapsho
     from deepseek_harness import DeepSeekHarness
 
     first_request = len(MockModelHandler.requests)
-    with tempfile.TemporaryDirectory(prefix="dsh-sdk-scheduler-recovery-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-sdk-scheduler-recovery-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
@@ -1695,7 +1695,7 @@ def smoke_sdk_scheduler_recovery(base_url: str, executable: Path, update_snapsho
                 provider="deepseek-official", model="smoke-model", cwd=str(root),
                 dsh_bin=str(executable), dsh_home=str(dsh_home),
                 patches=(str(base_patch), str(patch)),
-                env={"DSH_PERMISSION_MODE": "danger-full-access"},
+                env={"KH_PERMISSION_MODE": "danger-full-access"},
                 api_key="sk-keyless-smoke", base_url=base_url, request_timeout_seconds=60,
             )
 
@@ -1756,15 +1756,15 @@ def smoke_sdk_scheduler_recovery(base_url: str, executable: Path, update_snapsho
 
 
 def smoke_direct(base_url: str, executable: Path) -> None:
-    with tempfile.TemporaryDirectory(prefix="dsh-direct-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-direct-") as temporary:
         root = Path(temporary).resolve()
         dsh_home = root / "home"
         sessions = dsh_home / "sessions"
         patch = write_profile_patch(root, "direct.patch.yml", sessions, [])
         environment = {
             **os.environ,
-            "DSH_HOME": str(dsh_home),
-            "DSH_PERMISSION_MODE": "danger-full-access",
+            "KH_HOME": str(dsh_home),
+            "KH_PERMISSION_MODE": "danger-full-access",
             "DEEPSEEK_API_KEY": "sk-keyless-smoke",
             "DEEPSEEK_BASE_URL": base_url,
         }
@@ -1797,18 +1797,18 @@ def smoke_direct(base_url: str, executable: Path) -> None:
 
 def smoke_packaged_runner(executable: Path) -> None:
     """Exercise the private subprocess runner through the single-file entry."""
-    with tempfile.TemporaryDirectory(prefix="dsh-packaged-runner-") as temporary:
+    with tempfile.TemporaryDirectory(prefix="kh-packaged-runner-") as temporary:
         root = Path(temporary).resolve()
         target_script = (
             "import os,sys; "
             "ok = (os.getcwd() == os.environ['PACKAGED_RUNNER_EXPECTED_CWD'] "
-            "and os.environ.get('DSH_SUBPROCESS_RUNNER') == 'target-collision-restored'); "
+            "and os.environ.get('KH_SUBPROCESS_RUNNER') == 'target-collision-restored'); "
             "sys.exit(7 if ok else 9)"
         )
         if not IS_WINDOWS:
             request_path = root / "launch-request.json"
             target_env = dict(os.environ)
-            target_env["DSH_SUBPROCESS_RUNNER"] = "target-collision-restored"
+            target_env["KH_SUBPROCESS_RUNNER"] = "target-collision-restored"
             target_env["PACKAGED_RUNNER_EXPECTED_CWD"] = str(root)
             request_path.write_text(
                 json.dumps({"cwd": str(root), "env": target_env}),
@@ -1816,7 +1816,7 @@ def smoke_packaged_runner(executable: Path) -> None:
             )
             request_path.chmod(0o600)
             environment = dict(os.environ)
-            environment["DSH_SUBPROCESS_RUNNER"] = str(request_path)
+            environment["KH_SUBPROCESS_RUNNER"] = str(request_path)
             result = subprocess.run(
                 [str(executable), "--", sys.executable, "-c", target_script],
                 cwd=root,
@@ -1842,7 +1842,7 @@ def smoke_packaged_runner(executable: Path) -> None:
 const [runtime, target, cwd, targetScript] = process.argv.slice(2)
 const child = spawn(runtime, ['--', target, '-c', targetScript], {
   cwd,
-  env: { ...process.env, DSH_SUBPROCESS_RUNNER: 'windows' },
+  env: { ...process.env, KH_SUBPROCESS_RUNNER: 'windows' },
   stdio: ['ignore', 'ignore', 'ignore', 'ipc', 'pipe', 'pipe', 'pipe'],
 })
 const messages = []
@@ -1860,7 +1860,7 @@ const result = await new Promise((resolve, reject) => {
       cwd,
       env: {
         ...process.env,
-        DSH_SUBPROCESS_RUNNER: 'target-collision-restored',
+        KH_SUBPROCESS_RUNNER: 'target-collision-restored',
         PACKAGED_RUNNER_EXPECTED_CWD: cwd,
       },
     }, error => { if (error) reject(error) })

@@ -2,17 +2,17 @@
 
 import { hostname } from 'node:os'
 import { resolve } from 'node:path'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import type {} from '@deepseek-ai/dsh-fs'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import type {} from '@kinetick-labs/kh-fs'
 import { Context } from '@deepseek-ai/cordis'
 import z from '@deepseek-ai/schemastery'
-import { errorChain, ReasoningEffortId } from '@deepseek-ai/dsh-llm'
-import type {} from '@deepseek-ai/dsh-client-file-upload'
-import { canOpenNativePath, nativeFileManager, nativeFileApplications, openNativeFileApplication, openNativeAssociatedPath, revealNativePath } from '@deepseek-ai/dsh-native-command'
-import type { SessionId } from '@deepseek-ai/dsh-session'
-import type { SessionInspection } from '@deepseek-ai/dsh-session-persistence'
-import { SessionQueryError, type SessionObservation } from '@deepseek-ai/dsh-session-query'
-import { Remote, RemoteError, TypertRemoteService } from '@deepseek-ai/dsh-typert-protocol'
+import { errorChain, ReasoningEffortId } from '@kinetick-labs/kh-llm'
+import type {} from '@kinetick-labs/kh-client-file-upload'
+import { canOpenNativePath, nativeFileManager, nativeFileApplications, openNativeFileApplication, openNativeAssociatedPath, revealNativePath } from '@kinetick-labs/kh-native-command'
+import type { SessionId } from '@kinetick-labs/kh-session'
+import type { SessionInspection } from '@kinetick-labs/kh-session-persistence'
+import { SessionQueryError, type SessionObservation } from '@kinetick-labs/kh-session-query'
+import { Remote, RemoteError, TypertRemoteService } from '@kinetick-labs/kh-typert-protocol'
 import {
   ApiSessionAgentController,
   inspectApiSession,

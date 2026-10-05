@@ -6,13 +6,13 @@
       name: './web-fetch-fixture-server.mjs'
 
 - id: web
-  name: '@deepseek-ai/dsh-web'
+  name: '@kinetick-labs/kh-web'
 
 - id: web-fetch-http
-  name: '@deepseek-ai/dsh-web-fetch-http'
+  name: '@kinetick-labs/kh-web-fetch-http'
   disabled: true
 
 - id: tool-web
-  name: '@deepseek-ai/dsh-tool-web'
+  name: '@kinetick-labs/kh-tool-web'
   config:
     search: false

@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-plan-mode",
+  "name": "@kinetick-labs/kh-plan-mode",
   "description": "Logged per-agent plan mode with deployment guidance, a direct slash command, and a user-reviewed exit",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/plan/plan-mode"
   },
   "type": "module",
@@ -36,36 +36,36 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-commands": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-user-questions": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-commands": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-user-questions": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   },
   "peerDependenciesMeta": {
-    "@deepseek-ai/dsh-commands": {
+    "@kinetick-labs/kh-commands": {
       "optional": true
     }
   },
   "dependencies": {
-    "@deepseek-ai/dsh-brand": "workspace:*",
+    "@kinetick-labs/kh-brand": "workspace:*",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-ptc-runtime": "workspace:*",
-    "@deepseek-ai/dsh-commands": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-user-questions": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-ptc-runtime": "workspace:*",
+    "@kinetick-labs/kh-commands": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-user-questions": "workspace:*",
     "@deepseek-ai/cordis": "workspace:~"
   }
 }

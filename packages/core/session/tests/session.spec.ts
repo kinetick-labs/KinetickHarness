@@ -1,8 +1,8 @@
 import { describe, expect, expectTypeOf, it, vi } from 'vitest'
 import { Context } from '@deepseek-ai/cordis'
-import { createDeveloperMessage, createSystemMessage, createUserMessage, ToolCallId, createMessage, createToolResultMessage, MessageId, ReasoningEffortId } from '@deepseek-ai/dsh-llm'
-import type { ContentBlock } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
+import { createDeveloperMessage, createSystemMessage, createUserMessage, ToolCallId, createMessage, createToolResultMessage, MessageId, ReasoningEffortId } from '@kinetick-labs/kh-llm'
+import type { ContentBlock } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
 import SessionStore, {
   adoptSessionEvent,
   SESSION_FORMAT_VERSION,
@@ -12,10 +12,10 @@ import SessionStore, {
   SessionLogOffset,
   SessionSeq,
   snapshotSessionEvent,
-} from '@deepseek-ai/dsh-session'
-import type { CreateSessionOptions, SessionEventType, SessionHeader, SessionSurface } from '@deepseek-ai/dsh-session'
+} from '@kinetick-labs/kh-session'
+import type { CreateSessionOptions, SessionEventType, SessionHeader, SessionSurface } from '@kinetick-labs/kh-session'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
     'watcher': { kind: 'watcher' } & ContextFormed

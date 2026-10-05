@@ -1,7 +1,7 @@
 /** Pure task-view derivation shared by the task board and the client projection. */
 
-import { brandString } from '@deepseek-ai/dsh-brand'
-import type { SessionId } from '@deepseek-ai/dsh-session'
+import { brandString } from '@kinetick-labs/kh-brand'
+import type { SessionId } from '@kinetick-labs/kh-session'
 import type { TeamState } from './projection.ts'
 import type { TeamTaskSnapshot, TeamTaskView } from './types.ts'
 

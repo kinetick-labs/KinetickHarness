@@ -1,6 +1,6 @@
 import { describe, expect, it, vi } from 'vitest'
-import type { DynamicCordisLivePackage } from '@deepseek-ai/dsh-cordis-client-runner/client'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+import type { DynamicCordisLivePackage } from '@kinetick-labs/kh-cordis-client-runner/client'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import type {
   CordisDynamicPackageId, CordisDynamicPluginId, CordisDynamicPluginRunId,
   DynamicCordisInventoryRow,

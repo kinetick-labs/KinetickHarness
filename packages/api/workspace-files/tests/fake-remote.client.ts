@@ -3,10 +3,10 @@
  * opened `changes` generation, and a supervisor that runs one generation and
  * classifies its end the way the real one does.
  */
-import type { RemoteResult, RemoteStreamHandle } from '@deepseek-ai/dsh-typert-protocol'
-import { RemoteError } from '@deepseek-ai/dsh-typert-protocol'
-import { streamHandle } from '@deepseek-ai/dsh-remote-mock'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
+import type { RemoteResult, RemoteStreamHandle } from '@kinetick-labs/kh-typert-protocol'
+import { RemoteError } from '@kinetick-labs/kh-typert-protocol'
+import { streamHandle } from '@kinetick-labs/kh-remote-mock'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
 import type { WorkspaceFileWatchFrame, WorkspaceFileStat } from '../src/types.ts'
 import type { SupervisedStream, SupervisedStreamOptions, WorkspaceFilesRemote } from '../src/client/remote.ts'
 

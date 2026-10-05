@@ -1,18 +1,18 @@
 // @vitest-environment jsdom
 
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { useDisclosure } from '@deepseek-ai/dsh-client-ui-chat/src/client/chat/use-disclosure.ts'
+import { useDisclosure } from '@kinetick-labs/kh-client-ui-chat/src/client/chat/use-disclosure.ts'
 import { cleanup, fireEvent, render } from '@testing-library/react'
-import type { StartedToolCall, ToolResultNode } from '@deepseek-ai/dsh-client-ui-chat/client'
-import type { ToolCallOwnerProps } from '@deepseek-ai/dsh-client-ui-tool/client'
-import { IconGlobeOutlineRegular } from '@deepseek-ai/dsh-client-ui-primitives'
+import type { StartedToolCall, ToolResultNode } from '@kinetick-labs/kh-client-ui-chat/client'
+import type { ToolCallOwnerProps } from '@kinetick-labs/kh-client-ui-tool/client'
+import { IconGlobeOutlineRegular } from '@kinetick-labs/kh-client-ui-primitives'
 import { webCardModel, webFetchHref } from '../src/client/tool/models/web-card-model.ts'
 import { GenericToolCard } from '../src/client/tool/toolviews/GenericToolCard.tsx'
 import { WebRow, webToolview } from '../src/client/tool/toolviews/web-row.tsx'
-import { makeTranslate } from '@deepseek-ai/dsh-client-test-runtime'
-import { zh as commonZh } from '@deepseek-ai/dsh-client-locale/src/locales/zh.ts'
-import { zh } from '@deepseek-ai/dsh-client-ui-conversation/src/client/locales.ts'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
+import { zh as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/zh.ts'
+import { zh } from '@kinetick-labs/kh-client-ui-conversation/src/client/locales.ts'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 
 afterEach(cleanup)
 

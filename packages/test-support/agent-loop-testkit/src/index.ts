@@ -2,21 +2,21 @@
  * Shared service mounting, real AgentLoop drivers, and structural Inbox stubs
  * for agent-loop tests. Callers retain ownership of their contexts, adapters,
  * optional plugins, agents, and teardown.
- * @module @deepseek-ai/dsh-agent-loop-testkit
+ * @module @kinetick-labs/kh-agent-loop-testkit
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import AgentRegistry from '@deepseek-ai/dsh-agent'
-import type { Agent, AgentOptions, Inbox, InboxTarget } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import SessionStore from '@deepseek-ai/dsh-session'
-import type { SessionHeader, SessionId, UserMessage } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import type { Config as SystemPromptConfig } from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import type { Config as ToolRuntimeConfig } from '@deepseek-ai/dsh-tools'
+import AgentRegistry from '@kinetick-labs/kh-agent'
+import type { Agent, AgentOptions, Inbox, InboxTarget } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import LlmRuntime from '@kinetick-labs/kh-llm'
+import SessionStore from '@kinetick-labs/kh-session'
+import type { SessionHeader, SessionId, UserMessage } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import type { Config as SystemPromptConfig } from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import type { Config as ToolRuntimeConfig } from '@kinetick-labs/kh-tools'
 
 export { createInboxStub, unsupportedInbox } from './inbox.ts'
 

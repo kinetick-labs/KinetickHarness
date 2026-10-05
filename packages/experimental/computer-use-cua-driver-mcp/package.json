@@ -1,5 +1,5 @@
 {
-  "name": "@deepseek-ai/dsh-experimental-computer-use-cua-driver-mcp",
+  "name": "@kinetick-labs/kh-experimental-computer-use-cua-driver-mcp",
   "description": "Experimental computer use through an installed Cua Driver MCP executable",
   "version": "0.2.1-alpha.1",
   "publishConfig": {
@@ -7,7 +7,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "url": "git+https://github.com/kinetick-labs/KinetickHarness.git",
     "directory": "packages/experimental/computer-use-cua-driver-mcp"
   },
   "type": "module",
@@ -30,24 +30,24 @@
   "license": "MIT",
   "dependencies": {
     "@deepseek-ai/schemastery": "workspace:~",
-    "@deepseek-ai/dsh-mcp-client": "workspace:*"
+    "@kinetick-labs/kh-mcp-client": "workspace:*"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
-    "@deepseek-ai/dsh-computer-use": "workspace:*"
+    "@kinetick-labs/kh-computer-use": "workspace:*"
   },
   "devDependencies": {
     "@deepseek-ai/cordis": "workspace:~",
     "@deepseek-ai/cordis-plugin-loader": "workspace:~",
     "@deepseek-ai/cordis-plugin-include": "workspace:~",
-    "@deepseek-ai/dsh-computer-use": "workspace:*",
-    "@deepseek-ai/dsh-system-prompt": "workspace:*",
-    "@deepseek-ai/dsh-tools": "workspace:*",
-    "@deepseek-ai/dsh-llm": "workspace:*",
-    "@deepseek-ai/dsh-session": "workspace:*",
-    "@deepseek-ai/dsh-agent": "workspace:*",
-    "@deepseek-ai/dsh-agent-loop": "workspace:*",
-    "@deepseek-ai/dsh-attachment-local": "workspace:*",
-    "@deepseek-ai/dsh-session-projection": "workspace:*"
+    "@kinetick-labs/kh-computer-use": "workspace:*",
+    "@kinetick-labs/kh-system-prompt": "workspace:*",
+    "@kinetick-labs/kh-tools": "workspace:*",
+    "@kinetick-labs/kh-llm": "workspace:*",
+    "@kinetick-labs/kh-session": "workspace:*",
+    "@kinetick-labs/kh-agent": "workspace:*",
+    "@kinetick-labs/kh-agent-loop": "workspace:*",
+    "@kinetick-labs/kh-attachment-local": "workspace:*",
+    "@kinetick-labs/kh-session-projection": "workspace:*"
   }
 }

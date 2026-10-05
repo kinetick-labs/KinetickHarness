@@ -28,7 +28,7 @@ function runScript(script: string, environment: NodeJS.ProcessEnv): void {
   }
 }
 
-/** Run the full build selected by `--profile` or `DSH_BUILD_CLIENT_PROFILE`. */
+/** Run the full build selected by `--profile` or `KH_BUILD_CLIENT_PROFILE`. */
 function main(): void {
   // tsdown.config.ts loads only through Node type stripping (`--config-loader native`); this names the cause before tsdown fails.
   if (!process.features.typescript) {

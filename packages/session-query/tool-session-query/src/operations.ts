@@ -1,21 +1,21 @@
 /**
  * Tool operation orchestration over session-query service capabilities.
  *
- * @module @deepseek-ai/dsh-tool-session-query/operations
+ * @module @kinetick-labs/kh-tool-session-query/operations
  */
 
 import type { Context } from '@deepseek-ai/cordis'
-import { HarnessError } from '@deepseek-ai/dsh-llm'
-import { SessionSeq } from '@deepseek-ai/dsh-session'
-import type { SessionId } from '@deepseek-ai/dsh-session'
+import { HarnessError } from '@kinetick-labs/kh-llm'
+import { SessionSeq } from '@kinetick-labs/kh-session'
+import type { SessionId } from '@kinetick-labs/kh-session'
 import {
   SessionQueryError,
   type SessionEventSearchPage,
   type SessionEventSurface,
   type SessionRecord,
   type SessionSearchCursor,
-} from '@deepseek-ai/dsh-session-query'
-import type { ToolRunContext } from '@deepseek-ai/dsh-tools'
+} from '@kinetick-labs/kh-session-query'
+import type { ToolRunContext } from '@kinetick-labs/kh-tools'
 import { toolInput } from './input.ts'
 import { presentation } from './presentation.ts'
 import { serviceBoundary } from './service-boundary.ts'

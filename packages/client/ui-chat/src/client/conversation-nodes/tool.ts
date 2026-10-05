@@ -2,10 +2,10 @@ import type { Context } from '@deepseek-ai/cordis'
 import type {
   ConversationMatch, ConversationNodeContext, ConversationNodeDefinition, PreparingToolCall, StartedToolCall,
   ToolCallBlock, ToolResultNode,
-} from '@deepseek-ai/dsh-client-ui-conversation/client'
-import { isAppendSurfaceEvent } from '@deepseek-ai/dsh-session/surface'
-import type {} from '@deepseek-ai/dsh-tools/types'
-import { PartialArguments } from '@deepseek-ai/dsh-util-values'
+} from '@kinetick-labs/kh-client-ui-conversation/client'
+import { isAppendSurfaceEvent } from '@kinetick-labs/kh-session/surface'
+import type {} from '@kinetick-labs/kh-tools/types'
+import { PartialArguments } from '@kinetick-labs/kh-util-values'
 import type { ChatNode, ToolChatData } from '../contract/chat-nodes.ts'
 import { CHAT_SYNTHETIC_SEQ_OFFSETS, chatNode, contextLocation } from './common.ts'
 

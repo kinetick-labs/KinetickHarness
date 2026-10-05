@@ -48,7 +48,7 @@ const PREPARING_CASES = [
 const WORKER = join(
   import.meta.dirname,
   '..',
-  '.dsh-build',
+  '.kh-build',
   'conversation-fold',
   'conversation-fold.worker.js',
 )

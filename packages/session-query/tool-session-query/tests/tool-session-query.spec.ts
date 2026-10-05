@@ -1,10 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import { Context, type Fiber } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import { createUserMessage, ToolCallId, HarnessError , createMessage } from '@deepseek-ai/dsh-llm'
-import type { ContextFormed } from '@deepseek-ai/dsh-llm'
-import { MAX_TIMER_DELAY_MS, TimeoutReason } from '@deepseek-ai/dsh-timeout'
-import * as TimeoutPolicy from '@deepseek-ai/dsh-tool-call-timeout-policy'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import { createUserMessage, ToolCallId, HarnessError , createMessage } from '@kinetick-labs/kh-llm'
+import type { ContextFormed } from '@kinetick-labs/kh-llm'
+import { MAX_TIMER_DELAY_MS, TimeoutReason } from '@kinetick-labs/kh-timeout'
+import * as TimeoutPolicy from '@kinetick-labs/kh-tool-call-timeout-policy'
 import SessionStore, {
   SESSION_FORMAT_VERSION,
   SessionId,
@@ -13,9 +13,9 @@ import SessionStore, {
   type SessionEvent,
   type SessionHeader,
   type SessionId as SessionIdValue,
-} from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import { turnBoundaryProjectionDefinition } from '@deepseek-ai/dsh-agent-loop'
+} from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import { turnBoundaryProjectionDefinition } from '@kinetick-labs/kh-agent-loop'
 import SessionQueryEngine, {
   SessionQueryError,
   SessionSearchCursor,
@@ -28,12 +28,12 @@ import SessionQueryEngine, {
   type SessionSearchPage,
   type SessionSearchRequest,
   type SessionTitleObservationResult,
-} from '@deepseek-ai/dsh-session-query'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime, { type ToolExecutionResult } from '@deepseek-ai/dsh-tools'
-import * as ToolSessionQuery from '@deepseek-ai/dsh-tool-session-query'
+} from '@kinetick-labs/kh-session-query'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime, { type ToolExecutionResult } from '@kinetick-labs/kh-tools'
+import * as ToolSessionQuery from '@kinetick-labs/kh-tool-session-query'
 
-declare module '@deepseek-ai/dsh-llm' {
+declare module '@kinetick-labs/kh-llm' {
   interface MessageSourceMap {
     'test': { kind: 'test' } & ContextFormed
   }

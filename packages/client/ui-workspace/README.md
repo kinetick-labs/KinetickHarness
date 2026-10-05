@@ -1,9 +1,9 @@
 ---
-description: "Shared Workspace browser and picker plugin for the dsh web client: grouped or flat session rows, management actions, the slot-composed Session row actions, and directory picking."
+description: "Shared Workspace browser and picker plugin for the kh web client: grouped or flat session rows, management actions, the slot-composed Session row actions, and directory picking."
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-client-ui-workspace
+# @kinetick-labs/kh-client-ui-workspace
 
 English | [中文](README.zh.md)
 
@@ -105,19 +105,19 @@ Declare `ui-workspace`, `ui-slots`, `ui-renderer`, `client-locale`, and `ui-prim
 
 ```tsx
 import type { Context } from '@deepseek-ai/cordis'
-import type { SessionId } from '@deepseek-ai/dsh-session/types'
-import type {} from '@deepseek-ai/dsh-client-locale/client'
-import type {} from '@deepseek-ai/dsh-client-ui-renderer/client'
-import type {} from '@deepseek-ai/dsh-client-ui-workspace/client'
-import { MenuItemButton } from '@deepseek-ai/dsh-client-ui-primitives'
+import type { SessionId } from '@kinetick-labs/kh-session/types'
+import type {} from '@kinetick-labs/kh-client-locale/client'
+import type {} from '@kinetick-labs/kh-client-ui-renderer/client'
+import type {} from '@kinetick-labs/kh-client-ui-workspace/client'
+import { MenuItemButton } from '@kinetick-labs/kh-client-ui-primitives'
 import type {
   InjectFace, LocaleDictOf, PropsLocale, PropsRuntime,
-} from '@deepseek-ai/dsh-client-ui-slots'
+} from '@kinetick-labs/kh-client-ui-slots'
 import { exportSession } from './export-session.ts'
 
 const NS = 'acme.sessionActions'
 
-declare module '@deepseek-ai/dsh-client-ui-slots' {
+declare module '@kinetick-labs/kh-client-ui-slots' {
   interface LocaleNamespaceMap {
     'acme.sessionActions': 'export'
   }
@@ -164,7 +164,7 @@ export function apply(ctx: Context): void {
 
 #### Dynamic client package
 
-A dynamically loaded browser half follows the same component contract; which modules it can reach depends on its lane. A Module Loader package (`factory(require)`, as in the real Loader/Web fixture) gets `@deepseek-ai/dsh-client-ui-primitives` as an implicit baseline external: resolve `MenuItemButton` through the loader's `require`, do not list the primitive as a runtime dependency or bundle another copy, and declare a development dependency only when source compilation needs its types. A `cordis-client-runner` closure (the audience of the generated Client Slot catalog) cannot import anything: it renders its own `role="menuitem"` `<button>` with `React.createElement`, styles it through `styles.insert`, and dismisses the menu through the same `useMenuOpenState` hook, as the catalog's example shows.
+A dynamically loaded browser half follows the same component contract; which modules it can reach depends on its lane. A Module Loader package (`factory(require)`, as in the real Loader/Web fixture) gets `@kinetick-labs/kh-client-ui-primitives` as an implicit baseline external: resolve `MenuItemButton` through the loader's `require`, do not list the primitive as a runtime dependency or bundle another copy, and declare a development dependency only when source compilation needs its types. A `cordis-client-runner` closure (the audience of the generated Client Slot catalog) cannot import anything: it renders its own `role="menuitem"` `<button>` with `React.createElement`, styles it through `styles.insert`, and dismisses the menu through the same `useMenuOpenState` hook, as the catalog's example shows.
 
 ### View state
 

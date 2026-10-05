@@ -3,7 +3,7 @@ description: "Tool-result retention with a shared text/image token budget and re
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-spill-policy
+# @kinetick-labs/kh-spill-policy
 
 English | [中文](README.zh.md)
 
@@ -32,8 +32,8 @@ Mount the policy alongside a spill backend. Text and images share the configured
 Load a spill backend and set `maxInlineTokens` in estimated tokens:
 
 ```yaml
-- name: '@deepseek-ai/dsh-spill-local'
-- name: '@deepseek-ai/dsh-spill-policy'
+- name: '@kinetick-labs/kh-spill-local'
+- name: '@kinetick-labs/kh-spill-policy'
   config:
     maxInlineTokens: 12500
 ```
@@ -113,7 +113,7 @@ Recovery or pricing failures preserve the input and log the reason. Negative, fr
 Read these pages when the package-level contract is not enough.
 
 - [Spill storage service](../spill/README.md) — the `saveText` contract behind the policy's replacement.
-- [dsh-spill-local](../spill-local/README.md) — the local backend that stores the spilled text.
+- [kh-spill-local](../spill-local/README.md) — the local backend that stores the spilled text.
 - [Token meter](../../llm/token-meter/README.md) — shared text estimates and route image accounting.
 - [Tool output spill decision](../../../.agents/notes/implemented/architecture/2026-07-08-tool-output-spill-files.md) — the capability boundary and design rationale.
 

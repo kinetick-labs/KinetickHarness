@@ -5,15 +5,15 @@ import { Context } from '@deepseek-ai/cordis'
 import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
-import { createUserMessage } from '@deepseek-ai/dsh-llm'
-import LlmRuntime from '@deepseek-ai/dsh-llm'
-import SessionStore, { SessionId } from '@deepseek-ai/dsh-session'
-import SessionProjectionRegistry from '@deepseek-ai/dsh-session-projection'
-import SystemPrompt from '@deepseek-ai/dsh-system-prompt'
-import ToolRuntime from '@deepseek-ai/dsh-tools'
-import AgentRegistry, { type Agent } from '@deepseek-ai/dsh-agent'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
+import { createUserMessage } from '@kinetick-labs/kh-llm'
+import LlmRuntime from '@kinetick-labs/kh-llm'
+import SessionStore, { SessionId } from '@kinetick-labs/kh-session'
+import SessionProjectionRegistry from '@kinetick-labs/kh-session-projection'
+import SystemPrompt from '@kinetick-labs/kh-system-prompt'
+import ToolRuntime from '@kinetick-labs/kh-tools'
+import AgentRegistry, { type Agent } from '@kinetick-labs/kh-agent'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
 import { MockAdapter, textResponse } from './mock-adapter.ts'
 
 const dirs: string[] = []
@@ -28,7 +28,7 @@ function waitForIdle(ctx: Context, agent: Agent): Promise<void> {
 }
 
 async function mount(order: 'backend-first' | 'loop-first'): Promise<{ ctx: Context; root: string }> {
-  const root = await mkdtemp(join(tmpdir(), 'dsh-shutdown-drain-'))
+  const root = await mkdtemp(join(tmpdir(), 'kh-shutdown-drain-'))
   dirs.push(root)
   const ctx = new Context()
   await ctx.plugin(LlmRuntime)

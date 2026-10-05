@@ -1,7 +1,7 @@
-/** DeepSeek Files API transport. @module dsh-llm-deepseek/files-api */
+/** DeepSeek Files API transport. @module kh-llm-deepseek/files-api */
 
-import { attributionHeaders, LlmError } from '@deepseek-ai/dsh-llm'
-import type { ImageMediaType } from '@deepseek-ai/dsh-attachment'
+import { attributionHeaders, LlmError } from '@kinetick-labs/kh-llm'
+import type { ImageMediaType } from '@kinetick-labs/kh-attachment'
 import { DeepSeekFileId } from './file-id.ts'
 import type { DeepSeekFileId as DeepSeekFileIdType } from './file-id.ts'
 import { messagesApiRoot, MESSAGES_FILES_BETA } from './messages-api.ts'

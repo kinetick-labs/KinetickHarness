@@ -5,14 +5,14 @@ import { mkdtemp, rm } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
 import { join } from 'node:path'
 import { Context } from '@deepseek-ai/cordis'
-import type { Agent } from '@deepseek-ai/dsh-agent'
-import AgentLoop from '@deepseek-ai/dsh-agent-loop'
-import { mountAgentLoopTestDependencies } from '@deepseek-ai/dsh-agent-loop-testkit'
-import { SessionId } from '@deepseek-ai/dsh-session'
-import JsonlSessionPersistence from '@deepseek-ai/dsh-session-persistence-jsonl'
-import Storage from '@deepseek-ai/dsh-storage'
-import * as StorageDomain from '@deepseek-ai/dsh-storage-domain'
-import * as StorageJson from '@deepseek-ai/dsh-storage-json'
+import type { Agent } from '@kinetick-labs/kh-agent'
+import AgentLoop from '@kinetick-labs/kh-agent-loop'
+import { mountAgentLoopTestDependencies } from '@kinetick-labs/kh-agent-loop-testkit'
+import { SessionId } from '@kinetick-labs/kh-session'
+import JsonlSessionPersistence from '@kinetick-labs/kh-session-persistence-jsonl'
+import Storage from '@kinetick-labs/kh-storage'
+import * as StorageDomain from '@kinetick-labs/kh-storage-domain'
+import * as StorageJson from '@kinetick-labs/kh-storage-json'
 import { createAfterScheduleRecord, ScheduleId } from '../src/domain.ts'
 import ScheduleService from '../src/index.ts'
 import { scheduleDomain } from '../src/storage.ts'
@@ -35,7 +35,7 @@ async function core(persistenceRoot: string) {
 
 describe('due delivery during Agent creation', () => {
   it('enqueues the reminder without starting a turn before every creation listener finishes', async () => {
-    const root = await mkdtemp(join(tmpdir(), 'dsh-schedule-serial-'))
+    const root = await mkdtemp(join(tmpdir(), 'kh-schedule-serial-'))
     roots.push(root)
     const ctx = await core(join(root, 'sessions'))
     await ctx.plugin(Storage)

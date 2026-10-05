@@ -3,13 +3,13 @@ description: "SQLite storage backend for hosts and maintainers choosing, configu
 kind: "package-reference"
 ---
 
-# @deepseek-ai/dsh-storage-sqlite
+# @kinetick-labs/kh-storage-sqlite
 
 English | [中文](README.zh.md)
 
 ## Summary
 
-`dsh-storage-sqlite` is a storage backend that hosts every routed unit in one SQLite database file, storing each record as one JSON document per row, registered as backend `sqlite`. A single record update touches exactly one row, which is what makes this the right medium for high-frequency, point-sized writes. Choose it when a domain's data changes often or the deployment prefers one queryable database; choose the JSON backend when the data should be readable as plain files. The backend is host-side only: it contributes no prompt, tool, or schema, so the model and the agent loop never see it.
+`kh-storage-sqlite` is a storage backend that hosts every routed unit in one SQLite database file, storing each record as one JSON document per row, registered as backend `sqlite`. A single record update touches exactly one row, which is what makes this the right medium for high-frequency, point-sized writes. Choose it when a domain's data changes often or the deployment prefers one queryable database; choose the JSON backend when the data should be readable as plain files. The backend is host-side only: it contributes no prompt, tool, or schema, so the model and the agent loop never see it.
 
 ## Table of Contents
 
@@ -36,11 +36,11 @@ Choose it when writes are frequent and point-sized — each key maps to exactly 
 Two fields: the database path and the journal mode. `:memory:` opens an in-process database whose contents disappear with the process.
 
 ```yaml
-- name: '@deepseek-ai/dsh-storage'
-- name: '@deepseek-ai/dsh-storage-sqlite'
+- name: '@kinetick-labs/kh-storage'
+- name: '@kinetick-labs/kh-storage-sqlite'
   config:
-    path: /var/lib/dsh/data.db
-- name: '@deepseek-ai/dsh-storage-domain'
+    path: /var/lib/kh/data.db
+- name: '@kinetick-labs/kh-storage-domain'
   config:
     backend: sqlite
 ```
