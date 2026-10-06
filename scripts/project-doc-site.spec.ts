@@ -40,8 +40,8 @@ function fixture(): { root: string; pages: DocsPage[] } {
   return {
     root,
     pages: [
-      { locale: 'root', contentLocale: 'en-US', source: 'docs/a.md', route: 'a.md', label: 'A', sidebar: 'zh-reference', section: 'Test', order: 1 },
-      { locale: 'root', contentLocale: 'en-US', source: 'docs/b.md', route: 'reference-root/b.md', label: 'B', sidebar: 'zh-reference', section: 'Test', order: 2 },
+      { locale: 'root', contentLocale: 'en-US', source: 'docs/a.md', route: 'a.md', label: 'A', sidebar: 'en-reference', section: 'Test', order: 1 },
+      { locale: 'root', contentLocale: 'en-US', source: 'docs/b.md', route: 'reference-root/b.md', label: 'B', sidebar: 'en-reference', section: 'Test', order: 2 },
       { locale: 'en', contentLocale: 'en-US', source: 'docs/a.md', route: 'en/a.md', label: 'A', sidebar: 'en-reference', section: 'Test', order: 1 },
       { locale: 'en', contentLocale: 'en-US', source: 'docs/b.md', route: 'en/reference/b.md', label: 'B', sidebar: 'en-reference', section: 'Test', order: 2 },
     ],
@@ -313,7 +313,7 @@ describe('rewriteMarkdown', () => {
     paired.push(
       {
         locale: 'root', contentLocale: 'zh-CN', source: 'docs/a.zh.md', sourceAliases: ['docs/a.md'],
-        route: 'guide/a.md', label: 'A', sidebar: 'zh-guide', section: 'Test', order: 1,
+        route: 'guide/a.md', label: 'A', sidebar: 'en-guide', section: 'Test', order: 1,
       },
       {
         locale: 'en', contentLocale: 'en-US', source: 'docs/a.md', sourceAliases: ['docs/a.zh.md'],
@@ -571,7 +571,7 @@ describe('addProjectionFrontmatter', () => {
     expect(addProjectionFrontmatter('# Catalog\n', {
       source: 'docs/catalog.md',
       route: 'reference/index.md',
-      sidebar: 'zh-reference',
+      sidebar: 'en-reference',
       outline: [2, 4],
     })).toBe(
       '---\neditSource: "docs/catalog.md"\nrawMarkdownPath: "reference/index.md"\noutline: [2,4]\n---\n\n# Catalog\n',
@@ -600,26 +600,26 @@ describe('projectedPageContent', () => {
 
   it('keeps the full body for ordinary pages', () => {
     const markdown = '---\ntitle: Guide\n---\n\n# Guide\n'
-    expect(projectedPageContent(markdown, page('zh-guide'))).toBe(markdown)
+    expect(projectedPageContent(markdown, page('en-guide'))).toBe(markdown)
   })
 
   it('drops the language switcher the navigation bar already offers', () => {
-    expect(projectedPageContent('# Guide\n\nEnglish | [中文](./en/guide)\n\nBody.\n', page('zh-guide')))
+    expect(projectedPageContent('# Guide\n\nEnglish | [中文](./en/guide)\n\nBody.\n', page('en-guide')))
       .toBe('# Guide\n\nBody.\n')
-    expect(projectedPageContent('# 指南\n\n[English](./en/guide) | 中文\n\n正文。\n', page('zh-guide')))
+    expect(projectedPageContent('# 指南\n\n[English](./en/guide) | 中文\n\n正文。\n', page('en-guide')))
       .toBe('# 指南\n\n正文。\n')
   })
 
   it('drops the repository badge every page links from its footer', () => {
     const badge = '[![](https://img.shields.io/badge/powered_by-kh-4D6BFE?style=flat-square)](https://github.com/kinetick-labs/KinetickHarness)'
-    expect(projectedPageContent(`# Guide\n\nBody.\n\n${badge}\n`, page('zh-guide')))
+    expect(projectedPageContent(`# Guide\n\nBody.\n\n${badge}\n`, page('en-guide')))
       .toBe('# Guide\n\nBody.\n')
   })
 
   it('keeps a switcher-shaped line that is not the page header', () => {
     // A tutorial showing the convention must still render the example.
     const sample = '# Guide\n\nA\n\nB\n\nC\n\nD\n\nE\n\nEnglish | [中文](./x)\n'
-    expect(projectedPageContent(sample, page('zh-guide'))).toBe(sample)
+    expect(projectedPageContent(sample, page('en-guide'))).toBe(sample)
   })
 
   it('rejects a locale home source without frontmatter', () => {
@@ -693,7 +693,7 @@ describe('emitRawMarkdownPages', () => {
     writeFileSync(join(root, 'docs/c.md'), '# C\n\n[A](a.md)\n')
     pages.push({
       locale: 'root', contentLocale: 'en-US', source: 'docs/c.md', route: 'guide/index.md',
-      label: 'C', sidebar: 'zh-guide', section: 'Test', order: 3,
+      label: 'C', sidebar: 'en-guide', section: 'Test', order: 3,
     })
     const out = mirrorDir()
 
