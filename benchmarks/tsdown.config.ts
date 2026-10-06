@@ -5,6 +5,13 @@ import { typertPlugin } from '../packages/typert/generator/lib/types/tsdown-plug
 // typert decorator stripper that the root config installs must run here too:
 // without it, `@Remote` metadata emitted by the package build survives into the
 // worker bundle and Node rejects the module at import time.
+//
+// `@deepseek-ai/*` stays external here: the vendored packages publish `lib`
+// entrypoints and carry native addons (loader -> node-addon-require-builtin),
+// so the workers resolve them at runtime. The benchmarks package therefore
+// declares every framework package the boot graph reaches (cordis, include,
+// loader, cosmokit, schemastery, node-addon-system) as workspace links --
+// without the link the external import fails with ERR_MODULE_NOT_FOUND.
 const shared = {
   plugins: [typertPlugin({ mode: 'workspace', faces: ['host'] })],
   format: 'esm' as const,
