@@ -300,7 +300,7 @@ describe('CI workflow', () => {
 
     // The Linux lanes and the verdict job run on GitHub-hosted runners.
     for (const [jobName, job] of [['node-24', node24], ['node-24-coverage', node24Coverage], ['node-24-consumers', node24Consumers]] as const) {
-      expect(job['runs-on'], `${jobName} runs-on is the hosted 16-core Linux runner`).toBe('ubuntu-24.04-16core')
+      expect(job['runs-on'], `${jobName} runs-on is the hosted Linux runner`).toBe('ubuntu-latest')
     }
     expect(aggregate['runs-on']).toBe('ubuntu-latest')
 

@@ -20,13 +20,13 @@ jobs:
   # Three jobs isolate coverage, static analysis, and the build-backed
   # consumer tail. The consumer job owns the only Linux build so all three
   # jobs enter runner allocation independently. They run on GitHub-hosted
-  # runners (ubuntu-24.04-16core / windows-2025): the fork has no access to
+  # runners (ubuntu-latest / windows-2025): the fork has no access to
   # upstream's custom runner pools or the runner-failover variables they were
   # switched with.
   #
   node-24:
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-24.04-16core
+    runs-on: ubuntu-latest
     name: node 24 / static
     env:
       # Stop the aggregate at the first blocking gate failure so a red run
@@ -85,7 +85,7 @@ jobs:
 
   node-24-coverage:
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-24.04-16core
+    runs-on: ubuntu-latest
     name: node 24 / coverage
     env:
       # Managed-scope teardown cases run past the default per-test budget when
@@ -201,7 +201,7 @@ jobs:
 
   node-24-consumers:
     if: github.event_name == 'pull_request'
-    runs-on: ubuntu-24.04-16core
+    runs-on: ubuntu-latest
     name: node 24 / snapshots and artifacts
     env:
       KH_NODE_COMPAT_SKIP_TYPECHECK: '1'
@@ -288,18 +288,18 @@ jobs:
         include:
           - node: '22.19'
             name: node 22.19
-            runner: ubuntu-24.04-16core
+            runner: ubuntu-latest
             gate_concurrency: '1'
           # Pinned inside 24.0-24.11.1: those releases carry the v1 internal
           # loader while reporting major 24, and every other job tracks the
           # latest 24, which is v2. A bare `24` here would retest that same v2.
           - node: '24.9'
             name: node 24.9
-            runner: ubuntu-24.04-16core
+            runner: ubuntu-latest
             gate_concurrency: '1'
           - node: 26
             name: node 26
-            runner: ubuntu-24.04-16core
+            runner: ubuntu-latest
             gate_concurrency: '1'
     steps:
       - uses: actions/checkout@v6

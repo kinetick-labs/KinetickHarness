@@ -38,9 +38,9 @@ describe('Node compatibility hosted routing', () => {
     expect(job.if).toBe("github.event_name == 'pull_request'")
     expect(job.strategy['fail-fast']).toBe(false)
     expect(job.strategy.matrix.include).toEqual([
-      { node: '22.19', name: 'node 22.19', runner: 'ubuntu-24.04-16core', gate_concurrency: '1' },
-      { node: '24.9', name: 'node 24.9', runner: 'ubuntu-24.04-16core', gate_concurrency: '1' },
-      { node: 26, name: 'node 26', runner: 'ubuntu-24.04-16core', gate_concurrency: '1' },
+      { node: '22.19', name: 'node 22.19', runner: 'ubuntu-latest', gate_concurrency: '1' },
+      { node: '24.9', name: 'node 24.9', runner: 'ubuntu-latest', gate_concurrency: '1' },
+      { node: 26, name: 'node 26', runner: 'ubuntu-latest', gate_concurrency: '1' },
     ])
     expect(job.env.KH_GATE_CONCURRENCY).toBe('${{ matrix.gate_concurrency }}')
     expect(job.steps.map(step => step.run)).toContain('pnpm run check:node-compat')
