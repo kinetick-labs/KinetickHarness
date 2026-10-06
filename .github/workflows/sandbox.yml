@@ -55,10 +55,7 @@ jobs:
           - os: macos-latest
             runner: seatbelt
     name: sandbox e2e (${{ matrix.runner }}, ${{ matrix.os }})
-    runs-on: >-
-      ${{ matrix.runner == 'bwrap' && vars.KH_CI_FAILOVER_LINUX == 'blacksmith'
-          && 'blacksmith-4vcpu-ubuntu-2404'
-          || matrix.os }}
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
