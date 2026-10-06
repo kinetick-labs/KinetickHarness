@@ -532,7 +532,7 @@ function clientConfig(id: string, entry: string, clientBanner?: (fileName: strin
       // Cross-plugin collaboration goes through cordis services instead.
       name: 'kh-client-bundle-purity',
       resolveId(source: string) {
-        if (!source.startsWith('@deepseek-ai/')) return null
+        if (!source.startsWith('@kinetick-labs/') && !source.startsWith('@deepseek-ai/')) return null
         if (isRequested(source)) return null // requested module-table row: external wins
         if (VENDORED_LIBRARY.test(source)) return null // vendored library: inline, no shared identity
         if (INLINE_SAFE.test(source) || GENERATED_REMOTE.test(source)) return null // wire contribution: inline is the point

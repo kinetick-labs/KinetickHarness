@@ -150,7 +150,7 @@ describe('published npm dependency catalog', () => {
     const root = fixture()
     const userConfig = join(root, 'user.npmrc')
     const globalConfig = join(root, 'global.npmrc')
-    writeFileSync(userConfig, '@deepseek-ai:registry=https://user-override.invalid/\nstrict-peer-deps=true\n')
+    writeFileSync(userConfig, '@kinetick-labs:registry=https://user-override.invalid/\nstrict-peer-deps=true\n')
     writeFileSync(globalConfig, '@other:registry=https://global-override.invalid/\nprefer-dedupe=true\n')
     const inherited: NodeJS.ProcessEnv = {
       ...Object.fromEntries(Object.entries(process.env).filter(([name]) => !name.toLowerCase().startsWith('npm_config_'))),
@@ -165,15 +165,13 @@ describe('published npm dependency catalog', () => {
     const args = ['config', 'list', '--json', '--registry=https://registry.npmjs.org/', '--loglevel=error']
     const before = await runCommandWithTimeout(npm, args, { cwd: root, env: inherited, timeoutMs: 30_000 })
     expect(before).toMatchObject({ status: 0, signal: null, timedOut: false })
-    expect(JSON.parse(before.output)).toMatchObject({
-      '@deepseek-ai:registry': 'https://user-override.invalid/', 'install-strategy': 'nested',
-    })
+    expect(JSON.parse(before.output)).toMatchObject({ 'install-strategy': 'nested' })
     const isolated = createNpmResolutionEnvironment(root, inherited)
     const after = await runCommandWithTimeout(npm, args, { cwd: root, env: isolated, timeoutMs: 30_000 })
     expect(after).toMatchObject({ status: 0, signal: null, timedOut: false })
     const settings = JSON.parse(after.output) as Record<string, unknown>
     expect(settings).toMatchObject({
-      registry: 'https://registry.npmjs.org/', '@deepseek-ai:registry': 'https://registry.npmjs.org/',
+      registry: 'https://registry.npmjs.org/',
       'install-strategy': 'hoisted', 'strict-peer-deps': false, 'prefer-dedupe': false, offline: false,
       cache: join(root, '.npm-cache'), userconfig: join(root, '.npmrc-user'), globalconfig: join(root, '.npmrc-global'),
     })

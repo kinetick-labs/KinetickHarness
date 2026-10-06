@@ -31,8 +31,8 @@ def test_wheel_verification_uses_distribution_metadata_not_nested_libraries(tmp_
     with zipfile.ZipFile(wheel, "w") as archive:
         archive.writestr("nested/library.dist-info/WHEEL", "Tag: cp312-cp312-linux_x86_64\n")
         archive.writestr("nested/library.dist-info/METADATA", "Name: library\nVersion: 0.0.1\n")
-        archive.writestr("deepseek_harness_sdk-1.2.3.dist-info/WHEEL", "Tag: py3-none-any\n")
-        archive.writestr("deepseek_harness_sdk-1.2.3.dist-info/METADATA",
+        archive.writestr("kinetick_harness_sdk-1.2.3.dist-info/WHEEL", "Tag: py3-none-any\n")
+        archive.writestr("kinetick_harness_sdk-1.2.3.dist-info/METADATA",
                          "Name: kinetick-harness-sdk\nVersion: 1.2.3\nLicense-Expression: MIT\n"
                          "License-File: LICENSE\nRequires-Dist: kinetick-harness-runtime-bin==1.2.3\n")
     build_python_release.verify_wheel(wheel, "sdk", "1.2.3", None)

@@ -6,7 +6,7 @@ import { load } from 'js-yaml'
 import { describe, expect, it } from 'vitest'
 
 const root = resolve(import.meta.dirname, '../..')
-const repository = 'kinetick-harness/kinetick-harness'
+const repository = 'kinetick-labs/kinetick-harness'
 const selfhosted = ['self-hosted', 'linux', 'x64', 'vm-backup']
 const hosted = 'ubuntu-24.04'
 
@@ -93,7 +93,10 @@ for (const [file, jobIds] of [['release.yml', ['dependencies', 'pack']], ['relea
     for (const jobId of jobIds) {
       describe(jobId, () => {
         const job = release.jobs[jobId]!
-        it('routes trusted PRs and master pushes onto the existing Linux pool', () => {
+        it('routes trusted PRs and master pushes onto the failover pool when enabled', () => {
+          // The fork hosts no runners, so the var stays unset in practice and
+          // everything routes hosted; the expression still honors the upstream
+          // self-hosted failover path when the var is enabled.
           expect(evaluate(job['runs-on'], trustedPr)).toEqual(selfhosted)
           expect(evaluate(job['runs-on'], trustedPush)).toEqual(selfhosted)
           expect(evaluate(job['runs-on'], { ...trustedPush, 'vars.KH_CI_FAILOVER_LINUX': '' })).toBe(hosted)

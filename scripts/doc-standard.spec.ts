@@ -17,11 +17,8 @@ import { readCurrentSessionFormatVersion } from './gen-session-format-catalog.ts
 const root = resolve(import.meta.dirname, '..')
 const PACKAGE_README_GLOBS = [
   'packages/README.md',
-  'packages/README.zh.md',
   'packages/*/README.md',
-  'packages/*/README.zh.md',
   'packages/*/*/README.md',
-  'packages/*/*/README.zh.md',
 ] as const
 
 function packageReadmes(): string[] {
@@ -376,7 +373,7 @@ describe('kh-doc skill consolidation', () => {
 
   it('maps historical Session format references to their dedicated document kind', () => {
     const files = globSync('docs/persistence-changes/historical-formats/v*.md', { cwd: root })
-    expect(files.length).toBe(readCurrentSessionFormatVersion(root) * 2)
+    expect(files.length).toBe(readCurrentSessionFormatVersion(root))
     for (const file of files) {
       const metadata = readFrontmatter(file)
       expect(metadata.kind, file).toBe('persistence-format')
@@ -441,14 +438,7 @@ describe('kh-doc skill consolidation', () => {
 describe('reference-example README pair', () => {
   const dir = 'packages/session/session-persistence-jsonl'
 
-  it('keeps exact English/Chinese physical line alignment', () => {
-    const sourceLines = readFileSync(resolve(root, dir, 'README.md'), 'utf8').split('\n').length
-    const zhLines = readFileSync(resolve(root, dir, 'README.zh.md'), 'utf8').split('\n').length
-    expect(sourceLines).toBe(zhLines)
-  })
-
-  it('keeps the sidecar consistency record present', () => {
-    const sidecar = readFileSync(resolve(root, dir, 'README.i18n.yaml'), 'utf8')
-    expect(sidecar).toMatch(/^\/[^\s:]*:\n {2}en: [0-9a-f]{16}\n {2}zh: [0-9a-f]{16}$/m)
+  it('keeps the reference-example README present', () => {
+    expect(existsSync(resolve(root, dir, 'README.md'))).toBe(true)
   })
 })

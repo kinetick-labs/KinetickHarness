@@ -15,7 +15,7 @@ import {
 } from './persistence-catalog-source.ts'
 import { extractPersistenceSchema } from './persistence-schema.ts'
 import { persistenceCatalogText, type PersistenceCatalogLocale } from './persistence-catalog-text.ts'
-import { renderPersistencePair, type PersistenceArtifact } from './persistence-artifacts.ts'
+import { type PersistenceArtifact } from './persistence-artifacts.ts'
 
 export { annotateSurface, collectEventEnvelopeTypes, collectLogEvents, collectSurfaceEventTypes } from './persistence-catalog-source.ts'
 export type { AnnotatedLogEventEntry, EventEnvelopeTypeEntry, LogEventEntry } from './persistence-catalog-source.ts'
@@ -176,7 +176,8 @@ export function persistenceCatalogArtifacts(scanRoot: string, schema: Persistenc
   const events = annotateSurface(collectLogEvents(scanRoot), collectSurfaceEventTypes(scanRoot))
   const envelope = collectEventEnvelopeTypes(scanRoot)
   return [
-    ...renderPersistencePair(scanRoot, OUT, render(events, envelope, schema), render(events, envelope, schema, 'zh')),
+    // Chinese locales were dropped from the fork (bb4958693): English artifact only.
+    { path: OUT, content: render(events, envelope, schema) },
     { path: OUT_RUNTIME_TYPES, content: renderKnownEventTypes(events) },
     { path: OUT_SCHEMA, content: `${JSON.stringify(persistenceSchemaSnapshot(schema), null, 2)}\n` },
   ]
