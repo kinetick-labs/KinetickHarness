@@ -31,7 +31,7 @@ jobs:
     # Persistent runners accept only trusted, credential-free rehearsals.
     runs-on: >-
       ${{ vars.KH_CI_FAILOVER_LINUX == 'selfhosted'
-        && github.repository == 'kinetick-harness/kinetick-harness'
+        && github.repository == 'kinetick-labs/kinetick-harness'
         && github.actor != 'dependabot[bot]'
         && ((github.event_name == 'push' && github.ref == 'refs/heads/master')
           || (github.event_name == 'pull_request'

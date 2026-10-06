@@ -42,11 +42,11 @@ function route(options: { mode?: string; author?: string; repository?: string; f
   return evaluate(job['runs-on'], {
     vars: { KH_CI_FAILOVER_LINUX: options.mode ?? 'selfhosted' },
     github: {
-      repository: 'kinetick-harness/kinetick-harness',
+      repository: 'kinetick-labs/kinetick-harness',
       actor: options.actor ?? 'maintainer',
       event: { pull_request: {
         user: { login: options.author ?? 'maintainer' },
-        head: { repo: { full_name: options.repository ?? 'kinetick-harness/kinetick-harness', fork: options.fork ?? false } },
+        head: { repo: { full_name: options.repository ?? 'kinetick-labs/kinetick-harness', fork: options.fork ?? false } },
       } },
     },
     matrix: { runner: 'ubuntu-latest' },
