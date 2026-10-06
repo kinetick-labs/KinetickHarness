@@ -1,0 +1,16 @@
+# GitHub Copilot chat through the pi-ai adapter. Sign in with the GitHub
+# device flow (`kh` offers the Copilot sign-in when the authorization seam is
+# mounted), or export COPILOT_GITHUB_TOKEN — GH_TOKEN and GITHUB_TOKEN are
+# read too. No API key is configured. Replace the model id with one the
+# account's Copilot plan can call.
+
+- id: llm-pi-ai
+  config:
+    providers:
+      github-copilot:
+        displayName: GitHub Copilot
+
+- id: agent-default-model
+  config:
+    provider: github-copilot
+    model: claude-sonnet-5
