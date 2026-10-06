@@ -21,6 +21,34 @@ import { launchEnvironmentOf } from '@kinetick-labs/kh-launch-environment'
 import { LlmError } from '@kinetick-labs/kh-llm'
 
 /**
+ * The environment names GitHub itself publishes a token under, for the
+ * `github-copilot` route alone. pi-ai's Copilot ambient discovery reads
+ * `COPILOT_GITHUB_TOKEN` only, so without this aliasing a deployment that
+ * exports `GH_TOKEN` (the `gh` CLI's own variable) or `GITHUB_TOKEN`
+ * (Actions' default secret) finds the route unconfigured. Nothing else reads
+ * these names: pi-ai asks no provider for them, and a deployment that wants a
+ * token on another route names it through `apiKeyEnv`.
+ */
+const COPILOT_TOKEN_ALIASES: readonly string[] = ['GH_TOKEN', 'GITHUB_TOKEN']
+
+/**
+ * The GitHub token to answer a missing `COPILOT_GITHUB_TOKEN` lookup with.
+ * @param ctx - the plugin context carrying the optional `ctx.credentials`.
+ * @returns the first alias that resolves to a token, otherwise undefined.
+ */
+async function copilotAliasToken(ctx: Context): Promise<string | undefined> {
+  for (const alias of COPILOT_TOKEN_ALIASES) {
+    if (isCredentialRefName(alias)) {
+      const hit = await ctx.get('credentials')?.resolve(credentialRef(alias))
+      if (hit !== undefined) return hit.value
+    }
+    const ambient = launchEnvironmentOf(ctx).get(alias)?.value
+    if (ambient !== undefined) return ambient
+  }
+  return undefined
+}
+
+/**
  * The record scope every credential this adapter family stores is written
  * under. It is the plugin's registered name, which is what tells a later
  * reader — a configuration UI, or a second adapter family serving the same
@@ -192,11 +220,12 @@ export function credentialStoreFrom(ctx: Context): CredentialStore {
  * `env()` answers from the credential seam first, so a value a deployment
  * stored through the harness is found by a provider's own ambient discovery —
  * without this, that discovery reads only the process environment and a stored
- * `AWS_ACCESS_KEY_ID` is invisible to it. `fileExists()` answers about the host
- * process's own filesystem rather than the workspace `ctx.fs` seam, because the
- * paths it is asked about (`~/.aws/credentials`, application-default
- * credentials) are facts about where this process runs, not about the project
- * under edit.
+ * `AWS_ACCESS_KEY_ID` is invisible to it. A missing `COPILOT_GITHUB_TOKEN`
+ * answers from the GitHub token aliases (see {@link copilotAliasToken}).
+ * `fileExists()` answers about the host process's own filesystem rather than
+ * the workspace `ctx.fs` seam, because the paths it is asked about
+ * (`~/.aws/credentials`, application-default credentials) are facts about
+ * where this process runs, not about the project under edit.
  * @param ctx - the plugin context carrying the optional `ctx.credentials`.
  * @returns the auth context to hand `createModels()`.
  */
@@ -211,7 +240,9 @@ export function authContextFrom(ctx: Context): AuthContext {
         const hit = await credentials?.resolve(credentialRef(name))
         if (hit !== undefined) return hit.value
       }
-      return launchEnvironmentOf(ctx).get(name)?.value
+      const ambient = launchEnvironmentOf(ctx).get(name)?.value
+      if (ambient !== undefined) return ambient
+      return name === 'COPILOT_GITHUB_TOKEN' ? await copilotAliasToken(ctx) : undefined
     },
     async fileExists(path) {
       const expanded = path.startsWith('~/') || path === '~'
