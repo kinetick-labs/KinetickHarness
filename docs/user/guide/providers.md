@@ -14,7 +14,7 @@ kh web --patch apps/cli/config/examples/providers/openrouter.cordis.yml
 kh --profile headless --patch apps/cli/config/examples/providers/local-openai.cordis.yml "summarize this repo"
 ```
 
-`openai.cordis.yml` uses `OPENAI_API_KEY` and model `gpt-4o`. `openrouter.cordis.yml` uses `OPENROUTER_API_KEY` and model `openai/gpt-4o-mini`. `local-openai.cordis.yml` points at `http://127.0.0.1:11434/v1` with provider id `local` and model id `local-model`; change the URL and model id to match the server, and add `apiKeyEnv` when that server requires a key. Replace a model id the installed catalog does not list before the first request.
+`openai.cordis.yml` uses `OPENAI_API_KEY` and model `gpt-4o`. `openrouter.cordis.yml` uses `OPENROUTER_API_KEY` and model `openai/gpt-4o-mini`. `local-openai.cordis.yml` points at `http://127.0.0.1:11434/v1` with provider id `local` and model id `local-model`; change the URL and model id to match the server, and add `apiKeyEnv` when that server requires a key. `github-copilot.cordis.yml` uses your GitHub Copilot subscription instead of an API key — see [GitHub Copilot](#github-copilot). Replace a model id the installed catalog does not list before the first request.
 
 `deepseek.cordis.yml` restores `deepseek-official` / `deepseek-flash` and enables DeepSeek web search. Without that patch, `web-search-deepseek` stays disabled and `web_search` has no backend. Public HTTP(S) fetch stays available.
 
@@ -33,7 +33,7 @@ The model can call the provider only after a delegation tool row names it. The [
 
 ## GitHub Copilot
 
-The Models page does not sign in to GitHub Copilot, and this tree does not ship a Copilot chat route. Use OpenAI, OpenRouter, a local OpenAI-compatible server, or DeepSeek.
+GitHub Copilot runs as a `llm-pi-ai` route on your Copilot subscription rather than an API key. Apply `apps/cli/config/examples/providers/github-copilot.cordis.yml`, or add the `github-copilot` provider in `llm-pi-ai` settings. Authenticate one of two ways: sign in with the GitHub device flow through the authorization seam (the Web onboarding and `kh` login offer it once a route names the provider), or export `COPILOT_GITHUB_TOKEN` — `GH_TOKEN` and `GITHUB_TOKEN` are read as well. The model catalog comes from pi-ai's installed Copilot models, so only ids that catalog lists are selectable; an account's plan may answer some of them with `model_not_supported`. The Models page does not run the Copilot device-flow sign-in, so configure this provider through a patch or by editing the settings document.
 
 ## Configure DeepSeek
 
@@ -47,7 +47,7 @@ Keys are write-only. The page receives a redacted descriptor after saving, never
 
 Choose **Add model provider**. The card opens on **Third-party model provider**: pick a provider kh ships with — the list shows provider ids such as `anthropic`, `openai`, `moonshotai` for Kimi, or `zai` for GLM — enter its API key, and save. The installed catalog supplies the endpoint, protocol, and model list.
 
-Providers that sign in with OAuth, such as Codex and GitHub Copilot, are not supported on this page. Codex can still run as a delegated session after you install its bundle, as described above.
+Providers that sign in with OAuth, such as Codex and GitHub Copilot, are not configured on this page. Both still serve chat through an `llm-pi-ai` patch — GitHub Copilot as described above — and Codex can additionally run as a delegated session after you install its bundle, as described above.
 
 ## Add a custom model API
 
