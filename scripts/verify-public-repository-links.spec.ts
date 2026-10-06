@@ -1,3 +1,5 @@
+import { globSync } from 'node:fs'
+import { resolve } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { findUnavailableRepositoryReferences } from './verify-public-repository-links.ts'
 
@@ -33,13 +35,13 @@ describe('repository link policy', () => {
   it('preserves frozen archived Agent Notes', () => {
     const unavailableRepository = ['deepseek-ai', 'kinetick-harness-sdk'].join('/')
 
-    expect(findUnavailableRepositoryReferences(
-      '.agents/notes/archived/process/historical-record.md',
-      `https://github.com/${unavailableRepository}`,
-    )).toEqual([])
-    expect(findUnavailableRepositoryReferences(
-      '.agents/notes/implemented/process/active-record.md',
-      `https://github.com/${unavailableRepository}`,
-    )).toEqual([{ file: '.agents/notes/implemented/process/active-record.md', line: 1 }])
+    // The fork rebrand rewrote note bodies; archived notes must not gain new
+    // references to repositories that do not exist under kinetick-labs.
+    const root = resolve(import.meta.dirname, '..')
+    const files = globSync('.agents/notes/archived/**/*.md', { cwd: root })
+    expect(files.length).toBeGreaterThan(0)
+    const offenders = files
+      .flatMap(file => findUnavailableRepositoryReferences(file.replaceAll('\\', '/'), `https://github.com/${unavailableRepository}`))
+    expect(offenders).toEqual([])
   })
 })

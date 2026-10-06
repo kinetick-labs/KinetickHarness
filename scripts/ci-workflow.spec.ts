@@ -1115,7 +1115,7 @@ describe('Issue lifecycle workflow', () => {
       with: {
         'client-id': '${{ vars.KH_ISSUE_APP_CLIENT_ID }}',
         'private-key': '${{ secrets.KH_ISSUE_APP_PRIVATE_KEY }}',
-        owner: 'kinetick-harness',
+        owner: 'kinetick-labs',
         repositories: 'kinetick-harness',
         'permission-issues': 'read',
         'permission-organization-projects': 'read',

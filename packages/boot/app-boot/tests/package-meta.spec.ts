@@ -80,11 +80,11 @@ describe('plugin locale display metadata', () => {
 
   it('reads direct fields, retains per-field translations, and ignores other locale content', () => {
     dictionary('en', { meta: { title: 'Team', description: 'Work together', ignored: false }, other: { nested: [1] } })
-    dictionary('zh', { meta: { title: '团队' } })
+    dictionary('fr', { meta: { title: 'Equipe' } })
     dictionary('pt-BR', { meta: { description: 'Trabalhar juntos' } })
     file(join(dir, 'locale', 'ignored.txt'), 'not JSON')
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'Team' },
+      title: { en: 'Team', fr: 'Equipe' },
       description: { en: 'Work together', 'pt-br': 'Trabalhar juntos' },
     })
   })
@@ -99,9 +99,9 @@ describe('plugin locale display metadata', () => {
   it('accepts description-only metadata and supplies the module name when a translated title has no English value', () => {
     dictionary('en', { meta: { description: 'About it' } })
     expect(readPluginMeta('localized', parentURL)).toEqual({ description: { en: 'About it' } })
-    dictionary('zh', { meta: { title: '标题' } })
+    dictionary('pt-BR', { meta: { title: 'Titulo' } })
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'localized' }, description: { en: 'About it' },
+      title: { en: 'localized', 'pt-br': 'Titulo' }, description: { en: 'About it' },
     })
   })
 
@@ -125,25 +125,25 @@ describe('plugin locale display metadata', () => {
   it('falls back per field without replacing available locale translations', () => {
     manifest({ './locale/*.json': './locale/*.json', './package.json': './package.json' }, { description: 'Package introduction' })
     dictionary('en', { meta: { title: 'English title' } })
-    dictionary('zh', { meta: { description: '中文介绍' } })
+    dictionary('pt-BR', { meta: { description: 'Introducao local' } })
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'English title' }, description: { en: 'Package introduction' },
+      title: { en: 'English title' }, description: { en: 'Package introduction', 'pt-br': 'Introducao local' },
     })
     dictionary('en', { meta: { description: 'English introduction' } })
-    dictionary('zh', { meta: { title: '中文标题' } })
+    dictionary('pt-BR', { meta: { title: 'Titulo local' } })
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'localized' }, description: { en: 'English introduction' },
+      title: { en: 'localized', 'pt-br': 'Titulo local' }, description: { en: 'English introduction' },
     })
     dictionary('en', {})
-    dictionary('zh', {})
+    dictionary('pt-BR', {})
     expect(readPluginMeta('localized', parentURL)).toEqual({ title: 'localized', description: 'Package introduction' })
   })
 
   it('retains non-English descriptions with an empty final English fallback', () => {
     dictionary('en', { meta: { title: 'Plugin' } })
-    dictionary('zh', { meta: { description: '中文介绍' } })
+    dictionary('pt-BR', { meta: { description: 'Introducao local' } })
     expect(readPluginMeta('localized', parentURL)).toEqual({
-      title: { en: 'Plugin' }, description: { en: '' },
+      title: { en: 'Plugin' }, description: { en: '', 'pt-br': 'Introducao local' },
     })
   })
 
@@ -349,9 +349,9 @@ describe('plugin locale display metadata', () => {
     file(join(dir, 'lib', 'review.js'), 'throw new Error("must not execute review")\n')
     dictionary('en', { meta: { title: 'Whole package' } })
     dictionary('en', { meta: { title: 'Search' } }, join(dir, 'resources', 'search'))
-    dictionary('zh', { meta: { title: 'Search' } }, join(dir, 'resources', 'search'))
+    dictionary('pt-BR', { meta: { title: 'Pesquisa' } }, join(dir, 'resources', 'search'))
     dictionary('en', { meta: { title: 'Review' } }, join(dir, 'resources', 'review'))
-    expect(readPluginMeta('localized/search', parentURL)).toEqual({ title: { en: 'Search' } })
+    expect(readPluginMeta('localized/search', parentURL)).toEqual({ title: { en: 'Search', 'pt-br': 'Pesquisa' } })
     expect(readPluginMeta('localized/review', parentURL)).toEqual({ title: { en: 'Review' } })
     expect(readPluginMeta('localized/private', parentURL)).toBeUndefined()
   })
