@@ -874,6 +874,9 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../vendor/cordis
+      '@deepseek-ai/node-addon-system':
+        specifier: workspace:~
+        version: link:../native/system/packages/entry
       '@deepseek-ai/schemastery':
         specifier: link:../vendor/schemastery
         version: link:../vendor/schemastery
