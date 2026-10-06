@@ -28,7 +28,7 @@ const t = ((key: string, params?: Readonly<Record<string, unknown>>): string => 
     'file.pending': 'Pending files',
     'file.uploading': 'Uploading…',
     'file.uploadFailed': 'Upload failed; click to retry',
-    'file.label': '文件',
+    'file.label': 'File',
     'image.pending': 'Pending images',
     'image.original': 'Original image',
     'image.preview': 'Original image preview',
@@ -39,15 +39,15 @@ const t = ((key: string, params?: Readonly<Record<string, unknown>>): string => 
   }
   if (key === 'file.remove') {
     const name = params?.name
-    return `移除文件 ${typeof name === 'string' ? name : ''}`
+    return `Remove file ${typeof name === 'string' ? name : ''}`
   }
   if (key === 'file.retry') {
     const name = params?.name
-    return `重试上传 ${typeof name === 'string' ? name : ''}`
+    return `Retry uploading ${typeof name === 'string' ? name : ''}`
   }
   if (key === 'image.remove') {
     const name = params?.name
-    return `移除图片 ${typeof name === 'string' ? name : ''}`
+    return `Remove image ${typeof name === 'string' ? name : ''}`
   }
   if (key === 'attachment.dropDesc') {
     const count = params?.count
@@ -106,7 +106,7 @@ describe('ComposerAttachments', () => {
     const dataTransfer = { types: ['Files'], files: [image], items: [], dropEffect: 'none' }
     expect(fireEvent.dragEnter(document.body, { dataTransfer })).toBe(false)
     expect(view.getByRole('status').textContent).toContain('Drag files or images here to add them')
-    expect(view.getByRole('status').textContent).toContain('图片限制：最多 20 张，每张 5MB')
+    expect(view.getByRole('status').textContent).toContain('Image limit: up to 20 images, 5MB each')
     expect(fireEvent.dragOver(document.body, { dataTransfer })).toBe(false)
     expect(dataTransfer.dropEffect).toBe('copy')
     expect(fireEvent.drop(document.body, { dataTransfer })).toBe(false)
@@ -289,7 +289,7 @@ describe('ComposerAttachments file drafts', () => {
       },
     })} />)
     const group = view.getByRole('group', { name: 'Pending attachments' })
-    expect(group.textContent).toContain('文件')
+    expect(group.textContent).toContain('File')
     expect(group.textContent).toContain('3B')
   })
 
