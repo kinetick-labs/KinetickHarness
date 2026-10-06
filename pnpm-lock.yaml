@@ -208,6 +208,9 @@ importers:
       '@deepseek-ai/cordis-plugin-timer':
         specifier: workspace:~
         version: link:../../vendor/timer
+      '@deepseek-ai/schemastery':
+        specifier: link:../../vendor/schemastery
+        version: link:../../vendor/schemastery
       '@kinetick-labs/kh-acp-app':
         specifier: workspace:*
         version: link:../../packages/bundle/acp-app
@@ -433,9 +436,6 @@ importers:
       '@kinetick-labs/kh-workflow-ptc':
         specifier: workspace:*
         version: link:../../packages/workflow/workflow-ptc
-      '@deepseek-ai/schemastery':
-        specifier: link:../../vendor/schemastery
-        version: link:../../vendor/schemastery
       commander:
         specifier: ^15.0.0
         version: 15.0.0
@@ -600,6 +600,15 @@ importers:
         specifier: ^8.21.0
         version: 8.21.0
     devDependencies:
+      '@deepseek-ai/node-addon-system':
+        specifier: workspace:~
+        version: link:../../native/system/packages/entry
+      '@electron/get':
+        specifier: ^5.1.0
+        version: 5.1.0(supports-color@9.4.0)
+      '@electron/notarize':
+        specifier: 2.5.0
+        version: 2.5.0
       '@kinetick-labs/kh-app-boot':
         specifier: workspace:*
         version: link:../../packages/boot/app-boot
@@ -627,15 +636,6 @@ importers:
       '@kinetick-labs/kh-home-paths':
         specifier: workspace:*
         version: link:../../packages/util/home-paths
-      '@deepseek-ai/node-addon-system':
-        specifier: workspace:~
-        version: link:../../native/system/packages/entry
-      '@electron/get':
-        specifier: ^5.1.0
-        version: 5.1.0(supports-color@9.4.0)
-      '@electron/notarize':
-        specifier: 2.5.0
-        version: 2.5.0
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -699,6 +699,9 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../../vendor/cordis
+      '@deepseek-ai/libreoffice-kit':
+        specifier: ^0.1.5
+        version: 0.1.5
       '@kinetick-labs/kh':
         specifier: workspace:*
         version: link:../cli
@@ -735,9 +738,6 @@ importers:
       '@kinetick-labs/kh-workspace':
         specifier: workspace:*
         version: link:../../packages/workspace/workspace
-      '@deepseek-ai/libreoffice-kit':
-        specifier: ^0.1.5
-        version: 0.1.5
       koffi:
         specifier: ^3.1.0
         version: 3.1.1
@@ -874,6 +874,9 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../vendor/cordis
+      '@deepseek-ai/schemastery':
+        specifier: link:../vendor/schemastery
+        version: link:../vendor/schemastery
       '@kinetick-labs/kh-agent':
         specifier: workspace:*
         version: link:../packages/core/agent
@@ -1035,12 +1038,12 @@ importers:
       '@agentclientprotocol/sdk':
         specifier: 1.4.0
         version: 1.4.0(zod@4.4.3)
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -1106,6 +1109,9 @@ importers:
 
   packages/api/gateway:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-deque':
         specifier: workspace:*
         version: link:../../util/deque
@@ -1115,9 +1121,6 @@ importers:
       '@kinetick-labs/kh-typert-protocol':
         specifier: workspace:*
         version: link:../../typert/protocol
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       ws:
         specifier: ^8.21.0
         version: 8.21.0
@@ -1155,12 +1158,12 @@ importers:
 
   packages/api/job-controller:
     dependencies:
-      '@kinetick-labs/kh-typert-protocol':
-        specifier: workspace:*
-        version: link:../../typert/protocol
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-typert-protocol':
+        specifier: workspace:*
+        version: link:../../typert/protocol
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -1313,15 +1316,15 @@ importers:
 
   packages/api/session-controller:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-deque':
         specifier: workspace:*
         version: link:../../util/deque
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       mime-types:
         specifier: ^3.0.2
         version: 3.0.2
@@ -1489,6 +1492,9 @@ importers:
 
   packages/api/terminal-controller:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-deque':
         specifier: workspace:*
         version: link:../../util/deque
@@ -1498,9 +1504,6 @@ importers:
       '@kinetick-labs/kh-typert-protocol':
         specifier: workspace:*
         version: link:../../typert/protocol
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       '@xterm/addon-serialize':
         specifier: ^0.14.0
         version: 0.14.0
@@ -1556,15 +1559,15 @@ importers:
 
   packages/api/workspace-controller:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-deque':
         specifier: workspace:*
         version: link:../../util/deque
       '@kinetick-labs/kh-native-command':
         specifier: workspace:*
         version: link:../../util/native-command
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -1605,15 +1608,15 @@ importers:
 
   packages/api/workspace-files:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-deque':
         specifier: workspace:*
         version: link:../../util/deque
       '@kinetick-labs/kh-typert-protocol':
         specifier: workspace:*
         version: link:../../typert/protocol
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -1663,12 +1666,12 @@ importers:
 
   packages/attachment/attachment-local:
     dependencies:
-      '@kinetick-labs/kh-lazy-require':
-        specifier: workspace:*
-        version: link:../../util/lazy-require
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-lazy-require':
+        specifier: workspace:*
+        version: link:../../util/lazy-require
       sharp:
         specifier: ^0.35.3
         version: 0.35.3(@types/node@22.20.0)
@@ -1685,15 +1688,15 @@ importers:
 
   packages/boot/app-boot:
     dependencies:
+      '@eslint-community/regexpp':
+        specifier: ^4.12.2
+        version: 4.12.2
       '@kinetick-labs/kh-atomic-write':
         specifier: workspace:*
         version: link:../../util/atomic-write
       '@kinetick-labs/kh-package-manifest':
         specifier: workspace:*
         version: link:../../util/package-manifest
-      '@eslint-community/regexpp':
-        specifier: ^4.12.2
-        version: 4.12.2
       ajv:
         specifier: ^8.20.0
         version: 8.20.0
@@ -1725,6 +1728,9 @@ importers:
       '@deepseek-ai/cordis-plugin-timer':
         specifier: workspace:~
         version: link:../../../vendor/timer
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-home-paths':
         specifier: workspace:*
         version: link:../../util/home-paths
@@ -1734,9 +1740,6 @@ importers:
       '@kinetick-labs/kh-system-prompt':
         specifier: workspace:*
         version: link:../../core/system-prompt
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       '@types/js-yaml':
         specifier: ^4.0.9
         version: 4.0.9
@@ -1841,6 +1844,9 @@ importers:
 
   packages/boot/plugin-manager:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-app-boot':
         specifier: workspace:*
         version: link:../app-boot
@@ -1850,9 +1856,6 @@ importers:
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       execa:
         specifier: ^10.0.0
         version: 10.0.0
@@ -2222,6 +2225,9 @@ importers:
 
   packages/bundle/headless:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
@@ -2231,9 +2237,6 @@ importers:
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       commander:
         specifier: ^15.0.0
         version: 15.0.0
@@ -2271,6 +2274,9 @@ importers:
 
   packages/bundle/sdk-app:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-cmdline':
         specifier: workspace:*
         version: link:../../boot/cmdline
@@ -2283,9 +2289,6 @@ importers:
       '@kinetick-labs/kh-tool-workspace-dependencies':
         specifier: workspace:*
         version: link:../../skill/tool-workspace-dependencies
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       commander:
         specifier: ^15.0.0
         version: 15.0.0
@@ -2378,6 +2381,9 @@ importers:
 
   packages/bundle/web-app:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-agent-instructions':
         specifier: workspace:*
         version: link:../../context/agent-instructions
@@ -2753,9 +2759,6 @@ importers:
       '@kinetick-labs/kh-workspace-changes':
         specifier: workspace:*
         version: link:../../deliverables/workspace-changes
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       commander:
         specifier: ^15.0.0
         version: 15.0.0
@@ -2772,6 +2775,9 @@ importers:
       '@deepseek-ai/cordis-plugin-loader':
         specifier: workspace:~
         version: link:../../../vendor/loader
+      '@deepseek-ai/libreoffice-kit':
+        specifier: ^0.1.5
+        version: 0.1.5
       '@kinetick-labs/kh-fs':
         specifier: workspace:*
         version: link:../../fs/fs
@@ -2796,18 +2802,15 @@ importers:
       '@kinetick-labs/kh-typert-registry':
         specifier: workspace:*
         version: link:../../typert/registry
-      '@deepseek-ai/libreoffice-kit':
-        specifier: ^0.1.5
-        version: 0.1.5
 
   packages/client/connection:
     dependencies:
-      '@kinetick-labs/kh-credentials':
-        specifier: workspace:*
-        version: link:../../credentials/credentials
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-credentials':
+        specifier: workspace:*
+        version: link:../../credentials/credentials
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -2980,15 +2983,15 @@ importers:
 
   packages/client/shortcuts:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-util-crypto':
         specifier: workspace:*
         version: link:../../util/crypto
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -4271,15 +4274,15 @@ importers:
 
   packages/client/ui-plugin-manager:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-timeout':
         specifier: workspace:*
         version: link:../../util/timeout
       '@kinetick-labs/kh-typert-protocol':
         specifier: workspace:*
         version: link:../../typert/protocol
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -5249,6 +5252,12 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../../../vendor/cordis
+      '@fortune-sheet/core':
+        specifier: 1.0.4
+        version: 1.0.4(patch_hash=8791a230763dbf853fd65d627c68c31de37209992851377855e16cf08ea70532)
+      '@fortune-sheet/react':
+        specifier: 1.0.4
+        version: 1.0.4(patch_hash=2932e52e79afcd4ced08cfa123b5eded786c85043da32f622f3e80af6fc96c37)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@kinetick-labs/kh-api-gateway':
         specifier: workspace:*
         version: link:../../api/gateway
@@ -5306,12 +5315,6 @@ importers:
       '@kinetick-labs/kh-util-workspace-path':
         specifier: workspace:*
         version: link:../../util/workspace-path
-      '@fortune-sheet/core':
-        specifier: 1.0.4
-        version: 1.0.4(patch_hash=8791a230763dbf853fd65d627c68c31de37209992851377855e16cf08ea70532)
-      '@fortune-sheet/react':
-        specifier: 1.0.4
-        version: 1.0.4(patch_hash=2932e52e79afcd4ced08cfa123b5eded786c85043da32f622f3e80af6fc96c37)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@testing-library/react':
         specifier: ^16.1.0
         version: 16.3.2(@testing-library/dom@10.4.2)(@types/react-dom@18.3.7(@types/react@18.3.31))(@types/react@18.3.31)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6261,12 +6264,12 @@ importers:
 
   packages/compaction/compaction-basic:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -6362,12 +6365,12 @@ importers:
 
   packages/compaction/compaction-tool-result-pruner:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -6408,12 +6411,12 @@ importers:
 
   packages/context/agent-instructions:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -6497,15 +6500,15 @@ importers:
 
   packages/context/session-reference:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -6576,12 +6579,12 @@ importers:
 
   packages/context/time-context:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -6701,12 +6704,12 @@ importers:
 
   packages/core/agent-default-model:
     dependencies:
-      '@kinetick-labs/kh-config-editor':
-        specifier: workspace:*
-        version: link:../../boot/config-editor
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-config-editor':
+        specifier: workspace:*
+        version: link:../../boot/config-editor
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -6723,15 +6726,15 @@ importers:
 
   packages/core/agent-loop:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -6850,15 +6853,15 @@ importers:
 
   packages/core/tools:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -7066,18 +7069,18 @@ importers:
 
   packages/document/office-to-pdf:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
-      '@kinetick-labs/kh-typert-protocol':
-        specifier: workspace:*
-        version: link:../../typert/protocol
       '@deepseek-ai/libreoffice-kit':
         specifier: ^0.1.5
         version: 0.1.5
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
+      '@kinetick-labs/kh-typert-protocol':
+        specifier: workspace:*
+        version: link:../../typert/protocol
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -7103,12 +7106,12 @@ importers:
 
   packages/experimental/agent-team:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -7440,6 +7443,9 @@ importers:
       '@browserbasehq/stagehand':
         specifier: 4.1.0
         version: 4.1.0
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-experimental-browser-use-runtime':
         specifier: workspace:*
         version: link:../browser-use-runtime
@@ -7452,9 +7458,6 @@ importers:
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       '@puppeteer/browsers':
         specifier: 3.2.2
         version: 3.2.2(yauzl@3.4.0)
@@ -7510,15 +7513,15 @@ importers:
 
   packages/experimental/claude-code-mods:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-util-crypto':
         specifier: workspace:*
         version: link:../../util/crypto
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -7775,12 +7778,12 @@ importers:
 
   packages/experimental/computer-use-cua-driver-mcp:
     dependencies:
-      '@kinetick-labs/kh-mcp-client':
-        specifier: workspace:*
-        version: link:../../mcp/mcp-client
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-mcp-client':
+        specifier: workspace:*
+        version: link:../../mcp/mcp-client
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -7821,12 +7824,12 @@ importers:
 
   packages/experimental/computer-use-cua-driver-native:
     dependencies:
-      '@kinetick-labs/kh-mcp-client':
-        specifier: workspace:*
-        version: link:../../mcp/mcp-client
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-mcp-client':
+        specifier: workspace:*
+        version: link:../../mcp/mcp-client
       '@trycua/cua-driver':
         specifier: 0.28.0
         version: 0.28.0
@@ -7879,6 +7882,9 @@ importers:
 
   packages/experimental/inspector:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-app-boot':
         specifier: workspace:*
         version: link:../../boot/app-boot
@@ -7891,9 +7897,6 @@ importers:
       '@kinetick-labs/kh-util-crypto':
         specifier: workspace:*
         version: link:../../util/crypto
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       open:
         specifier: ^11.0.0
         version: 11.0.4
@@ -8074,12 +8077,12 @@ importers:
 
   packages/experimental/speech-to-text:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -8099,12 +8102,12 @@ importers:
 
   packages/experimental/speech-to-text-sensevoice:
     dependencies:
-      '@kinetick-labs/kh-timeout':
-        specifier: workspace:*
-        version: link:../../util/timeout
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-timeout':
+        specifier: workspace:*
+        version: link:../../util/timeout
       sherpa-onnx-node:
         specifier: 1.13.8
         version: 1.13.8
@@ -8284,6 +8287,9 @@ importers:
       '@deepseek-ai/cordis-plugin-loader':
         specifier: workspace:~
         version: link:../../../vendor/loader
+      '@deepseek-ai/node-addon-system':
+        specifier: workspace:~
+        version: link:../../../native/system/packages/entry
       '@kinetick-labs/kh-api-gateway':
         specifier: workspace:*
         version: link:../../api/gateway
@@ -8326,9 +8332,6 @@ importers:
       '@kinetick-labs/kh-subprocess-local':
         specifier: workspace:*
         version: link:../../subprocess/subprocess-local
-      '@deepseek-ai/node-addon-system':
-        specifier: workspace:~
-        version: link:../../../native/system/packages/entry
       '@types/picomatch':
         specifier: ^3.0.2
         version: 3.0.2
@@ -8371,12 +8374,12 @@ importers:
 
   packages/extensions/cordis-host-runner:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -8423,6 +8426,9 @@ importers:
       '@deepseek-ai/cordis-plugin-loader':
         specifier: workspace:~
         version: link:../../../vendor/loader
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-agent':
         specifier: workspace:*
         version: link:../../core/agent
@@ -8438,9 +8444,6 @@ importers:
       '@kinetick-labs/kh-tools':
         specifier: workspace:*
         version: link:../../core/tools
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
 
   packages/extensions/ui-cordis:
     devDependencies:
@@ -8636,12 +8639,12 @@ importers:
 
   packages/fs/tool-fs:
     dependencies:
-      '@kinetick-labs/kh-util-code-language':
-        specifier: workspace:*
-        version: link:../../util/code-language
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-code-language':
+        specifier: workspace:*
+        version: link:../../util/code-language
       diff:
         specifier: ^9.0.0
         version: 9.0.0
@@ -9161,12 +9164,12 @@ importers:
 
   packages/host/directory-picker-browse:
     dependencies:
-      '@kinetick-labs/kh-host-directory-picker':
-        specifier: workspace:*
-        version: link:../directory-picker
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-host-directory-picker':
+        specifier: workspace:*
+        version: link:../directory-picker
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -9215,6 +9218,9 @@ importers:
 
   packages/host/open-in-app:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-launch-environment':
         specifier: workspace:*
         version: link:../../util/launch-environment
@@ -9224,9 +9230,6 @@ importers:
       '@kinetick-labs/kh-subprocess':
         specifier: workspace:*
         version: link:../../subprocess/subprocess
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -9549,6 +9552,9 @@ importers:
 
   packages/llm/llm:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
@@ -9564,9 +9570,6 @@ importers:
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -9583,15 +9586,15 @@ importers:
       '@deepseek-ai/cosmokit':
         specifier: link:../../../vendor/cosmokit
         version: link:../../../vendor/cosmokit
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       eventsource-parser:
         specifier: ^3.1.0
         version: 3.1.0
@@ -9723,18 +9726,18 @@ importers:
 
   packages/llm/llm-pi-ai:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
       '@earendil-works/pi-ai':
         specifier: ^0.87.1
         version: 0.87.1(patch_hash=b9bcce474fb2ac44633dff0fa722816a5bff5451b4575d5874035ea14ba70a4f)(@modelcontextprotocol/sdk@1.29.0(zod@4.4.3))(supports-color@9.4.0)(ws@8.21.0)(zod@4.4.3)
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -9839,12 +9842,12 @@ importers:
 
   packages/llm/token-meter:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -9885,12 +9888,12 @@ importers:
 
   packages/lsp/lsp-stdio:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -9928,12 +9931,12 @@ importers:
 
   packages/lsp/tool-lsp:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -9974,12 +9977,12 @@ importers:
 
   packages/mcp/mcp-client:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       '@modelcontextprotocol/client':
         specifier: 2.0.0
         version: 2.0.0
@@ -10140,12 +10143,12 @@ importers:
 
   packages/preset/agent-preset-registry:
     dependencies:
-      '@kinetick-labs/kh-app-boot':
-        specifier: workspace:*
-        version: link:../../boot/app-boot
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-app-boot':
+        specifier: workspace:*
+        version: link:../../boot/app-boot
       js-yaml:
         specifier: ^4.2.0
         version: 4.3.1
@@ -10244,12 +10247,12 @@ importers:
 
   packages/ptc-runtime/ptc-runtime-node:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -10306,18 +10309,18 @@ importers:
 
   packages/sandbox/sandbox-local:
     dependencies:
-      '@kinetick-labs/kh-sandbox-windows-acl':
-        specifier: workspace:*
-        version: link:../sandbox-windows-acl
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/node-addon-system':
         specifier: workspace:~
         version: link:../../../native/system/packages/entry
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-sandbox-windows-acl':
+        specifier: workspace:*
+        version: link:../sandbox-windows-acl
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -10536,12 +10539,12 @@ importers:
 
   packages/sdk/server:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -10588,15 +10591,15 @@ importers:
 
   packages/session-query/session-log-export:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-session-format':
         specifier: workspace:*
         version: link:../../session/session-format
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       fflate:
         specifier: ^0.8.2
         version: 0.8.3
@@ -10726,12 +10729,12 @@ importers:
 
   packages/session-query/tool-session-query:
     dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -10947,6 +10950,12 @@ importers:
 
   packages/session/session-persistence-jsonl:
     dependencies:
+      '@deepseek-ai/node-addon-system':
+        specifier: workspace:~
+        version: link:../../../native/system/packages/entry
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-llm':
         specifier: workspace:*
         version: link:../../llm/llm
@@ -10959,12 +10968,6 @@ importers:
       '@kinetick-labs/kh-session-format-v3-to-v4':
         specifier: workspace:*
         version: link:../session-format-v3-to-v4
-      '@deepseek-ai/node-addon-system':
-        specifier: workspace:~
-        version: link:../../../native/system/packages/entry
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       koffi:
         specifier: 3.1.1
         version: 3.1.1
@@ -10997,12 +11000,12 @@ importers:
 
   packages/session/session-projection-cache:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -11053,12 +11056,12 @@ importers:
 
   packages/session/session-title:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -11158,12 +11161,12 @@ importers:
 
   packages/session/session-title-llm:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -11214,15 +11217,15 @@ importers:
       '@deepseek-ai/cosmokit':
         specifier: link:../../../vendor/cosmokit
         version: link:../../../vendor/cosmokit
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-config-editor':
         specifier: workspace:*
         version: link:../../boot/config-editor
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       yaml:
         specifier: ^2.8.1
         version: 2.9.0
@@ -11276,6 +11279,9 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../../../vendor/cordis
+      '@deepseek-ai/node-addon-system':
+        specifier: workspace:~
+        version: link:../../../native/system/packages/entry
       '@kinetick-labs/kh-bash-local':
         specifier: workspace:*
         version: link:../bash-local
@@ -11297,9 +11303,6 @@ importers:
       '@kinetick-labs/kh-subprocess-local':
         specifier: workspace:*
         version: link:../../subprocess/subprocess-local
-      '@deepseek-ai/node-addon-system':
-        specifier: workspace:~
-        version: link:../../../native/system/packages/entry
 
   packages/shell/pwsh-local:
     dependencies:
@@ -11645,12 +11648,12 @@ importers:
 
   packages/skill/skill:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -12079,6 +12082,9 @@ importers:
 
   packages/subagent/subagent:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
@@ -12088,9 +12094,6 @@ importers:
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       zod:
         specifier: ^4.4.3
         version: 4.4.3
@@ -12161,12 +12164,12 @@ importers:
       '@agentclientprotocol/sdk':
         specifier: 1.4.0
         version: 1.4.0(zod@4.4.3)
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -12222,12 +12225,12 @@ importers:
       '@anthropic-ai/sdk':
         specifier: 0.93.0
         version: 0.93.0(zod@4.4.3)
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
       '@modelcontextprotocol/sdk':
         specifier: ^1.29.0
         version: 1.29.0(zod@4.4.3)
@@ -12289,15 +12292,15 @@ importers:
 
   packages/subagent/subagent-codex:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-sdk-protocol':
         specifier: workspace:*
         version: link:../../sdk/protocol
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       '@openai/codex':
         specifier: 0.153.4
         version: 0.153.4
@@ -12353,76 +12356,6 @@ importers:
       '@kinetick-labs/kh-tools':
         specifier: workspace:*
         version: link:../../core/tools
-
-  packages/subagent/subagent-kh-sdk:
-    dependencies:
-      '@kinetick-labs/kh-brand':
-        specifier: workspace:*
-        version: link:../../util/brand
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
-    devDependencies:
-      '@deepseek-ai/cordis':
-        specifier: workspace:~
-        version: link:../../../vendor/cordis
-      '@deepseek-ai/cordis-plugin-loader':
-        specifier: workspace:~
-        version: link:../../../vendor/loader
-      '@kinetick-labs/kh-agent':
-        specifier: workspace:*
-        version: link:../../core/agent
-      '@kinetick-labs/kh-agent-instructions':
-        specifier: workspace:*
-        version: link:../../context/agent-instructions
-      '@kinetick-labs/kh-app-boot':
-        specifier: workspace:*
-        version: link:../../boot/app-boot
-      '@kinetick-labs/kh-llm':
-        specifier: workspace:*
-        version: link:../../llm/llm
-      '@kinetick-labs/kh-llm-deepseek':
-        specifier: workspace:*
-        version: link:../../llm/llm-deepseek
-      '@kinetick-labs/kh-llm-deepseek-api-key':
-        specifier: workspace:*
-        version: link:../../llm/llm-deepseek-api-key
-      '@kinetick-labs/kh-loader-smoke':
-        specifier: workspace:*
-        version: link:../../test-support/loader-smoke
-      '@kinetick-labs/kh-sdk-client':
-        specifier: workspace:*
-        version: link:../../sdk/client
-      '@kinetick-labs/kh-sdk-protocol':
-        specifier: workspace:*
-        version: link:../../sdk/protocol
-      '@kinetick-labs/kh-session':
-        specifier: workspace:*
-        version: link:../../core/session
-      '@kinetick-labs/kh-session-checkpoint-policy':
-        specifier: workspace:*
-        version: link:../../session/session-checkpoint-policy
-      '@kinetick-labs/kh-session-persistence-jsonl':
-        specifier: workspace:*
-        version: link:../../session/session-persistence-jsonl
-      '@kinetick-labs/kh-session-projection':
-        specifier: workspace:*
-        version: link:../../session/session-projection
-      '@kinetick-labs/kh-skill-filesystem':
-        specifier: workspace:*
-        version: link:../../skill/skill-filesystem
-      '@kinetick-labs/kh-subagent':
-        specifier: workspace:*
-        version: link:../subagent
-      '@kinetick-labs/kh-subprocess':
-        specifier: workspace:*
-        version: link:../../subprocess/subprocess
-      '@kinetick-labs/kh-system-prompt':
-        specifier: workspace:*
-        version: link:../../core/system-prompt
-      '@kinetick-labs/kh-tool-subagent':
-        specifier: workspace:*
-        version: link:../tool-subagent
 
   packages/subagent/subagent-fork-in-process:
     dependencies:
@@ -12521,6 +12454,76 @@ importers:
       '@kinetick-labs/kh-user-approval':
         specifier: workspace:*
         version: link:../../interaction/user-approval
+
+  packages/subagent/subagent-kh-sdk:
+    dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-brand':
+        specifier: workspace:*
+        version: link:../../util/brand
+    devDependencies:
+      '@deepseek-ai/cordis':
+        specifier: workspace:~
+        version: link:../../../vendor/cordis
+      '@deepseek-ai/cordis-plugin-loader':
+        specifier: workspace:~
+        version: link:../../../vendor/loader
+      '@kinetick-labs/kh-agent':
+        specifier: workspace:*
+        version: link:../../core/agent
+      '@kinetick-labs/kh-agent-instructions':
+        specifier: workspace:*
+        version: link:../../context/agent-instructions
+      '@kinetick-labs/kh-app-boot':
+        specifier: workspace:*
+        version: link:../../boot/app-boot
+      '@kinetick-labs/kh-llm':
+        specifier: workspace:*
+        version: link:../../llm/llm
+      '@kinetick-labs/kh-llm-deepseek':
+        specifier: workspace:*
+        version: link:../../llm/llm-deepseek
+      '@kinetick-labs/kh-llm-deepseek-api-key':
+        specifier: workspace:*
+        version: link:../../llm/llm-deepseek-api-key
+      '@kinetick-labs/kh-loader-smoke':
+        specifier: workspace:*
+        version: link:../../test-support/loader-smoke
+      '@kinetick-labs/kh-sdk-client':
+        specifier: workspace:*
+        version: link:../../sdk/client
+      '@kinetick-labs/kh-sdk-protocol':
+        specifier: workspace:*
+        version: link:../../sdk/protocol
+      '@kinetick-labs/kh-session':
+        specifier: workspace:*
+        version: link:../../core/session
+      '@kinetick-labs/kh-session-checkpoint-policy':
+        specifier: workspace:*
+        version: link:../../session/session-checkpoint-policy
+      '@kinetick-labs/kh-session-persistence-jsonl':
+        specifier: workspace:*
+        version: link:../../session/session-persistence-jsonl
+      '@kinetick-labs/kh-session-projection':
+        specifier: workspace:*
+        version: link:../../session/session-projection
+      '@kinetick-labs/kh-skill-filesystem':
+        specifier: workspace:*
+        version: link:../../skill/skill-filesystem
+      '@kinetick-labs/kh-subagent':
+        specifier: workspace:*
+        version: link:../subagent
+      '@kinetick-labs/kh-subprocess':
+        specifier: workspace:*
+        version: link:../../subprocess/subprocess
+      '@kinetick-labs/kh-system-prompt':
+        specifier: workspace:*
+        version: link:../../core/system-prompt
+      '@kinetick-labs/kh-tool-subagent':
+        specifier: workspace:*
+        version: link:../tool-subagent
 
   packages/subagent/subagent-spawn-in-process:
     dependencies:
@@ -12760,6 +12763,9 @@ importers:
 
   packages/terminal/terminal-bash:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-lazy-require':
         specifier: workspace:*
         version: link:../../util/lazy-require
@@ -12769,9 +12775,6 @@ importers:
       '@kinetick-labs/kh-session-projection':
         specifier: workspace:*
         version: link:../../session/session-projection
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
       '@xterm/headless':
         specifier: ^6.0.0
         version: 6.0.0
@@ -13380,15 +13383,15 @@ importers:
 
   packages/web/tool-web:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
       '@joplin/turndown-plugin-gfm':
         specifier: ^1.0.67
         version: 1.0.67
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       turndown:
         specifier: ^7.2.4
         version: 7.2.4
@@ -13594,12 +13597,12 @@ importers:
 
   packages/webhook/webhook-github:
     dependencies:
-      '@kinetick-labs/kh-util-values':
-        specifier: workspace:*
-        version: link:../../util/values
       '@deepseek-ai/schemastery':
         specifier: link:../../../vendor/schemastery
         version: link:../../../vendor/schemastery
+      '@kinetick-labs/kh-util-values':
+        specifier: workspace:*
+        version: link:../../util/values
       '@octokit/webhooks':
         specifier: ^14.2.0
         version: 14.2.0
@@ -13747,15 +13750,15 @@ importers:
 
   packages/workflow/workflow-ptc:
     dependencies:
+      '@deepseek-ai/schemastery':
+        specifier: link:../../../vendor/schemastery
+        version: link:../../../vendor/schemastery
       '@kinetick-labs/kh-brand':
         specifier: workspace:*
         version: link:../../util/brand
       '@kinetick-labs/kh-util-values':
         specifier: workspace:*
         version: link:../../util/values
-      '@deepseek-ai/schemastery':
-        specifier: link:../../../vendor/schemastery
-        version: link:../../../vendor/schemastery
     devDependencies:
       '@deepseek-ai/cordis':
         specifier: workspace:~
@@ -13875,6 +13878,9 @@ importers:
       '@deepseek-ai/cosmokit':
         specifier: link:../../vendor/cosmokit
         version: link:../../vendor/cosmokit
+      '@deepseek-ai/schemastery':
+        specifier: link:../../vendor/schemastery
+        version: link:../../vendor/schemastery
       '@kinetick-labs/kh':
         specifier: workspace:*
         version: link:../../apps/cli
@@ -14310,9 +14316,6 @@ importers:
       '@kinetick-labs/kh-workspace':
         specifier: workspace:*
         version: link:../../packages/workspace/workspace
-      '@deepseek-ai/schemastery':
-        specifier: link:../../vendor/schemastery
-        version: link:../../vendor/schemastery
 
   vendor/cordis:
     dependencies:
