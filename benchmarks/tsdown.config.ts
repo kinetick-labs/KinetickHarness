@@ -6,12 +6,13 @@ import { typertPlugin } from '../packages/typert/generator/lib/types/tsdown-plug
 // without it, `@Remote` metadata emitted by the package build survives into the
 // worker bundle and Node rejects the module at import time.
 //
-// `@deepseek-ai/*` stays external here: the vendored packages publish `lib`
-// entrypoints and carry native addons (loader -> node-addon-require-builtin),
-// so the workers resolve them at runtime. The benchmarks package therefore
-// declares every framework package the boot graph reaches (cordis, include,
-// loader, cosmokit, schemastery, node-addon-system) as workspace links --
-// without the link the external import fails with ERR_MODULE_NOT_FOUND.
+// The vendored framework (@deepseek-ai/*) is bundled into the workers: its
+// FiberState is a `const enum`, i.e. a type-only export once the framework
+// lib is built, so importing it as an external demands a runtime named
+// export that does not exist ("does not provide an export named
+// 'FiberState'"). Rolldown inlines the enum members when the framework is
+// part of the bundle graph. Workspace harness packages (@kinetick-labs/*)
+// stay external and resolve through their built lib entrypoints.
 const shared = {
   plugins: [typertPlugin({ mode: 'workspace', faces: ['host'] })],
   format: 'esm' as const,
@@ -20,7 +21,7 @@ const shared = {
   fixedExtension: false,
   dts: false,
   deps: {
-    neverBundle: [/^@deepseek-ai\//],
+    neverBundle: [/^@kinetick-labs\//],
     onlyBundle: false as const,
   },
 }
