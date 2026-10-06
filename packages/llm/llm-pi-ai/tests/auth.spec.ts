@@ -210,4 +210,38 @@ describe('pi-ai ambient auth context', () => {
     await expect(context.fileExists(join(dir, 'creds'))).resolves.toBe(true)
     await expect(context.fileExists('~')).resolves.toBe(true)
   })
+
+  it('answers COPILOT_GITHUB_TOKEN from the GH_TOKEN alias', async () => {
+    vi.stubEnv('GH_TOKEN', 'ghu-from-gh-cli')
+    await expect(authContextFrom(await stored()).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('ghu-from-gh-cli')
+  })
+
+  it('answers COPILOT_GITHUB_TOKEN from the GITHUB_TOKEN alias when GH_TOKEN is unset', async () => {
+    vi.stubEnv('GITHUB_TOKEN', 'ghp-from-actions')
+    await expect(authContextFrom(await stored()).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('ghp-from-actions')
+  })
+
+  it('keeps a stored COPILOT_GITHUB_TOKEN credential ahead of the aliases', async () => {
+    const ctx = await stored()
+    await ctx.credentials.set(credentialRef('COPILOT_GITHUB_TOKEN'), 'copilot-token')
+    vi.stubEnv('GH_TOKEN', 'ghu-from-gh-cli')
+
+    await expect(authContextFrom(ctx).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('copilot-token')
+  })
+
+  it('keeps an ambient COPILOT_GITHUB_TOKEN ahead of the aliases', async () => {
+    vi.stubEnv('COPILOT_GITHUB_TOKEN', 'primary-token')
+    vi.stubEnv('GH_TOKEN', 'ghu-from-gh-cli')
+
+    await expect(authContextFrom(await stored()).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('primary-token')
+  })
+
+  it('does not alias GitHub token names for any other lookup', async () => {
+    vi.stubEnv('GH_TOKEN', 'ghu-from-gh-cli')
+    const context = authContextFrom(await stored())
+
+    // pi-ai asks other providers only for their own names; an alias must not
+    // hand this token to a route whose profile resolved nothing.
+    await expect(context.env('OPENAI_API_KEY')).resolves.toBeUndefined()
+  })
 })
