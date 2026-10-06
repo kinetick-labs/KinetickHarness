@@ -221,7 +221,7 @@ describe('submit-machine: claimed lifecycle', () => {
     expect(m.state.claim?.name).toBe(name)
   })
 
-  it.each(['/目', '/目标x', '/目标/文件', '', '看看 /目标'])('releases a goal claim for %j', (draft) => {
+  it.each(['/目', '/目标x', '/目标/File', '', '看看 /目标'])('releases a goal claim for %j', (draft) => {
     const m = new SubmitMachine()
     m.dispatch({ type: 'claim', claim: { ...claimOf('goal'), token: '/目标 ' } })
     m.dispatch({ type: 'draft-changed', draft })

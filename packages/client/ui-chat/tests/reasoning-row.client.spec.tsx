@@ -96,7 +96,7 @@ describe('ReasoningRow', () => {
         t={t} blocks={[reasoning]} streaming renderMessageImages={renderMessageImages} />,
     )
     expect(view.getByRole('button').getAttribute('aria-expanded')).toBe('false')
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     view.rerender(
       <AssistantMarkdown useDisclosure={useDisclosure}
         usePresentation={useDetailedPresentation}
@@ -110,7 +110,7 @@ describe('ReasoningRow', () => {
     )
     expect(view.getByRole('button').getAttribute('aria-expanded')).toBe('true')
     expect(view.getByText(/Check persistence/)).toBeTruthy()
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(view.getByRole('button').getAttribute('aria-expanded')).toBe('false')
   })
 
@@ -124,7 +124,7 @@ describe('ReasoningRow', () => {
         renderMessageImages={renderMessageImages}
       />,
     )
-    expect(view.getByText('运行中')).toBeTruthy()
+    expect(view.getByText('Running')).toBeTruthy()
     expect(view.getByRole('button').getAttribute('aria-expanded')).toBe('false')
     expect(view.getByText('Newest reasoning tokens').closest('[data-streaming]')?.getAttribute('data-streaming'))
       .toBe('true')
@@ -166,7 +166,7 @@ describe('ReasoningRow', () => {
     )
     const settledSummary = view.getByText('Inspect the session')
     expect(view.getByRole('button').getAttribute('aria-expanded')).toBe('false')
-    expect(view.queryByText('运行中')).toBeNull()
+    expect(view.queryByText('Running')).toBeNull()
     expect(settledSummary.closest('[data-streaming]')).toBeNull()
   })
 
@@ -186,7 +186,7 @@ describe('ReasoningRow', () => {
     expect(row.getAttribute('aria-expanded')).toBe('true')
     expect(view.getByText(/Check persistence/)).toBeTruthy()
 
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(row.getAttribute('aria-expanded')).toBe('false')
   })
 
@@ -215,7 +215,7 @@ describe('ReasoningRow', () => {
     expect(view.getByText('Comparing checkout and merge bases')).toBeTruthy()
     expect(view.queryByText('**Comparing checkout and merge bases**')).toBeNull()
 
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(view.getByText('Comparing checkout and merge bases').tagName).toBe('STRONG')
     expect(view.container.querySelector('[class*="thinkBody"]')?.textContent).not.toContain('**')
   })
@@ -242,7 +242,7 @@ describe('ReasoningRow', () => {
     expect(compact?.querySelectorAll('h1, h2, h3, h4, h5, h6')).toHaveLength(6)
     expect(compact?.querySelector('p')?.textContent).toBe('Reasoning body.')
 
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(view.getByText('# Section 1').tagName).toBe('SPAN')
     expect(view.queryByRole('heading')).toBeNull()
   })
@@ -258,7 +258,7 @@ describe('ReasoningRow', () => {
         renderMessageImages={renderMessageImages}
       />,
     )
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     const heading = view.getByRole('heading', { name: 'Investigation' })
     const emphasis = view.getByText('Check persistence')
     const text = first + Array.from({ length: 8 }, (_, index) => `Paragraph ${index}.`).join('\n\n')
@@ -286,7 +286,7 @@ describe('ReasoningRow', () => {
         renderMessageImages={renderMessageImages}
       />,
     )
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(view.getAllByText(/Inspect the session/)).toHaveLength(1)
     expect(view.queryByText('IN')).toBeNull()
     expect(view.container.querySelector('[class*="ioCard"]')).toBeNull()
@@ -308,7 +308,7 @@ describe('ReasoningRow', () => {
     )
     // Collapsed: no `data-open`, so the sticky rule's gate never matches.
     expect(view.container.querySelector('[data-variant="think"] [data-open]')).toBeNull()
-    fireEvent.click(view.getByText('思考'))
+    fireEvent.click(view.getByText('Think'))
     expect(
       view.container.querySelector(
         '[data-variant="think"][data-expanded] [data-open] [data-disclosure-row]',

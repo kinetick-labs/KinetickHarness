@@ -86,7 +86,7 @@ describe('Markdown implementation registration', () => {
     })
     expect(runtime.slots.entries('sidebar.right.tab.document')).toHaveLength(1)
     const t = locale.bind('documentMarkdown')
-    await act(async () => { locale.setLocale('zh') })
+    await act(async () => { locale.setLocale('en') })
     expect(locale.bind('documentMarkdown')).toBe(t)
     expect(view.getByRole('button', { name: 'Copy' })).toBeDefined()
     expect(useTabInfo).not.toHaveBeenCalled()

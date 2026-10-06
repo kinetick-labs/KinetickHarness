@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
 
 import { afterEach, describe, expect, it } from 'vitest'
-import { cleanup, fireEvent, render } from '@testing-library/react'
+import { cleanup, fireEvent, render, within } from '@testing-library/react'
 import { makeTranslate } from '@kinetick-labs/kh-client-test-runtime'
 import { en as commonEn, en as commonZh } from '@kinetick-labs/kh-client-locale/src/locales/index.ts'
 import { ContextMeter, type ContextMeterProps } from '../src/client/skeleton/ContextMeter.tsx'
@@ -50,16 +50,16 @@ describe('ContextMeter', () => {
       contextPressure: { pressureTokens: 32_000, contextWindow: 128_000 },
       contextBreakdown: BREAKDOWN,
     })
-    const trigger = view.getByRole('button', { name: '上下文已用 25%' })
+    const trigger = view.getByRole('button', { name: '25% of context used' })
     expect(view.queryByRole('dialog')).toBeNull()
     fireEvent.click(trigger)
     const panel = view.queryByRole('dialog')!
     expect(panel.textContent).toContain('~32K / 128K')
     expect(panel.textContent).toContain('25%')
     expect(panel.textContent).toContain('of context used')
-    expect(panel.textContent).toContain('系统提示词~120')
-    expect(panel.textContent).toContain('工具定义~21.5K')
-    expect(panel.textContent).toContain('对话消息~477K')
+    expect(panel.textContent).toContain('System prompt~120')
+    expect(panel.textContent).toContain('Tool definitions~21.5K')
+    expect(panel.textContent).toContain('Messages~477K')
     // The occupancy bar splits into one colored segment per composition row.
     expect(panel.getElementsByClassName(segmentClass)).toHaveLength(3)
     // Clicking the trigger again toggles the panel shut.
@@ -73,13 +73,13 @@ describe('ContextMeter', () => {
       contextBreakdown: BREAKDOWN,
     }
     const zhView = meter(values)
-    fireEvent.click(zhView.getByRole('button', { name: '上下文已用 25%' }))
-    // The reading follows the label in Chinese and leads it in English; both
-    // headers read as one sentence rather than a concatenated fragment.
+    fireEvent.click(zhView.getByRole('button', { name: '25% of context used' }))
+    // English is the only shipped headline order; the reading leads the label.
     expect(zhView.queryByRole('dialog')!.textContent)
-      .toMatch(/^上下文已用25%/)
+      .toMatch(/^25%of context used/)
+    zhView.unmount()
     const enView = meter(values, tEn)
-    fireEvent.click(enView.getByRole('button', { name: '25% of context used' }))
+    fireEvent.click(within(enView.container).getByRole('button', { name: '25% of context used' }))
     expect(enView.queryByRole('dialog', { name: 'of context used' })!.textContent)
       .toMatch(/^25%of context used/)
   })
@@ -89,7 +89,7 @@ describe('ContextMeter', () => {
       contextPressure: { pressureTokens: 0, contextWindow: 128_000 },
       contextBreakdown: BREAKDOWN,
     })
-    fireEvent.click(view.getByRole('button', { name: '上下文已用 0%' }))
+    fireEvent.click(view.getByRole('button', { name: '0% of context used' }))
     const panel = view.queryByRole('dialog')!
     // `.segment` carries a min-width, so a zero-width part would still paint a
     // filled sliver over an empty context.
@@ -104,17 +104,17 @@ describe('ContextMeter', () => {
       contextPressure: { pressureTokens: 32_000, projectedTokens: 3_000, contextWindow: 128_000 },
       contextBreakdown: BREAKDOWN,
     })
-    const trigger = view.getByRole('button', { name: '上下文已用 2%' })
+    const trigger = view.getByRole('button', { name: '2% of context used' })
     fireEvent.click(trigger)
     expect(view.queryByRole('dialog')!.textContent).toContain('~3K / 128K')
   })
 
   it('omits the composition rows while the contextBreakdown projection is absent', () => {
     const view = meter({ contextPressure: { pressureTokens: 32_000, contextWindow: 128_000 } })
-    fireEvent.click(view.getByRole('button', { name: '上下文已用 25%' }))
+    fireEvent.click(view.getByRole('button', { name: '25% of context used' }))
     const panel = view.queryByRole('dialog')!
     expect(panel.textContent).toContain('~32K / 128K')
-    expect(panel.textContent).not.toContain('系统提示词')
+    expect(panel.textContent).not.toContain('System prompt')
     expect(panel.textContent).not.toContain('Messages')
     // Without composition shares, the bar falls back to one plain segment.
     expect(panel.getElementsByClassName(segmentClass)).toHaveLength(1)
@@ -126,7 +126,7 @@ describe('ContextMeter', () => {
       contextBreakdown: BREAKDOWN,
     }
     const view = render(<ContextMeter useProjection={(key: string) => values[key]} t={t} />)
-    fireEvent.click(view.getByRole('button', { name: '上下文已用 25%' }))
+    fireEvent.click(view.getByRole('button', { name: '25% of context used' }))
     expect(view.queryByRole('dialog')).not.toBeNull()
 
     values = { contextPressure: { pressureTokens: 32_000 }, contextBreakdown: BREAKDOWN }
@@ -138,7 +138,7 @@ describe('ContextMeter', () => {
       contextBreakdown: BREAKDOWN,
     }
     view.rerender(<ContextMeter useProjection={(key: string) => values[key]} t={t} />)
-    expect(view.getByRole('button', { name: '上下文已用 25%' }).getAttribute('aria-expanded')).toBe('false')
+    expect(view.getByRole('button', { name: '25% of context used' }).getAttribute('aria-expanded')).toBe('false')
     expect(view.queryByRole('dialog')).toBeNull()
   })
 
@@ -147,7 +147,7 @@ describe('ContextMeter', () => {
       contextPressure: { pressureTokens: 32_000, contextWindow: 128_000 },
       contextBreakdown: BREAKDOWN,
     })
-    const trigger = view.getByRole('button', { name: '上下文已用 25%' })
+    const trigger = view.getByRole('button', { name: '25% of context used' })
     const openPanel = () => {
       fireEvent.click(trigger)
       return view.queryByRole('dialog')!

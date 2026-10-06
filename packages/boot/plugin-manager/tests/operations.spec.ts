@@ -725,7 +725,7 @@ it('terminates a run that stopped printing and reports the silence bound', async
   command.run.mockImplementationOnce(() => silentChild('installing\n'))
   const outcome = await runProfilePnpm(context, ['add', './extra'], { execution: 'service', outputBytes: 100, idleTimeoutMs: 20 })
   expect(outcome).toMatchObject({ exitCode: 1, timedOut: true })
-  expect(outcome.output).toBe('installing\ndsh: pnpm printed nothing for 20ms and was terminated\n')
+  expect(outcome.output).toBe('installing\nkh: pnpm printed nothing for 20ms and was terminated\n')
   expect(readFileSync(outcome.logPath, 'utf8')).toBe(outcome.output)
 })
 
@@ -737,7 +737,7 @@ it('settles a run whose pipes stay open past the process exit', async () => {
     execution: 'service', outputBytes: 100, activateNewBundles: false,
   })
   expect(outcome).toMatchObject({ exitCode: 0 })
-  expect(outcome.output).toBe('installed\ndsh: pnpm output was cut short after its process exited\n')
+  expect(outcome.output).toBe('installed\nkh: pnpm output was cut short after its process exited\n')
   // The pipes never ended on their own, so the run settled by cutting them here.
   expect(child.stdout.destroyed).toBe(true)
   expect(child.stderr.destroyed).toBe(true)

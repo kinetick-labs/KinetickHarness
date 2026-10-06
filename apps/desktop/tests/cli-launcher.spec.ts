@@ -19,7 +19,7 @@ function fixture() {
     await Promise.allSettled(exits)
     await rm(root, { recursive: true, force: true, maxRetries: 10, retryDelay: 100 })
   })
-  const application = join(root, 'Application 中文 with spaces.app')
+  const application = join(root, 'Application Chinese with spaces.app')
   const platform = process.platform === 'win32' ? 'win32' : 'darwin'
   const resources = join(application, ...platform === 'darwin' ? ['Contents', 'Resources'] : ['resources'])
   const cli = join(resources, 'runtime', 'cli')
@@ -28,7 +28,7 @@ function fixture() {
   mkdirSync(dirname(electron), { recursive: true })
   if (platform === 'win32') copyFileSync(process.execPath, electron)
   else symlinkSync(process.execPath, electron)
-  const entry = join(resources, 'app.asar', 'kh', 'node_modules', '@deepseek-ai', 'kh-desktop-host', 'lib', 'cli.js')
+  const entry = join(resources, 'app.asar', 'kh', 'node_modules', '@kinetick-labs', 'kh-desktop-host', 'lib', 'cli.js')
   mkdirSync(dirname(entry), { recursive: true })
   writeFileSync(join(dirname(entry), 'package.json'), '{"type":"module"}\n')
   writeFileSync(entry, [
@@ -64,7 +64,7 @@ function fixture() {
 
 it('preserves common arguments, cwd, environment, binary input, stderr and exit status', async () => {
   const f = fixture()
-  const args = ['plugin', '--profile', 'desktop', 'hello world', '中文 🚀', '']
+  const args = ['plugin', '--profile', 'desktop', 'hello world', 'Chinese 🚀', '']
   const run = f.start(args)
   const input = Buffer.from([0, 1, 10, 255])
   run.child.stdin.end(input)

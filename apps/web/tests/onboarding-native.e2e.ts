@@ -57,10 +57,10 @@ describe.skipIf(MODE === 'record').each([false, true])('web e2e: native credenti
         await page.reload({ waitUntil: 'load' })
         acknowledgeReloadConnectionLoss(tripwire, warningsBefore)
       }
-      const accountMenu = page.getByRole('button', { name: '账号菜单', exact: true })
+      const accountMenu = page.getByRole('button', { name: 'Account menu', exact: true })
       if (desktop) {
         await accountMenu.waitFor()
-        expect(await accountMenu.textContent()).toBe('更多')
+        expect(await accountMenu.textContent()).toBe('More')
         const triggerBox = (await accountMenu.boundingBox())!
         expect(Math.abs(triggerBox.height - 32)).toBeLessThan(1)
         await accountMenu.click()
@@ -68,7 +68,7 @@ describe.skipIf(MODE === 'record').each([false, true])('web e2e: native credenti
         await menu.waitFor()
         expect(await menu.getByRole('menuitem').count()).toBe(3)
         // Shortcut hints vary by host platform; accessible names identify the three actions.
-        for (const name of ['设置', '意见反馈', '登录']) {
+        for (const name of ['Settings', 'Feedback', 'Sign in']) {
           expect(await menu.getByRole('menuitem', { name, exact: true }).count()).toBe(1)
         }
         const menuBox = (await menu.boundingBox())!
@@ -88,15 +88,15 @@ describe.skipIf(MODE === 'record').each([false, true])('web e2e: native credenti
         await page.keyboard.press('Escape')
         await menu.waitFor({ state: 'detached' })
       } else {
-        await page.getByRole('button', { name: '设置', exact: true }).waitFor()
+        await page.getByRole('button', { name: 'Settings', exact: true }).waitFor()
         expect(await accountMenu.count()).toBe(0)
         expect(await page.getByRole('dialog', { name: '开始你的创作' }).count()).toBe(0)
       }
       await openSettings(page, 'zh')
-      const settings = page.getByRole('dialog', { name: '设置', exact: true })
+      const settings = page.getByRole('dialog', { name: 'Settings', exact: true })
       await settings.getByRole('button', { name: '模型', exact: true }).click()
-      await settings.getByLabel('API 密钥', { exact: true }).waitFor()
-      expect(await page.getByRole('dialog', { name: '添加一个 API Key 开始使用' }).count()).toBe(0)
+      await settings.getByLabel('API key', { exact: true }).waitFor()
+      expect(await page.getByRole('dialog', { name: 'Add an API key to get started' }).count()).toBe(0)
       expect(await welcome.count()).toBe(0)
       expect(await readFile(credentialPath, 'utf8')).toBe(credentials)
       const aria = await captureStableAria(page, '[role="dialog"]', scaffold.workspaceCwd)

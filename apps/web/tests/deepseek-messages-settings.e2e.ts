@@ -57,10 +57,10 @@ describe.skipIf(webSnapshotMode() === 'record')('web e2e: DeepSeek Messages sett
       await captureStableAria(page, '[role="dialog"]', scaffold.workspaceCwd), webSnapshotMode())
     await messages.getByLabel('API key', { exact: true }).fill('sk-e2e-messages')
     await messages.getByLabel('Base URL', { exact: true }).fill('https://messages.example/anthropic')
-    expect(await messages.getByLabel('模型 ID 1').inputValue()).toBe('deepseek-flash')
-    await messages.getByLabel('显示名称 1', { exact: true }).fill('Messages Flash')
+    expect(await messages.getByLabel('Model ID 1').inputValue()).toBe('deepseek-flash')
+    await messages.getByLabel('Display name 1', { exact: true }).fill('Messages Flash')
     await messages.getByRole('button', { name: '保存', exact: true }).click()
-    await dialog.getByText('已保存 DeepSeek (deepseek-official)。', { exact: true }).waitFor()
+    await dialog.getByText('Saved DeepSeek (deepseek-official).', { exact: true }).waitFor()
 
     const settings = await readFile(join(scaffold.harnessHome, 'profiles', 'scaffold', 'cordis.patch.yml'), 'utf8')
     expect(settings).toContain('https://messages.example/anthropic')
@@ -80,9 +80,9 @@ describe.skipIf(webSnapshotMode() === 'record')('web e2e: DeepSeek Messages sett
     await page.getByRole('menuitem', { name: /模型/ }).click()
     await page.getByRole('menuitemradio', { name: 'Messages Flash', exact: true }).waitFor()
     await compareOrRefreshGolden(join(EXPECTED, 'picker.expected.md'),
-      await captureStableAria(page, '[role="group"][aria-label="模型与推理等级"]', scaffold.workspaceCwd), webSnapshotMode())
+      await captureStableAria(page, '[role="group"][aria-label="Model and reasoning effort"]', scaffold.workspaceCwd), webSnapshotMode())
     await page.keyboard.press('Escape')
-    await page.getByRole('menuitem', { name: /推理等级/ }).click()
+    await page.getByRole('menuitem', { name: /Effort/ }).click()
     const effortWeights = await page.getByRole('menuitemradio').evaluateAll(rows => rows.map(row =>
       getComputedStyle(row.querySelector('span span')!).fontWeight,
     ))

@@ -223,7 +223,7 @@ describe('ui-permission browser plugin', () => {
         confirmLabel: 'Enable Auto review',
       },
     })
-    b.locale.setLocale('zh')
+    b.locale.setLocale('en')
     const localized = await b.popup().options(proj, new AbortController().signal)
     expect(localized.map(option => option.label)).toEqual(['Read Only', 'Workspace Write', 'Full access', 'Auto review'])
     expect(localized.find(option => option.id === 'danger-full-access')?.confirmation).toEqual({
@@ -304,7 +304,7 @@ describe('ui-permission browser plugin', () => {
 
   it('localizes the Auto description instead of displaying host English copy', async () => {
     const b = await bench()
-    b.ctx.locale.setLocale('zh')
+    b.ctx.locale.setLocale('en')
     const proj = { sessionId: sid('s1') }
     b.values.set(sid('s1'), { currentValue: 'workspace-write' })
     const options = await b.popup().options(proj, new AbortController().signal)

@@ -165,7 +165,7 @@ describe('SubagentHeaderLineage', () => {
       useSessions={select => select({ ...initial, ids: [] })}
       useSessionStatus={select => select(statuses)}
     />)
-    expect(screen.getByRole('button', { name: '1 个子智能体，正在运行' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: '1 subagent running' })).toBeTruthy()
   })
 
   it('shows retained children while an idle projection awaits refresh', () => {
@@ -211,13 +211,13 @@ describe('SubagentHeaderLineage', () => {
     }
     const view = render(<HeaderCatalog {...props(catalog(), {}, summaries)} />)
 
-    const trigger = screen.getByRole('button', { name: '1 个子智能体，正在运行' })
+    const trigger = screen.getByRole('button', { name: '1 subagent running' })
     expect(trigger.querySelector('[data-state="ongoing"]')).not.toBeNull()
 
     view.rerender(<HeaderCatalog {...props(catalog(), {}, {
       ...summaries, [CHILD]: { ...summaries[CHILD]!, running: false },
     })} />)
-    const inactiveTrigger = screen.getByRole('button', { name: '2 个子智能体' })
+    const inactiveTrigger = screen.getByRole('button', { name: '2 subagents' })
     expect(inactiveTrigger.querySelector('[data-state="ongoing"]')).toBeNull()
   })
 
@@ -237,25 +237,25 @@ describe('SubagentHeaderLineage', () => {
       [forkChild]: { ...summary(forkChild, 1), parentId: fork, origin: 'subagent', running: true },
     })} />)
 
-    const trigger = screen.getByRole('button', { name: '1 个子智能体' })
+    const trigger = screen.getByRole('button', { name: '1 subagent' })
     expect(trigger.querySelector('[data-state="ongoing"]')).toBeNull()
   })
 
   it('renders stable rows and catalog-addressed navigation', () => {
     const input = props(catalog())
     render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     hoverCatalog(trigger)
 
     expect(input.refreshProjection).not.toHaveBeenCalled()
     expect(screen.getAllByRole('treeitem')).toHaveLength(2)
-    expect(screen.getByText('正在扫描项目文件 · 可继续 · 正在运行')).toBeTruthy()
-    expect(screen.getByText('一次性 · 当前未运行')).toBeTruthy()
-    expect(screen.getByRole('button', { name: '展开 worker 的下级子智能体' })).toBeTruthy()
-    expect(screen.getByRole('button', { name: '展开 reviewer 的下级子智能体' })).toBeTruthy()
+    expect(screen.getByText('正在扫描项目文件 · continuable · running')).toBeTruthy()
+    expect(screen.getByText('one-shot · not running')).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Expand worker descendants' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Expand reviewer descendants' })).toBeTruthy()
 
     const sidebarButton = within(screen.getByRole('treeitem', { name: /worker/ }))
-      .getByRole('button', { name: '在侧边栏打开 worker' })
+      .getByRole('button', { name: 'Open worker in sidebar' })
     fireEvent.keyDown(sidebarButton, { key: 'Enter' })
     fireEvent.click(sidebarButton)
     expect(input.openChildAside).toHaveBeenCalledWith({
@@ -292,23 +292,23 @@ describe('SubagentHeaderLineage', () => {
     render(<HeaderCatalog {...props(catalog({
       entries: catalog().entries.slice(0, 1),
     }), { [CHILD]: catalog({ entries: [] }) })} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体/ }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent/ }))
 
     expect(screen.getByRole('treeitem', { name: /worker/ }).children).toHaveLength(1)
   })
 
   it('aligns a known leaf with siblings whose child catalog is still unknown', () => {
     render(<HeaderCatalog {...props(catalog(), { [CHILD]: catalog({ entries: [] }) })} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体，正在运行/ }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent running/ }))
 
     expect(screen.getByRole('treeitem', { name: /worker/ }).children).toHaveLength(2)
-    expect(screen.getByRole('button', { name: /展开 reviewer/ })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /Expand reviewer/ })).toBeTruthy()
   })
 
   it('supports trigger/menu keyboard traversal, Escape focus restore, and outside close', async () => {
     const input = props(catalog())
     render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     fireEvent.keyDown(trigger, { key: 'ArrowDown' })
     await Promise.resolve()
     expect(document.activeElement).toBe(screen.getByRole('treeitem', { name: /worker/ }))
@@ -337,7 +337,7 @@ describe('SubagentHeaderLineage', () => {
       await act(async () => { await vi.advanceTimersByTimeAsync(duration) })
     }
     const view = render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     const triggerRect = vi.spyOn(trigger, 'getBoundingClientRect')
       .mockReturnValue({ bottom: 40, left: 50 } as DOMRect)
 
@@ -375,7 +375,7 @@ describe('SubagentHeaderLineage', () => {
       await act(async () => { await vi.advanceTimersByTimeAsync(duration) })
     }
     render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     const root = trigger.parentElement!
 
     fireEvent.click(trigger)
@@ -409,7 +409,7 @@ describe('SubagentHeaderLineage', () => {
   it('keeps the hover catalog open when the pointer returns directly to its trigger', async () => {
     vi.useFakeTimers()
     render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     fireEvent.mouseOver(trigger, { relatedTarget: document.body })
     await act(async () => { await vi.advanceTimersByTimeAsync(150) })
     const menu = screen.getByRole('tree').parentElement!
@@ -424,7 +424,7 @@ describe('SubagentHeaderLineage', () => {
   it('cancels pending hover dismissal when the catalog trigger is activated from the keyboard', async () => {
     vi.useFakeTimers()
     render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     fireEvent.mouseOver(trigger, { relatedTarget: document.body })
     await act(async () => { await vi.advanceTimersByTimeAsync(150) })
     fireEvent.mouseOut(trigger, { relatedTarget: document.body })
@@ -435,7 +435,7 @@ describe('SubagentHeaderLineage', () => {
 
   it('repositions an open catalog after viewport resize and document scroll', () => {
     const view = render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     const bounds = vi.spyOn(trigger, 'getBoundingClientRect')
     bounds.mockReturnValue({ bottom: 20, left: 30 } as DOMRect)
     hoverCatalog(trigger)
@@ -458,7 +458,7 @@ describe('SubagentHeaderLineage', () => {
   it('cancels a pending hover when the trigger becomes hidden', async () => {
     vi.useFakeTimers()
     const view = render(<HeaderCatalog {...props(catalog())} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
 
     fireEvent.mouseEnter(trigger)
     await vi.advanceTimersByTimeAsync(149)
@@ -485,7 +485,7 @@ describe('SubagentHeaderLineage', () => {
       ],
     }))
     render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     fireEvent.keyDown(trigger, { key: 'Tab' })
     expect(screen.queryByRole('tree')).toBeNull()
     hoverCatalog(trigger)
@@ -506,7 +506,7 @@ describe('SubagentHeaderLineage', () => {
   it('keeps unknown catalog children clickable by their durable parent address', () => {
     const input = props(catalog({ entries: [{ id: CHILD, mode: 'unknown', activity: 'inactive' }] }))
     render(<HeaderCatalog {...input} />)
-    hoverCatalog(screen.getByRole('button', { name: /子智能体/ }))
+    hoverCatalog(screen.getByRole('button', { name: '1 subagent' }))
     const row = screen.getByRole('treeitem', { name: new RegExp(CHILD) })
     expect(row.textContent).toContain('unknown mode')
     fireEvent.keyDown(row, { key: 'Enter' })
@@ -586,36 +586,36 @@ describe('SubagentHeaderLineage', () => {
     })) as Record<SessionId, SessionSummary>
     const input = props(catalog({ entries }), {}, summaries)
     render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: '1 个子智能体，正在运行' })
-    expect(within(trigger).getByText('9 个子智能体')).toBeTruthy()
+    const trigger = screen.getByRole('button', { name: '1 subagent running' })
+    expect(within(trigger).getByText('9 subagents')).toBeTruthy()
     hoverCatalog(trigger)
 
-    const runningRow = screen.getByRole('treeitem', { name: /running.*4\.6K tok · 1分10秒/ })
+    const runningRow = screen.getByRole('treeitem', { name: /running.*4\.6K tok · 1m 10s/ })
     const runningMetrics = within(runningRow)
     const tokenMetric = runningMetrics.getByText('4.6K tok')
-    const durationMetric = runningMetrics.getByText('1分10秒')
+    const durationMetric = runningMetrics.getByText('1m 10s')
     expect(tokenMetric.parentElement).toBe(durationMetric.parentElement)
     expect(tokenMetric.nextElementSibling).toBe(durationMetric)
-    const finishedRow = screen.getByRole('treeitem', { name: /finished.*已完成.*123 tok · 1小时02分03秒/ })
+    const finishedRow = screen.getByRole('treeitem', { name: /finished.*completed.*123 tok · 1h 02m 03s/ })
     expect(finishedRow.querySelector('[data-state="done"]')).not.toBeNull()
-    const interruptedRow = screen.getByRole('treeitem', { name: /interrupted.*当前未运行.*123M tok · 6秒/ })
+    const interruptedRow = screen.getByRole('treeitem', { name: /interrupted.*not running.*123M tok · 6s/ })
     expect(interruptedRow.querySelector('[data-state="idle"]')).not.toBeNull()
     for (const row of [runningRow, finishedRow, interruptedRow]) {
       expect(row.querySelector('[data-state]')?.parentElement?.className).toContain('rowActivitySlot')
     }
-    expect(screen.getByRole('treeitem', { name: /days.*12天05小时06分07秒/ })).toBeTruthy()
-    expect(screen.getByText('12天5小时').getAttribute('title'))
-      .toBe('总活跃耗时：12天05小时06分07秒')
-    expect(screen.getByText('1天')).toBeTruthy()
-    expect(screen.getByText('约6个月12天')).toBeTruthy()
-    expect(screen.getByText('约1个月')).toBeTruthy()
-    expect(screen.getByText('约2年3个月')).toBeTruthy()
-    expect(screen.getByText('约1年')).toBeTruthy()
+    expect(screen.getByRole('treeitem', { name: /days.*12d 05h 06m 07s/ })).toBeTruthy()
+    expect(screen.getByText('12d 5h').getAttribute('title'))
+      .toBe('Total active duration: 12d 05h 06m 07s')
+    expect(screen.getByText('1d')).toBeTruthy()
+    expect(screen.getByText('~6mo 12d')).toBeTruthy()
+    expect(screen.getByText('~1mo')).toBeTruthy()
+    expect(screen.getByText('~2y 3mo')).toBeTruthy()
+    expect(screen.getByText('~1y')).toBeTruthy()
 
     await vi.advanceTimersByTimeAsync(1_000)
-    expect(screen.getByRole('treeitem', { name: /running.*4\.6K tok · 1分11秒/ })).toBeTruthy()
-    expect(screen.getByRole('treeitem', { name: /finished.*已完成.*123 tok · 1小时02分03秒/ })).toBeTruthy()
-    expect(screen.getByRole('treeitem', { name: /interrupted.*当前未运行.*123M tok · 6秒/ })).toBeTruthy()
+    expect(screen.getByRole('treeitem', { name: /running.*4\.6K tok · 1m 11s/ })).toBeTruthy()
+    expect(screen.getByRole('treeitem', { name: /finished.*completed.*123 tok · 1h 02m 03s/ })).toBeTruthy()
+    expect(screen.getByRole('treeitem', { name: /interrupted.*not running.*123M tok · 6s/ })).toBeTruthy()
   })
 
   it('ticks expanded running grandchildren under an idle child and releases their clock on collapse', async () => {
@@ -640,17 +640,17 @@ describe('SubagentHeaderLineage', () => {
       },
     })
     render(<HeaderCatalog {...input} />)
-    hoverCatalog(screen.getByRole('button', { name: '1 个子智能体' }))
+    hoverCatalog(screen.getByRole('button', { name: '1 subagent' }))
     const beforeExpand = vi.getTimerCount()
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
-    expect(screen.getByRole('treeitem', { name: /indexer.*5秒/ })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
+    expect(screen.getByRole('treeitem', { name: /indexer.*5s/ })).toBeTruthy()
     await act(async () => { await vi.advanceTimersByTimeAsync(1_000) })
-    expect(screen.getByRole('treeitem', { name: /indexer.*6秒/ })).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: '收起 worker 的下级子智能体' }))
+    expect(screen.getByRole('treeitem', { name: /indexer.*6s/ })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Collapse worker descendants' }))
     expect(vi.getTimerCount()).toBe(beforeExpand)
     await act(async () => { await vi.advanceTimersByTimeAsync(1_000) })
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
-    expect(screen.getByRole('treeitem', { name: /indexer.*7秒/ })).toBeTruthy()
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
+    expect(screen.getByRole('treeitem', { name: /indexer.*7s/ })).toBeTruthy()
   })
 
   it('lazily expands and collapses descendant catalogs with direct-parent navigation', () => {
@@ -668,9 +668,9 @@ describe('SubagentHeaderLineage', () => {
       [GRANDCHILD]: grandchildCatalog,
     })
     render(<HeaderCatalog {...input} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体，正在运行/ }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent running/ }))
 
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
     expect(input.refreshProjection).toHaveBeenCalledWith(CHILD)
     const nested = screen.getByRole('treeitem', { name: /indexer/ })
     expect(nested.getAttribute('aria-level')).toBe('2')
@@ -696,8 +696,8 @@ describe('SubagentHeaderLineage', () => {
     }
     const deferred = props(catalog(), {}, summaries)
     const view = render(<HeaderCatalog {...deferred} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体，正在运行/ }))
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent running/ }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
 
     expect(deferred.refreshProjection).toHaveBeenCalledWith(CHILD)
     expect(screen.getByRole('group').getAttribute('aria-busy')).toBe('true')
@@ -741,7 +741,7 @@ describe('SubagentHeaderLineage', () => {
       }),
     })
     render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     fireEvent.keyDown(trigger, { key: 'ArrowDown' })
     await Promise.resolve()
     const worker = screen.getByRole('treeitem', { name: /worker/ })
@@ -761,10 +761,10 @@ describe('SubagentHeaderLineage', () => {
       }),
     })
     render(<HeaderCatalog {...input} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体，正在运行/ }))
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
-    fireEvent.click(screen.getByRole('button', { name: '展开 indexer 的下级子智能体' }))
-    fireEvent.click(screen.getByRole('button', { name: '收起 worker 的下级子智能体' }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent running/ }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand indexer descendants' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Collapse worker descendants' }))
 
     expect(screen.queryByRole('treeitem', { name: /indexer/ })).toBeNull()
   })
@@ -785,9 +785,9 @@ describe('SubagentHeaderLineage', () => {
       error: new RemoteError('gateway/internal', 'index down', {}),
     }))
     render(<HeaderCatalog {...failed} />)
-    hoverCatalog(screen.getByRole('button', { name: /0 个子智能体/ }))
+    hoverCatalog(screen.getByRole('button', { name: /0 subagents/ }))
     expect(screen.getByText('index down')).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: /重试/ }))
+    fireEvent.click(screen.getByRole('button', { name: /Retry/ }))
     expect(failed.refreshProjection).toHaveBeenCalledWith(PARENT)
   })
 
@@ -819,7 +819,7 @@ describe('SubagentHeaderLineage', () => {
 
     const failed = props(catalog({ entries: [], state: 'error', error: null }))
     render(<HeaderCatalog {...failed} />)
-    const trigger = screen.getByRole('button', { name: /0 个子智能体/ })
+    const trigger = screen.getByRole('button', { name: /0 subagents/ })
     hoverCatalog(trigger)
     expect(screen.getByText('Unable to load subagents')).toBeTruthy()
     fireEvent.keyDown(trigger, { key: 'ArrowDown' })
@@ -831,7 +831,7 @@ describe('SubagentHeaderLineage', () => {
   it('navigates from outside the tree and tolerates a deferred focus after unmount', async () => {
     const input = props(catalog())
     const view = render(<HeaderCatalog {...input} />)
-    const trigger = screen.getByRole('button', { name: /1 个子智能体，正在运行/ })
+    const trigger = screen.getByRole('button', { name: /1 subagent running/ })
     hoverCatalog(trigger)
     fireEvent.keyDown(screen.getByRole('tree'), { key: 'ArrowUp' })
     expect(document.activeElement).toBe(screen.getByRole('treeitem', { name: /reviewer/ }))
@@ -850,8 +850,8 @@ describe('SubagentHeaderLineage', () => {
       }),
     })
     const view = render(<HeaderCatalog {...populated} />)
-    hoverCatalog(screen.getByRole('button', { name: /1 个子智能体，正在运行/ }))
-    fireEvent.click(screen.getByRole('button', { name: '展开 worker 的下级子智能体' }))
+    hoverCatalog(screen.getByRole('button', { name: /1 subagent running/ }))
+    fireEvent.click(screen.getByRole('button', { name: 'Expand worker descendants' }))
 
     const empty = props(catalog({ entries: [] }))
     view.rerender(<HeaderCatalog {...empty} />)
@@ -862,7 +862,7 @@ describe('SubagentHeaderLineage', () => {
     const view = render(<HeaderCatalog {...props(catalog())} />)
 
     expect(screen.queryByText('/')).toBeNull()
-    expect(screen.getByRole('button', { name: /1 个子智能体，正在运行/ })).toBeTruthy()
+    expect(screen.getByRole('button', { name: /1 subagent running/ })).toBeTruthy()
 
     view.rerender(<HeaderCatalog {...props(catalog({ entries: [] }))} />)
     expect(screen.queryByRole('button')).toBeNull()
@@ -885,7 +885,7 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    const switcher = screen.getByRole('button', { name: '切换子智能体：worker' })
+    const switcher = screen.getByRole('button', { name: 'Switch subagent: worker' })
     expect(switcher.className).toContain('switcherTrigger')
     expect(within(switcher).getByText('worker')).toBeTruthy()
     expect(switcher.querySelector('svg')).not.toBeNull()
@@ -918,7 +918,7 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    expect(screen.queryByRole('button', { name: '切换子智能体：worker' })).toBeNull()
+    expect(screen.queryByRole('button', { name: 'Switch subagent: worker' })).toBeNull()
   })
 
   it('falls back to the catalog session id when the selected row has no label', () => {
@@ -937,7 +937,7 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    expect(screen.getByRole('button', { name: `切换子智能体：${CHILD}` })).toBeTruthy()
+    expect(screen.getByRole('button', { name: `Switch subagent: ${CHILD}` })).toBeTruthy()
   })
 
   it('keeps an ancestor switcher muted and omits its descendant count', () => {
@@ -961,9 +961,9 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    const switcher = screen.getByRole('button', { name: '切换子智能体：worker' })
+    const switcher = screen.getByRole('button', { name: 'Switch subagent: worker' })
     expect(switcher.className).toContain('ancestorSwitcherTrigger')
-    expect(screen.queryByRole('button', { name: /1 个子智能体/ })).toBeNull()
+    expect(screen.queryByRole('button', { name: /1 subagent/ })).toBeNull()
     vi.useFakeTimers()
     fireEvent.mouseEnter(switcher.parentElement!)
     fireEvent.click(switcher)
@@ -995,7 +995,7 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    expect(screen.getByRole('button', { name: '切换子智能体：正在扫描项目文件' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Switch subagent: 正在扫描项目文件' })).toBeTruthy()
     expect(input.refreshProjection).not.toHaveBeenCalled()
   })
 
@@ -1020,7 +1020,7 @@ describe('SubagentHeaderLineage', () => {
     }
     render(<HeaderCatalog {...input} />)
 
-    hoverCatalog(screen.getByRole('button', { name: '切换子智能体：indexer' }))
+    hoverCatalog(screen.getByRole('button', { name: 'Switch subagent: indexer' }))
 
     expect(input.refreshProjection).not.toHaveBeenCalled()
     const current = screen.getByRole('treeitem', { name: /indexer/ })
@@ -1033,16 +1033,16 @@ describe('SubagentHeaderLineage', () => {
 describe('SubagentReadOnlyComposer', () => {
   it('explains the exact missing-parent recovery path', () => {
     render(<SubagentReadOnlyComposer matched={{ reason: 'parent-unavailable' }} t={t} />)
-    expect(screen.getByRole('status').textContent).toContain('父会话当前不在线')
+    expect(screen.getByRole('status').textContent).toContain('The parent session is offline')
   })
 
   it('keeps an unknown child read-only until its descriptor is available', () => {
     render(<SubagentReadOnlyComposer matched={{ reason: 'unknown' }} t={t} />)
-    expect(screen.getByRole('status').textContent).toContain('读取子会话后才能确定是否可继续')
+    expect(screen.getByRole('status').textContent).toContain('Read the child session')
   })
 
   it('explains that one-shot histories never accept follow-ups', () => {
     render(<SubagentReadOnlyComposer matched={{ reason: 'one-shot' }} t={t} />)
-    expect(screen.getByRole('status').textContent).toContain('一次性任务不支持后续消息')
+    expect(screen.getByRole('status').textContent).toContain('One-shot tasks do not accept follow-ups')
   })
 })

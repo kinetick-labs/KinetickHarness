@@ -82,7 +82,7 @@ async function bench(options: {
   const moveDefault = (): void => { ROSTER = ROSTER_MOVED }
   await ctx.plugin(SlotRegistry).await()
   const locale = new LocaleRuntime(ctx)
-  locale.setLocale('zh')
+  locale.setLocale('en')
   ctx.provide('locale', locale)
   const calls: string[] = []
   let savedDefault = ROSTER.value.presets.find(row => row.isDefault)?.id ?? 'standard'
@@ -361,7 +361,7 @@ describe('ui-agent-preset apply', () => {
     expect(section.component).toBe(AgentPresetSection)
     expect(section.options).toMatchObject({ id: 'agent-presets', order: 20 })
     // The nav label is a locale-following thunk; owners resolve it at read time.
-    expect(resolveSlotLabel(section.options.label)).toBe('Agent 预设')
+    expect(resolveSlotLabel(section.options.label)).toBe('Agent presets')
   })
 
   it('registers into a declaration that arrives after apply', async () => {

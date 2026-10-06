@@ -249,7 +249,7 @@ describe('SearchRow keyed card', () => {
 
   it('collapses to the summary row; expanding reveals the grep card', () => {
     const view = render(<SearchRow {...rowProps(settledGrep(), 'grep')} />)
-    expect(view.getByText('搜索文件内容')).toBeTruthy()
+    expect(view.getByText('Grep')).toBeTruthy()
     expect(view.queryByText('Search')).toBeNull()
     // Collapsed: the card is not in the DOM until the row is expanded.
     expect(searchKindOf(view.container)).toBeNull()

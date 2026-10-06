@@ -49,10 +49,10 @@ describe('PlanChip', () => {
 
   it('renders the Plan status for active and pending-entry targets', () => {
     setup({ active: true, pending: false })
-    expect(chip().textContent).toBe('计划')
+    expect(chip().textContent).toBe('Plan')
     cleanup()
     setup({ active: false, pending: true })
-    expect(chip().textContent).toBe('计划')
+    expect(chip().textContent).toBe('Plan')
   })
 
   it('leads with the plan glyph and swaps in the circled close only while hovered', () => {
@@ -67,7 +67,7 @@ describe('PlanChip', () => {
     expect(glyphs[0]!.classList.contains(css.restGlyph!)).toBe(true)
     expect(glyphs[1]!.classList.contains(css.hoverGlyph!)).toBe(true)
     expect(glyphs[1]!.parentElement).toBe(slot)
-    expect(chip().lastChild?.textContent).toBe('计划')
+    expect(chip().lastChild?.textContent).toBe('Plan')
   })
 
   it('executes /plan off once and follows the projection down', async () => {

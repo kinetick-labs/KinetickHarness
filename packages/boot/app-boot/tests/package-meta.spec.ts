@@ -378,7 +378,7 @@ describe('plugin locale display metadata', () => {
   it('does not read unexported language files directly from the resolved English directory', () => {
     manifest({ './locale/en.json': './locale/en.json' })
     dictionary('en', { meta: { title: 'English' } })
-    dictionary('zh', { meta: { title: '中文' } })
+    dictionary('zh', { meta: { title: 'Chinese' } })
     expect(readPluginMeta('localized', parentURL)?.error).toContain('./locale/zh.json')
   })
 

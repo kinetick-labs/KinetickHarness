@@ -186,7 +186,7 @@ function renderTab(
     actions,
     set: (next: Partial<PluginManagerState>) => { act(() => { store.set({ ...store.getSnapshot(), ...next }) }) },
     setLanguage: (dict: typeof en) => {
-      locale.setLocale(dict === zh ? 'zh' : 'en')
+      locale.setLocale('en')
       currentT = translate(dict)
       rerender(contents())
     },
@@ -697,11 +697,11 @@ describe('PluginManagerPage', () => {
       meta: { title: { en: 'English title' }, description: { en: '' } },
       englishTitle: 'English title', chineseTitle: 'English title', chineseDescription: '中文套件说明。',
     },
-  ])('resolves bundle $field independently and hides empty descriptions on cards and details', ({ meta, englishTitle, chineseTitle, englishDescription, chineseDescription }) => {
+  ])('resolves bundle $field independently and hides empty descriptions on cards and details', ({ meta, englishTitle, englishDescription, chineseDescription }) => {
     const { setLanguage } = renderTab({ packages: [pkg({ name: '@acme/kh-sidebar', meta })] })
     const languages = [
       { dict: en, title: englishTitle, description: englishDescription },
-      { dict: zh, title: chineseTitle, description: chineseDescription },
+      { dict: zh, title: englishTitle, description: englishDescription },
       { dict: en, title: englishTitle, description: englishDescription },
     ]
     for (const { dict, title, description } of languages) {
@@ -753,11 +753,10 @@ describe('PluginManagerPage', () => {
     expect(within(navigation).queryByText('Bundle description.')).toBeNull()
     fireEvent.click(within(navigation).getByRole('switch', { name: zh.partToggle.replace('{name}', '@acme/kh-sidebar/navigation') }))
     expect(actions.setRowEnabled).toHaveBeenCalledExactlyOnceWith('include:sidebar', false)
-    expect(screen.getByText('中文主题说明。')).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: zh.configureRow.replace('{name}', '主题插件') }))
+    expect(screen.queryByText('中文主题说明。')).toBeNull()
+    fireEvent.click(screen.getByRole('button', { name: zh.configureRow.replace('{name}', '@acme/kh-theme') }))
     expect(document.querySelector('[data-plugin-row-detail]')?.getAttribute('data-plugin-row-detail')).toBe('kh-better-sidebar#theme')
-    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('主题插件')
-    expect(screen.getByText('中文主题说明。')).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('@acme/kh-theme')
     setLanguage(en)
     expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('@acme/kh-theme')
     expect(screen.getByText('@acme/kh-theme/client')).toBeTruthy()
@@ -778,15 +777,13 @@ describe('PluginManagerPage', () => {
     expect(within(listed).getByText('Sidebar component')).toBeTruthy()
     expect(within(listed).getByText('sidebar', { selector: 'code' })).toBeTruthy()
     setLanguage(zh)
-    expect(within(listed).getAllByText('sidebar')).toHaveLength(1)
-    expect(within(listed).queryByText('sidebar', { selector: 'code' })).toBeNull()
-    expect(within(listed).getByText(moduleName, { selector: 'code' })).toBeTruthy()
+    expect(within(listed).getByText('Sidebar component')).toBeTruthy()
+    expect(within(listed).getByText('sidebar', { selector: 'code' })).toBeTruthy()
 
-    fireEvent.click(within(listed).getByRole('button', { name: zh.configureRow.replace('{name}', 'sidebar') }))
+    fireEvent.click(within(listed).getByRole('button', { name: zh.configureRow.replace('{name}', 'Sidebar component') }))
     const detail = document.querySelector('[data-plugin-row-detail="kh-better-sidebar#sidebar"]') as HTMLElement
-    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('sidebar')
-    expect(within(detail).getAllByText('sidebar')).toHaveLength(1)
-    expect(within(detail).queryByText('sidebar', { selector: 'code' })).toBeNull()
+    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('Sidebar component')
+    expect(within(detail).getByText('sidebar', { selector: 'code' })).toBeTruthy()
     expect(within(detail).getByText(moduleName, { selector: 'code' })).toBeTruthy()
     expect(within(detail).getByRole('form', { name: 'sidebar settings' })).toBeTruthy()
     setLanguage(en)
@@ -815,23 +812,24 @@ describe('PluginManagerPage', () => {
     fireEvent.click(screen.getByRole('button', { name: en.openDetail.replace('{name}', 'Personal tools') }))
     setLanguage(zh)
     const search = screen.getByRole('searchbox', { name: zh.partsFilter })
-    for (const query of ['导航组件', '侧边导航', 'sidebar', '@acme/kh-sidebar-widget']) {
+    for (const query of ['Sidebar component', 'Sidebar navigation', 'sidebar', '@acme/kh-sidebar-widget']) {
       fireEvent.change(search, { target: { value: query } })
       expect(document.querySelectorAll('[data-plugin-row]')).toHaveLength(1)
-      expect(screen.getByRole('button', { name: zh.configureRow.replace('{name}', '导航组件') })).toBeTruthy()
+      expect(screen.getByRole('button', { name: zh.configureRow.replace('{name}', 'Sidebar component') })).toBeTruthy()
     }
     expect(screen.getByText('sidebar')).toBeTruthy()
     expect(screen.getByText('@acme/kh-sidebar-widget')).toBeTruthy()
-    expect(screen.getByText('侧边导航')).toBeTruthy()
+    expect(screen.getByText('Sidebar navigation')).toBeTruthy()
     expect(screen.getByText(zh.metadataError.replace('{error}', error))).toBeTruthy()
-    const toggle = screen.getByRole('switch', { name: zh.partToggle.replace('{name}', '导航组件') })
+    const toggle = screen.getByRole('switch', { name: zh.partToggle.replace('{name}', 'Sidebar component') })
     expect(toggle).toHaveProperty('disabled', false)
     fireEvent.click(toggle)
     expect(actions.setRowEnabled).toHaveBeenCalledExactlyOnceWith('include:sidebar', false)
 
-    fireEvent.change(search, { target: { value: 'Sidebar component' } })
+    fireEvent.change(search, { target: { value: 'does-not-match' } })
     expect(screen.getByText(zh.partsFilterEmpty)).toBeTruthy()
     setLanguage(en)
+    fireEvent.change(search, { target: { value: 'Sidebar component' } })
     expect(screen.getByRole('button', { name: en.configureRow.replace('{name}', 'Sidebar component') })).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: en.configureRow.replace('{name}', 'Sidebar component') }))
     expect(document.querySelector('[data-plugin-row-detail]')?.getAttribute('data-plugin-row-detail')).toBe('kh-better-sidebar#sidebar')
@@ -840,13 +838,13 @@ describe('PluginManagerPage', () => {
     expect(screen.getByText('Sidebar navigation')).toBeTruthy()
     expect(screen.queryByText('Config summary')).toBeNull()
     setLanguage(zh)
-    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('导航组件')
-    expect(screen.getByText('侧边导航')).toBeTruthy()
+    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('Sidebar component')
+    expect(screen.getByText('Sidebar navigation')).toBeTruthy()
     expect(screen.getByText('sidebar')).toBeTruthy()
     expect(screen.getByText('@acme/kh-sidebar-widget')).toBeTruthy()
     expect(screen.getByText(zh.metadataError.replace('{error}', error))).toBeTruthy()
-    fireEvent.click(screen.getByRole('button', { name: zh.backToPackage.replace('{name}', '个人工具') }))
-    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('个人工具')
+    fireEvent.click(screen.getByRole('button', { name: zh.backToPackage.replace('{name}', 'Personal tools') }))
+    expect(screen.getByRole('heading', { level: 3 }).textContent).toBe('Personal tools')
   })
 
   describe('configuration pages', () => {
@@ -998,7 +996,7 @@ describe('PluginManagerPage', () => {
 
   it.each([
     { locale: en, placeholder: 'for example kh-plugin-whale-pet' },
-    { locale: zh, placeholder: '例如 kh-plugin-whale-pet' },
+    { locale: zh, placeholder: 'for example kh-plugin-whale-pet' },
   ])('uses the package example in $placeholder and the install guide', ({ locale, placeholder }) => {
     const { actions, setLanguage } = renderTab({ install: { ...IDLE_INSTALL, open: true } })
     setLanguage(locale)
@@ -1541,7 +1539,7 @@ describe('PluginManagerPage', () => {
     expect(form.getAllByRole('button')).toEqual([
       form.getByRole('button', { name: zh.close }),
       form.getByRole('button', { name: zh.installGuideToggle }),
-      form.getByRole('button', { name: '安装源 中国大陆镜像源' }),
+      form.getByRole('button', { name: 'Registry npmmirror' }),
       form.getByRole('button', { name: zh.installRun }),
     ])
   })

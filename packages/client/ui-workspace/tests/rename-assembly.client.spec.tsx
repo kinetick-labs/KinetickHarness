@@ -120,10 +120,10 @@ describe('session rename through the assembled browser', () => {
     const view = runtime.renderRoot()
 
     const row = (await view.findByText('Persisted title')).closest('[role="treeitem"]')!
-    const trigger = within(row as HTMLElement).getByLabelText('会话“Persisted title”的操作')
+    const trigger = within(row as HTMLElement).getByLabelText('Session actions for Persisted title')
     fireEvent.click(trigger)
     expect(view.getAllByRole('menuitem').map(item => item.textContent)).toEqual([
-      '置顶会话', 'Rename', 'Fork session', '归档会话', 'Export action', 'Last action',
+      'Pin session', 'Rename', 'Fork session', 'Archive session', 'Export action', 'Last action',
     ])
     expect(view.getAllByRole('separator')).toHaveLength(1)
     const last = view.getByRole('menuitem', { name: 'Last action' })
@@ -161,7 +161,7 @@ describe('session rename through the assembled browser', () => {
 
     // The current session's group auto-expands; open the row's action menu.
     const row = (await view.findByText('旧标题')).closest('[role="treeitem"]')!
-    fireEvent.click(within(row as HTMLElement).getByLabelText('会话“旧标题”的操作'))
+    fireEvent.click(within(row as HTMLElement).getByLabelText('Session actions for 旧标题'))
     fireEvent.click(view.getByRole('menuitem', { name: 'Rename', hidden: true }))
     // The rename row dismissed the menu; the dialog lives in the overlay list.
     expect(view.queryByRole('menu')).toBeNull()
@@ -203,7 +203,7 @@ describe('session rename through the assembled browser', () => {
     await runtime.flush()
 
     const row = (await view.findByText('旧标题')).closest('[role="treeitem"]')!
-    fireEvent.click(within(row as HTMLElement).getByLabelText('会话“旧标题”的操作'))
+    fireEvent.click(within(row as HTMLElement).getByLabelText('Session actions for 旧标题'))
     fireEvent.click(view.getByRole('menuitem', { name: 'Rename', hidden: true }))
     const input = await view.findByLabelText('Session name')
     fireEvent.change(input, { target: { value: '新名' } })

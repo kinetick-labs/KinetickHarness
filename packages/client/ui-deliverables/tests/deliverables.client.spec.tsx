@@ -662,14 +662,14 @@ describe('ChangedFiles card', () => {
     expect(view.getByRole('button', { name: 'Review this turn’s changes in the sidebar' })).toBeTruthy()
     controller.host.set({ name: 'server', available: false, fileManager: null })
     view.rerender(<Deliverables {...props} matched={{ changes, presented: [] }} openFile={openFile} sessionId={SessionId('child-session')} t={makeTranslate(zh)} />)
-    expect(view.getByText('已编辑 11 个文件')).toBeTruthy()
+    expect(view.getByText('Edited 11 files')).toBeTruthy()
     fireEvent.click(view.getByRole('button', { name: 'Review this turn’s changes in the sidebar' }))
     expect(props.openChangesReview).toHaveBeenLastCalledWith({ sessionId: 'child-session', seq: 5, turn: 1 }, 0)
-    fireEvent.click(view.getByRole('button', { name: '查看 config/design-token 的改动' }))
+    fireEvent.click(view.getByRole('button', { name: 'View changes to config/design-token' }))
     expect(props.openChangesReview).toHaveBeenLastCalledWith({ sessionId: 'child-session', seq: 5, turn: 1 }, 0)
     expect(openFile).not.toHaveBeenCalled()
     expect(props.openChanged).not.toHaveBeenCalled()
-    expect(view.getByRole('button', { name: '展开全部 5 个改动文件' }).textContent).toContain('全部 5 个文件')
+    expect(view.getByRole('button', { name: 'Show all 5 changed files' }).textContent).toContain('All 5 files')
   })
 
   it('preserves expanded rows when the served announcement changes', () => {
@@ -712,7 +712,7 @@ describe('ChangedFiles card', () => {
 })
 
 describe('producedFileMentions resolver', () => {
-  const label = (path: string) => `打开 ${path}`
+  const label = (path: string) => `Open ${path}`
 
   it('resolves exact paths and unique basenames; ambiguity and unknowns stay unresolved', () => {
     const opened: string[] = []
@@ -723,7 +723,7 @@ describe('producedFileMentions resolver', () => {
     )
     // Unique basename resolves to its full path; the full path rides title.
     const byBasename = resolver.resolve('index.html')
-    expect(byBasename?.label).toBe('打开 out/index.html')
+    expect(byBasename?.label).toBe('Open out/index.html')
     expect(byBasename?.title).toBe('out/index.html')
     byBasename?.open()
     expect(opened).toEqual(['out/index.html'])

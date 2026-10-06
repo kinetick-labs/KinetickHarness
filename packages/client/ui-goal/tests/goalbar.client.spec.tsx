@@ -48,7 +48,7 @@ describe('GoalBar', () => {
     expect(complete.container.firstChild).toBeNull()
   })
 
-  it('active goal: goal glyph, "进行中的目标", truncated objective, edit and clear actions', () => {
+  it('active goal: goal glyph, "Ongoing Goal", truncated objective, edit and clear actions', () => {
     const actions = makeActions()
     render(<GoalBar goal={makeGoal()} {...actions} t={t} />)
     expect(screen.getByText('Ongoing Goal')).toBeTruthy()
@@ -127,7 +127,7 @@ describe('GoalBar', () => {
     render(<GoalBar goal={makeGoal()} {...actions} t={t} />)
     fireEvent.click(screen.getByRole('button', { name: 'Edit goal' }))
     fireEvent.change(screen.getByRole('textbox', { name: 'Goal objective' }), { target: { value: 'abandoned draft' } })
-    fireEvent.click(screen.getByRole('button', { name: '取消编辑' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Cancel edit' }))
     expect(actions.onEdit).not.toHaveBeenCalled()
     expect(screen.getByText('Ongoing Goal')).toBeTruthy()
 
@@ -156,7 +156,7 @@ describe('GoalBar', () => {
   it('active disarmed goal: "已暂停的目标" with a resume action instead of pause', () => {
     const actions = makeActions()
     render(<GoalBar goal={makeGoal()} activation="disarmed" {...actions} t={t} />)
-    expect(screen.getByText('已暂停的目标')).toBeTruthy()
+    expect(screen.getByText('Ship the redesign')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Resume goal' }))
     expect(actions.onResume).toHaveBeenCalledTimes(1)
     expect(screen.queryByRole('button', { name: 'Pause goal' })).toBeNull()
@@ -165,7 +165,7 @@ describe('GoalBar', () => {
   it('paused goal: "已暂停的目标" with a resume action before edit', () => {
     const actions = makeActions()
     render(<GoalBar goal={makeGoal({ phase: 'paused' })} {...actions} t={t} />)
-    expect(screen.getByText('已暂停的目标')).toBeTruthy()
+    expect(screen.getByText('Ship the redesign')).toBeTruthy()
     fireEvent.click(screen.getByRole('button', { name: 'Resume goal' }))
     expect(actions.onResume).toHaveBeenCalledTimes(1)
   })
@@ -199,7 +199,7 @@ describe('GoalBar', () => {
     expect(screen.queryByText('Ongoing Goal')).toBeNull()
   })
 
-  it('blocked goal: "受阻的目标" with the block reason as the strip tooltip', () => {
+  it('blocked goal: "Blocked Goal" with the block reason as the strip tooltip', () => {
     const actions = makeActions()
     const goal = makeGoal({ phase: 'blocked', blockedReason: { code: 'stalled', message: 'No progress in 3 rounds' } })
     render(<GoalBar goal={goal} {...actions} t={t} />)

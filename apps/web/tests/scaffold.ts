@@ -1509,7 +1509,7 @@ export async function readPersistedEvents(scaffold: WebScaffold, id: SessionId):
  * closing quote, where the bucket is always last.
  */
 const ARIA_AGE =
-  /(?:now|\d+min|\d+h|\d+d|\d+mo|\d+y|刚刚|\d+分钟|\d+小时|\d+天|\d+个月|\d+年)(?=")/g
+  /(?:now|\d+min|\d+h|\d+d|\d+mo|\d+y|now|\d+分钟|\d+小时|\d+天|\d+个月|\d+年)(?=")/g
 
 function normalizeAria(snapshot: string, workspaceCwd: string, age: boolean): string {
   // The session heading renders the workspace's basename, not the full

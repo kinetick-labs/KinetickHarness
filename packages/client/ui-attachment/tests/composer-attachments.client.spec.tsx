@@ -52,7 +52,7 @@ const t = ((key: string, params?: Readonly<Record<string, unknown>>): string => 
   if (key === 'attachment.dropDesc') {
     const count = params?.count
     const size = params?.size
-    return `图片限制：最多 ${typeof count === 'number' ? String(count) : ''} 张，每张 ${typeof size === 'string' ? size : ''}`
+    return `Image limit: up to ${typeof count === 'number' ? String(count) : ''} images, ${typeof size === 'string' ? size : ''} each`
   }
   return messages[key] ?? key
 }) as ComposerAttachmentsProps['t']
@@ -189,7 +189,7 @@ describe('ComposerAttachments', () => {
     const initial = props({ attachments: [image], onRemoveAttachment })
     const view = render(<ComposerAttachments {...initial} />)
 
-    fireEvent.click(view.getByRole('button', { name: '移除图片 pixel.png' }))
+    fireEvent.click(view.getByRole('button', { name: 'Remove image pixel.png' }))
     expect(onRemoveAttachment).toHaveBeenCalledWith(image.id)
     fireEvent.click(view.getByTitle('View original'))
     expect(view.getByRole('dialog', { name: 'Original image preview' })).toBeTruthy()
@@ -252,9 +252,9 @@ describe('ComposerAttachments file drafts', () => {
     expect(group.textContent).toContain('ok.pdf')
     expect(group.textContent).toContain('PDF 3B')
     expect(group.textContent).toContain('Upload failed; click to retry')
-    fireEvent.click(view.getByRole('button', { name: '重试上传 bad.pdf' }))
+    fireEvent.click(view.getByRole('button', { name: 'Retry uploading bad.pdf' }))
     expect(onRetryFile).toHaveBeenCalledWith('bad')
-    fireEvent.click(view.getByRole('button', { name: '移除文件 ok.pdf' }))
+    fireEvent.click(view.getByRole('button', { name: 'Remove file ok.pdf' }))
     expect(onRemoveAttachment).toHaveBeenCalledWith('ok')
   })
 
@@ -268,8 +268,8 @@ describe('ComposerAttachments file drafts', () => {
       onRemoveAttachment,
     })} />)
     expect(view.getByRole('group', { name: 'Pending attachments' }).textContent).toContain('Uploading…')
-    const retry = view.getByRole('button', { name: '重试上传 bad.pdf' })
-    const remove = view.getByRole('button', { name: '移除文件 bad.pdf' })
+    const retry = view.getByRole('button', { name: 'Retry uploading bad.pdf' })
+    const remove = view.getByRole('button', { name: 'Remove file bad.pdf' })
     expect(retry.contains(remove)).toBe(false)
     fireEvent.click(remove)
     expect(onRemoveAttachment).toHaveBeenCalledWith('bad')

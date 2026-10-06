@@ -135,7 +135,7 @@ describe('TerminalBlock states', () => {
 
   it('running still shows a settled-looking status pill when one is supplied', () => {
     render(<TerminalBlock command="sleep 5" running signal="SIGINT" />)
-    expect(screen.getByText('信号 SIGINT')).toBeTruthy()
+    expect(screen.getByText('signal SIGINT')).toBeTruthy()
   })
 
   it('settled with whitespace-only output shows the dimmed placeholder', () => {
@@ -208,29 +208,29 @@ describe('TerminalBlock states', () => {
 describe('TerminalBlock status pill', () => {
   it('renders no pill for a clean exit', () => {
     const view = render(<TerminalBlock command="true" output="a" exitCode={0} />)
-    expect(view.queryByText(/退出码|信号/u)).toBeNull()
+    expect(view.queryByText(/Exit code|Signal/u)).toBeNull()
   })
 
   it('renders no pill while the exit status is unknown', () => {
     const view = render(<TerminalBlock command="ls" output="a" />)
-    expect(view.queryByText(/退出码|信号/u)).toBeNull()
+    expect(view.queryByText(/Exit code|Signal/u)).toBeNull()
   })
 
   it('renders the exit-code pill for a non-zero exit', () => {
     render(<TerminalBlock command="false" output="a" exitCode={1} />)
-    expect(screen.getByText('退出码 1')).toBeTruthy()
+    expect(screen.getByText('Exit code 1')).toBeTruthy()
   })
 
   it('renders the no-exit-code pill and the error dot for a command that settled without one', () => {
     const view = render(<TerminalBlock command="pnpm add x" output="spawn pnpm ENOENT" exitCode={null} />)
-    expect(view.getByText('未正常退出')).toBeTruthy()
-    expect(runStateOf(view.container)).toEqual({ state: 'error', label: '失败' })
+    expect(view.getByText('no exit code')).toBeTruthy()
+    expect(runStateOf(view.container)).toEqual({ state: 'error', label: 'Failed' })
   })
 
   it('renders the signal pill, which outranks the exit code', () => {
     render(<TerminalBlock command="sleep 9" output="a" exitCode={0} signal="SIGKILL" />)
-    expect(screen.getByText('信号 SIGKILL')).toBeTruthy()
-    expect(screen.queryByText(/退出码/u)).toBeNull()
+    expect(screen.getByText('signal SIGKILL')).toBeTruthy()
+    expect(screen.queryByText(/Exit code/u)).toBeNull()
   })
 })
 
@@ -252,12 +252,12 @@ describe('TerminalBlock run-state dot', () => {
 
   it('shows the error dot for a non-zero exit', () => {
     const view = render(<TerminalBlock command="false" output="a" exitCode={1} />)
-    expect(runStateOf(view.container)).toEqual({ state: 'error', label: '失败' })
+    expect(runStateOf(view.container)).toEqual({ state: 'error', label: 'Failed' })
   })
 
   it('shows the error dot for a signal, whatever the exit code says', () => {
     const view = render(<TerminalBlock command="sleep 9" output="a" exitCode={0} signal="SIGKILL" />)
-    expect(runStateOf(view.container)).toEqual({ state: 'error', label: '失败' })
+    expect(runStateOf(view.container)).toEqual({ state: 'error', label: 'Failed' })
   })
 
   // The dot precedes the prompt label, which is what makes it read as the
@@ -301,7 +301,7 @@ describe('TerminalBlock run-state dot', () => {
     const view = render(<TerminalBlock command={'true\nfalse\ntrue'} output="x" exitCode={1} />)
     expect(view.container.querySelectorAll('[class*="_runState_"][data-state]')).toHaveLength(1)
     expect(view.container.querySelectorAll('[class^="_runStateLabel_"]')).toHaveLength(1)
-    expect(runStateOf(view.container)).toEqual({ state: 'error', label: '失败' })
+    expect(runStateOf(view.container)).toEqual({ state: 'error', label: 'Failed' })
     const rows = view.container.querySelectorAll('[class^="_promptLine_"]')
     expect(rows[0]!.querySelector('[data-state]')).not.toBeNull()
     expect(rows[1]!.querySelector('[data-state]')).toBeNull()
@@ -331,13 +331,13 @@ describe('TerminalBlock height cap', () => {
     const view = render(<TerminalBlock command="ls" output={body(10)} maxLines={4} />)
     // maxLines 4: head = ceil(4/2) = 2, tail = 4 - 2 = 2, 6 hidden.
     expect(outputLines(view.container)).toEqual(['line 1', 'line 2', 'line 9', 'line 10'])
-    const toggle = view.getByRole('button', { name: '展开其余 6 行输出' })
+    const toggle = view.getByRole('button', { name: 'Expand the remaining 6 output lines' })
     expect(toggle.getAttribute('aria-expanded')).toBe('false')
-    expect(toggle.textContent).toBe('… 其余 6 行')
+    expect(toggle.textContent).toBe('… 6 more lines')
 
     fireEvent.click(toggle)
     expect(outputLines(view.container)).toHaveLength(10)
-    const collapse = view.getByRole('button', { name: '收起输出' })
+    const collapse = view.getByRole('button', { name: 'Collapse output' })
     expect(collapse.getAttribute('aria-expanded')).toBe('true')
     expect(collapse.textContent).toBe('收起')
 
@@ -348,13 +348,13 @@ describe('TerminalBlock height cap', () => {
   it('renders the head slice alone when the cap leaves no tail', () => {
     const view = render(<TerminalBlock command="ls" output={body(5)} maxLines={1} />)
     expect(outputLines(view.container)).toEqual(['line 1'])
-    expect(view.getByRole('button', { name: '展开其余 4 行输出' })).toBeTruthy()
+    expect(view.getByRole('button', { name: 'Expand the remaining 4 output lines' })).toBeTruthy()
   })
 
   it('caps at the documented default when maxLines is absent', () => {
     const view = render(<TerminalBlock command="ls" output={body(DEFAULT_TERMINAL_MAX_LINES + 1)} />)
     expect(outputLines(view.container)).toHaveLength(DEFAULT_TERMINAL_MAX_LINES)
-    expect(view.getByRole('button', { name: '展开其余 1 行输出' })).toBeTruthy()
+    expect(view.getByRole('button', { name: 'Expand the remaining 1 output lines' })).toBeTruthy()
   })
 })
 
@@ -365,18 +365,18 @@ describe('TerminalBlock copy', () => {
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
     const output = `${ESC}[31mbad${ESC}[39m\n`
     render(<TerminalBlock command="make" cwd="/Users/me/app" output={output} exitCode={2} />)
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     // Escape codes, the newline terminator, and nothing of the chrome around them.
     expect(writeText).toHaveBeenCalledWith(output)
     await act(async () => {
       await Promise.resolve()
     })
-    expect(screen.getByRole('button', { name: '复制成功' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Copied' })).toBeTruthy()
     // While the ok label is showing, further clicks are no-ops.
-    fireEvent.click(screen.getByRole('button', { name: '复制成功' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copied' }))
     expect(writeText).toHaveBeenCalledTimes(1)
     await vi.advanceTimersByTimeAsync(1000)
-    expect(screen.getByRole('button', { name: '复制' })).toBeTruthy()
+    expect(screen.getByRole('button', { name: 'Copy' })).toBeTruthy()
   })
 
   it('copies the whole output while the height cap hides its middle', async () => {
@@ -384,9 +384,9 @@ describe('TerminalBlock copy', () => {
     Object.defineProperty(navigator, 'clipboard', { configurable: true, value: { writeText } })
     const output = `${body(10)}\n`
     render(<TerminalBlock command="ls" output={output} maxLines={4} exitCode={0} />)
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     expect(writeText).toHaveBeenCalledWith(output)
-    expect(await screen.findByRole('button', { name: '复制成功' })).toBeTruthy()
+    expect(await screen.findByRole('button', { name: 'Copied' })).toBeTruthy()
   })
 
   it('does not claim success when the host refuses the write', async () => {
@@ -395,12 +395,12 @@ describe('TerminalBlock copy', () => {
       value: { writeText: vi.fn().mockRejectedValue(new Error('denied')) },
     })
     render(<TerminalBlock command="ls" output="a" />)
-    fireEvent.click(screen.getByRole('button', { name: '复制' }))
+    fireEvent.click(screen.getByRole('button', { name: 'Copy' }))
     await act(async () => {
       await Promise.resolve()
     })
-    expect(screen.getByRole('button', { name: '复制' })).toBeTruthy()
-    expect(screen.queryByRole('button', { name: '复制成功' })).toBeNull()
+    expect(screen.getByRole('button', { name: 'Copy' })).toBeTruthy()
+    expect(screen.queryByRole('button', { name: 'Copied' })).toBeNull()
   })
 })
 

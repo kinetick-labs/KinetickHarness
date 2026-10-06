@@ -112,7 +112,7 @@ it.each(['macos', 'windows'] as const)('shows the reference, filters labels and 
   expect(screen.queryByRole('tooltip')).toBeNull()
   act(() => { catalog.set([]) })
   expect(opener.hasAttribute('aria-keyshortcuts')).toBe(false)
-  expect(makeTranslate(zh)('title')).toBe('快捷键')
+  expect(makeTranslate(zh)('title')).toBe('Keyboard shortcuts')
 })
 
 it('saves individual edits and disables changes when configuration cannot be read', async () => {
@@ -255,7 +255,7 @@ it.each((['web', 'desktop'] as const).flatMap(runtime => (['invalid', 'future'] 
   expect(text).toContain(runtime === 'web' ? 'kh.keybindings.v1' : 'userData/keybindings.json')
   expect(text).toContain(error === 'future'
     ? dictionary === en ? 'Upgrade Harness' : '升级 Harness'
-    : dictionary === en ? 'Back up and repair' : '先备份并修复')
+    : dictionary === en ? 'Back up and repair' : '先备份 and Repair')
   expect(text).toContain(dictionary['using-accepted'])
   const reset = screen.getByRole('button', { name: dictionary['reset-all'] })
   expect(reset.hasAttribute('disabled')).toBe(true)

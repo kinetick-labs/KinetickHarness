@@ -33,7 +33,7 @@ describe('web e2e: preset roster guidance', () => {
     const snapshot = await captureStableAria(page, '[role="dialog"]', scaffold.workspaceCwd)
     await compareOrRefreshGolden(join(EXPECTED, 'section.expected.md'), snapshot, mode)
     expect(snapshot).toContain('Let the agent help me create a preset')
-    expect(snapshot).toContain('查看配置: 标准模式')
+    expect(snapshot).toContain('View configuration: Standard mode')
     expect(snapshot).not.toContain('复制预设')
     expect(snapshot).not.toContain('编辑插件')
     expect(snapshot).not.toContain('打开目录')
@@ -43,7 +43,7 @@ describe('web e2e: preset roster guidance', () => {
   it('reads mode details and examples without changing the new-task default', async () => {
     onTestFailed(() => saveFailureShot(page, 'preset-roster-guide'))
     const settings = page.getByRole('dialog', { name: 'Settings' })
-    const trigger = settings.getByRole('button', { name: '模式说明: PTC 模式', exact: true })
+    const trigger = settings.getByRole('button', { name: 'Mode details: PTC mode', exact: true })
     await trigger.click()
     const guide = page.getByRole('dialog', { name: 'PTC mode', exact: true })
     await guide.getByRole('heading', { name: '怎样调用工具', exact: true }).waitFor()
@@ -52,14 +52,14 @@ describe('web e2e: preset roster guidance', () => {
     await guide.getByRole('tab', { name: 'How to use', exact: true }).press('Escape')
     await guide.waitFor({ state: 'detached' })
     expect(await trigger.evaluate(element => document.activeElement === element)).toBe(true)
-    expect(await settings.getByRole('button', { name: '新任务默认: 标准模式', exact: true }).getAttribute('aria-pressed')).toBe('true')
+    expect(await settings.getByRole('button', { name: 'New task default: Standard mode', exact: true }).getAttribute('aria-pressed')).toBe('true')
   })
 
   it('views a shipped composition read-only', async () => {
     onTestFailed(() => saveFailureShot(page, 'preset-roster-view'))
     const settings = page.getByRole('dialog', { name: 'Settings' })
-    await settings.getByRole('button', { name: '查看配置: PTC 模式', exact: true }).click()
-    const viewer = page.getByRole('dialog', { name: '查看配置 · PTC 模式', exact: true })
+    await settings.getByRole('button', { name: 'View configuration: PTC mode', exact: true }).click()
+    const viewer = page.getByRole('dialog', { name: 'View configuration · PTC mode', exact: true })
     await viewer.waitFor({ timeout: 10_000 })
     // The real shipped declaration, not a golden: the viewer shows whatever
     // the deployment ships, and this lane only asserts it is shown read-only
@@ -70,22 +70,22 @@ describe('web e2e: preset roster guidance', () => {
     expect(shown).toContain("disabled: !!js process.platform === 'win32'\n")
     expect(shown).not.toContain('__jsExpr')
     expect(await viewer.getByRole('textbox').count()).toBe(0)
-    // The header X and the footer button share the 关闭 name; the footer one is last.
-    await viewer.getByRole('button', { name: '关闭', exact: true }).last().click()
+    // The header X and the footer button share the Close name; the footer one is last.
+    await viewer.getByRole('button', { name: 'Close', exact: true }).last().click()
     await viewer.waitFor({ state: 'detached', timeout: 10_000 })
-    expect(await settings.getByRole('button', { name: '新任务默认: 标准模式', exact: true }).getAttribute('aria-pressed')).toBe('true')
+    expect(await settings.getByRole('button', { name: 'New task default: Standard mode', exact: true }).getAttribute('aria-pressed')).toBe('true')
   })
 
   it('starts a Creator-mode task from the section entry', async () => {
     onTestFailed(() => saveFailureShot(page, 'preset-roster-creator'))
     // The entry stages the self-referential preset and lands a new task on it,
     // so the flow needs a connected workspace to enter.
-    await page.getByRole('dialog', { name: '设置' }).getByRole('button', { name: '关闭', exact: true }).last().click()
+    await page.getByRole('dialog', { name: 'Settings' }).getByRole('button', { name: 'Close', exact: true }).last().click()
     await connectFreshWorkspaceZh(page, scaffold.workspaceCwd)
     await openSettings(page, 'zh')
-    const settings = page.getByRole('dialog', { name: '设置' })
-    await settings.getByRole('button', { name: 'Agent 预设' }).click()
-    await settings.getByRole('button', { name: '让 Agent 帮我创建预设模式', exact: true }).click()
+    const settings = page.getByRole('dialog', { name: 'Settings' })
+    await settings.getByRole('button', { name: 'Agent presets' }).click()
+    await settings.getByRole('button', { name: 'Let the agent help me create a preset', exact: true }).click()
     await settings.waitFor({ state: 'detached', timeout: 10_000 })
     await expect.poll(async () => {
       const response = await scaffold.hostFetch('/api/session/list', {

@@ -374,7 +374,7 @@ describe('ApprovalPanel', () => {
     const pending = new PendingApproval(id('s1'), {
       toolName: 'bash',
       reason: 'audit reason',
-      displayReason: { en: 'English explanation' },
+      displayReason: { en: 'English explanation', zh: '中文说明' },
     })
     const props = panelProps(pending)
     const view = render(<ApprovalPanel {...props} />)

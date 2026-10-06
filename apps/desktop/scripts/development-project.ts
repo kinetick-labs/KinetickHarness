@@ -152,10 +152,10 @@ export function prepareDevelopmentProject(options: DevelopmentProjectOptions): s
     ...mirrorDependencyLinks(options.dependencyDir, destinationModules),
     ...mirrorWorkspaceDependencies([options.cliDir, options.hostDir], destinationModules),
   ]
-  const khLink = join(destinationModules, '@deepseek-ai', 'kh')
+  const khLink = join(destinationModules, '@kinetick-labs', 'kh')
   removeOwnedPath(khLink)
   linkDirectory(options.cliDir, khLink)
-  const hostLink = join(destinationModules, '@deepseek-ai', 'kh-desktop-host')
+  const hostLink = join(destinationModules, '@kinetick-labs', 'kh-desktop-host')
   removeOwnedPath(hostLink)
   linkDirectory(options.hostDir, hostLink)
   const sharedPackages = [...new Set([...names, '@kinetick-labs/kh', '@kinetick-labs/kh-desktop-host'])].flatMap((name) => {

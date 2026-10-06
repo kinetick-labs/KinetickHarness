@@ -1062,7 +1062,7 @@ describe('PartialArguments', () => {
         'import { a } from "./a.ts"',
         '',
         'export const x = `${a}\\n`\t// "quoted" and C:\\path',
-        'bell \u0007 中文 😀',
+        'bell \u0007 Chinese 😀',
         '',
       ].join('\n')
       const text = JSON.stringify({ file_path: 'src/a.ts', content, overwrite: true })

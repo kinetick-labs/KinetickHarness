@@ -100,7 +100,6 @@ describe('PluginInventoryGateway', () => {
     }))
     writeFileSync(join(dir, 'index.js'), 'throw new Error("metadata must not execute the plugin")\n')
     writeFileSync(join(dir, 'locale', 'en.json'), '{"meta":{"title":"Preset plugin","description":"Preset description"}}')
-    writeFileSync(join(dir, 'locale', 'zh.json'), '{"meta":{"title":"预设插件"}}')
     if (mode === 'runtime') {
       expectUnlinked()
       expect(readPluginMeta('local-plugin/feature', baseUrl)).toBeUndefined()

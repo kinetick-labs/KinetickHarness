@@ -168,6 +168,7 @@ it('persists Web edits and presents normalized bindings through the public servi
   } })
   await vi.waitFor(() => { expect(service.config.getSnapshot().status).toBe('ready') })
   const changed = vi.fn(); service.catalog.subscribe(changed)
+  ctx.locale.addLanguage({ id: 'zh', label: '中文', fallback: 'en' })
   ctx.locale.setLocale('zh'); expect(changed).toHaveBeenCalled()
   expect((await service.edit({ type: 'set', id: command.id, binding: null }, service.config.getSnapshot().revision)).status).toBe('saved')
   expect(service.catalog.getSnapshot()[0]?.keys).toEqual([])

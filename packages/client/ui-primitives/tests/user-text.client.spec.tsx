@@ -28,12 +28,12 @@ describe('projectUserText', () => {
   })
 
   it('folds the wire session form to its label with the session glyph', () => {
-    const host = project('看看 @[查看并分析图片](kh-session:InNlc3Npb24tNDM0) 的结论')
+    const host = project('看看 @[Inspect and 分析图片](kh-session:InNlc3Npb24tNDM0) 的结论')
     const chip = host.querySelector('[data-ref-chip="session"]')!
-    expect(chip.textContent).toBe('查看并分析图片')
-    expect(chip.getAttribute('title')).toBe('@[查看并分析图片](kh-session:InNlc3Npb24tNDM0)')
+    expect(chip.textContent).toBe('Inspect and 分析图片')
+    expect(chip.getAttribute('title')).toBe('@[Inspect and 分析图片](kh-session:InNlc3Npb24tNDM0)')
     expect(chip.querySelector('svg')).not.toBeNull()
-    expect(host.textContent).toBe('看看 查看并分析图片 的结论')
+    expect(host.textContent).toBe('看看 Inspect and 分析图片 的结论')
   })
 
   it('prefers the wire fold over the bare-token scan on the same range', () => {
@@ -141,9 +141,9 @@ describe('projectUserText', () => {
   })
 
   it('renders undecorated text as one inline run', () => {
-    const host = project('纯文本，无引用')
+    const host = project('Plain text，无引用')
     expect(host.querySelectorAll('div').length).toBe(0)
     expect(host.querySelectorAll('[data-ref-chip]').length).toBe(0)
-    expect(host.textContent).toBe('纯文本，无引用')
+    expect(host.textContent).toBe('Plain text，无引用')
   })
 })

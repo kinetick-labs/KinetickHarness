@@ -127,7 +127,7 @@ describe('MenuView', () => {
       }],
     }))
     const options = screen.getAllByRole('option')
-    expect(options.map(o => o.textContent)).toEqual(['计划plan进入或退出计划模式', 'File'])
+    expect(options.map(o => o.textContent)).toEqual(['计划planEnter or leave plan mode', 'File'])
     expect(options[0]?.querySelector('[data-glyph="plan"]')?.getAttribute('width')).toBe('14')
     // A label that is the name in another letter case renders no alias.
     expect(options[1]?.querySelectorAll('span')).toHaveLength(1)
@@ -161,7 +161,7 @@ describe('MenuView', () => {
         { source: 'skill', status: 'pending', items: [] },
       ],
     }))
-    expect(titles(view.container)).toEqual(['指令', 'mystery', 'Skills'])
+    expect(titles(view.container)).toEqual(['Commands', 'mystery', 'Skills'])
   })
 
   it('renders contiguous candidate sections once without changing option indexes', () => {

@@ -120,7 +120,7 @@ function mount(
 }
 
 function chooseAdd(): void {
-  fireEvent.click(screen.getByRole('menuitem', { name: '添加工作区…' }))
+  fireEvent.click(screen.getByRole('menuitem', { name: 'Add workspace…' }))
 }
 
 describe('WorkspacePicker', () => {

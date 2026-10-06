@@ -320,12 +320,13 @@ export function conversationContextKey(kind: string, id: string): string {
 
 /** Open Settings through the Web gear or Desktop account menu.
  * @param page - browser page with the mounted sidebar.
- * @param locale - current UI language.
+ * @param _locale - accepted so callers can name the language they opened; the
+ * shell is English only, so the menu labels do not change with it.
  */
-export async function openSettings(page: Page, locale: 'en' | 'zh'): Promise<void> {
+export async function openSettings(page: Page, _locale: 'en' | 'zh'): Promise<void> {
   const label = 'Settings'
   if (await page.evaluate(() => 'khDesktop' in globalThis)) {
-    await page.getByRole('button', { name: locale === 'zh' ? '账号菜单' : 'Account menu', exact: true }).click()
+    await page.getByRole('button', { name: 'Account menu', exact: true }).click()
     await page.getByRole('menuitem', { name: label, exact: true }).click()
   } else {
     await page.getByRole('button', { name: label, exact: true }).click()

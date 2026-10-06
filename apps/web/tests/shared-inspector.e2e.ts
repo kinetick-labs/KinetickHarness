@@ -86,7 +86,7 @@ it('toggles bottom DevTools from the page and iframe without a selected Session'
 
 it.each([
   {
-    locale: 'zh-CN', file: 'zh', plugins: '插件', open: '查看 开发者工具', bundle: '开发者工具',
+    locale: 'zh-CN', file: 'zh', plugins: '插件', open: 'View 开发者工具', bundle: '开发者工具',
     description: '查看调试会话原始数据、聊天消息分组数据，以及调试 NodeJS 后端',
     inspector: 'NodeJS Inspector', inspectorDescription: '按 Ctrl/Cmd+Shift+. 在底部面板打开 Chrome DevTools 进行开发调试',
     session: 'Session Log', sessionDescription: '在会话侧边栏启用当前会话的原始数据和聊天分组数据分析功能',

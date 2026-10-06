@@ -20,7 +20,7 @@ import { openSettings, connectFreshWorkspaceZh, expandOwningTurnProcess, ZH_BROW
 const DIR = fileURLToPath(new URL('../../../snapshots/web/changed-files-turn', import.meta.url))
 const FIXTURE = join(DIR, 'session.v3.jsonl')
 const MODE = webSnapshotMode()
-const PROMPT = '不用先查看目录，直接做四件事：把 intro.md 里的标题「示例项目」改成「项目说明」，新建 src/util.ts 导出一个两数相加的 add 函数，新建 app.local 写一行 mode=demo，最后用 bash 在 notes.txt 末尾追加一行 done。'
+const PROMPT = '不用先查看目录，直接做四件事：把 intro.md 里的标题「示例项目」改成「项目说明」，New src/util.ts 导出一个两数相加的 add 函数，New app.local 写一行 mode=demo，最后用 bash 在 notes.txt 末尾追加一行 done。'
 
 /** Seed a committed repository so the turn's own edits are the only difference between its snapshots; `*.local` stays ignored. */
 async function seedRepository(cwd: string): Promise<void> {
@@ -210,12 +210,12 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     await header.getByRole('tablist').waitFor({ state: 'visible' })
     expect(await header.evaluate(element => element.getBoundingClientRect().height)).toBeGreaterThan(compactHeight)
     await card.waitFor({ state: 'visible' })
-    expect(await card.getByText('已编辑 4 个文件', { exact: true }).count()).toBe(1)
+    expect(await card.getByText('Edited 4 files', { exact: true }).count()).toBe(1)
     expect(await card.getByRole('listitem').count()).toBe(4)
-    expect(await card.getByRole('button', { name: '展开全部 4 个改动文件' }).count()).toBe(0)
+    expect(await card.getByRole('button', { name: 'Show all 4 changed files' }).count()).toBe(0)
     // The header and every row open the turn's review in the Sidebar, with or without a Host desktop.
-    expect(await card.getByRole('button', { name: '在侧边栏查看本轮改动' }).count()).toBe(1)
-    expect(await card.getByRole('button', { name: '查看 notes.txt 的改动' }).count()).toBe(1)
+    expect(await card.getByRole('button', { name: 'Review this turn’s changes in the sidebar' }).count()).toBe(1)
+    expect(await card.getByRole('button', { name: 'View changes to notes.txt' }).count()).toBe(1)
     const geometry = await card.evaluate((element) => {
       const requiredElement = <T extends Element>(value: T | null | undefined, name: string): T => {
         if (value === null || value === undefined) throw new Error(`changed-files layout is missing ${name}`)
@@ -269,7 +269,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
 
   it('previews a single column with a scrollable path and no file notes or hunk headers', async () => {
     const card = page.locator('[data-changed-files]')
-    const row = card.getByRole('button', { name: '查看 notes.txt 的改动' })
+    const row = card.getByRole('button', { name: 'View changes to notes.txt' })
     const preview = page.locator('[data-changes-hover-preview]')
     const entrance = hoverOpacityTransition(page, false)
     await row.hover()
@@ -312,7 +312,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     const review = page.locator('[data-changes-review]')
     await review.locator('[data-review-file="notes.txt"]').waitFor({ state: 'visible' })
     await review.locator('[data-review-view="unified"]').waitFor({ state: 'visible' })
-    await card.getByRole('button', { name: '查看 src/util.ts 的改动' }).hover()
+    await card.getByRole('button', { name: 'View changes to src/util.ts' }).hover()
     await preview.locator('[data-diff-code]').first().waitFor({ state: 'visible' })
     expect(await preview.locator('[data-review-view="unified"]').count()).toBe(1)
     expect(await preview.locator('[data-diff-note]').isVisible()).toBe(false)
@@ -344,11 +344,11 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
       root.locator('[data-diff-line]').evaluateAll(lines => lines.map(line => `${line.getAttribute('data-diff-line')}:${line.textContent}`))
     const review = column.locator('[data-changes-review]')
     // The header lands on the first listed file; a row lands on its own.
-    await card.getByRole('button', { name: '在侧边栏查看本轮改动' }).click()
+    await card.getByRole('button', { name: 'Review this turn’s changes in the sidebar' }).click()
     await review.locator('[data-review-file="app.local"]').waitFor({ state: 'visible' })
-    await card.getByRole('button', { name: '查看 notes.txt 的改动' }).click()
+    await card.getByRole('button', { name: 'View changes to notes.txt' }).click()
     await review.locator('[data-review-file="notes.txt"]').waitFor({ state: 'visible' })
-    expect(await column.locator('[data-dockkit-tab]').filter({ hasText: '第 1 轮改动' }).count()).toBe(1)
+    expect(await column.locator('[data-dockkit-tab]').filter({ hasText: 'Review · turn 1' }).count()).toBe(1)
     await review.locator('[data-review-view="unified"]').waitFor({ state: 'visible' })
     const compareTool = review.locator('[data-review-tool="split"]')
     const wrapTool = review.locator('[data-review-tool="wrap"]')
@@ -440,7 +440,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     expect(addedRule.numberLeft).toBeCloseTo(rightContextRule.numberLeft, 1)
     expect(addedRule.textLeft).toBeCloseTo(rightContextRule.textLeft, 1)
     // The ignored file has no snapshot; its comparison comes from the copies captured around the write call.
-    await review.getByRole('button', { name: '选择要查看的文件' }).click()
+    await review.getByRole('button', { name: 'Choose the file to review' }).click()
     const selectedAlignment = await page.getByRole('menuitem').filter({ hasText: 'notes.txt' }).evaluate((row) => {
       const center = (element: Element) => {
         const rect = element.getBoundingClientRect()
@@ -459,11 +459,11 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
     await review.locator('[data-review-file="app.local"]').waitFor({ state: 'visible' })
     await expect.poll(() => drawn(review)).toEqual(['add:1+mode=demo'])
     expect(await compareTool.getAttribute('aria-pressed')).toBe('true')
-    expect(await review.getByText('本轮新建的文件').count()).toBe(1)
+    expect(await review.getByText('Created in this turn').count()).toBe(1)
     // A mixed comparison uses the tab's retained split preference.
-    await card.getByRole('button', { name: '查看 intro.md 的改动' }).click()
+    await card.getByRole('button', { name: 'View changes to intro.md' }).click()
     await review.locator('[data-review-file="intro.md"]').waitFor({ state: 'visible' })
-    expect(await column.locator('[data-dockkit-tab]').filter({ hasText: '第 1 轮改动' }).count()).toBe(1)
+    expect(await column.locator('[data-dockkit-tab]').filter({ hasText: 'Review · turn 1' }).count()).toBe(1)
     await review.locator('[data-review-view="split"]').waitFor({ state: 'visible' })
     expect(await compareTool.getAttribute('aria-pressed')).toBe('true')
     const deletedLine = review.locator('[data-diff-side="left"] [data-diff-line="del"]').first()
@@ -564,7 +564,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
 
   it.skipIf(MODE === 'record')('keeps the file menu aligned while dragging the floating review', async () => {
     const column = page.locator('[data-rightbar-col]')
-    const tab = column.locator('[data-dockkit-tab]').filter({ hasText: '第 1 轮改动' })
+    const tab = column.locator('[data-dockkit-tab]').filter({ hasText: 'Review · turn 1' })
     const tabBox = await tab.boundingBox()
     if (tabBox === null) throw new Error('review tab is not rendered')
     await page.mouse.move(tabBox.x + 6, tabBox.y + tabBox.height / 2)
@@ -680,7 +680,7 @@ describe('web e2e: a git workspace turn ends with its changed files', () => {
       hunks: [{ oldStart: 1, oldLines: 1, newStart: 1, newLines: 2, lines: ['-before', '+after', '+extra'] }],
     } }))
     await preview.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
-    await preview.locator('[data-changed-files]').getByRole('button', { name: '查看 notes.txt 的改动' }).click()
+    await preview.locator('[data-changed-files]').getByRole('button', { name: 'View changes to notes.txt' }).click()
     const review = preview.locator('[data-changes-review]')
     await review.locator('[data-review-view="split"]').waitFor({ state: 'visible' })
     const emptyRowLayout = await preview.addStyleTag({ content: `

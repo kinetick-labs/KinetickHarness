@@ -687,7 +687,7 @@ describe('sendSession submission echo', () => {
       await vi.waitFor(() => {
         expect(b.root.fileUploads.getSnapshot()[attachments[1]!.id]?.status).toBe('ready')
       })
-      await expect(b.root.sendSession(session, '失败', attachments.map(attachment => attachment.id), 'queue'))
+      await expect(b.root.sendSession(session, 'Failed', attachments.map(attachment => attachment.id), 'queue'))
         .resolves.toEqual({ kind: 'error' })
       b.retire.onRetire?.({ reason: 'failed' })
       expect(b.root.resolveDraftAttachments(attachments.map(attachment => attachment.id))).toHaveLength(2)
@@ -730,8 +730,8 @@ describe('sendSession submission echo', () => {
     vi.stubGlobal('requestAnimationFrame', undefined)
     try {
       const session = b.runtime.sessions.binding('s1')!.session
-      await expect(b.root.sendSession(session, '纯文本', [], 'queue')).resolves.toEqual({ kind: 'success' })
-      expect(b.prompt).toHaveBeenCalledWith([{ type: 'text', text: '纯文本' }], 'queue', undefined, 'req-echo')
+      await expect(b.root.sendSession(session, 'Plain text', [], 'queue')).resolves.toEqual({ kind: 'success' })
+      expect(b.prompt).toHaveBeenCalledWith([{ type: 'text', text: 'Plain text' }], 'queue', undefined, 'req-echo')
     } finally {
       vi.unstubAllGlobals()
       b.restore()
@@ -767,9 +767,9 @@ describe('sendSession submission echo', () => {
       },
     })
     const prompt = vi.spyOn(session, 'prompt').mockResolvedValue({ ok: true, value: { accepted: true } })
-    await expect(b.root.sendSession(session, '继续', [], 'queue')).resolves.toEqual({ kind: 'success' })
+    await expect(b.root.sendSession(session, 'Continue', [], 'queue')).resolves.toEqual({ kind: 'success' })
     expect(beginSubmission).not.toHaveBeenCalled()
-    expect(prompt).toHaveBeenCalledWith([{ type: 'text', text: '继续' }], 'queue', undefined)
+    expect(prompt).toHaveBeenCalledWith([{ type: 'text', text: 'Continue' }], 'queue', undefined)
     await b.runtime.dispose()
   })
 })
@@ -862,7 +862,7 @@ describe('InputHub queue steering (empty-draft accelerated Enter)', () => {
     b.shell.steerQueue()
     await vi.waitFor(() => {
       expect(b.shell.notices.getSnapshot()).toEqual(
-        expect.objectContaining({ level: 'error', text: '插话发送失败，请重试。' }),
+        expect.objectContaining({ level: 'error', text: 'Steering failed. Try again.' }),
       )
     })
     expect(b.updateQueue).toHaveBeenCalledTimes(1)

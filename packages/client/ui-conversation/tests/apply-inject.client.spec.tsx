@@ -159,7 +159,7 @@ describe('Conversation inject API', () => {
     await vi.waitFor(() => { expect(contributions.has('file')).toBe(true) })
     const file = contributions.get('file')!
     const target = { sessionId: ROOT }
-    expect(file.label!()).toBe('文件')
+    expect(file.label!()).toBe('File')
     expect(file.available(target)).toBe(false)
     expect(file.available({ sessionId: 'missing' as SessionId })).toBe(false)
     if (file.ui.kind !== 'action') throw new Error('File must be an action')
@@ -408,7 +408,7 @@ describe('Conversation inject API', () => {
     const browser = await bench()
     const folder = new File([], 'project')
     expect(browser.composerApi(ROOT).addFiles?.([folder], new Set([folder])))
-      .toBe('只有桌面端支持添加文件夹，浏览器里请添加单个文件')
+      .toBe('Folders can only be added in the desktop app; add individual files in the browser')
     expect(browser.inputApi(ROOT).state.getSnapshot().attachmentIds).toEqual([])
     await browser.runtime.dispose()
 
@@ -430,7 +430,7 @@ describe('Conversation inject API', () => {
       // A directory the shell cannot name is refused even with the bridge present.
       const nameless = new File([], 'nameless')
       expect(composer.addFiles?.([nameless], new Set([nameless])))
-        .toBe('无法获取文件夹路径，请重新拖入')
+        .toBe('Could not obtain the folder path; drag it in again')
       await desktop.runtime.dispose()
     } finally {
       vi.unstubAllGlobals()
@@ -445,7 +445,7 @@ describe('Conversation inject API', () => {
     const composer = b.composerApi(ROOT)
     const editor = composer.keyboard!.editor
     const { state, actions } = b.inputApi(ROOT)
-    actions.setDraft('读取')
+    actions.setDraft('Read')
     editor.update(() => {
       const text = $getRoot().getAllTextNodes()[0]
       if (text === undefined || !$isTextNode(text)) throw new Error('expected text selection')
@@ -466,7 +466,7 @@ describe('Conversation inject API', () => {
       })), getData: () => '',
     } })
     editor.update(() => { editor.dispatchCommand(PASTE_COMMAND, event) }, { discrete: true })
-    expect(state.getSnapshot().draft).toBe('读取 @a.txt @"my project/" @b.txt ')
+    expect(state.getSnapshot().draft).toBe('Re @a.txt @"my project/" @b.txt ad')
     const view = render(<div>{projectUserText(state.getSnapshot().draft, [])}</div>)
     expect(view.container.querySelector('[data-ref-chip="folder"]')?.textContent).toBe('my project')
     expect(view.container.querySelector('[data-ref-chip="folder"]')?.getAttribute('title')).toBe('@"my project/"')
@@ -481,7 +481,7 @@ describe('Conversation inject API', () => {
     actions.setDraft('keep this text')
     for (const name of ['bad"name', 'bad\nname']) {
       const files = [new File([], 'good.txt'), new File([], name)]
-      expect(b.composerApi(ROOT).addFiles?.(files)).toBe('路径含有无法引用的字符，请改名后再试')
+      expect(b.composerApi(ROOT).addFiles?.(files)).toBe('The path contains characters a reference cannot carry; rename it and try again')
       expect(state.getSnapshot().draft).toBe('keep this text')
       expect(state.getSnapshot().attachmentIds).toEqual([])
       expect(b.rootUpload).not.toHaveBeenCalled()

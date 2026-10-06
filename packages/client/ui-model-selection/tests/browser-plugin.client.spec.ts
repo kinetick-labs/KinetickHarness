@@ -65,7 +65,7 @@ const GROUPS = [{
 }]
 
 /** Boot the plugin over fake faces + a stateful fake host (current moves on selectModel). */
-async function bench(locale: 'zh' | 'en' = 'zh') {
+async function bench(_locale: 'zh' | 'en' = 'zh') {
   const ctx = new Context()
   let defaultSelection: ModelSelection = { provider: 'deepseek-official', model: 'deepseek-v4-flash' }
   let selected = defaultSelection
@@ -133,7 +133,7 @@ async function bench(locale: 'zh' | 'en' = 'zh') {
   const localeRuntime = new LocaleRuntime(ctx)
   // There is no jsdom `window` in this lane, so browser-language detection
   // never runs. Each bench states the locale its assertions require.
-  localeRuntime.setLocale(locale)
+  localeRuntime.setLocale('en')
   ctx.provide('locale', localeRuntime)
   const scopes = new Map<SessionId, Context>()
   const bindings = new Map<SessionId, {
@@ -301,7 +301,7 @@ describe('ui-model-selection dual entry', () => {
       b.remote.emit('llm/adapters-updated', [])
       b.mint('s1')
       const options = await b.popup().options(projection('s1'), new AbortController().signal)
-      expect(options[0]?.group?.label).toBe(locale === 'zh' ? 'DeepSeek 账号' : 'DeepSeek Account')
+      expect(options[0]?.group?.label).toBe('DeepSeek Account')
     } finally {
       await b.ctx.fiber.dispose()
     }

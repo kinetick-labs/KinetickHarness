@@ -79,21 +79,21 @@ describe('tool-call-model', () => {
     // title here would be a second answer to what the card already renders.
     const model = toolRowModel('cordis_define', running({ name: 'cordis_define', argsRaw: '{"name":"clock"}' }))
     expect(model.variant).toBe('others')
-    expect(t(model.titleKey)).toBe('工具调用')
+    expect(t(model.titleKey)).toBe('Tool call')
   })
 
   it('renders cordis mount verbs no shipped tool implements as generic calls', () => {
     // No shipped tool implements these cordis mount verbs, so a mapping would
     // be unreachable.
     expect(classifyTool('cordis_mount')).toBe('others')
-    expect(t(toolRowModel('cordis_mount', running({ name: 'cordis_mount', argsRaw: '{}' })).titleKey)).toBe('工具调用')
-    expect(t(toolRowModel('cordis_unmount', running({ name: 'cordis_unmount', argsRaw: '{}' })).titleKey)).toBe('工具调用')
+    expect(t(toolRowModel('cordis_mount', running({ name: 'cordis_mount', argsRaw: '{}' })).titleKey)).toBe('Tool call')
+    expect(t(toolRowModel('cordis_unmount', running({ name: 'cordis_unmount', argsRaw: '{}' })).titleKey)).toBe('Tool call')
   })
 
   it('gives the pwsh shell row the bash family treatment and localized command title', () => {
     const m = toolRowModel('pwsh', running())
     expect(m.variant).toBe('bash')
-    expect(t(m.titleKey)).toBe('运行命令')
+    expect(t(m.titleKey)).toBe('Pwsh')
   })
 
   it('derives state across running/ok/error/interrupted', () => {
@@ -105,7 +105,7 @@ describe('tool-call-model', () => {
 
   it('derives the bash summary from description over command', () => {
     const m = toolRowModel('bash', running())
-    expect(t(m.titleKey)).toBe('运行命令')
+    expect(t(m.titleKey)).toBe('Bash')
     expect(m.summary).toBe('List files')
     expect(toolRowModel('bash', running({ argsRaw: '{"command":"pwd"}' })).summary).toBe('pwd')
   })
@@ -266,7 +266,7 @@ describe('tool-call-model', () => {
     expect(normalizeAutoReviewReason(null)).toBeNull()
     expect(localizeAutoReviewDenial({ reason: null }, t)).toEqual({
       summary: 'Rejected by Auto review',
-      output: '工具未执行。原因：Auto review 未授权此次操作',
+      output: 'Tool was not executed. Reason: Auto review did not authorize this action',
     })
   })
 
@@ -343,7 +343,7 @@ describe('ToolRow', () => {
     expect(view.getAllByText('end')).toHaveLength(1)
     expect(view.getByText('old', { exact: true })).toBeTruthy()
     expect(view.getByText('new', { exact: true })).toBeTruthy()
-    expect(view.queryByRole('button', { name: /展开其余/ })).toBeNull()
+    expect(view.queryByRole('button', { name: /Expand \d+ more/ })).toBeNull()
   })
 
   it('formats the argument body only while expanding it', () => {
@@ -514,19 +514,19 @@ describe('ToolRow', () => {
   it('the expanded card gutter-labels each section it carries (IN / OUT)', () => {
     const both = render(<ToolRow {...rowProps} output="result text" />)
     fireEvent.click(both.getByRole('button'))
-    expect(both.getByText('输入')).toBeTruthy()
-    expect(both.getByText('输出')).toBeTruthy()
+    expect(both.getByText('IN')).toBeTruthy()
+    expect(both.getByText('OUT')).toBeTruthy()
     expect(both.getByText('result text')).toBeTruthy()
     cleanup()
     const inputOnly = render(<ToolRow {...rowProps} />)
     fireEvent.click(inputOnly.getByRole('button'))
-    expect(inputOnly.getByText('输入')).toBeTruthy()
-    expect(inputOnly.queryByText('输出')).toBeNull()
+    expect(inputOnly.getByText('IN')).toBeTruthy()
+    expect(inputOnly.queryByText('OUT')).toBeNull()
     cleanup()
     const outputOnly = render(<ToolRow {...rowProps} bodyRaw={null} output="only out" />)
     fireEvent.click(outputOnly.getByRole('button'))
-    expect(outputOnly.queryByText('输入')).toBeNull()
-    expect(outputOnly.getByText('输出')).toBeTruthy()
+    expect(outputOnly.queryByText('IN')).toBeNull()
+    expect(outputOnly.getByText('OUT')).toBeTruthy()
     expect(outputOnly.getByText('only out')).toBeTruthy()
   })
 })
@@ -539,7 +539,7 @@ describe('GenericToolCard', () => {
 
   it('renders the classified variant row from the frozen slice', () => {
     const view = render(<GenericToolCard {...props('bash', result())} />)
-    expect(view.getByText('运行命令')).toBeTruthy()
+    expect(view.getByText('Bash')).toBeTruthy()
     expect(view.getByText('List files')).toBeTruthy()
     expect(view.container.querySelector('[data-variant="bash"]')).not.toBeNull()
   })
@@ -562,7 +562,7 @@ describe('GenericToolCard', () => {
     const view = render(
       <GenericToolCard {...props('custom_tool', running({ name: 'custom_tool', argsRaw: '{"note":"x"}' }))} />,
     )
-    expect(view.getByText('工具调用')).toBeTruthy()
+    expect(view.getByText('Tool call')).toBeTruthy()
     expect(view.container.querySelector('[data-variant="others"]')).not.toBeNull()
     expect(view.container.querySelector('[data-state="running"]')).not.toBeNull()
   })
@@ -596,7 +596,7 @@ describe('GenericToolCard', () => {
   it('passes the owner inspect callback through to the expanded row pill', () => {
     const inspect = vi.fn()
     const view = render(<GenericToolCard {...props('bash', result())} inspect={inspect} />)
-    fireEvent.click(view.getByRole('button', { name: /运行命令/ }))
+    fireEvent.click(view.getByRole('button', { name: /Bash/ }))
     fireEvent.click(view.getByText('Inspect'))
     expect(inspect).toHaveBeenCalledTimes(1)
   })
@@ -625,9 +625,9 @@ describe('GenericToolCard', () => {
     const view = render(<GenericToolCard {...props('mystery', denied)} />)
     expect(view.getByText('Rejected by Auto review')).toBeTruthy()
     fireEvent.click(view.getByRole('button'))
-    expect(view.getByText('工具未执行。原因：scope was not authorized')).toBeTruthy()
-    expect(view.queryByText('输入')).toBeNull()
-    expect(view.getAllByText('输出')).toHaveLength(1)
+    expect(view.getByText('Tool was not executed. Reason: scope was not authorized')).toBeTruthy()
+    expect(view.queryByText('IN')).toBeNull()
+    expect(view.getAllByText('OUT')).toHaveLength(1)
     expect(stringify.mock.calls.some(([value]) => (
       typeof value === 'object' && value !== null && 'path' in value
     ))).toBe(false)
