@@ -1,7 +1,8 @@
 
 
-/** English terminal copy. */
 import type {} from '@kinetick-labs/kh-client-ui-slots'
+
+/** English terminal copy. */
 export const en = {
   'shortcut.noSession': 'Select a session first',
   recoveryFailed: 'Terminal recovery failed: {message}', retryRecovery: 'Retry terminal recovery',
