@@ -874,6 +874,12 @@ importers:
       '@deepseek-ai/cordis':
         specifier: workspace:~
         version: link:../vendor/cordis
+      '@deepseek-ai/cordis-plugin-include':
+        specifier: workspace:~
+        version: link:../vendor/include
+      '@deepseek-ai/cosmokit':
+        specifier: link:../vendor/cosmokit
+        version: link:../vendor/cosmokit
       '@deepseek-ai/node-addon-system':
         specifier: workspace:~
         version: link:../native/system/packages/entry
