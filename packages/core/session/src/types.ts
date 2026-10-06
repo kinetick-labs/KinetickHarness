@@ -425,6 +425,15 @@ export interface SessionEventMap {
    * so tolerating concurrent writers needs a signal beyond the log.
    */
   'session/end-seed': { inherited?: true }
+  /**
+   * Historical watermark kept so logs written before session upload was removed
+   * stay readable. Shipped profiles do not append this event.
+   */
+  'session-log-deepseek/delivery-accepted': {
+    sessionFormatVersion?: number
+    sessionId: string
+    throughSeq: number
+  }
 }
 
 /** The appendable event-type keys of {@link SessionEventMap}, plugin-merged extensions included. */

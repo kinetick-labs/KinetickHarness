@@ -155,27 +155,27 @@ jobs:
         include:
           - platform: linux
             cores: '4'
-            runner: ubuntu-24.04
+            runner: ubuntu-latest
             workload: typecheck
           - platform: linux
             cores: '8'
-            runner: ubuntu-24.04-8core
+            runner: ubuntu-latest
             workload: typecheck
           - platform: linux
             cores: '16'
-            runner: ubuntu-24.04-16core
+            runner: ubuntu-latest
             workload: typecheck
           - platform: linux
             cores: '32'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workload: typecheck
           - platform: linux
             cores: '64'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workload: typecheck
           - platform: linux
             cores: '96'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workload: typecheck
           - platform: windows
             cores: '4'
@@ -183,23 +183,23 @@ jobs:
             workload: production-site
           - platform: windows
             cores: '8'
-            runner: windows-2025-8core
+            runner: windows-2025
             workload: production-site
           - platform: windows
             cores: '16'
-            runner: windows-2025-16core
+            runner: windows-2025
             workload: production-site
           - platform: windows
             cores: '32'
-            runner: windows-2025-32core
+            runner: windows-2025
             workload: production-site
           - platform: windows
             cores: '64'
-            runner: windows-2025-32core
+            runner: windows-2025
             workload: production-site
           - platform: windows
             cores: '96'
-            runner: windows-2025-32core
+            runner: windows-2025
             workload: production-site
     steps:
       - uses: actions/checkout@v6
@@ -246,27 +246,27 @@ jobs:
         include:
           - platform: linux
             cores: '4'
-            runner: ubuntu-24.04
+            runner: ubuntu-latest
             workers: '4'
           - platform: linux
             cores: '8'
-            runner: ubuntu-24.04-8core
+            runner: ubuntu-latest
             workers: '8'
           - platform: linux
             cores: '16'
-            runner: ubuntu-24.04-16core
+            runner: ubuntu-latest
             workers: '16'
           - platform: linux
             cores: '32'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workers: '32'
           - platform: linux
             cores: '64'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workers: '32'
           - platform: linux
             cores: '96'
-            runner: ubuntu-24.04-32core
+            runner: ubuntu-latest
             workers: '32'
           - platform: windows
             cores: '4'
@@ -274,23 +274,23 @@ jobs:
             workers: '2'
           - platform: windows
             cores: '8'
-            runner: windows-2025-8core
+            runner: windows-2025
             workers: '2'
           - platform: windows
             cores: '16'
-            runner: windows-2025-16core
+            runner: windows-2025
             workers: '2'
           - platform: windows
             cores: '32'
-            runner: windows-2025-32core
+            runner: windows-2025
             workers: '2'
           - platform: windows
             cores: '64'
-            runner: windows-2025-32core
+            runner: windows-2025
             workers: '2'
           - platform: windows
             cores: '96'
-            runner: windows-2025-32core
+            runner: windows-2025
             workers: '2'
     steps:
       - uses: actions/checkout@v6

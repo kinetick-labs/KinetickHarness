@@ -216,7 +216,7 @@ flowchart LR
   svc_subagents["ctx.subagents<br/>Subagent provider and continuation service"]
   pkg_subagent_spawn_in_process["subagent-spawn-in-process"]
   pkg_subagent_fork_in_process["subagent-fork-in-process"]
-  pkg_subagent_dsh_sdk["subagent-kh-sdk"]
+  pkg_subagent_kh_sdk["subagent-kh-sdk"]
   pkg_tool_subagent_control["tool-subagent-control"]
   pkg_tool_ralph["tool-ralph"]
   pkg_experimental_speech_to_text["experimental-speech-to-text"]
@@ -381,8 +381,8 @@ flowchart LR
   pkg_subagent_acp --> svc_subagents
   pkg_subagent_claude_code --> svc_subagents
   pkg_subagent_codex --> svc_subagents
-  pkg_subagent_dsh_sdk --> svc_subagents
   pkg_subagent_fork_in_process --> svc_subagents
+  pkg_subagent_kh_sdk --> svc_subagents
   pkg_subagent_spawn_in_process --> svc_subagents
   pkg_subprocess --> svc_subprocess
   pkg_subprocess_local --> svc_subprocess

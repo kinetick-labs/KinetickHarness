@@ -12,22 +12,11 @@ import { dirname, isAbsolute, relative, resolve, sep } from 'node:path'
 import ts from 'typescript'
 import { LINK_MAP } from './gen-cordis-catalog.ts'
 import { parseJsDoc, pointer, rawJsDoc } from './jsdoc.ts'
-import { rewriteTranslationLinkLocales } from './translation-links.ts'
-import {
-  computeTranslationPairingRecord,
-  renderTranslationPairingRecord,
-  translationPairPaths,
-} from './translation-pairing-record.ts'
-import {
-  languageSwitcherTargets,
-  parseTranslationPairingManifest,
-  renderGeneratedRegion,
-  translationPairSourcePredicate,
-} from './translation-pairing.ts'
+import { renderGeneratedRegion } from './translation-pairing.ts'
 import { githubSlug } from './verify-md-links.ts'
 
 const root = resolve(import.meta.dirname, '..')
-const PATHS = translationPairPaths('docs/config-catalog.md')
+const OUT = 'docs/config-catalog.md'
 
 /** The fenced-block info string for pasted config declarations (skipped by
  * doc-typecheck, since a lone declaration referencing imports is not
@@ -911,7 +900,7 @@ const TEXT: Record<Locale, {
     switcher: [],
     intro: [
       'Every `config:` block a `cordis.yml` entry can set: for each loadable harness package, the verbatim config declaration (JSDoc included) its `apply` function or service constructor receives, with every referenced type pasted alongside (package-local types) or linked (everything else). The paste is the plugin\'s full declared config type — a field the runtime schema deliberately excludes is a runtime-only seam (its own JSDoc says so) and is not settable from `cordis.yml`. This is the **deployment**-axis reference — the wiring a plugin author works against is the generated Cordis API region on each [subsystem page](subsystems/core.md), the model-facing tool schemas are the [tool catalog](tool-catalog.md), and [subsystems/](subsystems/core.md) documents the types these declarations reference.',
-      'Both language versions of this file are GENERATED from source (`scripts/gen-config-catalog.ts`) and verified fresh by `pnpm run verify-config-catalog` (part of `doc-sync`) — do not edit them by hand. Declaration blocks use a `ts config-catalog` fence (skipped by doc-typecheck, since a lone declaration referencing imports is not standalone-compilable). The generator also cross-checks the runtime schemastery schema against the pasted declaration — every schema-validated key, nested keys included, must be locatable on the declared config type — so the paste cannot hide a loader-accepted field.',
+      'This file is GENERATED from source (`scripts/gen-config-catalog.ts`) and verified fresh by `pnpm run verify-config-catalog` (part of `doc-sync`) — do not edit it by hand. Declaration blocks use a `ts config-catalog` fence (skipped by doc-typecheck, since a lone declaration referencing imports is not standalone-compilable). The generator also cross-checks the runtime schemastery schema against the pasted declaration — every schema-validated key, nested keys included, must be locatable on the declared config type — so the paste cannot hide a loader-accepted field.',
       'Each package entry labels its data with three identifiers: `inject` lists the service keys the plugin injects, so its `cordis.yml` tree must also load providers for those services; `refs` lists the referenced types that are not pasted here; `source` links the file that declares the config. Scope is the harness tier (`packages/`); the vendored cordis plugins a config tree may also load (the console logger, …) are pinned upstream source ([vendoring policy](../vendor/README.md)) and not catalogued here.',
     ],
     noConfig: [
@@ -998,10 +987,10 @@ function renderTable(slug: string, entries: readonly CatalogEntry[], withClass: 
 }
 
 /**
- * Render one language version of the catalog (pure, deterministic given sorted entries).
+ * Render the catalog page. The committed file is English; `locale` selects the surrounding prose.
  * @param entries - Catalog entries sorted by package name.
  * @param locale - Language whose prose surrounds the shared generated regions.
- * @returns The page with English-side document links; the caller localizes the Chinese page.
+ * @returns The catalog page.
  */
 export function render(entries: CatalogEntry[], locale: Locale = 'en'): string {
   const byName = new Map(entries.map(e => [e.pkg, e]))
@@ -1022,34 +1011,17 @@ export function render(entries: CatalogEntry[], locale: Locale = 'en'): string {
 }
 
 /**
- * Compute both language versions and their consistency record.
- * @param scanRoot - Repository root used to resolve paired-document links.
- * @returns Repository-relative output paths and exact generated content.
+ * Compute the English catalog. Documentation in this repository is English only.
+ * @param scanRoot - Repository root whose package sources supply the catalog.
+ * @returns The repository-relative catalog path and its exact generated content.
  */
 export function computeConfigCatalogOutputs(scanRoot: string = root): ReadonlyMap<string, string> {
-  const entries = collectConfigCatalog()
-  const context = {
-    repoRoot: scanRoot,
-    isTranslationPairSource: translationPairSourcePredicate(parseTranslationPairingManifest(
-      readFileSync(resolve(scanRoot, 'scripts/translation-pairing.manifest.json'), 'utf8'),
-    )),
-  }
-  const en = render(entries, 'en')
-  const zh = rewriteTranslationLinkLocales(
-    render(entries, 'zh'),
-    { ...context, sourcePath: PATHS.zh },
-    languageSwitcherTargets(PATHS.source),
-  ).content
-  return new Map([
-    [PATHS.source, en],
-    [PATHS.zh, zh],
-    [PATHS.meta, renderTranslationPairingRecord(PATHS, computeTranslationPairingRecord(PATHS, en, zh, context))],
-  ])
+  return new Map([[OUT, render(collectConfigCatalog(scanRoot), 'en')]])
 }
 
-/** CLI entry: default writes the catalog pair and record, `--check` fails if any
+/** CLI entry: default writes the English catalog, `--check` fails when the
  * committed copy is stale. Guarded behind an entry-point check so importing this
- * module for tests neither regenerates the committed files nor calls process.exit. */
+ * module for tests neither regenerates the committed file nor calls process.exit. */
 function main(): void {
   const outputs = computeConfigCatalogOutputs()
   const stale = [...outputs].filter(([path, content]) => (

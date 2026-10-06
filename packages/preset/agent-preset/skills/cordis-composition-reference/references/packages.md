@@ -427,8 +427,8 @@ Every package below exports a Cordis plugin that a bundle patch can name in a Lo
 | `@kinetick-labs/kh-subagent-acp` | yes | Out-of-process ACP subagent backend: drives a child agent in a spawned subprocess over the Agent Client Protocol |
 | `@kinetick-labs/kh-subagent-claude-code` | yes | One-shot Claude Code subagent provider over the official Agent SDK |
 | `@kinetick-labs/kh-subagent-codex` | yes | One-shot Codex subagent provider over the official app-server protocol |
-| `@kinetick-labs/kh-subagent-kh-sdk` | yes | Out-of-process SDK subagent backend: drives a child KinetickHarness runtime subprocess over stdio JSON-RPC through the TypeScript SDK client |
 | `@kinetick-labs/kh-subagent-fork-in-process` | yes | In-process fork subagent backend: runs a child agent seeded with a prefix of the parent's log |
+| `@kinetick-labs/kh-subagent-kh-sdk` | yes | Out-of-process SDK subagent backend: drives a child KinetickHarness runtime subprocess over stdio JSON-RPC through the TypeScript SDK client |
 | `@kinetick-labs/kh-subagent-spawn-in-process` | yes | In-process spawn subagent backend: runs a fresh child agent on ctx.agents |
 | `@kinetick-labs/kh-tool-subagent` | yes | Model-facing subagent delegation tool over the ctx.subagents seam |
 | `@kinetick-labs/kh-tool-subagent-control` | no | Globally named send_message, interrupt_agent, and list_agents tools over ctx.subagents continuations |

@@ -1,13 +1,27 @@
 import { defineConfig } from 'tsdown'
+import { typertPlugin } from '../packages/typert/generator/lib/types/tsdown-plugin.js'
 
+// Benchmark workers bundle workspace `lib` products into a single file, so the
+// typert decorator stripper that the root config installs must run here too:
+// without it, `@Remote` metadata emitted by the package build survives into the
+// worker bundle and Node rejects the module at import time.
+//
+// The vendored framework (@deepseek-ai/*) is bundled into the workers: its
+// FiberState is a `const enum`, i.e. a type-only export once the framework
+// lib is built, so importing it as an external demands a runtime named
+// export that does not exist ("does not provide an export named
+// 'FiberState'"). Rolldown inlines the enum members when the framework is
+// part of the bundle graph. Workspace harness packages (@kinetick-labs/*)
+// stay external and resolve through their built lib entrypoints.
 const shared = {
+  plugins: [typertPlugin({ mode: 'workspace', faces: ['host'] })],
   format: 'esm' as const,
   platform: 'node' as const,
   target: 'es2024',
   fixedExtension: false,
   dts: false,
   deps: {
-    neverBundle: [/^@deepseek-ai\//],
+    neverBundle: [/^@kinetick-labs\//],
     onlyBundle: false as const,
   },
 }

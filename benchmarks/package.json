@@ -10,7 +10,6 @@
     "@kinetick-labs/kh-terminal": "workspace:*",
     "@kinetick-labs/kh-subprocess": "workspace:*",
     "@kinetick-labs/kh-llm-replay": "workspace:*",
-    "@deepseek-ai/cordis": "workspace:~",
     "@kinetick-labs/kh-agent": "workspace:*",
     "@kinetick-labs/kh-agent-loop": "workspace:*",
     "@kinetick-labs/kh-agent-loop-testkit": "workspace:*",
@@ -47,6 +46,5 @@
     "zod": "^4.4.3"
   },
   "peerDependencies": {
-    "@deepseek-ai/cordis": "workspace:~"
   }
 }

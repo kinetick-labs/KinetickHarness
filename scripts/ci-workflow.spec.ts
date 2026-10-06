@@ -650,8 +650,8 @@ describe('Python release workflows', () => {
     })
     expect(pythonCompat.strategy).toMatchObject({ matrix: { python: ['3.10', '3.14'] } })
     const pythonCompatSteps = JSON.stringify(pythonCompat.steps)
-    expect(pythonCompatSteps).toContain('dist/deepseek_harness_sdk-$VERSION-py3-none-any.whl')
-    expect(pythonCompatSteps).toContain('dist/deepseek_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_x86_64.whl')
+    expect(pythonCompatSteps).toContain('dist/kinetick_harness_sdk-$VERSION-py3-none-any.whl')
+    expect(pythonCompatSteps).toContain('dist/kinetick_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_x86_64.whl')
     expect(pythonCompatSteps).not.toContain('--find-links')
     const validateSteps = JSON.stringify(validate.steps)
     const authorize = validate.steps.filter(isRecord).find(step => step.name === 'Authorize publication request')
@@ -868,6 +868,7 @@ describe('Weighted approval workflow', () => {
     if (!Array.isArray(recordJob.steps)) throw new TypeError('weighted-approval review event job must define steps')
     const steps = job.steps.filter(isRecord)
     const checkout = steps.find(step => step.name === 'Check out trusted approval policy')
+    const advisory = steps.find(step => step.name === 'Publish advisory approval')
     const publish = steps.find(step => step.name === 'Publish weighted approval status')
     const recordSteps = recordJob.steps.filter(isRecord)
     const record = recordSteps.find(step => step.name === 'Record review event')
@@ -900,6 +901,10 @@ describe('Weighted approval workflow', () => {
       'runs-on': 'ubuntu-latest',
       'timeout-minutes': 5,
     })
+    expect(advisory).toMatchObject({
+      if: "vars.KH_WEIGHTED_APPROVAL != 'enforce'",
+      run: 'node .github/review-ownership/check-approval.mjs advisory',
+    })
     expect(checkout).toMatchObject({
       uses: 'actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1',
       with: {
@@ -908,14 +913,15 @@ describe('Weighted approval workflow', () => {
       },
     })
     const setupIndex = steps.findIndex(step => typeof step.uses === 'string' && step.uses.startsWith('actions/setup-python@'))
-    expect(steps[setupIndex]?.if).toBe("steps.revoke.outputs.active == 'true'")
+    expect(steps[setupIndex]?.if).toBe("vars.KH_WEIGHTED_APPROVAL == 'enforce' && steps.revoke.outputs.active == 'true'")
     expect(steps[setupIndex]?.uses).toBe('actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1')
     const revokeIndex = steps.findIndex(step => step.id === 'revoke')
     expect(revokeIndex).toBeGreaterThan(steps.indexOf(checkout!))
     expect(revokeIndex).toBeLessThan(setupIndex)
+    expect(steps[revokeIndex]?.if).toBe("vars.KH_WEIGHTED_APPROVAL == 'enforce'")
     expect(steps[revokeIndex]?.run).toBe('node .github/review-ownership/check-approval.mjs pending')
     expect(steps.at(-1)).toMatchObject({
-      if: "failure() && steps.revoke.outputs.active == 'true'",
+      if: "failure() && vars.KH_WEIGHTED_APPROVAL == 'enforce' && steps.revoke.outputs.active == 'true'",
       run: 'node .github/review-ownership/check-approval.mjs error',
     })
     const pythonJob = workflowJob(loadWorkflow('.github/workflows/ci.yml'), 'python-sdk')
@@ -924,11 +930,11 @@ describe('Weighted approval workflow', () => {
       run: "uv run --python 3.10 --with-requirements .github/review-ownership/requirements.txt python -m unittest discover -s .github/review-ownership -p 'test_*.py'",
     })
     expect(steps.find(step => step.name === 'Install production lexer')).toMatchObject({
-      if: "steps.revoke.outputs.active == 'true'",
+      if: "vars.KH_WEIGHTED_APPROVAL == 'enforce' && steps.revoke.outputs.active == 'true'",
       run: 'python3 -m pip install -r .github/review-ownership/requirements.txt',
     })
     expect(publish).toMatchObject({
-      if: "steps.revoke.outputs.active == 'true'",
+      if: "vars.KH_WEIGHTED_APPROVAL == 'enforce' && steps.revoke.outputs.active == 'true'",
       env: {
         GITHUB_TOKEN: '${{ github.token }}',
         GITHUB_RUN_URL: '${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}',
@@ -982,8 +988,11 @@ describe('Issue lifecycle workflow', () => {
     const steps = lifecycleJob.steps.filter(isRecord)
     const tokenStep = steps.find(s => s.name === 'Create project token')
     const handleStep = steps.find(s => s.name === 'Handle repository event')
-    expect(tokenStep?.if).toBeUndefined()
-    expect(handleStep?.if).toBeUndefined()
+    const credentialStep = steps.find(s => s.id === 'issue-app')
+    expect(credentialStep?.if).toBeUndefined()
+    expect(tokenStep?.if).toBe("${{ steps.issue-app.outputs.configured == 'true' }}")
+    expect(tokenStep).toMatchObject({ with: { owner: 'kinetick-labs', repositories: 'kinetick-harness' } })
+    expect(handleStep?.if).toBe("${{ steps.issue-app.outputs.configured == 'true' }}")
 
     // issue-policy owns PR validation; it is read-only and a real gate.
     const policyPullRequest = workflowEvent(policy, 'pull_request')
@@ -1001,18 +1010,18 @@ describe('Issue lifecycle workflow', () => {
     expect(preflightStep).toMatchObject({ shell: 'bash' })
     expect(preflightStep?.run).toContain('if [ -f .github/issue-management/selective-preflight.json ]; then')
     expect(preflightStep?.run).toContain('node .github/issue-management/policy.mjs pr-preflight')
-    expect(preflightStep?.if).toBeUndefined()
+    expect(preflightStep?.if).toBe("steps.issue-app.outputs.configured == 'true'")
     expect(policyJob.if).toBeUndefined()
-    expect(validateStep?.if).toBe("${{ steps.preflight.outputs.legacy-automated != 'true' }}")
+    expect(validateStep?.if).toBe("${{ steps.issue-app.outputs.configured == 'true' && steps.preflight.outputs.legacy-automated != 'true' }}")
 
     expect(tokenStep).toMatchObject({
       id: 'app-token',
-      if: "${{ steps.preflight.outputs.needs-project == 'true' }}",
+      if: "${{ steps.issue-app.outputs.configured == 'true' && steps.preflight.outputs.needs-project == 'true' }}",
       uses: 'actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1',
       with: {
         'client-id': '${{ vars.KH_ISSUE_APP_CLIENT_ID }}',
         'private-key': '${{ secrets.KH_ISSUE_APP_PRIVATE_KEY }}',
-        owner: 'kinetick-harness',
+        owner: 'kinetick-labs',
         repositories: 'kinetick-harness',
         'permission-issues': 'read',
         'permission-organization-projects': 'read',

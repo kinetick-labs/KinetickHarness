@@ -74,9 +74,9 @@ flowchart TD
     pkg_subagent_acp["subagent-acp"]
     pkg_subagent_claude_code["subagent-claude-code"]
     pkg_subagent_codex["subagent-codex"]
-    pkg_subagent_dsh_sdk["subagent-kh-sdk"]
     pkg_subagent_fork_in_process["subagent-fork-in-process"]
     pkg_subagent_in_process_driver["subagent-in-process-driver"]
+    pkg_subagent_kh_sdk["subagent-kh-sdk"]
     pkg_subagent_spawn_in_process["subagent-spawn-in-process"]
     pkg_tool_subagent["tool-subagent"]
     pkg_tool_subagent_control["tool-subagent-control"]
@@ -1326,12 +1326,12 @@ flowchart TD
   pkg_client_test_runtime --> pkg_session
   pkg_client_test_runtime --> pkg_subagent
   pkg_client_test_runtime --> pkg_typert_protocol
-  pkg_subagent_dsh_sdk --> pkg_agent
-  pkg_subagent_dsh_sdk --> pkg_llm
-  pkg_subagent_dsh_sdk --> pkg_sdk_client
-  pkg_subagent_dsh_sdk --> pkg_session
-  pkg_subagent_dsh_sdk --> pkg_subagent
-  pkg_subagent_dsh_sdk --> pkg_subprocess
+  pkg_subagent_kh_sdk --> pkg_agent
+  pkg_subagent_kh_sdk --> pkg_llm
+  pkg_subagent_kh_sdk --> pkg_sdk_client
+  pkg_subagent_kh_sdk --> pkg_session
+  pkg_subagent_kh_sdk --> pkg_subagent
+  pkg_subagent_kh_sdk --> pkg_subprocess
   pkg_tool_schedule --> pkg_llm
   pkg_tool_schedule --> pkg_schedule
   pkg_tool_schedule --> pkg_subagent
