@@ -5072,14 +5072,6 @@ export const TYPE_API: readonly TypeApiEntry[] = [
     declaration: 'export interface DomainTableSpec<K extends string = string, V = unknown> {\n    readonly valueSchema: ZodType<V>;\n    readonly __key?: K;\n}',
   },
   {
-    name: 'KhEnvironment',
-    declaration: 'export type KhEnvironment = Readonly<Record<KhEnvironmentKey, string>>;',
-  },
-  {
-    name: 'KhEnvironmentKey',
-    declaration: 'export type KhEnvironmentKey = `${typeof KH_ENV_PREFIX}${string}`;',
-  },
-  {
     name: 'DynamicCordisPackage',
     declaration: 'export interface DynamicCordisPackage {\n    pluginId: CordisDynamicPluginId;\n    packageId: CordisDynamicPackageId;\n    pluginRunId: CordisDynamicPluginRunId;\n    name: string;\n}',
   },
@@ -5522,6 +5514,14 @@ export const TYPE_API: readonly TypeApiEntry[] = [
   {
     name: 'JsonValue',
     declaration: 'export type JsonValue = null | boolean | number | string | JsonValue[] | {\n    [key: string]: JsonValue;\n};',
+  },
+  {
+    name: 'KhEnvironment',
+    declaration: 'export type KhEnvironment = Readonly<Record<KhEnvironmentKey, string>>;',
+  },
+  {
+    name: 'KhEnvironmentKey',
+    declaration: 'export type KhEnvironmentKey = `${typeof KH_ENV_PREFIX}${string}`;',
   },
   {
     name: 'KvFacet',
