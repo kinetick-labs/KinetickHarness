@@ -107,6 +107,9 @@ export abstract class ReleaseFamily {
   /** Git tag prefix this family publishes from. */
   abstract readonly tagPrefix: string
 
+  /** npm scope the family's member names carry. */
+  abstract readonly scope: string
+
   /**
    * Assert that built artifacts match this release family's required profile.
    * Families without environment-selected artifacts accept every build tree.
@@ -132,7 +135,7 @@ export abstract class ReleaseFamily {
       const name = requireString(manifest, 'name', normalized)
       const version = requireString(manifest, 'version', normalized)
       if (name === WORKSPACE_ROOT_PACKAGE) throw new Error(`${normalized} selected the workspace root`)
-      if (!name.startsWith('@deepseek-ai/')) throw new Error(`${normalized} must name an @deepseek-ai package`)
+      if (!name.startsWith(`@${this.scope}/`)) throw new Error(`${normalized} must name an @${this.scope} package`)
       if (seen.has(name)) throw new Error(`${name} appears twice in release family ${this.id}`)
       seen.add(name)
       members.push({
@@ -326,6 +329,7 @@ class KhFamily extends ReleaseFamily {
     'apps/*/package.json',
   ] as const
   readonly tagPrefix = 'kh-v'
+  readonly scope = 'kinetick-labs'
 
   /** Require current artifacts from a complete official client build. */
   override verifyBuildArtifacts(root: string): void {
@@ -377,6 +381,7 @@ class VendorFamily extends ReleaseFamily {
   readonly id = 'vendor'
   readonly patterns = ['vendor/*/package.json'] as const
   readonly tagPrefix = 'vendor-'
+  readonly scope = 'deepseek-ai'
 
   /**
    * Accept independent versions; only reject a version this repository cannot publish.
@@ -396,7 +401,7 @@ class VendorFamily extends ReleaseFamily {
    * @returns `vendor-<unscoped name>-v`.
    */
   tagPrefixFor(member: ReleaseMember): string {
-    return `${this.tagPrefix}${member.name.replace('@deepseek-ai/', '')}-v`
+    return `${this.tagPrefix}${member.name.replace(`@${this.scope}/`, '')}-v`
   }
 
   /**

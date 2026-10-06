@@ -119,7 +119,7 @@ jobs:
 
   sdk-wheel:
     needs: plan
-    name: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+    name: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
     runs-on: >-
       ${{ inputs.ci && !inputs.release && vars.KH_CI_FAILOVER_LINUX == 'blacksmith'
           && 'blacksmith-4vcpu-ubuntu-2404' || 'ubuntu-latest' }}
@@ -142,8 +142,8 @@ jobs:
 
       - uses: actions/upload-artifact@v7
         with:
-          name: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
-          path: dist-python/deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          name: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          path: dist-python/kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
           if-no-files-found: error
           retention-days: 7
 
@@ -267,10 +267,10 @@ jobs:
           platform="${TARGET#node24-}"
           exe="$PWD/dist-exe/kinetick-harness-sdk-runtime-$platform"
           case "$platform" in
-            linux-x64) wheel=deepseek_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_x86_64.whl ;;
-            linux-arm64) wheel=deepseek_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_aarch64.whl ;;
-            macos-arm64) wheel=deepseek_harness_runtime_bin-$VERSION-py3-none-macosx_14_0_arm64.whl ;;
-            macos-x64) wheel=deepseek_harness_runtime_bin-$VERSION-py3-none-macosx_14_0_x86_64.whl ;;
+            linux-x64) wheel=kinetick_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_x86_64.whl ;;
+            linux-arm64) wheel=kinetick_harness_runtime_bin-$VERSION-py3-none-manylinux_2_28_aarch64.whl ;;
+            macos-arm64) wheel=kinetick_harness_runtime_bin-$VERSION-py3-none-macosx_14_0_arm64.whl ;;
+            macos-x64) wheel=kinetick_harness_runtime_bin-$VERSION-py3-none-macosx_14_0_x86_64.whl ;;
             *) echo "::error::Unsupported runtime platform $platform"; exit 1 ;;
           esac
           [ -x "$exe" ] || { echo "::error::$exe missing or not executable"; exit 1; }
@@ -289,7 +289,7 @@ jobs:
           if ($env:TARGET -ne 'node24-win-x64') { throw "Unsupported runtime target $env:TARGET" }
           $platform = 'win-x64'
           $exe = Join-Path $PWD 'dist-exe\kinetick-harness-sdk-runtime-win-x64.exe'
-          $wheel = "deepseek_harness_runtime_bin-$env:VERSION-py3-none-win_amd64.whl"
+          $wheel = "kinetick_harness_runtime_bin-$env:VERSION-py3-none-win_amd64.whl"
           if (-not (Test-Path -LiteralPath $exe -PathType Leaf)) { throw "Runtime executable is missing at $exe" }
           "platform=$platform" >> $env:GITHUB_OUTPUT
           "exe=$exe" >> $env:GITHUB_OUTPUT
@@ -305,7 +305,7 @@ jobs:
 
       - uses: actions/download-artifact@v8
         with:
-          name: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          name: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
           path: dist-python
 
       - name: Install local SDK and runtime wheels into a clean venv (POSIX)
@@ -313,7 +313,7 @@ jobs:
         if: runner.os != 'Windows'
         env:
           RUNTIME_WHEEL: ${{ steps.runtime-posix.outputs.wheel }}
-          SDK_WHEEL: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          SDK_WHEEL: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
         run: |
           set -euo pipefail
           venv="$(python -c 'import tempfile; print(tempfile.mkdtemp(prefix="kh-sdk-smoke-"))')"
@@ -330,7 +330,7 @@ jobs:
         shell: pwsh
         env:
           RUNTIME_WHEEL: ${{ steps.runtime-windows.outputs.wheel }}
-          SDK_WHEEL: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          SDK_WHEEL: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
         run: |
           $venv = (& python -c 'import tempfile; print(tempfile.mkdtemp(prefix="kh-sdk-smoke-"))').Trim()
           python -m venv $venv
@@ -475,7 +475,7 @@ jobs:
         env:
           RUNNER_ARCH: ${{ runner.arch }}
           RUNTIME_WHEEL: ${{ steps.runtime-posix.outputs.wheel }}
-          SDK_WHEEL: deepseek_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
+          SDK_WHEEL: kinetick_harness_sdk-${{ needs.plan.outputs.version }}-py3-none-any.whl
         run: |
           set -euo pipefail
           case "$RUNNER_ARCH" in

@@ -1,6 +1,12 @@
 import { defineConfig } from 'tsdown'
+import { typertPlugin } from '../packages/typert/generator/lib/types/tsdown-plugin.js'
 
+// Benchmark workers bundle workspace `lib` products into a single file, so the
+// typert decorator stripper that the root config installs must run here too:
+// without it, `@Remote` metadata emitted by the package build survives into the
+// worker bundle and Node rejects the module at import time.
 const shared = {
+  plugins: [typertPlugin({ mode: 'workspace', faces: ['host'] })],
   format: 'esm' as const,
   platform: 'node' as const,
   target: 'es2024',

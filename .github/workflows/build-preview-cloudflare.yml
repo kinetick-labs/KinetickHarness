@@ -4,6 +4,11 @@ name: Build PR preview
 # Cloudflare Pages under its own branch alias, behind Cloudflare Access. The
 # upload carries build products only: the workflow never grants the deployment
 # platform access to this repository's sources.
+#
+# The fork has no Cloudflare secrets (CLOUDFLARE_API_TOKEN /
+# CLOUDFLARE_ACCOUNT_ID), so the deployment step is skipped while they are
+# absent: the lane still builds and packs the preview on hosted runners, and
+# publishing lights up again as soon as the secrets are configured.
 
 on:
   pull_request:
@@ -84,7 +89,20 @@ jobs:
           find apps/web/dist -name '*.map' -delete
           cp apps/web/dist/preview.html apps/web/dist/index.html
 
+      - name: Resolve the Cloudflare gate
+        id: cloudflare
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ]; then
+            echo 'enabled=true' >> "$GITHUB_OUTPUT"
+          else
+            echo '::notice::CLOUDFLARE_API_TOKEN secret is not configured on this repository; skipping the Pages upload (build and pack still ran).'
+            echo 'enabled=false' >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Upload to Cloudflare Pages
+        if: steps.cloudflare.outputs.enabled == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
