@@ -623,9 +623,12 @@ describe('DeepSeek e2e workflow', () => {
     expect(preflight).toMatchObject({ id: 'key' })
     expect(String(preflight?.run)).toContain('configured=false')
     expect(String(preflight?.run)).not.toContain('exit 1')
+    const setupNode = steps.find(step => step.uses === 'actions/setup-node@v6')
     expect(tests).toMatchObject({ if: "steps.key.outputs.configured == 'true'" })
+    expect(setupNode).toMatchObject({ if: "steps.key.outputs.configured == 'true'" })
     expect(key).toBeGreaterThanOrEqual(0)
     expect(install).toBeGreaterThan(key)
+    expect(steps.findIndex(step => step.uses === 'actions/setup-node@v6')).toBeGreaterThan(key)
   })
 
   it('bounds profile subprocess fan-out to the tested e2e default', () => {
