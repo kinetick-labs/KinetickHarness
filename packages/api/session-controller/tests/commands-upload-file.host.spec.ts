@@ -20,7 +20,7 @@ import type { SessionRequestId } from '../src/types.ts'
 
 const SESSION = SessionId('upload-session')
 
-async function uploadHarness(origin?: 'subagent'): Promise<{
+async function uploadHarness(origin?: 'subagent', modelSelection?: ModelSelectionRef): Promise<{
   ctx: Context
   controller: SessionCommandController
   uploads: FileUploads
@@ -88,7 +88,7 @@ async function uploadHarness(origin?: 'subagent'): Promise<{
     listProviders: () => [{ id: 'fixture', name: 'Fixture' }],
     resolveModelInfo: () => Promise.resolve({ provider: 'fixture', id: 'fixture-model', name: 'Fixture' }),
   } as never)
-  const selection: ModelSelectionRef = {
+  const selection: ModelSelectionRef = modelSelection ?? {
     current: { provider: 'fixture', model: 'fixture-model' },
     assembled: undefined,
   }
@@ -124,13 +124,10 @@ function promptRequest(content: Parameters<SessionCommandController['prompt']>[0
 
 describe('Session file uploads', () => {
   it('rejects a prompt when the session has no model selection', async () => {
-    const { ctx, agent, disposeAgent } = await uploadHarness()
-    const agents = {
-      resolveAgent: () => Promise.resolve({ agent }),
-      selectionFor: () => ({ current: undefined, assembled: undefined }),
-      serializeImageAdmission: <Value>(_agent: Agent, operation: () => Promise<Value>) => operation(),
-    } as unknown as ApiSessionAgentController
-    const controller = new SessionCommandController(ctx, agents, '/workspace')
+    const { controller, disposeAgent } = await uploadHarness(undefined, {
+      current: undefined,
+      assembled: undefined,
+    })
     await expect(controller.prompt(promptRequest([{ type: 'text', text: 'hello' }]))).rejects.toMatchObject({
       code: 'session/model-unavailable',
       message: 'Select an available model before sending a message.',
