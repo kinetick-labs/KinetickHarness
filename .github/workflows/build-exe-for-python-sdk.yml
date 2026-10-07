@@ -358,6 +358,7 @@ jobs:
           }
 
       - name: Preflight installed-wheel real API test (POSIX)
+        id: live-api-posix
         if: >-
           inputs.ci
           && runner.os != 'Windows'
@@ -369,11 +370,14 @@ jobs:
         run: |
           set -euo pipefail
           if [ -z "${DEEPSEEK_API_KEY:-}" ]; then
-            echo "::error::DEEPSEEK_API_KEY_EXTERNAL is empty; the installed-wheel real API test cannot self-skip."
-            exit 1
+            echo "::notice::DEEPSEEK_API_KEY_EXTERNAL is not configured; skipping the installed-wheel real API test."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
           fi
 
       - name: Preflight installed-wheel real API test (Windows)
+        id: live-api-windows
         if: >-
           inputs.ci
           && runner.os == 'Windows'
@@ -385,13 +389,17 @@ jobs:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY_EXTERNAL }}
         run: |
           if ([string]::IsNullOrWhiteSpace($env:DEEPSEEK_API_KEY)) {
-            throw 'DEEPSEEK_API_KEY_EXTERNAL is empty; the installed-wheel real API test cannot self-skip.'
+            Write-Output '::notice::DEEPSEEK_API_KEY_EXTERNAL is not configured; skipping the installed-wheel real API test.'
+            Add-Content -Path $env:GITHUB_OUTPUT -Value 'configured=false'
+          } else {
+            Add-Content -Path $env:GITHUB_OUTPUT -Value 'configured=true'
           }
 
       - name: Run installed-wheel real API black-box test (POSIX)
         if: >-
           inputs.ci
           && runner.os != 'Windows'
+          && steps.live-api-posix.outputs.configured == 'true'
           && (github.event_name != 'pull_request'
               || !(github.event.pull_request.head.repo.fork
                    || github.event.pull_request.user.login == 'dependabot[bot]'))
@@ -412,6 +420,7 @@ jobs:
         if: >-
           inputs.ci
           && runner.os == 'Windows'
+          && steps.live-api-windows.outputs.configured == 'true'
           && (github.event_name != 'pull_request'
               || !(github.event.pull_request.head.repo.fork
                    || github.event.pull_request.user.login == 'dependabot[bot]'))

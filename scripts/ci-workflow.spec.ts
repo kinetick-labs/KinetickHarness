@@ -610,6 +610,24 @@ describe('DeepSeek e2e workflow', () => {
     expect(JSON.stringify(steps)).not.toContain('apt-get')
   })
 
+  it('skips real-API steps when the DeepSeek secret is unset', () => {
+    const workflow = loadWorkflow('.github/workflows/e2e.yml')
+    const e2e = workflowJob(workflow, 'e2e')
+    if (!Array.isArray(e2e.steps)) throw new TypeError('DeepSeek e2e workflow must define steps')
+
+    const steps = e2e.steps.filter(isRecord)
+    const preflight = steps.find(step => step.name === 'Preflight (DEEPSEEK_API_KEY)')
+    const tests = steps.find(step => step.name === 'E2E tests (real DeepSeek API)')
+    const key = steps.findIndex(step => step.name === 'Preflight (DEEPSEEK_API_KEY)')
+    const install = steps.findIndex(step => step.name === 'Install (immutable)')
+    expect(preflight).toMatchObject({ id: 'key' })
+    expect(String(preflight?.run)).toContain('configured=false')
+    expect(String(preflight?.run)).not.toContain('exit 1')
+    expect(tests).toMatchObject({ if: "steps.key.outputs.configured == 'true'" })
+    expect(key).toBeGreaterThanOrEqual(0)
+    expect(install).toBeGreaterThan(key)
+  })
+
   it('bounds profile subprocess fan-out to the tested e2e default', () => {
     const workflow = loadWorkflow('.github/workflows/e2e.yml')
     const e2e = workflowJob(workflow, 'e2e')
