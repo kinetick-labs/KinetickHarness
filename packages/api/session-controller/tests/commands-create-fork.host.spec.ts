@@ -272,6 +272,19 @@ describe('Session fork failures', () => {
     await ctx.fiber.dispose()
   })
 
+  it('rejects a fork when no default model is selected', async () => {
+    const ctx = await baseContext()
+    ctx.provide('workspaceRegistry', { list: () => [] } as never)
+    ;(ctx.agentDefaultModel as { currentSelection: () => undefined }).currentSelection = () => undefined
+    const source = completedSession(ctx, 'no-model-source', '/workspace')
+    const controller = new SessionCommandController(ctx, controllerAgents(), '/default')
+    await expect(controller.fork({ sessionId: source.id })).rejects.toMatchObject({
+      code: 'gateway/internal',
+      message: expect.stringContaining('Select an available model before forking a session.'),
+    })
+    await ctx.fiber.dispose()
+  })
+
   it('carries the composed Agent preset into the child metadata', async () => {
     const ctx = await baseContext()
     ctx.provide('workspaceRegistry', { list: () => [] } as never)

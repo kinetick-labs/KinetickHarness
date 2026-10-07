@@ -19,7 +19,7 @@ async function main(): Promise<void> {
   const runtimeDir = process.argv[2] as string
   const projectDir = process.argv[3] as string
   installOfficeEngineResolution(runtimeDir)
-  const installAnchor = join(runtimeDir, 'node_modules', '@deepseek-ai', 'kh', 'package.json')
+  const installAnchor = join(runtimeDir, 'node_modules', '@kinetick-labs', 'kh', 'package.json')
   const profile = loadProfileDirectory('kh', projectDir, installAnchor)
   reportSkippedBundles('kh', profile)
   const application = runProfile({

@@ -3,7 +3,7 @@ name: kh-code-review
 description: Use when reviewing a pull request in the kinetick-harness repo — orients the reviewer to this codebase's standards (AGENTS.md conventions, defensive patterns, ADRs, quality gates) and the review-specific checks that code alone can't show
 ---
 
-# Reviewing a DeepSeek-Harness PR
+# Reviewing a Kinetick Harness PR
 
 **This skill is guidance, not a complete checklist.** Verify and fetch the PR's live base and exact head, then run `pnpm --silent run change-scope --base <verified-base-ref> --head <verified-head-ref>` before reading the diff and enough surrounding code to understand the design. The report identifies paths and dirty layers but does not replace semantic review. Re-establish the base and rerun it after a retarget or merge. Prioritize correctness, lifecycle, security, and broken required behavior over style; a short review with one substantiated blocker is better than a list of nits.
 
@@ -17,7 +17,7 @@ description: Use when reviewing a pull request in the kinetick-harness repo — 
 - [kh-client-ui-ux](../kh-client-ui-ux/SKILL.md): feedback-surface choice, overlay safety, platform window adaptation, and visual token discipline for product-user-visible GUI changes.
 - [docs/testing.md](../../../docs/testing.md) and the [quality-gates reference](../../../docs/testing.md): required test tiers and gates.
 - [Agent Notes](../../notes/README.md): design rationale. Treat disagreement with an Agent Note as a design discussion, not an automatic veto.
-- For bilingual changes, read [translation-rules.md](../../../docs/i18n/translation-rules.md) and [terminology.md](../../../docs/i18n/terminology.md); the extended translation skill is outside automatic review and runs only on explicit user invocation.
+- Documentation is English only. [docs/i18n/README.md](../../../docs/i18n/README.md) forbids Chinese counterparts.
 
 ## Blocking requirements
 

@@ -75,7 +75,7 @@ describe.skipIf(MODE === 'record').each([
     const trigger = page.getByRole('button', { name: /^选择模型/ })
     await trigger.waitFor({ timeout: 15_000 })
     await trigger.click()
-    await page.getByRole('menuitem', { name: /推理等级/ }).click()
+    await page.getByRole('menuitem', { name: /Effort/ }).click()
 
     // Declared levels, nothing else: the provider-default entry (the route
     // configures no `reasoning`), then Off/High/Max — minimal, low, medium,
@@ -113,12 +113,12 @@ describe.skipIf(MODE === 'record').each([
       { timeout: 10_000 },
     ).toContain('reasoningEffort: high')
     await expect.poll(() => trigger.getAttribute('aria-label'), { timeout: 10_000 })
-      .toBe('选择模型，当前 Acme Think，推理等级 High')
+      .toBe('Select model, current Acme Think, reasoning effort High')
 
     // Reopening the drilled pane parks the keyboard on the level in use, and
     // Shift+Tab walks back out like Escape: to the drilled cell, then closed.
     await trigger.click()
-    await page.getByRole('menuitem', { name: /推理等级/ }).click()
+    await page.getByRole('menuitem', { name: /Effort/ }).click()
     const high = page.getByRole('menuitemradio', { name: 'High' })
     await expect.poll(
       () => high.evaluate(element => element === document.activeElement),
@@ -126,7 +126,7 @@ describe.skipIf(MODE === 'record').each([
     ).toBe(true)
     await page.keyboard.press('Shift+Tab')
     await expect.poll(
-      () => page.getByRole('menuitem', { name: /推理等级/ })
+      () => page.getByRole('menuitem', { name: /Effort/ })
         .evaluate(element => element === document.activeElement),
       { timeout: 10_000 },
     ).toBe(true)
@@ -148,7 +148,7 @@ describe.skipIf(MODE === 'record').each([
         await expect.poll(() => page.getByRole('menuitem', { name: /^模型/ })
           .evaluate(element => element === document.activeElement)).toBe(true)
       } else {
-        await page.getByRole('menuitem', { name: pane === 'model' ? /^模型/ : /推理等级/ }).click()
+        await page.getByRole('menuitem', { name: pane === 'model' ? /^模型/ : /Effort/ }).click()
         const focused = pane === 'model'
           ? page.getByRole('searchbox', { name: 'Search models…' })
           : page.locator('[role="menuitemradio"][aria-checked="true"]')
@@ -209,7 +209,7 @@ describe.skipIf(MODE === 'record').each([
       .toBe('acme-swift')
 
     await trigger.click()
-    await page.getByRole('menuitem', { name: /推理等级/ }).click()
+    await page.getByRole('menuitem', { name: /Effort/ }).click()
     await page.getByRole('menuitemradio', { name: 'Max', exact: true }).click()
     await menu.waitFor({ state: 'detached' })
     expect(selections).toBe(2)
@@ -236,7 +236,7 @@ describe.skipIf(MODE === 'record').each([
     await page.getByRole('alert').waitFor()
     expect(selections).toBe(3)
     await compareOrRefreshGolden(POINTER_EXPECTED,
-      await captureStableAria(page, '[role="group"][aria-label="模型与推理等级"]', scaffold.workspaceCwd), MODE)
+      await captureStableAria(page, '[role="group"][aria-label="Model and reasoning effort"]', scaffold.workspaceCwd), MODE)
     await expect.poll(() => trigger.evaluate(element => element === document.activeElement)).toBe(true)
     await page.keyboard.press('Tab')
     await expect.poll(() => search.evaluate(element => element === element.ownerDocument.activeElement)).toBe(true)

@@ -1183,7 +1183,7 @@ export function computeOutputs(): [string, string][] {
       events.filter(e => EVENT_SCOPE_PAGE[e.scope] === page),
       CORDIS_CATALOG_POLICY,
     )
-    // Chinese locales were dropped from the fork (bb4958693): English side only.
+    // Chinese locales were dropped from the fork: English side only.
     for (const side of [page]) {
       const rel = `${SUBSYSTEMS_DIR}/${side}`
       const localizedRegion = localizePageRegion(region, rel)

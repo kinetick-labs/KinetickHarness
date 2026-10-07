@@ -54,13 +54,13 @@ describe('Desktop local packaging configuration', () => {
       const parent = {
         PATH: 'build-tools', KH_DESKTOP_APP_ID: 'com.stale.desktop',
         KH_DESKTOP_MANDATORY_UPDATE_CONFIG: '{"origin":"https://stale.example.com"}',
-        dsh_desktop_mandatory_update_config: 'stale-policy',
+        kh_desktop_mandatory_update_config: 'stale-policy',
         KH_DESKTOP_MANDATORY_UPDATE_TEST_ORIGIN: 'https://stale.example.com',
-        dsh_desktop_mandatory_update_prod_origin: 'https://stale.example.com',
+        kh_desktop_mandatory_update_prod_origin: 'https://stale.example.com',
         KH_DESKTOP_WINDOWS_TOKEN_PIN: 'stale-pin', APPLE_ID: 'stale-apple-id',
         CSC_LINK: 'stale-certificate', DOWNLOAD_TEST_ORIGIN: 'https://stale.example.com',
         DOWNLOAD_TEST_RELEASE_ID: 'a'.repeat(32), download_test_release_id: 'b'.repeat(32),
-        dsh_desktop_windows_key_container: 'case-insensitive-stale-container',
+        kh_desktop_windows_key_container: 'case-insensitive-stale-container',
       }
       expect(loadDesktopPackageEnvironment('win32', parent, directory)).toEqual({
         PATH: 'build-tools', KH_DESKTOP_APP_ID: 'com.example.windows',
@@ -72,7 +72,7 @@ describe('Desktop local packaging configuration', () => {
         CSC_LINK: join(directory, 'keys/signing.p12'), CSC_KEY_PASSWORD: ' # literal ',
       })
       expect(parent.KH_DESKTOP_WINDOWS_TOKEN_PIN).toBe('stale-pin')
-      expect(parent.dsh_desktop_mandatory_update_config).toBe('stale-policy')
+      expect(parent.kh_desktop_mandatory_update_config).toBe('stale-policy')
     })
   })
 

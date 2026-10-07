@@ -53,9 +53,9 @@ export const SENSITIVE_ENV_PATTERN = /KEY|PASSWORD|SECRET|TOKEN/i
  * harness identity never leaks implicitly (a deliberately forwarded
  * credential or current `KH_*` fact goes through the spec's explicit `env`,
  * which merges after this scrub). Both scrubs match case-insensitively:
- * Windows environment names are case-insensitive, so a parent `dsh_*` entry
+ * Windows environment names are case-insensitive, so a parent `kh_*` entry
  * would otherwise survive and read back as `$env:KH_*` in the child;
- * deliberate lowercase `dsh_*` names on POSIX are implausible. Exported as a plain function so spawners
+ * deliberate lowercase `kh_*` names on POSIX are implausible. Exported as a plain function so spawners
  * that cannot route through the service (node-pty backends, SDK-managed
  * transports) share the one scrub definition.
  *

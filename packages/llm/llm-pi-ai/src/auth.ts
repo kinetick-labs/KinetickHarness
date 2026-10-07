@@ -38,12 +38,12 @@ const COPILOT_TOKEN_ALIASES: readonly string[] = ['GH_TOKEN', 'GITHUB_TOKEN']
  */
 async function copilotAliasToken(ctx: Context): Promise<string | undefined> {
   for (const alias of COPILOT_TOKEN_ALIASES) {
-    if (isCredentialRefName(alias)) {
-      const hit = await ctx.get('credentials')?.resolve(credentialRef(alias))
-      if (hit !== undefined) return hit.value
-    }
+    // Both aliases are POSIX identifiers, so the reference is always well formed.
+    const hit = await ctx.get('credentials')?.resolve(credentialRef(alias))
+    if (hit !== undefined) return hit.value
     const ambient = launchEnvironmentOf(ctx).get(alias)?.value
-    if (ambient !== undefined) return ambient
+    // An empty inherited value is unset, matching the credential seam.
+    if (ambient !== undefined && ambient.length > 0) return ambient
   }
   return undefined
 }

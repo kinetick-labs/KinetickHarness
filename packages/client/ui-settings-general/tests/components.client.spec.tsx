@@ -227,7 +227,7 @@ it('reports a failed developer-tool write and allows retry', async () => {
 describe('current version', () => {
   it.each([
     ['Current version: 1.2.3-rc.4', en],
-    ['当前版本：1.2.3-rc.4', zh],
+    ['Current version: 1.2.3-rc.4', zh],
   ])('renders the localized release label %s', (expected, dictionary) => {
     vi.stubEnv('KH_CLIENT_VERSION', '1.2.3-rc.4')
     const translate: TriggerContentProps['t'] = (key, params) => {

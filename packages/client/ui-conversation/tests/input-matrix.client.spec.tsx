@@ -164,7 +164,7 @@ describe('matrix row: claimed', () => {
     expect(shell.snapshot.claim).toEqual({ name: 'goal', token: '/goal ', hint: '目标' })
     expect(view.container.querySelector('[data-lexical-text][style*="business-primary"]')?.textContent).toBe('/goal ')
     // The zh dictionary owns a hint.goal entry, which overrides the raw claim hint (production behavior).
-    expect(textarea.style.getPropertyValue('--kh-composer-hint')).toBe(JSON.stringify('输入目标，智能体将持续执行'))
+    expect(textarea.style.getPropertyValue('--kh-composer-hint')).toBe(JSON.stringify('describe the objective for a long-running task'))
     expect(textarea.getAttribute('contenteditable')).toBe('true')
     // Free editing beyond the token: hint drops, claim holds.
     act(() => { shell.setDraft('/goal 发布版本') })
@@ -173,7 +173,7 @@ describe('matrix row: claimed', () => {
   })
 
   it('enter routes to claim.submit (command lane, never the queue sink)', async () => {
-    const submit = vi.fn(() => Promise.resolve({ kind: 'success' as const, text: '完成', source: 'command', name: 'goal' }))
+    const submit = vi.fn(() => Promise.resolve({ kind: 'success' as const, text: 'Done', source: 'command', name: 'goal' }))
     const { view, textarea, shell, sink, claim } = bench({ submit })
     claim()
     act(() => { shell.setDraft('/goal 发布') })
@@ -182,7 +182,7 @@ describe('matrix row: claimed', () => {
     await vi.waitFor(() => { expect(submit).toHaveBeenCalledWith('发布', SCTX, []) })
     // Commit: draft cleared, notice surfaced, back to plain.
     await vi.waitFor(() => { expect(shell.snapshot.draft).toBe('') })
-    expect(view.getByText('完成')).toBeTruthy()
+    expect(view.getByText('Done')).toBeTruthy()
   })
 
   it('backspacing the token auto-releases to plain and the visuals vanish (scenario H)', () => {
@@ -233,13 +233,13 @@ describe('matrix row: claimed with attachments', () => {
   })
 
   it('a handler error keeps a serialized file unreleased beside the notice and draft', async () => {
-    const submit = vi.fn(() => Promise.resolve({ kind: 'error' as const, text: '处理失败' }))
+    const submit = vi.fn(() => Promise.resolve({ kind: 'error' as const, text: 'Failed' }))
     const file: SubmitAttachment = { type: 'file', receiptId: 'receipt-x' }
     const { view, textarea, shell, claim, release } = bench({ submit, serialize: () => Promise.resolve([file]) })
     claim('/goal ', '目标', true)
     act(() => { shell.addAttachments([img]) })
     fireEvent.keyDown(textarea, { key: 'Enter' })
-    await vi.waitFor(() => { expect(view.getByText('处理失败')).toBeTruthy() })
+    await vi.waitFor(() => { expect(view.getByText('Failed')).toBeTruthy() })
     expect(shell.snapshot.phase).toBe('claimed')
     expect(shell.snapshot.attachmentIds).toEqual([img])
     expect(release).not.toHaveBeenCalled()
@@ -343,7 +343,7 @@ describe('matrix row: locked (session disabled)', () => {
   it('disables the textarea and chrome; the machine currency is untouched', () => {
     const { view, textarea, shell } = bench({ disabled: true })
     expect(textarea.getAttribute('aria-disabled')).toBe('true')
-    expect((view.getByLabelText('添加文件或调用指令') as HTMLButtonElement).disabled).toBe(true)
+    expect((view.getByLabelText('Add files or run commands') as HTMLButtonElement).disabled).toBe(true)
     expect(shell.snapshot.phase).toBe('plain')
   })
 

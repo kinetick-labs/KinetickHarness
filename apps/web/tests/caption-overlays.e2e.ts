@@ -66,7 +66,7 @@ it('keeps settings and expanded plugin dialogs clear of the Windows caption acro
         expect(await plugin.getByRole('button', { name: 'Close', exact: true }).isVisible()).toBe(true)
         expect(await plugin.getByRole('button', { name: 'Install', exact: true }).isVisible()).toBe(true)
       }
-      await plugin.getByRole('button', { name: /^安装源/ }).click()
+      await plugin.getByRole('button', { name: /^Registry/ }).click()
       const registry = page.locator('[data-install-registry]')
       await registry.waitFor()
       const registryRect = await registry.boundingBox()

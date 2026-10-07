@@ -88,7 +88,7 @@ describe('Toast', () => {
           text="Session archived. You can "
           tone="success"
           actions={[
-            { label: '撤销', onClick: undo },
+            { label: 'undo', onClick: undo },
             { prefix: ' or ', label: 'filter archived sessions', onClick: filter },
           ]}
           onDone={vi.fn()}
@@ -98,8 +98,8 @@ describe('Toast', () => {
       const glyph = view.getByRole('alert').querySelector('[aria-hidden]')
       expect(glyph?.className).toContain('success')
       expect(glyph?.querySelector('svg')).toBeTruthy()
-      expect(view.getByRole('alert').textContent).toBe('会话已归档，可撤销或筛选已归档会话')
-      fireEvent.click(view.getByRole('button', { name: '撤销' }))
+      expect(view.getByRole('alert').textContent).toBe('Session archived. You can undo or filter archived sessions')
+      fireEvent.click(view.getByRole('button', { name: 'undo' }))
       expect(undo).toHaveBeenCalledTimes(1)
       fireEvent.click(view.getByRole('button', { name: 'filter archived sessions' }))
       expect(filter).toHaveBeenCalledTimes(1)

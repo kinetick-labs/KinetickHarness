@@ -1,7 +1,8 @@
 
 
-/** Files dictionary key union. */
 import type {} from '@kinetick-labs/kh-client-ui-slots'
+
+/** Files dictionary key union. */
 export type SidebarFilesKey = keyof typeof en
 
 /** English dictionary, checked against the Chinese key set. */

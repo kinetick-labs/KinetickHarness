@@ -1,4 +1,4 @@
-/** Release rehearsal routing and persistent-runner isolation, without executing release builds. */
+/** Release rehearsal routing and runner isolation, without executing release builds. */
 import { readFileSync } from 'node:fs'
 import { resolve } from 'node:path'
 import { runInNewContext } from 'node:vm'
@@ -6,8 +6,6 @@ import { load } from 'js-yaml'
 import { describe, expect, it } from 'vitest'
 
 const root = resolve(import.meta.dirname, '../..')
-const repository = 'kinetick-labs/kinetick-harness'
-const selfhosted = ['self-hosted', 'linux', 'x64', 'vm-backup']
 const hosted = 'ubuntu-24.04'
 
 interface Step {
@@ -30,56 +28,12 @@ function workflow(file: string): Workflow {
 
 // This canonical-case corpus has matching Actions/JavaScript comparison results.
 // This is not an Actions interpreter: string case-folding and general coercion differ.
-// Missing context properties use the Actions empty-string value.
 function evaluate(expression: string, context: Record<string, string | boolean>): unknown {
   const source = expression.trim().replace(/^\$\{\{|\}\}$/g, '')
     .replace(/\b(?:github|vars|runner)(?:\.[a-zA-Z_][a-zA-Z_0-9]*)+/g,
       key => JSON.stringify(context[key] ?? ''))
   return runInNewContext(source, { fromJSON: JSON.parse }, { timeout: 1000 })
 }
-
-function assertSharedPersistentStore(run: string | undefined): void {
-  expect(run).toContain('store_root="$HOME/.local/share/pnpm/store"')
-  expect(run).toContain('echo "PNPM_CONFIG_STORE_DIR=$store_root" >> "$GITHUB_ENV"')
-  expect(run).toContain('store_path=$(PNPM_CONFIG_STORE_DIR="$store_root" pnpm store path --silent)')
-}
-
-const trustedPr = {
-  'vars.KH_CI_FAILOVER_LINUX': 'selfhosted',
-  'github.repository': repository,
-  'github.actor': 'maintainer',
-  'github.event_name': 'pull_request',
-  'github.ref': 'refs/pull/42/merge',
-  'github.event.pull_request.head.repo.full_name': repository,
-  'github.event.pull_request.head.repo.fork': false,
-  'github.event.pull_request.user.login': 'contributor',
-}
-const trustedPush = {
-  'vars.KH_CI_FAILOVER_LINUX': 'selfhosted',
-  'github.repository': repository,
-  'github.actor': 'maintainer',
-  'github.event_name': 'push',
-  'github.ref': 'refs/heads/master',
-}
-const fallbackCases: Array<[string, Record<string, string | boolean>]> = [
-  ['unset switch', { ...trustedPr, 'vars.KH_CI_FAILOVER_LINUX': '' }],
-  ['hosted switch', { ...trustedPr, 'vars.KH_CI_FAILOVER_LINUX': 'hosted' }],
-  ['unknown switch', { ...trustedPr, 'vars.KH_CI_FAILOVER_LINUX': 'true' }],
-  ['fork PR', { ...trustedPr, 'github.event.pull_request.head.repo.full_name': 'outsider/fork', 'github.event.pull_request.head.repo.fork': true }],
-  ['different head repository', { ...trustedPr, 'github.event.pull_request.head.repo.full_name': 'outsider/repo' }],
-  ['fork flag', { ...trustedPr, 'github.event.pull_request.head.repo.fork': true }],
-  ['Dependabot author rerun by maintainer', { ...trustedPr, 'github.event.pull_request.user.login': 'dependabot[bot]' }],
-  ['Dependabot PR actor', { ...trustedPr, 'github.actor': 'dependabot[bot]' }],
-  ['Dependabot push actor', { ...trustedPush, 'github.actor': 'dependabot[bot]' }],
-  ['non-master push', { ...trustedPush, 'github.ref': 'refs/heads/topic' }],
-  ['tag push', { ...trustedPush, 'github.ref': 'refs/tags/kh-v1.0.0' }],
-  ['push in another repository', { ...trustedPush, 'github.repository': 'outsider/fork' }],
-  ['dispatch on master', { ...trustedPush, 'github.event_name': 'workflow_dispatch' }],
-  ['dispatch on topic', { ...trustedPush, 'github.event_name': 'workflow_dispatch', 'github.ref': 'refs/heads/topic' }],
-  ['dispatch on tag', { ...trustedPush, 'github.event_name': 'workflow_dispatch', 'github.ref': 'refs/tags/kh-v1.0.0' }],
-  ['pull_request_target', { ...trustedPr, 'github.event_name': 'pull_request_target' }],
-  ['missing PR payload', { ...trustedPush, 'github.event_name': 'pull_request' }],
-]
 
 for (const [file, jobIds] of [['release.yml', ['dependencies', 'pack']], ['release-vendor.yml', ['pack']]] as const) {
   describe(file, () => {
@@ -93,16 +47,12 @@ for (const [file, jobIds] of [['release.yml', ['dependencies', 'pack']], ['relea
     for (const jobId of jobIds) {
       describe(jobId, () => {
         const job = release.jobs[jobId]!
-        it('routes trusted PRs and master pushes onto the failover pool when enabled', () => {
-          // The fork hosts no runners, so the var stays unset in practice and
-          // everything routes hosted; the expression still honors the upstream
-          // self-hosted failover path when the var is enabled.
-          expect(evaluate(job['runs-on'], trustedPr)).toEqual(selfhosted)
-          expect(evaluate(job['runs-on'], trustedPush)).toEqual(selfhosted)
-          expect(evaluate(job['runs-on'], { ...trustedPush, 'vars.KH_CI_FAILOVER_LINUX': '' })).toBe(hosted)
-        })
-        it.each(fallbackCases)('keeps %s hosted', (_name, context) => {
-          expect(evaluate(job['runs-on'], context)).toBe(hosted)
+        it('runs the rehearsal on a GitHub-hosted runner', () => {
+          // The fork owns no self-hosted pool: the routing expression collapsed
+          // to the hosted label it always fell back to.
+          expect(job['runs-on']).toBe(hosted)
+          const text = readFileSync(resolve(root, '.github/workflows', file), 'utf8')
+          expect(text).not.toMatch(/KH_CI_FAILOVER|self-hosted|fromJSON/)
         })
         it('cleans stale checkout output and isolates setup before any pnpm invocation', () => {
           expect(job.steps[0]).toMatchObject({ uses: 'actions/checkout@v6', with: { clean: true, 'persist-credentials': false } })
@@ -120,19 +70,15 @@ for (const [file, jobIds] of [['release.yml', ['dependencies', 'pack']], ['relea
         it('retains the configured shared npm cache', () => {
           expect(JSON.stringify(release)).not.toMatch(/npm_config_cache/i)
         })
-        it.each(['', 'store_root="${RUNNER_TEMP%/*}/pnpm-store"', 'store_root="$RUNNER_TEMP/pnpm-store"'])(
-          'rejects missing, runner-private, or job-temporary store placement: %s', (replacement) => {
-            const run = job.steps.find(step => step.name === 'Configure pnpm store path')?.run
-              ?.replace('store_root="$HOME/.local/share/pnpm/store"', replacement)
-            expect(() => { assertSharedPersistentStore(run) }).toThrow()
-          },
-        )
-        it('uses the shared persistent store without remote cache reads or writes on self-hosted', () => {
-          assertSharedPersistentStore(job.steps.find(step => step.name === 'Configure pnpm store path')?.run)
+        it('probes the pnpm store path before the install', () => {
+          const storeStep = job.steps.find(step => step.name === 'Configure pnpm store path')
+          expect(storeStep?.run).toContain('pnpm store path --silent')
+          expect(storeStep?.run).toContain('PNPM_CONFIG_STORE_DIR')
+        })
+        it('uses hosted package caching for the runner-scoped toolchain', () => {
           const caches = job.steps.filter(step => step.uses?.startsWith('actions/cache'))
           expect(caches.map(step => step.uses)).toEqual(['actions/cache/restore@v4'])
           for (const step of caches) {
-            expect(evaluate(step.if!, { 'runner.environment': 'self-hosted' })).toBe(false)
             expect(evaluate(step.if!, { 'runner.environment': 'github-hosted' })).toBe(true)
           }
           const nodeSetup = job.steps.find(step => step.uses === 'actions/setup-node@v6')

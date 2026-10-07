@@ -79,8 +79,8 @@ describe('desktop development project', () => {
       release: release(),
       target: 'win-x64',
     })
-    expect(realpathSync(join(project, 'node_modules', '@deepseek-ai', 'kh'))).toBe(realpathSync(cli))
-    expect(realpathSync(join(project, 'node_modules', '@deepseek-ai', 'kh-desktop-host'))).toBe(realpathSync(host))
+    expect(realpathSync(join(project, 'node_modules', '@kinetick-labs', 'kh'))).toBe(realpathSync(cli))
+    expect(realpathSync(join(project, 'node_modules', '@kinetick-labs', 'kh-desktop-host'))).toBe(realpathSync(host))
     expect(realpathSync(join(project, 'node_modules', 'plain-dependency')))
       .toBe(realpathSync(join(dependencies, 'plain-dependency')))
     expect(realpathSync(join(project, 'node_modules', '@scope', 'dependency')))

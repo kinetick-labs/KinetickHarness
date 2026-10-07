@@ -54,8 +54,8 @@ describe('shared detail values', () => {
 
 describe('control detail adapters', () => {
   it.each([
-    [{ timedOut: false }, '子智能体状态 · 检测到变化'],
-    [{ timedOut: true }, '子智能体状态 · 等待超时'],
+    [{ timedOut: false }, 'Subagent activity · Change detected'],
+    [{ timedOut: true }, 'Subagent activity · Wait timed out'],
     [{ timedOut: false, noProgress: { message: 'No pending work' } }, 'No active subagents'],
   ] as const)('names subagents in Chinese wait results (%j)', (value, summary) => {
     const translate = makeTranslate(zh, commonZh)

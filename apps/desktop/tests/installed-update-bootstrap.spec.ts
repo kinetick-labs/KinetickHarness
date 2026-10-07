@@ -50,7 +50,7 @@ console.log(JSON.stringify({ paths: app.paths, home: process.env.KH_HOME, journa
       const root = join(directory, 'application-data/kh-update-qualification', run.id)
       expect(results).toEqual([0, 1].map(() => ({ paths: { userData: join(root, 'user-data'), sessionData: join(root, 'user-data') },
         home: join(root, 'kh-home'), journals: join(root, 'journals') })))
-      expect((await readdir(root)).sort()).toEqual(['kh-home', 'journals', 'user-data'])
+      expect((await readdir(root)).sort()).toEqual(['journals', 'kh-home', 'user-data'])
       await expect(prepareInstalledUpdateBootstrap(join(run.root, 'run.json'))).rejects.toMatchObject({ code: 'EEXIST' })
     })
   })

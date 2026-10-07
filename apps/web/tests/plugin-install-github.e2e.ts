@@ -63,7 +63,7 @@ it.each(['network', 'timeout'] as const)('offers a mirror after a GitHub %s, the
   const spec = 'https://github.com/example/kh-plugin.git'
   const title = failure === 'timeout' ? 'GitHub connection timed out' : 'Cannot access GitHub'
   let dialog = page.getByRole('dialog', { name: 'Add plugin', exact: true })
-  await dialog.getByRole('button', { name: '安装源 npm 官方源', exact: true }).waitFor()
+  await dialog.getByRole('button', { name: 'Registry Official npm registry', exact: true }).waitFor()
   await dialog.getByRole('textbox', { name: 'Package name or address' }).fill(spec)
   expect(await page.getByText(title, { exact: true }).count()).toBe(0)
   await dialog.getByRole('button', { name: 'Install', exact: true }).click()
@@ -87,7 +87,7 @@ it.each(['network', 'timeout'] as const)('offers a mirror after a GitHub %s, the
   expect(await input.inputValue()).toBe('')
   expect(await input.evaluate(element => element === document.activeElement)).toBe(true)
   expect(await dialog.getByRole('button', { name: 'Install', exact: true }).isDisabled()).toBe(true)
-  await dialog.getByRole('button', { name: '安装源 中国大陆镜像源', exact: true }).waitFor()
+  await dialog.getByRole('button', { name: 'Registry npmmirror', exact: true }).waitFor()
   await compareOrRefreshGolden(
     fileURLToPath(new URL('./expected/plugin-install-github/mirror.expected.md', import.meta.url)),
     await captureStableAria(page, '[role="dialog"]', scaffold.workspaceCwd), webSnapshotMode(),

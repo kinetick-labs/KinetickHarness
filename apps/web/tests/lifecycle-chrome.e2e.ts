@@ -118,9 +118,9 @@ describe('web e2e: lifecycle & chrome (workspace flow / reload / dark mode)', ()
     try {
       await zhPage.goto(scaffold.authenticatedUrl, { waitUntil: 'load' })
       await zhPage.waitForSelector('[class*="frame"]', { timeout: 30_000 })
-      const launcher = zhPage.getByRole('button', { name: '添加文件或调用指令' })
+      const launcher = zhPage.getByRole('button', { name: 'Add files or run commands' })
       await launcher.click()
-      const menu = zhPage.getByRole('listbox', { name: '触发候选建议' })
+      const menu = zhPage.getByRole('listbox', { name: 'Trigger suggestions' })
       await menu.getByRole('option').first().waitFor({ timeout: 10_000 })
       await menu.getByRole('status').waitFor({ state: 'hidden', timeout: 10_000 })
       const snapshot = await captureStableAria(zhPage, '[role="listbox"]', scaffold.workspaceCwd)
@@ -135,8 +135,8 @@ describe('web e2e: lifecycle & chrome (workspace flow / reload / dark mode)', ()
   it.skipIf(MODE === 'record').each([
     { locale: 'en-US', token: '/goal', row: 'Goal Set or view the goal for a long-running task', hint: 'describe the objective for a long-running task' },
     { locale: 'en-US', token: '/plan', row: 'Plan Enter or leave plan mode', hint: 'describe your task to generate plan' },
-    { locale: ZH_BROWSER_LOCALE, token: '/目标', row: '目标 goal 设置或查看长期任务目标', hint: '输入目标，智能体将持续执行' },
-    { locale: ZH_BROWSER_LOCALE, token: '/计划', row: '计划 plan 进入或退出计划模式', hint: '描述你的任务以生成计划' },
+    { locale: ZH_BROWSER_LOCALE, token: '/目标', row: '目标 goal Set or view the goal for a long-running task', hint: 'describe the objective for a long-running task' },
+    { locale: ZH_BROWSER_LOCALE, token: '/计划', row: '计划 plan Enter or leave plan mode', hint: '描述你的任务以生成计划' },
   ])('keeps $token claimed across separator edits and hides hints during IME composition', async ({ locale, token, row, hint }) => {
     const inputPage = await browser.newPage({ viewport: { width: 1680, height: 1000 }, locale })
     const inputTripwire = watchConsole(inputPage)
@@ -272,13 +272,13 @@ describe('web e2e: lifecycle & chrome (workspace flow / reload / dark mode)', ()
       await zhPage.waitForSelector('[class*="frame"]', { timeout: 30_000 })
       await connectFreshWorkspaceZh(zhPage, zhScaffold.workspaceCwd)
       const input = zhPage.locator('[data-composer-input]').first()
-      await zhPage.getByRole('button', { name: '添加文件或调用指令' }).click()
-      const menu = zhPage.getByRole('listbox', { name: '触发候选建议' })
+      await zhPage.getByRole('button', { name: 'Add files or run commands' }).click()
+      const menu = zhPage.getByRole('listbox', { name: 'Trigger suggestions' })
       await menu.waitFor({ timeout: 10_000 })
-      await menu.getByRole('option', { name: '计划 plan 进入或退出计划模式', exact: true }).click()
+      await menu.getByRole('option', { name: '计划 plan Enter or leave plan mode', exact: true }).click()
       await expect.poll(() => input.textContent()).toBe('/计划 ')
       await input.press('Enter')
-      const planButton = zhPage.getByRole('button', { name: '计划模式已开启，按下关闭' })
+      const planButton = zhPage.getByRole('button', { name: 'Plan mode on, press to turn off' })
       await planButton.waitFor({ timeout: 10_000 })
       await expect.poll(() => input.textContent(), { timeout: 10_000 }).toBe('')
       const planSnapshot = await captureStableAria(zhPage, '[class*="frame"]', zhScaffold.workspaceCwd)

@@ -247,7 +247,7 @@ const CORPUS: Record<string, string> = {
     '',
     '**Notice:**text keeps upstream parsing.',
     '',
-    '*提醒！*单星号也保持上游行为。',
+    '*Reminders！*单星号也保持上游行为。',
     '',
     '`https://example.com/preview?q=one%20two#result` 与 `curl http://127.0.0.1:3199/` 以及 `javascript:alert(1)`。',
   ].join('\n'),

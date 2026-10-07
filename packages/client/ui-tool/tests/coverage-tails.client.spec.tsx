@@ -80,7 +80,7 @@ describe('Tool presentation tails', () => {
     }
     const view = render(<BashRow {...bashProps(settled)} />)
     const row = view.container.querySelector('[data-sample="bash"]')!
-    expect(row.textContent).toContain('运行命令')
+    expect(row.textContent).toContain('Bash')
     expect(row.textContent).toContain('Build')
     expect(row.getAttribute('data-clickable')).toBeNull()
   })
@@ -104,7 +104,7 @@ describe('Tool presentation tails', () => {
 
     const runningView = render(<BashRow {...bashProps(running)} />)
     expect(runningView.container.querySelector('[data-state="running"]')).not.toBeNull()
-    expect(runningView.getByText('运行命令')).toBeTruthy()
+    expect(runningView.getByText('Bash')).toBeTruthy()
     expect(runningView.getByText('List')).toBeTruthy()
     runningView.unmount()
 
@@ -112,7 +112,7 @@ describe('Tool presentation tails', () => {
     expect(errorView.container.querySelector('[data-sample="bash"]')).not.toBeNull()
     expect(errorView.container.querySelector('[data-state="error"]')).not.toBeNull()
     expect(errorView.container.querySelector('[data-state="error"] svg')).not.toBeNull()
-    expect(errorView.getByText('运行命令')).toBeTruthy()
+    expect(errorView.getByText('Bash')).toBeTruthy()
     expect(errorView.container.querySelector('[class*="_errorSummary_"]')).not.toBeNull()
     errorView.unmount()
 

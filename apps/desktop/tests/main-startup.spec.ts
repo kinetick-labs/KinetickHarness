@@ -1131,10 +1131,10 @@ describe('desktop main startup', () => {
     expect(window.focus).toHaveBeenCalled()
     harness.app.emit('second-instance')
     expect(window.show).toHaveBeenCalledTimes(2)
-    // Locale changes relabel the tray together with the application menu.
+    // English is the only shipped shell dictionary, so a zh preference does not rebuild the menu.
     const relabels = harness.trays[0]!.setContextMenu.mock.calls.length
     harness.ipcOn.mock.calls.find(call => call[0] === DESKTOP_IPC.localeChanged)![1]({ sender: window.webContents, senderFrame: window.webContents.mainFrame }, 'zh')
-    expect(harness.trays[0]!.setContextMenu.mock.calls.length).toBe(relabels + 1)
+    expect(harness.trays[0]!.setContextMenu.mock.calls.length).toBe(relabels)
   })
 
   it('keeps the workspace visible while acknowledgement is pending and ignores a destroyed window', async () => {

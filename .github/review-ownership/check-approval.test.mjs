@@ -481,7 +481,8 @@ test('publishes setup phases without evaluating or installing dependencies', asy
   }
   await publishApprovalPhase({ ...options, phase: 'pending' })
   await publishApprovalPhase({ ...options, phase: 'error' })
-  assert.deepEqual(states, ['pending', 'error'])
+  await publishApprovalPhase({ ...options, phase: 'advisory' })
+  assert.deepEqual(states, ['pending', 'error', 'success'])
   await assert.rejects(publishApprovalPhase({ ...options, phase: 'success' }), /invalid approval setup phase/u)
 })
 

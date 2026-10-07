@@ -1294,7 +1294,7 @@ it('installs from the next registry after one is unreachable, restoring the file
 it('does not ask the next registry after the manager terminated a silent run', async () => {
   const { manager } = await fixture()
   const install = vi.spyOn(operations, 'runProfilePnpm').mockResolvedValue({
-    exitCode: 1, output: 'installing\ndsh: pnpm printed nothing for 600000ms and was terminated\n',
+    exitCode: 1, output: 'installing\nkh: pnpm printed nothing for 600000ms and was terminated\n',
     truncated: false, logPath: '/dev/null', timedOut: true,
   })
   onTestFinished(() => { install.mockRestore() })
@@ -1312,7 +1312,7 @@ it('drops the earlier registry failure once a later attempt is terminated for si
       truncated: false, logPath: '/dev/null',
     })
     .mockResolvedValueOnce({
-      exitCode: 1, output: 'installing\ndsh: pnpm printed nothing for 600000ms and was terminated\n',
+      exitCode: 1, output: 'installing\nkh: pnpm printed nothing for 600000ms and was terminated\n',
       truncated: false, logPath: '/dev/null', timedOut: true,
     })
   onTestFinished(() => { install.mockRestore() })

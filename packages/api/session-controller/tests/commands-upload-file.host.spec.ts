@@ -20,7 +20,7 @@ import type { SessionRequestId } from '../src/types.ts'
 
 const SESSION = SessionId('upload-session')
 
-async function uploadHarness(origin?: 'subagent'): Promise<{
+async function uploadHarness(origin?: 'subagent', modelSelection?: ModelSelectionRef): Promise<{
   ctx: Context
   controller: SessionCommandController
   uploads: FileUploads
@@ -88,7 +88,7 @@ async function uploadHarness(origin?: 'subagent'): Promise<{
     listProviders: () => [{ id: 'fixture', name: 'Fixture' }],
     resolveModelInfo: () => Promise.resolve({ provider: 'fixture', id: 'fixture-model', name: 'Fixture' }),
   } as never)
-  const selection: ModelSelectionRef = {
+  const selection: ModelSelectionRef = modelSelection ?? {
     current: { provider: 'fixture', model: 'fixture-model' },
     assembled: undefined,
   }
@@ -123,6 +123,18 @@ function promptRequest(content: Parameters<SessionCommandController['prompt']>[0
 }
 
 describe('Session file uploads', () => {
+  it('rejects a prompt when the session has no model selection', async () => {
+    const { controller, disposeAgent } = await uploadHarness(undefined, {
+      current: undefined,
+      assembled: undefined,
+    })
+    await expect(controller.prompt(promptRequest([{ type: 'text', text: 'hello' }]))).rejects.toMatchObject({
+      code: 'session/model-unavailable',
+      message: 'Select an available model before sending a message.',
+    })
+    await disposeAgent()
+  })
+
   it('registers an HTTP route bound to the upload service', async () => {
     const { uploadRoute } = await uploadHarness()
     await expect(uploadRoute(new Request('http://host/upload')))

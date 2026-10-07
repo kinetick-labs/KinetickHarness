@@ -424,8 +424,8 @@ describe('ui-schedule browser half', () => {
     expect(panel.options.id).toBe('schedules')
     ctx.locale.setLocale('en')
     expect(resolveSlotLabel(panel.options.label)).toBe('Automation tasks')
-    ctx.locale.setLocale('zh')
-    expect(resolveSlotLabel(panel.options.label)).toBe('自动化任务')
+    ctx.locale.setLocale('en')
+    expect(resolveSlotLabel(panel.options.label)).toBe('Automation tasks')
     const face = injectedFace(entry, undefined as never) as TaskManagerInjected
     const dispose = face.hooks.catalog.subscribe(vi.fn())
     try {
@@ -518,7 +518,7 @@ describe('ui-schedule browser half', () => {
   it('registers both dictionaries and releases them with its fiber', async () => {
     const ctx = await baseContext()
     declareHeader(ctx)
-    ctx.locale.setLocale('zh')
+    ctx.locale.setLocale('en')
     const fiber = ctx.plugin({ inject: [...inject], apply })
     await fiber.await()
     const translate = ctx.locale.bind(NS)

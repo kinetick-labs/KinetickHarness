@@ -57,7 +57,7 @@ describe('AttachmentRail', () => {
   it('renders owner-provided attachment cards in order', () => {
     const items = [item('a'), item('b')]
     const view = render(<AttachmentRail items={items} labels={labels} renderItem={renderItem} />)
-    const rail = view.getByRole('group', { name: '待发送图片' })
+    const rail = view.getByRole('group', { name: 'Pending images' })
     expect([...rail.children].map(child => child.textContent)).toEqual(['a', 'b'])
   })
 
@@ -65,7 +65,7 @@ describe('AttachmentRail', () => {
     const view = render(
       <AttachmentRail items={[item('a'), item('b'), item('c')]} labels={labels} renderItem={renderItem} />,
     )
-    const rail = view.getByRole('group', { name: '待发送图片' })
+    const rail = view.getByRole('group', { name: 'Pending images' })
     const { scrollBy } = stubGeometry(rail, { scrollWidth: 400, clientWidth: 200 })
     // No arrows until geometry is observed (mount saw jsdom's zero metrics).
     expect(view.queryByLabelText('向右滚动图片')).toBeNull()

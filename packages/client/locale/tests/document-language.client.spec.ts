@@ -67,21 +67,21 @@ describe('document language', () => {
   })
 
   it('states the resolved locale at activation, not the value the markup shipped', async () => {
-    // A Chinese browser resolves zh even though the markup said en.
+    // Chinese is not a shipped locale, so a zh-CN browser opens in English.
     const { locale } = await bench()
-    expect(locale.getLocale().active).toBe('zh')
-    expect(langOf()).toBe('zh-CN')
+    expect(locale.getLocale().active).toBe('en')
+    expect(langOf()).toBe('en')
   })
 
   it('follows a locale switch in both directions with BCP 47 tags', async () => {
     const { locale } = await bench()
-    expect(langOf()).toBe('zh-CN')
+    expect(langOf()).toBe('en')
+    locale.addLanguage({ id: 'zh', label: '中文', fallback: 'en' })
+    expect(langOf()).toBe('zh')
     locale.setLocale('en')
-    // `en` needs no region; `zh` names its script variant, which bare `zh`
-    // leaves ambiguous for pronunciation and font selection.
     expect(langOf()).toBe('en')
     locale.setLocale('zh')
-    expect(langOf()).toBe('zh-CN')
+    expect(langOf()).toBe('zh')
   })
 
   it('follows an explicit Host preference that overrides browser detection', async () => {
@@ -107,9 +107,10 @@ describe('document language', () => {
       expect(observer.takeRecords()).toHaveLength(0)
       remove()
       expect(observer.takeRecords()).toHaveLength(0)
-      locale.setLocale('en')
+      locale.addLanguage({ id: 'pt-BR', label: 'Português', fallback: 'en' })
+      locale.setLocale('pt-BR')
       expect(observer.takeRecords()).toHaveLength(1)
-      expect(langOf()).toBe('en')
+      expect(langOf()).toBe('pt-BR')
     } finally {
       observer.disconnect()
     }

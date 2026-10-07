@@ -1,7 +1,8 @@
 
 
-/** English dictionary with the same keys. */
 import type {} from '@kinetick-labs/kh-client-ui-slots'
+
+/** English dictionary with the same keys. */
 export const en = {
   title: 'Code',
   copy: 'Copy',

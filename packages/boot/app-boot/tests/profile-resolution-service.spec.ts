@@ -132,7 +132,7 @@ describe('profile package metadata service', () => {
     contexts.push(ctx)
     await ctx.plugin(PluginPackages)
     const parent = pathToFileURL(join(root, 'entry.mjs')).href
-    // Chinese locale content was dropped from the fork (bb4958693); zh locale files stay untranslated extras.
+    // Chinese locale content was dropped from the fork; zh locale files stay untranslated extras.
     expect(ctx.pluginPackages.metaOf('localized/private', parent)).toEqual({ title: { en: 'Local plugin', zh: '本地插件' } })
     expect(ctx.pluginPackages.metaOf('localized', parent)).toBeUndefined()
     expect(ctx.pluginPackages.metaOf('node:fs', parent)).toBeUndefined()

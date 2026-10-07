@@ -1,5 +1,6 @@
-/** Dictionary namespace owned by this plugin. */
 import type {} from '@kinetick-labs/kh-client-ui-slots'
+
+/** Dictionary namespace owned by this plugin. */
 export const NS = 'voice-input'
 
 /** Keys accepted by the voice input translator. */

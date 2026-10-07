@@ -63,7 +63,7 @@ export interface Config {
 | `localInstructionFileCandidates` | `['AGENTS.local.md', 'CLAUDE.local.md']` | Local overlay file names loaded after the base files |
 | `khHome` | `$KH_HOME` or `~/.kh` | Directory containing the user-global `AGENTS.md` |
 
-The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-agent-instructions) is the exhaustive source for every accepted field and its JSDoc.
+The generated [configuration catalog](../../../docs/config-catalog.md#kinetick-labskh-agent-instructions) is the exhaustive source for every accepted field and its JSDoc.
 
 ### Observing the budget
 
@@ -114,7 +114,7 @@ Read these pages when the package-level contract is not enough. They move from t
 - [Documentation standard](../../../docs/AGENTS.md) — what `AGENTS.md` instruction files contain and how they are maintained.
 - [Workspace-context decision record](../../../.agents/notes/archived/feature/2026-06-24-workspace-context.md) — per-agent/session isolation and lifecycle rationale.
 - [Context group map](../README.md) — sibling request-context packages.
-- [Generated configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-agent-instructions) — every accepted config field and its source declaration.
+- [Generated configuration catalog](../../../docs/config-catalog.md#kinetick-labskh-agent-instructions) — every accepted config field and its source declaration.
 
 -----
 

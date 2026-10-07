@@ -476,7 +476,7 @@ describe('prompt and cancel errors', () => {
   it('routes an addressed child through non-activating history, continuation prompt, and interrupt only', async ({ mock, start }) => {
     const session = await sessionBench(mock, start, SID, { address: CHILD, parentAvailable: true })
     await session.open()
-    const prompted = await session.prompt([{ type: 'text', text: '继续' }], 'queue')
+    const prompted = await session.prompt([{ type: 'text', text: 'Continue' }], 'queue')
     const steered = await session.prompt([{ type: 'text', text: '现在处理' }], 'steer')
     const cancelled = await session.cancel()
 

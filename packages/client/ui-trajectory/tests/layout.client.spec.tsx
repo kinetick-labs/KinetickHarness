@@ -90,7 +90,7 @@ describe('deriveTrajectoryLayout', () => {
 
   it.each([
     [t, 'Tools updated · 2 added, 1 removed', 'Added: search, read_file\nRemoved: old_search'],
-    [tZh, '工具已更新 · 新增 2 个，移除 1 个', '新增：search, read_file\n移除：old_search'],
+    [tZh, 'Tools updated · 2 added, 1 removed', 'Added: search, read_file\nRemoved: old_search'],
   ] as const)('keeps tool update details on two literal lines', (translate, text, inputDetail) => {
     const nodes: ConversationNode[] = [{
       kind: 'context', seq: 1, time: 1_000, content: [{ type: 'tool-addition', toolName: 'search' }, { type: 'tool-addition', toolName: 'read_file' }, { type: 'tool-removal', toolName: 'old_search' }],

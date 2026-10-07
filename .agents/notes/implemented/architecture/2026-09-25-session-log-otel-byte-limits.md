@@ -12,7 +12,7 @@ The shared `otel` Cordis plugin owns ordinary-event and Session-log transport im
 
 Session logs use a separate provider and byte/count queue. Each record is measured once with the SDK serializer including a full envelope; the sum conservatively bounds a combined request. Greedy packing avoids full-candidate serialization and recursive re-encoding. Single oversized records receive one diagnostic and do not block later events. One HTTP request owns the transport slot until settlement, even after its watchdog fires; shutdown expiry stops the remaining queue. Scope name/version and explicit transport options remain owned by the backend.
 
-The [telemetry revival](../../../../packages/session/session-telemetry/README.md) remains authoritative for redaction, capture, and best-effort handoff. This decision replaces the earlier SDK-only queue/batching rule: SDK batch deadlines cannot own an operation split into multiple HTTP requests. The shared Session-log channel schedules complete requests; the SDK still owns transport/retry. Feedback authorization and the separate DeepSeek model-request contribution remain unchanged.
+This fork does not ship the telemetry service. The [telemetry removal guide](../../../../docs/upgrade-guide/v0.2.1-alpha.1/remove-telemetry/guide.md) is the current record. This decision replaces the earlier SDK-only queue/batching rule: SDK batch deadlines cannot own an operation split into multiple HTTP requests. The shared Session-log channel schedules complete requests; the SDK still owns transport/retry. Feedback authorization stays in the canonical log.
 
 ## Alternatives considered
 

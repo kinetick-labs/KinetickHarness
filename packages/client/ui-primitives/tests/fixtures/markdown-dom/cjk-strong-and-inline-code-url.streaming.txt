@@ -6,7 +6,7 @@
   <p>
     #text "**Notice:**text keeps upstream parsing."
   <p>
-    #text "*提醒！*单星号也保持上游行为。"
+    #text "*Reminders！*单星号也保持上游行为。"
   <p>
     <code>
       <a href="https://example.com/preview?q=one%20two#result" rel="noopener noreferrer" target="_blank">

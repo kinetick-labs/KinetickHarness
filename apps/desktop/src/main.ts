@@ -648,7 +648,7 @@ async function main(): Promise<void> {
     if (url.hostname === 'app') {
       if (url.pathname === '/' || url.pathname === '/index.html' || url.pathname.startsWith('/assets/')
         || ['/favicon.svg', '/manifest.webmanifest'].includes(url.pathname)) {
-        return serveWebDocument(request, join(resources.kh, 'node_modules', '@deepseek-ai', 'kh-web-frontend', 'dist'))
+        return serveWebDocument(request, join(resources.kh, 'node_modules', '@kinetick-labs', 'kh-web-frontend', 'dist'))
       }
       if (backend.host === undefined || hostUrl === undefined || hostCookie === undefined) {
         return Promise.resolve(new Response(null, { status: 503 }))

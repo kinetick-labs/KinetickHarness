@@ -100,7 +100,7 @@ function expectInitializationBlocked(shell: SessionInputShell): void {
 }
 
 describe('draft document values', () => {
-  it.each(['', 'plain text', 'first\nsecond\n', '\n\n', '🙂 中文 e\u0301\n第二行'])('round-trips plain text %j', (text) => {
+  it.each(['', 'plain text', 'first\nsecond\n', '\n\n', '🙂 Chinese e\u0301\n第二行'])('round-trips plain text %j', (text) => {
     const expected = { text, references: [] }
     expect(resolveDraftInput(text)).toEqual(expected)
     expect(parseStoredDraft(text)).toEqual(expected)
@@ -192,7 +192,7 @@ describe('draft document values', () => {
 
 describe('draft documents in the input shell', () => {
   it('imports file, folder, session, repeated, and invalid references on the first document', () => {
-    const draft = documentOf('🙂 文件 ', file, '\n目录 ', folder, '\n会话 ', session, ' 再次 ', file, ' ', {
+    const draft = documentOf('🙂 File ', file, '\n目录 ', folder, '\nSessions ', session, ' 再次 ', file, ' ', {
       ...session, invalid: true,
     })
     const shell = makeShell()

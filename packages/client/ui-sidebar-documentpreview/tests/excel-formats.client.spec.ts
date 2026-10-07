@@ -99,7 +99,7 @@ it('opens raw BIFF and empty legacy worksheets', async () => {
 it.each(['csv', 'tsv'] as const)('preserves %s strings, quoted separators, newlines, empty fields, and ragged rows', async (format) => {
   const delimiter = format === 'csv' ? ',' : '\t'
   const text = ['编号', 'Instructions', '值'].join(delimiter) + '\r\n'
-    + ['00123', `"中文${delimiter}字段\n第二行 ""引号"""`, '=SUM(1,2)'].map((field, index) => index === 2 ? '"' + field + '"' : field).join(delimiter) + '\r\n'
+    + ['00123', `"Chinese${delimiter}字段\n第二行 ""引号"""`, '=SUM(1,2)'].map((field, index) => index === 2 ? '"' + field + '"' : field).join(delimiter) + '\r\n'
     + ['2024-03-01', '', 'TRUE', '99999999999999999999'].join(delimiter) + '\r\nshort\r\n\r\n'
   const result = await convertExcel(encode(text), format, limits)
   const sheet = result.sheets[0]!
@@ -107,7 +107,7 @@ it.each(['csv', 'tsv'] as const)('preserves %s strings, quoted separators, newli
   expect(sheet.column).toBe(4)
   expect(cell(0, 0).v).toBe('编号')
   expect(cell(1, 0)).toMatchObject({ v: '00123', ct: { t: 's', fa: '@' } })
-  expect(cell(1, 1).v).toBe(`中文${delimiter}字段\n第二行 "引号"`)
+  expect(cell(1, 1).v).toBe(`Chinese${delimiter}字段\n第二行 "引号"`)
   expect(cell(1, 2)).toMatchObject({ v: '=SUM(1,2)', m: '=SUM(1,2)' })
   expect(cell(1, 2)).not.toHaveProperty('f')
   expect(cell(2, 0).v).toBe('2024-03-01')
@@ -120,12 +120,12 @@ it.each(['csv', 'tsv'] as const)('preserves %s strings, quoted separators, newli
 })
 
 it.each(['utf8', 'le', 'be'] as const)('decodes BOM-marked %s text', async (encoding) => {
-  const text = '\ufeff名称,编号\n中文,001'
+  const text = '\ufeff名称,编号\nChinese,001'
   const bytes = encoding === 'utf8' ? encode(text) : new Uint8Array(Buffer.from(text, 'utf16le'))
   if (encoding === 'be') for (let i = 0; i < bytes.length; i += 2) [bytes[i], bytes[i + 1]] = [bytes[i + 1]!, bytes[i]!]
   const sheet = (await convertExcel(bytes, 'csv', limits)).sheets[0]!
   expect(sheet.celldata![0]!.v!.v).toBe('名称')
-  expect(sheet.celldata!.find(cell => cell.r === 1 && cell.c === 0)!.v!.v).toBe('中文')
+  expect(sheet.celldata!.find(cell => cell.r === 1 && cell.c === 0)!.v!.v).toBe('Chinese')
 })
 
 it('handles empty text and rejects invalid encoding, broken quoting, and excess area', async () => {

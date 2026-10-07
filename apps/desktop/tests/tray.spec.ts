@@ -61,7 +61,7 @@ it('opens the window on a single click and routes menu entries to the open and q
 
 it('relabels the menu in the current locale and ignores relabel after disposal', () => {
   const f = setup()
-  f.setLocale('zh')
+  f.setLocale('en')
   f.tray.relabel()
   expect(labels(native.menus[1]!)).toEqual(['Open KinetickHarness', 'separator', 'Quit KinetickHarness'])
   f.tray.dispose()

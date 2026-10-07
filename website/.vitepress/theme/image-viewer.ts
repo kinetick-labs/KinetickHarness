@@ -3,6 +3,7 @@ import { labelButton, type MediaViewer, viewerButton } from './media-viewer.ts'
 
 const messages = {
   en: 'View image fullscreen: {alt}',
+  zh: '全屏查看图片：{alt}',
 }
 
 interface ImageEntry {
@@ -87,7 +88,7 @@ export class ImageViewer {
         this.#remove(image, entry)
       }
     }
-    const copy = messages.en
+    const copy = this.language().startsWith('zh') ? messages.zh : messages.en
     for (const image of images) {
       const label = copy.replace('{alt}', () => image.alt)
       const existing = this.#entries.get(image)

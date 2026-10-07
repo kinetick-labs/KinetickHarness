@@ -45,7 +45,7 @@ Load the subagent service and this backend, then configure one delegation tool p
 |---|---|---|
 | `providerName` | `spawn` | Provider name registered on `ctx.subagents` |
 
-The generated [configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-subagent-spawn-in-process) is the exhaustive source for every accepted field and its JSDoc.
+The generated [configuration catalog](../../../docs/config-catalog.md#kinetick-labskh-subagent-spawn-in-process) is the exhaustive source for every accepted field and its JSDoc.
 
 ### What a delegation does
 
@@ -92,7 +92,7 @@ Read these pages when the package-level contract is not enough; they move from t
 - [kh-subagent-in-process-driver](../subagent-in-process-driver/README.md) — the shared run driver this backend calls.
 - [kh-subagent-fork-in-process](../subagent-fork-in-process/README.md) — the sibling backend that seeds completed parent turns.
 - [kh-tool-subagent](../tool-subagent/README.md) — the model-facing delegation tool that reaches this provider.
-- [Generated configuration catalog](../../../docs/config-catalog.md#deepseek-aidsh-subagent-spawn-in-process) — every accepted config field and its source declaration.
+- [Generated configuration catalog](../../../docs/config-catalog.md#kinetick-labskh-subagent-spawn-in-process) — every accepted config field and its source declaration.
 
 -----
 

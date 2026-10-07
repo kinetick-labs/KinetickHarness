@@ -47,7 +47,7 @@ describe.skipIf(MODE === 'record')('web e2e: another usable provider ends first-
     const credentialStep = page.getByRole('dialog', { name: CREDENTIAL_STEP })
     await credentialStep.waitFor({ timeout: 15_000 })
     expect(await page.getByRole('dialog', { name: '开始你的创作' }).count()).toBe(0)
-    expect(await page.getByRole('button', { name: '账号菜单', exact: true }).count()).toBe(0)
+    expect(await page.getByRole('button', { name: 'Account menu', exact: true }).count()).toBe(0)
     await credentialStep.getByRole('button', { name: '稍后配置' }).click()
     await credentialStep.waitFor({ state: 'detached', timeout: 15_000 })
 
@@ -79,7 +79,7 @@ describe.skipIf(MODE === 'record')('web e2e: another usable provider ends first-
       async () => settings.getByRole('textbox', { name: 'API key', exact: true }).count(),
       { timeout: 10_000 },
     ).toBe(1)
-    await settings.getByRole('button', { name: '编辑 DeepSeek (deepseek-official)' }).waitFor({ timeout: 10_000 })
+    await settings.getByRole('button', { name: 'Edit DeepSeek (deepseek-official)' }).waitFor({ timeout: 10_000 })
     const dismissed = await captureStableAria(page, '[role="dialog"]', scaffold.workspaceCwd)
     await compareOrRefreshGolden(DISMISSED_EXPECTED, dismissed, MODE)
 
@@ -92,7 +92,7 @@ describe.skipIf(MODE === 'record')('web e2e: another usable provider ends first-
     const settings = page.getByRole('dialog', { name: 'Settings' })
     await settings.getByRole('textbox', { name: 'API key', exact: true }).fill('sk-e2e-minimax')
     await settings.getByRole('button', { name: '保存', exact: true }).click()
-    await settings.getByText('已保存 minimax-cn。', { exact: true }).waitFor({ timeout: 15_000 })
+    await settings.getByText('Saved minimax-cn.', { exact: true }).waitFor({ timeout: 15_000 })
 
     // Only minimax-cn is reachable; DeepSeek still holds no credential.
     const document = await readFile(join(scaffold.harnessHome, 'profiles', 'scaffold', 'cordis.patch.yml'), 'utf8')
@@ -118,8 +118,8 @@ describe.skipIf(MODE === 'record')('web e2e: another usable provider ends first-
     await openSettings(page, 'zh')
     await settings.waitFor({ timeout: 10_000 })
     await settings.getByRole('button', { name: '模型', exact: true }).click()
-    await settings.getByRole('button', { name: '编辑 DeepSeek (deepseek-official)' }).waitFor({ timeout: 10_000 })
-    expect(await settings.getByRole('textbox', { name: 'API 密钥', exact: true }).count()).toBe(0)
+    await settings.getByRole('button', { name: 'Edit DeepSeek (deepseek-official)' }).waitFor({ timeout: 10_000 })
+    expect(await settings.getByRole('textbox', { name: 'API key', exact: true }).count()).toBe(0)
 
     expect((await page.content()).includes('sk-e2e-minimax')).toBe(false)
     expect(tripwire.pageErrors).toEqual([])

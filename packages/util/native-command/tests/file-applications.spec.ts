@@ -10,7 +10,7 @@ const signal = new AbortController().signal
 describe('native file associations', () => {
   it('passes file paths as arguments and preserves the desktop default', async () => {
     const run = vi.fn(async () => ({ stdout: JSON.stringify([application]), stderr: '' }))
-    const path = '/tmp/中文 $(touch nope).mp3'
+    const path = '/tmp/Chinese $(touch nope).mp3'
     await expect(nativeFileApplications(path, signal, { platform: 'darwin', run })).resolves.toEqual([application])
     expect(run).toHaveBeenCalledWith('osascript', ['-l', 'JavaScript', '-e', expect.any(String), path, 'icons'], signal, 'hidden')
   })

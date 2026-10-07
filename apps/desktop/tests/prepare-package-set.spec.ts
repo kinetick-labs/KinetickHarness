@@ -39,10 +39,10 @@ describe('desktop package-set selection', () => {
     ])
     expect(selectDesktopPackageClosure(available).map(entry => entry.manifest.name)).toEqual([
       '@deepseek-ai/cordis',
+      '@deepseek-ai/platform-package',
       '@kinetick-labs/kh',
       '@kinetick-labs/kh-base',
       '@kinetick-labs/kh-desktop-host',
-      '@deepseek-ai/platform-package',
     ])
   })
 

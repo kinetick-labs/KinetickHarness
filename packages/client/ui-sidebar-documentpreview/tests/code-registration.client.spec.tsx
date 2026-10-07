@@ -64,7 +64,7 @@ describe('code renderer registration', () => {
     const definition = h.previews.getSnapshot()[0]
     await act(async () => { h.locale.setLocale('en') })
     expect(definition?.title()).toBe('Code')
-    await act(async () => { h.locale.setLocale('zh') })
+    await act(async () => { h.locale.setLocale('en') })
     expect(definition?.title()).toBe('Code')
     await feature.dispose()
     expect(h.previews.getSnapshot()).toEqual([])

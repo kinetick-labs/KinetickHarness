@@ -176,7 +176,7 @@ export function persistenceCatalogArtifacts(scanRoot: string, schema: Persistenc
   const events = annotateSurface(collectLogEvents(scanRoot), collectSurfaceEventTypes(scanRoot))
   const envelope = collectEventEnvelopeTypes(scanRoot)
   return [
-    // Chinese locales were dropped from the fork (bb4958693): English artifact only.
+    // Chinese locales were dropped from the fork: English artifact only.
     { path: OUT, content: render(events, envelope, schema) },
     { path: OUT_RUNTIME_TYPES, content: renderKnownEventTypes(events) },
     { path: OUT_SCHEMA, content: `${JSON.stringify(persistenceSchemaSnapshot(schema), null, 2)}\n` },

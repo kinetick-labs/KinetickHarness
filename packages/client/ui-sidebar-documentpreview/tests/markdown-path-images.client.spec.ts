@@ -9,7 +9,7 @@ describe('Markdown preview image URLs', () => {
     ['./images/a.png', '/work/guide/./images/a.png'],
     ['../a.png', '/work/guide/../a.png'],
     ['/tmp/a.png', '/tmp/a.png'],
-    ['images/中文%20图.png?size=2#detail', '/work/guide/images/中文 图.png'],
+    ['images/Chinese%20图.png?size=2#detail', '/work/guide/images/Chinese 图.png'],
     ['images/a%23b%3Fc%25.png', '/work/guide/images/a#b?c%.png'],
   ])('serves %s through the deployment file route', (destination, path) => {
     const url = new URL(markdownImageUrl(BASE, '/work/guide/notes.md', destination)!)

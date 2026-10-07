@@ -366,7 +366,7 @@ describe('docsPages locale routes', () => {
   })
 
   it('publishes every route in both site locales from the English sources', () => {
-    // Chinese content locales were dropped from the fork (bb4958693); the
+    // Chinese content locales were dropped from the fork; the
     // route tree keeps both locale trees but every page carries English copy.
     const byRoute = new Map(docsPages.map(page => [page.route, page]))
     for (const page of docsPages.filter(page => page.locale === 'root')) {
@@ -397,7 +397,7 @@ describe('docsPages locale routes', () => {
     ] as const
 
     for (const [englishSource, englishTarget] of entries) {
-      // Chinese doc sources were dropped (bb4958693); both locales project English pages.
+      // Chinese doc sources were dropped; both locales project English pages.
       for (const locale of ['en', 'root'] as const) {
         const source = englishSource
         const target = englishTarget
@@ -433,7 +433,7 @@ describe('docsPages locale routes', () => {
   })
 
   it('projects every published subsystem page in English', () => {
-    // Chinese docs were dropped (bb4958693): no root page carries a zh source.
+    // Chinese docs were dropped: no root page carries a zh source.
     const rootPages = docsPages.filter(page => (
       page.locale === 'root' && page.route.startsWith('reference/subsystems/')
     ))
@@ -816,7 +816,7 @@ describe('llmsTxt', () => {
   })
 
   it('groups the two locale trees under English headings', () => {
-    // Chinese content was dropped (bb4958693); both route trees list English copy.
+    // Chinese content was dropped; both route trees list English copy.
     const text = llmsTxt(site)
     const first = text.indexOf('## English')
     expect(first).toBeGreaterThan(-1)

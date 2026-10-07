@@ -358,8 +358,13 @@ export async function runApprovalCheck({ event, policySource, api, runUrl, getOw
  * @returns {Promise<void>} Completion of the status write.
  */
 export async function publishApprovalPhase({ event, api, runUrl, phase }) {
-  if (!['pending', 'error'].includes(phase)) throw new Error('invalid approval setup phase')
-  await publishStatus(api, pullRequestFromEvent(event), phase,
+  if (!['pending', 'error', 'advisory'].includes(phase)) throw new Error('invalid approval setup phase')
+  const pull = pullRequestFromEvent(event)
+  if (phase === 'advisory') {
+    await publishStatus(api, pull, 'success', 'Weighted approval is advisory on this fork.', runUrl)
+    return
+  }
+  await publishStatus(api, pull, phase,
     phase === 'pending' ? 'Preparing approval evaluation.' : 'Approval setup or evaluation failed.', runUrl)
 }
 

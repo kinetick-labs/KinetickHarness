@@ -57,7 +57,7 @@ function setup(options: {
 }
 
 function trigger(): HTMLButtonElement {
-  return screen.getByRole('button', { name: /^访问模式/ }) as HTMLButtonElement
+  return screen.getByRole('button', { name: /^Access mode/ }) as HTMLButtonElement
 }
 
 describe('PermissionSelect', () => {
@@ -146,15 +146,15 @@ describe('PermissionSelect', () => {
     fireEvent.click(screen.getByRole('menuitem', { name: 'Auto review EXP' }))
 
     const dialog = screen.getByRole('dialog', { name: 'Enable Auto review (experimental)?' })
-    expect(dialog.textContent).toContain('不使用沙箱')
-    expect(dialog.textContent).toContain('误放行或误拒绝')
+    expect(dialog.textContent).toContain('without a sandbox')
+    expect(dialog.textContent).toContain('falsely allow or deny')
     fireEvent.click(screen.getByRole('checkbox', { name: 'I understand these risks and want to continue' }))
     fireEvent.click(screen.getByRole('button', { name: 'Enable Auto review' }))
     expect(select).toHaveBeenCalledExactlyOnceWith('auto')
     act(() => { selection.set({ value: { currentValue: 'auto' } }) })
     await act(async () => {})
 
-    expect(trigger().getAttribute('aria-label')).toBe('访问模式，当前：Auto review EXP')
+    expect(trigger().getAttribute('aria-label')).toBe('Access mode, current: Auto review EXP')
     expect(trigger().querySelector('sup')?.textContent).toBe('EXP')
     expect(trigger().getAttribute('title')).toBe('Run without a sandbox after an experimental same-model review of every native tool call and PTC inner call.')
   })

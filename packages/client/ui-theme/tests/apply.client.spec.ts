@@ -30,7 +30,7 @@ async function bench(isLoopback = true) {
   const ctx = new Context()
   await ctx.plugin(SlotRegistry).await()
   const locale = new LocaleRuntime(ctx)
-  locale.setLocale('zh')
+  locale.setLocale('en')
   ctx.provide('locale', locale)
   const section: Record<string, unknown> = { preference: 'system', fontSize: 14 }
   const namespace = () => ({

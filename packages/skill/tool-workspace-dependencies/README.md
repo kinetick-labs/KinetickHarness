@@ -83,7 +83,7 @@ A container can copy both directories into an immutable image layer and set `KH_
 
 #### What the model sees
 
-The model sees the generated [`load_workspace_dependencies` schema](../../../docs/tool-catalog.md#deepseek-aidsh-tool-workspace-dependencies).
+The model sees the generated [`load_workspace_dependencies` schema](../../../docs/tool-catalog.md#kinetick-labskh-tool-workspace-dependencies).
 
 #### Token effect
 

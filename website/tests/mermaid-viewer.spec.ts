@@ -252,7 +252,7 @@ describe('documentation Mermaid viewer', () => {
     viewer.refresh()
     getByRole(document.body, 'button', { name: '全屏查看图表' }).click()
     expect(getByRole(document.body, 'dialog', { name: '图表查看器' })).toBeTruthy()
-    getByRole(document.body, 'button', { name: 'Close' }).click()
+    getByRole(document.body, 'button', { name: '关闭' }).click()
     expect(panzoom.destroy).toHaveBeenCalledTimes(3)
   })
 

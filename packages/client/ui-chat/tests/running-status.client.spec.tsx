@@ -27,7 +27,7 @@ describe('RunningStatus', () => {
     expect(view.content()?.textContent).toBe('Deep diving')
     expect(vi.getTimerCount()).toBe(0)
     view.set(1_000)
-    expect(view.content()?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(view.content()?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(view.content()?.querySelectorAll('[data-shimmer="true"]')).toHaveLength(1)
     expect(vi.getTimerCount()).toBe(1)
     view.set()
@@ -41,15 +41,15 @@ describe('RunningStatus', () => {
     const status = view.getByRole('status')
     const initialText = content?.textContent
     act(() => { vi.advanceTimersByTime(2_000) })
-    expect(content?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(content?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(content?.textContent).not.toBe(initialText)
     view.set(7_000)
     expect(view.content()).toBe(content)
-    expect(content?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(content?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(vi.getTimerCount()).toBe(1)
     const nextTurnText = content?.textContent
     act(() => { vi.advanceTimersByTime(2_000) })
-    expect(content?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(content?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(content?.textContent).not.toBe(nextTurnText)
     expect(view.getByRole('status')).toBe(status)
     expect(status.textContent).toBe('Deep diving')
@@ -59,10 +59,10 @@ describe('RunningStatus', () => {
 
   it('keeps the duration nonnegative when the start is ahead of the local clock', () => {
     const view = statusHarness(6_000)
-    expect(view.content()?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(view.content()?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(view.content()?.textContent).not.toContain('-')
     act(() => { vi.advanceTimersByTime(3_000) })
-    expect(view.content()?.textContent).toMatch(/^深度求索中，用时 \d+秒 ···$/)
+    expect(view.content()?.textContent).toMatch(/^Deep diving for \d+s ···$/)
     expect(view.content()?.textContent).not.toContain('-')
   })
 

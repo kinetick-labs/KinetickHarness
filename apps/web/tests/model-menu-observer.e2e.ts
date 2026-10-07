@@ -149,7 +149,7 @@ describe.skipIf(webSnapshotMode() === 'record').each([
       const composer = page.locator('[data-composer-input]').first()
       const surface = entry === 'button'
         ? page.getByRole('group', { name: 'Model and reasoning effort', exact: true })
-        : page.locator('[aria-label="/model 选项"]')
+        : page.locator('[aria-label="/model options"]')
       const viewport = entry === 'button'
         ? surface.getByRole('menu', { name: '模型', exact: true })
         : surface.getByRole('listbox')

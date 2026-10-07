@@ -11543,6 +11543,86 @@
       }
     },
     {
+      "key": "event:session-log-deepseek/delivery-accepted",
+      "kind": "event",
+      "event": "session-log-deepseek/delivery-accepted",
+      "surface": false,
+      "digest": "d63b8b8ffad9c02fd80c43a17df4f240c1fe8118ecca9de34f9d5871838ab5b9",
+      "schema": {
+        "root": 0,
+        "nodes": [
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "data",
+                "type": 1,
+                "optional": false
+              },
+              {
+                "name": "ignorable",
+                "type": 4,
+                "optional": true
+              },
+              {
+                "name": "seq",
+                "type": 2,
+                "optional": false
+              },
+              {
+                "name": "time",
+                "type": 2,
+                "optional": false
+              },
+              {
+                "name": "type",
+                "type": 5,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "object",
+            "properties": [
+              {
+                "name": "sessionFormatVersion",
+                "type": 2,
+                "optional": true
+              },
+              {
+                "name": "sessionId",
+                "type": 3,
+                "optional": false
+              },
+              {
+                "name": "throughSeq",
+                "type": 2,
+                "optional": false
+              }
+            ],
+            "indices": []
+          },
+          {
+            "kind": "primitive",
+            "type": "number"
+          },
+          {
+            "kind": "primitive",
+            "type": "string"
+          },
+          {
+            "kind": "literal",
+            "value": true
+          },
+          {
+            "kind": "literal",
+            "value": "session-log-deepseek/delivery-accepted"
+          }
+        ]
+      }
+    },
+    {
       "key": "event:session/end-seed",
       "kind": "event",
       "event": "session/end-seed",
@@ -22505,7 +22585,7 @@
         "packages/core/session/src/types.ts#SurfaceOp"
       ],
       "sources": [
-        "packages/core/session/src/types.ts:462"
+        "packages/core/session/src/types.ts:471"
       ]
     },
     {
@@ -22738,6 +22818,11 @@
       "sources": [
         "packages/compaction/compaction-image-offload/src/projection.ts:25"
       ]
+    },
+    {
+      "digest": "47e5d84f1a93450a78c7f3954b43990d0f629af7c034a56313e5deb63e772c1b",
+      "names": [],
+      "sources": []
     },
     {
       "digest": "47e9095591ae36e7c39ee62553097772f2bfa16304536a72dbbc3f691f605180",
@@ -23769,6 +23854,13 @@
       "sources": []
     },
     {
+      "digest": "8bb8c3751a6ce64b61aba1ec7ae798c00a5803c4d868a0430873216c6569ed52",
+      "names": [],
+      "sources": [
+        "packages/core/session/src/types.ts:432"
+      ]
+    },
+    {
       "digest": "8c1c4f72755a78ea163523a46565316e36e9b644382eb48e6635c71a6f412dd2",
       "names": [],
       "sources": []
@@ -24558,7 +24650,7 @@
       "digest": "bcf0caf62d964b2fcf5404bd5c909cfa9a21c3f3c96e6b7e36d9e33565223825",
       "names": [],
       "sources": [
-        "packages/core/session/src/types.ts:464"
+        "packages/core/session/src/types.ts:473"
       ]
     },
     {
@@ -24768,6 +24860,11 @@
     },
     {
       "digest": "d595ec73b32b016a6055333c67a5d646032b22e672da1d4a09c5b1ae398a093a",
+      "names": [],
+      "sources": []
+    },
+    {
+      "digest": "d63b8b8ffad9c02fd80c43a17df4f240c1fe8118ecca9de34f9d5871838ab5b9",
       "names": [],
       "sources": []
     },

@@ -260,7 +260,8 @@ it.each([false, true])('starts welcome onboarding without carrying update focus 
   expect(state.menu).toHaveBeenCalledTimes(initialMenus)
   changed(event, 'en')
   expect(state.dialogLocale!().id).toBe('en')
-  expect(state.menu).toHaveBeenCalledTimes(initialMenus + 1)
+  // The shell already resolved English, so repeating that preference does not rebuild the menu.
+  expect(state.menu).toHaveBeenCalledTimes(initialMenus)
   expect(await bootstrap(event)).toEqual({ languages: ['en-US'], preference: 'en' })
   const welcomeCount = state.beforeWelcome.mock.calls.length
   state.hasApiKey = true

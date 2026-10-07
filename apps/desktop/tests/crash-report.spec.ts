@@ -46,7 +46,7 @@ it('renders the facts header, the inspected error with its properties and cause,
   expect(text).toContain("syscall: 'open'")
   expect(text).toContain("path: 'C:\\\\Temp\\\\kh-subprocess-x\\\\out.log'")
   expect(text).toContain('[cause]: Error: ENOENT')
-  expect(text).toContain('--- renderer console (error level, oldest first) ---\ndsh-app://app/assets/entry.js:12 client-modules: bundle script')
+  expect(text).toContain('--- renderer console (error level, oldest first) ---\nkh-app://app/assets/entry.js:12 client-modules: bundle script')
   expect(text.endsWith('\n')).toBe(true)
 })
 

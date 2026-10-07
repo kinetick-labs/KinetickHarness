@@ -48,7 +48,7 @@ describe('Turn trigger notices', () => {
 
   it.each([
     { locale: en, title: 'Automation task' },
-    { locale: zh, title: '自动化任务' },
+    { locale: zh, title: 'Automation task' },
   ])('uses the automation task label $title and shared clock', ({ locale, title }) => {
     const node = trigger({ kind: 'schedule' })
     const view = render(<TurnTriggerNodeView node={node} t={makeTranslate(locale)} />)

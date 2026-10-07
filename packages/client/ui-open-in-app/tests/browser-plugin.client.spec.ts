@@ -279,7 +279,7 @@ describe('open-in-app browser half', () => {
   it('registers both dictionaries under its own namespace and releases them with the fiber', async () => {
     vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ apps: [] }), { status: 200 })))
     const { ctx, fiber } = await bench()
-    ctx.locale.setLocale('zh')
+    ctx.locale.setLocale('en')
     const translate = ctx.locale.bind(NS)
     expect(translate('path.more')).toBe(zh['path.more'])
     ctx.locale.setLocale('en')

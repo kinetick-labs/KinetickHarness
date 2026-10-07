@@ -248,14 +248,14 @@ async function launchDraftFixture(beforeBrowserOpen?: (page: Page, scaffold: Web
 function structuredDraft(sessionId: SessionId, title: string): DraftSnapshot {
   const file = `@"${FILE_NAME}"`
   const folder = '@"目录/"'
-  const session = formatSessionReferenceMention({ sessionId, label: '关联会话 🧩' })
+  const session = formatSessionReferenceMention({ sessionId, label: 'Linked session 🧩' })
   const references: DraftSnapshot['references'] = []
   let text = `${title} 🧭 e\u0301 雪\n`
   for (let repeat = 0; repeat < 2; repeat++) {
     for (const item of [
       { ref: file, label: FILE_NAME, appearance: 'file' },
       { ref: folder, label: '目录/', appearance: 'folder' },
-      { ref: session, label: '关联会话 🧩', appearance: 'session' },
+      { ref: session, label: 'Linked session 🧩', appearance: 'session' },
     ] as const) {
       references.push({
         ...item, offset: text.length, length: item.ref.length,
@@ -352,7 +352,7 @@ it('restores repeated file, folder and Session capsules across edits, Workspace 
         },
         {
           "editable": "false",
-          "label": "关联会话 🧩",
+          "label": "Linked session 🧩",
           "source": "reference",
         },
         {
@@ -367,14 +367,14 @@ it('restores repeated file, folder and Session capsules across edits, Workspace 
         },
         {
           "editable": "false",
-          "label": "关联会话 🧩",
+          "label": "Linked session 🧩",
           "source": "reference",
         },
       ],
       "paragraphs": [
         "工作区乙 🧭 é 雪",
-        "notes 雪.md 目录/ 关联会话 🧩 ",
-        "notes 雪.md 目录/ 关联会话 🧩 ",
+        "notes 雪.md 目录/ Linked session 🧩 ",
+        "notes 雪.md 目录/ Linked session 🧩 ",
         "普通文字 @\"notes 雪.md\"，末尾 🦉",
       ],
     }
@@ -392,7 +392,7 @@ it('restores repeated file, folder and Session capsules across edits, Workspace 
       await assertDraft(page, item.id, item.draft)
       await composer(page).click()
       await page.keyboard.press('ControlOrMeta+End')
-      const suffix = ` · 编辑${round} 🧪`
+      const suffix = ` · Edit${round} 🧪`
       await page.keyboard.insertText(suffix)
       item.draft = { ...item.draft, text: item.draft.text + suffix }
       await assertDraft(page, item.id, item.draft)
