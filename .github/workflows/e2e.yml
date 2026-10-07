@@ -63,11 +63,6 @@ jobs:
 
       - uses: pnpm/action-setup@v4
 
-      - uses: actions/setup-node@v6
-        with:
-          node-version: 24
-          cache: pnpm
-
       # The secret is optional. An empty key skips the real-API steps; a
       # present key runs them. Secrets cannot be read from a job-level `if:`.
       - name: Preflight (DEEPSEEK_API_KEY)
@@ -85,6 +80,13 @@ jobs:
             echo "configured=true" >> "$GITHUB_OUTPUT"
             echo "DEEPSEEK_API_KEY present."
           fi
+
+      # Node and its pnpm cache run only when the suite will install.
+      - uses: actions/setup-node@v6
+        if: steps.key.outputs.configured == 'true'
+        with:
+          node-version: 24
+          cache: pnpm
 
       - name: Install (immutable)
         if: steps.key.outputs.configured == 'true'
