@@ -124,6 +124,25 @@ describe('MessageFeedbackService public contract', () => {
     })
   })
 
+  it('keeps stored feedback when a committed observer throws', async () => {
+    const { ctx, persistence } = await harness()
+    const fixture = messageFixture('observer')
+    persistence.persist(fixture.session)
+    const warn = vi.spyOn(ctx.logger, 'warn').mockImplementation(() => {})
+    ctx.on('feedback/committed', () => { throw new Error('observer failed') })
+    const created = expectItem(await ctx.messageFeedback.put({
+      sessionId: fixture.session.id,
+      messageId: fixture.assistantMessageIds[0],
+      rating: 'positive',
+      ifVersion: null,
+    }))
+    expect(created.rating).toBe('positive')
+    expect(warn).toHaveBeenCalledWith(
+      'message-feedback: committed feedback observer failed',
+      expect.any(Error),
+    )
+  })
+
   it('creates, updates, and retry-reads immutable items with monotonic Host times', async () => {
     const { ctx, persistence } = await harness()
     const fixture = messageFixture('timestamps')

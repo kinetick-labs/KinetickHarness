@@ -36,6 +36,11 @@ describe('projectUserText', () => {
     expect(host.textContent).toBe('看看 Inspect and 分析图片 的结论')
   })
 
+  it('breaks a start-and-kind tie between a wire fold and a shorter session label by span', () => {
+    const host = project('@[ab](kh-session:x)', ['[ab]'])
+    expect(host.querySelector('[data-ref-chip="session"]')).not.toBeNull()
+  })
+
   it('prefers the wire fold over the bare-token scan on the same range', () => {
     const host = project('@[a](kh-session:x)', [])
     expect(host.querySelectorAll('[data-ref-chip]').length).toBe(1)

@@ -15,6 +15,8 @@ interface HarnessOptions {
   failDetach?: boolean
   failDispose?: boolean
   abortAt?: 'workspace' | 'agent'
+  /** When set, creation has no deployment default to copy onto an omitted model. */
+  noDefaultModel?: boolean
 }
 
 interface SessionHarness {
@@ -89,6 +91,7 @@ function harness(options: HarnessOptions = {}): SessionHarness {
     agentDefaultModel: {
       currentSelection() {
         calls.push('default-model')
+        if (options.noDefaultModel) return undefined
         return { provider: 'default-provider', model: 'default-model', reasoningEffort: 'high' }
       },
     },
@@ -268,6 +271,12 @@ describe('webhook Session creation', () => {
       model: 'later-model',
       reasoningEffort: 'later',
     })
+  })
+
+  it('requires a model when the deployment has no default selection', async () => {
+    const test = harness({ noDefaultModel: true })
+    await expect(create(test)).rejects.toThrow(/model is required when no default model is configured/)
+    expect(test.calls).toEqual(['default-model'])
   })
 
   it.each([

@@ -30,31 +30,22 @@ export const inject = ['slots', 'uiWorkspace', 'locale']
  */
 export function apply(ctx: ClientContext): void {
   ctx.effect(() => {
-    const disposers: (() => void)[] = []
-    const dictionaries: [locale: string, dict: Record<string, string>][] = [
-      ['en', {
-        'browser.title': 'Select Workspace Directory',
-        'browser.home': 'Home',
-        'browser.newFolder': 'New folder',
-        'browser.folderName': 'Folder name',
-        'browser.createIn': 'New folder in "{name}"',
-        'browser.untitledFolder': 'Untitled folder',
-        'browser.create': 'Create',
-        'browser.cancel': 'Cancel',
-        'browser.open': 'Open',
-        'browser.editPath': 'Edit path',
-        'browser.loading': 'Loading…',
-        'browser.truncated': 'Too many folders to list; only the beginning is shown.',
-        'browser.showHidden': 'Show hidden files',
-      }],
-    ]
-    try {
-      for (const [locale, dict] of dictionaries) disposers.push(ctx.locale.register(LOCALE_NS, locale, dict))
-    } catch (error) {
-      for (const dispose of disposers.reverse()) dispose()
-      throw error
-    }
-    return () => { for (const dispose of disposers) dispose() }
+    const dispose = ctx.locale.register(LOCALE_NS, 'en', {
+      'browser.title': 'Select Workspace Directory',
+      'browser.home': 'Home',
+      'browser.newFolder': 'New folder',
+      'browser.folderName': 'Folder name',
+      'browser.createIn': 'New folder in "{name}"',
+      'browser.untitledFolder': 'Untitled folder',
+      'browser.create': 'Create',
+      'browser.cancel': 'Cancel',
+      'browser.open': 'Open',
+      'browser.editPath': 'Edit path',
+      'browser.loading': 'Loading…',
+      'browser.truncated': 'Too many folders to list; only the beginning is shown.',
+      'browser.showHidden': 'Show hidden files',
+    })
+    return () => { dispose() }
   }, 'directory-picker-browse: dialog dictionaries')
 
   const injected = (): BrowseFlowInjected => ({

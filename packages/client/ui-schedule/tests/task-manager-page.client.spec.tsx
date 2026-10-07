@@ -3494,9 +3494,10 @@ describe('Task detail rule header and run-time card', () => {
       strip = 200
       act(() => { stripObserver().fire() })
       expect(compact()).toBe(true)
-      h.view.rerender(<TaskManagerPage {...h.props} t={makeTranslate(zh)} />)
+      const relabeled = { ...en, 'detail.session': 'Source session' }
+      h.view.rerender(<TaskManagerPage {...h.props} t={makeTranslate(relabeled)} />)
       expect(compact()).toBe(true)
-      expect(within(detail).getByRole('button', { name: zh['detail.openSession'] })).toBeDefined()
+      expect(within(detail).getByRole('button', { name: en['detail.openSession'] })).toBeDefined()
 
       const observer = stripObserver()
       fireEvent.click(within(detail).getByRole('tab', { name: detailViewLabels(zh).records }))

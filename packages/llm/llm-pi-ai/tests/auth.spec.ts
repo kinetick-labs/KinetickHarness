@@ -236,6 +236,19 @@ describe('pi-ai ambient auth context', () => {
     await expect(authContextFrom(await stored()).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('primary-token')
   })
 
+  it('reads a GitHub alias from the launch environment when no credential service is mounted', async () => {
+    vi.stubEnv('GH_TOKEN', 'ghu-ambient')
+    const ctx = new Context()
+    await expect(authContextFrom(ctx).env('COPILOT_GITHUB_TOKEN')).resolves.toBe('ghu-ambient')
+  })
+
+  it('answers nothing when no credential service is mounted and neither GitHub alias is set', async () => {
+    vi.stubEnv('GH_TOKEN', '')
+    vi.stubEnv('GITHUB_TOKEN', '')
+    const ctx = new Context()
+    await expect(authContextFrom(ctx).env('COPILOT_GITHUB_TOKEN')).resolves.toBeUndefined()
+  })
+
   it('does not alias GitHub token names for any other lookup', async () => {
     vi.stubEnv('GH_TOKEN', 'ghu-from-gh-cli')
     const context = authContextFrom(await stored())

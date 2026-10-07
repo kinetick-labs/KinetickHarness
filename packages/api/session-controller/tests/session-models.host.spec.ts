@@ -471,6 +471,9 @@ describe('Web session model selection', () => {
     })
 
     const catalog = await buildModelCatalog(ctx)
+    vi.spyOn(ctx.agentDefaultModel, 'currentSelection').mockReturnValueOnce(undefined)
+    const withoutDefault = await buildModelCatalog(ctx)
+    expect(withoutDefault).not.toHaveProperty('default')
     expect(catalog.groups).toEqual(expect.arrayContaining([
       { id: 'plain', name: 'Plain', models: [{ id: 'plain-model', name: 'Plain Model' }] },
       {

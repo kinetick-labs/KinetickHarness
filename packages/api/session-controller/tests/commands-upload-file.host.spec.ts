@@ -123,6 +123,21 @@ function promptRequest(content: Parameters<SessionCommandController['prompt']>[0
 }
 
 describe('Session file uploads', () => {
+  it('rejects a prompt when the session has no model selection', async () => {
+    const { ctx, agent, disposeAgent } = await uploadHarness()
+    const agents = {
+      resolveAgent: () => Promise.resolve({ agent }),
+      selectionFor: () => ({ current: undefined, assembled: undefined }),
+      serializeImageAdmission: <Value>(_agent: Agent, operation: () => Promise<Value>) => operation(),
+    } as unknown as ApiSessionAgentController
+    const controller = new SessionCommandController(ctx, agents, '/workspace')
+    await expect(controller.prompt(promptRequest([{ type: 'text', text: 'hello' }]))).rejects.toMatchObject({
+      code: 'session/model-unavailable',
+      message: 'Select an available model before sending a message.',
+    })
+    await disposeAgent()
+  })
+
   it('registers an HTTP route bound to the upload service', async () => {
     const { uploadRoute } = await uploadHarness()
     await expect(uploadRoute(new Request('http://host/upload')))

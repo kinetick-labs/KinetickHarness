@@ -138,7 +138,7 @@ describe('directory-picker-browse client half', () => {
     }
   })
 
-  it('rolls back the zh dictionary when a rival already owns the namespace en slot', async () => {
+  it('rejects dialog registration when a rival already owns the English dictionary slot', async () => {
     const b = await bench()
     b.declare()
     const locale = b.ctx.get('locale') as LocaleRuntime
@@ -150,8 +150,7 @@ describe('directory-picker-browse client half', () => {
     try {
       const fiber = b.ctx.plugin({ inject: [...inject], apply })
       await expect(fiber.await()).rejects.toThrow(/already has locale/)
-      // The zh registration rolled back with the failure: once the rival
-      // leaves, a fresh registrant owns the whole namespace again.
+      // Once the rival leaves, a fresh registrant owns the namespace again.
       disposeRival()
       const disposeZh = locale.register('directory-browser', 'zh', { 'browser.title': 'Idle' })
       disposeZh()

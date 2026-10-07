@@ -31,7 +31,7 @@ afterEach(async () => {
   for (const dir of tempDirs.splice(0)) rmSync(dir, { recursive: true, force: true })
 })
 
-async function harness(): Promise<{ ctx: Context; agents: ApiSessionAgentController }> {
+async function harness(options: { selection?: 'none' } = {}): Promise<{ ctx: Context; agents: ApiSessionAgentController }> {
   const ctx = new Context()
   roots.push(ctx)
   await ctx.plugin(TypertRegistry)
@@ -41,7 +41,9 @@ async function harness(): Promise<{ ctx: Context; agents: ApiSessionAgentControl
   ctx.sessionProjections.register(agentPresetProjectionDefinition)
   installModelSelectionProjection(ctx)
   ctx.provide('agentDefaultModel', {
-    currentSelection: () => ({ provider: 'fixture', model: 'fixture-model' }),
+    currentSelection: () => options.selection === 'none'
+      ? undefined
+      : { provider: 'fixture', model: 'fixture-model' },
     saveSelection: () => Promise.resolve(),
   } as never)
   return { ctx, agents: new ApiSessionAgentController(ctx) }
@@ -330,6 +332,19 @@ describe('ApiSession model selection', () => {
 })
 
 describe('ApiSession create or adoption', () => {
+  it('creates an agent with empty options when no default model is selected', async () => {
+    const { ctx, agents } = await harness({ selection: 'none' })
+    const cwd = mkdtempSync(join(tmpdir(), 'kh-session-controller-no-model-'))
+    tempDirs.push(cwd)
+    const meta = header('no-default-model', cwd)
+    const created = unpublishedAgent(ctx, meta)
+    const create = vi.spyOn(ctx.agents, 'create').mockResolvedValue({
+      agent: created, dispose: () => Promise.resolve(),
+    })
+    await expect(agents.ensureSession(meta.id, cwd, false)).resolves.toBe(created)
+    expect(create.mock.calls[0]?.[0]).toMatchObject({ agentOptions: {} })
+  })
+
   it('shares one in-flight creation between concurrent callers', async () => {
     const { ctx, agents } = await harness()
     const cwd = mkdtempSync(join(tmpdir(), 'kh-session-controller-concurrent-'))

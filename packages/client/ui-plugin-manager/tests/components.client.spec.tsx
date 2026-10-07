@@ -768,27 +768,27 @@ describe('PluginManagerPage', () => {
   it('shows a row id only once when it is the localized title in lists and configuration pages', () => {
     const moduleName = '@acme/kh-sidebar/navigation'
     const { setLanguage } = renderTab(
-      { packages: [pkg({ rows: [row({ moduleName, meta: { title: { en: 'Sidebar component', zh: 'sidebar' } } })] })] },
+      { packages: [pkg({ rows: [row({ moduleName, meta: { title: { en: 'sidebar' } } })] })] },
       { rows: new Set(['kh-better-sidebar#sidebar']) },
       { 'plugins.row.config:kh-better-sidebar#sidebar': view => view === 'page' ? <form aria-label="sidebar settings" /> : null },
     )
     fireEvent.click(screen.getByRole('button', { name: en.openDetail.replace('{name}', 'kh-better-sidebar') }))
     const listed = document.querySelector('[data-plugin-row="include:sidebar"]') as HTMLElement
-    expect(within(listed).getByText('Sidebar component')).toBeTruthy()
-    expect(within(listed).getByText('sidebar', { selector: 'code' })).toBeTruthy()
+    expect(within(listed).getAllByText('sidebar')).toHaveLength(1)
+    expect(within(listed).queryByText('sidebar', { selector: 'code' })).toBeNull()
     setLanguage(zh)
-    expect(within(listed).getByText('Sidebar component')).toBeTruthy()
-    expect(within(listed).getByText('sidebar', { selector: 'code' })).toBeTruthy()
+    expect(within(listed).getAllByText('sidebar')).toHaveLength(1)
+    expect(within(listed).queryByText('sidebar', { selector: 'code' })).toBeNull()
 
-    fireEvent.click(within(listed).getByRole('button', { name: zh.configureRow.replace('{name}', 'Sidebar component') }))
+    fireEvent.click(within(listed).getByRole('button', { name: zh.configureRow.replace('{name}', 'sidebar') }))
     const detail = document.querySelector('[data-plugin-row-detail="kh-better-sidebar#sidebar"]') as HTMLElement
-    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('Sidebar component')
-    expect(within(detail).getByText('sidebar', { selector: 'code' })).toBeTruthy()
+    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('sidebar')
+    expect(within(detail).queryByText('sidebar', { selector: 'code' })).toBeNull()
     expect(within(detail).getByText(moduleName, { selector: 'code' })).toBeTruthy()
     expect(within(detail).getByRole('form', { name: 'sidebar settings' })).toBeTruthy()
     setLanguage(en)
-    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('Sidebar component')
-    expect(within(detail).getByText('sidebar', { selector: 'code' })).toBeTruthy()
+    expect(within(detail).getByRole('heading', { level: 3 }).textContent).toBe('sidebar')
+    expect(within(detail).queryByText('sidebar', { selector: 'code' })).toBeNull()
   })
 
   it('translates row text, searches current copy and technical identities, and keeps configuration keys unchanged', () => {
